@@ -19,9 +19,9 @@ const StyledButton = styled(Button, {
         background: bgColor,
         border: "none",
     },
-    "&.MuiButton-containedPrimary:hover": {
-        background: Colors.BLACK
-    },
+    // "&.MuiButton-containedPrimary:hover": {
+    //    // background: Colors.BLACK
+    // },
     "&.MuiButton-outlinedPrimary": {
         boxShadow: "none",
         background: "none",

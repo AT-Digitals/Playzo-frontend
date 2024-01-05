@@ -30,12 +30,9 @@ const StyledButton = styled(CustomButton)({
 export default function Header() {
     return (
         <Box
-            borderBottom={`1px solid ${Colors.SHADOW}`}
+            width="100%"
             bgcolor={Colors.BLACK}
-            position="sticky"
-            top={0}
-            zIndex={1000}
-            padding={3}
+
         >
             <AppContainer>
                 <Stack
@@ -43,6 +40,7 @@ export default function Header() {
                     spacing={2}
                     alignItems="center"
                     justifyContent="space-between"
+                    p={3}
                 >
                     <Box>
                         <Link>
