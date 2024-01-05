@@ -5,6 +5,7 @@ import routes from "../routes/routes";
 import Colors from "../CommonComponents/Colors";
 import Layout from "../CommonComponents/Layout";
 import Header from "./Header";
+import AppHeader from "./AppHeader";
 
 
 export default function AppLayout({ children, ...props }: BoxProps) {
@@ -13,7 +14,7 @@ export default function AppLayout({ children, ...props }: BoxProps) {
 
     return (
         <Layout {...props}>
-            <Header />
+            <AppHeader />
             <Box display="flex" flexDirection="column" width="100%" flexGrow={1}>
                 <Box display="flex" flexDirection="column" flexGrow={1}>
                     <Box sx={{
