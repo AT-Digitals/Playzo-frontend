@@ -1,10 +1,11 @@
+import { Box, Tab, Tabs } from "@mui/material";
 import {
     Link,
     matchPath,
     useLocation
 } from "react-router-dom";
-import { Tab, Tabs } from "@mui/material";
 
+import ServiceGrid from "./ServiceGrid";
 import routes from "../../routes/routes";
 
 const tabList = [
