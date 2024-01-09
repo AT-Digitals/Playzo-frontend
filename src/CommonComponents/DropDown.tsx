@@ -1,10 +1,45 @@
 import * as React from 'react';
+
 import Button from '@mui/material/Button';
+import Colors from './Colors';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Link } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Colors from './Colors';
+import routes from '../routes/routes';
 
+const menuList = [
+    {
+        href:routes.BADMINTON,
+        label:"Badminton",
+    },
+    {
+        href:routes.CROSSFIT,
+        label:"CrossFit",
+    },
+    
+    {
+        href:routes.TURF,
+        label:"Turf",
+    },
+    {
+        href:routes.PLAYSTATION,
+        label:"Play Station",
+    },
+ 
+    {
+        href:routes.BOARDGAMES,
+        label:"Board Games",
+    },
+    {
+        href:routes.PARTYCENTER,
+        label:"Party Center",
+    },
+    {
+        href:routes.CAFETERIA,
+        label:"Cafeteria",
+    },
+];
 export default function BasicMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -38,13 +73,10 @@ export default function BasicMenu() {
                 }}
                 sx={{ ".css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper": { width: "140px", height: "270px", backgroundColor: Colors.BUTTON_COLOR, color: Colors.WHITE } }}
             >
-                <MenuItem onClick={handleClose}>Badminton</MenuItem>
-                <MenuItem onClick={handleClose}>CrossFit</MenuItem>
-                <MenuItem onClick={handleClose}>Turf</MenuItem>
-                <MenuItem onClick={handleClose}>PlayStation</MenuItem>
-                <MenuItem onClick={handleClose}>Board Games</MenuItem>
-                <MenuItem onClick={handleClose}>Party Center</MenuItem>
-                <MenuItem onClick={handleClose}>Cafeteria</MenuItem>
+                {menuList.map((menu,index) => (
+    <MenuItem to={menu.href} component={Link} key={index} onClick={handleClose}>{menu.label}</MenuItem>
+   
+      ))}
 
             </Menu>
         </div>

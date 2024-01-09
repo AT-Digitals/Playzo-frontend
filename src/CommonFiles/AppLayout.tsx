@@ -1,13 +1,11 @@
 import { Box, BoxProps } from "@mui/material";
+
+import AppHeader from "./AppHeader";
+import Colors from "../CommonComponents/Colors";
+import Footer from "../CommonComponents/footer/Footer";
+import Layout from "../CommonComponents/Layout";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
-import routes from "../routes/routes";
-import Colors from "../CommonComponents/Colors";
-import Layout from "../CommonComponents/Layout";
-import Header from "./Header";
-import AppHeader from "./AppHeader";
-import Footer from "./Footer";
-
 
 export default function AppLayout({ children, ...props }: BoxProps) {
     const [activeTab, setActiveTab] = useState();
@@ -22,7 +20,8 @@ export default function AppLayout({ children, ...props }: BoxProps) {
                         backgroundColor: Colors.WHITE,
                     }} display="flex" flexDirection="column" flexGrow={1}>
 
-                        <Outlet />
+<Outlet />
+          <Footer />
                     </Box>
                 </Box>
             </Box>
