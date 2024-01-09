@@ -19,6 +19,7 @@ import Image3 from "../assets/Image (3).png";
 import Image4 from "../assets/Image (4).png";
 import Image5 from "../assets/Image (5).png";
 import ball3 from "../assets/ball 3.png";
+import ComponentCarosel from "./ComponentCarosel";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,
@@ -239,22 +240,7 @@ export default function HomePage() {
                     />
                 </Stack>
             </Box>
-            <Box width="100%" paddingY={4}>
-                <Grid container spacing={3} maxWidth={1200} margin="0 auto">
-                    {items.map((item, index) => (
-                        <Grid item xs={4}>
-                            <CardComponent
-                                key={index}
-                                image={item.image}
-                                title={item.title}
-                                description={item.description}
-                                buttonLabel={item.label}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
-
+            <ComponentCarosel />
         </Box>
     );
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import { Typography, styled } from '@mui/material';
 
@@ -9,19 +9,19 @@ import CustomSwiper from '../../CommonComponents/carousel/CustomSwiper';
 import Grid from '@mui/material/Grid';
 import { Navigation } from 'swiper/modules';
 
-interface serviceGridProps{
-    carouselItems:any[],
-    heading1:string,
-    desc1:string,
-    heading2:string,
-    firstBullet1:string,
-    firstBullet2:string,
-    firstBullet3:string,
-    heading3:string,
-    secBullet1:string,
-    secBullet2:string,
-    secBullet3:string,
-    buttonLabel:string
+interface serviceGridProps {
+  carouselItems: any[];
+  heading1: string;
+  desc1: string;
+  heading2: string;
+  firstBullet1: string;
+  firstBullet2: string;
+  firstBullet3: string;
+  heading3: string;
+  secBullet1: string;
+  secBullet2: string;
+  secBullet3: string;
+  buttonLabel: string;
 }
 
 
@@ -30,14 +30,14 @@ export default function ServiceGrid(props:serviceGridProps) {
   return (
     <Box margin={7}>
         <Grid minHeight="100vh" container>
-        <Grid
-        item
-        xs={12}
-        sm={7}
-      >
-         <CustomSwiper navigation={true} modules={[Navigation]} className="mySwiper" slides={props.carouselItems} />
-      </Grid>
-    
+        <Grid item xs={12} sm={7}>
+          <CustomSwiper
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+            slides={props.carouselItems}
+          />
+        </Grid>
       <Grid
         item
         xs={12}

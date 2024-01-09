@@ -1,58 +1,52 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import {
-    Link,
-    matchPath,
-    useLocation
-} from "react-router-dom";
+import { Link, matchPath, useLocation } from "react-router-dom";
 
 import { NoEncryption } from "@mui/icons-material";
 import ServiceGrid from "./ServiceGrid";
 import routes from "../../routes/routes";
 
 const tabList = [
-    {
-        href:routes.PLAYSTATION,
-        label:"Play Station",
-    },
-    {
-        href:routes.CROSSFIT,
-        label:"CrossFit",
-    },
-    {
-        href:routes.BADMINTON,
-        label:"Badminton",
-    },
-    {
-        href:routes.TURF,
-        label:"Turf",
-    },
-    {
-        href:routes.BOARDGAMES,
-        label:"Board Games",
-    },
-    {
-        href:routes.PARTYCENTER,
-        label:"Party Center",
-    },
-    {
-        href:routes.CAFETERIA,
-        label:"Cafeteria",
-    },
+  {
+    href: routes.PLAYSTATION,
+    label: "Play Station",
+  },
+  {
+    href: routes.CROSSFIT,
+    label: "CrossFit",
+  },
+  {
+    href: routes.BADMINTON,
+    label: "Badminton",
+  },
+  {
+    href: routes.TURF,
+    label: "Turf",
+  },
+  {
+    href: routes.BOARDGAMES,
+    label: "Board Games",
+  },
+  {
+    href: routes.PARTYCENTER,
+    label: "Party Center",
+  },
+  {
+    href: routes.CAFETERIA,
+    label: "Cafeteria",
+  },
 ];
 
 function useRouteMatch(patterns: readonly string[]) {
-    const { pathname } = useLocation();
-  
-    for (let i = 0; i < patterns.length; i += 1) {
-      const pattern = patterns[i];
-      const possibleMatch = matchPath(pattern, pathname);
-      if (possibleMatch !== null) {
-        return possibleMatch;
-      }
+  const { pathname } = useLocation();
+
+  for (let i = 0; i < patterns.length; i += 1) {
+    const pattern = patterns[i];
+    const possibleMatch = matchPath(pattern, pathname);
+    if (possibleMatch !== null) {
+      return possibleMatch;
     }
-  
-    return null;
   }
+}
 
 function samePageLinkNavigation(
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -127,4 +121,3 @@ export default function MuiTab() {
 
     </>
 }
-

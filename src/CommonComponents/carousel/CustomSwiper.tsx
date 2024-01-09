@@ -75,8 +75,9 @@ export default function CustomSwiper({
       autoplay-disable-on-interaction={false}
       autoplay-pause-on-mouse-enter={true}
       {...props}
+      className="mySwiper"
     >
-      {slides.map((slide:any, index:any) => (
+      {slides.map((slide: any, index: any) => (
         <swiper-slide key={index}>{slide}</swiper-slide>
       ))}
     </swiper-container>
