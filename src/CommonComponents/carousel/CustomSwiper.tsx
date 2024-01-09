@@ -16,6 +16,7 @@ import {
 import { SwiperOptions } from "swiper/types/swiper-options";
 import { SwiperProps } from "swiper/react";
 import { register } from "swiper/element/bundle";
+import '../../Style.css';
 
 register();
 
@@ -69,8 +70,9 @@ export default function CustomSwiper({
       autoplay-disable-on-interaction={false}
       autoplay-pause-on-mouse-enter={true}
       {...props}
+      className="mySwiper"
     >
-      {slides.map((slide:any, index:any) => (
+      {slides.map((slide: any, index: any) => (
         <swiper-slide key={index}>{slide}</swiper-slide>
       ))}
     </swiper-container>

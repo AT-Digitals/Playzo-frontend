@@ -33,10 +33,10 @@ export default function CardComponent({
             />
 
             <Stack direction="column" spacing={2} margin="0 auto" padding="32px" sx={{ backgroundColor: Colors.WHITE }}>
-                <Typography fontSize="20px" variant="h6" fontWeight={600}>
+                <Typography fontSize="20px" variant="h6" fontWeight={600} textAlign="start">
                     {title}
                 </Typography>
-                <Typography fontSize="16px">{description}</Typography>
+                <Typography fontSize="16px" textAlign="start">{description}</Typography>
                 <CustomButton
                     color={Colors.BUTTON_COLOR}
                     variant="outlined"
