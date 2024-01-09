@@ -25,7 +25,6 @@ export default function AppLayout({ children, ...props }: BoxProps) {
                     </Box>
                 </Box>
             </Box>
-            <Footer />
         </Layout>
     );
 }
