@@ -15,7 +15,6 @@ import CardComponent from "./CardComponent";
 import playstation from "../assets/playstation.png";
 import boardGames from "../assets/board games.png";
 import ball from "../assets/ball 1.png";
-import Carousel from "react-material-ui-carousel";
 import Image3 from "../assets/Image (3).png";
 import Image4 from "../assets/Image (4).png";
 import Image5 from "../assets/Image (5).png";
@@ -241,22 +240,21 @@ export default function HomePage() {
                 </Stack>
             </Box>
             <Box width="100%" paddingY={4}>
-                <Carousel>
-                    <Grid container spacing={3} maxWidth={1200} margin="0 auto">
-                        {items.map((item, index) => (
-                            <Grid item xs={4}>
-                                <CardComponent
-                                    key={index}
-                                    image={item.image}
-                                    title={item.title}
-                                    description={item.description}
-                                    buttonLabel={item.label}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Carousel>
+                <Grid container spacing={3} maxWidth={1200} margin="0 auto">
+                    {items.map((item, index) => (
+                        <Grid item xs={4}>
+                            <CardComponent
+                                key={index}
+                                image={item.image}
+                                title={item.title}
+                                description={item.description}
+                                buttonLabel={item.label}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
             </Box>
+
         </Box>
     );
 }

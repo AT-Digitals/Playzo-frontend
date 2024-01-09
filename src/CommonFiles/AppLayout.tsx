@@ -6,6 +6,7 @@ import Colors from "../CommonComponents/Colors";
 import Layout from "../CommonComponents/Layout";
 import Header from "./Header";
 import AppHeader from "./AppHeader";
+import Footer from "./Footer";
 
 
 export default function AppLayout({ children, ...props }: BoxProps) {
@@ -25,6 +26,7 @@ export default function AppLayout({ children, ...props }: BoxProps) {
                     </Box>
                 </Box>
             </Box>
+            <Footer />
         </Layout>
     );
 }
