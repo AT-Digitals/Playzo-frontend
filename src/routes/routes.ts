@@ -10,6 +10,7 @@ const TURF = SERVICE+"/turf";
 const BOARDGAMES = SERVICE+"/boardgames";
 const PARTYCENTER = SERVICE+"/partycenter";
 const CAFETERIA = SERVICE+"/cafeteria";
+const ABOUTUS = "/about-us";
 const routes = {
   ROOT,
   SIGN_IN,
@@ -22,7 +23,8 @@ const routes = {
   TURF,
   BOARDGAMES,
   PARTYCENTER,
-  CAFETERIA
+  CAFETERIA,
+  ABOUTUS
 };
 
 export default routes;

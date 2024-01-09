@@ -5,6 +5,7 @@ import {
     useLocation
 } from "react-router-dom";
 
+import { NoEncryption } from "@mui/icons-material";
 import ServiceGrid from "./ServiceGrid";
 import routes from "../../routes/routes";
 
@@ -88,17 +89,38 @@ export default function MuiTab() {
     const currentTab = routeMatch?.pattern?.path;
     
     return <>
-<Tabs
+<Tabs 
   value={currentTab}
   onChange={handleChange}
   aria-label="nav tabs example"
   role="navigation"
   centered
+  sx={{
+    marginTop:"10px",
+    maxWidth:"95%",
+    "--Tab-indicatorThickness": "0px",
+".MuiTabs-indicator":{
+  display:"none"
+},
+".MuiButtonBase-root":{
+  fontSize: "20px",
+  fontWeight: "700",
+  textTransform:"capitalize"
+},
+// ".MuiButtonBase-root-MuiTab-root":{
+  ".Mui-selected":{
+    // fontSize: "20px",
+    fontStyle: "italic",
+    // fontWeight: "700",
+    // textTransform:"lowercase"
+  // }
+}
+  }}
  
 >
 
 {tabList.map((tab,index) => (
-    <Tab label={tab.label} value={tab.href} to={tab.href} component={Link} key={index} />
+    <Tab label={tab.label} value={tab.href} to={tab.href} component={Link} key={index}  />
    
       ))}
 </Tabs>

@@ -1,11 +1,12 @@
 import { Box, FormControl, Link, MenuItem, NativeSelect, Select, Stack, Typography, styled } from "@mui/material";
-import Colors from "../CommonComponents/Colors";
-import logo from "../assets/logo.png";
-import AppContainer from "../CommonComponents/AppContainer";
-import CustomDropdown from "../CommonComponents/CustomDropdown";
-import CustomButton from "../CommonComponents/CustomButton";
-import DropDown from "../CommonComponents/DropDown";
 
+import AppContainer from "../CommonComponents/AppContainer";
+import Colors from "../CommonComponents/Colors";
+import CustomButton from "../CommonComponents/CustomButton";
+import CustomDropdown from "../CommonComponents/CustomDropdown";
+import DropDown from "../CommonComponents/DropDown";
+import logo from "../assets/logo.png";
+import routes from "../routes/routes";
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -48,7 +49,7 @@ export default function Header() {
                         </Link>
                     </Box>
                     <Stack direction="row" spacing={3} alignItems="center">
-                        <HeaderLink href="">
+                        <HeaderLink href={routes.ABOUTUS}>
                             <Typography color={Colors.WHITE} fontSize="18px">About Us</Typography>
                         </HeaderLink>
                         <Link>

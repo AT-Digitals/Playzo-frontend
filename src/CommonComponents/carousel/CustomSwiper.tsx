@@ -13,6 +13,7 @@ import {
   useRef,
 } from "react";
 
+import { Box } from "@mui/material";
 import { SwiperOptions } from "swiper/types/swiper-options";
 import { SwiperProps } from "swiper/react";
 import { register } from "swiper/element/bundle";
@@ -59,6 +60,11 @@ export default function CustomSwiper({
   }, []);
 
   return (
+    <Box sx={{
+      ".swiper-button-prev": {
+        color: "red"
+      }
+    }}>
     <swiper-container
       ref={swiperElRef}
       slides-per-view={DefaultSlidesPerViewOption}
@@ -74,5 +80,6 @@ export default function CustomSwiper({
         <swiper-slide key={index}>{slide}</swiper-slide>
       ))}
     </swiper-container>
+    </Box>
   );
 }

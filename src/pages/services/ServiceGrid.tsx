@@ -1,12 +1,13 @@
 import * as React from 'react';
 
+import { Typography, styled } from '@mui/material';
+
 import Box from '@mui/material/Box';
 import Colors from '../../CommonComponents/Colors';
 import CustomButton from '../../CommonComponents/CustomButton';
 import CustomSwiper from '../../CommonComponents/carousel/CustomSwiper';
 import Grid from '@mui/material/Grid';
 import { Navigation } from 'swiper/modules';
-import { Typography } from '@mui/material';
 
 interface serviceGridProps{
     carouselItems:any[],
@@ -22,23 +23,12 @@ interface serviceGridProps{
     secBullet3:string,
     buttonLabel:string
 }
+
+
 export default function ServiceGrid(props:serviceGridProps) {
-    // const carouselItems = [
-    //     <img
-    //     style={{ width:"100%" }}
-    //     src={plyaStationSlide}
-    //     alt={"title"}
-    //   />,
-      
-    //   <img
-    //   style={{ width:"100%"}}
-    //   src={plyaStationSlide}
-    //   alt={"title"}
-    // />
-    //   ];
 
   return (
-    <Box margin={10}>
+    <Box margin={7}>
         <Grid minHeight="100vh" container>
         <Grid
         item
@@ -52,7 +42,7 @@ export default function ServiceGrid(props:serviceGridProps) {
         item
         xs={12}
         sm={5}
-        sx={{backgroundColor:"#EBF5FF",marginBottom:"20px",borderRadius: "8px",padding:"40px"}}
+        sx={{backgroundColor:"#EBF5FF",borderRadius: "8px",padding:"40px"}}
         alignItems="center"
         justifyContent="center"
 
@@ -78,7 +68,7 @@ fontWeight: 700}} >
               {props.heading2}
               </Typography>
               <Typography variant="body1">
-  <ul>
+  <ul style={{paddingInlineStart: "28px"}}>
     <li>{props.firstBullet1}</li>
     <li>{props.firstBullet2}</li>
     <li>{props.firstBullet3}</li>
@@ -95,7 +85,7 @@ fontWeight: 700}} >
              {props.heading3}
               </Typography>
               <Typography variant="body1">
-  <ul>
+  <ul style={{paddingInlineStart: "28px"}}>
     <li>{props.secBullet1}</li>
     <li>{props.secBullet2}</li>
     <li>{props.secBullet3}</li>
@@ -103,7 +93,7 @@ fontWeight: 700}} >
 </Typography>
 
 <Box mt={5}>
-        <CustomButton type="submit" style={{backgroundColor:Colors.BUTTON_COLOR}} >
+        <CustomButton type="submit" style={{backgroundColor:Colors.BUTTON_COLOR, textTransform:"capitalize"}} >
           {props.buttonLabel}
         </CustomButton>
       </Box>

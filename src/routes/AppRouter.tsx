@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
 import Badminton from "../pages/services/Badminton";
 import BoardGames from "../pages/services/BoardGames";
@@ -26,6 +27,7 @@ export default function AppRouter() {
                     <Route path={routes.BOARDGAMES} element={<BoardGames />} />
                     <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
                     <Route path={routes.CAFETERIA} element={<Cafeteria />} />
+                    <Route path={routes.ABOUTUS} element={<AboutUs />} />
                 </Route>
             </Routes>
         </Router>
