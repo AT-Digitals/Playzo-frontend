@@ -37,7 +37,9 @@ const Colors = {
   ICON_COLOR: "#00171F",
   SELECT_BORDER: "#DEE6EC",
   BUTTON_COLOR: "#15B5FC",
-  BACK_BLACK:"#030413"
+  BACK_BLACK: "#030413",
+  BACKGROUND_COLOR: "#000333",
+  BUTTON: "#15B5FC",
 };
 
 export default Colors;

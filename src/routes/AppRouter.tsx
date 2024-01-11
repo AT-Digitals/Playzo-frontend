@@ -12,11 +12,13 @@ import PlayStation from "../pages/services/PlayStation";
 import Service from "../pages/services/Service";
 import Turf from "../pages/services/Turf";
 import routes from "./routes";
+import LoginForm from "../pages/login/LoginForm";
 
 export default function AppRouter() {
     return (
         <Router>
             <Routes>
+                <Route path={routes.LOGIN} element={<LoginForm />} />
                 <Route path={routes.ROOT} element={<AppLayout />}>
                     <Route path={routes.ROOT} element={<HomePage />} />
                     <Route path={routes.SERVICE} element={<Service />} />
@@ -28,6 +30,7 @@ export default function AppRouter() {
                     <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
                     <Route path={routes.CAFETERIA} element={<Cafeteria />} />
                     <Route path={routes.ABOUTUS} element={<AboutUs />} />
+
                 </Route>
             </Routes>
         </Router>
