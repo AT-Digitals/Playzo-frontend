@@ -57,7 +57,7 @@ export default function Header() {
                             <Typography color={Colors.WHITE} fontSize="18px">About Us</Typography>
                         </HeaderLink>
                         <DropDown />
-                        <HeaderLink href="">
+                        <HeaderLink href={routes.CONTACTUS}>
                             <Typography color={Colors.WHITE} fontSize="18px">Contact Us</Typography>
                         </HeaderLink>
                     </Stack>

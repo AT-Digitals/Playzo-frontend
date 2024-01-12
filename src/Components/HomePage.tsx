@@ -1,4 +1,12 @@
-import { Box, Grid, Link, Stack, Typography, styled } from "@mui/material";
+import {
+    Box,
+    Grid,
+    Link,
+    Rating,
+    Stack,
+    Typography,
+    styled,
+} from "@mui/material";
 import Header from "../CommonFiles/Header";
 import Image1 from "../assets/Rectangle 67.png";
 import Image2 from "../assets/Rectangle 669.png";
@@ -20,6 +28,8 @@ import Image4 from "../assets/Image (4).png";
 import Image5 from "../assets/Image (5).png";
 import ball3 from "../assets/ball 3.png";
 import ComponentCarosel from "./ComponentCarosel";
+import CaroselComponent from "./CaroselComponent";
+import member from "../assets/Rectangle 673.png";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,
@@ -208,7 +218,7 @@ export default function HomePage() {
                             fontWeight: 600,
                             ".css-olvtuu-MuiTypography-root-MuiLink-root:hover": {
                                 textDecoration: "underline",
-                            }
+                            },
                         }}
                     >
                         see more services
@@ -241,6 +251,39 @@ export default function HomePage() {
                 </Stack>
             </Box>
             <ComponentCarosel />
-        </Box>
-    );
+            <Grid container width="100%" maxWidth={1200} margin="auto" columnSpacing={3}>
+                <Grid item xs={8}>
+                    <CaroselComponent />
+                </Grid>
+                <Grid item xs={4}>
+                    <Stack direction="column" spacing={3}>
+                        <Rating
+                            name="simple-controlled"
+                        // value={value}
+                        // onChange={(event, newValue) => {
+                        //   setValue(newValue);
+                        // }}
+                        />
+                        <Typography> I had a great experience playing badminton at Playzo33! The
+                            professional-level courts provided an excellent playing surface,
+                            and the well-lit environment made it easy to enjoy games even in
+                            the evening. The booking process was straightforward, and the
+                            overall atmosphere was friendly and inviting. I appreciate the
+                            attention to detail and the effort put into maintaining
+                            high-quality badminton facilities. Looking forward to my next game!</Typography>
+
+                        <Typography>
+                            Andnd
+                        </Typography>
+                        <Typography>
+                            Badminton
+                        </Typography>
+                        <Typography>
+                            Member since 2022
+                        </Typography>
+                    </Stack>
+            </Grid>
+        </Grid>
+    </Box>
+  );
 }

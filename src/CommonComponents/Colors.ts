@@ -40,6 +40,7 @@ const Colors = {
   BACK_BLACK: "#030413",
   BACKGROUND_COLOR: "#000333",
   BUTTON: "#15B5FC",
+  BUTTON_ONE: "#4285F4",
 };
 
 export default Colors;

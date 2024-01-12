@@ -13,6 +13,7 @@ import Service from "../pages/services/Service";
 import Turf from "../pages/services/Turf";
 import routes from "./routes";
 import LoginForm from "../pages/login/LoginForm";
+import ContactUs from "../pages/contactus/ContactUs";
 
 export default function AppRouter() {
     return (
@@ -30,7 +31,7 @@ export default function AppRouter() {
                     <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
                     <Route path={routes.CAFETERIA} element={<Cafeteria />} />
                     <Route path={routes.ABOUTUS} element={<AboutUs />} />
-
+                    <Route path={routes.CONTACTUS} element={<ContactUs />} />
                 </Route>
             </Routes>
         </Router>

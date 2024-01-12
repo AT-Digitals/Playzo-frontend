@@ -11,6 +11,7 @@ const BOARDGAMES = SERVICE + "/boardgames";
 const PARTYCENTER = SERVICE + "/partycenter";
 const CAFETERIA = SERVICE + "/cafeteria";
 const ABOUTUS = "/about-us";
+const CONTACTUS = "/contact-us";
 const routes = {
   ROOT,
   LOGIN,
@@ -25,6 +26,7 @@ const routes = {
   PARTYCENTER,
   CAFETERIA,
   ABOUTUS,
+  CONTACTUS,
 };
 
 export default routes;
