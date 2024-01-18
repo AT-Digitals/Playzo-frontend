@@ -28,7 +28,7 @@ import Image4 from "../assets/Image (4).png";
 import Image5 from "../assets/Image (5).png";
 import ball3 from "../assets/ball 3.png";
 import ComponentCarosel from "./ComponentCarosel";
-import CaroselComponent from "./CaroselComponent";
+import CarouselComponent from "./CarouselComponent";
 import member from "../assets/Rectangle 673.png";
 
 const StyledTypo = styled(Typography)({
@@ -225,6 +225,7 @@ export default function HomePage() {
                     </Link>
                 </Stack>
             </Box>
+            <CarouselComponent />
             <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>
                 <Stack direction="row" justifyContent="start" alignItems="center">
                     <Link
@@ -251,39 +252,7 @@ export default function HomePage() {
                 </Stack>
             </Box>
             <ComponentCarosel />
-            <Grid container width="100%" maxWidth={1200} margin="auto" columnSpacing={3}>
-                <Grid item xs={8}>
-                    <CaroselComponent />
-                </Grid>
-                <Grid item xs={4}>
-                    <Stack direction="column" spacing={3}>
-                        <Rating
-                            name="simple-controlled"
-                        // value={value}
-                        // onChange={(event, newValue) => {
-                        //   setValue(newValue);
-                        // }}
-                        />
-                        <Typography> I had a great experience playing badminton at Playzo33! The
-                            professional-level courts provided an excellent playing surface,
-                            and the well-lit environment made it easy to enjoy games even in
-                            the evening. The booking process was straightforward, and the
-                            overall atmosphere was friendly and inviting. I appreciate the
-                            attention to detail and the effort put into maintaining
-                            high-quality badminton facilities. Looking forward to my next game!</Typography>
 
-                        <Typography>
-                            Andnd
-                        </Typography>
-                        <Typography>
-                            Badminton
-                        </Typography>
-                        <Typography>
-                            Member since 2022
-                        </Typography>
-                    </Stack>
-            </Grid>
-        </Grid>
-    </Box>
-  );
+        </Box>
+    );
 }
