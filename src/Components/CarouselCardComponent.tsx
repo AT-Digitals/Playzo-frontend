@@ -125,10 +125,9 @@ export default function CarouselCardComponent({
                 </Stack>
             ) : (
                 <Box>
-                    <CardMedia
-                        component="img"
+                    <img
                         height="290"
-                        image={cardDetails.imageSrc}
+                        src={cardDetails.imageSrc}
                         alt="green iguana"
                         width="192"
                     />

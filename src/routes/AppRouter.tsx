@@ -14,6 +14,7 @@ import Turf from "../pages/services/Turf";
 import routes from "./routes";
 import LoginForm from "../pages/login/LoginForm";
 import ContactUs from "../pages/contactus/ContactUs";
+import UserProfile from "../pages/user/UserProfile";
 
 export default function AppRouter() {
     return (
@@ -32,6 +33,7 @@ export default function AppRouter() {
                     <Route path={routes.CAFETERIA} element={<Cafeteria />} />
                     <Route path={routes.ABOUTUS} element={<AboutUs />} />
                     <Route path={routes.CONTACTUS} element={<ContactUs />} />
+                    <Route path={routes.USERPROFILE} element={<UserProfile />} />
                 </Route>
             </Routes>
         </Router>
