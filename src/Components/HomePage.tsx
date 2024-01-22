@@ -2,21 +2,17 @@ import {
     Box,
     Grid,
     Link,
-    Rating,
     Stack,
     Typography,
     styled,
 } from "@mui/material";
-import Header from "../CommonFiles/Header";
+
 import Image1 from "../assets/Rectangle 67.png";
 import Image2 from "../assets/Rectangle 669.png";
 import Colors from "../CommonComponents/Colors";
-import { Translate } from "@mui/icons-material";
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+
 import CardMedia from "@mui/material/CardMedia";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+
 import turf from "../assets/turf.png";
 import CustomButton from "../CommonComponents/CustomButton";
 import CardComponent from "./CardComponent";
@@ -29,7 +25,11 @@ import Image5 from "../assets/Image (5).png";
 import ball3 from "../assets/ball 3.png";
 import ComponentCarosel from "./ComponentCarosel";
 import CarouselComponent from "./CarouselComponent";
-import member from "../assets/Rectangle 673.png";
+import Badminton from "../assets/Image (8).png";
+import Machine from "../assets/Image (7).png";
+import Cricket from "../assets/Image (9).png";
+import Layer2 from "../assets/Layer_2.png";
+import Layer1 from "../assets/Layer_1 (1).png";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,
@@ -144,15 +144,22 @@ export default function HomePage() {
                 paddingTop={8}
                 pb={4}
             >
+                <img
+                    src={Layer2}
+                    width={82}
+                    height={113}
+                    alt="Layer2"
+                    style={{ position: "absolute", transform: `translate(180px, -43px)` }}
+                />
                 <Typography
                     variant="h2"
                     color={Colors.BLACK}
                     textAlign="center"
                     fontSize="32px"
-                    fontWeight={800}
-                    letterSpacing={-2}
+                    fontWeight={700}
                     width={700}
                     margin="auto"
+                    sx={{ fontFamily: "Inter" }}
                 >
                     We offer a diverse range of{" "}
                     <span style={{ color: Colors.BUTTON_COLOR }}>
@@ -197,6 +204,56 @@ export default function HomePage() {
                             "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
                         }
                         image={boardGames}
+                    />
+                </Grid>
+                <img
+                    src={Layer1}
+                    width={37}
+                    height={37}
+                    alt="layer1"
+                    style={{
+                        position: "absolute",
+                        transform: "translate(74rem, 30rem)",
+                    }}
+                />
+                <img
+                    src={Layer1}
+                    width={37}
+                    height={37}
+                    alt="layer1"
+                    style={{
+                        position: "absolute",
+                        transform: "translate(10px, 62rem)",
+                    }}
+                />
+                <Grid item xs={4}>
+                    <CardComponent
+                        buttonLabel="Know more.."
+                        title={"Badminton"}
+                        description={
+                            "Ace every shot on our professional Badminton courts, where passion meets precision."
+                        }
+                        image={Badminton}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <CardComponent
+                        buttonLabel="Know more.."
+                        title={"Cricket Net"}
+                        description={
+                            "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
+                        }
+                        image={Cricket}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <CardComponent
+                        buttonLabel="Know more.."
+                        title={"Bowling Machine"}
+                        description={
+                            "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine."
+                        }
+                        image={Machine}
                     />
                 </Grid>
             </Grid>
@@ -252,7 +309,6 @@ export default function HomePage() {
                 </Stack>
             </Box>
             <ComponentCarosel />
-
         </Box>
     );
 }

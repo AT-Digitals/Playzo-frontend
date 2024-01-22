@@ -13,6 +13,7 @@ import RectangleImage from "../../assets/Rectangle 679.png";
 import layer from "../../assets/Layer_1.png";
 import ball from "../../assets/ball 1.png";
 import ListCard from "./ListCard";
+import ball2 from "../../assets/ball 2.png";
 
 interface userType {
     bookingId: string;
@@ -150,6 +151,7 @@ export default function UserProfile() {
                     </Grid>
                 </Grid>
             </AppContainer>
+            <img src={ball2} width={200} height={200} alt="ball2" style={{ position: "absolute", transform: `translate(130px, 61rem)` }} />
             <img src={RectangleImage} width="100%" height={50} alt="bottom" />
         </>
     );

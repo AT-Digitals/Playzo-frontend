@@ -15,6 +15,7 @@ import CustomButton from "../CommonComponents/CustomButton";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import icon from "../assets/img-4 1.png";
+import Layer3 from "../assets/Layer_3.png";
 
 interface HotelCard {
     feedback: string;
@@ -49,6 +50,10 @@ export default function CarouselCardComponent({
         >
             {showDetails ? (
                 <Stack direction="row" spacing={3}>
+                    <img src={Layer3} width={50} height={50} alt="layer3" style={{
+                        position: "absolute",
+                        transform: "translate(0px, -28px)"
+                    }} />
                     <img
                         height="492px"
                         src={cardDetails.imageSrc}

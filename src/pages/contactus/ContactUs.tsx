@@ -56,7 +56,7 @@ export default function ContactUs() {
     return (
         <>
             <AppContainer>
-                <Grid container paddingY={8} columnGap={12.5}>
+                <Grid container paddingY={15} columnGap={12.5}>
                     <Grid item xs={5}>
                         <Stack direction="column" spacing={2}>
                             <Typography
@@ -76,6 +76,7 @@ export default function ContactUs() {
                                 style={{
                                     textDecoration: "none",
                                     color: Colors.BUTTON_COLOR,
+                                    fontWeight: 600
                                 }}
                                 to="mailto:orders@alterknitnewyork.com"
                             >
@@ -89,7 +90,7 @@ export default function ContactUs() {
                             alt="contact-us"
                             style={{
                                 position: "absolute",
-                                transform: `translate(157px, -40px)`,
+                                transform: `translate(130px, 30px)`,
                             }}
                         />
                     </Grid>
@@ -98,12 +99,6 @@ export default function ContactUs() {
                             <Stack
                                 direction="column"
                                 spacing={3}
-                                paddingY={6}
-                                paddingX={5}
-                                sx={{
-                                    border: `1px solid ${Colors.BORDER}`,
-                                    borderRadius: "12px",
-                                }}
                             >
                                 <CustomTextField
                                     label="Name"

@@ -1,9 +1,11 @@
 import {
   A11y,
   Autoplay,
+  FreeMode,
   Navigation,
   Pagination,
   Scrollbar,
+  Thumbs,
 } from "swiper/modules";
 import {
   DetailedHTMLProps,
@@ -26,6 +28,8 @@ const DefaultModules: SwiperOptions["modules"] = [
   Scrollbar,
   A11y,
   Autoplay,
+  Thumbs,
+  FreeMode,
 ];
 
 const DefaultSlidesPerViewOption: SwiperOptions["slidesPerView"] = 1;
@@ -65,22 +69,22 @@ export default function CustomSwiper({
         color: "red"
       }
     }}>
-    <swiper-container
-      ref={swiperElRef}
-      slides-per-view={DefaultSlidesPerViewOption}
-      loop={DefaultLoopOption}
-      speed={DefaultSpeedOption}
-      effect={DefaultEffectOption}
-      autoplay-delay={10000}
-      autoplay-disable-on-interaction={false}
-      autoplay-pause-on-mouse-enter={true}
-      {...props}
-      className="mySwiper"
-    >
-      {slides.map((slide: any, index: any) => (
-        <swiper-slide key={index}>{slide}</swiper-slide>
-      ))}
-    </swiper-container>
+      <swiper-container
+        ref={swiperElRef}
+        slides-per-view={DefaultSlidesPerViewOption}
+        loop={DefaultLoopOption}
+        speed={DefaultSpeedOption}
+        effect={DefaultEffectOption}
+        autoplay-delay={10000}
+        autoplay-disable-on-interaction={false}
+        autoplay-pause-on-mouse-enter={true}
+        {...props}
+        className="mySwiper"
+      >
+        {slides.map((slide: any, index: any) => (
+          <swiper-slide key={index}>{slide}</swiper-slide>
+        ))}
+      </swiper-container>
     </Box>
   );
 }

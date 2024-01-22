@@ -1,4 +1,4 @@
-import { Box, Grid, Link, Stack, Typography } from "@mui/material";
+import { Box, CardMedia, Grid, Link, Stack, Typography } from "@mui/material";
 
 import Aboutus from "../../assets/Aboutus.svg";
 import Colors from "../../CommonComponents/Colors";
@@ -11,10 +11,21 @@ import turf3 from "../../assets/image 17.png";
 import turf4 from "../../assets/image 18.png";
 import EastIcon from "@mui/icons-material/East";
 import ball from "../../assets/ball 3.png";
+import Layer3 from "../../assets/Layer_4.png";
+import Image1 from "../../assets/Rectangle 67.png";
+import PopupCarousel from "./PopupCarousel";
 
 export default function AboutUs() {
   return (
     <>
+      <Box>
+        <CardMedia
+          component="img"
+          //height="194"
+          image={Image1}
+          alt="Paella dish"
+        />
+      </Box>
       <AppContainer>
         <Box margin="10px 20px">
           <Grid
@@ -136,13 +147,23 @@ export default function AboutUs() {
                 the delight of sports and recreation is within everyone's reach.
               </Typography>
             </Box>
+            <img
+              src={Layer3}
+              width={100}
+              height={137}
+              alt="layer3"
+              style={{
+                position: "absolute",
+                transform: `translate(475px, -18rem)`,
+              }}
+            />
           </Grid>
         </Grid>
       </Box>
       <Box paddingY={10} maxWidth={1200} margin="auto">
         <Stack direction="column" spacing={4}>
           <Typography variant="h3" color={Colors.BUTTON_COLOR} fontWeight={600}>
-            Turf Facilities
+            PlayZo Facilities
           </Typography>
           <Grid container>
             <Stack direction="row" spacing={3}>
@@ -192,65 +213,40 @@ export default function AboutUs() {
           <Box paddingY={5}>
             <Grid container spacing={5}>
               <Grid item xs={12}>
+                <img
+                  src={ball}
+                  width={132}
+                  height={132}
+                  alt="grid-ball"
+                  style={{
+                    position: "absolute",
+                    transform: `translate(135px, -85px)`,
+                  }}
+                />
                 <Typography
-                  variant="h3"
+                  variant="h6"
                   color={Colors.BUTTON_COLOR}
                   fontWeight={600}
                 >
-                  Experience Top-Notch <br />
-                  Turf Facilities
+                  Ready to play? <br /> Let's make every moment count at
+                  Playzo33!
                 </Typography>
-              </Grid>
-              <Grid item xs={5}>
-                <Stack direction="column" spacing={3}>
-                  <Typography variant="h6">
-                    Our turf facilities are crafted to accommodate an array of
-                    sports and events. Featuring cutting-edge turf, excellent
-                    lighting, and meticulously maintained surroundings, Playzo33
-                    provides an ideal space for:
-                  </Typography>
-                  <img
-                    src={ball}
-                    width={250}
-                    height={250}
-                    alt="grid-ball"
-                    style={{
-                      position: "absolute",
-                      transform: `translate(145px, 110px)`,
-                    }}
-                  />
-                </Stack>
-              </Grid>
-              <Grid item xs={5}>
-                <Stack direction="column" spacing={1.5}>
-                  <Typography variant="h6">
-                    <span style={{ fontWeight: "bold" }}>
-                      Soccer Enthusiasts:
-                    </span>{" "}
-                    Whether you're a seasoned player or just love kicking the
-                    ball around, our turf is the ideal setting for soccer
-                    enthusiasts of all levels.
-                  </Typography>
-                  <Typography variant="h6">
-                    <span style={{ fontWeight: "bold" }}> Field Hockey:</span>{" "}
-                    Dive into the world of field hockey with our specially
-                    designed turf, providing the perfect surface for quick
-                    movements and precision play.
-                  </Typography>
-                  <Typography variant="h6">
-                    <span style={{ fontWeight: "bold" }}>Flag Football:</span>{" "}
-                    Gather your team and enjoy the thrill of flag football on
-                    our premium turf, ensuring a safe and enjoyable experience
-                    for all participants.
-                  </Typography>
-                  <Typography variant="h6" color={Colors.BUTTON_COLOR}>
-                    Ready to ? Let's make every moment count <br />
-                    at Playzo33!
-                  </Typography>
-                </Stack>
+                <PopupCarousel />
               </Grid>
             </Grid>
           </Box>
+        </Stack>
+      </Box>
+      <Box paddingY={10} maxWidth={1200} margin="auto">
+        <Stack direction="column" spacing={2} >
+          <Box>
+            <Typography variant="body1">Lorem ipsum</Typography>
+            <Typography variant="h4">2020</Typography>
+          </Box>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </Typography>
         </Stack>
       </Box>
     </>

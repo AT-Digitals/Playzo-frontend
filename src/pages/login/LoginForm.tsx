@@ -70,17 +70,15 @@ export default function LoginForm() {
                     item
                     xs={12}
                     md={6}
-                    paddingX={5}
-                    paddingTop={{ xs: 0, md: 8 }}
+                    padding={5}
                     bgcolor={{ xs: "none", md: Colors.BACKGROUND_COLOR }}
                     borderRadius={5}
-                    paddingBottom={{ xs: 4, md: 8 }}
                     marginLeft={{ xs: 3, md: 0 }}
                 >
                     <Stack direction="row" justifyContent="end">
                         <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
                     </Stack>
-                    <Stack direction="column" spacing={3} paddingX={6}>
+                    <Stack direction="column" spacing={3} padding={6}>
                         <Box>
                             <CustomLabel color={Colors.WHITE} mb={1}>
                                 Email
