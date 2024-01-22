@@ -4,17 +4,19 @@ import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
 import Badminton from "../pages/services/Badminton";
 import BoardGames from "../pages/services/BoardGames";
+import BowlingMachine from "../pages/services/BowlingMachine";
 import Cafeteria from "../pages/services/Cafeteria";
+import ContactUs from "../pages/contactus/ContactUs";
+import CricketNet from "../pages/services/CricketNet";
 import CrossFit from "../pages/services/CrossFit";
 import HomePage from "../Components/HomePage";
+import LoginForm from "../pages/login/LoginForm";
 import PartyCenter from "../pages/services/PartyCenter";
 import PlayStation from "../pages/services/PlayStation";
 import Service from "../pages/services/Service";
 import Turf from "../pages/services/Turf";
-import routes from "./routes";
-import LoginForm from "../pages/login/LoginForm";
-import ContactUs from "../pages/contactus/ContactUs";
 import UserProfile from "../pages/user/UserProfile";
+import routes from "./routes";
 
 export default function AppRouter() {
     return (
@@ -30,6 +32,8 @@ export default function AppRouter() {
                     <Route path={routes.TURF} element={<Turf />} />
                     <Route path={routes.BOARDGAMES} element={<BoardGames />} />
                     <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
+                    <Route path={routes.CRICKETNET} element={<CricketNet />} />
+                    <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
                     <Route path={routes.CAFETERIA} element={<Cafeteria />} />
                     <Route path={routes.ABOUTUS} element={<AboutUs />} />
                     <Route path={routes.CONTACTUS} element={<ContactUs />} />

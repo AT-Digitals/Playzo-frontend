@@ -1,4 +1,5 @@
 import BoardGameSlide1 from '../../assets/BoardGameSlide1.svg'
+import Board_logo from '../../assets/Board_logo.svg'
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
 
@@ -29,7 +30,7 @@ export default function BoardGames() {
       ];
     return <>
 <Service />
-<ServiceGrid carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
+<ServiceGrid icon={Board_logo} carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
 
     </>
 }

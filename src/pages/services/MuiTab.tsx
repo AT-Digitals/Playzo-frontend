@@ -1,35 +1,43 @@
-import { Box, Tab, Tabs } from "@mui/material";
 import { Link, matchPath, useLocation } from "react-router-dom";
+import { Tab, Tabs } from "@mui/material";
 
-import { NoEncryption } from "@mui/icons-material";
-import ServiceGrid from "./ServiceGrid";
 import routes from "../../routes/routes";
 
 const tabList = [
   {
-    href: routes.PLAYSTATION,
-    label: "Play Station",
-  },
-  {
-    href: routes.CROSSFIT,
-    label: "CrossFit",
-  },
-  {
-    href: routes.BADMINTON,
-    label: "Badminton",
-  },
-  {
     href: routes.TURF,
     label: "Turf",
+  },
+  {
+    href: routes.PLAYSTATION,
+    label: "Play Station",
   },
   {
     href: routes.BOARDGAMES,
     label: "Board Games",
   },
   {
+    href: routes.BADMINTON,
+    label: "Badminton",
+  },
+  {
+    href: routes.CRICKETNET,
+    label: "Cricket Net",
+  },
+  {
+    href: routes.BOWLINGMACHINE,
+    label: "Bowling Machine",
+  },
+  
+  {
     href: routes.PARTYCENTER,
     label: "Party Center",
   },
+  {
+    href: routes.CROSSFIT,
+    label: "Cross Fit",
+  },
+
   {
     href: routes.CAFETERIA,
     label: "Cafeteria",
@@ -79,7 +87,7 @@ export default function MuiTab() {
       }
     };
 
-    const routeMatch = useRouteMatch([routes.PLAYSTATION,routes.CROSSFIT,routes.BADMINTON,routes.TURF,routes.BOARDGAMES,routes.PARTYCENTER,routes.CAFETERIA]);
+    const routeMatch = useRouteMatch([routes.CRICKETNET,routes.BOWLINGMACHINE,routes.PLAYSTATION,routes.CROSSFIT,routes.BADMINTON,routes.TURF,routes.BOARDGAMES,routes.PARTYCENTER,routes.CAFETERIA]);
     const currentTab = routeMatch?.pattern?.path;
     
     return <>
@@ -91,7 +99,7 @@ export default function MuiTab() {
   centered
   sx={{
     marginTop:"10px",
-    maxWidth:"95%",
+    maxWidth:"100%",
     "--Tab-indicatorThickness": "0px",
 ".MuiTabs-indicator":{
   display:"none"

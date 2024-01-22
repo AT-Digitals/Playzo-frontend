@@ -1,3 +1,4 @@
+import Badmin_logo from '../../assets/Badmin_logo.svg'
 import Badmintonslide1 from '../../assets/Badmintonslide1.svg'
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
@@ -29,7 +30,7 @@ export default function Badminton() {
       ];
     return <>
 <Service />
-<ServiceGrid carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
+<ServiceGrid icon={Badmin_logo} carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
 
     </>
 }

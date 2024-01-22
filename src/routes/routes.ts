@@ -13,6 +13,8 @@ const CAFETERIA = SERVICE + "/cafeteria";
 const ABOUTUS = "/about-us";
 const CONTACTUS = "/contact-us";
 const USERPROFILE = "/user-profile";
+const CRICKETNET = SERVICE + "cricketnet";
+const BOWLINGMACHINE = SERVICE + "bowlingmachine";
 const routes = {
   ROOT,
   LOGIN,
@@ -29,6 +31,8 @@ const routes = {
   ABOUTUS,
   CONTACTUS,
   USERPROFILE,
+  CRICKETNET,
+  BOWLINGMACHINE
 };
 
 export default routes;
