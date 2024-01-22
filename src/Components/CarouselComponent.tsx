@@ -1,30 +1,16 @@
-import Slider from "react-slick";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import {
     Box,
-    Button,
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    Rating,
     Stack,
-    Typography,
 } from "@mui/material";
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+
+import CarouselCardComponent from "./CarouselCardComponent";
+import Colors from "../CommonComponents/Colors";
 import Image1 from "../assets/Rectangle 678.png";
 import Image2 from "../assets/Rectangle 677.png";
 import Image3 from "../assets/Rectangle 673.png";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import CarouselCardComponent from "./CarouselCardComponent";
-import Colors from "../CommonComponents/Colors";
-import Image5 from "../assets/Image (5).png";
 import Image4 from "../assets/Image (3).png";
+import Image5 from "../assets/Image (5).png";
+import { useState } from "react";
 
 interface HotelCard {
     imageSrc: string;
