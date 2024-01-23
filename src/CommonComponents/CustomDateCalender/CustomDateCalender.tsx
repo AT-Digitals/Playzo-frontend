@@ -263,6 +263,17 @@ export default function CustomDateCalendar() {
           </Table>
         </TableContainer>
       </Box>
+      <Button
+        style={{
+          background: "var(--primary-3, #15B5FC)",
+          color: "white",
+          textTransform: "none",
+          maxWidth: 247,
+          width: "100%",
+        }}
+      >
+        Proceed to payment{" "}
+      </Button>
     </Stack>
   );
 }
