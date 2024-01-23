@@ -1,12 +1,27 @@
 import * as React from "react";
 
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import CloseIcon from "@mui/icons-material/Close";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { format } from "date-fns";
 import leftarrow from "./left-arrow.svg";
 import rightarrow from "./right-arrow.svg";
+import styled from "styled-components";
 
 const Timings = [
   { name: "9:00-10:00 AM" },
@@ -19,7 +34,31 @@ const Timings = [
   { name: "4:00-5:00 PM" },
 ];
 
+const StyledCell = styled(TableCell)({
+  " &.MuiTableCell-root": {
+    borderBottom: "none",
+    fontSize: "18px",
+  },
+});
+
+const StyledCellTitle = styled(TableCell)({
+  " &.MuiTableCell-root": {
+    borderBottom: "none",
+    fontWeight: "bold",
+    fontSize: "16px",
+  },
+});
+
+interface TableDataItem {
+  date: string;
+  time: string;
+}
+
 export default function CustomDateCalendar() {
+  const [selectedDate, setSelectedDate] = React.useState<string>("");
+  const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
+  const [tableData, setTableData] = React.useState<TableDataItem[]>([]);
+
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
 
@@ -61,17 +100,44 @@ export default function CustomDateCalendar() {
     );
   };
 
+  const handleDateSelection = (date: string) => {
+    if (date) {
+      setSelectedDate(date);
+    }
+  };
+
+  const handleTimeSelection = (time: string) => {
+    setSelectedTime(time);
+  };
+
+  const handleAddButtonClick = () => {
+    if (selectedDate !== null && selectedTime !== null) {
+      setTableData([...tableData, { date: selectedDate, time: selectedTime }]);
+      setSelectedDate("");
+      setSelectedTime(null);
+    }
+  };
+
+  const handleRemoveItem = (indexToRemove: any) => {
+    const updatedTableData = tableData.filter(
+      (_, index) => index !== indexToRemove
+    );
+    setTableData(updatedTableData);
+  };
+
   return (
     <Stack
-      p={"0 40px 20px"}
-      display={"flex"}
-      flexDirection={"column"}
+      p="0 40px 20px"
+      display="flex"
+      flexDirection="column"
       spacing={2}
-      maxWidth={500}
-      margin={"0 auto"}
+      maxWidth={1146}
+      alignItems="center"
+      width="100%"
+      margin="0 auto"
     >
       <Box>
-        <Typography mb={2} fontSize={"18px"}>
+        <Typography mb={2} fontSize="18px">
           Pick Date
         </Typography>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -96,17 +162,17 @@ export default function CustomDateCalendar() {
                 border: "1px solid #15B5FC  !important",
               },
             }}
+            onChange={(date) => handleDateSelection(date)}
           />
         </LocalizationProvider>
       </Box>
-      <Box width={"100%"} maxWidth={330}>
-        <Typography mb={2} fontSize={"18px"}>
+      <Box width="100%" maxWidth={330}>
+        <Typography mb={2} fontSize="18px">
           Pick Time
         </Typography>
-        <Box mb={2} display={"flex"} gap={"2rem"} flexWrap={"wrap"}>
+        <Box mb={2} display="flex" gap="2rem" flexWrap="wrap">
           {Timings.map((item, index) => (
-            <Box
-              key={index}
+            <Button
               sx={{
                 maxWidth: 147,
                 width: "100%",
@@ -118,18 +184,23 @@ export default function CustomDateCalendar() {
                 justifyContent: "center",
                 borderRadius: "5px",
               }}
+              key={index}
+              onClick={() => handleTimeSelection(item.name)}
             >
-              <Typography
-                color={item.disabled ? "#9C9C9C" : "black"}
-                fontSize={"18px"}
-              >
-                {item.name}
-              </Typography>
-            </Box>
+              <Box>
+                <Typography
+                  color={item.disabled ? "#9C9C9C" : "black"}
+                  fontSize="18px"
+                >
+                  {item.name}
+                </Typography>
+              </Box>
+            </Button>
           ))}
         </Box>
-        <Box display={"flex"} justifyContent={"end"}>
+        <Box display="flex" justifyContent="end">
           <Button
+            onClick={handleAddButtonClick}
             style={{
               background: "var(--primary-3, #15B5FC)",
               color: "white",
@@ -139,6 +210,58 @@ export default function CustomDateCalendar() {
             Add
           </Button>
         </Box>
+      </Box>
+
+      <Box
+        border="1px solid black"
+        borderRadius="12px"
+        display="flex"
+        alignItems="center"
+        width="100%"
+        justifyContent="center"
+      >
+        <TableContainer
+          style={{
+            width: "85%",
+          }}
+        >
+          <Table>
+            <TableHead>
+              <TableRow>
+                <StyledCellTitle>Items</StyledCellTitle>
+                <StyledCellTitle>Type</StyledCellTitle>
+                <StyledCellTitle>Date</StyledCellTitle>
+                <StyledCellTitle>Time</StyledCellTitle>
+                <StyledCellTitle>Qty</StyledCellTitle>
+                <StyledCellTitle>Rate</StyledCellTitle>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tableData.map((data, index) => (
+                <TableRow key={index}>
+                  <StyledCell>Turf</StyledCell>
+                  <StyledCell>Turf 1</StyledCell>
+                  <StyledCell>
+                    {format(new Date(data.date), "dd MMM yyyy")}
+                  </StyledCell>
+
+                  <StyledCell>{String(data.time)}</StyledCell>
+                  <StyledCell>2 hours</StyledCell>
+                  <StyledCell>1500</StyledCell>
+                  <StyledCell>
+                    <IconButton onClick={() => handleRemoveItem(index)}>
+                      <CloseIcon
+                        style={{
+                          color: "black",
+                        }}
+                      />
+                    </IconButton>
+                  </StyledCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Stack>
   );
