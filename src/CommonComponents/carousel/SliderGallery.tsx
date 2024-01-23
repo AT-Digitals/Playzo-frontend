@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { Box } from "@mui/material";
 import image1 from "./Rectangle 688.png";
 import image2 from "../../assets/image 17.png";
 import image3 from "../../assets/image 16.png";
@@ -10,7 +11,7 @@ import leftNavi from "./left-navi.svg";
 import righttNavi from "./right-navi.svg";
 import styled from "styled-components";
 
-const GalleryImages = [image1, image2, image3, image4, image5, image6];
+const GalleryImages = [image1, image2, image3, image4, image5, image6, image1];
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -42,7 +43,9 @@ const GalleryContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin-top: 20px;
-  gap: 0.8rem;
+  gap: 0.5rem;
+  max-height: 960px; /* 160px * 6 images */
+  overflow: hidden;
 `;
 
 const GalleryImage = styled.img`
@@ -52,9 +55,11 @@ const GalleryImage = styled.img`
   cursor: pointer;
 `;
 const ImageGallery = ({ images, onImageClick }: any) => {
+  const visibleImages = images.slice(0, 6); // Show only the first 6 images
+
   return (
     <GalleryContainer>
-      {images.map((image: string, index: number) => (
+      {visibleImages.map((image: string, index: number) => (
         <GalleryImage
           key={index}
           src={image}
@@ -104,6 +109,15 @@ const GalleryWithCarousel = () => {
         </ArrowButton>
       </CarouselContainer>
       <ImageGallery images={GalleryImages} onImageClick={handleImageClick} />
+      <Box width={"83%"} display={"flex"} justifyContent={"flex-end"} mt={1}>
+        <ArrowButton onClick={() => setCurrentIndex(currentIndex - 1)}>
+          {" "}
+          <img src={leftNavi} alt="left" />
+        </ArrowButton>
+        <ArrowButton onClick={() => setCurrentIndex(currentIndex + 1)}>
+          <img src={righttNavi} alt="right" />
+        </ArrowButton>
+      </Box>
     </div>
   );
 };
