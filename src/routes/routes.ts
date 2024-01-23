@@ -13,6 +13,7 @@ const CAFETERIA = SERVICE + "/cafeteria";
 const ABOUTUS = "/about-us";
 const CONTACTUS = "/contact-us";
 const USERPROFILE = "/user-profile";
+const DATE_CALENDER = "/date-calender";
 const routes = {
   ROOT,
   LOGIN,
@@ -29,6 +30,7 @@ const routes = {
   ABOUTUS,
   CONTACTUS,
   USERPROFILE,
+  DATE_CALENDER,
 };
 
 export default routes;
