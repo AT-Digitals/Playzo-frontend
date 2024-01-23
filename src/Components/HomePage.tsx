@@ -5,7 +5,6 @@ import {
     Rating,
     Stack,
     Typography,
-    styled,
 } from "@mui/material";
 import Header from "../CommonFiles/Header";
 import Image1 from "../assets/Rectangle 67.png";
@@ -30,6 +29,7 @@ import ball3 from "../assets/ball 3.png";
 import ComponentCarosel from "./ComponentCarosel";
 import CarouselComponent from "./CarouselComponent";
 import member from "../assets/Rectangle 673.png";
+import styled from "styled-components";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,

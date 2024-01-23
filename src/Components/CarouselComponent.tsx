@@ -1,7 +1,4 @@
-import Slider from "react-slick";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import {
     Box,
     Button,
@@ -13,8 +10,6 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import Image1 from "../assets/Rectangle 678.png";
 import Image2 from "../assets/Rectangle 677.png";

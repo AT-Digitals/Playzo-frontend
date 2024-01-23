@@ -15,6 +15,13 @@ import routes from "./routes";
 import LoginForm from "../pages/login/LoginForm";
 import ContactUs from "../pages/contactus/ContactUs";
 import UserProfile from "../pages/user/UserProfile";
+import ServiceBooking from "../BookingService/ServiceBooking";
+import TurfBooking from "../BookingService/TurfBooking";
+import PlaystationBooking from "../BookingService/PlaystationBooking";
+import BadmintonBooking from "../BookingService/BadmintonBooking";
+import BoardgameBooking from "../BookingService/BoardgameBooking";
+import CricketnetBooking from "../BookingService/CricketnetBooking";
+import BowlingmachineBooking from "../BookingService/BowlingmachineBooking";
 
 export default function AppRouter() {
     return (
@@ -34,6 +41,13 @@ export default function AppRouter() {
                     <Route path={routes.ABOUTUS} element={<AboutUs />} />
                     <Route path={routes.CONTACTUS} element={<ContactUs />} />
                     <Route path={routes.USERPROFILE} element={<UserProfile />} />
+                    <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
+                    <Route path={routes.TURF_BOOKING} element={<TurfBooking />} />
+                    <Route path={routes.PLAYSTATION_BOOKING} element={<PlaystationBooking />} />
+                    <Route path={routes.BADMINTON_BOOKING} element={<BadmintonBooking />} />
+                    <Route path={routes.BOARDGAME_BOOKING} element={<BoardgameBooking />} />
+                    <Route path={routes.CRICKETNET_BOOKING} element={<CricketnetBooking />} />
+                    <Route path={routes.BOWLINGMACHINE_BOOKING} element={<BowlingmachineBooking />} />
                 </Route>
             </Routes>
         </Router>
