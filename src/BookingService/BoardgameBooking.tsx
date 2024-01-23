@@ -8,6 +8,8 @@ import boardgames3 from "../assets/Rectangle 685 (9).png";
 import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import routes from "../routes/routes";
+import { Link } from "react-router-dom";
 const BoardgameImages = [
     {
         image: boardgames1,
@@ -41,9 +43,11 @@ export default function BoardgameBooking() {
         >
         Date & Time
         </Typography>,
+         <Link style={{textDecoration: "none"}} to={routes.PAYMENT_BOOKING}>
         <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('3')}>
         Payment
-        </Typography>,
+        </Typography>
+        </Link>
       ];
     return (
         <>

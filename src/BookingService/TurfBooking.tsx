@@ -5,6 +5,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import turf from "../assets/turf.png";
 import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
+import { Link } from "react-router-dom";
+import routes from "../routes/routes";
 const TurfImages = [
     {
         image: turf,
@@ -38,9 +40,11 @@ export default function TurfBooking() {
         >
         Date & Time
         </Typography>,
+         <Link style={{textDecoration: "none"}} to={routes.PAYMENT_BOOKING}>
         <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('3')}>
         Payment
-        </Typography>,
+        </Typography>
+        </Link>
       ];
     return (
         <>

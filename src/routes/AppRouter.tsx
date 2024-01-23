@@ -22,6 +22,7 @@ import BadmintonBooking from "../BookingService/BadmintonBooking";
 import BoardgameBooking from "../BookingService/BoardgameBooking";
 import CricketnetBooking from "../BookingService/CricketnetBooking";
 import BowlingmachineBooking from "../BookingService/BowlingmachineBooking";
+import PaymentBooking from "../BookingService/PaymentBooking";
 
 export default function AppRouter() {
     return (
@@ -48,6 +49,7 @@ export default function AppRouter() {
                     <Route path={routes.BOARDGAME_BOOKING} element={<BoardgameBooking />} />
                     <Route path={routes.CRICKETNET_BOOKING} element={<CricketnetBooking />} />
                     <Route path={routes.BOWLINGMACHINE_BOOKING} element={<BowlingmachineBooking />} />
+                    <Route path={routes.PAYMENT_BOOKING} element={<PaymentBooking />} />
                 </Route>
             </Routes>
         </Router>

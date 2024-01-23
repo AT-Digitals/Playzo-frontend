@@ -8,6 +8,8 @@ import badminton from "../assets/Image (7).png";
 import badminton1 from "../assets/Rectangle 685 (3).png";
 import badminton2 from "../assets/Rectangle 685 (4).png";
 import badminton3 from "../assets/Rectangle 685 (5).png";
+import { Link } from "react-router-dom";
+import routes from "../routes/routes";
 
 const BadmintonImages = [
     {
@@ -41,9 +43,11 @@ export default function BadmintonBooking() {
           >
           Date & Time
           </Typography>,
+           <Link style={{textDecoration: "none"}} to={routes.PAYMENT_BOOKING}>
           <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('3')}>
           Payment
-          </Typography>,
+          </Typography>
+          </Link>
         ];
     return (
         <>

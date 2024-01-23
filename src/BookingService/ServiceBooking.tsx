@@ -53,21 +53,22 @@ const CricketDetails = [
 
 export default function ServiceBooking() {
     const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
-
-  // Function to handle breadcrumb selection
+    
   const handleBreadcrumbClick = (breadcrumbKey: any) => {
     setSelectedBreadcrumb(breadcrumbKey);
   };
     const breadcrumbs = [
-        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="1" color={selectedBreadcrumb === '1' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('1')}>
+        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="1" color={selectedBreadcrumb === '1' ? Colors.BUTTON : Colors.BLACK} onClick={() => handleBreadcrumbClick('1')}>
         Service
         </Typography>,
-        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="2" color={selectedBreadcrumb === '2' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('2')}>
+        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="2" color={selectedBreadcrumb === '2' ? Colors.BUTTON : Colors.BLACK} onClick={() => handleBreadcrumbClick('2')}>
         Date & Time
         </Typography>,
-        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('3')}>
+        <Link style={{textDecoration: "none"}} to={routes.PAYMENT_BOOKING}>
+        <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK} onClick={() => handleBreadcrumbClick('3')}>
         Payment
-        </Typography>,
+        </Typography>
+        </Link>
       ];
 
     return (

@@ -20,6 +20,7 @@ const BADMINTON_BOOKING = "/badminton-booking";
 const BOARDGAME_BOOKING = "/boardgame-booking";
 const CRICKETNET_BOOKING = "/cricketnet-booking"
 const BOWLINGMACHINE_BOOKING = "/bowlingmachine-booking"
+const PAYMENT_BOOKING = "/payment-booking";
 const routes = {
   ROOT,
   LOGIN,
@@ -43,6 +44,7 @@ const routes = {
   BOARDGAME_BOOKING,
   CRICKETNET_BOOKING,
   BOWLINGMACHINE_BOOKING,
+  PAYMENT_BOOKING,
 };
 
 export default routes;

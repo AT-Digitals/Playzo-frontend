@@ -8,6 +8,8 @@ import grass from "../assets/Rectangle 679.png";
 import playstation1 from "../assets/Rectangle 685.png";
 import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
+import { Link } from "react-router-dom";
+import routes from "../routes/routes";
 
 const PlaystationImages = [
     {
@@ -41,9 +43,11 @@ export default function PlaystationBooking() {
           >
           Date & Time
           </Typography>,
+            <Link style={{textDecoration: "none"}} to={routes.PAYMENT_BOOKING}>
           <Typography fontSize={"16px"} fontWeight={"bold"} style={{cursor: "pointer"}} key="3" color={selectedBreadcrumb === '3' ? Colors.BUTTON : Colors.BLACK}onClick={() => handleBreadcrumbClick('3')}>
           Payment
-          </Typography>,
+          </Typography>
+          </Link>
         ];
     return (
         <>
