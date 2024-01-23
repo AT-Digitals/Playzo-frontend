@@ -14,6 +14,8 @@ const ABOUTUS = "/about-us";
 const CONTACTUS = "/contact-us";
 const USERPROFILE = "/user-profile";
 const DATE_CALENDER = "/date-calender";
+const IMAGE_GALLERY = "/image-gal";
+
 const routes = {
   ROOT,
   LOGIN,
@@ -31,6 +33,7 @@ const routes = {
   CONTACTUS,
   USERPROFILE,
   DATE_CALENDER,
+  IMAGE_GALLERY,
 };
 
 export default routes;

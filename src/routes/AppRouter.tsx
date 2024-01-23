@@ -9,6 +9,7 @@ import ContactUs from "../pages/contactus/ContactUs";
 import CrossFit from "../pages/services/CrossFit";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import HomePage from "../Components/HomePage";
+import ImageSliderGallery from "../CommonComponents/carousel/SliderGallery";
 import LoginForm from "../pages/login/LoginForm";
 import PartyCenter from "../pages/services/PartyCenter";
 import PlayStation from "../pages/services/PlayStation";
@@ -36,6 +37,7 @@ export default function AppRouter() {
           <Route path={routes.CONTACTUS} element={<ContactUs />} />
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
           <Route path={routes.DATE_CALENDER} element={<CustomDateCalendar />} />
+          <Route path={routes.IMAGE_GALLERY} element={<ImageSliderGallery />} />
         </Route>
       </Routes>
     </Router>
