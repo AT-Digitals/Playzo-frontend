@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup, RadioProps, Stack, TextField, Typography, styled } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup, RadioProps, Stack, TextField, Typography, styled } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Colors from "../CommonComponents/Colors";
 import calendar from "../assets/Calendar.png";
@@ -11,6 +11,9 @@ import TodayIcon from '@mui/icons-material/Today';
 import LockIcon from '@mui/icons-material/Lock';
 import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
+import { useState } from "react";
+import React from "react";
+import CloseIcon from '@mui/icons-material/Close';
 
 const PaymentDetails = [
   {
@@ -48,6 +51,16 @@ const BpCheckedIcon = styled(BpIcon)({
     backgroundColor: '#15B5FC',
   },
 });
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '#000333',
+  borderRadius: "15px",
+  p: 4,
+};
 
 function BpRadio(props: RadioProps) {
   return (
@@ -61,6 +74,15 @@ function BpRadio(props: RadioProps) {
   );
 }
 export default function PaymentBooking() {
+  const initialPaymentMethod = 'female';
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(initialPaymentMethod);
+
+  const handlePaymentMethodChange = (event: any) => {
+    setSelectedPaymentMethod(event.target.value);
+  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 return (
   <>
     <Stack margin={{xs: "0px", sm: "0px", md: "0px", lg: "50px 190px"}} flexDirection={{xs:"column", sm: "column", md: "column", lg: "row"}}>
@@ -110,7 +132,8 @@ return (
     <Typography pt={"30px"} fontWeight={"600"} color={Colors.BUTTON} fontSize={"19px"}>Payment Methods</Typography>
     <Box display={"flex"} alignItems={"center"}>
     <FormControl>
-      <RadioGroup style={{marginTop: "10px"}} defaultValue="female" aria-labelledby="demo-customized-radios" name="customized-radios"
+      <RadioGroup style={{marginTop: "10px"}} defaultValue="female" aria-labelledby="demo-customized-radios" name="customized-radios" value={selectedPaymentMethod}
+      onChange={handlePaymentMethodChange}
       >
         <FormControlLabel value="female" control={<BpRadio />} label="" />
       </RadioGroup>
@@ -143,8 +166,9 @@ return (
     </Box>
     <Box display={"flex"} alignItems={"center"}>
     <FormControl>
-      <RadioGroup style={{marginTop: "10px"}} aria-labelledby="demo-customized-radios" name="customized-radios">
-        <FormControlLabel value="male" control={<BpRadio />} label="" />
+      <RadioGroup style={{marginTop: "10px"}} defaultValue="other" aria-labelledby="demo-customized-radios" name="customized-radios" value={selectedPaymentMethod}
+      onChange={handlePaymentMethodChange}>
+        <FormControlLabel value="other" control={<BpRadio />} label="" />
       </RadioGroup>
     </FormControl>
     <Typography pt={"9px"} color={"#666666"} fontSize={"16px"} fontWeight={"bold"}>Direct Bank Transfer</Typography>
@@ -152,15 +176,16 @@ return (
     <Typography pl={"38px"} color={"#666666"} fontSize={"16px"} fontWeight={"500"}>Make payment directly through bank account.</Typography>
     <Box display={"flex"} alignItems={"center"}>
     <FormControl>
-      <RadioGroup style={{marginTop: "10px"}} aria-labelledby="demo-customized-radios" name="customized-radios">
-        <FormControlLabel value="" control={<BpRadio />} label="" />
+      <RadioGroup style={{marginTop: "10px"}} defaultValue="male" aria-labelledby="demo-customized-radios" name="customized-radios" value={selectedPaymentMethod}
+      onChange={handlePaymentMethodChange}>
+        <FormControlLabel value="male" control={<BpRadio />} label="" />
       </RadioGroup>
     </FormControl>
     <Typography pt={"9px"} color={"#666666"} fontSize={"16px"} fontWeight={"bold"}>Other Payment Methods</Typography>
     </Box>
     <Typography pl={"38px"} color={"#666666"} fontSize={"16px"} fontWeight={"500"}>Make payment through Gpay, Paytm etc</Typography>
     <Box mt={"10px"} display={"flex"} justifyContent={"end"}>
-    <Button style={{backgroundColor: Colors.BUTTON, width: "100%", maxWidth: "120px", height: "40px", textTransform: "capitalize", fontWeight: "bold"}} variant="contained">Pay 1500</Button>
+    <Button onClick={handleOpen} style={{backgroundColor: Colors.BUTTON, width: "100%", maxWidth: "120px", height: "40px", textTransform: "capitalize", fontWeight: "bold"}} variant="contained">Pay 1500</Button>
     </Box>
     </Box>
   </Stack>
@@ -168,6 +193,26 @@ return (
       <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{marginTop: "-40px"}} src={grass} alt="" />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Box display={"flex"} justifyContent={"end"} marginTop={"-12px"}>
+            <IconButton>
+          <CloseIcon onClick={handleClose} style={{fontSize: "25px", color: Colors.WHITE}} />
+          </IconButton>
+          </Box>
+          <Typography marginTop={"20px"} textAlign={"center"} fontSize={"17px"} color={Colors.WHITE}>
+            Your booking is confirmed
+          </Typography>
+          <Typography mb={"20px"} textAlign={"center"} fontSize={"15px"} marginTop={"8px"} color={Colors.WHITE}>
+          Thank you, your payment has been successfull.
+          </Typography>
+        </Box>
+      </Modal>
   </>
 );
 }
