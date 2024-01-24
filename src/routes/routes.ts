@@ -18,9 +18,12 @@ const TURF_BOOKING = "/turf-booking";
 const PLAYSTATION_BOOKING = "/playstation-booking";
 const BADMINTON_BOOKING = "/badminton-booking";
 const BOARDGAME_BOOKING = "/boardgame-booking";
-const CRICKETNET_BOOKING = "/cricketnet-booking"
-const BOWLINGMACHINE_BOOKING = "/bowlingmachine-booking"
+const CRICKETNET_BOOKING = "/cricketnet-booking";
+const BOWLINGMACHINE_BOOKING = "/bowlingmachine-booking";
 const PAYMENT_BOOKING = "/payment-booking";
+const DATE_CALENDER = "/date-calender";
+const IMAGE_GALLERY = "/image-gal";
+
 const routes = {
   ROOT,
   LOGIN,
@@ -45,6 +48,8 @@ const routes = {
   CRICKETNET_BOOKING,
   BOWLINGMACHINE_BOOKING,
   PAYMENT_BOOKING,
+  DATE_CALENDER,
+  IMAGE_GALLERY,
 };
 
 export default routes;

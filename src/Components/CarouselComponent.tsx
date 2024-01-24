@@ -1,8 +1,4 @@
-
-import {
-    Box,
-    Stack,
-} from "@mui/material";
+import { Box, Stack } from "@mui/material";
 
 import { useState } from "react";
 import Image1 from "../assets/Rectangle 678.png";
@@ -29,7 +25,8 @@ const CardDetails: HotelCard[] = [
         name: "Prakash",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
+        feedback:
+            "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
         ratings: 3,
     },
     {
@@ -37,7 +34,8 @@ const CardDetails: HotelCard[] = [
         name: "Shwetha",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "By far the two best features are the ease of use and the customer service. The app is SOOOO easy to use for everyone and customer service answers on the second ring EVERY.",
+        feedback:
+            "By far the two best features are the ease of use and the customer service. The app is SOOOO easy to use for everyone and customer service answers on the second ring EVERY.",
         ratings: 5,
     },
     {
@@ -45,15 +43,17 @@ const CardDetails: HotelCard[] = [
         name: "Prakash",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "I had a great experience playing badminton at Playzo33! The professional-level courts provided an excellent playing surface, and the well-lit environment made it easy to enjoy games even in the evening. The booking process was straightforward, and the overall atmosphere was friendly and inviting. I appreciate the attention to detail and the effort put into maintaining high-quality badminton facilities. Looking forward to my next game!",
-        ratings: 4.5
+        feedback:
+            "I had a great experience playing badminton at Playzo33! The professional-level courts provided an excellent playing surface, and the well-lit environment made it easy to enjoy games even in the evening. The booking process was straightforward, and the overall atmosphere was friendly and inviting. I appreciate the attention to detail and the effort put into maintaining high-quality badminton facilities. Looking forward to my next game!",
+        ratings: 4.5,
     },
     {
         imageSrc: Image4,
         name: "Anand",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.",
+        feedback:
+            "The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.",
         ratings: 3.5,
     },
     {
@@ -61,7 +61,8 @@ const CardDetails: HotelCard[] = [
         name: "Shwetha",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "I went from doing everything the paper way to now everything is electronic from check in and out to all of the children files and mine on the Playground app. Love love the all the payment options.",
+        feedback:
+            "I went from doing everything the paper way to now everything is electronic from check in and out to all of the children files and mine on the Playground app. Love love the all the payment options.",
         ratings: 2.5,
     },
     {
@@ -69,27 +70,31 @@ const CardDetails: HotelCard[] = [
         name: "Anand",
         type: "Badminton",
         member: "Member since 2022",
-        feedback: "The statement dates were not correct and caused a lot of confusion for parents. Assigning the charges takes a lot of time for us as a large center with multiple age groups and price points.",
+        feedback:
+            "The statement dates were not correct and caused a lot of confusion for parents. Assigning the charges takes a lot of time for us as a large center with multiple age groups and price points.",
         ratings: 4,
     },
     // Add more hotel cards as needed
 ];
 
 export default function CarouselComponent() {
-
-
     const initialCardsToShow = 3;
 
     const [startIndex, setStartIndex] = useState(0);
 
     const showNextCards = () => {
-        setStartIndex((prevIndex) => Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow));
+        setStartIndex((prevIndex) =>
+            Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow)
+        );
     };
 
     const showPreviousCards = () => {
         setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
-    const visibleCards = CardDetails.slice(startIndex, startIndex + initialCardsToShow);
+    const visibleCards = CardDetails.slice(
+        startIndex,
+        startIndex + initialCardsToShow
+    );
 
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} marginY={4} width="100%">
@@ -101,11 +106,15 @@ export default function CarouselComponent() {
                 paddingY={12}
             >
                 {visibleCards.map((card, index) => (
-                    <CarouselCardComponent key={index} cardDetails={card} showDetails={index === 2} nextClick={showNextCards} prevClick={showPreviousCards} />
+                    <CarouselCardComponent
+                        key={index}
+                        cardDetails={card}
+                        showDetails={index === 2}
+                        nextClick={showNextCards}
+                        prevClick={showPreviousCards}
+                    />
                 ))}
             </Stack>
         </Box>
     );
 }
-
-//sx={{ backgroundColor: Colors.LIGHT_GRAY, borderRadius: "50%" }} sx={{ fontSize: "22px" }}
