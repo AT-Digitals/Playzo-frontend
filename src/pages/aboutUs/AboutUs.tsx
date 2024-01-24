@@ -231,13 +231,13 @@ export default function AboutUs() {
                   Ready to play? <br /> Let's make every moment count at
                   Playzo33!
                 </Typography>
-                <PopupCarousel />
+                {/* <PopupCarousel /> */}
               </Grid>
             </Grid>
           </Box>
         </Stack>
       </Box>
-      <Box paddingY={10} maxWidth={1200} margin="auto">
+      {/* <Box paddingY={10} maxWidth={1200} margin="auto">
         <Stack direction="column" spacing={2} >
           <Box>
             <Typography variant="body1">Lorem ipsum</Typography>
@@ -248,7 +248,7 @@ export default function AboutUs() {
             incididunt ut labore et dolore magna aliqua.
           </Typography>
         </Stack>
-      </Box>
+      </Box> */}
     </>
   );
 }

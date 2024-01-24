@@ -36,7 +36,7 @@ const StyledTypo = styled(Typography)({
     position: "absolute",
     top: "100px",
     // left: '50%',
-    transform: "translate(105%, 228%)",
+    transform: "translate(107%, 232%)",
     fontSize: "5rem",
     textAlign: "center",
     zIndex: 1,
@@ -90,7 +90,7 @@ const StyledButton = styled(CustomButton)({
     fontWeight: 600,
     position: "absolute",
     top: "100px",
-    transform: "translate(450%, 1300%)",
+    transform: "translate(450%, -1200%)",
     padding: "10px 20px",
 });
 
@@ -115,7 +115,7 @@ export default function HomePage() {
                 }}
             />
 
-            <StyledTypo variant="h3" fontWeight={600}>
+            <StyledTypo variant="h3" fontWeight={600} fontFamily="Inter" fontSize="5rem">
                 Play Beyond <br /> Boundaries
             </StyledTypo>
             <img
