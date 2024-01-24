@@ -81,7 +81,7 @@ export default function ServiceBooking() {
         {breadcrumbs}
       </Breadcrumbs>
       </Stack>
-      <Box margin={{xs: "50px 50px", sm: "50px 50px", md: "50px 50px", lg: "50px 170px"}} width={"100%"} maxWidth={"290px"} borderRight={"1px solid #D9D9D9"}>
+      <Box margin={{xs: "50px 50px", sm: "50px 50px", md: "50px 50px", lg: "50px 240px"}} width={"100%"} maxWidth={"290px"} borderRight={"1px solid #D9D9D9"}>
       <Typography fontSize={"14px"} paddingBottom={"7px"} color={Colors.BLACK}>Pick a service</Typography>
       <Stack alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
       {TurfDetails.map((item) => (

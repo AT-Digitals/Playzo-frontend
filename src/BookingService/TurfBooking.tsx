@@ -56,7 +56,7 @@ export default function TurfBooking() {
         {breadcrumbs}
       </Breadcrumbs>
       </Stack>
-      <Box display={"flex"} margin={{xs: "0px", sm: "0px", md: "0px", lg: "30px 110px"}}>
+      <Box display={"flex"} margin={{xs: "0px", sm: "0px", md: "0px", lg: "30px 190px"}}>
       <Box margin={"60px 50px"} border={"1px solid #D9D9D9"} width={"100%"} maxWidth={"200px"} borderRadius={"10px"} height={"195px"}>
       <Box padding={"20px 20px"}>
       <img src={turf} width={"160px"} height={"130px"} alt="turf" />
