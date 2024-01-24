@@ -24,6 +24,8 @@ const PAYMENT_BOOKING = "/payment-booking";
 const DATE_CALENDER = "/date-calender";
 const IMAGE_GALLERY = "/image-gal";
 
+const CRICKETNET = SERVICE + "cricketnet";
+const BOWLINGMACHINE = SERVICE + "bowlingmachine";
 const routes = {
   ROOT,
   LOGIN,
@@ -50,6 +52,8 @@ const routes = {
   PAYMENT_BOOKING,
   DATE_CALENDER,
   IMAGE_GALLERY,
+  CRICKETNET,
+  BOWLINGMACHINE,
 };
 
 export default routes;

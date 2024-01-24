@@ -4,8 +4,10 @@ import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
 import Badminton from "../pages/services/Badminton";
 import BoardGames from "../pages/services/BoardGames";
+import BowlingMachine from "../pages/services/BowlingMachine";
 import Cafeteria from "../pages/services/Cafeteria";
 import ContactUs from "../pages/contactus/ContactUs";
+import CricketNet from "../pages/services/CricketNet";
 import CrossFit from "../pages/services/CrossFit";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import HomePage from "../Components/HomePage";
@@ -54,8 +56,11 @@ export default function AppRouter() {
           <Route path={routes.PAYMENT_BOOKING} element={<PaymentBooking />} />
           <Route path={routes.DATE_CALENDER} element={<CustomDateCalendar />} />
           <Route path={routes.IMAGE_GALLERY} element={<ImageSliderGallery />} />
+          <Route path={routes.CRICKETNET} element={<CricketNet />} />
+          <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
         </Route>
       </Routes>
     </Router>
   );
+
 }

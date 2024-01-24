@@ -1,3 +1,4 @@
+import Play_logo from '../../assets/Play_logo.svg'
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
 import plyaStationSlide from '../../assets/plyaStationSlide.svg'
@@ -29,7 +30,7 @@ export default function PlayStation() {
       ];
     return <>
 <Service />
-<ServiceGrid carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
+<ServiceGrid icon={Play_logo} carouselItems={carouselItems} heading1={heading1} desc1={desc1} heading2={heading2} firstBullet1={firstBullet1} firstBullet2={firstBullet2} firstBullet3={firstBullet3} heading3={heading3} secBullet1={secBullet1} secBullet2={secBullet2} secBullet3={secBullet3} buttonLabel={buttonLabel} />
 
     </>
 }

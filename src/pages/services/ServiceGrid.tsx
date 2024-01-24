@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { Typography, styled } from '@mui/material';
-
 import Box from '@mui/material/Box';
 import Colors from '../../CommonComponents/Colors';
 import CustomButton from '../../CommonComponents/CustomButton';
 import CustomSwiper from '../../CommonComponents/carousel/CustomSwiper';
 import Grid from '@mui/material/Grid';
+import LeftArrow from '../../assets/LeftArrow.svg'
 import { Navigation } from 'swiper/modules';
+import { Typography } from '@mui/material';
 
 interface serviceGridProps {
   carouselItems: any[];
@@ -22,13 +22,27 @@ interface serviceGridProps {
   secBullet2: string;
   secBullet3: string;
   buttonLabel: string;
+  icon:string;
 }
 
 
 export default function ServiceGrid(props:serviceGridProps) {
 
   return (
-    <Box margin={7}>
+    <Box margin={7} sx={{
+      ".mySwiper":{
+      ".swiper-button-next" :{
+        backgroundImage: LeftArrow,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% auto",
+        backgroundPosition: "center",
+      },
+      
+      ".swiper-button-next::after": {
+        display: "none"
+      }
+    }
+    }}>
         <Grid minHeight="100vh" container>
         <Grid item xs={12} sm={7}>
           <CustomSwiper
@@ -98,7 +112,20 @@ fontWeight: 700}} >
         </CustomButton>
       </Box>
 
+
               </Grid>
+              <Grid
+  container
+  direction="row"
+  justifyContent="flex-end"
+  alignItems="flex-end"
+>
+              <img
+        // style={{ width:"100%" }}
+        src={props.icon}
+        alt={"icon"}
+      />
+      </Grid>
               </Grid>
       </Grid>
     </Grid>
