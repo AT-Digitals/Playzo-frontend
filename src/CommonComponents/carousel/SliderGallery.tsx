@@ -1,6 +1,7 @@
+import { Box, Button, IconButton, Modal } from "@mui/material";
 import React, { useState } from "react";
 
-import { Box } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import image1 from "./Rectangle 688.png";
 import image2 from "../../assets/image 17.png";
 import image3 from "../../assets/image 16.png";
@@ -17,8 +18,8 @@ const CarouselContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1100px;
   margin: 0 auto;
+  max-width: 1000px;
 `;
 
 const ArrowButton = styled.button`
@@ -32,9 +33,9 @@ const ArrowButton = styled.button`
 const SlideImage = styled.img`
   width: 100%;
   height: 100%;
-  max-height: 500px;
+  max-height: 440px;
+  max-width: 1107px;
   object-fit: contain;
-  margin-top: 20px; /* Add margin to separate slider from images */
 `;
 
 const GalleryContainer = styled.div`
@@ -42,15 +43,14 @@ const GalleryContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 10px;
   gap: 0.5rem;
-  max-height: 960px; /* 160px * 6 images */
   overflow: hidden;
 `;
 
 const GalleryImage = styled.img`
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   object-fit: cover; // This property maintains the aspect ratio and covers the container
   cursor: pointer;
 `;
@@ -73,7 +73,9 @@ const ImageGallery = ({ images, onImageClick }: any) => {
 
 const GalleryWithCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleImageClick = (index: number) => {
     setCurrentIndex(index);
   };
@@ -90,35 +92,69 @@ const GalleryWithCarousel = () => {
   };
 
   return (
-    <div
-      style={{
-        marginBottom: 5,
-      }}
-    >
-      <CarouselContainer>
-        <ArrowButton onClick={goToPrev}>
-          {" "}
-          <img src={leftNavi} alt="left" />
-        </ArrowButton>
-        <SlideImage
-          src={GalleryImages[currentIndex]}
-          alt={`Image ${currentIndex}`}
-        />
-        <ArrowButton onClick={goToNext}>
-          <img src={righttNavi} alt="left" />
-        </ArrowButton>
-      </CarouselContainer>
-      <ImageGallery images={GalleryImages} onImageClick={handleImageClick} />
-      <Box width={"83%"} display={"flex"} justifyContent={"flex-end"} mt={1}>
-        <ArrowButton onClick={() => setCurrentIndex(currentIndex - 1)}>
-          {" "}
-          <img src={leftNavi} alt="left" />
-        </ArrowButton>
-        <ArrowButton onClick={() => setCurrentIndex(currentIndex + 1)}>
-          <img src={righttNavi} alt="right" />
-        </ArrowButton>
-      </Box>
-    </div>
+    <Box>
+      <Button onClick={handleOpen}>OPEN</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          maxWidth: "1240px",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            background: "white",
+            maxWidth: "1107px",
+            margin: "auto",
+            padding: "0 30px",
+          }}
+        >
+          <Box display={"flex"} justifyContent={"flex-end"}>
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <CarouselContainer>
+            <ArrowButton onClick={goToPrev}>
+              {" "}
+              <img src={leftNavi} alt="left" />
+            </ArrowButton>
+            <SlideImage
+              src={GalleryImages[currentIndex]}
+              alt={`Image ${currentIndex}`}
+            />
+            <ArrowButton onClick={goToNext}>
+              <img src={righttNavi} alt="left" />
+            </ArrowButton>
+          </CarouselContainer>
+          <ImageGallery
+            images={GalleryImages}
+            onImageClick={handleImageClick}
+          />
+          <Box
+            maxWidth={1000}
+            width={"95%"}
+            display={"flex"}
+            justifyContent={"flex-end"}
+            padding={"0 20px"}
+            mt={1}
+          >
+            <ArrowButton onClick={() => setCurrentIndex(currentIndex - 1)}>
+              {" "}
+              <img src={leftNavi} alt="left" />
+            </ArrowButton>
+            <ArrowButton onClick={() => setCurrentIndex(currentIndex + 1)}>
+              <img src={righttNavi} alt="right" />
+            </ArrowButton>
+          </Box>
+        </div>
+      </Modal>
+    </Box>
   );
 };
 
