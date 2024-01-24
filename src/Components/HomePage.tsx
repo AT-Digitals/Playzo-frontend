@@ -4,7 +4,6 @@ import {
     Link,
     Stack,
     Typography,
-    styled,
 } from "@mui/material";
 
 import Image1 from "../assets/Rectangle 67.png";
@@ -30,6 +29,7 @@ import Machine from "../assets/Image (7).png";
 import Cricket from "../assets/Image (9).png";
 import Layer2 from "../assets/Layer_2.png";
 import Layer1 from "../assets/Layer_1 (1).png";
+import styled from "styled-components";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,

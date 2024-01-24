@@ -1,8 +1,10 @@
+
 import {
     Box,
     Stack,
 } from "@mui/material";
 
+import { useState } from "react";
 import Image1 from "../assets/Rectangle 678.png";
 import Image2 from "../assets/Rectangle 677.png";
 import Image3 from "../assets/Rectangle 673.png";
@@ -11,7 +13,6 @@ import Colors from "../CommonComponents/Colors";
 import Image5 from "../assets/Image (5).png";
 import Image4 from "../assets/Image (3).png";
 
-import { useState } from "react";
 
 interface HotelCard {
     imageSrc: string;

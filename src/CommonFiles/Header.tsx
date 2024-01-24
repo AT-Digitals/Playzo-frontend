@@ -1,4 +1,4 @@
-import { Box, FormControl, MenuItem, NativeSelect, Select, Stack, Typography, styled } from "@mui/material";
+import { Box, FormControl, MenuItem, NativeSelect, Select, Stack, Typography,  } from "@mui/material";
 
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
@@ -8,6 +8,7 @@ import DropDown from "../CommonComponents/DropDown";
 import logo from "../assets/logo.png";
 import routes from "../routes/routes";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -62,7 +63,7 @@ export default function Header() {
                         </HeaderLink>
                     </Stack>
                     <Stack direction="row" spacing={3} alignItems="center">
-                        <HeaderLink>
+                        <HeaderLink href={routes.BOOKING_SERVICE}>
                             <Typography
                                 color={Colors.BUTTON_COLOR}
                                 fontWeight="bold"

@@ -13,6 +13,14 @@ const CAFETERIA = SERVICE + "/cafeteria";
 const ABOUTUS = "/about-us";
 const CONTACTUS = "/contact-us";
 const USERPROFILE = "/user-profile";
+const BOOKING_SERVICE = "/service-booking";
+const TURF_BOOKING = "/turf-booking";
+const PLAYSTATION_BOOKING = "/playstation-booking";
+const BADMINTON_BOOKING = "/badminton-booking";
+const BOARDGAME_BOOKING = "/boardgame-booking";
+const CRICKETNET_BOOKING = "/cricketnet-booking"
+const BOWLINGMACHINE_BOOKING = "/bowlingmachine-booking"
+const PAYMENT_BOOKING = "/payment-booking";
 const routes = {
   ROOT,
   LOGIN,
@@ -29,6 +37,14 @@ const routes = {
   ABOUTUS,
   CONTACTUS,
   USERPROFILE,
+  BOOKING_SERVICE,
+  TURF_BOOKING,
+  PLAYSTATION_BOOKING,
+  BADMINTON_BOOKING,
+  BOARDGAME_BOOKING,
+  CRICKETNET_BOOKING,
+  BOWLINGMACHINE_BOOKING,
+  PAYMENT_BOOKING,
 };
 
 export default routes;
