@@ -1,27 +1,12 @@
 import * as React from "react";
 
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CloseIcon from "@mui/icons-material/Close";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { format } from "date-fns";
 import leftarrow from "./left-arrow.svg";
 import rightarrow from "./right-arrow.svg";
-import styled from "styled-components";
 
 const Timings = [
   { name: "9:00-10:00 AM" },
@@ -34,30 +19,17 @@ const Timings = [
   { name: "4:00-5:00 PM" },
 ];
 
-const StyledCell = styled(TableCell)({
-  " &.MuiTableCell-root": {
-    borderBottom: "none",
-    fontSize: "18px",
-  },
-});
-
-const StyledCellTitle = styled(TableCell)({
-  " &.MuiTableCell-root": {
-    borderBottom: "none",
-    fontWeight: "bold",
-    fontSize: "16px",
-  },
-});
-
-interface TableDataItem {
-  date: string;
-  time: string;
+interface CustomDateCalendarProps {
+  tableData?: any;
+  setTableData?: any;
 }
 
-export default function CustomDateCalendar() {
+export default function CustomDateCalendar({
+  tableData,
+  setTableData,
+}: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const [selectedTime, setSelectedTime] = React.useState<string | null>(null);
-  const [tableData, setTableData] = React.useState<TableDataItem[]>([]);
 
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
@@ -118,16 +90,9 @@ export default function CustomDateCalendar() {
     }
   };
 
-  const handleRemoveItem = (indexToRemove: any) => {
-    const updatedTableData = tableData.filter(
-      (_, index) => index !== indexToRemove
-    );
-    setTableData(updatedTableData);
-  };
-
   return (
     <Stack
-      p="0 40px 20px"
+      p="0  20px"
       display="flex"
       flexDirection="column"
       spacing={2}
@@ -212,7 +177,7 @@ export default function CustomDateCalendar() {
         </Box>
       </Box>
 
-      <Box
+      {/* <Box
         border="1px solid black"
         borderRadius="12px"
         display="flex"
@@ -273,7 +238,7 @@ export default function CustomDateCalendar() {
         }}
       >
         Proceed to payment{" "}
-      </Button>
+      </Button> */}
     </Stack>
   );
 }
