@@ -78,18 +78,16 @@ export default function ServiceBooking() {
     >
       Date & Time
     </Typography>,
-    <Link style={{ textDecoration: "none" }} to={routes.PAYMENT_BOOKING}>
-      <Typography
-        fontSize={"16px"}
-        fontWeight={"bold"}
-        style={{ cursor: "pointer" }}
-        key="3"
-        color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
-        onClick={() => handleBreadcrumbClick("3")}
-      >
-        Payment
-      </Typography>
-    </Link>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="3"
+      color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
+      onClick={() => handleBreadcrumbClick("3")}
+    >
+      Payment
+    </Typography>,
   ];
 
   return (
