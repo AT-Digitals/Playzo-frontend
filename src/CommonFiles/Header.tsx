@@ -1,11 +1,14 @@
-import { Box, FormControl, Link, MenuItem, NativeSelect, Select, Stack, Typography, styled } from "@mui/material";
-import Colors from "../CommonComponents/Colors";
-import logo from "../assets/logo.png";
-import AppContainer from "../CommonComponents/AppContainer";
-import CustomDropdown from "../CommonComponents/CustomDropdown";
-import CustomButton from "../CommonComponents/CustomButton";
-import DropDown from "../CommonComponents/DropDown";
+import { Box, FormControl, MenuItem, NativeSelect, Select, Stack, Typography,  } from "@mui/material";
 
+import AppContainer from "../CommonComponents/AppContainer";
+import Colors from "../CommonComponents/Colors";
+import CustomButton from "../CommonComponents/CustomButton";
+import CustomDropdown from "../CommonComponents/CustomDropdown";
+import DropDown from "../CommonComponents/DropDown";
+import logo from "../assets/logo.png";
+import routes from "../routes/routes";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -17,7 +20,7 @@ const HeaderLink = styled("a")`
   }
 `;
 
-const StyledButton = styled(CustomButton)({
+const StyledLink = styled(Link)({
     padding: "8px 20px",
     textTransform: "none",
     whiteSpace: "nowrap",
@@ -25,17 +28,17 @@ const StyledButton = styled(CustomButton)({
     minWidth: 0,
     fontSize: "16px",
     fontWeight: "bold",
+    textDecoration: "none",
+    color: Colors.BUTTON_COLOR,
+    borderRadius: "20px"
 });
 
 export default function Header() {
     return (
         <Box
-            borderBottom={`1px solid ${Colors.SHADOW}`}
+            width="100%"
             bgcolor={Colors.BLACK}
-            position="sticky"
-            top={0}
-            zIndex={1000}
-            padding={3}
+
         >
             <AppContainer>
                 <Stack
@@ -43,25 +46,24 @@ export default function Header() {
                     spacing={2}
                     alignItems="center"
                     justifyContent="space-between"
+                    paddingY={3}
                 >
                     <Box>
-                        <Link>
+                        <Link to={routes.ROOT}>
                             <img width={172} height={34} src={logo} alt="alterknit" />
                         </Link>
                     </Box>
                     <Stack direction="row" spacing={3} alignItems="center">
-                        <HeaderLink href="">
+                        <HeaderLink href={routes.ABOUTUS}>
                             <Typography color={Colors.WHITE} fontSize="18px">About Us</Typography>
                         </HeaderLink>
-                        <Link>
-                            <DropDown />
-                        </Link>
-                        <HeaderLink href="">
+                        <DropDown />
+                        <HeaderLink href={routes.CONTACTUS}>
                             <Typography color={Colors.WHITE} fontSize="18px">Contact Us</Typography>
                         </HeaderLink>
                     </Stack>
                     <Stack direction="row" spacing={3} alignItems="center">
-                        <HeaderLink href="">
+                        <HeaderLink href={routes.BOOKING_SERVICE}>
                             <Typography
                                 color={Colors.BUTTON_COLOR}
                                 fontWeight="bold"
@@ -70,9 +72,7 @@ export default function Header() {
                                 Book Now
                             </Typography>
                         </HeaderLink>
-                        <StyledButton bgColor="none" color={Colors.BUTTON_COLOR}>
-                            Login
-                        </StyledButton>
+                        <StyledLink to={routes.LOGIN}>Login</StyledLink>
                     </Stack>
                 </Stack>
             </AppContainer>

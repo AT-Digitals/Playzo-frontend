@@ -11,3 +11,71 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* swiper */
+swiper-container {
+  width: 100%;
+  flex-grow: 1;
+}
+
+swiper-container::part(pagination) {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+swiper-container::part(bullet) {
+  display: none;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #fff;
+  background-color: #05607d;
+}
+
+swiper-container::part(bullet-active) {
+  display: none;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #fff;
+  background-color: #fff;
+}
+
+swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-button-next,
+          .swiper-button-prev {
+            background-color: white;
+            padding: 8px 16px;
+            border-radius: 100%;
+            border: 2px solid black;
+            color: red;
+          }
+          .swiper-pagination-bullet{
+            width: 40px;
+            height: 40px;
+            background-color: red;
+          }
+/* .swiper-button-next svg{
+  display: none;
+} */
