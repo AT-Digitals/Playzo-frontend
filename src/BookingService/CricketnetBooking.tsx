@@ -55,7 +55,7 @@ export default function CricketnetBooking() {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
-      color={selectedBreadcrumb === "1" ? Colors.BUTTON : Colors.BLACK}
+      color={Colors.BLACK}
       onClick={() => handleBreadcrumbClick("1")}
     >
       Service
@@ -65,7 +65,7 @@ export default function CricketnetBooking() {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
-      color={selectedBreadcrumb === "2" ? Colors.BUTTON : Colors.BLACK}
+      color={Colors.BUTTON}
       onClick={() => handleBreadcrumbClick("2")}
     >
       Date & Time
