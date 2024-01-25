@@ -26,6 +26,36 @@ const DropDownData = [
     },
 ];
 
+const StyledImage = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+ /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 230px;
+    height: 215px;
+  }
+`;
+
 export default function ContactUs() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -56,18 +86,18 @@ export default function ContactUs() {
     return (
         <>
             <AppContainer>
-                <Grid container paddingY={15} columnGap={12.5}>
+                <Grid container paddingTop={{xs: "50px", sm: "60px", md: "60px", lg: "120px"}} paddingBottom={{xs: "50px", sm: "60px", md: "60px", lg: "120px"}} columnGap={12.5}>
                     <Grid item xs={5}>
                         <Stack direction="column" spacing={2}>
                             <Typography
-                                variant="h4"
+                               fontSize={{xs: "19px", sm: "19px", md: "19px", lg: "30px"}}
                                 fontWeight={700}
                                 color={Colors.BUTTON_COLOR}
                             >
                                 For More Details <br />
                                 Contact Us!
                             </Typography>
-                            <Typography fontSize="18px" width="433px">
+                            <Typography fontSize={{xs: "15px", sm: "15px", md: "16px", lg: "18px"}} width={{xs: "310px", sm: "310px", md: "310px", lg: "433px"}}>
                                 Send our team a quick message with your question, and we’ll get
                                 back to you as soon as possible. We’re pretty responsive and
                                 will try to respond in a few hours 🙂
@@ -76,27 +106,24 @@ export default function ContactUs() {
                                 style={{
                                     textDecoration: "none",
                                     color: Colors.BUTTON_COLOR,
-                                    fontWeight: 600
+                                    fontWeight: 600,
+                                    fontSize: "18px"
                                 }}
                                 to="mailto:orders@alterknitnewyork.com"
                             >
                                 playzo.erode@gmail.com
                             </Link>
                         </Stack>
-                        <img
+                        <Box>
+                        <StyledImage
                             src={GameIcon}
-                            width={230}
-                            height={215}
                             alt="contact-us"
-                            style={{
-                                position: "absolute",
-                                transform: `translate(130px, 30px)`,
-                            }}
                         />
+                        </Box>
                     </Grid>
                     <Grid item xs={6}>
                         <form onSubmit={onSubmit}>
-                            <Stack
+                            <Stack marginLeft={{xs: "-6px", sm: "-6px", md: "-6px", lg: "0px"}} marginTop={{xs: "180px", sm: "180px", md: "180px", lg: "0px"}} border={{xs: "1px solid grey", sm: "1px solid grey", md: "1px solid grey", lg: "none"}} width={{xs: "158%", sm: "158%", md: "158%", lg: "100%"}} borderRadius={{xs: "10px", sm: "10px", md: "10px", lg: "0px"}} padding={{xs: "21px 16px", sm: "21px 16px", md: "21px 16px", lg: "0px"}}
                                 direction="column"
                                 spacing={3}
                             >

@@ -96,6 +96,7 @@ export default function BowlingmachineBooking() {
       </Stack>
       <Box
         display={"flex"}
+        flexDirection={{xs: "column", sm: "column", ms: "column", lg: "row"}}
         margin={{
           xs: "0px",
           sm: "0px",
@@ -105,21 +106,22 @@ export default function BowlingmachineBooking() {
         pt={2}
       >
         <Box
-          margin={"60px 50px"}
-          border={"1px solid #D9D9D9"}
-          width={"100%"}
-          maxWidth={"300px"}
-          borderRadius={"10px"}
-          height={"300px"}
+           margin={{xs: "60px 38px", sm: "60px 38px", md: "60px 38px", lg: "60px 50px"}}
+           width={"100%"}
+           border={{xs: "1px solid #D9D9D9", sm: "1px solid #D9D9D9", md: "1px solid #D9D9D9", lg: "none"}}
+           maxWidth={{xs: "270px", sm: "270px", md: "270px", lg: "300px"}}
+           borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
+           height={{xs: "100px", sm: "100px", md: "100px", lg: "300px"}}
         >
-          <Box padding={"20px 20px"}>
+          <Box display={{xs: "flex", sm: "flex", md: "flex", lg: ""}} alignItems={{xs: "center", sm: "cemter", md: "center", lg: ""}} padding={{xs: "10px 10px", sm: "10px 10px", md: "10px 10px", lg:"20px 20px"}} width={{xs: "219px", sm: "219px", md: "219px", lg: "260px"}} height={{xs: "80px", sm: "80px", md: "80px", lg: "260px"}}>
             <img src={bowling} width={"100%"} height={"100%"} alt="turf" />
             <Typography
-              // display={seletedBowling ? "block" : "none"}
+              display={{xs: "block", sm: "block", md: "block", lg: "none"}}
               textAlign={"center"}
               fontSize={"14px"}
               color={Colors.BLACK}
               fontWeight={"600"}
+              paddingLeft={{xs: "30px", sm: "30px", md: "30px", lg: "0px"}}
             >
               Bowling Machine
             </Typography>

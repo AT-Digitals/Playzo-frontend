@@ -92,7 +92,7 @@ export default function CustomDateCalendar({
 
   return (
     <Stack
-      p="0  20px"
+     padding={{xs: "18px 0px", sm: "18px 0px", md: "18px 0px", lg: "0px 20px"}}
       display="flex"
       flexDirection="column"
       spacing={2}
@@ -102,7 +102,7 @@ export default function CustomDateCalendar({
       margin="0 auto"
     >
       <Box>
-        <Typography mb={2} fontSize="18px">
+        <Typography mb={2} fontSize={{xs: "15px", sm: "15px", md: "15px", lg: "18px"}}>
           Pick Date
         </Typography>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -131,8 +131,8 @@ export default function CustomDateCalendar({
           />
         </LocalizationProvider>
       </Box>
-      <Box width="100%" maxWidth={330}>
-        <Typography mb={2} fontSize="18px">
+      <Box pl={{xs: "26px", sm: "26px", md: "26px", lg: "0px"}} width="100%" maxWidth={330}>
+        <Typography mb={2} fontSize={{xs: "15px", sm: "15px", md: "15px", lg: "18px"}}>
           Pick Time
         </Typography>
         <Box mb={2} display="flex" gap="2rem" flexWrap="wrap">
@@ -155,7 +155,7 @@ export default function CustomDateCalendar({
               <Box>
                 <Typography
                   color={item.disabled ? "#9C9C9C" : "black"}
-                  fontSize="18px"
+                  fontSize={{xs: "14px", sm: "14px", md: "14px", lg: "18px"}}
                 >
                   {item.name}
                 </Typography>
