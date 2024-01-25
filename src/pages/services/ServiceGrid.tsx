@@ -1,13 +1,14 @@
 import * as React from "react";
 
-import Box from '@mui/material/Box';
-import Colors from '../../CommonComponents/Colors';
-import CustomButton from '../../CommonComponents/CustomButton';
-import CustomSwiper from '../../CommonComponents/carousel/CustomSwiper';
-import Grid from '@mui/material/Grid';
-import LeftArrow from '../../assets/LeftArrow.svg'
-import { Navigation } from 'swiper/modules';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from "@mui/material";
+
+import Box from "@mui/material/Box";
+import Colors from "../../CommonComponents/Colors";
+import CustomButton from "../../CommonComponents/CustomButton";
+import CustomSwiper from "../../CommonComponents/carousel/CustomSwiper";
+import Grid from "@mui/material/Grid";
+import LeftArrow from "../../assets/LeftArrow.svg";
+import { Navigation } from "swiper/modules";
 
 interface serviceGridProps {
   carouselItems: any[];
@@ -22,29 +23,30 @@ interface serviceGridProps {
   secBullet2: string;
   secBullet3: string;
   buttonLabel: string;
-  icon:string;
+  icon: string;
 }
 
-
-export default function ServiceGrid(props:serviceGridProps) {
-
+export default function ServiceGrid(props: serviceGridProps) {
   return (
-    <Box margin={7} sx={{
-      ".mySwiper":{
-      ".swiper-button-next" :{
-        backgroundImage: LeftArrow,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "100% auto",
-        backgroundPosition: "center",
-      },
-      
-      ".swiper-button-next::after": {
-        display: "none"
-      }
-    }
-    }}>
-        <Grid minHeight="100vh" container>
-        <Grid item xs={12} sm={7}>
+    <Box
+      margin={{ xs: "30px", md: 7 }}
+      sx={{
+        ".mySwiper": {
+          ".swiper-button-next": {
+            backgroundImage: LeftArrow,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% auto",
+            backgroundPosition: "center",
+          },
+
+          ".swiper-button-next::after": {
+            display: "none",
+          },
+        },
+      }}
+    >
+      <Grid container>
+        <Grid item xs={12} sm={12} md={6}>
           <CustomSwiper
             navigation={true}
             modules={[Navigation]}
@@ -52,84 +54,97 @@ export default function ServiceGrid(props:serviceGridProps) {
             slides={props.carouselItems}
           />
         </Grid>
-      <Grid
-        item
-        xs={12}
-        sm={5}
-        sx={{backgroundColor:"#EBF5FF",borderRadius: "8px",padding:"40px"}}
-        alignItems="center"
-        justifyContent="center"
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          sx={{
+            backgroundColor: "#EBF5FF",
+            borderRadius: "8px",
+            padding: "40px",
+          }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Stack direction={"column"} spacing={2}>
+            <Stack spacing={3}>
+              <Box>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    fontSize: "20px",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                  }}
+                >
+                  {props.heading1}
+                </Typography>
+                <Typography variant="body1">{props.desc1}</Typography>
+              </Box>
+            </Stack>
 
-      >
-        <Grid item xs container direction="column" spacing={3} marginBottom={6}>
-            <Grid item xs>
-              <Typography gutterBottom variant="h5" style={{fontSize: "20px",
-fontStyle: "normal",
-fontWeight: 700}} >
-              {props.heading1}
-              </Typography>
-              <Typography variant="body1">
-             {props.desc1}
+            <Stack spacing={3}>
+              <Box>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                  }}
+                >
+                  {props.heading2}
+                </Typography>
+                <Typography variant="body1">
+                  <ul style={{ paddingInlineStart: "28px" }}>
+                    <li>{props.firstBullet1}</li>
+                    <li>{props.firstBullet2}</li>
+                    <li>{props.firstBullet3}</li>
+                  </ul>
+                </Typography>
+              </Box>
+            </Stack>
 
-        </Typography>
-              </Grid>
-              </Grid>
-              <Grid item xs container direction="column" spacing={3} marginBottom={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="h5" style={{fontSize: "16px",
-fontStyle: "normal",
-fontWeight: 700}} >
-              {props.heading2}
-              </Typography>
-              <Typography variant="body1">
-  <ul style={{paddingInlineStart: "28px"}}>
-    <li>{props.firstBullet1}</li>
-    <li>{props.firstBullet2}</li>
-    <li>{props.firstBullet3}</li>
-  </ul>
-</Typography>
-             
-              </Grid>
-              </Grid>
-              <Grid item xs container direction="column" spacing={3} marginBottom={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="h5" style={{fontSize: "16px",
-fontStyle: "normal",
-fontWeight: 700}} >
-             {props.heading3}
-              </Typography>
-              <Typography variant="body1">
-  <ul style={{paddingInlineStart: "28px"}}>
-    <li>{props.secBullet1}</li>
-    <li>{props.secBullet2}</li>
-    <li>{props.secBullet3}</li>
-  </ul>
-</Typography>
+            <Stack spacing={3}>
+              <Box>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                  }}
+                >
+                  {props.heading3}
+                </Typography>
+                <Typography variant="body1">
+                  <ul style={{ paddingInlineStart: "28px" }}>
+                    <li>{props.secBullet1}</li>
+                    <li>{props.secBullet2}</li>
+                    <li>{props.secBullet3}</li>
+                  </ul>
+                </Typography>
 
-<Box mt={5}>
-        <CustomButton type="submit" style={{backgroundColor:Colors.BUTTON_COLOR, textTransform:"capitalize"}} >
-          {props.buttonLabel}
-        </CustomButton>
-      </Box>
-
-
-              </Grid>
-              <Grid
-  container
-  direction="row"
-  justifyContent="flex-end"
-  alignItems="flex-end"
->
-              <img
-        // style={{ width:"100%" }}
-        src={props.icon}
-        alt={"icon"}
-      />
+                <Box mt={5}>
+                  <CustomButton
+                    type="submit"
+                    style={{
+                      backgroundColor: Colors.BUTTON_COLOR,
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {props.buttonLabel}
+                  </CustomButton>
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
+        </Grid>
       </Grid>
-              </Grid>
-      </Grid>
-    </Grid>
-     
     </Box>
   );
 }

@@ -1,5 +1,5 @@
-import { Link, matchPath, useLocation } from "react-router-dom";
-import { Tab, Tabs } from "@mui/material";
+import { Box, IconButton, Tab, Tabs, Typography } from "@mui/material";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 
 import routes from "../../routes/routes";
 
@@ -28,7 +28,7 @@ const tabList = [
     href: routes.BOWLINGMACHINE,
     label: "Bowling Machine",
   },
-  
+
   {
     href: routes.PARTYCENTER,
     label: "Party Center",
@@ -57,75 +57,119 @@ function useRouteMatch(patterns: readonly string[]) {
 }
 
 function samePageLinkNavigation(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 || // ignore everything but left-click
+    event.metaKey ||
+    event.ctrlKey ||
+    event.altKey ||
+    event.shiftKey
   ) {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 || // ignore everything but left-click
-      event.metaKey ||
-      event.ctrlKey ||
-      event.altKey ||
-      event.shiftKey
-    ) {
-      return false;
-    }
-    return true;
-  };
+    return false;
+  }
+  return true;
+}
 
 export default function MuiTab() {
+  const navigate = useNavigate();
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      // event.type can be equal to focus with selectionFollowsFocus.
-      if (
-        event.type !== 'click' ||
-        (event.type === 'click' &&
-          samePageLinkNavigation(
-            event as React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-          ))
-      ) {
-        console.log(newValue);
-      }
-    };
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    // event.type can be equal to focus with selectionFollowsFocus.
+    if (
+      event.type !== "click" ||
+      (event.type === "click" &&
+        samePageLinkNavigation(
+          event as React.MouseEvent<HTMLAnchorElement, MouseEvent>
+        ))
+    ) {
+      console.log(newValue);
+    }
+  };
 
-    const routeMatch = useRouteMatch([routes.CRICKETNET,routes.BOWLINGMACHINE,routes.PLAYSTATION,routes.CROSSFIT,routes.BADMINTON,routes.TURF,routes.BOARDGAMES,routes.PARTYCENTER,routes.CAFETERIA]);
-    const currentTab = routeMatch?.pattern?.path;
-    
-    return <>
-<Tabs 
-  value={currentTab}
-  onChange={handleChange}
-  aria-label="nav tabs example"
-  role="navigation"
-  centered
-  sx={{
-    marginTop:"10px",
-    maxWidth:"100%",
-    "--Tab-indicatorThickness": "0px",
-".MuiTabs-indicator":{
-  display:"none"
-},
-".MuiButtonBase-root":{
-  fontSize: "20px",
-  fontWeight: "700",
-  textTransform:"capitalize"
-},
-// ".MuiButtonBase-root-MuiTab-root":{
-  ".Mui-selected":{
-    // fontSize: "20px",
-    fontStyle: "italic",
-    // fontWeight: "700",
-    // textTransform:"lowercase"
-  // }
-}
-  }}
- 
->
+  const handleNextTab = () => {
+    const currentIndex = tabList.findIndex((tab) => tab.href === currentTab);
+    const nextIndex = (currentIndex + 1) % tabList.length;
+    navigate(tabList[nextIndex].href);
+  };
 
-{tabList.map((tab,index) => (
-    <Tab label={tab.label} value={tab.href} to={tab.href} component={Link} key={index}  />
-   
-      ))}
-</Tabs>
+  const routeMatch = useRouteMatch([
+    routes.CRICKETNET,
+    routes.BOWLINGMACHINE,
+    routes.PLAYSTATION,
+    routes.CROSSFIT,
+    routes.BADMINTON,
+    routes.TURF,
+    routes.BOARDGAMES,
+    routes.PARTYCENTER,
+    routes.CAFETERIA,
+  ]);
+  const currentTab = routeMatch?.pattern?.path;
 
+  return (
+    <>
+      <Box
+        flexDirection={"row"}
+        sx={{
+          width: "100%",
+          maxWidth: "880px", // Set the maximum width for the box
+          margin: "auto", // Center the box
+          display: "flex",
+          // flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Tabs
+          value={currentTab}
+          onChange={handleChange}
+          aria-label="nav tabs example"
+          role="navigation"
+          centered
+          sx={{
+            "--Tab-indicatorThickness": "0px",
+            ".MuiTabs-indicator": {
+              display: "none",
+            },
+            ".MuiButtonBase-root": {
+              fontSize: { xs: "14px", sm: "20px" },
+              fontWeight: "700",
+              textTransform: "capitalize",
+            },
+            ".Mui-selected": {
+              // fontStyle: "italic",
+            },
+            ".MuiTabs-flexContainer": {
+              flexWrap: "wrap",
+            },
+            width: "95%", // Make sure the Tabs take full width
+          }}
+        >
+          {tabList.map((tab, index) => (
+            <Tab
+              style={{
+                flexWrap: "wrap",
+              }}
+              label={tab.label}
+              value={tab.href}
+              to={tab.href}
+              component={Link}
+              key={index}
+            />
+          ))}
+        </Tabs>
+        <Box display={{ lg: "none" }} onClick={handleNextTab}>
+          <Typography fontWeight={"bold"} fontSize={"20px"}>
+            <IconButton
+              style={{
+                color: "black",
+              }}
+            >
+              {">"}
+            </IconButton>
+          </Typography>
+        </Box>
+      </Box>
     </>
+  );
 }
