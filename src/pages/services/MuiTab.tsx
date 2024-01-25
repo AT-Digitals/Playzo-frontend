@@ -137,7 +137,7 @@ export default function MuiTab() {
               textTransform: "capitalize",
             },
             ".Mui-selected": {
-              // fontStyle: "italic",
+              fontStyle: "italic",
             },
             ".MuiTabs-flexContainer": {
               flexWrap: "wrap",
