@@ -36,7 +36,7 @@ const StyledTypo = styled(Typography)({
     position: "absolute",
     top: "100px",
     // left: '50%',
-    transform: "translate(107%, 232%)",
+    transform: "translate(128%, 258%)",
     fontSize: "5rem",
     textAlign: "center",
     zIndex: 1,
@@ -90,8 +90,9 @@ const StyledButton = styled(CustomButton)({
     fontWeight: 600,
     position: "absolute",
     top: "100px",
-    transform: "translate(450%, -1200%)",
-    padding: "10px 20px",
+    transform: "translate(450%, -900%)",
+    padding: "12px 20px !important",
+    fontFamily: "Inter",
 });
 
 export default function HomePage() {
@@ -115,7 +116,7 @@ export default function HomePage() {
                 }}
             />
 
-            <StyledTypo variant="h3" fontWeight={600} fontFamily="Inter" fontSize="5rem">
+            <StyledTypo variant="h3" fontWeight={600} fontFamily="Inter" fontSize="4.5rem">
                 Play Beyond <br /> Boundaries
             </StyledTypo>
             <img
@@ -133,6 +134,7 @@ export default function HomePage() {
                 bgColor={Colors.BUTTON_COLOR}
                 variant="contained"
                 color={Colors.WHITE}
+                sx={{ fontFamily: "Inter", fontWeight: 600 }}
             >
                 Book Now
             </StyledButton>

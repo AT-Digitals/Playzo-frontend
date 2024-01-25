@@ -12,8 +12,10 @@ import turf4 from "../../assets/image 18.png";
 import EastIcon from "@mui/icons-material/East";
 import ball from "../../assets/ball 3.png";
 import Layer3 from "../../assets/Layer_4.png";
-import Image1 from "../../assets/Rectangle 67.png";
-import PopupCarousel from "./PopupCarousel";
+import Image1 from "../../assets/about-banner.png";
+import TimelineComponent from "./TimelineComponent";
+import Image2 from "../../assets/Rectangle 669.png";
+
 
 export default function AboutUs() {
   return (
@@ -25,6 +27,7 @@ export default function AboutUs() {
           image={Image1}
           alt="Paella dish"
         />
+        <img src={Image2} alt="about dish" style={{ width: "100%", position: "absolute", transform: `translate(0px, -100%)` }} />
       </Box>
       <AppContainer>
         <Box margin="10px 20px">
@@ -237,7 +240,10 @@ export default function AboutUs() {
           </Box>
         </Stack>
       </Box>
+      <TimelineComponent />
       {/* <Box paddingY={10} maxWidth={1200} margin="auto">
+
+
         <Stack direction="column" spacing={2} >
           <Box>
             <Typography variant="body1">Lorem ipsum</Typography>
@@ -249,6 +255,7 @@ export default function AboutUs() {
           </Typography>
         </Stack>
       </Box> */}
+
     </>
   );
 }
