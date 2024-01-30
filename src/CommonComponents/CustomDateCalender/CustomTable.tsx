@@ -57,7 +57,7 @@ export default function CustomTable({
         borderRadius="12px"
         display="flex"
         alignItems="center"
-        width="70%"
+        width={{xs: "90%", sm: "90%", md: "90%", lg: "70%"}}
         margin={"0 auto"}
         justifyContent="center"
       >
@@ -114,12 +114,13 @@ export default function CustomTable({
       </Box>
       <Link to={routes.PAYMENT_BOOKING}>
         <Button
-          style={{
+          sx={{
             background: "var(--primary-3, #15B5FC)",
             color: "white",
             textTransform: "none",
             maxWidth: 247,
             width: "100%",
+            padding: {xs: "6px 40px", sm: "6px 40px", md: "6px 40px", lg: "6px 8px"}
           }}
         >
           Proceed to payment{" "}

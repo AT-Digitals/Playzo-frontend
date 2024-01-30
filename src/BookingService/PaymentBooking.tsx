@@ -86,7 +86,7 @@ export default function PaymentBooking() {
 return (
   <>
     <Stack margin={{xs: "0px", sm: "0px", md: "0px", lg: "50px 190px"}} flexDirection={{xs:"column", sm: "column", md: "column", lg: "row"}}>
-    <Box margin={"50px"} width={"100%"} maxWidth={"330px"} borderRadius={"10px"} border={"1px solid #D9D9D9"}>
+    <Box margin={{xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "50px"}} width={"100%"} maxWidth={{xs: "313px", sm: "313px", md: "313px", lg: "330px"}} borderRadius={"10px"} border={"1px solid #D9D9D9"}>
       <Box padding={"27px 20px"} gap={"7px"} display={"flex"} alignItems={"center"}>
       <ArrowBackIosNewIcon style={{fontSize: "20px", color: Colors.BUTTON}} />
       <Typography fontWeight={"600"} fontSize={"18px"} color={Colors.BUTTON}>Booking Summary</Typography>
@@ -118,13 +118,13 @@ return (
         <Box borderBottom={"1px solid black"} pb={"20px"}>
         <Button style={{border: "1px solid #15B5FC", color: Colors.BUTTON, width: "100%", maxWidth: "60px", height: "30px", marginTop: "16px", textTransform: "capitalize"}} variant="outlined">Apply</Button>
         </Box>
-        <Box mt={"7px"} display={"flex"} justifyContent={"space-between"}>
+        <Box pb={{xs: "16px", sm: "16px", md: "16px", lg: "0px"}} mt={"7px"} display={"flex"} justifyContent={"space-between"}>
         <Typography fontWeight={"500"} color={Colors.BLACK} fontSize={"15px"}>Total</Typography>
         <Typography fontWeight={"500"} color={Colors.BLACK} fontSize={"15px"}>1500</Typography>
         </Box>
       </Stack>
     </Box>
-    <Box padding={"70px 45px"} display={"flex"} flexDirection={"column"}>
+    <Box padding={{xs: "17px 35px", sm: "17px 35px", md: "17px 35px", lg: "70px 45px"}} width={"100%"} maxWidth={{xs: "295px", sm: "295px", md: "295px", lg: "379px"}} display={"flex"} flexDirection={"column"}>
     <Typography  fontWeight={"600"} color={Colors.BUTTON} fontSize={"19px"}>Phone Number</Typography>
     <Box mt={"5px"} width={"100%"} maxWidth={"140px"} height={"35px"} bgcolor={"#F9F9F9"}>
     <Typography pt={"7px"} textAlign={"center"} fontWeight={"500"} color={Colors.BLACK} fontSize={"15px"}>9876543210</Typography>
@@ -173,7 +173,7 @@ return (
     </FormControl>
     <Typography pt={"9px"} color={"#666666"} fontSize={"16px"} fontWeight={"bold"}>Direct Bank Transfer</Typography>
     </Box>
-    <Typography pl={"38px"} color={"#666666"} fontSize={"16px"} fontWeight={"500"}>Make payment directly through bank account.</Typography>
+    <Typography pl={{xs: "42px", sm: "42px", md: "42px", lg: "38px"}} color={"#666666"} fontSize={{xs: "12px", sm: "12px", md: "12px", lg: "16px"}} fontWeight={"500"}>Make payment directly through bank account.</Typography>
     <Box display={"flex"} alignItems={"center"}>
     <FormControl>
       <RadioGroup style={{marginTop: "10px"}} defaultValue="male" aria-labelledby="demo-customized-radios" name="customized-radios" value={selectedPaymentMethod}
@@ -183,13 +183,13 @@ return (
     </FormControl>
     <Typography pt={"9px"} color={"#666666"} fontSize={"16px"} fontWeight={"bold"}>Other Payment Methods</Typography>
     </Box>
-    <Typography pl={"38px"} color={"#666666"} fontSize={"16px"} fontWeight={"500"}>Make payment through Gpay, Paytm etc</Typography>
+    <Typography  pl={{xs: "42px", sm: "42px", md: "42px", lg: "38px"}} color={"#666666"} fontSize={{xs: "12px", sm: "12px", md: "12px", lg: "16px"}} fontWeight={"500"}>Make payment through Gpay, Paytm etc</Typography>
     <Box mt={"10px"} display={"flex"} justifyContent={"end"}>
     <Button onClick={handleOpen} style={{backgroundColor: Colors.BUTTON, width: "100%", maxWidth: "120px", height: "40px", textTransform: "capitalize", fontWeight: "bold"}} variant="contained">Pay 1500</Button>
     </Box>
     </Box>
   </Stack>
-  <Box display={"flex"} justifyContent={"end"}>
+  <Box mt={{xs: "50px", sm: "50px", md: "50px", g: "0px"}} display={"flex"} justifyContent={"end"}>
       <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{marginTop: "-40px"}} src={grass} alt="" />

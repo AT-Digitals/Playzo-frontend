@@ -9,6 +9,34 @@ import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
 import turf from "../assets/turf.png";
 import { useState } from "react";
+import styled from "@emotion/styled";
+
+const StyledImage = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 100px;
+    height: 80px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: "145px";
+    height "105px";
+  }
+`;
 
 const TurfImages = [
   {
@@ -103,6 +131,7 @@ export default function TurfBooking() {
       </Stack>
       <Box
         display={"flex"}
+        flexDirection={{xs: "column", sm: "column", ms: "column", lg: "row"}}
         margin={{
           xs: "0px",
           sm: "0px",
@@ -111,21 +140,22 @@ export default function TurfBooking() {
         }}
       >
         <Box
-          margin={"60px 50px"}
-          border={selectedTurf ? "1px solid #D9D9D9" : "none"}
+          margin={{xs: "60px 38px", sm: "60px 38px", md: "60px 38px", lg: "60px 50px"}}
+          border={{xs: "1px solid #D9D9D9", sm: "1px solid #D9D9D9", md: "1px solid #D9D9D9", lg: "none"}}
           width={"100%"}
-          maxWidth={"300px"}
-          borderRadius={"10px"}
-          height={"300px"}
+          maxWidth={{xs: "270px", sm: "270px", md: "270px", lg: "300px"}}
+          borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
+          height={{xs: "100px", sm: "100px", md: "100px", lg: "300px"}}
         >
-          <Box padding={"20px 20px"}>
+          <Box display={{xs: "flex", sm: "flex", md: "flex", lg: ""}} alignItems={{xs: "center", sm: "cemter", md: "center", lg: ""}} padding={{xs: "10px 10px", sm: "10px 10px", md: "10px 10px", lg:"20px 20px"}} width={{xs: "219px", sm: "219px", md: "219px", lg: "260px"}} height={{xs: "80px", sm: "80px", md: "80px", lg: "260px"}}>
             <img src={turf} width={"100%"} height={"100%"} alt="turf" />
             <Typography
-              display={selectedTurf ? "block" : "none"}
+              display={{xs: "block", sm: "block", md: "block", lg: "none"}}
               textAlign={"center"}
               fontSize={"14px"}
               color={Colors.BLACK}
               fontWeight={"600"}
+              paddingLeft={{xs: "30px", sm: "30px", md: "30px", lg: "0px"}}
             >
               Turf
             </Typography>
@@ -134,7 +164,7 @@ export default function TurfBooking() {
         <Stack
           borderLeft={"1px solid #D9D9D9"}
           gap={"8px"}
-          padding={"40px 37px"}
+          padding={{xs: "0px 37px", sm: "0px 37px", md: "0px 37px", lg: "40px 37px"}}
           flexDirection={"column"}
         >
           <Typography
@@ -156,8 +186,8 @@ export default function TurfBooking() {
               }}
               border={"1px solid #D9D9D9"}
               width={"100%"}
-              maxWidth={"200px"}
-              borderRadius={"10px"}
+              maxWidth={{xs: "215px", sm: "215px", md: "215px", lg: "200px"}}
+              borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
               height={"105px"}
               onClick={() => handleTurfSelection(item.name)}
             >
@@ -187,10 +217,10 @@ export default function TurfBooking() {
             <Box
               border={"1px solid #D9D9D9"}
               width={"100%"}
-              maxWidth={"290px"}
-              borderRadius={"10px"}
-              height={"155px"}
-              marginTop={3}
+              maxWidth={{xs: "220px", sm: "220px", md: "220px", lg: "290px"}}
+              borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
+              height={{xs: "105px", sm: "105px", md: "105px", lg: "155px"}}
+              marginTop={{xs: "-40px", sm: "-40px", md: "-40px", lg: "24px"}}
             >
               {/* Render the selected turf */}
               <Box
@@ -199,12 +229,10 @@ export default function TurfBooking() {
                 alignItems={"center"}
                 padding={"14px 12px"}
               >
-                <img
+                <StyledImage
                   src={
                     TurfImages.find((item) => item.name === selectedTurf)?.image
                   }
-                  width={"145px"}
-                  height={"105px"}
                   alt="selected turf"
                 />
                 <Typography
