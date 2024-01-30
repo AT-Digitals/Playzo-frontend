@@ -1,15 +1,14 @@
-import { Box, Modal, Stack, Typography, styled } from "@mui/material";
+import { Box, Stack, Typography, styled } from "@mui/material";
 
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
+import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import { Link } from "react-router-dom";
+import LoginForm from "../pages/login/LoginForm";
 import logo from "../assets/logo.png";
 import routes from "../routes/routes";
-import CustomButton from "../CommonComponents/CustomButton";
-import { useCallback, useContext, useState } from "react";
-import LoginForm from "../pages/login/LoginForm";
-
+import { useState } from "react";
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -20,19 +19,6 @@ const HeaderLink = styled("a")`
     color: ${Colors.WHITE};
   }
 `;
-
-const StyledLink = styled(Link)({
-  padding: "8px 20px",
-  textTransform: "none",
-  whiteSpace: "nowrap",
-  border: `1px solid ${Colors.BUTTON_COLOR} !important`,
-  minWidth: 0,
-  fontSize: "16px",
-  fontWeight: "bold",
-  textDecoration: "none",
-  color: Colors.BUTTON_COLOR,
-  borderRadius: "20px",
-});
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -96,7 +82,7 @@ export default function Header() {
             </CustomButton>
           </Stack>
         </Stack>
-        <Modal
+        {/* <Modal
           open={open}
           onClose={handleClose}
           slotProps={{
@@ -104,9 +90,9 @@ export default function Header() {
               timeout: 500,
             },
           }}
-        >
-          <LoginForm handleClose={handleClose} />
-        </Modal>
+        > */}
+        <LoginForm handleClose={handleClose} open={open} />
+        {/* </Modal> */}
       </AppContainer>
     </Box>
   );
