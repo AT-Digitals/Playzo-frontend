@@ -1,5 +1,13 @@
-import { Box, Divider, Grid, Link, Stack, TextField } from "@mui/material";
-
+import {
+  Box,
+  Divider,
+  Grid,
+  IconButton,
+  Link,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
@@ -8,7 +16,11 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Icon from "../../assets/Variant10.png";
 import { useState } from "react";
 
-export default function LoginForm() {
+interface loginProps {
+  handleClose?: () => void;
+}
+
+export default function LoginForm({ handleClose }: loginProps) {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
@@ -26,14 +38,43 @@ export default function LoginForm() {
     setIsValidEmail(isValid);
   };
 
+  // const handlePasswordChange = (event: any) => {
+  //   setPassword(event.target.value);
+  //   validatePassword(event.target.value);
+  // };
+
+  const validatePassword = (value: string) => {
+    setIsPasswordValid(value.length >= 8);
+  };
+
+  // const onSubmit = (event: any) => {
+  //   event.preventDefault();
+  //   if (isValidEmail) {
+  //     setIsValidEmail(false);
+  //   }
+  //   if (isPasswordValid) {
+  //     setIsPasswordValid(false);
+  //   }
+
+  //   const data = {
+  //     email: email,
+  //     password: password,
+  //   };
+
+  // const validateEmail = (input: any) => {
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   const isValid = emailRegex.test(input);
+  //   setIsValidEmail(isValid);
+  // };
+
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
     validatePassword(event.target.value);
   };
 
-  const validatePassword = (value: string) => {
-    setIsPasswordValid(value.length >= 8);
-  };
+  // const validatePassword = (value: string) => {
+  //   setIsPasswordValid(value.length >= 8);
+  // };
 
   const onSubmit = (event: any) => {
     event.preventDefault();
@@ -51,24 +92,29 @@ export default function LoginForm() {
     console.log("data", data);
   };
   return (
-    <Box margin="100px auto" width="100%" maxWidth={1200}>
+    <Box margin="60px auto" width="100%" maxWidth={1200}>
       <Grid
         container
         alignItems="center"
         justifyContent="center"
-        columnSpacing={5}
+      //columnSpacing={5}
       >
         <Grid
           item
           xs={12}
           md={6}
-          padding={5}
+          padding={3}
           bgcolor={{ xs: "none", md: Colors.BACKGROUND_COLOR }}
           borderRadius={5}
           marginLeft={{ xs: 3, md: 0 }}
         >
           <Stack direction="row" justifyContent="end">
-            <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
+            <IconButton>
+              <CloseIcon
+                sx={{ color: Colors.WHITE, fontSize: "30px" }}
+                onClick={handleClose}
+              />
+            </IconButton>
           </Stack>
           <Stack direction="column" spacing={3} padding={6}>
             <Box>
@@ -82,9 +128,8 @@ export default function LoginForm() {
                   backgroundColor: Colors.WHITE,
                   width: "100%",
                   borderRadius: "8px",
-                  ".css-bn26lx-MuiFormHelperText-root": {
-                    backgroundColor: Colors.BACKGROUND_COLOR,
-                    margin: "0px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "8px",
                   },
                 }}
                 placeholder="Enter your email"
@@ -93,9 +138,6 @@ export default function LoginForm() {
                 value={email}
                 onChange={handleEmailChange}
                 error={!isValidEmail}
-                helperText={
-                  !isValidEmail ? "Please enter valid email address" : ""
-                }
                 InputProps={{
                   endAdornment: !isValidEmail && (
                     <ErrorOutlineIcon
@@ -105,6 +147,10 @@ export default function LoginForm() {
                   ),
                 }}
               />
+              <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                {" "}
+                {!isValidEmail ? "Please enter valid email address" : ""}
+              </span>
             </Box>
             <Box>
               <CustomLabel color={Colors.WHITE} mb={1}>
@@ -117,9 +163,8 @@ export default function LoginForm() {
                   backgroundColor: Colors.WHITE,
                   width: "100%",
                   borderRadius: "8px",
-                  ".css-bn26lx-MuiFormHelperText-root": {
-                    backgroundColor: Colors.BACKGROUND_COLOR,
-                    margin: "0px",
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "8px",
                   },
                 }}
                 placeholder="Enter your password"
@@ -127,9 +172,6 @@ export default function LoginForm() {
                 value={password}
                 required
                 error={!isPasswordValid}
-                helperText={
-                  !isPasswordValid ? "Please enter valid password" : ""
-                }
                 InputProps={{
                   endAdornment: !isPasswordValid && (
                     <ErrorOutlineIcon
@@ -139,6 +181,9 @@ export default function LoginForm() {
                   ),
                 }}
               />
+              <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                {!isPasswordValid ? "Please enter valid password" : ""}
+              </span>
             </Box>
             <Link
               sx={{
@@ -205,4 +250,4 @@ export default function LoginForm() {
       </Grid>
     </Box>
   );
-}
+};

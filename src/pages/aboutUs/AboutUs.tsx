@@ -14,7 +14,9 @@ import ball from "../../assets/ball 3.png";
 import Layer3 from "../../assets/Layer_4.png";
 import Image1 from "../../assets/Rectangle 67.png";
 import PopupCarousel from "./PopupCarousel";
+import Image2 from "../../assets/Rectangle 669.png";
 import styled from "@emotion/styled";
+import TimelineComponent from "./TimelineComponent";
 
 const StyledImage = styled.img`
 
@@ -238,6 +240,7 @@ export default function AboutUs() {
           image={Image1}
           alt="Paella dish"
         />
+        <img src={Image2} alt="about dish" style={{ width: "100%", position: "absolute", transform: `translate(0px, -100%)` }} />
       </Box>
       <AppContainer>
         <Box margin="10px 20px">
@@ -247,11 +250,11 @@ export default function AboutUs() {
             justifyContent="center"
             alignItems="center"
             spacing={8}
-            flexDirection={{xs: "column", sm: "column", md: "column", lg: "row"}}
-            mb={{xs: "60px", sm: "60px", md: "60px", lg: "0px"}}
+            flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+            mb={{ xs: "60px", sm: "60px", md: "60px", lg: "0px" }}
           >
-            <Grid item xs={0} pl={{xs: '58px', sm: "58px", md: "58px", lg: "70px"}} justifyContent="center" alignItems="center">
-              <Typography pt={{xs: '25px', sm: "25px", md: "25px", lg: "0px"}} marginRight={{xs: "66px", sm: "66px", md: "66px", lg: "0px"}} fontSize={{xs: "15px", sm: "15px", md: "15px", lg: "20px"}} maxWidth={{xs: "298px", sm: "298px", md: "298px", lg: "438px"}}
+            <Grid item xs={0} pl={{ xs: '58px', sm: "58px", md: "58px", lg: "70px" }} justifyContent="center" alignItems="center">
+              <Typography pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "0px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
                 style={{
                   height: "284px",
                   fontStyle: "normal",
@@ -270,7 +273,7 @@ export default function AboutUs() {
                 alt="ball 4"
               />
             </Grid>
-            <Grid item xs={7} display={{xs: 'contents', sm: "contents", md: "contents", lg: "block"}}>
+            <Grid item xs={7} display={{ xs: 'contents', sm: "contents", md: "contents", lg: "block" }}>
               <StyledImage
                 src={Aboutus}
                 alt={"title"}
@@ -289,17 +292,17 @@ export default function AboutUs() {
           container
           maxWidth={1200}
           margin="auto"
-         pt={{xs: "70px", sm: '70px', md: '70px', lg: "96px"}}
-         pb={{xs: "60px", sm: '60px', md: '60px', lg: "96px"}}
-          pl={{xs: "0px", sm: "0px", md: "0px", lg: "40px"}}
-          pr={{xs: "15px", sm: "15px", md: "15px", lg: "40px"}}
+          pt={{ xs: "70px", sm: '70px', md: '70px', lg: "96px" }}
+          pb={{ xs: "60px", sm: '60px', md: '60px', lg: "96px" }}
+          pl={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}
+          pr={{ xs: "15px", sm: "15px", md: "15px", lg: "40px" }}
           columnSpacing={4}
-          flexDirection={{xs: "column", sm: "column", md: "column", lg: "row"}}
-          gap={{xs: "30px", sm: "30px", md: "30px", lg: "0px"}}
+          flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+          gap={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
         >
-          <Grid item xs={6} maxWidth={{xs: "100%", sm: "100%", md: "100%", lg: "50%"}}>
+          <Grid item xs={6} maxWidth={{ xs: "100%", sm: "100%", md: "100%", lg: "50%" }}>
             <Box>
-              <Typography fontSize={{xs: '20px', sm: '20px', md: '20px', lg: "32px"}}
+              <Typography fontSize={{ xs: '20px', sm: '20px', md: '20px', lg: "32px" }}
                 variant={"h4"}
                 style={{
                   fontStyle: "normal",
@@ -309,7 +312,7 @@ export default function AboutUs() {
               >
                 Mission
               </Typography>
-              <Typography fontSize={{xs: '15px', sm: '15px', md: '15px', lg: "20px"}}
+              <Typography fontSize={{ xs: '15px', sm: '15px', md: '15px', lg: "20px" }}
                 style={{
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -325,9 +328,9 @@ export default function AboutUs() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={6} maxWidth={{xs: "100%", sm: "100%", md: "100%", lg: "50%"}}>
+          <Grid item xs={6} maxWidth={{ xs: "100%", sm: "100%", md: "100%", lg: "50%" }}>
             <Box>
-              <Typography fontSize={{xs: '20px', sm: '20px', md: '20px', lg: "32px"}}
+              <Typography fontSize={{ xs: '20px', sm: '20px', md: '20px', lg: "32px" }}
                 variant={"h4"}
                 style={{
                   fontStyle: "normal",
@@ -337,7 +340,7 @@ export default function AboutUs() {
               >
                 Vision
               </Typography>
-              <Typography fontSize={{xs: '15px', sm: '15px', md: '15px', lg: "20px"}}
+              <Typography fontSize={{ xs: '15px', sm: '15px', md: '15px', lg: "20px" }}
                 style={{
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -359,35 +362,35 @@ export default function AboutUs() {
           </Grid>
         </Grid>
       </Box>
-      <Box pt={{xs: "50px", sm: "50px", md: "50px", lg: "80px"}} pb={{xs: "0px", sm: "0px", md: "0px", lg: "80px"}} maxWidth={1200} margin="auto">
+      <Box pt={{ xs: "50px", sm: "50px", md: "50px", lg: "80px" }} pb={{ xs: "0px", sm: "0px", md: "0px", lg: "80px" }} maxWidth={1200} margin="auto">
         <Stack direction="column" spacing={4}>
           <Typography sx={{
-            position: {xs: "absolute", sm: "absolute", md: "absolute", lg: ""},
-            transform: {xs: "translate(29px, 100px)", sm: "translate(29px, 100px)", md: "translate(29px, 100px)", lg: "translate(-1px, -26px)"}
-          }} fontSize={{xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "2rem"}} variant="h3" color={Colors.BUTTON_COLOR} fontWeight={600}>
+            position: { xs: "absolute", sm: "absolute", md: "absolute", lg: "" },
+            transform: { xs: "translate(29px, 100px)", sm: "translate(29px, 100px)", md: "translate(29px, 100px)", lg: "translate(-1px, -26px)" }
+          }} fontSize={{ xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "2rem" }} variant="h3" color={Colors.BUTTON_COLOR} fontWeight={600}>
             PlayZo Facilities
           </Typography>
           <Grid container>
-            <Stack alignItems={{xs: "center", sm: "center", md: "center", lg: "normal"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
-              <Grid item xs={6} maxWidth={{xs: '83%', sm: "83%", md: "83%", lg: '50%'}} margin={{xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px"}}>
+            <Stack alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} direction={{ xs: "column", sm: "column", md: "column", lg: "row" }} spacing={3}>
+              <Grid item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px" }}>
                 <img src={turf} alt="grid 1" style={{ width: "100%" }} />
               </Grid>
-              <Grid item xs={6} maxWidth={{xs: '83%', sm: "83%", md: "83%", lg: '50%'}} margin={{xs: "-23px 30px", sm: "-23px 30px", md: "-23px 30px", lg: "0px"}}>
+              <Grid item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "-23px 30px", sm: "-23px 30px", md: "-23px 30px", lg: "0px" }}>
                 <img src={turf1} alt="grid 2" style={{ width: "100%" }} />
               </Grid>
             </Stack>
           </Grid>
           <Grid container>
-            <Stack direction="row" marginBottom={{xs: "80px", sm: "80px", md: "80px", lg: '0px'}} spacing={{xs: 0, sm: 0, md: 0, lg: 3}}>
-              <Box alignItems={{xs: "center", sm: "center", md: "center", lg: "normal"}} gap={{xs: "0px", sm: "0px", md: "0px", lg: "25px"}} display={{xs: "flex", sm: "flex", md: "flex", lg: "flex"}} flexDirection={{xs: 'column', sm: "column", md: "column", lg: "row"}}>
-              <Grid item xs={0} ml={{xs: "20px", sm: "20px", md: "20px", lg: "0px"}} width={{xs: '73%', sm: "73%", md: "73%", lg: '37%'}}>
-                <StyledImage4 src={turf2} alt="grid 3" />
-              </Grid>
-              <Grid item xs={0}>
-                <StyledImage5 src={turf3} alt="grid 4" />
-              </Grid>
+            <Stack direction="row" marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: '0px' }} spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}>
+              <Box alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }} display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }} flexDirection={{ xs: 'column', sm: "column", md: "column", lg: "row" }}>
+                <Grid item xs={0} ml={{ xs: "20px", sm: "20px", md: "20px", lg: "0px" }} width={{ xs: '73%', sm: "73%", md: "73%", lg: '37%' }}>
+                  <StyledImage4 src={turf2} alt="grid 3" />
+                </Grid>
+                <Grid item xs={0}>
+                  <StyledImage5 src={turf3} alt="grid 4" />
+                </Grid>
               </Box>
-              <Grid item xs={0} width={{xs: '135%', sm: "135%", md: "135%", lg: '33%'}}>
+              <Grid item xs={0} width={{ xs: '135%', sm: "135%", md: "135%", lg: '33%' }}>
                 <StyledImage3 src={turf4} alt="grid 5" />
               </Grid>
             </Stack>
@@ -397,15 +400,15 @@ export default function AboutUs() {
             spacing={2}
             alignItems="center"
             justifyContent="end"
-            paddingTop={{xs: "40px", sm: "40px", md: "40px", lg: "0px"}}
+            paddingTop={{ xs: "40px", sm: "40px", md: "40px", lg: "0px" }}
           >
             <Link
               href=""
               sx={{
                 textDecoration: "none",
                 color: Colors.BUTTON_COLOR,
-                fontSize: {xs: "16px", sm: "16px", md: "16px", lg: "18px"},
-                fontWeight: {xs: "bold", sm: "bold", md: "bold", lg: "600"},
+                fontSize: { xs: "16px", sm: "16px", md: "16px", lg: "18px" },
+                fontWeight: { xs: "bold", sm: "bold", md: "bold", lg: "600" },
                 ".css-olvtuu-MuiTypography-root-MuiLink-root:hover": {
                   textDecoration: "underline",
                 },
@@ -413,16 +416,16 @@ export default function AboutUs() {
             >
               see all images
             </Link>
-            <EastIcon sx={{ color: Colors.BUTTON_COLOR, fontSize: "35px", paddingRight: {xs: "9px", sm: "9px", md: "9px", lg: "0px"} }} />
+            <EastIcon sx={{ color: Colors.BUTTON_COLOR, fontSize: "35px", paddingRight: { xs: "9px", sm: "9px", md: "9px", lg: "0px" } }} />
           </Stack>
-          <Box pb={{xs: "0px", sm: "0px", md: "0px", lg: "40px"}} >
-            <Grid  container spacing={5}>
-              <Grid  item xs={12} marginTop={{xs: "-83px", sm: "-83px", md: "-83px", lg: "40px"}} marginLeft={{xs: "24px", sm: "24px", md: "24px", lg: "0px"}}>
+          <Box pb={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} >
+            <Grid container spacing={5}>
+              <Grid item xs={12} marginTop={{ xs: "-83px", sm: "-83px", md: "-83px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
                 <StyledImage6
                   src={ball}
                   alt="grid-ball"
                 />
-                <Typography maxWidth={{xs: "200px", sm: "200px", md: "200px", lg: "441px"}} fontSize={{xs: "15px", sm: "15px", md: "15px", lg: "20px"}}
+                <Typography maxWidth={{ xs: "200px", sm: "200px", md: "200px", lg: "441px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
                   variant="h6"
                   color={Colors.BUTTON_COLOR}
                   fontWeight={600}
@@ -436,7 +439,10 @@ export default function AboutUs() {
           </Box>
         </Stack>
       </Box>
+      <TimelineComponent />
       {/* <Box paddingY={10} maxWidth={1200} margin="auto">
+
+
         <Stack direction="column" spacing={2} >
           <Box>
             <Typography variant="body1">Lorem ipsum</Typography>
@@ -448,6 +454,7 @@ export default function AboutUs() {
           </Typography>
         </Stack>
       </Box> */}
+
     </>
   );
 }
