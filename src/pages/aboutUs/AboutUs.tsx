@@ -193,6 +193,40 @@ const StyledImage5 = styled.img`
     margin: 1px;
   }
 `;
+const StyledImage6 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    transform: translate(93px, -60px);
+    width: 80px;
+    height: 90px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    transform: translate(93px, -60px);
+    width: 80px;
+    height: 90px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    transform: translate(93px, -60px);
+    width: 80px;
+    height: 90px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    transform: translate(135px, -85px);
+    width: 132px;
+    height: 132px;
+  }
+`;
 
 export default function AboutUs() {
   return (
@@ -325,9 +359,12 @@ export default function AboutUs() {
           </Grid>
         </Grid>
       </Box>
-      <Box paddingY={10} maxWidth={1200} margin="auto">
+      <Box pt={{xs: "50px", sm: "50px", md: "50px", lg: "80px"}} pb={{xs: "0px", sm: "0px", md: "0px", lg: "80px"}} maxWidth={1200} margin="auto">
         <Stack direction="column" spacing={4}>
-          <Typography variant="h3" color={Colors.BUTTON_COLOR} fontWeight={600}>
+          <Typography sx={{
+            position: {xs: "absolute", sm: "absolute", md: "absolute", lg: ""},
+            transform: {xs: "translate(29px, 100px)", sm: "translate(29px, 100px)", md: "translate(29px, 100px)", lg: "translate(-1px, -26px)"}
+          }} fontSize={{xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "2rem"}} variant="h3" color={Colors.BUTTON_COLOR} fontWeight={600}>
             PlayZo Facilities
           </Typography>
           <Grid container>
@@ -360,14 +397,15 @@ export default function AboutUs() {
             spacing={2}
             alignItems="center"
             justifyContent="end"
+            paddingTop={{xs: "40px", sm: "40px", md: "40px", lg: "0px"}}
           >
             <Link
               href=""
               sx={{
                 textDecoration: "none",
                 color: Colors.BUTTON_COLOR,
-                fontSize: "18px",
-                fontWeight: 600,
+                fontSize: {xs: "16px", sm: "16px", md: "16px", lg: "18px"},
+                fontWeight: {xs: "bold", sm: "bold", md: "bold", lg: "600"},
                 ".css-olvtuu-MuiTypography-root-MuiLink-root:hover": {
                   textDecoration: "underline",
                 },
@@ -375,20 +413,14 @@ export default function AboutUs() {
             >
               see all images
             </Link>
-            <EastIcon sx={{ color: Colors.BUTTON_COLOR, fontSize: "35px" }} />
+            <EastIcon sx={{ color: Colors.BUTTON_COLOR, fontSize: "35px", paddingRight: {xs: "9px", sm: "9px", md: "9px", lg: "0px"} }} />
           </Stack>
           <Box pb={{xs: "0px", sm: "0px", md: "0px", lg: "40px"}} >
             <Grid  container spacing={5}>
-              <Grid  item xs={12} marginTop={{xs: "-82px", sm: "-49px", md: "-49px", lg: "40px"}} marginLeft={{xs: "16px", sm: "16px", md: "16px", lg: "0px"}}>
-                <img
+              <Grid  item xs={12} marginTop={{xs: "-83px", sm: "-83px", md: "-83px", lg: "40px"}} marginLeft={{xs: "24px", sm: "24px", md: "24px", lg: "0px"}}>
+                <StyledImage6
                   src={ball}
-                  width={132}
-                  height={132}
                   alt="grid-ball"
-                  style={{
-                    position: "absolute",
-                    transform: `translate(135px, -85px)`,
-                  }}
                 />
                 <Typography maxWidth={{xs: "200px", sm: "200px", md: "200px", lg: "441px"}} fontSize={{xs: "15px", sm: "15px", md: "15px", lg: "20px"}}
                   variant="h6"
