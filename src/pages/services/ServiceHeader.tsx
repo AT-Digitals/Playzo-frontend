@@ -49,10 +49,6 @@ export default function ServiceHeaders() {
                 ? { xs: "26%", md: "20%" }
                 : { xs: "21%", sm: "38%", md: "32%", lg: "19%" },
               maxWidth: { xs: "45px", sm: "60px", md: "100%" },
-
-              //   "@media (max-width: 280px)": {
-              //     right: "10%", // Adjust this value according to your needs
-              //   },
             } as any
           }
         />

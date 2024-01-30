@@ -1,5 +1,6 @@
 import { Box, IconButton, Tab, Tabs, Typography } from "@mui/material";
-import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
+import { Link, matchPath, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import routes from "../../routes/routes";
 
@@ -73,8 +74,6 @@ function samePageLinkNavigation(
 }
 
 export default function MuiTab() {
-  const navigate = useNavigate();
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     // event.type can be equal to focus with selectionFollowsFocus.
     if (
@@ -87,11 +86,28 @@ export default function MuiTab() {
       console.log(newValue);
     }
   };
+  const [displayedTabs, setDisplayedTabs] = useState(tabList.slice(0, 5));
+
+  const [nextClicked, setNextClicked] = useState(false);
 
   const handleNextTab = () => {
     const currentIndex = tabList.findIndex((tab) => tab.href === currentTab);
-    const nextIndex = (currentIndex + 1) % tabList.length;
-    navigate(tabList[nextIndex].href);
+    const remainingTabs = tabList.slice(currentIndex + 1);
+
+    if (remainingTabs.length > 0) {
+      setDisplayedTabs(remainingTabs.slice(0, 5));
+      setNextClicked(true);
+    }
+  };
+
+  const handlePrevTab = () => {
+    const currentIndex = tabList.findIndex((tab) => tab.href === currentTab);
+    const prevTabs = tabList.slice(0, currentIndex);
+
+    if (prevTabs.length > 0 && nextClicked) {
+      setDisplayedTabs(prevTabs.slice(-5));
+      setNextClicked(false);
+    }
   };
 
   const routeMatch = useRouteMatch([
@@ -107,6 +123,25 @@ export default function MuiTab() {
   ]);
   const currentTab = routeMatch?.pattern?.path;
 
+  useEffect(() => {
+    const handleResize = () => {
+      const innerWidth = window.innerWidth;
+      if (innerWidth >= 280 && innerWidth <= 960) {
+        setDisplayedTabs(tabList.slice(0, 5));
+      } else {
+        setDisplayedTabs(tabList);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    // Initial check
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [tabList]);
+
   return (
     <>
       <Box
@@ -120,6 +155,22 @@ export default function MuiTab() {
           alignItems: "center",
         }}
       >
+        {nextClicked ? (
+          <Box display={{ lg: "none" }} onClick={handlePrevTab}>
+            <Typography fontWeight={"bold"} fontSize={"20px"}>
+              <IconButton
+                style={{
+                  color: "black",
+                }}
+              >
+                {"<"}
+              </IconButton>
+            </Typography>
+          </Box>
+        ) : (
+          ""
+        )}
+
         <Tabs
           value={currentTab}
           onChange={handleChange}
@@ -145,7 +196,7 @@ export default function MuiTab() {
             width: "95%", // Make sure the Tabs take full width
           }}
         >
-          {tabList.map((tab, index) => (
+          {displayedTabs.map((tab, index) => (
             <Tab
               style={{
                 flexWrap: "wrap",
@@ -158,7 +209,8 @@ export default function MuiTab() {
             />
           ))}
         </Tabs>
-        <Box display={{ lg: "none" }} onClick={handleNextTab}>
+
+        <Box display={{ md: "none", lg: "none" }} onClick={handleNextTab}>
           <Typography fontWeight={"bold"} fontSize={"20px"}>
             <IconButton
               style={{
