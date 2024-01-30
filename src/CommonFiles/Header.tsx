@@ -41,7 +41,7 @@ export default function Header() {
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
-      <AppContainer>
+      <AppContainer display={{ xs: "none", xl: "flex" }}>
         <Stack
           direction="row"
           spacing={2}
@@ -54,13 +54,18 @@ export default function Header() {
               <img width={172} height={34} src={logo} alt="alterknit" />
             </Link>
           </Box>
+
           <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.ABOUTUS}>
-              <Typography color={Colors.WHITE} fontSize="18px">About Us</Typography>
+              <Typography color={Colors.WHITE} fontSize="18px">
+                About Us
+              </Typography>
             </HeaderLink>
             <DropDown />
             <HeaderLink href={routes.CONTACTUS}>
-              <Typography color={Colors.WHITE} fontSize="18px">Contact Us</Typography>
+              <Typography color={Colors.WHITE} fontSize="18px">
+                Contact Us
+              </Typography>
             </HeaderLink>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
