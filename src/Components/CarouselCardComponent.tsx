@@ -16,6 +16,63 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import icon from "../assets/img-4 1.png";
 import Layer3 from "../assets/Layer_3.png";
+import styled from "@emotion/styled";
+
+const StyledImage = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 290px;
+    height: 350px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 290px;
+    height: 350px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 290px;
+    height: 350px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 327px;
+    height: 492px;
+  }
+`;
+const StyledImage1 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 55px;
+    height: 80px;
+    margin-right: 9px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 55px;
+    height: 80px;
+    margin-right: 9px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 55px;
+    height: 80px;
+    margin-right: 9px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 192px;
+    height: 290px;
+  }
+`;
 
 interface HotelCard {
     feedback: string;
@@ -44,28 +101,27 @@ export default function CarouselCardComponent({
             direction="row"
             alignItems="flex-end"
             maxWidth={900}
+            
             sx={{
                 backgroundColor: Colors.BLACK,
             }}
         >
             {showDetails ? (
-                <Stack direction="row" spacing={3}>
+                <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: "30px 30px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
                     <img src={Layer3} width={50} height={50} alt="layer3" style={{
                         position: "absolute",
                         transform: "translate(0px, -28px)"
                     }} />
-                    <img
-                        height="492px"
+                    <StyledImage
                         src={cardDetails.imageSrc}
                         alt="green iguana"
-                        width="327px !important"
                     />
                     <Stack direction="column" spacing={2} width="370px" py={2}>
                         <Rating value={cardDetails.ratings} readOnly />
-                        <Typography color={Colors.WHITE} fontSize="18px">
+                        <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "18px"}}>
                             {cardDetails.feedback}
                         </Typography>
-                        <Stack direction="column" sx={{ backgroundColor: Colors.BLACK }}>
+                        <Stack  direction="column" sx={{ backgroundColor: Colors.BLACK }}>
                             <Typography
                                 gutterBottom
                                 component="div"
@@ -130,16 +186,16 @@ export default function CarouselCardComponent({
                 </Stack>
             ) : (
                 <Box>
-                    <img
-                        height="290"
+                    <StyledImage1
                         src={cardDetails.imageSrc}
                         alt="green iguana"
-                        width="192"
+                       
                     />
                     <Stack
                         direction="column"
                         sx={{ backgroundColor: Colors.BLACK }}
                         paddingY={3}
+                        display={{xs: "none", sm: 'none', md: 'none', lg: 'flex'}}
                     >
                         <Typography
                             gutterBottom

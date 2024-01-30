@@ -29,18 +29,266 @@ import Machine from "../assets/Image (7).png";
 import Cricket from "../assets/Image (9).png";
 import Layer2 from "../assets/Layer_2.png";
 import Layer1 from "../assets/Layer_1 (1).png";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const StyledTypo = styled(Typography)({
     color: Colors.WHITE,
     position: "absolute",
     top: "100px",
     // left: '50%',
-    transform: "translate(107%, 232%)",
     fontSize: "5rem",
     textAlign: "center",
     zIndex: 1,
 });
+
+const StyledImage = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    transform: translate(28px, -38px);
+    width: 50px;
+    height: 60px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    transform: translate(28px, -38px);
+    width: 50px;
+    height: 60px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    transform: translate(28px, -38px);
+    width: 50px;
+    height: 60px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    transform: translate(180px, -43px);
+    width: 82px;
+    height: 113px;
+  }
+`;
+const StyledImage1 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    transform: translate(19rem, 49rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    transform: translate(19rem, 49rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    transform: translate(19rem, 49rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    transform: translate(74rem, 30rem);
+    width: 37px;
+    height: 37px;
+  }
+`;
+
+const StyledImage2 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    transform: translate(10px, 104rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    transform: translate(10px, 104rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    transform: translate(10px, 104rem);
+    width: 37px;
+    height: 37px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    transform: translate(10px, 62rem);
+    width: 37px;
+    height: 37px;
+  }
+`;
+const StyledImage3 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    right: 147px;
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    right: 147px;
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    right: 147px;
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    right: 275px;
+    width: 100px;
+    height: 100px;
+  }
+`;
+const StyledImage4 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    transform: translate(151%, 206%);
+    top: 100px;
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    transform: translate(151%, 206%);
+    top: 100px;
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    transform: translate(151%, 206%);
+    top: 100px;
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    transform: translate(385%, 102%);
+    top: 100px;
+    width: 250px;
+    height: 250px;
+  }
+`;
+const StyledImage5 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    position: absolute;
+    top: -270px;
+    width: 1240px;
+    transform: translate(${0}, ${10.5}%);
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    position: absolute;
+    top: -270px;
+    width: 1240px;
+    transform: translate(${0}, ${10.5}%);
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    position: absolute;
+    top: -270px;
+    width: 1240px;
+    transform: translate(${0}, ${10.5}%);
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    position: absolute;
+    top: 0;
+    width: 1240px;
+    transform: translate(${0}, ${10.5}%);
+  }
+`;
+const StyledImage6 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 100px;
+    height: 100px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 88px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 100px;
+    height: 100px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 88px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 100px;
+    height: 100px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 88px;
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 150px;
+    height: 150px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 225px;
+    }}
+  }
+`;
 
 const items = [
     {
@@ -90,46 +338,41 @@ const StyledButton = styled(CustomButton)({
     fontWeight: 600,
     position: "absolute",
     top: "100px",
-    transform: "translate(450%, -1200%)",
     padding: "10px 20px",
 });
 
 export default function HomePage() {
     return (
         <Box width="100%">
-            <CardMedia
+            <Box>
+            <CardMedia sx={{
+                height: {xs: '700px', sm: "700px", md: '700px', lg: ''}
+            }}
                 component="img"
                 //height="194"
                 image={Image1}
                 alt="Paella dish"
             />
-            <img
+            </Box>
+            <StyledImage5
                 src={Image2}
                 alt="background"
-                style={{
-                    position: "absolute",
-                    top: 0,
-                    width: "1240px",
-
-                    transform: `translate(${0}, ${10.5}%)`,
-                }}
             />
 
-            <StyledTypo variant="h3" fontWeight={600} fontFamily="Inter" fontSize="5rem">
+            <StyledTypo variant="h3" sx={{
+                   transform: {xs:"translate(13%, 393%)", sm: "translate(13%, 393%)", md: "translate(13%, 393%)", lg: "translate(107%, 232%)"},
+            }} fontWeight={600} fontFamily="Inter" fontSize={{xs: "3rem", sm: "3rem", md: "3rem", lg: "5rem"}}>
                 Play Beyond <br /> Boundaries
             </StyledTypo>
-            <img
+            <StyledImage4
                 src={ball3}
                 alt="banner"
-                width={250}
-                height={250}
-                style={{
-                    position: "absolute",
-                    top: "100px",
-                    transform: "translate(385%, 102%)",
-                }}
             />
-            <StyledButton
+            <StyledButton sx={{
+                backgroundColor: Colors.BUTTON_COLOR,
+                color: "white",
+                transform: {xs: "translate(74%, 1161%)", sm: "translate(74%, 1161%)", md: "translate(74%, 1161%)", lg: "translate(450%, -1200%)"}
+            }}
                 bgColor={Colors.BUTTON_COLOR}
                 variant="contained"
                 color={Colors.WHITE}
@@ -144,20 +387,17 @@ export default function HomePage() {
                 paddingTop={8}
                 pb={4}
             >
-                <img
+                <StyledImage
                     src={Layer2}
-                    width={82}
-                    height={113}
                     alt="Layer2"
-                    style={{ position: "absolute", transform: `translate(180px, -43px)` }}
                 />
                 <Typography
                     variant="h2"
                     color={Colors.BLACK}
                     textAlign="center"
-                    fontSize="32px"
+                    fontSize={{xs: '18px', sm: '18px', md: '18px', lg: "32px"}}
                     fontWeight={700}
-                    width={700}
+                    width={{xs: "300px", sm: '300px', md: "300px", lg: "700px"}}
                     margin="auto"
                     sx={{ fontFamily: "Inter" }}
                 >
@@ -175,6 +415,7 @@ export default function HomePage() {
                 margin="0 auto"
                 spacing={3}
                 pb={3}
+                flexDirection={{xs: 'column', sm: "column", md: "column", lg: "row"}}
             >
                 <Grid item xs={4}>
                     <CardComponent
@@ -206,25 +447,13 @@ export default function HomePage() {
                         image={boardGames}
                     />
                 </Grid>
-                <img
+                <StyledImage1
                     src={Layer1}
-                    width={37}
-                    height={37}
                     alt="layer1"
-                    style={{
-                        position: "absolute",
-                        transform: "translate(74rem, 30rem)",
-                    }}
                 />
-                <img
+                <StyledImage2
                     src={Layer1}
-                    width={37}
-                    height={37}
                     alt="layer1"
-                    style={{
-                        position: "absolute",
-                        transform: "translate(10px, 62rem)",
-                    }}
                 />
                 <Grid item xs={4}>
                     <CardComponent
@@ -258,13 +487,10 @@ export default function HomePage() {
                 </Grid>
             </Grid>
             <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>
-                <Stack direction="row" justifyContent="end" alignItems="center">
-                    <img
+                <Stack marginRight={{xs: "25px", sm: '25px', md: "25px", lg: '0px'}} direction="row" justifyContent="end" alignItems="center">
+                    <StyledImage3
                         src={ball}
                         alt="ball1"
-                        width={100}
-                        height={100}
-                        style={{ position: "absolute", right: "275px" }}
                     />
                     <Link
                         href=""
@@ -289,22 +515,17 @@ export default function HomePage() {
                         sx={{
                             textDecoration: "none",
                             color: Colors.BUTTON_COLOR,
-                            fontSize: "40px",
+                            fontSize: {xs: '30px', sm: '30px', md: '30px', lg: "40px"},
                             fontWeight: 500,
+                            marginLeft: {xs: "29px", sm: '29px', md: "29px", lg: "-81px"}
                         }}
                     >
                         Offers
                     </Link>
-                    <img
+                    <StyledImage6
                         src={ball}
                         alt="ball1"
-                        width={150}
-                        height={150}
-                        style={{
-                            transform: "scaleX(-1)",
-                            position: "absolute",
-                            left: "225px",
-                        }}
+                        
                     />
                 </Stack>
             </Box>

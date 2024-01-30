@@ -372,13 +372,13 @@ export default function AboutUs() {
               <Grid item xs={6} maxWidth={{xs: '83%', sm: "83%", md: "83%", lg: '50%'}} margin={{xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px"}}>
                 <img src={turf} alt="grid 1" style={{ width: "100%" }} />
               </Grid>
-              <Grid item xs={6} maxWidth={{xs: '83%', sm: "83%", md: "83%", lg: '50%'}} margin={{xs: "-23px 30px", sm: "-23px 30px", md: "-23px 30px", lg: "0px"}}>
+              <Grid item xs={6} style={{marginTop: "0px"}} maxWidth={{xs: '83%', sm: "83%", md: "83%", lg: '50%'}}>
                 <img src={turf1} alt="grid 2" style={{ width: "100%" }} />
               </Grid>
             </Stack>
           </Grid>
           <Grid container>
-            <Stack direction="row" marginBottom={{xs: "80px", sm: "80px", md: "80px", lg: '0px'}} spacing={{xs: 0, sm: 0, md: 0, lg: 3}}>
+            <Stack direction="row" marginTop={{xs: "-30px", sm: '-30px', md: "-30px", lg: '0px'}} marginBottom={{xs: "80px", sm: "80px", md: "80px", lg: '0px'}} spacing={{xs: 0, sm: 0, md: 0, lg: 3}}>
               <Box alignItems={{xs: "center", sm: "center", md: "center", lg: "normal"}} gap={{xs: "0px", sm: "0px", md: "0px", lg: "25px"}} display={{xs: "flex", sm: "flex", md: "flex", lg: "flex"}} flexDirection={{xs: 'column', sm: "column", md: "column", lg: "row"}}>
               <Grid item xs={0} ml={{xs: "20px", sm: "20px", md: "20px", lg: "0px"}} width={{xs: '73%', sm: "73%", md: "73%", lg: '37%'}}>
                 <StyledImage4 src={turf2} alt="grid 3" />

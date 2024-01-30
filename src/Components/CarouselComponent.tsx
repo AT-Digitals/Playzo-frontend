@@ -99,11 +99,12 @@ export default function CarouselComponent() {
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} marginY={4} width="100%">
             <Stack
-                direction="row"
+                flexDirection={{xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row"}}
                 spacing={3}
                 maxWidth={1200}
                 margin="auto"
                 paddingY={12}
+                alignItems={{xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal"}}
             >
                 {visibleCards.map((card, index) => (
                     <CarouselCardComponent
