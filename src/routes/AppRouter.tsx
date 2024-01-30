@@ -32,7 +32,7 @@ export default function AppRouter() {
   return (
     <Router>
       <Routes>
-        <Route path={routes.LOGIN} element={<LoginForm />} />
+        {/* <Route path={routes.LOGIN} element={<LoginForm />} /> */}
         <Route path={routes.ROOT} element={<AppLayout />}>
           <Route path={routes.ROOT} element={<HomePage />} />
           <Route path={routes.SERVICE} element={<Service />} />
