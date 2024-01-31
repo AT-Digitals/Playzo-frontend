@@ -22,19 +22,19 @@ const StyledImage = styled.img`
 
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
-    width: 290px;
+    width: 264px;
     height: 350px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
-    width: 290px;
+    width: 264px;
     height: 350px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
-    width: 290px;
+    width: 264px;
     height: 350px;
   }
 
@@ -73,6 +73,74 @@ const StyledImage1 = styled.img`
     height: 290px;
   }
 `;
+const StyledImage2 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    transform: translate(116%, 294%);
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    transform: translate(116%, 294%);
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    transform: translate(116%, 294%);
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 159px;
+    height: 252px;
+    position: absolute;
+    transform: translate(340%, 127%);
+  }
+`;
+const StyledImage3 = styled.img`
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(-24px, -6px);
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(-24px, -6px);
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(-24px, -6px);
+  }
+
+  @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(0px, -28px);
+  }
+`;
 
 interface HotelCard {
     feedback: string;
@@ -108,10 +176,7 @@ export default function CarouselCardComponent({
         >
             {showDetails ? (
                 <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: "30px 30px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
-                    <img src={Layer3} width={50} height={50} alt="layer3" style={{
-                        position: "absolute",
-                        transform: "translate(0px, -28px)"
-                    }} />
+                    <StyledImage3 src={Layer3} alt="layer3" />
                     <StyledImage
                         src={cardDetails.imageSrc}
                         alt="green iguana"
@@ -179,10 +244,7 @@ export default function CarouselCardComponent({
                             </Button>
                         </Stack>
                     </Stack>
-                    <img src={icon} width={159} height={252} alt="carousel-Icon" style={{
-                        position: "absolute",
-                        transform: `translate(340%, 127%)`
-                    }} />
+                    <StyledImage2 src={icon} alt="carousel-Icon" />
                 </Stack>
             ) : (
                 <Box>

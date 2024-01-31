@@ -27,6 +27,7 @@ import Turf from "../pages/services/Turf";
 import TurfBooking from "../BookingService/TurfBooking";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
+import FaqPage from "../pages/FAQ/FaqPage";
 
 export default function AppRouter() {
   return (
@@ -74,6 +75,7 @@ export default function AppRouter() {
           <Route path={routes.IMAGE_GALLERY} element={<ImageSliderGallery />} />
           <Route path={routes.CRICKETNET} element={<CricketNet />} />
           <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
+          <Route path={routes.FAQ} element={<FaqPage />} />
         </Route>
       </Routes>
     </Router>

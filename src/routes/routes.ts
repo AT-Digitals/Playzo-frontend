@@ -24,6 +24,7 @@ const PAYMENT_BOOKING = "/payment-booking";
 const DATE_CALENDER = "/date-calender";
 const IMAGE_GALLERY = "/image-gal";
 const CAREERS_PAGE = "/careers-page";
+const FAQ = "/faq-page";
 
 const CRICKETNET = SERVICE + "cricketnet";
 const BOWLINGMACHINE = SERVICE + "bowlingmachine";
@@ -56,6 +57,7 @@ const routes = {
   CRICKETNET,
   BOWLINGMACHINE,
   CAREERS_PAGE,
+  FAQ,
 };
 
 export default routes;
