@@ -54,19 +54,26 @@ export default function CareersPage() {
             Explore our openings, and let's chat over a cup of coffee to discuss
             your potential role at Playzo33!
           </Typography>
-          <Box display={"flex"} justifyContent={"flex-end"} ml={"6rem"}>
+          <Box display={"flex"} justifyContent={"center"} ml={"10rem"}>
             <Box
               display={"flex"}
               justifyContent={"end"}
               style={{
-                right: "65%",
+                right: "70%",
               }}
               component="img"
               src={CareersImage}
             />
           </Box>
         </Box>
-        <Stack maxWidth={580} width={"100%"} spacing={3} ml={"0px !important"}>
+        <Stack
+          maxWidth={580}
+          width={"100%"}
+          height={"100%"}
+          spacing={3}
+          ml={"0px !important"}
+          alignItems={"flex-start"}
+        >
           {CareersTexts.map((index, i) => (
             <Stack
               key={index.title}
