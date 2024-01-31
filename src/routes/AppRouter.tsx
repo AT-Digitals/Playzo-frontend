@@ -9,6 +9,7 @@ import BoardgameBooking from "../BookingService/BoardgameBooking";
 import BowlingMachine from "../pages/services/BowlingMachine";
 import BowlingmachineBooking from "../BookingService/BowlingmachineBooking";
 import Cafeteria from "../pages/services/Cafeteria";
+import CareersPage from "../pages/Careers/CareersPage";
 import ContactUs from "../pages/contactus/ContactUs";
 import CricketNet from "../pages/services/CricketNet";
 import CricketnetBooking from "../BookingService/CricketnetBooking";
@@ -43,6 +44,8 @@ export default function AppRouter() {
           <Route path={routes.CAFETERIA} element={<Cafeteria />} />
           <Route path={routes.ABOUTUS} element={<AboutUs />} />
           <Route path={routes.CONTACTUS} element={<ContactUs />} />
+          <Route path={routes.CAREERS_PAGE} element={<CareersPage />} />
+
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
           <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
           <Route path={routes.TURF_BOOKING} element={<TurfBooking />} />

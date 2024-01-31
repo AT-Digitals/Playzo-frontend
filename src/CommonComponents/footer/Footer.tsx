@@ -140,7 +140,7 @@ export default function Footer() {
                   <StyledLink to={routes.ROOT}>Privacy Policy</StyledLink>
                   <StyledLink to={routes.ROOT}>Terms of Service</StyledLink>
                   <StyledLink to={routes.ROOT}>FAQ</StyledLink>
-                  <StyledLink to={routes.ROOT}>Careers</StyledLink>
+                  <StyledLink to={routes.CAREERS_PAGE}>Careers</StyledLink>
                 </Stack>
               </Stack>
               <Divider
