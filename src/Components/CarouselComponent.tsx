@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 
 import { useState } from "react";
 import Image1 from "../assets/Rectangle 678.png";
@@ -78,24 +78,48 @@ const CardDetails: HotelCard[] = [
 ];
 
 export default function CarouselComponent() {
-    const initialCardsToShow = 3;
-
+    const initialCardsToShowMobile = 2;
+    const initialCardsToShowWeb = 3;
+  
     const [startIndex, setStartIndex] = useState(0);
-
+  
+    const isWeb = useMediaQuery("(min-width:600px)");
+  
+    const initialCardsToShow = isWeb
+      ? initialCardsToShowWeb
+      : initialCardsToShowMobile;
+  
     const showNextCards = () => {
-        setStartIndex((prevIndex) =>
-            Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow)
-        );
+      setStartIndex((prevIndex) =>
+        Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow)
+      );
     };
-
+  
     const showPreviousCards = () => {
-        setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
-    const visibleCards = CardDetails.slice(
-        startIndex,
-        startIndex + initialCardsToShow
-    );
-
+  
+    let visibleCards;
+    if (isWeb) {
+        visibleCards = CardDetails.slice(startIndex, startIndex + initialCardsToShowWeb).map((card, index) => {
+            switch (index) {
+              case 0:
+                return { ...card, name: "Prakash" };
+              case 1:
+                return { ...card, name: "Shwetha" };
+              case 2:
+                return { ...card, name: "Anand" };
+              default:
+                return card;
+            }
+          });
+    } else {
+      // In mobile view, show specific cards
+      visibleCards = [
+        { ...CardDetails[CardDetails.length - 1], name: "Anand" }, // Rectangle 673 card with Anand's name
+        { ...CardDetails[2], name: "Anand" }, // Rectangle 678 card with Anand's name
+      ];
+    }
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} marginY={4} width="100%">
             <Stack
@@ -103,14 +127,15 @@ export default function CarouselComponent() {
                 spacing={3}
                 maxWidth={1200}
                 margin="auto"
-                paddingY={12}
+               pt={{xs: '0px', sm: '0px', md: "0px", lg: "96px"}}
+               pb={{xs: '0px', sm: '0px', md: "0px", lg: "96px"}}
                 alignItems={{xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal"}}
             >
                 {visibleCards.map((card, index) => (
                     <CarouselCardComponent
                         key={index}
                         cardDetails={card}
-                        showDetails={index === 2}
+                        showDetails={index === initialCardsToShow - 1}
                         nextClick={showNextCards}
                         prevClick={showPreviousCards}
                     />
