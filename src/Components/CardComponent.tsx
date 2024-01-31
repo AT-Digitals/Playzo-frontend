@@ -1,10 +1,7 @@
 import {
     Card,
-    CardActionArea,
     CardMedia,
-    CardContent,
     Typography,
-    CardActions,
     Stack,
 } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
@@ -24,15 +21,17 @@ export default function CardComponent({
     description, buttonLabel
 }: cardProps) {
     return (
-        <Card sx={{ maxWidth: 400, boxShadow: "0 4px 14px rgba(0,0,0,.17)" }} >
+        <Card sx={{ maxWidth: 400, height: { xs: "400px", sm: '400px', md: "400px", lg: "525px" }, width: { xs: "319px", sm: '319px', md: "319px", lg: "374px" }, boxShadow: { xs: "none", sm: "none", md: "none", lg: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" } }} >
             <CardMedia
                 component="img"
-                height="300"
+                sx={{
+                    height: { xs: "180px", sm: "180px", md: "180px", lg: "300px" }
+                }}
                 image={image}
                 alt="green iguana"
             />
 
-            <Stack direction="column" spacing={2} margin="0 auto" padding="32px" sx={{ backgroundColor: Colors.WHITE }}>
+            <Stack direction="column" spacing={2} margin="0 auto" padding={{ xs: "25px", sm: '25px', md: "25px", lg: '32px' }} sx={{ backgroundColor: Colors.WHITE }}>
                 <Typography fontSize="20px" variant="h6" fontWeight={600} textAlign="start">
                     {title}
                 </Typography>
