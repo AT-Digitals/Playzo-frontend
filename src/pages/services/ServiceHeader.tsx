@@ -90,7 +90,7 @@ export default function ServiceHeaders() {
             // top: { xs: 172, sm: "118px", md: 130 },
             transform: {
               xs: "translate(0px,-200px)",
-              sm: "translate(10px,-210px)",
+              sm: "translate(0px,-200px)",
               md: "translate(180px,-180px)",
               lg: "translate(10px,-180px)",
             },
