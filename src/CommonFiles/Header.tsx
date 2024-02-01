@@ -82,17 +82,8 @@ export default function Header() {
             </CustomButton>
           </Stack>
         </Stack>
-        {/* <Modal
-          open={open}
-          onClose={handleClose}
-          slotProps={{
-            backdrop: {
-              timeout: 500,
-            },
-          }}
-        > */}
+
         <LoginForm handleClose={handleClose} open={open} />
-        {/* </Modal> */}
       </AppContainer>
     </Box>
   );

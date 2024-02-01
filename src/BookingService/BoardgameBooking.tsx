@@ -12,8 +12,8 @@ import boardgames2 from "../assets/Rectangle 685 (12).png";
 import boardgames3 from "../assets/Rectangle 685 (9).png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
-import { useState } from "react";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -41,7 +41,6 @@ const StyledImage = styled.img`
     height "105px";
   }
 `;
-
 
 const BoardgameImages = [
   {
@@ -133,7 +132,7 @@ export default function BoardgameBooking() {
       </Stack>
       <Box
         display={"flex"}
-        flexDirection={{xs: "column", sm: "column", ms: "column", lg: "row"}}
+        flexDirection={{ xs: "column", sm: "column", ms: "column", lg: "row" }}
         margin={{
           xs: "0px",
           sm: "0px",
@@ -142,22 +141,43 @@ export default function BoardgameBooking() {
         }}
       >
         <Box
-          margin={{xs: "60px 38px", sm: "60px 38px", md: "60px 38px", lg: "60px 50px"}}
+          margin={{
+            xs: "60px 38px",
+            sm: "60px 38px",
+            md: "60px 38px",
+            lg: "60px 50px",
+          }}
           width={"100%"}
-          border={{xs: "1px solid #D9D9D9", sm: "1px solid #D9D9D9", md: "1px solid #D9D9D9", lg: "none"}}
-          maxWidth={{xs: "270px", sm: "270px", md: "270px", lg: "300px"}}
-          borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
-          height={{xs: "100px", sm: "100px", md: "100px", lg: "300px"}}
+          border={{
+            xs: "1px solid #D9D9D9",
+            sm: "1px solid #D9D9D9",
+            md: "1px solid #D9D9D9",
+            lg: "none",
+          }}
+          maxWidth={{ xs: "270px", sm: "270px", md: "270px", lg: "300px" }}
+          borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
+          height={{ xs: "100px", sm: "100px", md: "100px", lg: "300px" }}
         >
-          <Box display={{xs: "flex", sm: "flex", md: "flex", lg: ""}} alignItems={{xs: "center", sm: "cemter", md: "center", lg: ""}} padding={{xs: "10px 10px", sm: "10px 10px", md: "10px 10px", lg:"20px 20px"}} width={{xs: "219px", sm: "219px", md: "219px", lg: "260px"}} height={{xs: "80px", sm: "80px", md: "80px", lg: "260px"}}>
+          <Box
+            display={{ xs: "flex", sm: "flex", md: "flex", lg: "" }}
+            alignItems={{ xs: "center", sm: "cemter", md: "center", lg: "" }}
+            padding={{
+              xs: "10px 10px",
+              sm: "10px 10px",
+              md: "10px 10px",
+              lg: "20px 20px",
+            }}
+            width={{ xs: "219px", sm: "219px", md: "219px", lg: "260px" }}
+            height={{ xs: "80px", sm: "80px", md: "80px", lg: "260px" }}
+          >
             <img src={boardgames} width={"100%"} height={"100%"} alt="turf" />
             <Typography
-              display={{xs: "block", sm: "block", md: "block", lg: "none"}}
+              display={{ xs: "block", sm: "block", md: "block", lg: "none" }}
               textAlign={"center"}
               fontSize={"14px"}
               color={Colors.BLACK}
               fontWeight={"600"}
-              paddingLeft={{xs: "30px", sm: "30px", md: "30px", lg: "0px"}}
+              paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
             >
               Board Games
             </Typography>
@@ -166,7 +186,12 @@ export default function BoardgameBooking() {
         <Stack
           borderLeft={"1px solid #D9D9D9"}
           gap={"8px"}
-          padding={{xs: "0px 37px", sm: "0px 37px", md: "0px 37px", lg: "40px 37px"}}
+          padding={{
+            xs: "0px 37px",
+            sm: "0px 37px",
+            md: "0px 37px",
+            lg: "40px 37px",
+          }}
           flexDirection={"column"}
         >
           <Typography
@@ -188,8 +213,8 @@ export default function BoardgameBooking() {
               }}
               border={"1px solid #D9D9D9"}
               width={"100%"}
-              maxWidth={{xs: "215px", sm: "215px", md: "215px", lg: "200px"}}
-              borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
+              maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
+              borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
               height={"105px"}
               onClick={() => handleBoardSelection(item.name)}
             >
@@ -219,10 +244,10 @@ export default function BoardgameBooking() {
             <Box
               border={"1px solid #D9D9D9"}
               width={"100%"}
-              maxWidth={{xs: "220px", sm: "220px", md: "220px", lg: "290px"}}
-              borderRadius={{xs: "17px", sm: "17px", md: "17px", lg: "10px"}}
-              height={{xs: "105px", sm: "105px", md: "105px", lg: "155px"}}
-              marginTop={{xs: "-40px", sm: "-40px", md: "-40px", lg: "24px"}}
+              maxWidth={{ xs: "220px", sm: "220px", md: "220px", lg: "290px" }}
+              borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
+              height={{ xs: "105px", sm: "105px", md: "105px", lg: "155px" }}
+              marginTop={{ xs: "-40px", sm: "-40px", md: "-40px", lg: "24px" }}
             >
               {/* Render the selected turf */}
               <Box
@@ -268,6 +293,7 @@ export default function BoardgameBooking() {
               handleRemoveItem={handleRemoveItem}
               serviceName={selectedCBoard}
               serviceType={undefined}
+              setTableData={setTableData}
             />
           </>
         )}
