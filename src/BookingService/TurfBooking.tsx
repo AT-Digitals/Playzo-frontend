@@ -1,10 +1,10 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import React, { useEffect } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import React from "react";
 import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
 import styled from "@emotion/styled";
@@ -69,6 +69,8 @@ export default function TurfBooking() {
   const handleTurfSelection = (turfName: string) => {
     setSelectedTurf(turfName);
     setSelectedBreadcrumb("2"); // Move to the next step (Date & Time) after turf selection
+    localStorage.setItem("selectedTurf", turfName);
+    localStorage.setItem("tableData", JSON.stringify(tableData));
   };
 
   const breadcrumbs = [
@@ -104,14 +106,24 @@ export default function TurfBooking() {
     </Typography>,
   ];
 
-  const [tableData, setTableData] = React.useState<TableDataItem[]>([]);
-
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    // Retrieve tableData from local storage or use an empty array
+    const storedTableData = JSON.parse(
+      localStorage.getItem("tableData") || "[]"
+    );
+    return storedTableData;
+  });
   const handleRemoveItem = (indexToRemove: any) => {
     const updatedTableData = tableData.filter(
       (_, index) => index !== indexToRemove
     );
     setTableData(updatedTableData);
+    localStorage.setItem("tableData", JSON.stringify(updatedTableData));
   };
+
+  useEffect(() => {
+    localStorage.setItem("tableData", JSON.stringify(tableData));
+  }, [tableData]);
 
   return (
     <>

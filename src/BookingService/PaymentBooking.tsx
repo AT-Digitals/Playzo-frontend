@@ -9,7 +9,6 @@ import {
   RadioGroup,
   RadioProps,
   Stack,
-  TextField,
   Typography,
   styled,
 } from "@mui/material";
@@ -102,15 +101,12 @@ export default function PaymentBooking() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
-
   const navigate = useNavigate();
 
   const handlegoBack = () => {
     // Go back one step in the navigation history
     navigate(-1);
   };
-
 
   return (
     <>

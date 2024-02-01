@@ -1,4 +1,5 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -13,7 +14,6 @@ import ball from "../assets/ball 4.png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
 import styled from "@emotion/styled";
-import { useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -56,6 +56,11 @@ const BadmintonImages = [
     name: "Court 3",
   },
 ];
+
+interface TableDataItem {
+  date: string;
+  time: string;
+}
 
 export default function BadmintonBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
@@ -100,8 +105,13 @@ export default function BadmintonBooking() {
   ];
 
   const [selectedBad, setSelectedBad] = useState("");
-  const [tableData, setTableData] = useState([]);
-
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    // Retrieve tableData from local storage or use an empty array
+    const storedTableData = JSON.parse(
+      localStorage.getItem("badminton") || "[]"
+    );
+    return storedTableData;
+  });
   const handleBadSelection = (playstationName: any) => {
     setSelectedBad(playstationName);
     setSelectedBreadcrumb("2");
@@ -113,6 +123,10 @@ export default function BadmintonBooking() {
     );
     setTableData(updatedTableData);
   };
+
+  useEffect(() => {
+    localStorage.setItem("badminton", JSON.stringify(tableData));
+  }, [tableData]);
 
   return (
     <>

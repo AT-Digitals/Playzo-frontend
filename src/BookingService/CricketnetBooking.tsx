@@ -1,4 +1,5 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -9,7 +10,6 @@ import ball from "../assets/ball 4.png";
 import cricketnet from "../assets/Image (1).png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
-import { useState } from "react";
 
 // const CricketnetImages = [
 //   {
@@ -26,21 +26,21 @@ import { useState } from "react";
 //   },
 // ];
 
+interface TableDataItem {
+  date: string;
+  time: string;
+}
 export default function CricketnetBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
 
-  // Function to handle breadcrumb selection
   const handleBreadcrumbClick = (breadcrumbKey: any) => {
     setSelectedBreadcrumb(breadcrumbKey);
   };
 
-  // const [selectedCricket, setSelectedCricket] = useState("");
-  const [tableData, setTableData] = useState([]);
-
-  // const handleCricketSelection = (playstationName: any) => {
-  //   setSelectedCricket(playstationName);
-  //   setSelectedBreadcrumb("2");
-  // };
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    const storedTableData = JSON.parse(localStorage.getItem("cricket") || "[]");
+    return storedTableData;
+  });
 
   const handleRemoveItem = (indexToRemove: any) => {
     const updatedTableData = tableData.filter(
@@ -83,6 +83,10 @@ export default function CricketnetBooking() {
       </Typography>
     </Link>,
   ];
+
+  useEffect(() => {
+    localStorage.setItem("cricket", JSON.stringify(tableData));
+  }, [tableData]);
   return (
     <>
       <Stack

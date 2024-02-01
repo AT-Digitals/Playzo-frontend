@@ -1,4 +1,5 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -13,7 +14,6 @@ import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
 import routes from "../routes/routes";
 import styled from "@emotion/styled";
-import { useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -57,11 +57,20 @@ const PlaystationImages = [
   },
 ];
 
+interface TableDataItem {
+  date: string;
+  time: string;
+}
 export default function PlaystationBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
   const [selectedPlaystation, setSelectedPlaystation] = useState("");
-  const [tableData, setTableData] = useState([]);
-
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    // Retrieve tableData from local storage or use an empty array
+    const storedTableData = JSON.parse(
+      localStorage.getItem("playstaion") || "[]"
+    );
+    return storedTableData;
+  });
   const handleBreadcrumbClick = (breadcrumbKey: any) => {
     setSelectedBreadcrumb(breadcrumbKey);
   };
@@ -111,6 +120,10 @@ export default function PlaystationBooking() {
       </Typography>
     </Link>,
   ];
+
+  useEffect(() => {
+    localStorage.setItem("playstaion", JSON.stringify(tableData));
+  }, [tableData]);
 
   return (
     <>

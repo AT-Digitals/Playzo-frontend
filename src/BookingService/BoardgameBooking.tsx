@@ -1,4 +1,5 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -13,7 +14,6 @@ import boardgames3 from "../assets/Rectangle 685 (9).png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
 import styled from "@emotion/styled";
-import { useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -56,6 +56,11 @@ const BoardgameImages = [
     name: "Scrabble",
   },
 ];
+
+interface TableDataItem {
+  date: string;
+  time: string;
+}
 
 export default function BoardgameBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
@@ -100,8 +105,11 @@ export default function BoardgameBooking() {
   ];
 
   const [selectedCBoard, setSelectedBoard] = useState("");
-  const [tableData, setTableData] = useState([]);
-
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    // Retrieve tableData from local storage or use an empty array
+    const storedTableData = JSON.parse(localStorage.getItem("board") || "[]");
+    return storedTableData;
+  });
   const handleBoardSelection = (playstationName: any) => {
     setSelectedBoard(playstationName);
     setSelectedBreadcrumb("2");
@@ -113,6 +121,10 @@ export default function BoardgameBooking() {
     );
     setTableData(updatedTableData);
   };
+
+  useEffect(() => {
+    localStorage.setItem("board", JSON.stringify(tableData));
+  }, [tableData]);
 
   return (
     <>

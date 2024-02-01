@@ -1,4 +1,5 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -7,7 +8,6 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ball from "../assets/ball 4.png";
 import bowling from "../assets/Image (2).png";
 import grass from "../assets/Rectangle 679.png";
-import { useState } from "react";
 
 // const BowlingmachineImages = [
 //   {
@@ -23,6 +23,11 @@ import { useState } from "react";
 //     name: "Ball 3",
 //   },
 // ];
+
+interface TableDataItem {
+  date: string;
+  time: string;
+}
 
 export default function BowlingmachineBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
@@ -65,7 +70,11 @@ export default function BowlingmachineBooking() {
   ];
 
   // const [seletedBowling, setSelectedBowling] = useState("");
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    // Retrieve tableData from local storage or use an empty array
+    const storedTableData = JSON.parse(localStorage.getItem("bowling") || "[]");
+    return storedTableData;
+  });
 
   // const handleBowlingselection = (playstationName: any) => {
   //   setSelectedBowling(playstationName);
@@ -78,6 +87,11 @@ export default function BowlingmachineBooking() {
     );
     setTableData(updatedTableData);
   };
+
+  useEffect(() => {
+    localStorage.setItem("bowling", JSON.stringify(tableData));
+  }, [tableData]);
+
   return (
     <>
       <Stack
