@@ -251,12 +251,12 @@ export default function AboutUs() {
             alignItems="center"
             spacing={8}
             flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
-            mb={{ xs: "60px", sm: "60px", md: "60px", lg: "0px" }}
+            mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
           >
             <Grid item xs={0} pl={{ xs: '58px', sm: "58px", md: "58px", lg: "70px" }} justifyContent="center" alignItems="center">
-              <Typography pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "0px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
-                style={{
-                  height: "284px",
+              <Typography pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "30px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
+                sx={{
+                  height: {xs: "245px", sm: "245px", md: "245px", lg: "320px"},
                   fontStyle: "normal",
                   fontWeight: "700",
                 }}
@@ -362,7 +362,7 @@ export default function AboutUs() {
           </Grid>
         </Grid>
       </Box>
-      <Box pt={{ xs: "50px", sm: "50px", md: "50px", lg: "80px" }} pb={{ xs: "0px", sm: "0px", md: "0px", lg: "80px" }} maxWidth={1200} margin="auto">
+      <Box pt={{ xs: "50px", sm: "50px", md: "50px", lg: "80px" }} pb={{ xs: "10px", sm: "10px", md: "10px", lg: "25px" }} maxWidth={1200} margin="auto">
         <Stack direction="column" spacing={4}>
           <Typography sx={{
             position: { xs: "absolute", sm: "absolute", md: "absolute", lg: "" },

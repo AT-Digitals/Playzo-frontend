@@ -221,7 +221,7 @@ const StyledImage5 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
-    top: -270px;
+    top: -172px;
     width: 1240px;
     transform: translate(${0}, ${10.5}%);
   }
@@ -229,7 +229,7 @@ const StyledImage5 = styled.img`
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     position: absolute;
-    top: -270px;
+    top: -172px;
     width: 1240px;
     transform: translate(${0}, ${10.5}%);
   }
@@ -237,7 +237,7 @@ const StyledImage5 = styled.img`
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     position: absolute;
-    top: -270px;
+    top: -172px;
     width: 1240px;
     transform: translate(${0}, ${10.5}%);
   }
@@ -246,8 +246,8 @@ const StyledImage5 = styled.img`
     /* Large devices (large desktops) */
     position: absolute;
     top: 0;
-    width: 1240px;
-    transform: translate(${0}, ${10.5}%);
+    width: 1688px;
+    transform: translate(${0}, ${-10.1}%);
   }
 `;
 const StyledImage6 = styled.img`
@@ -346,7 +346,7 @@ export default function HomePage() {
     <Box width="100%">
       <Box>
         <CardMedia sx={{
-          height: { xs: '700px', sm: "700px", md: '700px', lg: '' }
+          height: { xs: '800px', sm: "800px", md: '800px', lg: '' }
         }}
           component="img"
           //height="194"
@@ -360,7 +360,7 @@ export default function HomePage() {
       />
 
       <StyledTypo variant="h3" sx={{
-        transform: { xs: "translate(13%, 393%)", sm: "translate(13%, 393%)", md: "translate(13%, 393%)", lg: "translate(107%, 232%)" },
+        transform: { xs: "translate(13%, 438%)", sm: "translate(13%, 438%)", md: "translate(13%, 438%)", lg: "translate(107%, 232%)" },
       }} fontWeight={600} fontFamily="Inter" fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "5rem" }}>
         Play Beyond <br /> Boundaries
       </StyledTypo>
@@ -372,7 +372,7 @@ export default function HomePage() {
         backgroundColor: Colors.BUTTON_COLOR,
         fontFamily: "Inter", fontWeight: 600,
         color: "white",
-        transform: { xs: "translate(74%, 1161%)", sm: "translate(74%, 1161%)", md: "translate(74%, 1161%)", lg: "translate(450%, -1200%)" }
+        transform: { xs: "translate(74%, 1271%)", sm: "translate(74%, 1271%)", md: "translate(74%, 1271%)", lg: "translate(450%, -1200%)" }
       }}
         bgColor={Colors.BUTTON_COLOR}
         variant="contained"
@@ -488,7 +488,7 @@ export default function HomePage() {
           />
         </Grid>
       </Grid>
-      <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>
+      <Box width="100%" maxWidth={1200} margin="0 auto" pb={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}} pt={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}}>
         <Stack marginRight={{ xs: "25px", sm: '25px', md: "25px", lg: '0px' }} direction="row" justifyContent="end" alignItems="center">
           <StyledImage3
             src={ball}

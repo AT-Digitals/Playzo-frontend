@@ -223,8 +223,8 @@ export default function CarouselCardComponent({
                                 alignItems: "center"
 
                             }}>
-                                <ArrowBackIosIcon style={{
-                                    color: Colors.WHITE, fontSize: "20px",
+                                <ArrowBackIosIcon sx={{
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "20px"},
                                     textAlign: "center"
                                 }} />
                             </Button>
@@ -237,8 +237,8 @@ export default function CarouselCardComponent({
                                 alignItems: "center"
 
                             }}>
-                                <ArrowForwardIosIcon style={{
-                                    color: Colors.WHITE, fontSize: "20px",
+                                <ArrowForwardIosIcon sx={{
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "20px"},
                                     textAlign: "center"
                                 }} />
                             </Button>

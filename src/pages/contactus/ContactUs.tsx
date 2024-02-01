@@ -123,7 +123,7 @@ export default function ContactUs() {
                     </Grid>
                     <Grid item xs={6}>
                         <form onSubmit={onSubmit}>
-                            <Stack marginLeft={{xs: "-6px", sm: "-6px", md: "-6px", lg: "0px"}} marginTop={{xs: "180px", sm: "180px", md: "180px", lg: "0px"}} border={{xs: "1px solid grey", sm: "1px solid grey", md: "1px solid grey", lg: "none"}} width={{xs: "158%", sm: "158%", md: "158%", lg: "100%"}} borderRadius={{xs: "10px", sm: "10px", md: "10px", lg: "0px"}} padding={{xs: "21px 16px", sm: "21px 16px", md: "21px 16px", lg: "0px"}}
+                            <Stack marginLeft={{xs: "-6px", sm: "-6px", md: "-6px", lg: "0px"}} marginTop={{xs: "180px", sm: "180px", md: "180px", lg: "0px"}} border={{xs: "1px solid grey", sm: "1px solid grey", md: "1px solid grey", lg: "none"}} width={{xs: "155%", sm: "155%", md: "155%", lg: "100%"}} borderRadius={{xs: "10px", sm: "10px", md: "10px", lg: "0px"}} padding={{xs: "21px 16px", sm: "21px 16px", md: "21px 16px", lg: "0px"}}
                                 direction="column"
                                 spacing={3}
                             >
