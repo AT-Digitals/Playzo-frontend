@@ -1,10 +1,10 @@
-import './App.css';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import "./App.css";
+import "swiper/css";
+import "swiper/css/navigation";
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import AppRouter from './routes/AppRouter';
+import AppRouter from "./routes/AppRouter";
 
 const theme = createTheme({
   typography: {

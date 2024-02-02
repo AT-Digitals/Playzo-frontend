@@ -37,6 +37,7 @@ interface TableProps {
   handleRemoveItem: any;
   serviceName: any;
   serviceType: any;
+  setTableData?: any;
 }
 
 export default function CustomTable({
@@ -44,6 +45,7 @@ export default function CustomTable({
   handleRemoveItem,
   serviceName,
   serviceType,
+  setTableData,
 }: TableProps) {
   return (
     <Box
@@ -57,7 +59,7 @@ export default function CustomTable({
         borderRadius="12px"
         display="flex"
         alignItems="center"
-        width={{xs: "90%", sm: "90%", md: "90%", lg: "70%"}}
+        width={{ xs: "90%", sm: "90%", md: "90%", lg: "70%" }}
         margin={"0 auto"}
         justifyContent="center"
       >
@@ -87,8 +89,8 @@ export default function CustomTable({
                   </StyledCell>
 
                   <StyledCell>{String(data.time)}</StyledCell>
-                  <StyledCell>2 hours</StyledCell>
-                  <StyledCell>1500</StyledCell>
+                  <StyledCell>{data.duratoin}hours</StyledCell>
+                  <StyledCell>{data.amount}</StyledCell>
                   <StyledCell>
                     <IconButton onClick={() => handleRemoveItem(index)}>
                       <CloseIcon
@@ -112,7 +114,7 @@ export default function CustomTable({
           </Table>
         </TableContainer>
       </Box>
-      <Link to={routes.PAYMENT_BOOKING}>
+      <Link to={routes.PAYMENT_BOOKING} onClick={() => setTableData(tableData)}>
         <Button
           sx={{
             background: "var(--primary-3, #15B5FC)",
@@ -120,7 +122,12 @@ export default function CustomTable({
             textTransform: "none",
             maxWidth: 247,
             width: "100%",
-            padding: {xs: "6px 40px", sm: "6px 40px", md: "6px 40px", lg: "6px 8px"}
+            padding: {
+              xs: "6px 40px",
+              sm: "6px 40px",
+              md: "6px 40px",
+              lg: "6px 8px",
+            },
           }}
         >
           Proceed to payment{" "}
