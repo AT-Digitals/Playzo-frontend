@@ -59,18 +59,13 @@ interface TableDataItem {
 }
 export default function TurfBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
-  const [selectedTurf, setSelectedTurf] = useState(""); // Added state to track selected turf
 
-  // Function to handle breadcrumb selection
-  // const handleBreadcrumbClick = (breadcrumbKey: any) => {
-  //   setSelectedBreadcrumb(breadcrumbKey);
-  // };
+  const [selectedTurf, setSelectedTurf] = useState<string | null>(
+    localStorage.getItem("selectedTurf") || null
+  );
 
-  const handleTurfSelection = (turfName: string) => {
-    setSelectedTurf(turfName);
-    setSelectedBreadcrumb("2"); // Move to the next step (Date & Time) after turf selection
-    localStorage.setItem("selectedTurf", turfName);
-    localStorage.setItem("tableData", JSON.stringify(tableData));
+  const handleBreadcrumbClick = (breadcrumbKey: any) => {
+    setSelectedBreadcrumb(breadcrumbKey);
   };
 
   const breadcrumbs = [
@@ -80,7 +75,7 @@ export default function TurfBooking() {
       style={{ cursor: "pointer" }}
       key="1"
       color={selectedBreadcrumb === "1" ? Colors.BUTTON : Colors.BLACK}
-      // onClick={() => handleBreadcrumbClick("1")}
+      onClick={() => handleBreadcrumbClick("1")}
     >
       Service
     </Typography>,
@@ -107,12 +102,12 @@ export default function TurfBooking() {
   ];
 
   const [tableData, setTableData] = useState<TableDataItem[]>(() => {
-    // Retrieve tableData from local storage or use an empty array
     const storedTableData = JSON.parse(
       localStorage.getItem("tableData") || "[]"
     );
     return storedTableData;
   });
+
   const handleRemoveItem = (indexToRemove: any) => {
     const updatedTableData = tableData.filter(
       (_, index) => index !== indexToRemove
@@ -121,10 +116,38 @@ export default function TurfBooking() {
     localStorage.setItem("tableData", JSON.stringify(updatedTableData));
   };
 
+  const handleTurfSelection = (turfName: any) => {
+    setSelectedTurf(turfName);
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { turf: turfName, date: "", time: "" },
+    ]);
+  };
+
+  const handleAddMoreItems = () => {
+    setTableData((prevTableData) => {
+      const lastIndex = prevTableData.length - 1;
+      if (lastIndex >= 0) {
+        const updatedTableData = [...prevTableData];
+        updatedTableData[lastIndex] = {
+          ...updatedTableData[lastIndex],
+          date: "", // Reset date
+          time: "", // Reset time
+        };
+        return updatedTableData;
+      }
+      return prevTableData;
+    });
+
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { turf: selectedTurf, date: "", time: "" },
+    ]);
+  };
+
   useEffect(() => {
     localStorage.setItem("tableData", JSON.stringify(tableData));
   }, [tableData]);
-
   return (
     <>
       <Stack
@@ -290,11 +313,13 @@ export default function TurfBooking() {
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
+                selctedname={selectedTurf}
               />{" "}
             </>
           )}
         </Stack>
       </Box>
+
       <Box pt={2}>
         {selectedTurf && (
           <>
@@ -304,6 +329,7 @@ export default function TurfBooking() {
               serviceName={selectedTurf}
               serviceType={undefined}
               setTableData={setTableData}
+              handleAddmore={handleAddMoreItems}
             />
           </>
         )}

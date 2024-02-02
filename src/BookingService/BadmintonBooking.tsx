@@ -112,9 +112,12 @@ export default function BadmintonBooking() {
     );
     return storedTableData;
   });
-  const handleBadSelection = (playstationName: any) => {
-    setSelectedBad(playstationName);
-    setSelectedBreadcrumb("2");
+  const handleBadSelection = (badminton: any) => {
+    setSelectedBad(badminton);
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { turf: badminton, date: "", time: "" },
+    ]);
   };
 
   const handleRemoveItem = (indexToRemove: any) => {
@@ -122,6 +125,27 @@ export default function BadmintonBooking() {
       (_, index) => index !== indexToRemove
     );
     setTableData(updatedTableData);
+  };
+
+  const handleAddMoreItems = () => {
+    setTableData((prevTableData) => {
+      const lastIndex = prevTableData.length - 1;
+      if (lastIndex >= 0) {
+        const updatedTableData = [...prevTableData];
+        updatedTableData[lastIndex] = {
+          ...updatedTableData[lastIndex],
+          date: "", // Reset date
+          time: "", // Reset time
+        };
+        return updatedTableData;
+      }
+      return prevTableData;
+    });
+
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { bad: selectedBad, date: "", time: "" },
+    ]);
   };
 
   useEffect(() => {
@@ -294,6 +318,7 @@ export default function BadmintonBooking() {
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
+                selctedname={selectedBad}
               />{" "}
             </>
           )}
@@ -308,6 +333,7 @@ export default function BadmintonBooking() {
               serviceName={selectedBad}
               serviceType={undefined}
               setTableData={setTableData}
+              handleAddmore={handleAddMoreItems}
             />
           </>
         )}

@@ -15,6 +15,7 @@ import CricketNet from "../pages/services/CricketNet";
 import CricketnetBooking from "../BookingService/CricketnetBooking";
 import CrossFit from "../pages/services/CrossFit";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
+import FaqPage from "../pages/FAQ/FaqPage";
 import HomePage from "../Components/HomePage";
 import ImageSliderGallery from "../CommonComponents/carousel/SliderGallery";
 import PartyCenter from "../pages/services/PartyCenter";
@@ -27,7 +28,6 @@ import Turf from "../pages/services/Turf";
 import TurfBooking from "../BookingService/TurfBooking";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
-import FaqPage from "../pages/FAQ/FaqPage";
 
 export default function AppRouter() {
   return (

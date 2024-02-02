@@ -34,11 +34,13 @@ const Timings = [
 interface CustomDateCalendarProps {
   tableData?: any;
   setTableData?: any;
+  selctedname?: any;
 }
 
 export default function CustomDateCalendar({
   tableData,
   setTableData,
+  selctedname,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
 
@@ -105,7 +107,7 @@ export default function CustomDateCalendar({
   };
 
   const handleAddButtonClick = () => {
-    if (selectedDate !== null && selectedTimings !== null) {
+    if (selectedDate !== "" && selectedTimings.length > 0) {
       const totalDuration = selectedTimings.length;
       const ratePerHour = 1500;
       const totalAmount = totalDuration * ratePerHour;
@@ -117,13 +119,13 @@ export default function CustomDateCalendar({
           time: selectedTimings,
           duratoin: totalDuration,
           amount: totalAmount,
+          name: selctedname,
         },
       ]);
       setSelectedDate("");
       setSelectedTimings([]);
     }
   };
-
   return (
     <Stack
       padding={{
