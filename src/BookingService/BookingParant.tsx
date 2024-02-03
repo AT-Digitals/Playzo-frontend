@@ -15,6 +15,7 @@ import boardgames1 from "../assets/Rectangle 685 (11).png";
 import boardgames2 from "../assets/Rectangle 685 (12).png";
 import boardgames3 from "../assets/Rectangle 685 (9).png";
 import bowling from "../assets/Image (2).png";
+import cricketnet from "../assets/Image (1).png";
 import grass from "../assets/Rectangle 679.png";
 import playstation from "../assets/playstation.png";
 import playstation1 from "../assets/Rectangle 685.png";
@@ -92,7 +93,8 @@ type BookingType =
   | "playstation"
   | "Badminton"
   | "Boardgames"
-  | "BowlingMachine";
+  | "BowlingMachine"
+  | "cricketnet";
 
 interface TableDataItem {
   type: BookingType;
@@ -119,8 +121,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       ? BadmintonImages
       : type === "Boardgames"
       ? BoardgameImages
-      : type === "BowlingMachine" // Add this line for BowlingMachine
+      : type === "BowlingMachine"
       ? [{ image: bowling, name: "Bowling Machine" }]
+      : type === "cricketnet"
+      ? [{ image: cricketnet, name: "Cricket Net" }]
       : [];
 
   const handleServiceSelection = (serviceName: string) => {
@@ -163,8 +167,38 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       item.type === "playstation" ||
       item.type === "Badminton" ||
       item.type === "Boardgames" ||
-      item.type === "BowlingMachine"
+      item.type === "BowlingMachine" ||
+      item.type === "cricketnet"
   );
+
+  const breadcrumbs = [
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="1"
+      color={Colors.BLACK}
+    >
+      Service
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="2"
+      color={Colors.BUTTON}
+    >
+      Date & Time
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="3"
+    >
+      Payment
+    </Typography>,
+  ];
 
   return (
     <>
@@ -178,7 +212,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
-        />
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
       </Stack>
       <Box
         display={"flex"}
@@ -226,10 +262,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   ? turf
                   : type === "playstation"
                   ? playstation
-                  : type === "Badminton" // Corrected type name
+                  : type === "Badminton"
                   ? badminton
-                  : type === "Boardgames" // Add this line for boardgames
+                  : type === "Boardgames"
                   ? boardgames
+                  : type === "BowlingMachine"
+                  ? bowling
+                  : type === "cricketnet"
+                  ? cricketnet
                   : undefined // Handle other cases or set to undefined
               }
               width={"100%"}
@@ -252,12 +292,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 ? "Badminton"
                 : type === "Boardgames"
                 ? "Board Games"
-                : "Unknown Type"}{" "}
-              {/* Handle other cases */}
+                : type === "BowlingMachine"
+                ? "Bowling Machine"
+                : "Unknown Type"}
             </Typography>
           </Box>
         </Box>
         <Stack
+          display={
+            type === "BowlingMachine" || type === "cricketnet" ? "none" : "flex"
+          }
           borderLeft={"1px solid #D9D9D9"}
           gap={"8px"}
           padding={{
@@ -377,21 +421,30 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           )}
         </Stack>
         <Stack borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
-          {selectedService && (
-            <>
+          {(type === "BowlingMachine" ||
+            type === "cricketnet" ||
+            selectedService) && (
+            <Box
+              borderLeft={
+                type === "BowlingMachine" || type === "cricketnet"
+                  ? "1px solid #D9D9D9"
+                  : "none"
+              }
+            >
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
-                selctedname={selectedService}
                 selectedService={selectedService}
                 type={type}
-              />{" "}
-            </>
+              />
+            </Box>
           )}
         </Stack>
       </Box>
       <Box pt={2}>
-        {selectedService && (
+        {(type === "BowlingMachine" ||
+          type === "cricketnet" ||
+          selectedService) && (
           <>
             <CustomTable
               tableData={allBookings}

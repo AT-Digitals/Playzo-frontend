@@ -12,7 +12,7 @@ import Cafeteria from "../pages/services/Cafeteria";
 import CareersPage from "../pages/Careers/CareersPage";
 import ContactUs from "../pages/contactus/ContactUs";
 import CricketNet from "../pages/services/CricketNet";
-import CricketnetBooking from "../BookingService/CricketnetBooking";
+import CricketNetBookingCommon from "../BookingService/CricketNetCommon";
 import CrossFit from "../pages/services/CrossFit";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import FaqPage from "../pages/FAQ/FaqPage";
@@ -64,7 +64,7 @@ export default function AppRouter() {
           />
           <Route
             path={routes.CRICKETNET_BOOKING}
-            element={<CricketnetBooking />}
+            element={<CricketNetBookingCommon />}
           />
           <Route
             path={routes.BOWLINGMACHINE_BOOKING}
