@@ -17,6 +17,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import routes from "../../routes/routes";
 import styled from "styled-components";
+import { useTableData } from "./TableDataReducer";
 
 const StyledCell = styled(TableCell)({
   " &.MuiTableCell-root": {
@@ -42,13 +43,15 @@ interface TableProps {
 }
 
 export default function CustomTable({
-  tableData,
-  handleRemoveItem,
+  // tableData,
+  // handleRemoveItem,
   serviceName,
-  serviceType,
+  // serviceType,
   setTableData,
   handleAddmore,
 }: TableProps) {
+  const { tableData, removeItem } = useTableData();
+
   return (
     <Box
       display={"flex"}
@@ -101,7 +104,7 @@ export default function CustomTable({
                   <StyledCell>{data.duratoin}hours</StyledCell>
                   <StyledCell>{data.amount}</StyledCell>
                   <StyledCell>
-                    <IconButton onClick={() => handleRemoveItem(index)}>
+                    <IconButton onClick={() => removeItem(index)}>
                       <CloseIcon
                         style={{
                           color: "black",

@@ -58,34 +58,38 @@ const PlaystationImages = [
 ];
 
 interface TableDataItem {
+  playstation: string;
   date: string;
   time: string;
 }
+
 export default function PlaystationBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
-  const [selectedPlaystation, setSelectedPlaystation] = useState("");
-  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
-    // Retrieve tableData from local storage or use an empty array
-    const storedTableData = JSON.parse(
-      localStorage.getItem("playstaion") || "[]"
-    );
-    return storedTableData;
-  });
-  const handleBreadcrumbClick = (breadcrumbKey: any) => {
-    setSelectedBreadcrumb(breadcrumbKey);
-  };
 
-  const handlePlaystationSelection = (playstationName: any) => {
-    setSelectedPlaystation(playstationName);
-    setSelectedBreadcrumb("2");
-  };
+  // const [selectedPlaystation, setSelectedPlaystation] = useState("");
+  // const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+  //   // Retrieve tableData from local storage or use an empty array
+  //   const storedTableData = JSON.parse(
+  //     localStorage.getItem("playstaion") || "[]"
+  //   );
+  //   return storedTableData;
+  // });
+  // const handleBreadcrumbClick = (breadcrumbKey: any) => {
+  //   setSelectedBreadcrumb(breadcrumbKey);
+  // };
 
-  const handleRemoveItem = (indexToRemove: any) => {
-    const updatedTableData = tableData.filter(
-      (_, index) => index !== indexToRemove
-    );
-    setTableData(updatedTableData);
-  };
+  // const handlePlaystationSelection = (playstationName: any) => {
+  //   setSelectedPlaystation(playstationName);
+  //   setSelectedBreadcrumb("2");
+  // };
+
+  // const handleRemoveItem = (indexToRemove: any) => {
+  //   const updatedTableData = tableData.filter(
+  //     (_, index) => index !== indexToRemove
+  //   );
+  //   setTableData(updatedTableData);
+  // };
+
   const breadcrumbs = [
     <Typography
       fontSize={"16px"}
@@ -120,6 +124,64 @@ export default function PlaystationBooking() {
       </Typography>
     </Link>,
   ];
+
+  // useEffect(() => {
+  //   localStorage.setItem("playstaion", JSON.stringify(tableData));
+  // }, [tableData]);
+
+  const [selectedPlaystation, setSelectedPlaystation] = useState("");
+  const [tableData, setTableData] = useState<TableDataItem[]>(() => {
+    const storedTableData = JSON.parse(
+      localStorage.getItem("playstaion") || "[]"
+    );
+    return storedTableData;
+  });
+
+  // Step state
+  // const [currentStep, setCurrentStep] = useState("playstation");
+
+  const handleBreadcrumbClick = (breadcrumbKey: any) => {
+    setSelectedBreadcrumb(breadcrumbKey);
+  };
+
+  const handlePlaystationSelection = (playstationName: any) => {
+    setSelectedPlaystation(playstationName);
+
+    // Add selected PlayStation to tableData
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { playstation: playstationName, date: "", time: "" },
+    ]);
+  };
+
+  const handleRemoveItem = (indexToRemove: any) => {
+    const updatedTableData = tableData.filter(
+      (_, index) => index !== indexToRemove
+    );
+    setTableData(updatedTableData);
+  };
+
+  const handleAddMoreItems = () => {
+    // Reset selected PlayStation and update date and time in the last added object
+    setTableData((prevTableData) => {
+      const lastIndex = prevTableData.length - 1;
+      if (lastIndex >= 0) {
+        const updatedTableData = [...prevTableData];
+        updatedTableData[lastIndex] = {
+          ...updatedTableData[lastIndex],
+          date: "", // Reset date
+          time: "", // Reset time
+        };
+        return updatedTableData;
+      }
+      return prevTableData;
+    });
+
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { playstation: selectedPlaystation, date: "", time: "" },
+    ]);
+  };
 
   useEffect(() => {
     localStorage.setItem("playstaion", JSON.stringify(tableData));
@@ -292,6 +354,7 @@ export default function PlaystationBooking() {
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
+                selctedname={selectedPlaystation}
               />{" "}
             </>
           )}
@@ -306,6 +369,7 @@ export default function PlaystationBooking() {
               serviceName={selectedPlaystation}
               serviceType={undefined}
               setTableData={setTableData}
+              handleAddmore={handleAddMoreItems}
             />
           </>
         )}

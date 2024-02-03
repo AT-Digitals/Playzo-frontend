@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import AppRouter from "./routes/AppRouter";
+import { TableDataProvider } from "./CommonComponents/CustomDateCalender/TableDataReducer";
 
 const theme = createTheme({
   typography: {
@@ -15,7 +16,9 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <AppRouter />
+      <TableDataProvider>
+        <AppRouter />
+      </TableDataProvider>
     </ThemeProvider>
   );
 }

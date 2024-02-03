@@ -110,9 +110,12 @@ export default function BoardgameBooking() {
     const storedTableData = JSON.parse(localStorage.getItem("board") || "[]");
     return storedTableData;
   });
-  const handleBoardSelection = (playstationName: any) => {
-    setSelectedBoard(playstationName);
-    setSelectedBreadcrumb("2");
+  const handleBoardSelection = (Board: any) => {
+    setSelectedBoard(Board);
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { Board: Board, date: "", time: "" },
+    ]);
   };
 
   const handleRemoveItem = (indexToRemove: any) => {
@@ -120,6 +123,27 @@ export default function BoardgameBooking() {
       (_, index) => index !== indexToRemove
     );
     setTableData(updatedTableData);
+  };
+
+  const handleAddMoreItems = () => {
+    setTableData((prevTableData) => {
+      const lastIndex = prevTableData.length - 1;
+      if (lastIndex >= 0) {
+        const updatedTableData = [...prevTableData];
+        updatedTableData[lastIndex] = {
+          ...updatedTableData[lastIndex],
+          date: "", // Reset date
+          time: "", // Reset time
+        };
+        return updatedTableData;
+      }
+      return prevTableData;
+    });
+
+    setTableData((prevTableData) => [
+      ...prevTableData,
+      { board: selectedCBoard, date: "", time: "" },
+    ]);
   };
 
   useEffect(() => {
@@ -292,6 +316,7 @@ export default function BoardgameBooking() {
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
+                selctedname={selectedCBoard}
               />{" "}
             </>
           )}
@@ -306,6 +331,7 @@ export default function BoardgameBooking() {
               serviceName={selectedCBoard}
               serviceType={undefined}
               setTableData={setTableData}
+              handleAddmore={handleAddMoreItems}
             />
           </>
         )}
