@@ -1,0 +1,305 @@
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+a {
+  color: inherit;
+}
+
+body {
+  font: normal 16px/1.5 "Helvetica Neue", sans-serif;
+  background: #456990;
+  color: #fff;
+}
+
+/* .section SECTION
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.section {
+  background: #f45b69;
+  padding: 50px 0;
+}
+
+.section .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section h1 {
+  font-size: 2.5rem;
+}
+
+.section h2 {
+  font-size: 1.3rem;
+}
+
+/* TIMELINE
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline {
+  white-space: nowrap;
+  width: 1395px;
+  height: 40px;
+}
+
+.timeline ol {
+  font-size: 0;
+  width: 100vw;
+  transition: all 1s;
+}
+
+.timeline ol li {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  width: 229px;
+  height: 0px;
+  background: #15b5fc;
+  margin-left: 20px;
+}
+
+.timeline ol li:last-child {
+  width: 280px;
+}
+
+.timeline ol li:not(:first-child) {
+  margin-left: 14px;
+}
+
+.timeline ol li.item1 ::after {
+  content: "";
+  position: absolute;
+  top: 215px;
+  left: calc(100% + -238px);
+  bottom: 0;
+  width: 15px;
+  height: 15px;
+  transform: translateY(-50%);
+  background: #15b5fc;
+}
+.timeline ol li.item2 ::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: calc(100% + -238px);
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    transform: translateY(-50%);
+    background: #15b5fc;
+  }
+  .timeline ol li.item3 ::after {
+    content: "";
+    position: absolute;
+    top: 176px;
+    left: calc(100% + -6px);
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    transform: translateY(-50%);
+    background: #15b5fc;
+  }
+  .timeline ol li.item4 ::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: calc(100% + -7px);
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    transform: translateY(-50%);
+    background: #15b5fc;
+  }
+  .timeline ol li.item5 ::after {
+    content: "";
+    position: absolute;
+    top: 245px;
+    left: calc(100% + -7px);
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    transform: translateY(-50%);
+    background: #15b5fc;
+  }
+
+.timeline ol li div {
+  position: absolute;
+  left: calc(100% + 7px);
+  width: 280px;
+  padding: 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: white;
+}
+
+
+
+.timeline ol li:nth-child(odd) .case1 {
+  top: 14px;
+  transform: translateY(-100%);
+  margin-left: -289px;
+  text-align: center;
+  border-left: 1px solid #15b5fc;
+  max-width: 200px;
+  height: 179px;
+}
+.timeline ol li:nth-child(odd) .case3 {
+    top: 14px;
+    transform: translateY(-100%);
+    margin-left: -738px;
+    text-align: center;
+    border-right: 1px solid #15b5fc;
+    max-width: 200px;
+    height: 140px;
+  }
+  .timeline ol li:nth-child(odd) .case5 {
+    top: 14px;
+    transform: translateY(-100%);
+    margin-left: -1000px;
+    border-right: 1px solid #15b5fc;
+    max-width: 200px;
+    height: 210px;
+  }
+.timeline ol li:nth-child(odd) div::before {
+  top: 100%;
+  border-width: 8px 8px 0 0;
+  border-color: white transparent transparent transparent;
+}
+
+.timeline ol li:nth-child(even) .case2 {
+  top: calc(100% + 25px);
+  margin-left: -425px;
+  text-align: center;
+  border-left: 1px solid #15b5fc;
+  max-width: 200px;
+  height: 180px;
+}
+.timeline ol li:nth-child(even) .case4 {
+    top: calc(100% + 25px);
+    margin-left: -856px;
+    text-align: center;
+    border-right: 1px solid #15b5fc;
+    max-width: 200px;
+    height: 120px;
+  }
+
+.timeline ol li:nth-child(even) div::before {
+  top: -8px;
+  border-width: 8px 0 0 8px;
+  border-color: transparent transparent transparent white;
+}
+
+.timeline time {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* TIMELINE ARROWS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline .arrows {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.timeline .arrows .arrow__prev {
+  margin-right: 20px;
+}
+
+.timeline .disabled {
+  opacity: 0.5;
+}
+
+.timeline .arrows img {
+  width: 45px;
+  height: 45px;
+}
+
+/* GENERAL MEDIA QUERIES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media screen and (max-width: 599px) {
+  .timeline ol,
+  .timeline ol li {
+    width: auto;
+  }
+
+  .timeline ol {
+    padding: 0;
+    transform: none !important;
+  }
+
+  .timeline ol li {
+    display: block;
+    height: auto;
+    background: transparent;
+  }
+
+  .timeline ol li:first-child {
+    margin-top: 25px;
+  }
+
+  .timeline ol li:not(:first-child) {
+    margin-left: auto;
+  }
+
+  .timeline ol li div {
+    position: static;
+    width: 94%;
+    height: auto !important;
+    margin: 0 auto 25px;
+  }
+
+  .timeline ol li:nth-child(odd) div {
+    transform: none;
+  }
+
+  .timeline ol li:nth-child(odd) div::before,
+  .timeline ol li:nth-child(even) div::before {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: none;
+    border-left: 1px solid white;
+    height: 25px;
+  }
+
+  .timeline ol li:last-child,
+  .timeline ol li:nth-last-child(2) div::before,
+  .timeline ol li:not(:last-child)::after,
+  .timeline .arrows {
+    display: none;
+  }
+}
+
+/* FOOTER STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.page-footer {
+  position: fixed;
+  right: 0;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  color: black;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.page-footer a {
+  display: flex;
+  margin-left: 4px;
+}
