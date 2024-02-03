@@ -3,11 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
 import Badminton from "../pages/services/Badminton";
-import BadmintonBooking from "../BookingService/BadmintonBooking";
+import BadmintonBookingCommon from "../BookingService/BadmintonCommon";
+import BoardBookingCommon from "../BookingService/BoardGamesCommon";
 import BoardGames from "../pages/services/BoardGames";
-import BoardgameBooking from "../BookingService/BoardgameBooking";
 import BowlingMachine from "../pages/services/BowlingMachine";
-import BowlingmachineBooking from "../BookingService/BowlingmachineBooking";
+import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon";
 import Cafeteria from "../pages/services/Cafeteria";
 import CareersPage from "../pages/Careers/CareersPage";
 import ContactUs from "../pages/contactus/ContactUs";
@@ -21,11 +21,11 @@ import ImageSliderGallery from "../CommonComponents/carousel/SliderGallery";
 import PartyCenter from "../pages/services/PartyCenter";
 import PaymentBooking from "../BookingService/PaymentBooking";
 import PlayStation from "../pages/services/PlayStation";
-import PlaystationBooking from "../BookingService/PlaystationBooking";
+import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
 import Service from "../pages/services/Service";
 import ServiceBooking from "../BookingService/ServiceBooking";
 import Turf from "../pages/services/Turf";
-import TurfBooking from "../BookingService/TurfBooking";
+import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
 
@@ -49,18 +49,18 @@ export default function AppRouter() {
 
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
           <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
-          <Route path={routes.TURF_BOOKING} element={<TurfBooking />} />
+          <Route path={routes.TURF_BOOKING} element={<TurfBookingCoomon />} />
           <Route
             path={routes.PLAYSTATION_BOOKING}
-            element={<PlaystationBooking />}
+            element={<PlaystationBookingCommon />}
           />
           <Route
             path={routes.BADMINTON_BOOKING}
-            element={<BadmintonBooking />}
+            element={<BadmintonBookingCommon />}
           />
           <Route
             path={routes.BOARDGAME_BOOKING}
-            element={<BoardgameBooking />}
+            element={<BoardBookingCommon />}
           />
           <Route
             path={routes.CRICKETNET_BOOKING}
@@ -68,7 +68,7 @@ export default function AppRouter() {
           />
           <Route
             path={routes.BOWLINGMACHINE_BOOKING}
-            element={<BowlingmachineBooking />}
+            element={<BowllingMachineBookingCommon />}
           />
           <Route path={routes.PAYMENT_BOOKING} element={<PaymentBooking />} />
           <Route path={routes.DATE_CALENDER} element={<CustomDateCalendar />} />

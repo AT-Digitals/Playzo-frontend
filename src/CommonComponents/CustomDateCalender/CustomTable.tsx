@@ -84,21 +84,19 @@ export default function CustomTable({
             <TableBody>
               {tableData.map((data: any, index: any) => (
                 <TableRow key={index}>
-                  <StyledCell>{serviceName}</StyledCell>
+                  <StyledCell>{data.type}</StyledCell> {/* Add this line */}
                   <StyledCell>{data.name}</StyledCell>
                   <StyledCell>
                     {data.date && isValid(new Date(data.date))
                       ? format(new Date(data.date), "dd MMM yyyy")
                       : "Invalid Date"}
                   </StyledCell>
-
                   <StyledCell>
-                    {" "}
                     {Array.isArray(data.time)
                       ? data.time.join(", ")
                       : data.time}
                   </StyledCell>
-                  <StyledCell>{data.duratoin}hours</StyledCell>
+                  <StyledCell>{data.duration} hours</StyledCell>
                   <StyledCell>{data.amount}</StyledCell>
                   <StyledCell>
                     <IconButton onClick={() => handleRemoveItem(index)}>

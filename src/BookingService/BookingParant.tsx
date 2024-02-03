@@ -1,46 +1,76 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
-import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import badminton from "../assets/Image (7).png";
+import badminton1 from "../assets/Rectangle 685 (3).png";
+import badminton2 from "../assets/Rectangle 685 (4).png";
+import badminton3 from "../assets/Rectangle 685 (5).png";
 import ball from "../assets/ball 4.png";
 import boardgames from "../assets/board games.png";
 import boardgames1 from "../assets/Rectangle 685 (11).png";
 import boardgames2 from "../assets/Rectangle 685 (12).png";
 import boardgames3 from "../assets/Rectangle 685 (9).png";
+import bowling from "../assets/Image (2).png";
 import grass from "../assets/Rectangle 679.png";
-import routes from "../routes/routes";
+import playstation from "../assets/playstation.png";
+import playstation1 from "../assets/Rectangle 685.png";
+import playstation2 from "../assets/Rectangle 685 (1).png";
+import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
+import turf from "../assets/turf.png";
 
 const StyledImage = styled.img`
-
   @media (min-width: 300px) {
-    /* Extra small devices (phones) */
     width: 100px;
     height: 80px;
   }
 
   @media (min-width: 768px) {
-    /* Small devices (tablets) */
     width: 130px;
     height: 130px;
   }
 
   @media (min-width: 992px) {
-    /* Medium devices (desktops) */
     width: 130px;
     height: 130px;
   }
 
   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: "145px";
-    height "105px";
+    width: 145px;
+    height: 105px;
   }
 `;
+
+const TurfImages = [
+  { image: turf, name: "Turf 1" },
+  { image: turf, name: "Turf 2" },
+  { image: turf, name: "Turf 3" },
+];
+
+const PlaystationImages = [
+  { image: playstation1, name: "PS 1" },
+  { image: playstation2, name: "PS 2" },
+  { image: playstation3, name: "PS 3" },
+];
+
+const BadmintonImages = [
+  {
+    image: badminton1,
+    name: "Court 1",
+  },
+  {
+    image: badminton2,
+    name: "Court 2",
+  },
+  {
+    image: badminton3,
+    name: "Court 3",
+  },
+];
 
 const BoardgameImages = [
   {
@@ -57,68 +87,51 @@ const BoardgameImages = [
   },
 ];
 
+type BookingType =
+  | "turf"
+  | "playstation"
+  | "Badminton"
+  | "Boardgames"
+  | "BowlingMachine";
+
 interface TableDataItem {
+  type: BookingType;
+  name: string;
   date: string;
   time: string;
 }
 
-export default function BoardgameBooking() {
-  const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
-
-  // Function to handle breadcrumb selection
-  const handleBreadcrumbClick = (breadcrumbKey: any) => {
-    setSelectedBreadcrumb(breadcrumbKey);
-  };
-  const breadcrumbs = [
-    <Typography
-      fontSize={"16px"}
-      fontWeight={"bold"}
-      style={{ cursor: "pointer" }}
-      key="1"
-      color={selectedBreadcrumb === "1" ? Colors.BUTTON : Colors.BLACK}
-      onClick={() => handleBreadcrumbClick("1")}
-    >
-      Service
-    </Typography>,
-    <Typography
-      fontSize={"16px"}
-      fontWeight={"bold"}
-      style={{ cursor: "pointer" }}
-      key="2"
-      color={selectedBreadcrumb === "2" ? Colors.BUTTON : Colors.BLACK}
-      onClick={() => handleBreadcrumbClick("2")}
-    >
-      Date & Time
-    </Typography>,
-    <Link style={{ textDecoration: "none" }} to={routes.PAYMENT_BOOKING}>
-      <Typography
-        fontSize={"16px"}
-        fontWeight={"bold"}
-        style={{ cursor: "pointer" }}
-        key="3"
-        color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
-        onClick={() => handleBreadcrumbClick("3")}
-      >
-        Payment
-      </Typography>
-    </Link>,
-  ];
-
-  const [selectedCBoard, setSelectedBoard] = useState("");
+const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
+  const [selectedService, setSelectedService] = useState("");
   const [tableData, setTableData] = useState<TableDataItem[]>(() => {
-    // Retrieve tableData from local storage or use an empty array
-    const storedTableData = JSON.parse(localStorage.getItem("board") || "[]");
+    const storedTableData = JSON.parse(
+      localStorage.getItem("bookings") || "[]"
+    );
     return storedTableData;
   });
-  const handleBoardSelection = (Board: any) => {
-    setSelectedBoard(Board);
+
+  const images =
+    type === "turf"
+      ? TurfImages
+      : type === "playstation"
+      ? PlaystationImages
+      : type === "Badminton"
+      ? BadmintonImages
+      : type === "Boardgames"
+      ? BoardgameImages
+      : type === "BowlingMachine" // Add this line for BowlingMachine
+      ? [{ image: bowling, name: "Bowling Machine" }]
+      : [];
+
+  const handleServiceSelection = (serviceName: string) => {
+    setSelectedService(serviceName);
     setTableData((prevTableData) => [
       ...prevTableData,
-      { Board: Board, date: "", time: "" },
+      { type, name: serviceName, date: "", time: "" },
     ]);
   };
 
-  const handleRemoveItem = (indexToRemove: any) => {
+  const handleRemoveItem = (indexToRemove: number) => {
     const updatedTableData = tableData.filter(
       (_, index) => index !== indexToRemove
     );
@@ -126,29 +139,32 @@ export default function BoardgameBooking() {
   };
 
   const handleAddMoreItems = () => {
-    setTableData((prevTableData) => {
-      const lastIndex = prevTableData.length - 1;
-      if (lastIndex >= 0) {
-        const updatedTableData = [...prevTableData];
-        updatedTableData[lastIndex] = {
-          ...updatedTableData[lastIndex],
-          date: "", // Reset date
-          time: "", // Reset time
-        };
-        return updatedTableData;
-      }
-      return prevTableData;
-    });
+    const selectedDate = "29 Feb 2024";
+    const selectedTime = "9.00AM-11.00AM";
 
     setTableData((prevTableData) => [
       ...prevTableData,
-      { board: selectedCBoard, date: "", time: "" },
+      {
+        type,
+        name: selectedService,
+        date: selectedDate,
+        time: selectedTime,
+      },
     ]);
   };
 
   useEffect(() => {
-    localStorage.setItem("board", JSON.stringify(tableData));
+    localStorage.setItem("bookings", JSON.stringify(tableData));
   }, [tableData]);
+
+  const allBookings = tableData.filter(
+    (item) =>
+      item.type === "turf" ||
+      item.type === "playstation" ||
+      item.type === "Badminton" ||
+      item.type === "Boardgames" ||
+      item.type === "BowlingMachine"
+  );
 
   return (
     <>
@@ -162,9 +178,7 @@ export default function BoardgameBooking() {
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
-        >
-          {breadcrumbs}
-        </Breadcrumbs>
+        />
       </Stack>
       <Box
         display={"flex"}
@@ -173,7 +187,7 @@ export default function BoardgameBooking() {
           xs: "0px",
           sm: "0px",
           md: "0px",
-          lg: selectedCBoard ? "30px auto" : "30px 110px",
+          lg: selectedService ? "30px auto" : "30px 110px",
         }}
       >
         <Box
@@ -206,7 +220,22 @@ export default function BoardgameBooking() {
             width={{ xs: "219px", sm: "219px", md: "219px", lg: "260px" }}
             height={{ xs: "80px", sm: "80px", md: "80px", lg: "260px" }}
           >
-            <img src={boardgames} width={"100%"} height={"100%"} alt="turf" />
+            <img
+              src={
+                type === "turf"
+                  ? turf
+                  : type === "playstation"
+                  ? playstation
+                  : type === "Badminton" // Corrected type name
+                  ? badminton
+                  : type === "Boardgames" // Add this line for boardgames
+                  ? boardgames
+                  : undefined // Handle other cases or set to undefined
+              }
+              width={"100%"}
+              height={"100%"}
+              alt="booking"
+            />
             <Typography
               display={{ xs: "block", sm: "block", md: "block", lg: "none" }}
               textAlign={"center"}
@@ -215,7 +244,16 @@ export default function BoardgameBooking() {
               fontWeight={"600"}
               paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
             >
-              Board Games
+              {type === "turf"
+                ? "Turf"
+                : type === "playstation"
+                ? "Playstation"
+                : type === "Badminton"
+                ? "Badminton"
+                : type === "Boardgames"
+                ? "Board Games"
+                : "Unknown Type"}{" "}
+              {/* Handle other cases */}
             </Typography>
           </Box>
         </Box>
@@ -231,16 +269,26 @@ export default function BoardgameBooking() {
           flexDirection={"column"}
         >
           <Typography
-            display={selectedCBoard ? "none" : "block"}
+            display={selectedService ? "none" : "block"}
             fontSize={"14px"}
             color={Colors.BLACK}
             fontWeight={"500"}
           >
-            Choose board games
+            Choose{" "}
+            {type === "turf"
+              ? "Turf"
+              : type === "playstation"
+              ? "Playstation"
+              : type === "Badminton"
+              ? "Badminton"
+              : type === "Boardgames"
+              ? "Board Games"
+              : "Unknown Type"}{" "}
+            {/* Handle other cases */}
           </Typography>
-          {BoardgameImages.map((item) => (
+          {images.map((item) => (
             <Box
-              display={selectedCBoard ? "none" : "block"}
+              display={selectedService ? "none" : "block"}
               key={item.name}
               sx={{
                 ":hover": {
@@ -252,7 +300,7 @@ export default function BoardgameBooking() {
               maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
               height={"105px"}
-              onClick={() => handleBoardSelection(item.name)}
+              onClick={() => handleServiceSelection(item.name)}
             >
               <Box
                 display={"flex"}
@@ -264,7 +312,17 @@ export default function BoardgameBooking() {
                   src={item.image}
                   width={"95px"}
                   height={"75px"}
-                  alt="turf"
+                  alt={
+                    type === "turf"
+                      ? "Turf"
+                      : type === "playstation"
+                      ? "Playstation"
+                      : type === "Badminton"
+                      ? "Badminton"
+                      : type === "Boardgames"
+                      ? "Board Games"
+                      : "Unknown Type"
+                  }
                 />
                 <Typography
                   fontSize={"14px"}
@@ -276,7 +334,7 @@ export default function BoardgameBooking() {
               </Box>
             </Box>
           ))}
-          {selectedCBoard && (
+          {selectedService && (
             <Box
               border={"1px solid #D9D9D9"}
               width={"100%"}
@@ -285,7 +343,6 @@ export default function BoardgameBooking() {
               height={{ xs: "105px", sm: "105px", md: "105px", lg: "155px" }}
               marginTop={{ xs: "-40px", sm: "-40px", md: "-40px", lg: "24px" }}
             >
-              {/* Render the selected turf */}
               <Box
                 display={"flex"}
                 gap={"16px"}
@@ -294,42 +351,53 @@ export default function BoardgameBooking() {
               >
                 <StyledImage
                   src={
-                    BoardgameImages.find((item) => item.name === selectedCBoard)
-                      ?.image
+                    images.find((item) => item.name === selectedService)?.image
                   }
-                  alt="selected turf"
+                  alt={`selected ${
+                    type === "turf"
+                      ? "Turf"
+                      : type === "playstation"
+                      ? "Playstation"
+                      : type === "Badminton"
+                      ? "Badminton"
+                      : type === "Boardgames"
+                      ? "Board Games"
+                      : "Unknown Type"
+                  }`}
                 />
                 <Typography
                   fontSize={"14px"}
                   color={Colors.BLACK}
                   fontWeight={"600"}
                 >
-                  {selectedCBoard}
+                  {selectedService}
                 </Typography>
               </Box>
             </Box>
           )}
         </Stack>
-        <Stack borderLeft={selectedCBoard ? "1px solid #D9D9D9" : "none"}>
-          {selectedCBoard && (
+        <Stack borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
+          {selectedService && (
             <>
               <CustomDateCalendar
                 tableData={tableData}
                 setTableData={setTableData}
-                selctedname={selectedCBoard}
+                selctedname={selectedService}
+                selectedService={selectedService}
+                type={type}
               />{" "}
             </>
           )}
         </Stack>
       </Box>
       <Box pt={2}>
-        {selectedCBoard && (
+        {selectedService && (
           <>
             <CustomTable
-              tableData={tableData}
+              tableData={allBookings}
               handleRemoveItem={handleRemoveItem}
-              serviceName={selectedCBoard}
-              serviceType={undefined}
+              serviceName={selectedService}
+              serviceType={type}
               setTableData={setTableData}
               handleAddmore={handleAddMoreItems}
             />
@@ -342,4 +410,6 @@ export default function BoardgameBooking() {
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
     </>
   );
-}
+};
+
+export default BookingParent;

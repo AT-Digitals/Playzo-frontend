@@ -9,21 +9,6 @@ import ball from "../assets/ball 4.png";
 import bowling from "../assets/Image (2).png";
 import grass from "../assets/Rectangle 679.png";
 
-// const BowlingmachineImages = [
-//   {
-//     image: bowling,
-//     name: "Ball 1",
-//   },
-//   {
-//     image: bowling,
-//     name: "Ball 2",
-//   },
-//   {
-//     image: bowling,
-//     name: "Ball 3",
-//   },
-// ];
-
 interface TableDataItem {
   date: string;
   time: string;
@@ -163,109 +148,16 @@ export default function BowlingmachineBooking() {
           </Box>
         </Box>
 
-        {/* <Stack
-          borderLeft={"1px solid #D9D9D9"}
-          gap={"8px"}
-          padding={"40px 37px"}
-          flexDirection={"column"}
-        >
-          <Typography
-            display={seletedBowling ? "none" : "block"}
-            fontSize={"14px"}
-            color={Colors.BLACK}
-            fontWeight={"500"}
-          >
-            Choose Turf
-          </Typography>
-          {BowlingmachineImages.map((item) => (
-            <Box
-              display={seletedBowling ? "none" : "block"}
-              key={item.name}
-              sx={{
-                ":hover": {
-                  backgroundColor: "#A1EBFF",
-                },
-              }}
-              border={"1px solid #D9D9D9"}
-              width={"100%"}
-              maxWidth={"200px"}
-              borderRadius={"10px"}
-              height={"105px"}
-              onClick={() => handleBowlingselection(item.name)}
-            >
-              <Box
-                display={"flex"}
-                gap={"16px"}
-                alignItems={"center"}
-                padding={"14px 12px"}
-              >
-                <img
-                  src={item.image}
-                  width={"95px"}
-                  height={"75px"}
-                  alt="turf"
-                />
-                <Typography
-                  fontSize={"14px"}
-                  color={Colors.BLACK}
-                  fontWeight={"600"}
-                >
-                  {item.name}
-                </Typography>
-              </Box>
-            </Box>
-          ))}
-          {seletedBowling && (
-            <Box
-              border={"1px solid #D9D9D9"}
-              width={"100%"}
-              maxWidth={"290px"}
-              borderRadius={"10px"}
-              height={"155px"}
-              marginTop={3}
-            >
-              {/* Render the selected turf */}
-        {/* <Box
-                display={"flex"}
-                gap={"16px"}
-                alignItems={"center"}
-                padding={"14px 12px"}
-              >
-                <img
-                  src={
-                    BowlingmachineImages.find(
-                      (item) => item.name === seletedBowling
-                    )?.image
-                  }
-                  width={"145px"}
-                  height={"105px"}
-                  alt="selected turf"
-                />
-                <Typography
-                  fontSize={"14px"}
-                  color={Colors.BLACK}
-                  fontWeight={"600"}
-                >
-                  {seletedBowling}
-                </Typography>
-              </Box>
-            </Box>
-          )}
-        </Stack>  */}
-
         <Stack borderLeft={"1px solid #D9D9D9"}>
-          {/* {seletedBowling && ( */}
           <>
             <CustomDateCalendar
               tableData={tableData}
               setTableData={setTableData}
             />{" "}
           </>
-          {/* )} */}
         </Stack>
       </Box>
       <Box pt={2}>
-        {/* {seletedBowling && ( */}
         <>
           <CustomTable
             tableData={tableData}
@@ -275,7 +167,6 @@ export default function BowlingmachineBooking() {
             setTableData={setTableData}
           />
         </>
-        {/* )} */}
       </Box>
       <Box display={"flex"} justifyContent={"end"}>
         <img src={ball} width={"150px"} alt="" />
