@@ -35,12 +35,16 @@ interface CustomDateCalendarProps {
   tableData?: any;
   setTableData?: any;
   selctedname?: any;
+  type?: any;
+  selectedService?: any;
 }
 
 export default function CustomDateCalendar({
   tableData,
   setTableData,
   selctedname,
+  type,
+  selectedService,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
 
@@ -85,47 +89,84 @@ export default function CustomDateCalendar({
     );
   };
 
-  const handleDateSelection = (date: string) => {
-    if (date) {
-      setSelectedDate(date);
-    }
-  };
+  // const handleDateSelection = (date: string) => {
+  //   if (date) {
+  //     setSelectedDate(date);
+  //   }
+  // };
 
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
 
-  const handleTimeSelection = (time: string) => {
-    if (selectedTimings.includes(time)) {
-      setSelectedTimings((prevSelectedTimings) =>
-        prevSelectedTimings.filter((selectedTime) => selectedTime !== time)
-      );
-    } else {
-      setSelectedTimings((prevSelectedTimings) => [
-        ...prevSelectedTimings,
-        time,
-      ]);
-    }
+  // const handleTimeSelection = (time: string) => {
+  //   if (selectedTimings.includes(time)) {
+  //     setSelectedTimings((prevSelectedTimings) =>
+  //       prevSelectedTimings.filter((selectedTime) => selectedTime !== time)
+  //     );
+  //   } else {
+  //     setSelectedTimings((prevSelectedTimings) => [
+  //       ...prevSelectedTimings,
+  //       time,
+  //     ]);
+  //   }
+  // };
+
+  // const handleAddButtonClick = () => {
+  //   console.log("Before adding:", selectedDate, selectedTimings);
+
+  //   if (selectedDate !== "" && selectedTimings.length > 0) {
+  //     const totalDuration = selectedTimings.length;
+  //     const ratePerHour = 1500;
+  //     const totalAmount = totalDuration * ratePerHour;
+
+  //     setTableData([
+  //       ...tableData,
+  //       {
+  //         date: selectedDate,
+  //         time: selectedTimings,
+  //         duratoin: totalDuration,
+  //         amount: totalAmount,
+  //         name: selctedname,
+  //       },
+  //     ]);
+
+  //     console.log("After adding:", selectedDate, selectedTimings);
+
+  //     setSelectedDate("");
+  //     setSelectedTimings([]);
+  //   }
+  // };
+
+  const handleDateSelection = (date: string) => {
+    setSelectedDate(date);
   };
 
-  const handleAddButtonClick = () => {
+  const handleTimeSelection = (time: string) => {
+    setSelectedTimings((prevSelectedTimings) => [...prevSelectedTimings, time]);
+  };
+
+  const handleAddButtonClick = (type: string, selectedService: string) => {
     if (selectedDate !== "" && selectedTimings.length > 0) {
       const totalDuration = selectedTimings.length;
       const ratePerHour = 1500;
-      const totalAmount = totalDuration * ratePerHour;
 
-      setTableData([
-        ...tableData,
-        {
-          date: selectedDate,
-          time: selectedTimings,
-          duratoin: totalDuration,
-          amount: totalAmount,
-          name: selctedname,
-        },
-      ]);
+      const totalAmount = totalDuration * ratePerHour;
+      const newItem = {
+        type,
+        name: selectedService,
+        date: selectedDate,
+        time: selectedTimings,
+        amount: totalAmount,
+        duration: totalDuration,
+        // ... other properties
+      };
+      setTableData((prevTableData: any) => [...prevTableData, newItem]);
+
+      // Reset selected date and timings
       setSelectedDate("");
       setSelectedTimings([]);
     }
   };
+
   return (
     <Stack
       padding={{
@@ -226,7 +267,7 @@ export default function CustomDateCalendar({
         </Box>
         <Box display="flex" justifyContent="end">
           <Button
-            onClick={handleAddButtonClick}
+            onClick={() => handleAddButtonClick(type, selectedService)}
             style={{
               background: "var(--primary-3, #15B5FC)",
               color: "white",

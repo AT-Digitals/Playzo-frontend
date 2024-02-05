@@ -12,6 +12,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -27,7 +28,6 @@ import cardicons from "../assets/card icons.png";
 import crediticon from "../assets/Icon.png";
 import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const PaymentDetails = [
@@ -98,8 +98,10 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const location = useLocation();
+  const allBookings = location.state?.allBookings || [];
 
   const navigate = useNavigate();
 
@@ -107,6 +109,17 @@ export default function PaymentBooking() {
     // Go back one step in the navigation history
     navigate(-1);
   };
+
+  const handlePayClick = () => {
+    console.log(allBookings, "allbookings");
+    setOpen(true);
+  };
+
+  const totalAmount = allBookings.reduce(
+    (accumulator: number, booking: { amount: string }) =>
+      accumulator + parseFloat(booking.amount),
+    0
+  );
 
   return (
     <>
@@ -144,7 +157,7 @@ export default function PaymentBooking() {
             </Typography>
           </Box>
           <Stack margin={"0px 25px"}>
-            {PaymentDetails.map((item) => (
+            {PaymentDetails.map((item, index) => (
               <Stack paddingBottom={"20px"}>
                 <Typography
                   fontWeight={"500"}
@@ -255,7 +268,7 @@ export default function PaymentBooking() {
                 color={Colors.BLACK}
                 fontSize={"15px"}
               >
-                1500
+                {totalAmount}
               </Typography>
             </Box>
           </Stack>
@@ -478,7 +491,7 @@ export default function PaymentBooking() {
           </Typography>
           <Box mt={"10px"} display={"flex"} justifyContent={"end"}>
             <Button
-              onClick={handleOpen}
+              onClick={handlePayClick}
               style={{
                 backgroundColor: Colors.BUTTON,
                 width: "100%",
@@ -489,7 +502,7 @@ export default function PaymentBooking() {
               }}
               variant="contained"
             >
-              Pay 1500
+              Pay {totalAmount}
             </Button>
             <Button
               onClick={handlegoBack}
