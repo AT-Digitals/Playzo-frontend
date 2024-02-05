@@ -2,7 +2,6 @@ import * as React from "react";
 
 import {
   Box,
-  Button,
   IconButton,
   Table,
   TableBody,
@@ -122,7 +121,7 @@ export default function CustomTable({
           </Table>
         </TableContainer>
       </Box>
-      <Link to={routes.PAYMENT_BOOKING} onClick={() => setTableData(tableData)}>
+      {/* <Link to={routes.PAYMENT_BOOKING} onClick={() => setTableData(tableData)}>
         <Button
           sx={{
             background: "var(--primary-3, #15B5FC)",
@@ -140,7 +139,7 @@ export default function CustomTable({
         >
           Proceed to payment{" "}
         </Button>
-      </Link>
+      </Link> */}
     </Box>
   );
 }

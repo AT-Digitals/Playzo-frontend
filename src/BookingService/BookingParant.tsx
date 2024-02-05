@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
@@ -23,6 +23,7 @@ import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
+import { useNavigate } from "react-router-dom";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -142,20 +143,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setTableData(updatedTableData);
   };
 
-  // const handleAddMoreItems = () => {
-  //   const selectedDate = "29 Feb 2024";
-  //   const selectedTime = "9.00AM-11.00AM";
-
-  //   setTableData((prevTableData) => [
-  //     ...prevTableData,
-  //     {
-  //       type,
-  //       name: selectedService,
-  //       date: selectedDate,
-  //       time: selectedTime,
-  //     },
-  //   ]);
-  // };
   const handleAddMoreItems = () => {
     if (selectedService) {
       const selectedDate = "29 Feb 2024";
@@ -171,6 +158,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         },
       ]);
     }
+  };
+  const navigate = useNavigate();
+
+  const handleProceedToPayment = () => {
+    navigate("/payment-booking", { state: { allBookings } });
+
+    console.log("Proceeding to Payment with allBookings:", allBookings);
   };
 
   useEffect(() => {
@@ -470,6 +464,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               setTableData={setTableData}
               handleAddmore={handleAddMoreItems}
             />
+            <Button
+              style={{
+                margin: "auto",
+                display: "block",
+                marginTop: "2rem",
+                background: Colors.BUTTON_COLOR,
+                color: "white",
+              }}
+              onClick={handleProceedToPayment}
+            >
+              Proceed to Payment
+            </Button>
           </>
         )}
       </Box>
