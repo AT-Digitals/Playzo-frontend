@@ -131,7 +131,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setSelectedService(serviceName);
     setTableData((prevTableData) => [
       ...prevTableData,
-      { type, name: serviceName, date: "", time: "" },
+      // { type, name: serviceName, date: "", time: "" },
     ]);
   };
 
@@ -142,19 +142,35 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setTableData(updatedTableData);
   };
 
-  const handleAddMoreItems = () => {
-    const selectedDate = "29 Feb 2024";
-    const selectedTime = "9.00AM-11.00AM";
+  // const handleAddMoreItems = () => {
+  //   const selectedDate = "29 Feb 2024";
+  //   const selectedTime = "9.00AM-11.00AM";
 
-    setTableData((prevTableData) => [
-      ...prevTableData,
-      {
-        type,
-        name: selectedService,
-        date: selectedDate,
-        time: selectedTime,
-      },
-    ]);
+  //   setTableData((prevTableData) => [
+  //     ...prevTableData,
+  //     {
+  //       type,
+  //       name: selectedService,
+  //       date: selectedDate,
+  //       time: selectedTime,
+  //     },
+  //   ]);
+  // };
+  const handleAddMoreItems = () => {
+    if (selectedService) {
+      const selectedDate = "29 Feb 2024";
+      const selectedTime = "9.00AM-11.00AM";
+
+      setTableData((prevTableData) => [
+        ...prevTableData,
+        {
+          type,
+          name: selectedService,
+          date: selectedDate,
+          time: selectedTime,
+        },
+      ]);
+    }
   };
 
   useEffect(() => {
