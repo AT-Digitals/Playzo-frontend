@@ -1,9 +1,11 @@
 import { Box, Breadcrumbs, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import badminton from "../assets/Image (7).png";
 import badminton1 from "../assets/Rectangle 685 (3).png";
@@ -23,7 +25,6 @@ import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
-import { useNavigate } from "react-router-dom";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -32,8 +33,10 @@ const StyledImage = styled.img`
   }
 
   @media (min-width: 768px) {
-    width: 130px;
-    height: 130px;
+    width: 100%;
+    max-height: 130px;
+    height: 100%;
+    max-width: 130px;
   }
 
   @media (min-width: 992px) {
@@ -160,16 +163,26 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   };
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleProceedToPayment = () => {
-    navigate("/payment-booking", { state: { allBookings } });
+    navigate("/payment-booking", { state: { allBookings, selectedService } });
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
   };
 
+  console.log(selectedService, "selectedService");
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
   }, [tableData]);
+
+  useEffect(() => {
+    const selectedServiceFromState = location.state?.selectedService;
+
+    if (selectedServiceFromState) {
+      setSelectedService(selectedServiceFromState);
+    }
+  }, [location.state?.selectedService]);
 
   const allBookings = tableData.filter(
     (item) =>
@@ -210,21 +223,67 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     </Typography>,
   ];
 
+  const selectedServiceFromState = location.state?.selectedService;
+
+  const handlegoBack = () => {
+    navigate(-1);
+    console.log(selectedServiceFromState, "selectedServiceFromState");
+  };
+
+  const [isServiceSelected, setIsServiceSelected] = useState(false);
+
+  useEffect(() => {
+    setIsServiceSelected(!!selectedService);
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (isServiceSelected) {
+        const message =
+          "Are you sure you want to leave? Your selected service will be lost.";
+        event.returnValue = message;
+        return message;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isServiceSelected, selectedService]);
+
   return (
     <>
       <Stack
-        marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "120px" }}
-        marginTop={"50px"}
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
+        justifyContent={"space-between"}
+        maxWidth={800}
+        width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
+        ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
+        marginTop={"5rem"}
+        // margin={"0 auto"}
+        // spacing={{ xs: 3, sm: 3, md: 0, lg: 0 }}
+        direction={"row"}
+        alignItems={"flex-start"}
       >
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
+        <Button
+          onClick={handlegoBack}
+          variant="text"
+          startIcon={<KeyboardBackspaceIcon />}
         >
-          {breadcrumbs}
-        </Breadcrumbs>
+          Back
+        </Button>{" "}
+        <Stack
+          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "120px" }}
+          // marginTop={"50px"}
+          spacing={2}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            {breadcrumbs}
+          </Breadcrumbs>
+        </Stack>
       </Stack>
       <Box
         display={"flex"}
