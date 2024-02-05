@@ -115,6 +115,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+  const [isServiceSelected, setIsServiceSelected] = useState(false);
 
   const images =
     type === "turf"
@@ -133,10 +134,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const handleServiceSelection = (serviceName: string) => {
     setSelectedService(serviceName);
-    setTableData((prevTableData) => [
-      ...prevTableData,
-      // { type, name: serviceName, date: "", time: "" },
-    ]);
+    setTableData((prevTableData) => [...prevTableData]);
   };
 
   const handleRemoveItem = (indexToRemove: number) => {
@@ -165,13 +163,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // navigate to payment page with state table data  when booking is complete
+
   const handleProceedToPayment = () => {
     navigate("/payment-booking", { state: { allBookings, selectedService } });
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
   };
 
-  console.log(selectedService, "selectedService");
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
   }, [tableData]);
@@ -230,8 +229,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 
-  const [isServiceSelected, setIsServiceSelected] = useState(false);
-
   useEffect(() => {
     setIsServiceSelected(!!selectedService);
 
@@ -244,11 +241,25 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       }
     };
 
+    const handleRouteChange = () => {
+      if (isServiceSelected) {
+        const confirmLeave = window.confirm(
+          "You have unsaved changes. Are you sure you want to leave?"
+        );
+        if (!confirmLeave) {
+          navigate(location.pathname); // Navigate back to the current location
+        }
+      }
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handleRouteChange);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handleRouteChange);
     };
-  }, [isServiceSelected, selectedService]);
+  }, [isServiceSelected, selectedService, navigate, location]);
 
   return (
     <>
@@ -397,7 +408,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               : type === "Boardgames"
               ? "Board Games"
               : "Unknown Type"}{" "}
-            {/* Handle other cases */}
           </Typography>
           {images.map((item) => (
             <Box
