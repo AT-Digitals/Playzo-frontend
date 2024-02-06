@@ -101,7 +101,7 @@ export default function PaymentBooking() {
   const handleClose = () => setOpen(false);
 
   const location = useLocation();
-  const allBookings = location.state?.allBookings || [];
+  const allBookings = location.state?.bookingsWithTime || [];
   const selectedServiceFromState = location.state?.selectedService;
 
   const navigate = useNavigate();
@@ -115,10 +115,9 @@ export default function PaymentBooking() {
     console.log(allBookings, "allbookings");
     setOpen(true);
   };
-
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
-      accumulator + parseFloat(booking.amount),
+      accumulator + (parseFloat(booking.amount) || 0),
     0
   );
 
