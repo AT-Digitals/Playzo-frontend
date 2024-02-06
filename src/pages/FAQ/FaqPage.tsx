@@ -29,7 +29,7 @@ export default function FaqPage() {
 
     return (
         <>
-            <Box width={"100%"} margin={{xs: "80px 30px", sm: '80px 30px', md: "80px 90px", lg: '80px 230px'}}>
+            <Box margin={{xs: "80px 30px", sm: '80px 30px', md: "80px 90px", lg: '80px 230px'}}>
                 <Typography color={Colors.BUTTON_COLOR} fontSize={{xs: "18px", sm :'18px', md: "18px", lg: "22px"}} fontWeight={"600"}>Frequently Asked Questions</Typography>
                 {FaqItems.map((item, index) => (
                     <Box key={index} width={"100%"} maxWidth={{xs: "323px", sm: "323px", md: '323px', lg: "1200px"}} mt={"25px"} borderRadius={"10px"} border={"1px solid grey"}>

@@ -97,7 +97,7 @@ export default function ContactUs() {
                                 For More Details <br />
                                 Contact Us!
                             </Typography>
-                            <Typography fontSize={{xs: "15px", sm: "15px", md: "16px", lg: "18px"}} width={{xs: "310px", sm: "310px", md: "310px", lg: "433px"}}>
+                            <Typography color={Colors.BLACK} fontSize={{xs: "15px", sm: "15px", md: "16px", lg: "18px"}} width={{xs: "310px", sm: "310px", md: "310px", lg: "433px"}}>
                                 Send our team a quick message with your question, and we’ll get
                                 back to you as soon as possible. We’re pretty responsive and
                                 will try to respond in a few hours 🙂
@@ -153,6 +153,7 @@ export default function ContactUs() {
                                         marginBottom={"4px"}
                                         fontSize={"18px"}
                                         fontWeight={700}
+                                        color={Colors.BLACK}
                                     >
                                         Message
                                     </Typography>

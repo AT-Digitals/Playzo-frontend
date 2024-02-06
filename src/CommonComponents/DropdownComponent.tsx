@@ -7,6 +7,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CustomLabel from "./CustomLabel";
 import { Typography } from "@mui/material";
 import { DropdownItem } from "./CustomDropdown";
+import Colors from "./Colors";
 
 interface dropdownProps {
     label: string;
@@ -25,7 +26,7 @@ export default function DropDownComponent({
 }: dropdownProps) {
     return (
         <Box>
-            <Typography fontWeight={700} fontSize="18px" mb="4px">
+            <Typography color={Colors.BLACK} fontWeight={700} fontSize="18px" mb="4px">
                 {label}
             </Typography>
             <FormControl fullWidth>

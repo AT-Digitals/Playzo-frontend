@@ -245,9 +245,8 @@ const StyledImage5 = styled.img`
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     position: absolute;
-    top: 0;
-    width: 1688px;
-    transform: translate(${0}, ${-10.1}%);
+    width: 100%;
+    transform: translate(0%, 4.7%);
   }
 `;
 const StyledImage6 = styled.img`

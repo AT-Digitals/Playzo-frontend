@@ -254,7 +254,7 @@ export default function AboutUs() {
             mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
           >
             <Grid item xs={0} pl={{ xs: '58px', sm: "58px", md: "58px", lg: "70px" }} justifyContent="center" alignItems="center">
-              <Typography pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "30px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
+              <Typography color={Colors.BLACK} pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "30px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
                 sx={{
                   height: {xs: "245px", sm: "245px", md: "245px", lg: "320px"},
                   fontStyle: "normal",
