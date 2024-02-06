@@ -64,11 +64,17 @@ export default function CustomSwiper({
   }, []);
 
   return (
-    <Box sx={{
-      ".swiper-button-prev": {
-        color: "red"
-      }
-    }}>
+    <Box
+      sx={{
+        ".swiper-button-prev": {
+          color: "red",
+          width: "30px",
+          height: "30px",
+          borderRadius: "50%",
+          background: "white",
+        },
+      }}
+    >
       <swiper-container
         ref={swiperElRef}
         slides-per-view={DefaultSlidesPerViewOption}

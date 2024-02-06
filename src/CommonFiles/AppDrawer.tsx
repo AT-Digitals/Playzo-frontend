@@ -1,6 +1,15 @@
-import { Avatar, Box, Drawer, Stack, Typography, styled } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Drawer,
+  IconButton,
+  Stack,
+  Typography,
+  styled,
+} from "@mui/material";
 import React, { useState } from "react";
 
+import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import KeyboardArrowUpTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
@@ -99,6 +108,13 @@ export default function AppDrawer({
         height="100%"
       >
         <Stack padding={"0 20px"} mt={6} spacing={3} alignItems="self-start">
+          <IconButton onClick={onClose}>
+            <CloseIcon
+              style={{
+                color: "white",
+              }}
+            />
+          </IconButton>
           <HeaderLink href={routes.ABOUTUS}>
             <Typography color={Colors.WHITE} fontSize="16px">
               About Us

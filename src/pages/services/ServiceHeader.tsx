@@ -6,7 +6,6 @@ import ServicePara from "../../assets/ServicePara.svg";
 import ServicePara1 from "../../assets/ServicePara1.svg";
 
 const StyledTypo = styled(Typography)({
-  color: Colors.BUTTON_COLOR,
   marginTop: "60px",
   position: "absolute",
   fontStyle: "normal",
@@ -54,6 +53,7 @@ export default function ServiceHeaders() {
         />
 
         <StyledTypo
+          color={Colors.BLACK}
           padding={"0 20px"}
           textAlign={{ xs: "center" }}
           fontSize={{ xs: "20px", sm: "32px" }}

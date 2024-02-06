@@ -61,7 +61,7 @@ export default function ServiceGrid(props: serviceGridProps) {
           md={6}
           sx={{
             backgroundColor: "#EBF5FF",
-            borderRadius: "8px",
+            // borderRadius: "8px",
             padding: "40px",
           }}
           alignItems="center"

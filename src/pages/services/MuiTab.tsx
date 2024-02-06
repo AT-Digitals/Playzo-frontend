@@ -186,13 +186,22 @@ export default function MuiTab() {
               fontSize: { xs: "14px", sm: "20px" },
               fontWeight: "700",
               textTransform: "capitalize",
-            },
-            ".Mui-selected": {
-              fontStyle: "italic",
+              padding: "5px",
+              "&.Mui-selected": {
+                fontStyle: "italic",
+                fontWeight: "bold",
+                textDecoration: "underline",
+                paddingBottom: "5px !important", // Add padding-bottom for the underline
+              },
+              "&:hover": {
+                textDecoration: "underline",
+                paddingBottom: "5px", // Add padding-bottom for the underline
+              },
             },
             ".MuiTabs-flexContainer": {
               flexWrap: "wrap",
             },
+
             width: "95%", // Make sure the Tabs take full width
           }}
         >
