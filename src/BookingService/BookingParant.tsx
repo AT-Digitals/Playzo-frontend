@@ -159,6 +159,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         },
       ]);
     }
+    setSelectedService("");
+    localStorage.removeItem("selectedService");
   };
   const navigate = useNavigate();
   const location = useLocation();
@@ -167,6 +169,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const handleProceedToPayment = () => {
     navigate("/payment-booking", { state: { allBookings, selectedService } });
+    localStorage.setItem("selectedService", selectedService);
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
   };
@@ -222,11 +225,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     </Typography>,
   ];
 
-  const selectedServiceFromState = location.state?.selectedService;
+  // const selectedServiceFromState = location.state?.selectedService;
 
   const handlegoBack = () => {
     navigate(-1);
-    console.log(selectedServiceFromState, "selectedServiceFromState");
+
+    localStorage.removeItem("selectedService");
   };
 
   useEffect(() => {
@@ -260,6 +264,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       window.removeEventListener("popstate", handleRouteChange);
     };
   }, [isServiceSelected, selectedService, navigate, location]);
+
+  useEffect(() => {
+    // Read selected service from local storage
+    const storedSelectedService = localStorage.getItem("selectedService");
+
+    if (storedSelectedService) {
+      setSelectedService(storedSelectedService);
+    }
+  }, []);
 
   return (
     <>
