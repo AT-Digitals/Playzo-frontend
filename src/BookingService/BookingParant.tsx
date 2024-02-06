@@ -51,29 +51,32 @@ const StyledImage = styled.img`
 `;
 
 const TurfImages = [
-  { image: turf, name: "Turf 1" },
-  { image: turf, name: "Turf 2" },
-  { image: turf, name: "Turf 3" },
+  { image: turf, name: "Turf 1", value: "1" },
+  { image: turf, name: "Turf 2", value: "2" },
+  { image: turf, name: "Turf 3", value: "3" },
 ];
 
 const PlaystationImages = [
-  { image: playstation1, name: "PS 1" },
-  { image: playstation2, name: "PS 2" },
-  { image: playstation3, name: "PS 3" },
+  { image: playstation1, name: "PS 1", value: "1" },
+  { image: playstation2, name: "PS 2", value: "2" },
+  { image: playstation3, name: "PS 3", value: "3" },
 ];
 
 const BadmintonImages = [
   {
     image: badminton1,
     name: "Court 1",
+    value: "1",
   },
   {
     image: badminton2,
     name: "Court 2",
+    value: "2",
   },
   {
     image: badminton3,
     name: "Court 3",
+    value: "3",
   },
 ];
 
@@ -81,14 +84,17 @@ const BoardgameImages = [
   {
     image: boardgames1,
     name: "Chess",
+    value: "1",
   },
   {
     image: boardgames2,
     name: "Monopoly",
+    value: "2",
   },
   {
     image: boardgames3,
     name: "Scrabble",
+    value: "3",
   },
 ];
 
@@ -105,6 +111,7 @@ interface TableDataItem {
   name: string;
   date: string;
   time: string;
+  court: string;
 }
 
 const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
@@ -156,6 +163,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           name: selectedService,
           date: selectedDate,
           time: selectedTime,
+          court: "",
         },
       ]);
     }
@@ -168,10 +176,65 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   // navigate to payment page with state table data  when booking is complete
 
   const handleProceedToPayment = () => {
-    navigate("/payment-booking", { state: { allBookings, selectedService } });
+    const bookingsWithTime = allBookings.map((booking, index) => {
+      const timeString = String(booking.time); // Ensure time is a string
+      const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
+
+      const startTime = timeMatch ? timeMatch[1] : "";
+      let endTime = "";
+      // let ampm = "";
+
+      // Calculate start time and end time in milliseconds
+      let startMilliseconds = 0;
+      let endMilliseconds = 0;
+      console.log(booking.court, "court");
+      console.log("booking:", booking); // Print the entire booking object for inspection
+
+      if (startTime) {
+        const [hours, minutes] = startTime.split(":");
+        const startDateTime = new Date(booking.date);
+        startDateTime.setHours(Number(hours), Number(minutes));
+        startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+        const endDateTime = new Date(startDateTime);
+        endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+        endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+
+        const endHours = endDateTime.getHours();
+        const endMinutes = endDateTime.getMinutes();
+
+        endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+          2,
+          "0"
+        )}`;
+        // ampm = endHours >= 12 ? "PM" : "AM";
+      }
+
+      return {
+        type: booking.type,
+        name: booking.name,
+        startDate: new Date(booking.date).toISOString().split("T")[0],
+        startTime: startMilliseconds,
+
+        endDate: endTime
+          ? new Date(booking.date).toISOString().split("T")[0]
+          : "",
+        endTime: endMilliseconds,
+        court: booking.court,
+      };
+    });
+
+    navigate("/payment-booking", {
+      state: { selectedService, bookingsWithTime },
+    });
+
+    // navigate("/payment-booking", { state: { allBookings, selectedService } });
     localStorage.setItem("selectedService", selectedService);
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
+
+    // Log the array of objects
+    console.log("All Bookings Structure:", bookingsWithTime);
   };
 
   useEffect(() => {
