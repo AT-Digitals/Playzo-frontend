@@ -17,6 +17,7 @@ import PopupCarousel from "./PopupCarousel";
 import Image2 from "../../assets/Rectangle 669.png";
 import styled from "@emotion/styled";
 import TimelineComponent from "./TimelineComponent";
+import { useRef, useEffect, useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -118,25 +119,30 @@ const StyledImage3 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 100%;
     margin-left: 5px;
+    height: 98%;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
   }
 `;
 const StyledImage4 = styled.img`
@@ -163,6 +169,11 @@ const StyledImage4 = styled.img`
     /* Large devices (large desktops) */
     width: 100%;
     height: 99%;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
+               
   }
 `;
 
@@ -172,27 +183,31 @@ const StyledImage5 = styled.img`
     /* Extra small devices (phones) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 100%;
     margin: 1px;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
   }
 `;
 const StyledImage6 = styled.img`
@@ -203,6 +218,8 @@ const StyledImage6 = styled.img`
     transform: translate(93px, -60px);
     width: 80px;
     height: 90px;
+    margin-top: -74px;
+    margin-left: 92px;
   }
 
   @media (min-width: 768px) {
@@ -231,16 +248,93 @@ const StyledImage6 = styled.img`
 `;
 
 export default function AboutUs() {
+  const ballRef = useRef<HTMLImageElement>(null);
+  const lastScrollTop = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ballRef.current) {
+        const ball = ballRef.current;
+        const scrollTop = window.scrollY || window.pageYOffset;
+        
+        if (scrollTop > lastScrollTop.current) {
+          // Scrolling down
+          ball.style.transform = `rotate(${scrollTop * 0.1}deg)`;
+          if (window.innerWidth >= 600) { // Only adjust margins on desktop view
+            ball.style.marginTop = "-102px";
+            ball.style.marginLeft = "120px";
+          }
+        } else {
+          // Scrolling up
+          ball.style.transform = `rotate(-${scrollTop * 0.1}deg)`;
+          if (window.innerWidth <= 600) { // Only adjust margins on desktop view
+            ball.style.marginTop = "-74px"; // Reset margin top
+            ball.style.marginLeft = "87px";
+            ball.style.width = "93px";
+            ball.style.height = "93px"; // Reset margin left
+          }
+        }
+        lastScrollTop.current = scrollTop;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const [showTimeline, setShowTimeline] = useState(false);
+
+  useEffect(() => {
+    // Show the timeline component with a delay for animation effect
+    const timer = setTimeout(() => {
+      setShowTimeline(true);
+    }, 500); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
-      <Box>
+      <Box style={{
+                position: "relative",
+                overflow: "hidden"
+              }}
+              >
         <CardMedia
           component="img"
           //height="194"
           image={Image1}
           alt="Paella dish"
+          style={{
+            opacity: 1,
+            width: "100%",
+            transition: "transform 0.5s ease",
+            height: "100%",
+            overflow: "hidden",
+            position: "relative",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         />
-        <img src={Image2} alt="about dish" style={{ width: "100%", position: "absolute", transform: `translate(0px, -100%)` }} />
+        <img src={Image2} alt="about dish"  style={{
+          width: "100%",
+          position: "absolute",
+          transform: `translate(0px, -100%) scale(1)`, 
+          opacity: 1,
+          transition: "transform 0.5s ease",
+          overflow: "hidden",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
+        }} />
       </Box>
       <AppContainer>
         <Box margin="10px 20px">
@@ -372,26 +466,84 @@ export default function AboutUs() {
           </Typography>
           <Grid container>
             <Stack alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} direction={{ xs: "column", sm: "column", md: "column", lg: "row" }} spacing={3}>
-              <Grid item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px" }}>
-                <img src={turf} alt="grid 1" style={{ width: "100%" }} />
+              <Grid style={{
+                position: "relative",
+                overflow: "hidden"
+              }} item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px" }}>
+                <img style={{
+                  opacity: 1,
+                  width: "100%",
+                  transition: "transform 0.5s ease",
+                  height: "100%",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+       src={turf} alt="grid 1" />
               </Grid>
-              <Grid item xs={6} style={{ marginTop: "0px" }} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }}>
-                <img src={turf1} alt="grid 2" style={{ width: "100%" }} />
+              <Grid item xs={6} style={{ marginTop: "3px",  position: "relative",
+              overflow: "hidden" }} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }}>
+                <img style={{
+                  opacity: 1,
+                  width: "100%",
+                  transition: "transform 0.5s ease",
+                  height: "100%",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }} src={turf1} alt="grid 2" />
               </Grid>
             </Stack>
           </Grid>
           <Grid container>
             <Stack direction="row" marginTop={{ xs: "-30px", sm: '-30px', md: "-30px", lg: '0px' }} marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: '0px' }} spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}>
               <Box alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }} display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }} flexDirection={{ xs: 'column', sm: "column", md: "column", lg: "row" }}>
-                <Grid item xs={0} ml={{ xs: "20px", sm: "20px", md: "20px", lg: "0px" }} width={{ xs: '73%', sm: "73%", md: "73%", lg: '37%' }}>
-                  <StyledImage4 src={turf2} alt="grid 3" />
+                <Grid sx={{
+                position: "relative",
+                overflow: {xs: "", sm: "", md: "", lg: "hidden"}
+              }} item xs={0} ml={{ xs: "19px", sm: "19px", md: "19px", lg: "0px" }} width={{ xs: '75%', sm: "75%", md: "75%", lg: '37%' }}>
+                  <StyledImage4 style={{}}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }} src={turf2} alt="grid 3" />
                 </Grid>
-                <Grid item xs={0}>
-                  <StyledImage5 src={turf3} alt="grid 4" />
+                <Grid  sx={{
+                position: "relative",
+                overflow: {xs: "", sm: "", md: "", lg: "hidden"}
+              }} item xs={0}>
+                  <StyledImage5 style={{}}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }} src={turf3} alt="grid 4" />
                 </Grid>
               </Box>
-              <Grid item xs={0} width={{ xs: '135%', sm: "135%", md: "135%", lg: '33%' }}>
-                <StyledImage3 src={turf4} alt="grid 5" />
+              <Grid sx={{
+                position: "relative",
+                overflow: {xs: "", sm: "", md: "", lg: "hidden"}
+              }} item xs={0} width={{ xs: '135%', sm: "135%", md: "135%", lg: '33%' }}>
+                <StyledImage3 style={{}}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }} src={turf4} alt="grid 5" />
               </Grid>
             </Stack>
           </Grid>
@@ -423,6 +575,7 @@ export default function AboutUs() {
               <Grid item xs={12} marginTop={{ xs: "-83px", sm: "-83px", md: "-83px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
                 <StyledImage6
                   src={ball}
+                  ref={ballRef}
                   alt="grid-ball"
                 />
                 <Typography maxWidth={{ xs: "200px", sm: "200px", md: "200px", lg: "441px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
@@ -439,7 +592,16 @@ export default function AboutUs() {
           </Box>
         </Stack>
       </Box>
-      <TimelineComponent />
+      <Box
+        style={{
+          transform: showTimeline ? 'translateY(-420vh)' : 'translateY(100vh)', // Slide up from bottom
+          transition: 'transform 0.5s ease-in-out', // Smooth transition
+          position: 'relative',
+         
+        }}
+      >
+        {showTimeline && <TimelineComponent />}
+      </Box>
       {/* <Box paddingY={10} maxWidth={1200} margin="auto">
 
 
