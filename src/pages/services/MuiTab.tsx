@@ -2,6 +2,7 @@ import { Box, IconButton, Tab, Tabs, Typography } from "@mui/material";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import Colors from "../../CommonComponents/Colors";
 import routes from "../../routes/routes";
 
 const tabList = [
@@ -151,7 +152,6 @@ export default function MuiTab() {
           maxWidth: "880px", // Set the maximum width for the box
           margin: "auto", // Center the box
           display: "flex",
-          // flexDirection: "column",
           alignItems: "center",
         }}
       >
@@ -184,18 +184,16 @@ export default function MuiTab() {
             },
             ".MuiButtonBase-root": {
               fontSize: { xs: "14px", sm: "20px" },
-              fontWeight: "700",
+              fontWeight: 500,
               textTransform: "capitalize",
               padding: "5px",
+              fontStyle: "italic",
+              color: "black",
+
               "&.Mui-selected": {
-                fontStyle: "italic",
                 fontWeight: "bold",
                 textDecoration: "underline",
-                paddingBottom: "5px !important", // Add padding-bottom for the underline
-              },
-              "&:hover": {
-                textDecoration: "underline",
-                paddingBottom: "5px", // Add padding-bottom for the underline
+                color: Colors.BUTTON_COLOR,
               },
             },
             ".MuiTabs-flexContainer": {

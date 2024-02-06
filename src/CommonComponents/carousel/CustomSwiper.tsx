@@ -68,10 +68,6 @@ export default function CustomSwiper({
       sx={{
         ".swiper-button-prev": {
           color: "red",
-          width: "30px",
-          height: "30px",
-          borderRadius: "50%",
-          background: "white",
         },
       }}
     >
@@ -86,6 +82,10 @@ export default function CustomSwiper({
         autoplay-pause-on-mouse-enter={true}
         {...props}
         className="mySwiper"
+        style={{
+          height: "100%",
+          maxHeight: 600,
+        }}
       >
         {slides.map((slide: any, index: any) => (
           <swiper-slide key={index}>{slide}</swiper-slide>
