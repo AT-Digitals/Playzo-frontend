@@ -102,12 +102,13 @@ export default function PaymentBooking() {
 
   const location = useLocation();
   const allBookings = location.state?.allBookings || [];
+  const selectedServiceFromState = location.state?.selectedService;
 
   const navigate = useNavigate();
 
   const handlegoBack = () => {
-    // Go back one step in the navigation history
     navigate(-1);
+    console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 
   const handlePayClick = () => {
