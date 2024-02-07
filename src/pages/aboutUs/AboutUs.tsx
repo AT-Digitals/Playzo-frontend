@@ -214,12 +214,13 @@ const StyledImage6 = styled.img`
 
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(93px, -60px);
+    position: relative;
+    transform: translate(14px, 19px);
     width: 80px;
     height: 90px;
     margin-top: -74px;
     margin-left: 92px;
+    transition: left 0.2s;
   }
 
   @media (min-width: 768px) {
@@ -240,10 +241,11 @@ const StyledImage6 = styled.img`
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(135px, -85px);
-    width: 132px;
-    height: 132px;
+    position: relative;
+    transform: translate(50px, 36px);
+    width: 100px;
+    height: 100px;
+    transition: left 0.2s;
   }
 `;
 
@@ -260,13 +262,17 @@ export default function AboutUs() {
         if (scrollTop > lastScrollTop.current) {
           // Scrolling down
           ball.style.transform = `rotate(${scrollTop * 0.1}deg)`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') - 1}px`;
+        // Adjust the movement speed by changing the value after '-'
           if (window.innerWidth >= 600) { // Only adjust margins on desktop view
-            ball.style.marginTop = "-102px";
-            ball.style.marginLeft = "120px";
+            ball.style.marginTop = "-92px";
+            ball.style.marginLeft = "190px";
           }
         } else {
           // Scrolling up
           ball.style.transform = `rotate(-${scrollTop * 0.1}deg)`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') + 1}px`; 
+         // Adjust the movement speed by changing the value after '+'
           if (window.innerWidth <= 600) { // Only adjust margins on desktop view
             ball.style.marginTop = "-74px"; // Reset margin top
             ball.style.marginLeft = "87px";
@@ -296,56 +302,52 @@ export default function AboutUs() {
   }, []);
   return (
     <>
-      <Box style={{
-                position: "relative",
-                overflow: "hidden"
-              }}
-              >
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          position: "relative",
+          transition: "transform 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.1)", // Increase scale on hover
+          },
+        }}
+      >
         <CardMedia
           component="img"
-          //height="194"
+          // height="194"
           image={Image1}
           alt="Paella dish"
-          style={{
-            opacity: 1,
+          sx={{
             width: "100%",
-            transition: "transform 0.5s ease",
             height: "100%",
-            overflow: "hidden",
-            position: "relative",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
+            objectFit: "cover", // Make sure the image covers the entire container
           }}
         />
-        <img src={Image2} alt="about dish"  style={{
-          width: "100%",
-          position: "absolute",
-          transform: `translate(0px, -100%) scale(1)`, 
-          opacity: 1,
-          transition: "transform 0.5s ease",
-          overflow: "hidden",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "scale(1.1)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "scale(1)";
-        }} />
+        <img
+          src={Image2}
+          alt="about dish"
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Make sure the image covers the entire container
+          }}
+        />
       </Box>
       <AppContainer>
         <Box margin="10px 20px">
           <Grid
             container
-            paddingY={2}
             justifyContent="center"
             alignItems="center"
             spacing={8}
             flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
             mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
+            mt={{xs: "-44px", sm: "-44px", md: "-44px", lg:"-7px"}}
           >
             <Grid item xs={0} pl={{ xs: '58px', sm: "58px", md: "58px", lg: "70px" }} justifyContent="center" alignItems="center">
               <Typography color={Colors.BLACK} pt={{ xs: '25px', sm: "25px", md: "25px", lg: "0px" }} marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "30px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }} maxWidth={{ xs: "298px", sm: "298px", md: "298px", lg: "438px" }}
@@ -572,16 +574,18 @@ export default function AboutUs() {
           </Stack>
           <Box pb={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} >
             <Grid container spacing={5}>
-              <Grid item xs={12} marginTop={{ xs: "-83px", sm: "-83px", md: "-83px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
+              <Grid item xs={12} marginTop={{ xs: "-104px", sm: "-104px", md: "-104px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
                 <StyledImage6
                   src={ball}
                   ref={ballRef}
                   alt="grid-ball"
+                 
                 />
                 <Typography maxWidth={{ xs: "200px", sm: "200px", md: "200px", lg: "441px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
                   variant="h6"
                   color={Colors.BUTTON_COLOR}
                   fontWeight={600}
+                  marginTop={{xs: "0px", sm: "0px", md: "0px", lg: "-48px"}}
                 >
                   Ready to play? <br /> Let's make every moment count at
                   Playzo33!
@@ -595,12 +599,12 @@ export default function AboutUs() {
       <Box
         style={{
           transform: showTimeline ? 'translateY(-420vh)' : 'translateY(100vh)', // Slide up from bottom
-          transition: 'transform 0.5s ease-in-out', // Smooth transition
+          transition: 'transform 0.9s ease-in-out', // Smooth transition
           position: 'relative',
          
         }}
       >
-        {showTimeline && <TimelineComponent />}
+       {showTimeline && window.innerWidth >= 600 && <TimelineComponent />}
       </Box>
       {/* <Box paddingY={10} maxWidth={1200} margin="auto">
 
