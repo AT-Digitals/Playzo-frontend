@@ -186,18 +186,22 @@ export default function MuiTab() {
               fontSize: { xs: "14px", sm: "20px" },
               fontWeight: 500,
               textTransform: "capitalize",
-              padding: "5px",
               fontStyle: "italic",
               color: "black",
+              // padding: "5px 15px", // Adjust the padding as needed
 
               "&.Mui-selected": {
                 fontWeight: "bold",
-                textDecoration: "underline",
                 color: Colors.BUTTON_COLOR,
+                borderBottomColor: Colors.BUTTON_COLOR,
+                boxShadow: "0px 3px 0px 0px " + Colors.BUTTON_COLOR,
+                borderBottomWidth: "2px",
               },
             },
             ".MuiTabs-flexContainer": {
               flexWrap: "wrap",
+              gap: "0.5rem",
+              paddingBottom: "2rem",
             },
 
             width: "95%", // Make sure the Tabs take full width
