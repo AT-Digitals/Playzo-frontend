@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import React, { ReactNode, useEffect } from "react";
 
 import Colors from "../../CommonComponents/Colors";
@@ -140,6 +140,60 @@ const CustomSlider = ({
           />
         ))}
       </Box>
+      {/* <Stack direction={"row"} justifyContent={"space-between"}>
+        <IconButton
+          sx={{
+            // position: "absolute",
+            // top: "50%",
+            // transform: "translateY(-50%)",
+            // left: "15px",
+            background: Colors.BUTTON_COLOR,
+            "&:hover": {
+              background: Colors.BUTTON_COLOR, // Set the same background color on hover
+            },
+          }}
+          onClick={prevSlide}
+        >
+          <NavigateBeforeIcon
+            style={{
+              color: "white",
+            }}
+          />
+        </IconButton>
+        <Box display="flex" justifyContent="center">
+          {slides.map((_, index) => (
+            <FiberManualRecordIcon
+              key={index}
+              sx={{
+                fontSize: currentSlide === index ? "18px" : "14px",
+                color: currentSlide === index ? "#007bff" : "gray",
+                cursor: "pointer",
+                mx: 1,
+              }}
+              onClick={() => handleBulletClick(index)}
+            />
+          ))}
+        </Box>
+        <IconButton
+          sx={{
+            // position: "absolute",
+            // top: "50%",
+            // transform: "translateY(-50%)",
+            // right: "15px",
+            background: Colors.BUTTON_COLOR,
+            "&:hover": {
+              background: Colors.BUTTON_COLOR, // Set the same background color on hover
+            },
+          }}
+          onClick={nextSlide}
+        >
+          <NavigateNextIcon
+            style={{
+              color: "white",
+            }}
+          />
+        </IconButton>
+      </Stack> */}
     </>
   );
 };
