@@ -186,9 +186,7 @@ export default function MuiTab() {
               fontSize: { xs: "14px", sm: "20px" },
               fontWeight: 500,
               textTransform: "capitalize",
-              fontStyle: "italic",
-              color: "black",
-              // padding: "5px 15px", // Adjust the padding as needed
+              color: Colors.BUTTON_COLOR,
 
               "&.Mui-selected": {
                 fontWeight: "bold",
