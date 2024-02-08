@@ -122,6 +122,7 @@ export default function CarouselComponent() {
     }
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} marginY={4} width="100%">
+             <Typography pt={"50px"} textAlign={"center"} color={Colors.BUTTON_COLOR} fontSize={"35px"} fontWeight={"bold"}>Our Client Testimonials</Typography>
             <Stack
                 flexDirection={{xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row"}}
                 spacing={3}
@@ -131,6 +132,7 @@ export default function CarouselComponent() {
                pb={{xs: '0px', sm: '0px', md: "0px", lg: "96px"}}
                 alignItems={{xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal"}}
             >
+               
                 {visibleCards.map((card, index) => (
                     <CarouselCardComponent
                         key={index}
