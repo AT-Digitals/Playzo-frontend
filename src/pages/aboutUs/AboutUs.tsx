@@ -4,19 +4,19 @@ import Aboutus from "../../assets/Aboutus.svg";
 import AppContainer from "../../CommonComponents/AppContainer";
 import Ball4 from "../../assets/ball-4 1.png";
 import Colors from "../../CommonComponents/Colors";
-import EastIcon from "@mui/icons-material/East";
-import Image1 from "../../assets/Rectangle 67.png";
-import Image2 from "../../assets/Rectangle 669.png";
-import Layer3 from "../../assets/Layer_4.png";
-import PopupCarousel from "./PopupCarousel";
-import TimelineComponent from "./TimelineComponent";
-import ball from "../../assets/ball 3.png";
-import styled from "@emotion/styled";
 import turf from "../../assets/Rectangle 12.png";
 import turf1 from "../../assets/image 15.png";
 import turf2 from "../../assets/image 16.png";
 import turf3 from "../../assets/image 17.png";
 import turf4 from "../../assets/image 18.png";
+import EastIcon from "@mui/icons-material/East";
+import ball from "../../assets/ball 3.png";
+import Layer3 from "../../assets/Layer_4.png";
+import Image1 from "../../assets/Rectangle 67.png";
+import Image2 from "../../assets/Rectangle 669.png";
+import styled from "@emotion/styled";
+import TimelineComponent from "./TimelineComponent";
+import { useRef, useEffect, useState } from "react";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -114,25 +114,30 @@ const StyledImage3 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     width: 100%;
-    margin-left: -30px;
+    margin-left: -31px;
   }
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 100%;
     margin-left: 5px;
+    height: 98%;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
   }
 `;
 const StyledImage4 = styled.img`
@@ -158,6 +163,11 @@ const StyledImage4 = styled.img`
     /* Large devices (large desktops) */
     width: 100%;
     height: 99%;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
+               
   }
 `;
 
@@ -166,36 +176,43 @@ const StyledImage5 = styled.img`
     /* Extra small devices (phones) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     width: 159%;
     margin-left: 37px;
-    margin-top: 12px;
+    margin-top: 7px;
   }
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 100%;
     margin: 1px;
+    opacity: 1;
+    overflow: hidden;
+    position: relative;        
+    transition: transform 0.5s ease;
   }
 `;
 const StyledImage6 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(93px, -60px);
+    position: relative;
+    transform: translate(14px, 19px);
     width: 80px;
     height: 90px;
+    margin-top: -74px;
+    margin-left: 92px;
+    transition: left 0.2s;
   }
 
   @media (min-width: 768px) {
@@ -216,30 +233,100 @@ const StyledImage6 = styled.img`
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(135px, -85px);
-    width: 132px;
-    height: 132px;
+    position: relative;
+    transform: translate(50px, 36px);
+    width: 100px;
+    height: 100px;
+    transition: left 0.2s;
   }
 `;
 
 export default function AboutUs() {
+  const ballRef = useRef<HTMLImageElement>(null);
+  const lastScrollTop = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ballRef.current) {
+        const ball = ballRef.current;
+        const scrollTop = window.scrollY || window.pageYOffset;
+
+        if (scrollTop > lastScrollTop.current) {
+          // Scrolling down
+          ball.style.transform = `rotate(${scrollTop * 0.1}deg)`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') - 1}px`;
+          // Adjust the movement speed by changing the value after '-'
+          if (window.innerWidth >= 600) { // Only adjust margins on desktop view
+            ball.style.marginTop = "-92px";
+            ball.style.marginLeft = "190px";
+          }
+        } else {
+          // Scrolling up
+          ball.style.transform = `rotate(-${scrollTop * 0.1}deg)`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') + 1}px`;
+          // Adjust the movement speed by changing the value after '+'
+          if (window.innerWidth <= 600) { // Only adjust margins on desktop view
+            ball.style.marginTop = "-74px"; // Reset margin top
+            ball.style.marginLeft = "87px";
+            ball.style.width = "93px";
+            ball.style.height = "93px"; // Reset margin left
+          }
+        }
+        lastScrollTop.current = scrollTop;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const [showTimeline, setShowTimeline] = useState(false);
+
+  useEffect(() => {
+    // Show the timeline component with a delay for animation effect
+    const timer = setTimeout(() => {
+      setShowTimeline(true);
+    }, 500); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
-      <Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          position: "relative",
+          transition: "transform 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.1)", // Increase scale on hover
+          },
+        }}
+      >
         <CardMedia
           component="img"
-          //height="194"
+          // height="194"
           image={Image1}
           alt="Paella dish"
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Make sure the image covers the entire container
+          }}
         />
         <img
           src={Image2}
           alt="about dish"
           style={{
-            width: "100%",
             position: "absolute",
-            transform: `translate(0px, -100%)`,
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // Make sure the image covers the entire container
           }}
         />
       </Box>
@@ -247,7 +334,6 @@ export default function AboutUs() {
         <Box margin="10px 20px">
           <Grid
             container
-            paddingY={2}
             justifyContent="center"
             alignItems="center"
             spacing={8}
@@ -258,6 +344,7 @@ export default function AboutUs() {
               lg: "row",
             }}
             mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
+            mt={{ xs: "-44px", sm: "-44px", md: "-44px", lg: "-7px" }}
           >
             <Grid
               item
@@ -436,85 +523,87 @@ export default function AboutUs() {
             PlayZo Facilities
           </Typography>
           <Grid container>
-            <Stack
-              alignItems={{
-                xs: "center",
-                sm: "center",
-                md: "center",
-                lg: "normal",
-              }}
-              direction={{
-                xs: "column",
-                sm: "column",
-                md: "column",
-                lg: "row",
-              }}
-              spacing={3}
-            >
-              <Grid
-                item
-                xs={6}
-                maxWidth={{ xs: "83%", sm: "83%", md: "83%", lg: "50%" }}
-                margin={{
-                  xs: "30px 30px",
-                  sm: "30px 30px",
-                  md: "30px 30px",
-                  lg: "0px",
+            <Stack alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} direction={{ xs: "column", sm: "column", md: "column", lg: "row" }} spacing={3}>
+              <Grid style={{
+                position: "relative",
+                overflow: "hidden"
+              }} item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px" }}>
+                <img style={{
+                  opacity: 1,
+                  width: "100%",
+                  transition: "transform 0.5s ease",
+                  height: "100%",
+                  overflow: "hidden",
+                  position: "relative",
                 }}
-              >
-                <img src={turf} alt="grid 1" style={{ width: "100%" }} />
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                  src={turf} alt="grid 1" />
               </Grid>
-              <Grid
-                item
-                xs={6}
-                style={{ marginTop: "0px" }}
-                maxWidth={{ xs: "83%", sm: "83%", md: "83%", lg: "50%" }}
-              >
-                <img src={turf1} alt="grid 2" style={{ width: "100%" }} />
+              <Grid item xs={6} style={{
+                marginTop: "3px", position: "relative",
+                overflow: "hidden"
+              }} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }}>
+                <img style={{
+                  opacity: 1,
+                  width: "100%",
+                  transition: "transform 0.5s ease",
+                  height: "100%",
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }} src={turf1} alt="grid 2" />
               </Grid>
             </Stack>
           </Grid>
           <Grid container>
-            <Stack
-              direction="row"
-              marginTop={{ xs: "-30px", sm: "-30px", md: "-30px", lg: "0px" }}
-              marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: "0px" }}
-              spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}
-            >
-              <Box
-                alignItems={{
-                  xs: "center",
-                  sm: "center",
-                  md: "center",
-                  lg: "normal",
-                }}
-                gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }}
-                display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }}
-                flexDirection={{
-                  xs: "column",
-                  sm: "column",
-                  md: "column",
-                  lg: "row",
-                }}
-              >
-                <Grid
-                  item
-                  xs={0}
-                  ml={{ xs: "20px", sm: "20px", md: "20px", lg: "0px" }}
-                  width={{ xs: "73%", sm: "73%", md: "73%", lg: "37%" }}
-                >
-                  <StyledImage4 src={turf2} alt="grid 3" />
+            <Stack direction="row" marginTop={{ xs: "-30px", sm: '-30px', md: "-30px", lg: '0px' }} marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: '0px' }} spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}>
+              <Box alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }} display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }} flexDirection={{ xs: 'column', sm: "column", md: "column", lg: "row" }}>
+                <Grid sx={{
+                  position: "relative",
+                  overflow: { xs: "", sm: "", md: "", lg: "hidden" }
+                }} item xs={0} ml={{ xs: "19px", sm: "19px", md: "19px", lg: "0px" }} width={{ xs: '75%', sm: "75%", md: "75%", lg: '37%' }}>
+                  <StyledImage4 style={{}}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }} src={turf2} alt="grid 3" />
                 </Grid>
-                <Grid item xs={0}>
-                  <StyledImage5 src={turf3} alt="grid 4" />
+                <Grid sx={{
+                  position: "relative",
+                  overflow: { xs: "", sm: "", md: "", lg: "hidden" }
+                }} item xs={0}>
+                  <StyledImage5 style={{}}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.1)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }} src={turf3} alt="grid 4" />
                 </Grid>
               </Box>
-              <Grid
-                item
-                xs={0}
-                width={{ xs: "135%", sm: "135%", md: "135%", lg: "33%" }}
-              >
-                <StyledImage3 src={turf4} alt="grid 5" />
+              <Grid sx={{
+                position: "relative",
+                overflow: { xs: "", sm: "", md: "", lg: "hidden" }
+              }} item xs={0} width={{ xs: '135%', sm: "135%", md: "135%", lg: '33%' }}>
+                <StyledImage3 style={{}}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }} src={turf4} alt="grid 5" />
               </Grid>
             </Stack>
           </Grid>
@@ -549,29 +638,18 @@ export default function AboutUs() {
           </Stack>
           <Box pb={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}>
             <Grid container spacing={5}>
-              <Grid
-                item
-                xs={12}
-                marginTop={{
-                  xs: "-83px",
-                  sm: "-83px",
-                  md: "-83px",
-                  lg: "40px",
-                }}
-                marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}
-              >
-                <StyledImage6 src={ball} alt="grid-ball" />
-                <Typography
-                  maxWidth={{
-                    xs: "200px",
-                    sm: "200px",
-                    md: "200px",
-                    lg: "441px",
-                  }}
-                  fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
+              <Grid item xs={12} marginTop={{ xs: "-104px", sm: "-104px", md: "-104px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
+                <StyledImage6
+                  src={ball}
+                  ref={ballRef}
+                  alt="grid-ball"
+
+                />
+                <Typography maxWidth={{ xs: "200px", sm: "200px", md: "200px", lg: "441px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
                   variant="h6"
                   color={Colors.BUTTON_COLOR}
                   fontWeight={600}
+                  marginTop={{ xs: "0px", sm: "0px", md: "0px", lg: "-48px" }}
                 >
                   Ready to play? <br /> Let's make every moment count at
                   Playzo33!
@@ -582,7 +660,16 @@ export default function AboutUs() {
           </Box>
         </Stack>
       </Box>
-      <TimelineComponent />
+      <Box
+        style={{
+          transform: showTimeline ? 'translateY(-420vh)' : 'translateY(100vh)', // Slide up from bottom
+          transition: 'transform 0.9s ease-in-out', // Smooth transition
+          position: 'relative',
+
+        }}
+      >
+        {showTimeline && window.innerWidth >= 600 && <TimelineComponent />}
+      </Box>
       {/* <Box paddingY={10} maxWidth={1200} margin="auto">
 
 
