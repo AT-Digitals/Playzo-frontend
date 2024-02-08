@@ -1,13 +1,12 @@
-import { Box, Stack, Typography, styled, useMediaQuery } from "@mui/material";
+import { Box, Stack, Typography, styled } from "@mui/material";
 
 import Colors from "../../CommonComponents/Colors";
-import ServiceHeader from "../../assets/ServiceHeader.svg";
 import ServicePara from "../../assets/ServicePara.svg";
 import ServicePara1 from "../../assets/ServicePara1.svg";
 
 const StyledTypo = styled(Typography)({
   marginTop: "60px",
-  position: "absolute",
+  // position: "absolute",
   fontStyle: "normal",
   fontWeight: 700,
 });
@@ -24,10 +23,6 @@ const StyledTypoBody = styled(Typography)({
 });
 
 export default function ServiceHeaders() {
-  const isMdScreen = useMediaQuery(
-    "@media (max-width: 500px) and (max-width: 560px)"
-  );
-
   return (
     <>
       <Stack
@@ -37,7 +32,7 @@ export default function ServiceHeaders() {
         direction={{ xs: "column", sm: "row" }}
         spacing={0}
       >
-        <Box
+        {/* <Box
           component="img"
           src={ServiceHeader}
           sx={
@@ -50,7 +45,7 @@ export default function ServiceHeaders() {
               maxWidth: { xs: "45px", sm: "60px", md: "100%" },
             } as any
           }
-        />
+        /> */}
 
         <StyledTypo
           color={Colors.BLACK}
@@ -92,10 +87,10 @@ export default function ServiceHeaders() {
               xs: "translate(0px,-200px)",
               sm: "translate(0px,-200px)",
               md: "translate(180px,-180px)",
-              lg: "translate(10px,-180px)",
+              lg: "translate(-30px,-180px)",
             },
             right: { xs: "10%", sm: 0, md: "16%" },
-            maxWidth: { xs: "60px", sm: 117, md: "250px" },
+            maxWidth: { xs: "60px", sm: 117, md: "250px", lg: "199px" },
           }}
         />
         <Box
@@ -108,7 +103,7 @@ export default function ServiceHeaders() {
               xs: "translate(-3px,-150px)",
               sm: "translate(20px,-120px)",
               md: "translate(150px,30px)",
-              lg: "translate(10px,30px)",
+              lg: "translate(-10px,-10px)",
             },
             right: { xs: "14%", sm: "5%", md: "22%" },
             maxWidth: { xs: "15px", sm: "60px" },

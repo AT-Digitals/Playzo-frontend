@@ -73,13 +73,8 @@ export default function Footer() {
               lg={4}
             >
               <Stack direction="column" spacing={4}>
-                <Link
-                  // style={{
-                  //   marginBottom: 1,
-                  // }}
-                  to={routes.ROOT}
-                >
-                  <img src={logo} width={172} height={34} />
+                <Link to={routes.ROOT}>
+                  <img src={logo} width={172} height={34} alt="22" />
                 </Link>
                 <Typography fontSize="16px" ml="10px !important">
                   Lorem ipsum dolor sit amet consectetur dolol drakgonil
@@ -172,16 +167,15 @@ export default function Footer() {
               >
                 Contact Us
               </Typography>
-              <Stack direction="row" spacing={5}>
+              <Stack spacing={2}>
                 <Typography fontSize="14px" fontWeight={400}>
-                  39/6 KCP Thottam,
-                  <br /> Kumalan Kuttai,
-                  <br />
-                  Erode, Tamil Nadu <br /> 638011
+                  +91 70944 60944 <br />
+                  +91 91088 83555
                 </Typography>
                 <Typography fontSize="14px" fontWeight={400}>
-                  70944 60944 <br />
-                  91088 83555
+                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
+                  <br />
+                  Tamil Nadu - 638011{" "}
                 </Typography>
               </Stack>
             </Grid>

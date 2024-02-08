@@ -108,7 +108,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             backgroundColor: "#EBF5FF",
             // borderRadius: "8px",
             padding: "40px",
-            maxHeight: { xs: 670, sm: 670, md: 600, lg: 600 },
+            maxHeight: { xs: undefined, sm: 670, md: 600, lg: 600 },
             marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
           }}
           alignItems="center"
