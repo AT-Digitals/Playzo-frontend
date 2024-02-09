@@ -1,35 +1,25 @@
-import {
-  Box,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Link, Stack, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
 
+import Badminton from "../assets/Image (8).png";
+import CardComponent from "./CardComponent";
+import CardMedia from "@mui/material/CardMedia";
+import CarouselComponent from "./CarouselComponent";
+import Colors from "../CommonComponents/Colors";
+import ComponentCarosel from "./ComponentCarosel";
+import Cricket from "../assets/Image (9).png";
+import CustomButton from "../CommonComponents/CustomButton";
 import Image1 from "../assets/Rectangle 67.png";
 import Image2 from "../assets/Rectangle 669.png";
-import Colors from "../CommonComponents/Colors";
-
-import CardMedia from "@mui/material/CardMedia";
-
-import turf from "../assets/turf.png";
-import CustomButton from "../CommonComponents/CustomButton";
-import CardComponent from "./CardComponent";
-import playstation from "../assets/playstation.png";
-import boardGames from "../assets/board games.png";
-import ball from "../assets/ball 1.png";
-import Image3 from "../assets/Image (3).png";
-import Image4 from "../assets/Image (4).png";
-import Image5 from "../assets/Image (5).png";
-import ball3 from "../assets/ball 3.png";
-import ComponentCarosel from "./ComponentCarosel";
-import CarouselComponent from "./CarouselComponent";
-import Badminton from "../assets/Image (8).png";
-import Machine from "../assets/Image (7).png";
-import Cricket from "../assets/Image (9).png";
-import Layer2 from "../assets/Layer_2.png";
 import Layer1 from "../assets/Layer_1 (1).png";
+import Layer2 from "../assets/Layer_2.png";
+import Machine from "../assets/Image (7).png";
+import ball from "../assets/ball 1.png";
+import ball3 from "../assets/ball 3.png";
+import boardGames from "../assets/board games.png";
+import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
+import turf from "../assets/turf.png";
 
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
@@ -54,7 +44,6 @@ const StyledTypo = styled(Typography)({
 });
 
 const StyledImage = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
@@ -88,11 +77,10 @@ const StyledImage = styled.img`
   }
 `;
 const StyledImage1 = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
-    transform: translate(19rem, 49rem);
+    transform: translate(23rem, 49rem);
     width: 37px;
     height: 37px;
   }
@@ -100,7 +88,7 @@ const StyledImage1 = styled.img`
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     position: absolute;
-    transform: translate(19rem, 49rem);
+    transform: translate(24rem, 49rem);
     width: 37px;
     height: 37px;
   }
@@ -108,7 +96,7 @@ const StyledImage1 = styled.img`
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     position: absolute;
-    transform: translate(19rem, 49rem);
+    transform: translate(24rem, 49rem);
     width: 37px;
     height: 37px;
   }
@@ -123,11 +111,10 @@ const StyledImage1 = styled.img`
 `;
 
 const StyledImage2 = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
-    transform: translate(10px, 104rem);
+    transform: translate(-0px, 104rem);
     width: 37px;
     height: 37px;
   }
@@ -135,7 +122,7 @@ const StyledImage2 = styled.img`
   @media (min-width: 768px) {
     /* Small devices (tablets) */
     position: absolute;
-    transform: translate(10px, 104rem);
+    transform: translate(-15px, 104rem);
     width: 37px;
     height: 37px;
   }
@@ -143,7 +130,7 @@ const StyledImage2 = styled.img`
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
     position: absolute;
-    transform: translate(10px, 104rem);
+    transform: translate(-15px, 104rem);
     width: 37px;
     height: 37px;
   }
@@ -157,7 +144,6 @@ const StyledImage2 = styled.img`
   }
 `;
 const StyledImage3 = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
@@ -191,7 +177,6 @@ const StyledImage3 = styled.img`
   }
 `;
 const StyledImage4 = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
@@ -229,7 +214,6 @@ const StyledImage4 = styled.img`
   }
 `;
 const StyledImage5 = styled.img`
-
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
     position: absolute;
@@ -301,48 +285,6 @@ const StyledImage6 = styled.img`
   }
 `;
 
-const items = [
-  {
-    title: "Special Weekday Rates",
-    label: "Avail Now!",
-    description:
-      "Enjoy our exclusive weekday rates and make the most of your afternoons with friends. Book now and save!",
-    image: Image3,
-  },
-  {
-    title: "Playzo Membership",
-    label: "Explore Now!",
-    description:
-      "Unlock a world of benefits with Playzo Membership. Enjoy discounts priority access, and member-only events!",
-    image: Image4,
-  },
-  {
-    title: "Celebration Package",
-    label: "Book Now!",
-    description:
-      "Host your next celebration at Playzo! Our Celebration Package includes turf time, activities, and a dedicated party area.",
-    image: Image5,
-  },
-  // {
-  //     title: "Special Weekday Rates",
-  //     label: 'Avail Now!',
-  //     description: 'Enjoy our exclusive weekday rates and make the most of your afternoons with friends. Book now and save!',
-  //     image: Image3,
-  // },
-  // {
-  //     title: "Playzo Membership",
-  //     label: 'Explore Now!',
-  //     description: 'Unlock a world of benefits with Playzo Membership. Enjoy discounts priority access, and member-only events!',
-  //     image: Image4,
-  // },
-  // {
-  //     title: "Celebration Package",
-  //     label: 'Book Now!',
-  //     description: 'Host your next celebration at Playzo! Our Celebration Package includes turf time, activities, and a dedicated party area.',
-  //     image: Image5,
-  // },
-];
-
 const StyledButton = styled(CustomButton)({
   fontSize: "20px",
   textTransform: "none",
@@ -353,24 +295,31 @@ const StyledButton = styled(CustomButton)({
 });
 
 export default function HomePage() {
+  const typoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = typoRef.current;
+    if (element) {
+      element.classList.add("start-animation");
+    }
+  }, []);
+
   return (
     <Box width="100%">
       <Box>
-        <CardMedia sx={{
-          height: { xs: '800px', sm: "800px", md: '800px', lg: '' }
-        }}
+        <CardMedia
+          sx={{
+            height: { xs: "800px", sm: "800px", md: "800px", lg: "" },
+          }}
           component="img"
           //height="194"
           image={Image1}
           alt="Paella dish"
         />
       </Box>
-      <StyledImage5
-        src={Image2}
-        alt="background"
-      />
+      <StyledImage5 src={Image2} alt="background" />
 
-<StyledTypo
+      <StyledTypo
         variant="h3"
         sx={{
           transform: {
@@ -395,7 +344,6 @@ export default function HomePage() {
         bgColor={Colors.BUTTON_COLOR}
         variant="contained"
         color={Colors.WHITE}
-
       >
         Book Now
       </StyledButton>
@@ -407,17 +355,14 @@ export default function HomePage() {
         paddingTop={"80px"}
         pb={"50px"}
       >
-        <StyledImage
-          src={Layer2}
-          alt="Layer2"
-        />
+        <StyledImage src={Layer2} alt="Layer2" />
         <Typography
           variant="h2"
           color={Colors.BLACK}
           textAlign="center"
-          fontSize={{ xs: '18px', sm: '18px', md: '18px', lg: "32px" }}
+          fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "32px" }}
           fontWeight={700}
-          width={{ xs: "300px", sm: '300px', md: "300px", lg: "700px" }}
+          width={{ xs: "300px", sm: "300px", md: "300px", lg: "700px" }}
           margin="auto"
           sx={{ fontFamily: "Inter" }}
         >
@@ -435,7 +380,7 @@ export default function HomePage() {
         margin="0 auto"
         spacing={3}
         pb={3}
-        flexDirection={{ xs: 'column', sm: "column", md: "column", lg: "row" }}
+        flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
       >
         <Grid item xs={4}>
           <CardComponent
@@ -467,14 +412,8 @@ export default function HomePage() {
             image={boardGames}
           />
         </Grid>
-        <StyledImage1
-          src={Layer1}
-          alt="layer1"
-        />
-        <StyledImage2
-          src={Layer1}
-          alt="layer1"
-        />
+        <StyledImage1 src={Layer1} alt="layer1" />
+        <StyledImage2 src={Layer1} alt="layer1" />
         <Grid item xs={4}>
           <CardComponent
             buttonLabel="Know more.."
@@ -506,7 +445,7 @@ export default function HomePage() {
           />
         </Grid>
       </Grid>
-      <Box width="100%" maxWidth={1200} margin="0 auto" pb={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}} pt={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}}>
+      <Box width="100%" maxWidth={1200} margin="0 auto" pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }} pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}>
         <Stack marginRight={{ xs: "25px", sm: '25px', md: "25px", lg: '0px' }} direction="row" justifyContent="center" alignItems="center">
           {/* <StyledImage3
             src={ball}
@@ -520,7 +459,7 @@ export default function HomePage() {
             padding: "10px 15px"
           }}>
             see more services
-            </CustomButton>
+          </CustomButton>
         </Stack>
       </Box>
       <CarouselComponent />
@@ -530,18 +469,14 @@ export default function HomePage() {
             sx={{
               textDecoration: "none",
               color: Colors.BUTTON_COLOR,
-              fontSize: { xs: '30px', sm: '30px', md: '30px', lg: "40px" },
+              fontSize: { xs: "30px", sm: "30px", md: "30px", lg: "40px" },
               fontWeight: 500,
-              marginLeft: { xs: "29px", sm: '29px', md: "29px", lg: "-81px" }
+              marginLeft: { xs: "29px", sm: "29px", md: "29px", lg: "-81px" },
             }}
           >
             Offers
           </Link>
-          <StyledImage6
-            src={ball}
-            alt="ball1"
-
-          />
+          <StyledImage6 src={ball} alt="ball1" />
         </Stack>
       </Box>
       <ComponentCarosel />
