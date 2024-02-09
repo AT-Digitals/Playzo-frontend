@@ -1,5 +1,5 @@
 import { Box, Grid, Link, Stack, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import Badminton from "../assets/Image (8).png";
 import CardComponent from "./CardComponent";
@@ -304,6 +304,28 @@ export default function HomePage() {
     }
   }, []);
 
+  const [animateOnMount, setAnimateOnMount] = useState(false);
+
+  useLayoutEffect(() => {
+    const handleAnimation = () => {
+      // Trigger animation after a short delay (adjust as needed)
+      const animationTimeout = setTimeout(() => {
+        setAnimateOnMount(true);
+      }, 500);
+
+      // Clear the timeout to avoid memory leaks
+      return () => clearTimeout(animationTimeout);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      handleAnimation();
+    } else {
+      // If not, wait for the window.onload event
+      window.onload = handleAnimation;
+    }
+  }, []);
+
   return (
     <Box width="100%">
       <Box>
@@ -329,6 +351,7 @@ export default function HomePage() {
             md: "translate(13%, 438%)",
             lg: "translate(107%, 232%)",
           },
+          animation: animateOnMount ? "slide-in 0.8s ease" : "none",
         }}
         fontWeight={600}
         fontFamily="Inter"
