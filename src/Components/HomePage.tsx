@@ -1,5 +1,13 @@
-import { Box, Grid, Link, Stack, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import {
+  Box,
+  Grid,
+  Link,
+  Stack,
+  Typography,
+  css,
+  keyframes,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Badminton from "../assets/Image (8).png";
 import CardComponent from "./CardComponent";
@@ -15,7 +23,6 @@ import Layer1 from "../assets/Layer_1 (1).png";
 import Layer2 from "../assets/Layer_2.png";
 import Machine from "../assets/Image (7).png";
 import ball from "../assets/ball 1.png";
-import ball3 from "../assets/ball 3.png";
 import boardGames from "../assets/board games.png";
 import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
@@ -24,22 +31,26 @@ import turf from "../assets/turf.png";
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
   position: "absolute",
-  top: "50px",
+  top: "50%",
+  left: "25%",
   fontSize: "5rem",
   textAlign: "center",
   zIndex: 1,
-  overflow: "hidden", // This is added to hide the overflow during the animation
+  overflow: "hidden",
+  cursor: "pointer",
+
   "&:hover": {
     "& > span:first-of-type": {
       transform: "translateX(-100%)",
     },
     "& > span:last-of-type": {
-      transform: "translateX(100%)",
+      transform: "translateX(104%)",
     },
   },
+
   "& > span": {
     display: "inline-block",
-    transition: "transform 0.8s ease", // Adjust the duration here
+    transition: "transform 2s ease",
   },
 });
 
@@ -143,76 +154,76 @@ const StyledImage2 = styled.img`
     height: 37px;
   }
 `;
-const StyledImage3 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    right: 147px;
-    width: 80px;
-    height: 80px;
-  }
+// const StyledImage3 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     right: 147px;
+//     width: 80px;
+//     height: 80px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    right: 147px;
-    width: 80px;
-    height: 80px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     right: 147px;
+//     width: 80px;
+//     height: 80px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    right: 147px;
-    width: 80px;
-    height: 80px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     right: 147px;
+//     width: 80px;
+//     height: 80px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    right: 275px;
-    width: 100px;
-    height: 100px;
-  }
-`;
-const StyledImage4 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(151%, 206%);
-    top: 100px;
-    width: 150px;
-    height: 150px;
-  }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     right: 275px;
+//     width: 100px;
+//     height: 100px;
+//   }
+// `;
+// const StyledImage4 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(151%, 206%);
+//     top: 100px;
+//     width: 150px;
+//     height: 150px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(151%, 206%);
-    top: 100px;
-    width: 150px;
-    height: 150px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(151%, 206%);
+//     top: 100px;
+//     width: 150px;
+//     height: 150px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(151%, 206%);
-    top: 100px;
-    width: 150px;
-    height: 150px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(151%, 206%);
+//     top: 100px;
+//     width: 150px;
+//     height: 150px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(385%, 102%);
-    top: 100px;
-    width: 250px;
-    height: 250px;
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(385%, 102%);
+//     top: 100px;
+//     width: 250px;
+//     height: 250px;
+//   }
+// `;
 const StyledImage5 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
@@ -295,15 +306,65 @@ const StyledButton = styled(CustomButton)({
 });
 
 export default function HomePage() {
-  const typoRef = useRef<HTMLDivElement>(null);
+  const slideFromLeft = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+  const slideFromRight = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+  interface StyledSpanProps {
+    showText: boolean;
+  }
+
+  const StyledSpan = styled.span<StyledSpanProps>`
+    opacity: ${({ showText }) => (showText ? 1 : 0)};
+    transition: opacity 2s ease-in-out;
+
+    &:first-child {
+      ${({ showText }) =>
+        showText &&
+        css`
+          animation: ${slideFromLeft} 2s ease-out;
+        `}
+    }
+
+    &:last-child {
+      ${({ showText }) =>
+        showText &&
+        css`
+          animation: ${slideFromRight} 2s ease-out;
+        `}
+    }
+  `;
+
+  const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    const element = typoRef.current;
-    if (element) {
-      element.classList.add("start-animation");
-    }
-  }, []);
+    const timer1 = setTimeout(() => {
+      setShowText(true);
+    }, 1000);
 
+    const timer2 = setTimeout(() => {
+      setShowText(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
   return (
     <Box width="100%">
       <Box>
@@ -312,7 +373,6 @@ export default function HomePage() {
             height: { xs: "800px", sm: "800px", md: "800px", lg: "" },
           }}
           component="img"
-          //height="194"
           image={Image1}
           alt="Paella dish"
         />
@@ -321,26 +381,29 @@ export default function HomePage() {
 
       <StyledTypo
         variant="h3"
-        sx={{
-          transform: {
-            xs: "translate(13%, 438%)",
-            sm: "translate(13%, 438%)",
-            md: "translate(13%, 438%)",
-            lg: "translate(107%, 232%)",
-          },
-        }}
         fontWeight={600}
         fontFamily="Inter"
-        fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "5rem" }}
+        fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "8rem" }}
+        textAlign={"center"}
       >
-        <span>Play Beyond</span> <br /> <span>Boundaries</span>
+        <StyledSpan showText={showText}>Play Beyond</StyledSpan>
+
+        <br />
+        <StyledSpan showText={showText}>Boundaries</StyledSpan>
       </StyledTypo>
-      <StyledButton sx={{
-        backgroundColor: Colors.BUTTON_COLOR,
-        fontFamily: "Inter", fontWeight: 600,
-        color: "white",
-        transform: { xs: "translate(74%, 1271%)", sm: "translate(74%, 1271%)", md: "translate(74%, 1271%)", lg: "translate(450%, -1200%)" }
-      }}
+      <StyledButton
+        sx={{
+          backgroundColor: Colors.BUTTON_COLOR,
+          fontFamily: "Inter",
+          fontWeight: 600,
+          color: "white",
+          transform: {
+            xs: "translate(74%, 1271%)",
+            sm: "translate(74%, 1271%)",
+            md: "translate(74%, 1271%)",
+            lg: "translate(450%, -1200%)",
+          },
+        }}
         bgColor={Colors.BUTTON_COLOR}
         variant="contained"
         color={Colors.WHITE}
@@ -367,10 +430,8 @@ export default function HomePage() {
           sx={{ fontFamily: "Inter" }}
         >
           We offer a diverse range of{" "}
-          <span style={{ color: Colors.BUTTON_COLOR }}>
-            services
-          </span>{" "}
-          to cater to the varied interests of our community.
+          <span style={{ color: Colors.BUTTON_COLOR }}>services</span> to cater
+          to the varied interests of our community.
         </Typography>
       </Box>
       <Grid
@@ -445,19 +506,32 @@ export default function HomePage() {
           />
         </Grid>
       </Grid>
-      <Box width="100%" maxWidth={1200} margin="0 auto" pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }} pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}>
-        <Stack marginRight={{ xs: "25px", sm: '25px', md: "25px", lg: '0px' }} direction="row" justifyContent="center" alignItems="center">
+      <Box
+        width="100%"
+        maxWidth={1200}
+        margin="0 auto"
+        pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+        pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+      >
+        <Stack
+          marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
           {/* <StyledImage3
             src={ball}
             alt="ball1"
           /> */}
-          <CustomButton style={{
-            background: Colors.WHITE,
-            color: Colors.BUTTON_COLOR,
-            textTransform: "capitalize",
-            border: "1px solid #15B5FC",
-            padding: "10px 15px"
-          }}>
+          <CustomButton
+            style={{
+              background: Colors.WHITE,
+              color: Colors.BUTTON_COLOR,
+              textTransform: "capitalize",
+              border: "1px solid #15B5FC",
+              padding: "10px 15px",
+            }}
+          >
             see more services
           </CustomButton>
         </Stack>
