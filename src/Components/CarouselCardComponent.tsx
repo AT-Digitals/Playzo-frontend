@@ -183,10 +183,10 @@ export default function CarouselCardComponent({
                     />
                     <Stack direction="column" spacing={2} width="370px" py={2}>
                         <Rating value={cardDetails.ratings} readOnly />
-                        <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "18px"}}>
+                        <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "17px"}}>
                             {cardDetails.feedback}
                         </Typography>
-                        <Stack  direction="column" sx={{ backgroundColor: Colors.BLACK }}>
+                        <Stack height={"100%"} direction="column" sx={{ backgroundColor: Colors.BLACK }}>
                             <Typography
                                 gutterBottom
                                 component="div"
@@ -215,22 +215,23 @@ export default function CarouselCardComponent({
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <Button onClick={prevClick} sx={{
-                                padding: "15px 5px",
-                                background: "#36454F",
+                                padding: "18px 7px",
+                                background: Colors.BUTTON_COLOR,
                                 borderRadius: "50%",
                                 minWidth: "24px !important",
                                 height: "24px",
-                                alignItems: "center"
+                                alignItems: "center",
 
                             }}>
                                 <ArrowBackIosIcon sx={{
-                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "20px"},
-                                    textAlign: "center"
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "16px"},
+                                    textAlign: "center", 
+                                    marginLeft: "4px"
                                 }} />
                             </Button>
                             <Button onClick={nextClick} sx={{
-                                padding: "15px 5px",
-                                background: "#36454F",
+                                padding: "18px 7px",
+                                background: Colors.BUTTON_COLOR,
                                 borderRadius: "50%",
                                 minWidth: "24px !important",
                                 height: "24px",
@@ -238,8 +239,9 @@ export default function CarouselCardComponent({
 
                             }}>
                                 <ArrowForwardIosIcon sx={{
-                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "20px"},
-                                    textAlign: "center"
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "16px"},
+                                    textAlign: "center",
+                                    marginLeft: "4px"
                                 }} />
                             </Button>
                         </Stack>

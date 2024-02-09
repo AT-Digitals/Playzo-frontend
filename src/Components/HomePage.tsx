@@ -34,11 +34,23 @@ import styled from "@emotion/styled";
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
   position: "absolute",
-  top: "100px",
-  // left: '50%',
+  top: "50px",
   fontSize: "5rem",
   textAlign: "center",
   zIndex: 1,
+  overflow: "hidden", // This is added to hide the overflow during the animation
+  "&:hover": {
+    "& > span:first-of-type": {
+      transform: "translateX(-100%)",
+    },
+    "& > span:last-of-type": {
+      transform: "translateX(100%)",
+    },
+  },
+  "& > span": {
+    display: "inline-block",
+    transition: "transform 0.8s ease", // Adjust the duration here
+  },
 });
 
 const StyledImage = styled.img`
@@ -104,7 +116,7 @@ const StyledImage1 = styled.img`
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     position: absolute;
-    transform: translate(74rem, 30rem);
+    transform: translate(75rem, 30rem);
     width: 37px;
     height: 37px;
   }
@@ -139,7 +151,7 @@ const StyledImage2 = styled.img`
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     position: absolute;
-    transform: translate(10px, 62rem);
+    transform: translate(-14px, 62rem);
     width: 37px;
     height: 37px;
   }
@@ -358,15 +370,22 @@ export default function HomePage() {
         alt="background"
       />
 
-      <StyledTypo variant="h3" sx={{
-        transform: { xs: "translate(13%, 438%)", sm: "translate(13%, 438%)", md: "translate(13%, 438%)", lg: "translate(107%, 232%)" },
-      }} fontWeight={600} fontFamily="Inter" fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "5rem" }}>
-        Play Beyond <br /> Boundaries
+<StyledTypo
+        variant="h3"
+        sx={{
+          transform: {
+            xs: "translate(13%, 438%)",
+            sm: "translate(13%, 438%)",
+            md: "translate(13%, 438%)",
+            lg: "translate(107%, 232%)",
+          },
+        }}
+        fontWeight={600}
+        fontFamily="Inter"
+        fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "5rem" }}
+      >
+        <span>Play Beyond</span> <br /> <span>Boundaries</span>
       </StyledTypo>
-      <StyledImage4
-        src={ball3}
-        alt="banner"
-      />
       <StyledButton sx={{
         backgroundColor: Colors.BUTTON_COLOR,
         fontFamily: "Inter", fontWeight: 600,
@@ -385,8 +404,8 @@ export default function HomePage() {
         width="100%"
         maxWidth={1200}
         margin="0 auto"
-        paddingTop={8}
-        pb={4}
+        paddingTop={"80px"}
+        pb={"50px"}
       >
         <StyledImage
           src={Layer2}
@@ -404,7 +423,7 @@ export default function HomePage() {
         >
           We offer a diverse range of{" "}
           <span style={{ color: Colors.BUTTON_COLOR }}>
-            <i>services</i>
+            services
           </span>{" "}
           to cater to the varied interests of our community.
         </Typography>
@@ -488,25 +507,20 @@ export default function HomePage() {
         </Grid>
       </Grid>
       <Box width="100%" maxWidth={1200} margin="0 auto" pb={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}} pt={{xs: "32px", sm: "32px", md: "32px", lg: "50px"}}>
-        <Stack marginRight={{ xs: "25px", sm: '25px', md: "25px", lg: '0px' }} direction="row" justifyContent="end" alignItems="center">
-          <StyledImage3
+        <Stack marginRight={{ xs: "25px", sm: '25px', md: "25px", lg: '0px' }} direction="row" justifyContent="center" alignItems="center">
+          {/* <StyledImage3
             src={ball}
             alt="ball1"
-          />
-          <Link
-            href=""
-            sx={{
-              textDecoration: "none",
-              color: Colors.BUTTON_COLOR,
-              fontSize: "18px",
-              fontWeight: 600,
-              ".css-olvtuu-MuiTypography-root-MuiLink-root:hover": {
-                textDecoration: "underline",
-              },
-            }}
-          >
+          /> */}
+          <CustomButton style={{
+            background: Colors.WHITE,
+            color: Colors.BUTTON_COLOR,
+            textTransform: "capitalize",
+            border: "1px solid #15B5FC",
+            padding: "10px 15px"
+          }}>
             see more services
-          </Link>
+            </CustomButton>
         </Stack>
       </Box>
       <CarouselComponent />

@@ -21,7 +21,14 @@ export default function CardComponent({
     description, buttonLabel
 }: cardProps) {
     return (
-        <Card sx={{ maxWidth: 400, height: { xs: "400px", sm: '400px', md: "400px", lg: "525px" }, width: { xs: "319px", sm: '319px', md: "319px", lg: "374px" }, boxShadow: { xs: "none", sm: "none", md: "none", lg: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" } }} >
+        <Card sx={{ maxWidth: 400, height: { xs: "400px", sm: '400px', md: "400px", lg: "525px" }, width: { xs: "319px", sm: '319px', md: "319px", lg: "374px" },
+        ":hover": {
+            boxShadow: { xs: "none", sm: "none", md: "none", lg: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(173,173,173)" },
+            cursor: "pointer",
+            "& .title": {
+                color: Colors.BUTTON_COLOR // Change to your desired color
+            }
+           } }} >
             <CardMedia
                 component="img"
                 sx={{
@@ -32,7 +39,7 @@ export default function CardComponent({
             />
 
             <Stack direction="column" spacing={2} margin="0 auto" padding={{ xs: "25px", sm: '25px', md: "25px", lg: '32px' }} sx={{ backgroundColor: Colors.WHITE }}>
-                <Typography fontSize="20px" variant="h6" fontWeight={600} textAlign="start">
+                <Typography className="title" fontSize="20px" variant="h6" fontWeight={600} textAlign="start">
                     {title}
                 </Typography>
                 <Typography fontSize="16px" textAlign="start">{description}</Typography>
@@ -40,7 +47,7 @@ export default function CardComponent({
                     color={Colors.BUTTON_COLOR}
                     variant="outlined"
                     bgColor={Colors.BUTTON_COLOR}
-                    sx={{ textTransform: "none", fontWeight: 600, maxWidth: "100px" }}
+                    sx={{ textTransform: "none", fontWeight: 600, maxWidth: "100px", display: "none" }}
                 >
                     {buttonLabel}
                 </CustomButton>

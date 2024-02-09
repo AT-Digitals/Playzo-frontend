@@ -234,7 +234,7 @@ const StyledImage6 = styled.img`
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     position: relative;
-    transform: translate(50px, 36px);
+    transform: translate(50px, -10px);
     width: 100px;
     height: 100px;
     transition: left 0.2s;
@@ -254,16 +254,15 @@ export default function AboutUs() {
         if (scrollTop > lastScrollTop.current) {
           // Scrolling down
           ball.style.transform = `rotate(${scrollTop * 0.1}deg)`;
-          ball.style.left = `${parseFloat(ball.style.left || '50%') - 1}px`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') + 1.3}px`;
           // Adjust the movement speed by changing the value after '-'
           if (window.innerWidth >= 600) { // Only adjust margins on desktop view
             ball.style.marginTop = "-92px";
-            ball.style.marginLeft = "190px";
           }
         } else {
           // Scrolling up
           ball.style.transform = `rotate(-${scrollTop * 0.1}deg)`;
-          ball.style.left = `${parseFloat(ball.style.left || '50%') + 1}px`;
+          ball.style.left = `${parseFloat(ball.style.left || '50%') - 1.3}px`;
           // Adjust the movement speed by changing the value after '+'
           if (window.innerWidth <= 600) { // Only adjust margins on desktop view
             ball.style.marginTop = "-74px"; // Reset margin top
