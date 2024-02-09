@@ -13,6 +13,7 @@ import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import GameIcon from "../../assets/doodl-5 1.png";
 import { Link } from "react-router-dom";
 import ball from "../../assets/ball 3.png";
+import banner from "../../assets/turf.png";
 import bottomImage from "../../assets/Rectangle 679.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -84,7 +85,7 @@ const StyledImage = styled.img`
   }
 `;
 
-export default function ContactUs() {
+export default function ContactUsSample() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
@@ -137,18 +138,43 @@ export default function ContactUs() {
       }
     }
   `;
+  const BannerImage = styled.img`
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  `;
 
   return (
-    <>
-      <Box padding={"0 40px"}>
+    <Box>
+      <Box>
+        <BannerImage src={banner} alt="banner" />
+      </Box>
+      <Box
+        width={{ xs: "80%", sm: "80%", md: "100%" }}
+        sx={{
+          padding: "0 40px",
+          position: "relative",
+          background: "white",
+          maxWidth: "1170px",
+          top: "-7rem",
+          margin: "0 auto",
+          borderRadius: "30px",
+          transition: "box-shadow 0.3s, transform 0.3s", // Adding transition
+          "&:hover": {
+            boxShadow: "0px 0px 20px 0px rgba(0, 0, 0, 0.3)", // Box shadow on hover
+            transform: "scale(1.05)", // Zoom in effect on hover
+          },
+        }}
+      >
         <Stack
           direction={{ xs: "column", sm: "column", md: "row" }}
           // container
           paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "120px" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "120px" }}
-          columnGap={12.5}
+          //   columnGap={12.5}
+          spacing={5}
         >
-          <Box>
+          <Box borderRight={{ xs: "none", sm: "none", md: "1px solid gray" }}>
             <Stack
               padding={{ xs: "0 20px", md: "0 50px" }}
               width={"100%"}
@@ -189,6 +215,7 @@ export default function ContactUs() {
               <StyledImage src={GameIcon} alt="contact-us" />
             </Box>
           </Box>
+
           <Box width={"100%"}>
             <form onSubmit={onSubmit}>
               <Stack
@@ -212,7 +239,7 @@ export default function ContactUs() {
                 spacing={3}
               >
                 <CustomTextField
-                  sx={{ maxWidth: 700 }}
+                  sx={{ maxWidth: 700, borderRadius: "30px" }}
                   label="Name"
                   required={false}
                   placeholder="Enter your name"
@@ -220,7 +247,7 @@ export default function ContactUs() {
                   onChange={setName}
                 />
                 <CustomTextField
-                  sx={{ maxWidth: 700 }}
+                  sx={{ maxWidth: 700, borderRadius: "30px" }}
                   label="Email"
                   required={false}
                   placeholder="Enter your email address"
@@ -248,6 +275,7 @@ export default function ContactUs() {
                     sx={{
                       width: "100%",
                       maxWidth: "700px",
+                      borderRadius: "30px",
                       ".MuiOutlinedInput-input": {
                         marginBottom: "130px",
                       },
@@ -297,6 +325,6 @@ export default function ContactUs() {
         </Stack>
       </Box>
       <img src={bottomImage} alt="bottom" width="100%" height={50} />
-    </>
+    </Box>
   );
 }
