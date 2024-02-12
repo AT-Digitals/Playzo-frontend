@@ -121,8 +121,8 @@ export default function CarouselComponent() {
       ];
     }
     return (
-        <Box sx={{ backgroundColor: Colors.BLACK }} marginY={4} width="100%">
-             <Typography pt={"50px"} textAlign={"center"} color={Colors.BUTTON_COLOR} fontSize={"35px"} fontWeight={"bold"}>Our Client Testimonials</Typography>
+        <Box sx={{ backgroundColor: Colors.BLACK }} mb={"32px"} width="100%">
+             <Typography pt={"50px"} textAlign={"center"} color={Colors.WHITE} fontSize={"42px"} fontWeight={"bold"}>Our Client Testimonials</Typography>
             <Stack
                 flexDirection={{xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row"}}
                 spacing={3}

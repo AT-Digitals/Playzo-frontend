@@ -18,6 +18,9 @@ import ComponentCarosel from "./ComponentCarosel";
 import Cricket from "../assets/Image (9).png";
 import CustomButton from "../CommonComponents/CustomButton";
 import Image1 from "../assets/Rectangle 67.png";
+import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
+import Image4 from "../assets/pexels-pixabay-209977.jpg";
+import Image5 from "../assets/pexels-pixabay-46798.jpg";
 import Image2 from "../assets/Rectangle 669.png";
 import Layer1 from "../assets/Layer_1 (1).png";
 import Layer2 from "../assets/Layer_2.png";
@@ -31,9 +34,9 @@ import turf from "../assets/turf.png";
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
   position: "absolute",
-  top: "50%",
-  left: "25%",
-  fontSize: "5rem",
+  top: "25%",
+  left: "27%",
+  fontSize: "3rem",
   textAlign: "center",
   zIndex: 1,
   overflow: "hidden",
@@ -253,6 +256,7 @@ const StyledImage5 = styled.img`
     /* Large devices (large desktops) */
     position: absolute;
     width: 100%;
+    top: -613px;
     transform: translate(0%, 4.7%);
   }
 `;
@@ -301,9 +305,10 @@ const StyledButton = styled(CustomButton)({
   textTransform: "none",
   fontWeight: 600,
   position: "absolute",
-  top: "100px",
   padding: "10px 20px",
 });
+const images = [Image1, Image3, Image4, Image5]; // List of images to loop through
+const intervalTime = 6000; // Interval time in milliseconds
 
 export default function HomePage() {
   const slideFromLeft = keyframes`
@@ -365,15 +370,27 @@ export default function HomePage() {
       clearTimeout(timer2);
     };
   }, []);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <Box width="100%">
+    <Box width="100%" >
       <Box>
         <CardMedia
           sx={{
-            height: { xs: "800px", sm: "800px", md: "800px", lg: "" },
+            height: { xs: "800px", sm: "800px", md: "800px", lg: "550px" },
           }}
           component="img"
-          image={Image1}
+          image={images[currentImageIndex]}
           alt="Paella dish"
         />
       </Box>
@@ -383,7 +400,7 @@ export default function HomePage() {
         variant="h3"
         fontWeight={600}
         fontFamily="Inter"
-        fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "8rem" }}
+        fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "7rem" }}
         textAlign={"center"}
       >
         <StyledSpan showText={showText}>Play Beyond</StyledSpan>
@@ -391,6 +408,7 @@ export default function HomePage() {
         <br />
         <StyledSpan showText={showText}>Boundaries</StyledSpan>
       </StyledTypo>
+      <Typography style={{transform: "translate(160%, -253%)"}} position={"absolute"} fontSize={"3rem"} fontWeight={"600"} color={Colors.WHITE}>#Let’s Playzo33</Typography>
       <StyledButton
         sx={{
           backgroundColor: Colors.BUTTON_COLOR,
@@ -401,7 +419,7 @@ export default function HomePage() {
             xs: "translate(74%, 1271%)",
             sm: "translate(74%, 1271%)",
             md: "translate(74%, 1271%)",
-            lg: "translate(450%, -1200%)",
+            lg: "translate(451%, -190%)",
           },
         }}
         bgColor={Colors.BUTTON_COLOR}
@@ -410,15 +428,16 @@ export default function HomePage() {
       >
         Book Now
       </StyledButton>
+      <Box sx={{ backgroundColor: "#f0f0f0" }}>
+      <Typography pt={"36px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BUTTON_COLOR}>Our Services</Typography>
       <Box
-        sx={{ backgroundColor: Colors.WHITE }}
         width="100%"
         maxWidth={1200}
         margin="0 auto"
-        paddingTop={"80px"}
+        paddingTop={"50px"}
         pb={"50px"}
       >
-        <StyledImage src={Layer2} alt="Layer2" />
+        {/* <StyledImage src={Layer2} alt="Layer2" /> */}
         <Typography
           variant="h2"
           color={Colors.BLACK}
@@ -445,17 +464,17 @@ export default function HomePage() {
       >
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Turf"}
             description={
-              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket."
+              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket selection."
             }
             image={turf}
           />
         </Grid>
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Play Station"}
             description={
               "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection."
@@ -465,7 +484,7 @@ export default function HomePage() {
         </Grid>
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Board Games"}
             description={
               "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
@@ -473,11 +492,11 @@ export default function HomePage() {
             image={boardGames}
           />
         </Grid>
-        <StyledImage1 src={Layer1} alt="layer1" />
-        <StyledImage2 src={Layer1} alt="layer1" />
+        {/* <StyledImage1 src={Layer1} alt="layer1" />
+        <StyledImage2 src={Layer1} alt="layer1" /> */}
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Badminton"}
             description={
               "Ace every shot on our professional Badminton courts, where passion meets precision."
@@ -487,7 +506,7 @@ export default function HomePage() {
         </Grid>
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Cricket Net"}
             description={
               "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
@@ -497,15 +516,16 @@ export default function HomePage() {
         </Grid>
         <Grid item xs={4}>
           <CardComponent
-            buttonLabel="Know more.."
+            buttonLabel="Know more"
             title={"Bowling Machine"}
             description={
-              "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine."
+              "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine selection."
             }
             image={Machine}
           />
         </Grid>
       </Grid>
+    
       <Box
         width="100%"
         maxWidth={1200}
@@ -529,12 +549,13 @@ export default function HomePage() {
               color: Colors.BUTTON_COLOR,
               textTransform: "capitalize",
               border: "1px solid #15B5FC",
-              padding: "10px 15px",
+              padding: "10px 30px",
             }}
           >
             see more services
           </CustomButton>
         </Stack>
+      </Box>
       </Box>
       <CarouselComponent />
       <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>
@@ -550,7 +571,7 @@ export default function HomePage() {
           >
             Offers
           </Link>
-          <StyledImage6 src={ball} alt="ball1" />
+          {/* <StyledImage6 src={ball} alt="ball1" /> */}
         </Stack>
       </Box>
       <ComponentCarosel />
