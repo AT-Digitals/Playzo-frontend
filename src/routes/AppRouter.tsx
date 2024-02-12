@@ -11,6 +11,7 @@ import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon
 import Cafeteria from "../pages/services/Cafeteria";
 import CareersPage from "../pages/Careers/CareersPage";
 import ContactUs from "../pages/contactus/ContactUs";
+import ContactUsSample from "../pages/contactus/ContactUssample";
 import CricketNet from "../pages/services/CricketNet";
 import CricketNetBookingCommon from "../BookingService/CricketNetCommon";
 import CrossFit from "../pages/services/CrossFit";

@@ -13,6 +13,7 @@ import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import GameIcon from "../../assets/doodl-5 1.png";
 import { Link } from "react-router-dom";
 import ball from "../../assets/ball 3.png";
+import banner from "./cUS.png";
 import bottomImage from "../../assets/Rectangle 679.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
@@ -138,8 +139,17 @@ export default function ContactUs() {
     }
   `;
 
+  const BannerImage = styled.img`
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  `;
+
   return (
     <>
+      <Box padding={"0 30px"}>
+        <BannerImage src={banner} alt="banner" />
+      </Box>
       <Box padding={"0 40px"}>
         <Stack
           direction={{ xs: "column", sm: "column", md: "row" }}

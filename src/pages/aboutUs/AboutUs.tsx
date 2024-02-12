@@ -1,22 +1,34 @@
-import { Box, CardMedia, Grid, Link, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Grid,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
 import Aboutus from "../../assets/Aboutus.svg";
 import AppContainer from "../../CommonComponents/AppContainer";
 import Ball4 from "../../assets/ball-4 1.png";
 import Colors from "../../CommonComponents/Colors";
+import CustomButton from "../../CommonComponents/CustomButton";
+import EastIcon from "@mui/icons-material/East";
+import Image1 from "../../assets/Rectangle 67.png";
+import Image2 from "../../assets/Rectangle 669.png";
+import Layer3 from "../../assets/Layer_4.png";
+import TimelineComponent from "./TimelineComponent";
+import ball from "../../assets/ball 3.png";
+import bg from "./about-us-bg.jpg";
+import group from "./Group 34245.svg";
+import styled from "@emotion/styled";
 import turf from "../../assets/Rectangle 12.png";
 import turf1 from "../../assets/image 15.png";
 import turf2 from "../../assets/image 16.png";
 import turf3 from "../../assets/image 17.png";
 import turf4 from "../../assets/image 18.png";
-import EastIcon from "@mui/icons-material/East";
-import ball from "../../assets/ball 3.png";
-import Layer3 from "../../assets/Layer_4.png";
-import Image1 from "../../assets/Rectangle 67.png";
-import Image2 from "../../assets/Rectangle 669.png";
-import styled from "@emotion/styled";
-import TimelineComponent from "./TimelineComponent";
-import { useRef, useEffect, useState } from "react";
+import vision from "./visibility.svg";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -136,7 +148,7 @@ const StyledImage3 = styled.img`
     height: 98%;
     opacity: 1;
     overflow: hidden;
-    position: relative;        
+    position: relative;
     transition: transform 0.5s ease;
   }
 `;
@@ -165,9 +177,8 @@ const StyledImage4 = styled.img`
     height: 99%;
     opacity: 1;
     overflow: hidden;
-    position: relative;        
+    position: relative;
     transition: transform 0.5s ease;
-               
   }
 `;
 
@@ -199,7 +210,7 @@ const StyledImage5 = styled.img`
     margin: 1px;
     opacity: 1;
     overflow: hidden;
-    position: relative;        
+    position: relative;
     transition: transform 0.5s ease;
   }
 `;
@@ -254,17 +265,19 @@ export default function AboutUs() {
         if (scrollTop > lastScrollTop.current) {
           // Scrolling down
           ball.style.transform = `rotate(${scrollTop * 0.1}deg)`;
-          ball.style.left = `${parseFloat(ball.style.left || '50%') + 1.3}px`;
+          ball.style.left = `${parseFloat(ball.style.left || "50%") + 1.3}px`;
           // Adjust the movement speed by changing the value after '-'
-          if (window.innerWidth >= 600) { // Only adjust margins on desktop view
+          if (window.innerWidth >= 600) {
+            // Only adjust margins on desktop view
             ball.style.marginTop = "-92px";
           }
         } else {
           // Scrolling up
           ball.style.transform = `rotate(-${scrollTop * 0.1}deg)`;
-          ball.style.left = `${parseFloat(ball.style.left || '50%') - 1.3}px`;
+          ball.style.left = `${parseFloat(ball.style.left || "50%") - 1.3}px`;
           // Adjust the movement speed by changing the value after '+'
-          if (window.innerWidth <= 600) { // Only adjust margins on desktop view
+          if (window.innerWidth <= 600) {
+            // Only adjust margins on desktop view
             ball.style.marginTop = "-74px"; // Reset margin top
             ball.style.marginLeft = "87px";
             ball.style.width = "93px";
@@ -275,10 +288,10 @@ export default function AboutUs() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   const [showTimeline, setShowTimeline] = useState(false);
@@ -337,10 +350,10 @@ export default function AboutUs() {
             alignItems="center"
             spacing={8}
             flexDirection={{
-              xs: "column",
-              sm: "column",
-              md: "column",
-              lg: "row",
+              xs: "column-reverse",
+              sm: "column-reverse",
+              md: "column-reverse",
+              lg: "row-reverse",
             }}
             mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
             mt={{ xs: "-44px", sm: "-44px", md: "-44px", lg: "-7px" }}
@@ -381,7 +394,7 @@ export default function AboutUs() {
                 establish a haven where people could gather, connect, and stay
                 active.
               </Typography>
-              <StyledImage1 src={Ball4} alt="ball 4" />
+              {/* <StyledImage1 src={Ball4} alt="ball 4" /> */}
             </Grid>
             <Grid
               item
@@ -399,9 +412,11 @@ export default function AboutUs() {
         </Box>
       </AppContainer>
       <Box
-        style={{
-          backgroundColor: Colors.BACK_BLACK,
+        sx={{
+          background: `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${bg})`,
+          backgroundSize: "cover",
           color: Colors.WHITE,
+          position: "relative",
         }}
       >
         <Grid
@@ -436,6 +451,15 @@ export default function AboutUs() {
                   marginBottom: "10px",
                 }}
               >
+                <img
+                  src={group}
+                  alt=""
+                  style={{
+                    maxWidth: 50,
+                    width: "100%",
+                    marginRight: "10px",
+                  }}
+                />
                 Mission
               </Typography>
               <Typography
@@ -470,6 +494,15 @@ export default function AboutUs() {
                   marginBottom: "10px",
                 }}
               >
+                <img
+                  src={vision}
+                  alt=""
+                  style={{
+                    maxWidth: 50,
+                    width: "100%",
+                    marginRight: "10px",
+                  }}
+                />
                 Vision
               </Typography>
               <Typography
@@ -488,7 +521,7 @@ export default function AboutUs() {
                 the delight of sports and recreation is within everyone's reach.
               </Typography>
             </Box>
-            <StyledImage2 src={Layer3} alt="layer3" />
+            {/* <StyledImage2 src={Layer3} alt="layer3" /> */}
           </Grid>
         </Grid>
       </Box>
@@ -514,7 +547,7 @@ export default function AboutUs() {
                 lg: "translate(-1px, -26px)",
               },
             }}
-            fontSize={{ xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "2rem" }}
+            fontSize={{ xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "42px" }}
             variant="h3"
             color={Colors.BUTTON_COLOR}
             fontWeight={600}
@@ -522,87 +555,172 @@ export default function AboutUs() {
             PlayZo Facilities
           </Typography>
           <Grid container>
-            <Stack alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} direction={{ xs: "column", sm: "column", md: "column", lg: "row" }} spacing={3}>
-              <Grid style={{
-                position: "relative",
-                overflow: "hidden"
-              }} item xs={6} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }} margin={{ xs: "30px 30px", sm: "30px 30px", md: "30px 30px", lg: "0px" }}>
-                <img style={{
-                  opacity: 1,
-                  width: "100%",
-                  transition: "transform 0.5s ease",
-                  height: "100%",
-                  overflow: "hidden",
+            <Stack
+              alignItems={{
+                xs: "center",
+                sm: "center",
+                md: "center",
+                lg: "normal",
+              }}
+              direction={{
+                xs: "column",
+                sm: "column",
+                md: "column",
+                lg: "row",
+              }}
+              spacing={3}
+            >
+              <Grid
+                style={{
                   position: "relative",
+                  overflow: "hidden",
                 }}
+                item
+                xs={6}
+                maxWidth={{ xs: "83%", sm: "83%", md: "83%", lg: "50%" }}
+                margin={{
+                  xs: "30px 30px",
+                  sm: "30px 30px",
+                  md: "30px 30px",
+                  lg: "0px",
+                }}
+              >
+                <img
+                  style={{
+                    opacity: 1,
+                    width: "100%",
+                    transition: "transform 0.5s ease",
+                    height: "100%",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.1)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "scale(1)";
                   }}
-                  src={turf} alt="grid 1" />
+                  src={turf}
+                  alt="grid 1"
+                />
               </Grid>
-              <Grid item xs={6} style={{
-                marginTop: "3px", position: "relative",
-                overflow: "hidden"
-              }} maxWidth={{ xs: '83%', sm: "83%", md: "83%", lg: '50%' }}>
-                <img style={{
-                  opacity: 1,
-                  width: "100%",
-                  transition: "transform 0.5s ease",
-                  height: "100%",
-                  overflow: "hidden",
+              <Grid
+                item
+                xs={6}
+                style={{
+                  marginTop: "3px",
                   position: "relative",
+                  overflow: "hidden",
                 }}
+                maxWidth={{ xs: "83%", sm: "83%", md: "83%", lg: "50%" }}
+              >
+                <img
+                  style={{
+                    opacity: 1,
+                    width: "100%",
+                    transition: "transform 0.5s ease",
+                    height: "100%",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.1)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "scale(1)";
-                  }} src={turf1} alt="grid 2" />
+                  }}
+                  src={turf1}
+                  alt="grid 2"
+                />
               </Grid>
             </Stack>
           </Grid>
           <Grid container>
-            <Stack direction="row" marginTop={{ xs: "-30px", sm: '-30px', md: "-30px", lg: '0px' }} marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: '0px' }} spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}>
-              <Box alignItems={{ xs: "center", sm: "center", md: "center", lg: "normal" }} gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }} display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }} flexDirection={{ xs: 'column', sm: "column", md: "column", lg: "row" }}>
-                <Grid sx={{
-                  position: "relative",
-                  overflow: { xs: "", sm: "", md: "", lg: "hidden" }
-                }} item xs={0} ml={{ xs: "19px", sm: "19px", md: "19px", lg: "0px" }} width={{ xs: '75%', sm: "75%", md: "75%", lg: '37%' }}>
-                  <StyledImage4 style={{}}
+            <Stack
+              direction="row"
+              marginTop={{ xs: "-30px", sm: "-30px", md: "-30px", lg: "0px" }}
+              marginBottom={{ xs: "80px", sm: "80px", md: "80px", lg: "0px" }}
+              spacing={{ xs: 0, sm: 0, md: 0, lg: 3 }}
+            >
+              <Box
+                alignItems={{
+                  xs: "center",
+                  sm: "center",
+                  md: "center",
+                  lg: "normal",
+                }}
+                gap={{ xs: "0px", sm: "0px", md: "0px", lg: "25px" }}
+                display={{ xs: "flex", sm: "flex", md: "flex", lg: "flex" }}
+                flexDirection={{
+                  xs: "column",
+                  sm: "column",
+                  md: "column",
+                  lg: "row",
+                }}
+              >
+                <Grid
+                  sx={{
+                    position: "relative",
+                    overflow: { xs: "", sm: "", md: "", lg: "hidden" },
+                  }}
+                  item
+                  xs={0}
+                  ml={{ xs: "19px", sm: "19px", md: "19px", lg: "0px" }}
+                  width={{ xs: "75%", sm: "75%", md: "75%", lg: "37%" }}
+                >
+                  <StyledImage4
+                    style={{}}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "scale(1.1)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "scale(1)";
-                    }} src={turf2} alt="grid 3" />
+                    }}
+                    src={turf2}
+                    alt="grid 3"
+                  />
                 </Grid>
-                <Grid sx={{
-                  position: "relative",
-                  overflow: { xs: "", sm: "", md: "", lg: "hidden" }
-                }} item xs={0}>
-                  <StyledImage5 style={{}}
+                <Grid
+                  sx={{
+                    position: "relative",
+                    overflow: { xs: "", sm: "", md: "", lg: "hidden" },
+                  }}
+                  item
+                  xs={0}
+                >
+                  <StyledImage5
+                    style={{}}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "scale(1.1)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "scale(1)";
-                    }} src={turf3} alt="grid 4" />
+                    }}
+                    src={turf3}
+                    alt="grid 4"
+                  />
                 </Grid>
               </Box>
-              <Grid sx={{
-                position: "relative",
-                overflow: { xs: "", sm: "", md: "", lg: "hidden" }
-              }} item xs={0} width={{ xs: '135%', sm: "135%", md: "135%", lg: '33%' }}>
-                <StyledImage3 style={{}}
+              <Grid
+                sx={{
+                  position: "relative",
+                  overflow: { xs: "", sm: "", md: "", lg: "hidden" },
+                }}
+                item
+                xs={0}
+                width={{ xs: "135%", sm: "135%", md: "135%", lg: "33%" }}
+              >
+                <StyledImage3
+                  style={{}}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "scale(1.1)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "scale(1)";
-                  }} src={turf4} alt="grid 5" />
+                  }}
+                  src={turf4}
+                  alt="grid 5"
+                />
               </Grid>
             </Stack>
           </Grid>
@@ -610,7 +728,7 @@ export default function AboutUs() {
             direction="row"
             spacing={2}
             alignItems="center"
-            justifyContent="end"
+            justifyContent="center"
             paddingTop={{ xs: "40px", sm: "40px", md: "40px", lg: "0px" }}
           >
             <Link
@@ -625,28 +743,50 @@ export default function AboutUs() {
                 },
               }}
             >
-              see all images
+              <CustomButton
+                style={{
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  textTransform: "capitalize",
+                  border: "1px solid #15B5FC",
+                  padding: "10px 15px",
+                }}
+              >
+                see more services
+              </CustomButton>{" "}
             </Link>
-            <EastIcon
+            {/* <EastIcon
               sx={{
                 color: Colors.BUTTON_COLOR,
                 fontSize: "35px",
                 paddingRight: { xs: "9px", sm: "9px", md: "9px", lg: "0px" },
               }}
-            />
+            /> */}
           </Stack>
           <Box pb={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}>
             <Grid container spacing={5}>
-              <Grid item xs={12} marginTop={{ xs: "-104px", sm: "-104px", md: "-104px", lg: "40px" }} marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}>
-                <StyledImage6
-                  src={ball}
-                  ref={ballRef}
-                  alt="grid-ball"
-
-                />
-                <Typography maxWidth={{ xs: "200px", sm: "200px", md: "200px", lg: "441px" }} fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
+              <Grid
+                item
+                xs={12}
+                marginTop={{
+                  xs: "-104px",
+                  sm: "-104px",
+                  md: "-104px",
+                  lg: "40px",
+                }}
+                marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}
+              >
+                {/* <StyledImage6 src={ball} ref={ballRef} alt="grid-ball" /> */}
+                <Typography
+                  maxWidth={{
+                    xs: "200px",
+                    sm: "200px",
+                    md: "200px",
+                    lg: "441px",
+                  }}
+                  fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
                   variant="h6"
-                  color={Colors.BUTTON_COLOR}
+                  color={Colors.BLACK}
                   fontWeight={600}
                   marginTop={{ xs: "0px", sm: "0px", md: "0px", lg: "-48px" }}
                 >
@@ -661,10 +801,9 @@ export default function AboutUs() {
       </Box>
       <Box
         style={{
-          transform: showTimeline ? 'translateY(-420vh)' : 'translateY(100vh)', // Slide up from bottom
-          transition: 'transform 0.9s ease-in-out', // Smooth transition
-          position: 'relative',
-
+          transform: showTimeline ? "translateY(-380vh)" : "translateY(100vh)", // Slide up from bottom
+          transition: "transform 0.9s ease-in-out", // Smooth transition
+          position: "relative",
         }}
       >
         {showTimeline && window.innerWidth >= 600 && <TimelineComponent />}
