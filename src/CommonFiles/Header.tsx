@@ -27,7 +27,10 @@ export default function Header() {
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
-      <AppContainer display={{ xs: "none", xl: "flex" }}>
+      <AppContainer
+        maxWidth={1200}
+        display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+      >
         <Stack
           direction="row"
           spacing={2}

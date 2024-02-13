@@ -12,13 +12,7 @@ interface AppHeaderProps {
 export default function AppHeader({ activeTab, setActiveTab }: AppHeaderProps) {
   return (
     <Box bgcolor={Colors.WHITE} position="sticky" top={0} zIndex={1000}>
-      <AppContainer
-        maxWidth={1520}
-        direction="row"
-        alignItems="center"
-        spacing={1}
-        padding={0}
-      >
+      <AppContainer direction="row" alignItems="center" spacing={1} padding={0}>
         <MoblieHeader setActiveTab={setActiveTab} activeTab={activeTab} />
       </AppContainer>
       <Box bgcolor={Colors.WHITE}>
