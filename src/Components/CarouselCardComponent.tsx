@@ -41,7 +41,7 @@ const StyledImage = styled.img`
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 757px;
-    height: 492px;
+    height: 392px;
   }
 `;
 const StyledImage1 = styled.img`

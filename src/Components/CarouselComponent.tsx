@@ -65,15 +65,15 @@ const CardDetails: HotelCard[] = [
             "I went from doing everything the paper way to now everything is electronic from check in and out to all of the children files and mine on the Playground app. Love love the all the payment options.",
         ratings: 2.5,
     },
-    {
-        imageSrc: Image1,
-        name: "Anand",
-        type: "Badminton",
-        member: "Member since 2022",
-        feedback:
-            "The statement dates were not correct and caused a lot of confusion for parents. Assigning the charges takes a lot of time for us as a large center with multiple age groups and price points.",
-        ratings: 4,
-    },
+    // {
+    //     imageSrc: Image1,
+    //     name: "Anand",
+    //     type: "Badminton",
+    //     member: "Member since 2022",
+    //     feedback:
+    //         "The statement dates were not correct and caused a lot of confusion for parents. Assigning the charges takes a lot of time for us as a large center with multiple age groups and price points.",
+    //     ratings: 4,
+    // },
     // Add more hotel cards as needed
 ];
 

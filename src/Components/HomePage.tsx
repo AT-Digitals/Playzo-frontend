@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Grid,
   Link,
   Stack,
@@ -34,7 +35,7 @@ import turf from "../assets/turf.png";
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
   position: "absolute",
-  top: "25%",
+  top: "34%",
   left: "27%",
   fontSize: "3rem",
   textAlign: "center",
@@ -256,7 +257,7 @@ const StyledImage5 = styled.img`
     /* Large devices (large desktops) */
     position: absolute;
     width: 100%;
-    top: -613px;
+    top: -520px;
     transform: translate(0%, 4.7%);
   }
 `;
@@ -387,7 +388,7 @@ export default function HomePage() {
       <Box>
         <CardMedia
           sx={{
-            height: { xs: "800px", sm: "800px", md: "800px", lg: "550px" },
+            height: { xs: "800px", sm: "800px", md: "800px", lg: "640px" },
           }}
           component="img"
           image={images[currentImageIndex]}
@@ -408,28 +409,21 @@ export default function HomePage() {
         <br />
         <StyledSpan showText={showText}>Boundaries</StyledSpan>
       </StyledTypo>
-      <Typography style={{transform: "translate(160%, -253%)"}} position={"absolute"} fontSize={"3rem"} fontWeight={"600"} color={Colors.WHITE}>#Let’s Playzo33</Typography>
+      <Typography style={{transform: "translate(271%, -340%)"}} position={"absolute"} fontSize={"2.5rem"} fontWeight={"400"} color={Colors.WHITE}>#Let’s Playzo</Typography>
       <StyledButton
-        sx={{
-          backgroundColor: Colors.BUTTON_COLOR,
+        style={{
           fontFamily: "Inter",
           fontWeight: 600,
-          color: "white",
-          transform: {
-            xs: "translate(74%, 1271%)",
-            sm: "translate(74%, 1271%)",
-            md: "translate(74%, 1271%)",
-            lg: "translate(451%, -190%)",
-          },
+          color: Colors.WHITE,
+          border: "2px solid white",
+          transform:  "translate(459%, -235%)",
         }}
-        bgColor={Colors.BUTTON_COLOR}
-        variant="contained"
-        color={Colors.WHITE}
+        variant="outlined"
       >
         Book Now
       </StyledButton>
       <Box sx={{ backgroundColor: "#f0f0f0" }}>
-      <Typography pt={"36px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BUTTON_COLOR}>Our Services</Typography>
+      <Typography pt={"36px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
       <Box
         width="100%"
         maxWidth={1200}
@@ -543,17 +537,22 @@ export default function HomePage() {
             src={ball}
             alt="ball1"
           /> */}
-          <CustomButton
-            style={{
+          <Button
+            sx={{
               background: Colors.WHITE,
               color: Colors.BUTTON_COLOR,
               textTransform: "capitalize",
               border: "1px solid #15B5FC",
               padding: "10px 30px",
+              borderRadius: "30px",
+              ":hover": {
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE
+              }
             }}
           >
             see more services
-          </CustomButton>
+          </Button>
         </Stack>
       </Box>
       </Box>
