@@ -36,7 +36,7 @@ export default function MoblieHeader({
     <>
       <Box
         alignItems="center"
-        display={{ lg: "flex", xl: "none" }}
+        display={{ xs: "block", sm: "block", md: "block", lg: "none" }}
         paddingY={3}
         paddingX={3}
         width="100%"
