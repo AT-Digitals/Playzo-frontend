@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
-import Aboutus from "../../assets/Aboutus.svg";
+import Aboutus from "./pexels-pixabay-209841.jpg";
 import AppContainer from "../../CommonComponents/AppContainer";
 import Ball4 from "../../assets/ball-4 1.png";
 import Colors from "../../CommonComponents/Colors";
@@ -20,7 +20,7 @@ import Image2 from "../../assets/Rectangle 669.png";
 import Layer3 from "../../assets/Layer_4.png";
 import TimelineComponent from "./TimelineComponent";
 import ball from "../../assets/ball 3.png";
-import bg from "./about-us-bg.jpg";
+import bg from "./pexels-pixabay-262524.jpg";
 import group from "./Group 34245.svg";
 import styled from "@emotion/styled";
 import turf from "../../assets/Rectangle 12.png";
@@ -33,26 +33,38 @@ import vision from "./visibility.svg";
 const StyledImage = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
-    width: 370px;
+    max-width: 370px;
     height: 350px;
+    object-fit: contain;
+    width: 100%;
+    padding: 0 10px;
   }
 
   @media (min-width: 768px) {
     /* Small devices (tablets) */
-    width: 370px;
+    max-width: 370px;
     height: 350px;
+    object-fit: contain;
+    width: 100%;
+    padding: 0 10px;
   }
 
   @media (min-width: 992px) {
     /* Medium devices (desktops) */
-    width: 370px;
+    max-width: 370px;
     height: 350px;
+    object-fit: contain;
+    width: 100%;
+    padding: 0 10px;
   }
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
-    width: 670px;
-    height: 846px;
+    max-width: 800px;
+    height: 400px;
+    object-fit: contain;
+    width: 100%;
+    padding: 0 10px;
   }
 `;
 
@@ -304,23 +316,25 @@ export default function AboutUs() {
 
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <Box
         sx={{
           width: "100%",
           height: "100%",
-          overflow: "hidden",
+          maxHeight: 600,
+          overflow: "hidden", // Prevent scroll when the element is scaled
           position: "relative",
+          objectFit: "cover",
           transition: "transform 0.3s ease",
-          "&:hover": {
-            transform: "scale(1.1)", // Increase scale on hover
-          },
+          // "&:hover": {
+          //   transform: "scale(1.1)", // Increase scale on hover
+          // },
         }}
       >
         <CardMedia
           component="img"
-          // height="194"
           image={Image1}
           alt="Paella dish"
           sx={{
@@ -342,91 +356,83 @@ export default function AboutUs() {
           }}
         />
       </Box>
-      <AppContainer>
-        <Box margin="10px 20px">
-          <Grid
-            container
+      <AppContainer mb={"3rem"} pl={0}>
+        <Stack
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={6}
+          flexDirection={{
+            xs: "column-reverse",
+            sm: "column-reverse",
+            md: "row-reverse",
+            lg: "row-reverse",
+          }}
+        >
+          <Stack
             justifyContent="center"
-            alignItems="center"
-            spacing={8}
-            flexDirection={{
-              xs: "column-reverse",
-              sm: "column-reverse",
-              md: "column-reverse",
-              lg: "row-reverse",
-            }}
-            mb={{ xs: "60px", sm: "60px", md: "60px", lg: "20px" }}
-            mt={{ xs: "-44px", sm: "-44px", md: "-44px", lg: "-7px" }}
+            alignItems="start"
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"1rem"}
           >
-            <Grid
-              item
-              xs={0}
-              pl={{ xs: "58px", sm: "58px", md: "58px", lg: "70px" }}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Typography
-                color={Colors.BLACK}
-                pt={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
-                marginRight={{ xs: "66px", sm: "66px", md: "66px", lg: "30px" }}
-                fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
-                maxWidth={{
-                  xs: "298px",
-                  sm: "298px",
-                  md: "298px",
-                  lg: "438px",
-                }}
-                sx={{
-                  height: {
-                    xs: "245px",
-                    sm: "245px",
-                    md: "245px",
-                    lg: "320px",
-                  },
-                  fontStyle: "normal",
-                  fontWeight: "700",
-                }}
-              >
-                At Playzo33, we extend beyond being a turf booking platform;
-                we're a community driven destination designed for sports
-                enthusiasts and those seeking the perfect blend of recreation
-                and entertainment. Our journey commenced with a simple dream: to
-                establish a haven where people could gather, connect, and stay
-                active.
-              </Typography>
-              {/* <StyledImage1 src={Ball4} alt="ball 4" /> */}
-            </Grid>
-            <Grid
-              item
-              xs={7}
-              display={{
-                xs: "contents",
-                sm: "contents",
-                md: "contents",
-                lg: "block",
+            <Typography fontSize={"32px"}>About Us</Typography>
+
+            <Typography
+              color={Colors.BLACK}
+              pt={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+              marginRight={{
+                xs: "66px",
+                sm: "66px",
+                md: "66px",
+                lg: "30px",
+              }}
+              fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "16px" }}
+              maxWidth={{
+                xs: "298px",
+                sm: "298px",
+                md: "298px",
+                lg: "438px",
               }}
             >
-              <StyledImage src={Aboutus} alt={"title"} />
-            </Grid>
-          </Grid>
-        </Box>
+              At Playzo33, we extend beyond being a turf booking platform; we're
+              a community-driven destination designed for sports enthusiasts and
+              those seeking the perfect blend of recreation and entertainment.
+              Our journey commenced with a simple dream: to establish a haven
+              where people could gather, connect, and stay active.
+            </Typography>
+            {/* <StyledImage1 src={Ball4} alt="ball 4" /> */}
+          </Stack>
+
+          <Box
+            display={{
+              xs: "contents",
+              sm: "contents",
+              md: "contents",
+              lg: "block",
+            }}
+          >
+            <StyledImage width={"100%"} src={Aboutus} alt={"title"} />
+          </Box>
+        </Stack>
       </AppContainer>
       <Box
         sx={{
           background: `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${bg})`,
           backgroundSize: "cover",
+          backgroundPosition: "center",
+
           color: Colors.WHITE,
           position: "relative",
         }}
       >
         <Grid
           container
-          maxWidth={1200}
+          maxWidth={1280}
           margin="auto"
-          pt={{ xs: "70px", sm: "70px", md: "70px", lg: "96px" }}
-          pb={{ xs: "60px", sm: "60px", md: "60px", lg: "96px" }}
-          pl={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}
-          pr={{ xs: "15px", sm: "15px", md: "15px", lg: "40px" }}
+          pt={{ xs: "70px", sm: "70px", md: "70px", lg: "80px" }}
+          pb={{ xs: "60px", sm: "60px", md: "60px", lg: "80px" }}
+          pl={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
+          pr={{ xs: "15px", sm: "15px", md: "15px", lg: "0px" }}
           columnSpacing={4}
           flexDirection={{
             xs: "column",
@@ -434,9 +440,11 @@ export default function AboutUs() {
             md: "column",
             lg: "row",
           }}
+          justifyContent={"space-between"}
           gap={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
         >
           <Grid
+            paddingLeft={{ xs: "none", sm: "none", md: "14px !important" }}
             item
             xs={6}
             maxWidth={{ xs: "100%", sm: "100%", md: "100%", lg: "50%" }}
@@ -463,7 +471,7 @@ export default function AboutUs() {
                 Mission
               </Typography>
               <Typography
-                fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
+                fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "16px" }}
                 style={{
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -480,6 +488,7 @@ export default function AboutUs() {
             </Box>
           </Grid>
           <Grid
+            paddingLeft={{ xs: "none", sm: "none", md: "40px !important" }}
             item
             xs={6}
             maxWidth={{ xs: "100%", sm: "100%", md: "100%", lg: "50%" }}
@@ -506,7 +515,7 @@ export default function AboutUs() {
                 Vision
               </Typography>
               <Typography
-                fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
+                fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "16px" }}
                 style={{
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -540,6 +549,7 @@ export default function AboutUs() {
                 md: "absolute",
                 lg: "",
               },
+              mb: "2rem",
               transform: {
                 xs: "translate(29px, 100px)",
                 sm: "translate(29px, 100px)",
@@ -549,12 +559,12 @@ export default function AboutUs() {
             }}
             fontSize={{ xs: "1.3rem", sm: "1.3rem", md: "1.3rem", lg: "42px" }}
             variant="h3"
-            color={Colors.BUTTON_COLOR}
+            color={Colors.BLACK}
             fontWeight={600}
           >
             PlayZo Facilities
           </Typography>
-          <Grid container>
+          <Grid mt={"4rem !important "} container>
             <Stack
               alignItems={{
                 xs: "center",
@@ -743,17 +753,24 @@ export default function AboutUs() {
                 },
               }}
             >
-              <CustomButton
-                style={{
+              <Button
+                sx={{
+                  boxShadow: "none",
                   background: Colors.WHITE,
                   color: Colors.BUTTON_COLOR,
                   textTransform: "capitalize",
                   border: "1px solid #15B5FC",
-                  padding: "10px 15px",
+                  padding: "10px 30px",
+                  transition: "background 0.3s",
+                  borderRadius: "30px",
+                  "&:hover": {
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                  },
                 }}
               >
                 see more services
-              </CustomButton>{" "}
+              </Button>{" "}
             </Link>
             {/* <EastIcon
               sx={{
@@ -800,6 +817,7 @@ export default function AboutUs() {
         </Stack>
       </Box>
       <Box
+        display={"none"}
         style={{
           transform: showTimeline ? "translateY(-380vh)" : "translateY(100vh)", // Slide up from bottom
           transition: "transform 0.9s ease-in-out", // Smooth transition
