@@ -26,7 +26,7 @@ const StyledButton = styled(Button, {
   "&.MuiButton-outlinedPrimary": {
     boxShadow: "none",
     background: "none",
-    border: `1.5px solid ${bgColor ?? Colors.PRIMARY_BUTTON}`,
+    border: `2px solid ${bgColor ?? Colors.PRIMARY_BUTTON}`,
   },
   "&.MuiButton-textPrimary": {
     boxShadow: "none",

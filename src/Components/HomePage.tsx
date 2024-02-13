@@ -8,7 +8,7 @@ import {
   css,
   keyframes,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Badminton from "../assets/Image (8).png";
 import CardComponent from "./CardComponent";
@@ -19,18 +19,20 @@ import ComponentCarosel from "./ComponentCarosel";
 import Cricket from "../assets/Image (9).png";
 import CustomButton from "../CommonComponents/CustomButton";
 import Image1 from "../assets/Rectangle 67.png";
+import Image2 from "../assets/Rectangle 669.png";
 import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
 import Image4 from "../assets/pexels-pixabay-209977.jpg";
 import Image5 from "../assets/pexels-pixabay-46798.jpg";
-import Image2 from "../assets/Rectangle 669.png";
-import Layer1 from "../assets/Layer_1 (1).png";
-import Layer2 from "../assets/Layer_2.png";
 import Machine from "../assets/Image (7).png";
-import ball from "../assets/ball 1.png";
 import boardGames from "../assets/board games.png";
 import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
+
+// import Layer1 from "../assets/Layer_1 (1).png";
+// import Layer2 from "../assets/Layer_2.png";
+
+// import ball from "../assets/ball 1.png";
 
 const StyledTypo = styled(Typography)({
   color: Colors.WHITE,
@@ -58,106 +60,106 @@ const StyledTypo = styled(Typography)({
   },
 });
 
-const StyledImage = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+// const StyledImage = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(180px, -43px);
-    width: 82px;
-    height: 113px;
-  }
-`;
-const StyledImage1 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(23rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(180px, -43px);
+//     width: 82px;
+//     height: 113px;
+//   }
+// `;
+// const StyledImage1 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(23rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(75rem, 30rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(75rem, 30rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
 
-const StyledImage2 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(-0px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+// const StyledImage2 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(-0px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(-14px, 62rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(-14px, 62rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
 // const StyledImage3 = styled.img`
 //   @media (min-width: 300px) {
 //     /* Extra small devices (phones) */
@@ -261,45 +263,45 @@ const StyledImage5 = styled.img`
     transform: translate(0%, 4.7%);
   }
 `;
-const StyledImage6 = styled.img`
+// const StyledImage6 = styled.img`
 
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 150px;
-    height: 150px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 225px;
-    }}
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     width: 150px;
+//     height: 150px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 225px;
+//     }}
+//   }
+// `;
 
 const StyledButton = styled(CustomButton)({
   fontSize: "20px",
@@ -358,17 +360,19 @@ export default function HomePage() {
   const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => {
+    // Trigger animation on initial mount after 1000ms
+    const initialTimer = setTimeout(() => {
       setShowText(true);
     }, 1000);
 
-    const timer2 = setTimeout(() => {
+    // Trigger animation again after 30 seconds
+    const repeatTimer = setTimeout(() => {
       setShowText(true);
-    }, 2000);
+    }, 30000); // 30 seconds
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      clearTimeout(initialTimer);
+      clearTimeout(repeatTimer);
     };
   }, []);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -383,15 +387,20 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
+  const currentImage = useMemo(
+    () => images[currentImageIndex],
+    [currentImageIndex]
+  );
+
   return (
-    <Box width="100%" >
+    <Box width="100%">
       <Box>
         <CardMedia
           sx={{
             height: { xs: "800px", sm: "800px", md: "800px", lg: "640px" },
           }}
           component="img"
-          image={images[currentImageIndex]}
+          image={currentImage}
           alt="Paella dish"
         />
       </Box>
@@ -409,152 +418,177 @@ export default function HomePage() {
         <br />
         <StyledSpan showText={showText}>Boundaries</StyledSpan>
       </StyledTypo>
-      <Typography style={{transform: "translate(271%, -340%)"}} position={"absolute"} fontSize={"2.5rem"} fontWeight={"400"} color={Colors.WHITE}>#Let’s Playzo</Typography>
+      <Typography
+        style={{ transform: "translate(271%, -340%)" }}
+        position={"absolute"}
+        fontSize={"2.5rem"}
+        fontWeight={"400"}
+        color={Colors.WHITE}
+      >
+        #Let’s Playzo
+      </Typography>
       <StyledButton
         style={{
           fontFamily: "Inter",
           fontWeight: 600,
           color: Colors.WHITE,
           border: "2px solid white",
-          transform:  "translate(459%, -235%)",
+          transform: "translate(459%, -235%)",
         }}
         variant="outlined"
       >
         Book Now
       </StyledButton>
       <Box sx={{ backgroundColor: "#f0f0f0" }}>
-      <Typography pt={"36px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
-      <Box
-        width="100%"
-        maxWidth={1200}
-        margin="0 auto"
-        paddingTop={"50px"}
-        pb={"50px"}
-      >
-        {/* <StyledImage src={Layer2} alt="Layer2" /> */}
         <Typography
-          variant="h2"
+          pt={"36px"}
+          fontSize={"42px"}
+          textAlign={"center"}
+          fontWeight={"600"}
           color={Colors.BLACK}
-          textAlign="center"
-          fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "32px" }}
-          fontWeight={700}
-          width={{ xs: "300px", sm: "300px", md: "300px", lg: "700px" }}
-          margin="auto"
-          sx={{ fontFamily: "Inter" }}
         >
-          We offer a diverse range of{" "}
-          <span style={{ color: Colors.BUTTON_COLOR }}>services</span> to cater
-          to the varied interests of our community.
+          Our Services
         </Typography>
-      </Box>
-      <Grid
-        container
-        width="100%"
-        maxWidth={1200}
-        margin="0 auto"
-        spacing={3}
-        pb={3}
-        flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
-      >
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Turf"}
-            description={
-              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket selection."
-            }
-            image={turf}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Play Station"}
-            description={
-              "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection."
-            }
-            image={playstation}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Board Games"}
-            description={
-              "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
-            }
-            image={boardGames}
-          />
-        </Grid>
-        {/* <StyledImage1 src={Layer1} alt="layer1" />
-        <StyledImage2 src={Layer1} alt="layer1" /> */}
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Badminton"}
-            description={
-              "Ace every shot on our professional Badminton courts, where passion meets precision."
-            }
-            image={Badminton}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Cricket Net"}
-            description={
-              "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
-            }
-            image={Cricket}
-          />
-        </Grid>
-        <Grid item xs={4}>
-          <CardComponent
-            buttonLabel="Know more"
-            title={"Bowling Machine"}
-            description={
-              "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine selection."
-            }
-            image={Machine}
-          />
-        </Grid>
-      </Grid>
-    
-      <Box
-        width="100%"
-        maxWidth={1200}
-        margin="0 auto"
-        pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-        pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-      >
-        <Stack
-          marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
+        <Box
+          width="100%"
+          maxWidth={1200}
+          margin="0 auto"
+          paddingTop={"50px"}
+          pb={"50px"}
         >
-          {/* <StyledImage3
+          {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+          <Typography
+            variant="h2"
+            color={Colors.BLACK}
+            textAlign="center"
+            fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "32px" }}
+            fontWeight={700}
+            width={{ xs: "300px", sm: "300px", md: "300px", lg: "700px" }}
+            margin="auto"
+            sx={{ fontFamily: "Inter" }}
+          >
+            We offer a diverse range of{" "}
+            <span style={{ color: Colors.BUTTON_COLOR }}>services</span> to
+            cater to the varied interests of our community.
+          </Typography>
+        </Box>
+        <Grid
+          container
+          width="100%"
+          maxWidth={1200}
+          margin="0 auto"
+          spacing={3}
+          pb={3}
+          flexDirection={{
+            xs: "column",
+            sm: "column",
+            md: "column",
+            lg: "row",
+          }}
+        >
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Turf"}
+              description={
+                "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket selection."
+              }
+              image={turf}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Play Station"}
+              description={
+                "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection."
+              }
+              image={playstation}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Board Games"}
+              description={
+                "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
+              }
+              image={boardGames}
+            />
+          </Grid>
+          {/* <StyledImage1 src={Layer1} alt="layer1" />
+        <StyledImage2 src={Layer1} alt="layer1" /> */}
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Badminton"}
+              description={
+                "Ace every shot on our professional Badminton courts, where passion meets precision."
+              }
+              image={Badminton}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Cricket Net"}
+              description={
+                "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
+              }
+              image={Cricket}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <CardComponent
+              buttonLabel="Know more"
+              title={"Bowling Machine"}
+              description={
+                "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine selection."
+              }
+              image={Machine}
+            />
+          </Grid>
+        </Grid>
+
+        <Box
+          width="100%"
+          maxWidth={1200}
+          margin="0 auto"
+          pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+          pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+        >
+          <Stack
+            marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <StyledImage3
             src={ball}
             alt="ball1"
           /> */}
-          <Button
-            sx={{
-              background: Colors.WHITE,
-              color: Colors.BUTTON_COLOR,
-              textTransform: "capitalize",
-              border: "1px solid #15B5FC",
-              padding: "10px 30px",
-              borderRadius: "30px",
-              ":hover": {
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE
-              }
-            }}
-          >
-            see more services
-          </Button>
-        </Stack>
-      </Box>
+            <Button
+              sx={{
+                boxShadow: "none",
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                textTransform: "capitalize",
+                border: "2px solid #15B5FC",
+                padding: "10px 30px",
+                transition: "background 0.3s",
+                borderRadius: "30px",
+                fontSize: "16px",
+                fontWeight: "bold",
+                "&:hover": {
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                },
+              }}
+            >
+              see more Services
+            </Button>
+          </Stack>
+        </Box>
       </Box>
       <CarouselComponent />
       <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>
