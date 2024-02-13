@@ -159,23 +159,24 @@ export default function Footer() {
               lg={4}
             >
               <Typography
+               fontSize="14px" pt={"8px"} fontWeight={400}>
+               39/6 KCP Thottam, Kumalan Kuttai, Erode,
+               <br />
+               Tamil Nadu - 638011{" "}
+              </Typography>
+              <Stack spacing={2}>
+                <Typography
                 sx={{
                   fontSize: "16px",
                   fontWeight: 600,
-                  paddingBottom: "15px",
+                  paddingTop: "12px"
                 }}
               >
                 Contact Us
               </Typography>
-              <Stack spacing={2}>
-                <Typography fontSize="14px" fontWeight={400}>
+              <Typography fontSize="14px" fontWeight={400}>
                   +91 70944 60944 <br />
                   +91 91088 83555
-                </Typography>
-                <Typography fontSize="14px" fontWeight={400}>
-                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
-                  <br />
-                  Tamil Nadu - 638011{" "}
                 </Typography>
               </Stack>
             </Grid>

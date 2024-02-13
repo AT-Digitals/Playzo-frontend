@@ -12,8 +12,8 @@ import {
 import { title } from "process";
 import Colors from "../CommonComponents/Colors";
 import CustomButton from "../CommonComponents/CustomButton";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import EastIcon from '@mui/icons-material/East';
+import WestIcon from '@mui/icons-material/West';
 import icon from "../assets/img-4 1.png";
 import Layer3 from "../assets/Layer_3.png";
 import styled from "@emotion/styled";
@@ -40,8 +40,8 @@ const StyledImage = styled.img`
 
   @media (min-width: 1200px) {
     /* Large devices (large desktops) */
-    width: 327px;
-    height: 492px;
+    width: 757px;
+    height: 392px;
   }
 `;
 const StyledImage1 = styled.img`
@@ -104,7 +104,7 @@ const StyledImage2 = styled.img`
     width: 159px;
     height: 252px;
     position: absolute;
-    transform: translate(340%, 127%);
+    transform: translate(727%, 117%);
   }
 `;
 const StyledImage3 = styled.img`
@@ -142,6 +142,7 @@ const StyledImage3 = styled.img`
   }
 `;
 
+
 interface HotelCard {
     feedback: string;
     ratings: number;
@@ -164,11 +165,14 @@ export default function CarouselCardComponent({
     nextClick,
     prevClick,
 }: cardProps) {
+  
+  
     return (
         <Stack
             direction="row"
             alignItems="flex-end"
             maxWidth={900}
+            justifyContent={"space-evenly"}
             
             sx={{
                 backgroundColor: Colors.BLACK,
@@ -181,7 +185,7 @@ export default function CarouselCardComponent({
                         src={cardDetails.imageSrc}
                         alt="green iguana"
                     />
-                    <Stack direction="column" spacing={2} width="370px" py={2}>
+                    <Stack style={{transform: "translate(200px, 10px)"}} direction="column" spacing={2} width="370px" py={2}>
                         <Rating value={cardDetails.ratings} readOnly />
                         <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "17px"}}>
                             {cardDetails.feedback}
@@ -213,49 +217,47 @@ export default function CarouselCardComponent({
                                 <i> {cardDetails.member}</i>
                             </Typography>
                         </Stack>
-                        <Stack direction="row" spacing={2}>
+                        <Stack style={{transform: "translate(-239%, 56px)", marginTop: "0px"}} direction="row" spacing={2}>
                             <Button onClick={prevClick} sx={{
                                 padding: "18px 7px",
-                                background: Colors.BUTTON_COLOR,
                                 borderRadius: "50%",
                                 minWidth: "24px !important",
                                 height: "24px",
                                 alignItems: "center",
 
                             }}>
-                                <ArrowBackIosIcon sx={{
-                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "16px"},
+                                <WestIcon sx={{
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "28px"},
                                     textAlign: "center", 
                                     marginLeft: "4px"
                                 }} />
                             </Button>
                             <Button onClick={nextClick} sx={{
                                 padding: "18px 7px",
-                                background: Colors.BUTTON_COLOR,
                                 borderRadius: "50%",
                                 minWidth: "24px !important",
                                 height: "24px",
                                 alignItems: "center"
 
                             }}>
-                                <ArrowForwardIosIcon sx={{
-                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "16px"},
+                                <EastIcon sx={{
+                                    color: Colors.WHITE, fontSize: {xs: "15px", sm: "15px", md: "15px", lg: "28px"},
                                     textAlign: "center",
                                     marginLeft: "4px"
                                 }} />
                             </Button>
                         </Stack>
                     </Stack>
-                    <StyledImage2 src={icon} alt="carousel-Icon" />
+                    {/* <StyledImage2 src={icon} alt="carousel-Icon" /> */}
                 </Stack>
             ) : (
                 <Box>
-                    <StyledImage1
+                    {/* <StyledImage1
                         src={cardDetails.imageSrc}
                         alt="green iguana"
                        
-                    />
-                    <Stack
+                    /> */}
+                    {/* <Stack
                         direction="column"
                         sx={{ backgroundColor: Colors.BLACK }}
                         paddingY={3}
@@ -286,8 +288,8 @@ export default function CarouselCardComponent({
                             color={Colors.WHITE}
                         >
                             <i>{cardDetails.member}</i>
-                        </Typography>
-                    </Stack>
+                        </Typography> */}
+                    {/* </Stack> */}
                 </Box>
             )}
         </Stack>
