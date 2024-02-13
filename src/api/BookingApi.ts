@@ -1,6 +1,6 @@
-import { handleApiError } from "../Utils/ApiUtils";
 import FilterUtils from "../Utils/FilterUtils";
 import axiosInstance from "./CreateAxiosInstance";
+import { handleApiError } from "../Utils/ApiUtils";
 
 export default class BookingApi {
   public static async createBooking(booking?: any) {
@@ -46,9 +46,9 @@ export default class BookingApi {
       throw handleApiError(e, "Failed to create booking");
     }
   }
-  public static async getAll() {
+  public static async getBookingList(booking?: any) {
     try {
-      const details = await axiosInstance.get<any[]>(`/bookings`);
+      const details = await axiosInstance.get<any[]>(`/bookings`,booking);
       return details.data;
     } catch (e) {
       throw handleApiError(e, "Failed to get all details");

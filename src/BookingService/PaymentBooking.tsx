@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import BookingApi from "../api/BookingApi";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
@@ -104,6 +105,9 @@ export default function PaymentBooking() {
   const allBookings = location.state?.bookingsWithTime || [];
   const selectedServiceFromState = location.state?.selectedService;
 
+  const user = localStorage.getItem('user');
+  const userData = JSON.parse(user??"");
+
   const navigate = useNavigate();
 
   const handlegoBack = () => {
@@ -113,7 +117,34 @@ export default function PaymentBooking() {
 
   const handlePayClick = () => {
     console.log(allBookings, "allbookings");
+
+    allBookings.map(async (bookings:any)=>{
+
+try {
+  const response = await BookingApi.createBooking({
+    type: bookings.type,
+    bookingtype: "online",
+    startTime: parseInt(bookings.startTime),
+    endTime: parseInt(bookings.endTime),
+    user: userData.id,
+    startDate: bookings.startDate,
+    endDate: bookings.endDate,
+  //   bookingId: response.razorpay_payment_id,
+    // court: ,
+  
+    });
+  if (response) {
     setOpen(true);
+  } else {
+    console.log('Booking Failed');
+  }
+} catch (err) {
+  console.log("err",err)
+}
+
+
+    })
+
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>

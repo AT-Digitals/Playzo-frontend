@@ -51,32 +51,32 @@ const StyledImage = styled.img`
 `;
 
 const TurfImages = [
-  { image: turf, name: "Turf 1", value: "1" },
-  { image: turf, name: "Turf 2", value: "2" },
-  { image: turf, name: "Turf 3", value: "3" },
+  { image: turf, name: "Turf 1", value: 1 },
+  { image: turf, name: "Turf 2", value: 2 },
+  { image: turf, name: "Turf 3", value: 3 },
 ];
 
 const PlaystationImages = [
-  { image: playstation1, name: "PS 1", value: "1" },
-  { image: playstation2, name: "PS 2", value: "2" },
-  { image: playstation3, name: "PS 3", value: "3" },
+  { image: playstation1, name: "PS 1", value: 1 },
+  { image: playstation2, name: "PS 2", value: 2 },
+  { image: playstation3, name: "PS 3", value: 3 },
 ];
 
 const BadmintonImages = [
   {
     image: badminton1,
     name: "Court 1",
-    value: "1",
+    value: 1,
   },
   {
     image: badminton2,
     name: "Court 2",
-    value: "2",
+    value: 2,
   },
   {
     image: badminton3,
     name: "Court 3",
-    value: "3",
+    value: 3,
   },
 ];
 
@@ -84,17 +84,17 @@ const BoardgameImages = [
   {
     image: boardgames1,
     name: "Chess",
-    value: "1",
+    value: 1,
   },
   {
     image: boardgames2,
     name: "Monopoly",
-    value: "2",
+    value: 2,
   },
   {
     image: boardgames3,
     name: "Scrabble",
-    value: "3",
+    value: 3,
   },
 ];
 
@@ -111,11 +111,12 @@ interface TableDataItem {
   name: string;
   date: string;
   time: string;
-  court: string;
+  court: number;
 }
 
 const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const [selectedService, setSelectedService] = useState("");
+  const [selectedCourt, setSelectedCourt] = useState(1);
   const [tableData, setTableData] = useState<TableDataItem[]>(() => {
     const storedTableData = JSON.parse(
       localStorage.getItem("bookings") || "[]"
@@ -139,8 +140,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       ? [{ image: cricketnet, name: "Cricket Net" }]
       : [];
 
-  const handleServiceSelection = (serviceName: string) => {
-    setSelectedService(serviceName);
+  const handleServiceSelection = (service: any) => {
+    console.log("djcndj",service)
+    setSelectedService(service.name);
+    setSelectedCourt(service.value);
     setTableData((prevTableData) => [...prevTableData]);
   };
 
@@ -155,6 +158,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     if (selectedService) {
       const selectedDate = "29 Feb 2024";
       const selectedTime = "9.00AM-11.00AM";
+      console.log("selectedService",selectedService)
 
       setTableData((prevTableData) => [
         ...prevTableData,
@@ -163,11 +167,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           name: selectedService,
           date: selectedDate,
           time: selectedTime,
-          court: "",
+          court: selectedCourt,
         },
       ]);
     }
     setSelectedService("");
+    setSelectedCourt(1);
     localStorage.removeItem("selectedService");
   };
   const navigate = useNavigate();
@@ -177,6 +182,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const handleProceedToPayment = () => {
     const bookingsWithTime = allBookings.map((booking, index) => {
+      // booking["court"] = selectedCourt;
+
       const timeString = String(booking.time); // Ensure time is a string
       const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
 
@@ -499,7 +506,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
               height={"105px"}
-              onClick={() => handleServiceSelection(item.name)}
+              onClick={() => handleServiceSelection(item)}
             >
               <Box
                 display={"flex"}

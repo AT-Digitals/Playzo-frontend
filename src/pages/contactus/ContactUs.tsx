@@ -10,6 +10,7 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
+import EnquiryApi from "../../api/EnquiryApi";
 import GameIcon from "../../assets/doodl-5 1.png";
 import { Link } from "react-router-dom";
 import ball from "../../assets/ball 3.png";
@@ -101,7 +102,7 @@ export default function ContactUs() {
     setMessage(event?.target.value);
   };
 
-  const onSubmit = (event: any) => {
+  const onSubmit =  async (event: any) => {
     event?.preventDefault();
 
     const data = {
@@ -111,12 +112,27 @@ export default function ContactUs() {
       message: message,
     };
     console.log("data", data);
-    setSubmitted(true);
+    try {
+      const response = await EnquiryApi.createEnquiry({
+        userName: data.name,
+        userEmail: data.email,
+        enquiryMessage: data.message,
+        projectType:data.type
+      });
+      if ( response) {
+        setSubmitted(true);
 
     // Simulate an asynchronous operation (e.g., API call) with setTimeout
     setTimeout(() => {
       setSubmitted(false); // Reset submitted state after 5 seconds
     }, 5000);
+      } else {
+        console.log('Response Failed');
+      }
+    } catch (err) {
+      console.log("err",err)
+    }
+   
   };
 
   const StyledImage1 = styled.img`
