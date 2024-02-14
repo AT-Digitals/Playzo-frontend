@@ -15,6 +15,9 @@ import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Icon from "../../assets/Variant10.png";
+import UserLoginApi from "../../api/UserLoginApi";
+import routes from "../../routes/routes";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface loginProps {
@@ -27,7 +30,9 @@ export default function LoginForm({ handleClose, open }: loginProps) {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
+  const navigate = useNavigate();
 
+  
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
@@ -49,7 +54,7 @@ export default function LoginForm({ handleClose, open }: loginProps) {
     validatePassword(event.target.value);
   };
 
-  const onSubmit = (event: any) => {
+  const onSubmit = async (event: any) => {
     event.preventDefault();
     if (isValidEmail) {
       setIsValidEmail(false);
@@ -62,6 +67,24 @@ export default function LoginForm({ handleClose, open }: loginProps) {
       email: email,
       password: password,
     };
+
+    try {
+      const response = await UserLoginApi.loginUser({
+        email: data.email,
+        password: data.password
+      });
+      if (response) {
+        localStorage.setItem('user', JSON.stringify(response));
+        navigate(routes.BOOKING_SERVICE);
+        handleClose?.();
+        // setStatus({ success: true });
+        // setSubmitting(true);
+      } else {
+        console.log('Login Failed');
+      }
+    } catch (err) {
+      console.log("err",err)
+    }
     console.log("data", data);
   };
   return (

@@ -3,10 +3,13 @@ import * as React from "react";
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import BookingApi from "../../api/BookingApi";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import leftarrow from "./left-arrow.svg";
 import rightarrow from "./right-arrow.svg";
+import routes from "../../routes/routes";
+import { useNavigate } from "react-router-dom";
 
 const Timings = [
   { name: "6:00-7:00 AM" },
@@ -47,6 +50,8 @@ export default function CustomDateCalendar({
   selectedService,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
+  const user = localStorage.getItem('user');
+  const userData = JSON.parse(user??"");
 
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
@@ -96,6 +101,7 @@ export default function CustomDateCalendar({
   // };
 
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
+  const navigate = useNavigate();
 
   // const handleTimeSelection = (time: string) => {
   //   if (selectedTimings.includes(time)) {
@@ -144,13 +150,16 @@ export default function CustomDateCalendar({
     setSelectedTimings((prevSelectedTimings) => [...prevSelectedTimings, time]);
   };
 
-  const handleAddButtonClick = (type: string, selectedService: string) => {
+  const handleAddButtonClick = async (type: string, selectedService: string) => {
+if(userData.userType!=="user"){
+  navigate(routes.ROOT)
+}else{
     if (selectedDate !== "" && selectedTimings.length > 0) {
       const totalDuration = selectedTimings.length;
       const ratePerHour = 1500;
 
       const totalAmount = totalDuration * ratePerHour;
-      const newItem = {
+      const bookings = {
         type,
         name: selectedService,
         date: selectedDate,
@@ -159,12 +168,40 @@ export default function CustomDateCalendar({
         duration: totalDuration,
         // ... other properties
       };
-      setTableData((prevTableData: any) => [...prevTableData, newItem]);
 
-      // Reset selected date and timings
-      setSelectedDate("");
-      setSelectedTimings([]);
+      // try {
+      //   const response = await BookingApi.getBookingList({
+      //     type: bookings.type,
+      //     bookingtype: "online",
+      //     startTime: parseInt(bookings.startTime),
+      //     endTime: parseInt(bookings.endTime),
+      //     user: userData.id,
+      //     startDate: bookings.selectedDate,
+      //     endDate: bookings.selectedDate,
+      //   //   bookingId: response.razorpay_payment_id,
+      //     // court: ,
+        
+      //     });
+      //   if (response) {
+      //     // setTableData((prevTableData: any) => [...prevTableData, bookings]);
+
+      //     // // Reset selected date and timings
+      //     // setSelectedDate("");
+      //     // setSelectedTimings([]);
+      //   } else {
+      //     console.log('Booking Failed');
+      //   }
+      // } catch (err) {
+      //   console.log("err",err)
+      // }
+                setTableData((prevTableData: any) => [...prevTableData, bookings]);
+
+          // Reset selected date and timings
+          setSelectedDate("");
+          setSelectedTimings([]);
+    
     }
+  }
   };
 
   return (
