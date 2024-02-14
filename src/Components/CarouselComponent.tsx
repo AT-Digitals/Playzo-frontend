@@ -1,14 +1,10 @@
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image1 from "../assets/Rectangle 678.png";
 import Image2 from "../assets/Rectangle 677.png";
 import Image3 from "../assets/Rectangle 673.png";
 import CarouselCardComponent from "./CarouselCardComponent";
 import Colors from "../CommonComponents/Colors";
-import Image5 from "../assets/Image (5).png";
-import Image4 from "../assets/Image (3).png";
-
 
 interface HotelCard {
     imageSrc: string;
@@ -21,13 +17,13 @@ interface HotelCard {
 
 const CardDetails: HotelCard[] = [
     {
-        imageSrc: Image1, // Replace with your actual image paths
-        name: "Prakash",
+        imageSrc: Image3,
+        name: "Anand",
         type: "Badminton",
         member: "Member since 2022",
         feedback:
-            "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
-        ratings: 3,
+            "I had a great experience playing badminton at Playzo33! The professional-level courts provided an excellent playing surface, and the well-lit environment made it easy to enjoy games even in the evening. The booking process was straightforward, and the overall atmosphere was friendly and inviting. I appreciate the attention to detail and the effort put into maintaining high-quality badminton facilities. Looking forward to my next game!",
+        ratings: 4.5,
     },
     {
         imageSrc: Image2,
@@ -39,105 +35,85 @@ const CardDetails: HotelCard[] = [
         ratings: 5,
     },
     {
-        imageSrc: Image3, // Replace with your actual image paths
+        imageSrc: Image1,
         name: "Prakash",
         type: "Badminton",
         member: "Member since 2022",
         feedback:
-            "I had a great experience playing badminton at Playzo33! The professional-level courts provided an excellent playing surface, and the well-lit environment made it easy to enjoy games even in the evening. The booking process was straightforward, and the overall atmosphere was friendly and inviting. I appreciate the attention to detail and the effort put into maintaining high-quality badminton facilities. Looking forward to my next game!",
-        ratings: 4.5,
+            "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
+        ratings: 3,
     },
-    {
-        imageSrc: Image4,
-        name: "Anand",
-        type: "Badminton",
-        member: "Member since 2022",
-        feedback:
-            "The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.The playground staff is very helpful especially with them sending vides to help us figure out how to do something we haven't before.",
-        ratings: 3.5,
-    },
-    {
-        imageSrc: Image5,
-        name: "Shwetha",
-        type: "Badminton",
-        member: "Member since 2022",
-        feedback:
-            "I went from doing everything the paper way to now everything is electronic from check in and out to all of the children files and mine on the Playground app. Love love the all the payment options.",
-        ratings: 2.5,
-    },
-    // {
-    //     imageSrc: Image1,
-    //     name: "Anand",
-    //     type: "Badminton",
-    //     member: "Member since 2022",
-    //     feedback:
-    //         "The statement dates were not correct and caused a lot of confusion for parents. Assigning the charges takes a lot of time for us as a large center with multiple age groups and price points.",
-    //     ratings: 4,
-    // },
-    // Add more hotel cards as needed
 ];
 
 export default function CarouselComponent() {
     const initialCardsToShowMobile = 2;
     const initialCardsToShowWeb = 3;
-  
+
     const [startIndex, setStartIndex] = useState(0);
-  
+    const [cardIndex, setCardIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
     const isWeb = useMediaQuery("(min-width:600px)");
-  
-    const initialCardsToShow = isWeb
-      ? initialCardsToShowWeb
-      : initialCardsToShowMobile;
-  
+    const initialCardsToShow = isWeb ? initialCardsToShowWeb : initialCardsToShowMobile;
+
+    // Initialize visibleCards
+    let visibleCards: HotelCard[] = [];
+
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setCardIndex((prevIndex) => (prevIndex + 1) % visibleCards.length);
+    //         setLoading(false);
+    //     }, 5000);
+    //     return () => clearTimeout(timer);
+    // }, [cardIndex, visibleCards.length]);
+
     const showNextCards = () => {
-      setStartIndex((prevIndex) =>
-        Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow)
-      );
-    };
-  
-    const showPreviousCards = () => {
-      setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    };
-  
-    let visibleCards;
+    setStartIndex((prevIndex) => Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow));
+    setCardIndex((prevIndex) => (prevIndex + 1) % initialCardsToShow); // Update card index based on visible cards
+};
+
+const showPreviousCards = () => {
+    setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    setCardIndex((prevIndex) => (prevIndex - 1 + initialCardsToShow) % initialCardsToShow); // Update card index based on visible cards
+};
+
     if (isWeb) {
-        visibleCards = CardDetails.slice(startIndex, startIndex + initialCardsToShowWeb).map((card, index) => {
-            switch (index) {
-              case 0:
-                return { ...card, name: "Prakash" };
-              case 1:
-                return { ...card, name: "Shwetha" };
-              case 2:
-                return { ...card, name: "Anand" };
-              default:
-                return card;
+        visibleCards = CardDetails.slice(startIndex, startIndex + initialCardsToShow).map(
+            (card, index) => {
+                return { ...card, name: CardDetails[startIndex + index].name };
             }
-          });
+        );
     } else {
-      // In mobile view, show specific cards
-      visibleCards = [
-        { ...CardDetails[CardDetails.length - 1], name: "Anand" }, // Rectangle 673 card with Anand's name
-        { ...CardDetails[2], name: "Anand" }, // Rectangle 678 card with Anand's name
-      ];
+        visibleCards = [
+            { ...CardDetails[CardDetails.length - 1], name: "Anand" },
+            { ...CardDetails[0], name: "Anand" },
+        ];
     }
+
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} mb={"32px"} width="100%">
-             <Typography pt={"50px"} textAlign={"center"} color={Colors.WHITE} fontSize={"42px"} fontWeight={"bold"}>Our Client Testimonials</Typography>
+            <Typography
+                pt={"50px"}
+                textAlign={"center"}
+                color={Colors.WHITE}
+                fontSize={"42px"}
+                fontWeight={"bold"}
+            >
+                Our Client Testimonials
+            </Typography>
             <Stack
-                flexDirection={{xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row"}}
+                flexDirection={{ xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row" }}
                 spacing={3}
                 maxWidth={1200}
                 margin="auto"
-               pt={{xs: '0px', sm: '0px', md: "0px", lg: "96px"}}
-               pb={{xs: '0px', sm: '0px', md: "0px", lg: "96px"}}
-                alignItems={{xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal"}}
+                pt={{ xs: '0px', sm: '0px', md: "0px", lg: "45px" }}
+                pb={{ xs: '0px', sm: '0px', md: "0px", lg: "96px" }}
+                alignItems={{ xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal" }}
             >
-               
                 {visibleCards.map((card, index) => (
                     <CarouselCardComponent
                         key={index}
                         cardDetails={card}
-                        showDetails={index === initialCardsToShow - 1}
+                        showDetails={index === cardIndex}
                         nextClick={showNextCards}
                         prevClick={showPreviousCards}
                     />

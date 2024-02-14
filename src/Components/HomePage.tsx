@@ -18,7 +18,7 @@ import Colors from "../CommonComponents/Colors";
 import ComponentCarosel from "./ComponentCarosel";
 import Cricket from "../assets/Image (9).png";
 import CustomButton from "../CommonComponents/CustomButton";
-import Image1 from "../assets/Rectangle 67.png";
+
 import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
 import Image4 from "../assets/pexels-pixabay-209977.jpg";
 import Image5 from "../assets/pexels-pixabay-46798.jpg";
@@ -32,31 +32,6 @@ import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
 
-const StyledTypo = styled(Typography)({
-  color: Colors.WHITE,
-  position: "absolute",
-  top: "34%",
-  left: "27%",
-  fontSize: "3rem",
-  textAlign: "center",
-  zIndex: 1,
-  overflow: "hidden",
-  cursor: "pointer",
-
-  "&:hover": {
-    "& > span:first-of-type": {
-      transform: "translateX(-100%)",
-    },
-    "& > span:last-of-type": {
-      transform: "translateX(104%)",
-    },
-  },
-
-  "& > span": {
-    display: "inline-block",
-    transition: "transform 2s ease",
-  },
-});
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -308,8 +283,20 @@ const StyledButton = styled(CustomButton)({
   position: "absolute",
   padding: "10px 20px",
 });
-const images = [Image1, Image3, Image4, Image5]; // List of images to loop through
-const intervalTime = 6000; // Interval time in milliseconds
+const StyledTypo = styled(Typography)({
+  color: Colors.WHITE,
+  position: "absolute",
+  top: "34%",
+  left: "27%",
+  fontSize: "3rem",
+  textAlign: "center",
+  zIndex: 1,
+  overflow: "hidden",
+  cursor: "pointer",
+});
+
+const images = [Image3, Image4, Image5]; // List of images to loop through
+const intervalTime = 5000; // Interval time in milliseconds
 
 export default function HomePage() {
   const slideFromLeft = keyframes`
@@ -321,7 +308,7 @@ export default function HomePage() {
   }
 `;
 
-  const slideFromRight = keyframes`
+const slideFromRight = keyframes`
   from {
     transform: translateX(100%);
   }
@@ -329,51 +316,59 @@ export default function HomePage() {
     transform: translateX(0);
   }
 `;
-
   interface StyledSpanProps {
     showText: boolean;
+    initialLoad: boolean;
   }
 
   const StyledSpan = styled.span<StyledSpanProps>`
-    opacity: ${({ showText }) => (showText ? 1 : 0)};
-    transition: opacity 2s ease-in-out;
+  opacity: ${({ showText }) => (showText ? 1 : 0)};
+  transition: opacity 2s ease-in-out;
 
-    &:first-child {
-      ${({ showText }) =>
-        showText &&
-        css`
-          animation: ${slideFromLeft} 2s ease-out;
-        `}
-    }
+  &:first-child {
+    ${({ initialLoad, showText }) =>
+      initialLoad &&
+      showText &&
+      css`
+        animation: ${slideFromLeft} 2s ease-out;
+      `}
+  }
 
-    &:last-child {
-      ${({ showText }) =>
-        showText &&
-        css`
-          animation: ${slideFromRight} 2s ease-out;
-        `}
-    }
-  `;
+  &:last-child {
+    ${({ initialLoad, showText }) =>
+      initialLoad &&
+      showText &&
+      css`
+        animation: ${slideFromRight} 2s ease-out;
+      `}
+  }
+`;
 
-  const [showText, setShowText] = useState(false);
 
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setShowText(true);
-    }, 1000);
 
-    const timer2 = setTimeout(() => {
-      setShowText(true);
-    }, 2000);
+const [showText, setShowText] = useState(false);
+const [initialLoad, setInitialLoad] = useState(true);
+const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+useEffect(() => {
+  const timer1 = setTimeout(() => {
+    setShowText(true);
+  }, 1000);
 
-  useEffect(() => {
+  const timer2 = setTimeout(() => {
+    setShowText(true); // Set showText to true for the second timer
+    setInitialLoad(false); // Move this line here to set initialLoad to false after animation
+  }, 2000);
+
+  return () => {
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  };
+}, []);
+
+
+useEffect(() => {
+  if (!initialLoad) {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
@@ -381,8 +376,8 @@ export default function HomePage() {
     }, intervalTime);
 
     return () => clearInterval(interval);
-  }, []);
-
+  }
+}, [initialLoad]);
   return (
     <Box width="100%" >
       <Box>
@@ -404,10 +399,10 @@ export default function HomePage() {
         fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "7rem" }}
         textAlign={"center"}
       >
-        <StyledSpan showText={showText}>Play Beyond</StyledSpan>
+        <StyledSpan showText={showText} initialLoad={initialLoad}>Play Beyond</StyledSpan>
 
         <br />
-        <StyledSpan showText={showText}>Boundaries</StyledSpan>
+        <StyledSpan  showText={showText} initialLoad={initialLoad}>Boundaries</StyledSpan>
       </StyledTypo>
       <Typography style={{transform: "translate(271%, -340%)"}} position={"absolute"} fontSize={"2.5rem"} fontWeight={"400"} color={Colors.WHITE}>#Let’s Playzo</Typography>
       <StyledButton
@@ -423,22 +418,22 @@ export default function HomePage() {
         Book Now
       </StyledButton>
       <Box sx={{ backgroundColor: "#f0f0f0" }}>
-      <Typography pt={"36px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
+      <Typography pt={"90px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
       <Box
         width="100%"
         maxWidth={1200}
         margin="0 auto"
-        paddingTop={"50px"}
-        pb={"50px"}
+        paddingTop={"20px"}
+        pb={"20px"}
       >
         {/* <StyledImage src={Layer2} alt="Layer2" /> */}
         <Typography
           variant="h2"
           color={Colors.BLACK}
           textAlign="center"
-          fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "32px" }}
+          fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "20px" }}
           fontWeight={700}
-          width={{ xs: "300px", sm: "300px", md: "300px", lg: "700px" }}
+          width={{ xs: "300px", sm: "300px", md: "300px", lg: "850px" }}
           margin="auto"
           sx={{ fontFamily: "Inter" }}
         >
@@ -450,23 +445,23 @@ export default function HomePage() {
       <Grid
         container
         width="100%"
-        maxWidth={1200}
+        maxWidth={1300}
         margin="0 auto"
         spacing={3}
         pb={3}
         flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
       >
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Turf"}
             description={
-              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket selection."
+              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and a cricket selection."
             }
             image={turf}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Play Station"}
@@ -476,7 +471,7 @@ export default function HomePage() {
             image={playstation}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Board Games"}
@@ -488,17 +483,17 @@ export default function HomePage() {
         </Grid>
         {/* <StyledImage1 src={Layer1} alt="layer1" />
         <StyledImage2 src={Layer1} alt="layer1" /> */}
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Badminton"}
             description={
-              "Ace every shot on our professional Badminton courts, where passion meets precision."
+              "Ace every shot on our professional Badminton courts, where passion meets a precision."
             }
             image={Badminton}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Cricket Net"}
@@ -508,7 +503,7 @@ export default function HomePage() {
             image={Cricket}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <CardComponent
             buttonLabel="Know more"
             title={"Bowling Machine"}

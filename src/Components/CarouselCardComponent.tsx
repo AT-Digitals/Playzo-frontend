@@ -180,14 +180,14 @@ export default function CarouselCardComponent({
         >
             {showDetails ? (
                 <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: "30px 30px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
-                    <StyledImage3 src={Layer3} alt="layer3" />
+                    {/* <StyledImage3 src={Layer3} alt="layer3" /> */}
                     <StyledImage
                         src={cardDetails.imageSrc}
                         alt="green iguana"
                     />
-                    <Stack style={{transform: "translate(200px, 10px)"}} direction="column" spacing={2} width="370px" py={2}>
+                    <Stack direction="column" spacing={2} width="370px" py={2}>
                         <Rating value={cardDetails.ratings} readOnly />
-                        <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "17px"}}>
+                        <Typography maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "350px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "16px"}}>
                             {cardDetails.feedback}
                         </Typography>
                         <Stack height={"100%"} direction="column" sx={{ backgroundColor: Colors.BLACK }}>
@@ -217,7 +217,7 @@ export default function CarouselCardComponent({
                                 <i> {cardDetails.member}</i>
                             </Typography>
                         </Stack>
-                        <Stack style={{transform: "translate(-239%, 56px)", marginTop: "0px"}} direction="row" spacing={2}>
+                        <Stack style={{ marginTop: "0px"}} direction="row" spacing={2}>
                             <Button onClick={prevClick} sx={{
                                 padding: "18px 7px",
                                 borderRadius: "50%",
