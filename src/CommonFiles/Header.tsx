@@ -94,6 +94,23 @@ export default function Header() {
             >
               Login
             </CustomButton>
+
+            <CustomButton
+              variant="outlined"
+              color={Colors.WHITE}
+              bgColor={Colors.BUTTON}
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "20px",
+                minWidth: "100px",
+                color: Colors.BUTTON_COLOR,
+                fontWeight: "bold",
+              }}
+              onClick={handleLogout}
+            >
+              Logout
+            </CustomButton>
             <CustomButton
               variant="contained"
               color={Colors.WHITE}

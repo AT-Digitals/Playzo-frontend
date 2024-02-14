@@ -22,105 +22,107 @@ import Image2 from "../assets/Rectangle 669.png";
 import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
 import Image4 from "../assets/pexels-pixabay-209977.jpg";
 import Image5 from "../assets/pexels-pixabay-46798.jpg";
-import Layer1 from "../assets/Layer_1 (1).png";
-import Layer2 from "../assets/Layer_2.png";
 import Machine from "../assets/Image (7).png";
-import ball from "../assets/ball 1.png";
 import boardGames from "../assets/board games.png";
 import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
 
-const StyledImage = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(180px, -43px);
-    width: 82px;
-    height: 113px;
-  }
-`;
-const StyledImage1 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(23rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(75rem, 30rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
-const StyledImage2 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(-0px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(-14px, 62rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
+// import Layer1 from "../assets/Layer_1 (1).png";
+// import Layer2 from "../assets/Layer_2.png";
+
+// import ball from "../assets/ball 1.png";
+
+// const StyledImage = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(180px, -43px);
+//     width: 82px;
+//     height: 113px;
+//   }
+// `;
+// const StyledImage1 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(23rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(75rem, 30rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
+// const StyledImage2 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(-0px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(-14px, 62rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
 // const StyledImage3 = styled.img`
 //   @media (min-width: 300px) {
 //     /* Extra small devices (phones) */
@@ -215,41 +217,41 @@ const StyledImage5 = styled.img`
     transform: translate(0%, 4.7%);
   }
 `;
-const StyledImage6 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 150px;
-    height: 150px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 225px;
-    }}
-  }
-`;
+// const StyledImage6 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     width: 150px;
+//     height: 150px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 225px;
+//     }}
+//   }
+// `;
 const StyledButton = styled(CustomButton)({
   fontSize: "20px",
   textTransform: "none",
