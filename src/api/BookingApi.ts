@@ -46,9 +46,10 @@ export default class BookingApi {
       throw handleApiError(e, "Failed to create booking");
     }
   }
-  public static async getBookingList(booking?: any) {
+  public static async getBookedList(booking?: any) {
     try {
-      const details = await axiosInstance.get<any[]>(`/bookings`,booking);
+      console.log("booking",booking)
+      const details = await axiosInstance.post<any[]>(`/bookings/disable`,booking);
       return details.data;
     } catch (e) {
       throw handleApiError(e, "Failed to get all details");
@@ -94,6 +95,15 @@ export default class BookingApi {
       return detail.data;
     } catch (e) {
       throw handleApiError(e, "Failed to get booking");
+    }
+  }
+
+  public static async getBookingAmount(type: any) {
+    try {
+      const detail = await axiosInstance.get<any>(`/booking/amount/${type}`);
+      return detail.data;
+    } catch (e) {
+      throw handleApiError(e, "Failed to get amount");
     }
   }
 }
