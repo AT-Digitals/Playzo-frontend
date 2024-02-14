@@ -60,6 +60,7 @@ const StyledTypo = styled(Typography)({
   },
 });
 
+
 // const StyledImage = styled.img`
 //   @media (min-width: 300px) {
 //     /* Extra small devices (phones) */
@@ -310,8 +311,20 @@ const StyledButton = styled(CustomButton)({
   position: "absolute",
   padding: "10px 20px",
 });
-const images = [Image1, Image3, Image4, Image5]; // List of images to loop through
-const intervalTime = 6000; // Interval time in milliseconds
+const StyledTypo = styled(Typography)({
+  color: Colors.WHITE,
+  position: "absolute",
+  top: "34%",
+  left: "27%",
+  fontSize: "3rem",
+  textAlign: "center",
+  zIndex: 1,
+  overflow: "hidden",
+  cursor: "pointer",
+});
+
+const images = [Image3, Image4, Image5]; // List of images to loop through
+const intervalTime = 5000; // Interval time in milliseconds
 
 export default function HomePage() {
   const slideFromLeft = keyframes`
@@ -323,7 +336,7 @@ export default function HomePage() {
   }
 `;
 
-  const slideFromRight = keyframes`
+const slideFromRight = keyframes`
   from {
     transform: translateX(100%);
   }
@@ -331,9 +344,9 @@ export default function HomePage() {
     transform: translateX(0);
   }
 `;
-
   interface StyledSpanProps {
     showText: boolean;
+    initialLoad: boolean;
   }
 
   const StyledSpan = styled.span<StyledSpanProps>`
@@ -378,6 +391,53 @@ export default function HomePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+  opacity: ${({ showText }) => (showText ? 1 : 0)};
+  transition: opacity 2s ease-in-out;
+
+  &:first-child {
+    ${({ initialLoad, showText }) =>
+      initialLoad &&
+      showText &&
+      css`
+        animation: ${slideFromLeft} 2s ease-out;
+      `}
+  }
+
+  &:last-child {
+    ${({ initialLoad, showText }) =>
+      initialLoad &&
+      showText &&
+      css`
+        animation: ${slideFromRight} 2s ease-out;
+      `}
+  }
+`;
+
+
+
+const [showText, setShowText] = useState(false);
+const [initialLoad, setInitialLoad] = useState(true);
+const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+useEffect(() => {
+  const timer1 = setTimeout(() => {
+    setShowText(true);
+  }, 1000);
+
+  const timer2 = setTimeout(() => {
+    setShowText(true); // Set showText to true for the second timer
+    setInitialLoad(false); // Move this line here to set initialLoad to false after animation
+  }, 2000);
+
+  return () => {
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  };
+}, []);
+
+
+useEffect(() => {
+  if (!initialLoad) {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
@@ -385,13 +445,16 @@ export default function HomePage() {
     }, intervalTime);
 
     return () => clearInterval(interval);
-  }, []);
+//   }, []);
 
-  const currentImage = useMemo(
-    () => images[currentImageIndex],
-    [currentImageIndex]
-  );
+//   const currentImage = useMemo(
+//     () => images[currentImageIndex],
+//     [currentImageIndex]
+//   );
 
+
+  }
+}, [initialLoad]);
   return (
     <Box width="100%">
       <Box>
@@ -413,10 +476,10 @@ export default function HomePage() {
         fontSize={{ xs: "3rem", sm: "3rem", md: "3rem", lg: "7rem" }}
         textAlign={"center"}
       >
-        <StyledSpan showText={showText}>Play Beyond</StyledSpan>
+        <StyledSpan showText={showText} initialLoad={initialLoad}>Play Beyond</StyledSpan>
 
         <br />
-        <StyledSpan showText={showText}>Boundaries</StyledSpan>
+        <StyledSpan  showText={showText} initialLoad={initialLoad}>Boundaries</StyledSpan>
       </StyledTypo>
       <Typography
         style={{ transform: "translate(271%, -340%)" }}
@@ -440,12 +503,28 @@ export default function HomePage() {
         Book Now
       </StyledButton>
       <Box sx={{ backgroundColor: "#f0f0f0" }}>
+
+      <Typography pt={"90px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
+      <Box
+        width="100%"
+        maxWidth={1200}
+        margin="0 auto"
+        paddingTop={"20px"}
+        pb={"20px"}
+      >
+        {/* <StyledImage src={Layer2} alt="Layer2" /> */}
         <Typography
           pt={"36px"}
-          fontSize={"42px"}
+//           fontSize={"42px"}
           textAlign={"center"}
-          fontWeight={"600"}
+//           fontWeight={"600"}
           color={Colors.BLACK}
+//           textAlign="center"
+          fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "20px" }}
+          fontWeight={700}
+          width={{ xs: "300px", sm: "300px", md: "300px", lg: "850px" }}
+          margin="auto"
+          sx={{ fontFamily: "Inter" }}
         >
           Our Services
         </Typography>
@@ -472,82 +551,78 @@ export default function HomePage() {
             cater to the varied interests of our community.
           </Typography>
         </Box>
-        <Grid
-          container
-          width="100%"
-          maxWidth={1200}
-          margin="0 auto"
-          spacing={3}
-          pb={3}
-          flexDirection={{
-            xs: "column",
-            sm: "column",
-            md: "column",
-            lg: "row",
-          }}
-        >
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Turf"}
-              description={
-                "Kick off your sports adventure on our two top-notch turfs, perfect for football, and cricket selection."
-              }
-              image={turf}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Play Station"}
-              description={
-                "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection."
-              }
-              image={playstation}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Board Games"}
-              description={
-                "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
-              }
-              image={boardGames}
-            />
-          </Grid>
-          {/* <StyledImage1 src={Layer1} alt="layer1" />
+      
+      </Box>
+      <Grid
+        container
+        width="100%"
+        maxWidth={1300}
+        margin="0 auto"
+        spacing={3}
+        pb={3}
+        flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+      >
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Turf"}
+            description={
+              "Kick off your sports adventure on our two top-notch turfs, perfect for football, and a cricket selection."
+            }
+            image={turf}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Play Station"}
+            description={
+              "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection."
+            }
+            image={playstation}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Board Games"}
+            description={
+              "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time."
+            }
+            image={boardGames}
+          />
+        </Grid>
+        {/* <StyledImage1 src={Layer1} alt="layer1" />
         <StyledImage2 src={Layer1} alt="layer1" /> */}
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Badminton"}
-              description={
-                "Ace every shot on our professional Badminton courts, where passion meets precision."
-              }
-              image={Badminton}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Cricket Net"}
-              description={
-                "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
-              }
-              image={Cricket}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Bowling Machine"}
-              description={
-                "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine selection."
-              }
-              image={Machine}
-            />
-          </Grid>
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Badminton"}
+            description={
+              "Ace every shot on our professional Badminton courts, where passion meets a precision."
+            }
+            image={Badminton}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Cricket Net"}
+            description={
+              "Refine your cricket prowess where every practice session is designed to elevate your game to new heights."
+            }
+            image={Cricket}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <CardComponent
+            buttonLabel="Know more"
+            title={"Bowling Machine"}
+            description={
+              "Precision meets practice – polish your cricket skills with our cutting-edge Bowling Machine selection."
+            }
+            image={Machine}
+          />
         </Grid>
 
         <Box
