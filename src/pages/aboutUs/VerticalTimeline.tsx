@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import "intersection-observer";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -35,48 +37,95 @@ const data = [
     year: "2021",
   },
 ];
+
 export default function CustomTimeline() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const isInitialMount = useRef(true);
 
-  const handleScroll = () => {
-    const timelineElement = document.getElementById("custom-timeline");
-    if (timelineElement) {
-      const timelineRect = timelineElement.getBoundingClientRect();
-      const timelineTop = timelineRect.top + window.scrollY;
-      const timelineBottom = timelineTop + timelineRect.height;
-
-      const timelineItems = document.querySelectorAll(".timeline-item");
-      let currentActiveIndex = 0;
-
-      timelineItems.forEach((item, index) => {
-        const rect = item.getBoundingClientRect();
-        const itemTop = rect.top + window.scrollY;
-        const itemBottom = itemTop + rect.height;
-
-        if (
-          (itemTop >= timelineTop && itemTop <= timelineBottom) ||
-          (itemBottom >= timelineTop && itemBottom <= timelineBottom)
-        ) {
-          currentActiveIndex = index;
-        }
-      });
-
-      setActiveIndex(currentActiveIndex);
-    }
+  const handleIntersect = (entries: any, observer: any) => {
+    entries.forEach((entry: any) => {
+      if (entry.isIntersecting) {
+        const index = parseInt(entry.target.getAttribute("data-index"), 10);
+        setActiveIndex(index);
+      }
+    });
   };
 
   useEffect(() => {
     const timelineElement = document.getElementById("custom-timeline");
-    if (timelineElement) {
-      timelineElement.addEventListener("scroll", handleScroll);
+    const timelineItems = document.querySelectorAll(".timeline-item");
+
+    if (!timelineElement) {
+      return; // Exit early if timelineElement is null
     }
 
-    return () => {
-      if (timelineElement) {
-        timelineElement.removeEventListener("scroll", handleScroll);
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          let currentActiveIndex = activeIndex;
+
+          timelineItems.forEach((item, index) => {
+            const rect = item.getBoundingClientRect();
+            const isVisible =
+              rect.top <= timelineElement.clientHeight / 2 &&
+              rect.bottom >= timelineElement.clientHeight / 2;
+
+            if (isVisible) {
+              currentActiveIndex = index;
+            }
+          });
+
+          if (currentActiveIndex !== activeIndex) {
+            setActiveIndex(currentActiveIndex);
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
-  }, []);
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      root: timelineElement,
+      threshold: 0.5, // Adjust this threshold as needed
+    });
+
+    timelineItems.forEach((item, index) => {
+      observer.observe(item);
+      item.setAttribute("data-index", index.toString());
+    });
+
+    // Set the initial state based on the visibility of the items only on the initial mount
+    if (isInitialMount.current) {
+      let initialActiveIndex = 0;
+
+      timelineItems.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const isVisible =
+          rect.top <= timelineElement.clientHeight / 2 &&
+          rect.bottom >= timelineElement.clientHeight / 2;
+
+        if (isVisible) {
+          initialActiveIndex = index;
+        }
+      });
+
+      setActiveIndex(initialActiveIndex);
+      isInitialMount.current = false;
+    }
+
+    // Add scroll event listener
+    timelineElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      observer.disconnect();
+      timelineElement.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeIndex]);
+
   return (
     <Timeline
       id="custom-timeline"
@@ -85,50 +134,80 @@ export default function CustomTimeline() {
         overflow: "auto",
         display: "flex",
         flexDirection: "column",
-        gap: "10rem",
+        gap: "9rem",
         width: "100%",
         scrollbarWidth: "none",
         msOverflowStyle: "none",
         WebkitOverflowScrolling: "touch",
+        scrollBehavior: "smooth",
       }}
     >
-      {data.map((item, index) => (
-        <TimelineItem
-          key={index}
-          style={{
-            gap: "5rem",
-          }}
-          className={`timeline-item ${index === activeIndex ? "red" : ""}`}
-        >
-          <TimelineOppositeContent
-            color={index === activeIndex ? "red" : "white"}
-            fontSize={"40px"}
-            sx={{
-              background: index === activeIndex ? "#e9673f" : "",
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <Box>
+        {data.map((item, index) => (
+          <TimelineItem
+            key={index}
+            style={{
+              gap: "1rem",
+              // alignItems:index === activeIndex ? "baseline" :"center"
             }}
+            className={`timeline-item ${index === activeIndex ? "red" : ""}`}
           >
-            {item.year}
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector style={{ minHeight: 150 }} />
-          </TimelineSeparator>
-          <TimelineContent>
-            <Box
-              maxWidth={350}
-              display={"flex"}
-              color={index === activeIndex ? "red" : "white"}
-              flexDirection={"column"}
-              gap={"2rem"}
-              fontSize={"16px"}
+            <TimelineOppositeContent
+              color={index === activeIndex ? "white" : "white"}
+              fontSize={index === activeIndex ? "32px" : "15px"}
+              sx={{
+                background: index === activeIndex ? "" : "",
+                marginTop: index === activeIndex ? "-1rem" : undefined,
+                padding: index === activeIndex ? "17px 16px" : "6px 16px",
+                fontWeight: index === activeIndex ? 900 : 400,
+                fontStyle: index === activeIndex ? "italic" : "italic",
+              }}
             >
-              {item.title}
-              <br />
-              {item.disciption}
-            </Box>
-          </TimelineContent>
-        </TimelineItem>
-      ))}
+              {item.year}
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineDot
+                sx={{
+                  padding: index === activeIndex ? "10px" : "5px",
+                  borderRadius: "0px",
+                }}
+              />
+              <TimelineConnector style={{ minHeight: 240 }} />
+            </TimelineSeparator>
+            <TimelineContent>
+              <Box
+                maxWidth={400}
+                display={index === activeIndex ? "flex" : "none"}
+                color={index === activeIndex ? "white" : "white"}
+                flexDirection={"column"}
+                gap={"1rem"}
+              >
+                <Typography
+                  fontSize={"26px"}
+                  fontWeight={index === activeIndex ? 600 : "400"}
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography lineHeight={"1.7rem"} fontSize={"18px"}>
+                  {item.disciption}
+                </Typography>
+              </Box>
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </Box>
     </Timeline>
   );
 }

@@ -11,7 +11,6 @@ import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon
 import Cafeteria from "../pages/services/Cafeteria";
 import CareersPage from "../pages/Careers/CareersPage";
 import ContactUs from "../pages/contactus/ContactUs";
-import ContactUsSample from "../pages/contactus/ContactUssample";
 import CricketNet from "../pages/services/CricketNet";
 import CricketNetBookingCommon from "../BookingService/CricketNetCommon";
 import CrossFit from "../pages/services/CrossFit";
@@ -25,6 +24,7 @@ import PlayStation from "../pages/services/PlayStation";
 import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
 import Service from "../pages/services/Service";
 import ServiceBooking from "../BookingService/ServiceBooking";
+import TermsandComditions from "../pages/Terms&conditions/TermsandConditions";
 import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
@@ -77,6 +77,10 @@ export default function AppRouter() {
           <Route path={routes.CRICKETNET} element={<CricketNet />} />
           <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
           <Route path={routes.FAQ} element={<FaqPage />} />
+          <Route
+            path={routes.TERMS_AND_CONDITIONS}
+            element={<TermsandComditions />}
+          />
         </Route>
       </Routes>
     </Router>

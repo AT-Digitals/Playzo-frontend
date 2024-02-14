@@ -133,7 +133,9 @@ export default function Footer() {
                 </Stack>
                 <Stack direction="column" spacing={2}>
                   <StyledLink to={routes.ROOT}>Privacy Policy</StyledLink>
-                  <StyledLink to={routes.ROOT}>Terms of Service</StyledLink>
+                  <StyledLink to={routes.TERMS_AND_CONDITIONS}>
+                    Terms of Service
+                  </StyledLink>
                   <StyledLink to={routes.FAQ}>FAQ</StyledLink>
                   <StyledLink to={routes.CAREERS_PAGE}>Careers</StyledLink>
                 </Stack>
@@ -159,22 +161,22 @@ export default function Footer() {
               lg={4}
             >
               <Typography
-               fontSize="14px" pt={"8px"} fontWeight={400}>
-               39/6 KCP Thottam, Kumalan Kuttai, Erode,
-               <br />
-               Tamil Nadu - 638011{" "}
-              </Typography>
-              <Stack spacing={2}>
-                <Typography
                 sx={{
                   fontSize: "16px",
                   fontWeight: 600,
-                  paddingTop: "12px"
+                  paddingTop: "12px",
                 }}
               >
                 Contact Us
               </Typography>
-              <Typography fontSize="14px" fontWeight={400}>
+
+              <Stack spacing={2}>
+                <Typography fontSize="14px" pt={"8px"} fontWeight={400}>
+                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
+                  <br />
+                  Tamil Nadu - 638011{" "}
+                </Typography>
+                <Typography fontSize="14px" fontWeight={400}>
                   +91 70944 60944 <br />
                   +91 91088 83555
                 </Typography>

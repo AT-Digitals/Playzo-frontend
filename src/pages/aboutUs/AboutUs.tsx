@@ -15,7 +15,6 @@ import BasicTimeline from "./VerticalTimeline";
 import Colors from "../../CommonComponents/Colors";
 import Image1 from "../../assets/Rectangle 67.png";
 import Image2 from "../../assets/Rectangle 669.png";
-import TimelineComponent from "./TimelineComponent";
 import bg from "./pexels-pixabay-262524.jpg";
 import group from "./Group 34245.svg";
 import styled from "@emotion/styled";
@@ -378,22 +377,28 @@ export default function AboutUs() {
             objectFit: "cover",
           }}
         />
+
         <Box
           ref={timelineRef}
           sx={{
             position: "absolute",
             width: "100%",
             bottom: "0%",
-            top: "10%",
-            right: "10%",
+            top: "-10%",
+            right: "6%",
             // transition: "transform 0.9s ease-in-out",
             // transform: showTimeline ? "translateY(0)" : "translateY(100%)",
           }}
         >
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
         </Box>
+        <Box position={"absolute"} top={"7%"} right={"75%"}>
+          <Typography color={"white"} fontSize={"52px"} fontWeight={"bold"}>
+            Timeline
+          </Typography>
+        </Box>
       </Box>
-      <AppContainer mb={"3rem"} pl={0}>
+      <AppContainer pb={"40px"} pt={"40px"} mb={"3rem"} pl={0}>
         <Stack
           justifyContent="space-between"
           alignItems="center"
@@ -573,7 +578,7 @@ export default function AboutUs() {
         </Grid>
       </Box>
       <Box
-        pt={{ xs: "50px", sm: "50px", md: "50px", lg: "80px" }}
+        pt={{ xs: "50px", sm: "50px", md: "50px", lg: "90px" }}
         pb={{ xs: "10px", sm: "10px", md: "10px", lg: "25px" }}
         maxWidth={1200}
         margin="auto"
@@ -824,7 +829,7 @@ export default function AboutUs() {
       </Box>
 
       <Box
-        mt={"60px"}
+        mt={"70px"}
         bgcolor={"#f0f0f0"}
         height={"130px"}
         display={"flex"}
