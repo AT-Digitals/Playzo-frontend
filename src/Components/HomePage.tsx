@@ -8,7 +8,7 @@ import {
   css,
   keyframes,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Badminton from "../assets/Image (8).png";
 import CardComponent from "./CardComponent";
@@ -18,121 +18,149 @@ import Colors from "../CommonComponents/Colors";
 import ComponentCarosel from "./ComponentCarosel";
 import Cricket from "../assets/Image (9).png";
 import CustomButton from "../CommonComponents/CustomButton";
-
+import Image1 from "../assets/Rectangle 67.png";
+import Image2 from "../assets/Rectangle 669.png";
 import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
 import Image4 from "../assets/pexels-pixabay-209977.jpg";
 import Image5 from "../assets/pexels-pixabay-46798.jpg";
-import Image2 from "../assets/Rectangle 669.png";
-import Layer1 from "../assets/Layer_1 (1).png";
-import Layer2 from "../assets/Layer_2.png";
 import Machine from "../assets/Image (7).png";
-import ball from "../assets/ball 1.png";
 import boardGames from "../assets/board games.png";
 import playstation from "../assets/playstation.png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
 
+// import Layer1 from "../assets/Layer_1 (1).png";
+// import Layer2 from "../assets/Layer_2.png";
 
-const StyledImage = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+// import ball from "../assets/ball 1.png";
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+const StyledTypo = styled(Typography)({
+  color: Colors.WHITE,
+  position: "absolute",
+  top: "34%",
+  left: "27%",
+  fontSize: "3rem",
+  textAlign: "center",
+  zIndex: 1,
+  overflow: "hidden",
+  cursor: "pointer",
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(28px, -38px);
-    width: 50px;
-    height: 60px;
-  }
+  "&:hover": {
+    "& > span:first-of-type": {
+      transform: "translateX(-100%)",
+    },
+    "& > span:last-of-type": {
+      transform: "translateX(104%)",
+    },
+  },
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(180px, -43px);
-    width: 82px;
-    height: 113px;
-  }
-`;
-const StyledImage1 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(23rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
+  "& > span": {
+    display: "inline-block",
+    transition: "transform 2s ease",
+  },
+});
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(24rem, 49rem);
-    width: 37px;
-    height: 37px;
-  }
+// const StyledImage = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(75rem, 30rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-const StyledImage2 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: absolute;
-    transform: translate(-0px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(28px, -38px);
+//     width: 50px;
+//     height: 60px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(180px, -43px);
+//     width: 82px;
+//     height: 113px;
+//   }
+// `;
+// const StyledImage1 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(23rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(-15px, 104rem);
-    width: 37px;
-    height: 37px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: absolute;
-    transform: translate(-14px, 62rem);
-    width: 37px;
-    height: 37px;
-  }
-`;
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(24rem, 49rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(75rem, 30rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
+
+// const StyledImage2 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: absolute;
+//     transform: translate(-0px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(-15px, 104rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: absolute;
+//     transform: translate(-14px, 62rem);
+//     width: 37px;
+//     height: 37px;
+//   }
+// `;
 // const StyledImage3 = styled.img`
 //   @media (min-width: 300px) {
 //     /* Extra small devices (phones) */
@@ -236,45 +264,45 @@ const StyledImage5 = styled.img`
     transform: translate(0%, 4.7%);
   }
 `;
-const StyledImage6 = styled.img`
+// const StyledImage6 = styled.img`
 
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 100px;
-    height: 100px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 88px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     width: 100px;
+//     height: 100px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 88px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 150px;
-    height: 150px;
-    transform: scaleX(-1);
-    position: absolute;
-    left: 225px;
-    }}
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     width: 150px;
+//     height: 150px;
+//     transform: scaleX(-1);
+//     position: absolute;
+//     left: 225px;
+//     }}
+//   }
+// `;
 
 const StyledButton = styled(CustomButton)({
   fontSize: "20px",
@@ -322,6 +350,47 @@ const slideFromRight = keyframes`
   }
 
   const StyledSpan = styled.span<StyledSpanProps>`
+    opacity: ${({ showText }) => (showText ? 1 : 0)};
+    transition: opacity 2s ease-in-out;
+
+    &:first-child {
+      ${({ showText }) =>
+        showText &&
+        css`
+          animation: ${slideFromLeft} 2s ease-out;
+        `}
+    }
+
+    &:last-child {
+      ${({ showText }) =>
+        showText &&
+        css`
+          animation: ${slideFromRight} 2s ease-out;
+        `}
+    }
+  `;
+
+  const [showText, setShowText] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation on initial mount after 1000ms
+    const initialTimer = setTimeout(() => {
+      setShowText(true);
+    }, 1000);
+
+    // Trigger animation again after 30 seconds
+    const repeatTimer = setTimeout(() => {
+      setShowText(true);
+    }, 30000); // 30 seconds
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(repeatTimer);
+    };
+  }, []);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
   opacity: ${({ showText }) => (showText ? 1 : 0)};
   transition: opacity 2s ease-in-out;
 
@@ -376,17 +445,25 @@ useEffect(() => {
     }, intervalTime);
 
     return () => clearInterval(interval);
+//   }, []);
+
+//   const currentImage = useMemo(
+//     () => images[currentImageIndex],
+//     [currentImageIndex]
+//   );
+
+
   }
 }, [initialLoad]);
   return (
-    <Box width="100%" >
+    <Box width="100%">
       <Box>
         <CardMedia
           sx={{
             height: { xs: "800px", sm: "800px", md: "800px", lg: "640px" },
           }}
           component="img"
-          image={images[currentImageIndex]}
+          image={currentImage}
           alt="Paella dish"
         />
       </Box>
@@ -404,20 +481,29 @@ useEffect(() => {
         <br />
         <StyledSpan  showText={showText} initialLoad={initialLoad}>Boundaries</StyledSpan>
       </StyledTypo>
-      <Typography style={{transform: "translate(271%, -340%)"}} position={"absolute"} fontSize={"2.5rem"} fontWeight={"400"} color={Colors.WHITE}>#Let’s Playzo</Typography>
+      <Typography
+        style={{ transform: "translate(271%, -340%)" }}
+        position={"absolute"}
+        fontSize={"2.5rem"}
+        fontWeight={"400"}
+        color={Colors.WHITE}
+      >
+        #Let’s Playzo
+      </Typography>
       <StyledButton
         style={{
           fontFamily: "Inter",
           fontWeight: 600,
           color: Colors.WHITE,
           border: "2px solid white",
-          transform:  "translate(459%, -235%)",
+          transform: "translate(459%, -235%)",
         }}
         variant="outlined"
       >
         Book Now
       </StyledButton>
       <Box sx={{ backgroundColor: "#f0f0f0" }}>
+
       <Typography pt={"90px"} fontSize={"42px"} textAlign={"center"} fontWeight={"600"} color={Colors.BLACK}>Our Services</Typography>
       <Box
         width="100%"
@@ -428,19 +514,44 @@ useEffect(() => {
       >
         {/* <StyledImage src={Layer2} alt="Layer2" /> */}
         <Typography
-          variant="h2"
+          pt={"36px"}
+//           fontSize={"42px"}
+          textAlign={"center"}
+//           fontWeight={"600"}
           color={Colors.BLACK}
-          textAlign="center"
+//           textAlign="center"
           fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "20px" }}
           fontWeight={700}
           width={{ xs: "300px", sm: "300px", md: "300px", lg: "850px" }}
           margin="auto"
           sx={{ fontFamily: "Inter" }}
         >
-          We offer a diverse range of{" "}
-          <span style={{ color: Colors.BUTTON_COLOR }}>services</span> to cater
-          to the varied interests of our community.
+          Our Services
         </Typography>
+        <Box
+          width="100%"
+          maxWidth={1200}
+          margin="0 auto"
+          paddingTop={"50px"}
+          pb={"50px"}
+        >
+          {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+          <Typography
+            variant="h2"
+            color={Colors.BLACK}
+            textAlign="center"
+            fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "32px" }}
+            fontWeight={700}
+            width={{ xs: "300px", sm: "300px", md: "300px", lg: "700px" }}
+            margin="auto"
+            sx={{ fontFamily: "Inter" }}
+          >
+            We offer a diverse range of{" "}
+            <span style={{ color: Colors.BUTTON_COLOR }}>services</span> to
+            cater to the varied interests of our community.
+          </Typography>
+        </Box>
+      
       </Box>
       <Grid
         container
@@ -513,43 +624,46 @@ useEffect(() => {
             image={Machine}
           />
         </Grid>
-      </Grid>
-    
-      <Box
-        width="100%"
-        maxWidth={1200}
-        margin="0 auto"
-        pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-        pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-      >
-        <Stack
-          marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
+
+        <Box
+          width="100%"
+          maxWidth={1200}
+          margin="0 auto"
+          pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+          pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
         >
-          {/* <StyledImage3
+          <Stack
+            marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* <StyledImage3
             src={ball}
             alt="ball1"
           /> */}
-          <Button
-            sx={{
-              background: Colors.WHITE,
-              color: Colors.BUTTON_COLOR,
-              textTransform: "capitalize",
-              border: "1px solid #15B5FC",
-              padding: "10px 30px",
-              borderRadius: "30px",
-              ":hover": {
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE
-              }
-            }}
-          >
-            see more services
-          </Button>
-        </Stack>
-      </Box>
+            <Button
+              sx={{
+                boxShadow: "none",
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                textTransform: "capitalize",
+                border: "2px solid #15B5FC",
+                padding: "10px 30px",
+                transition: "background 0.3s",
+                borderRadius: "30px",
+                fontSize: "16px",
+                fontWeight: "bold",
+                "&:hover": {
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                },
+              }}
+            >
+              see more Services
+            </Button>
+          </Stack>
+        </Box>
       </Box>
       <CarouselComponent />
       <Box width="100%" maxWidth={1200} margin="0 auto" paddingY={4}>

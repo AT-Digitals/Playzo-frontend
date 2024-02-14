@@ -11,15 +11,11 @@ import { useEffect, useRef, useState } from "react";
 
 import Aboutus from "./pexels-pixabay-209841.jpg";
 import AppContainer from "../../CommonComponents/AppContainer";
-import Ball4 from "../../assets/ball-4 1.png";
+import BasicTimeline from "./VerticalTimeline";
 import Colors from "../../CommonComponents/Colors";
-import CustomButton from "../../CommonComponents/CustomButton";
-import EastIcon from "@mui/icons-material/East";
 import Image1 from "../../assets/Rectangle 67.png";
 import Image2 from "../../assets/Rectangle 669.png";
-import Layer3 from "../../assets/Layer_4.png";
 import TimelineComponent from "./TimelineComponent";
-import ball from "../../assets/ball 3.png";
 import bg from "./pexels-pixabay-262524.jpg";
 import group from "./Group 34245.svg";
 import styled from "@emotion/styled";
@@ -29,6 +25,15 @@ import turf2 from "../../assets/image 16.png";
 import turf3 from "../../assets/image 17.png";
 import turf4 from "../../assets/image 18.png";
 import vision from "./visibility.svg";
+
+// import Ball4 from "../../assets/ball-4 1.png";
+
+// import CustomButton from "../../CommonComponents/CustomButton";
+// import EastIcon from "@mui/icons-material/East";
+
+// import Layer3 from "../../assets/Layer_4.png";
+
+// import ball from "../../assets/ball 3.png";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -68,72 +73,72 @@ const StyledImage = styled.img`
   }
 `;
 
-const StyledImage1 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    transform: translate(205px, 285px);
-  }
+// const StyledImage1 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     width: 120px;
+//     height: 120px;
+//     position: absolute;
+//     transform: translate(205px, 285px);
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    transform: translate(205px, 285px);
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     width: 120px;
+//     height: 120px;
+//     position: absolute;
+//     transform: translate(205px, 285px);
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    transform: translate(205px, 285px);
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     width: 120px;
+//     height: 120px;
+//     position: absolute;
+//     transform: translate(205px, 285px);
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 300px;
-    height: 310px;
-    position: absolute;
-    transform: translate(345px, -45px);
-  }
-`;
-const StyledImage2 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 50px;
-    height: 70px;
-    position: absolute;
-    transform: translate(81px, -27rem);
-  }
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     width: 300px;
+//     height: 310px;
+//     position: absolute;
+//     transform: translate(345px, -45px);
+//   }
+// `;
+// const StyledImage2 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     width: 50px;
+//     height: 70px;
+//     position: absolute;
+//     transform: translate(81px, -27rem);
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 50px;
-    height: 70px;
-    position: absolute;
-    transform: translate(81px, -27rem);
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     width: 50px;
+//     height: 70px;
+//     position: absolute;
+//     transform: translate(81px, -27rem);
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 50px;
-    height: 70px;
-    position: absolute;
-    transform: translate(81px, -27rem);
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     width: 50px;
+//     height: 70px;
+//     position: absolute;
+//     transform: translate(81px, -27rem);
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 100px;
-    height: 137px;
-    position: absolute;
-    transform: translate(475px, -18rem);
-  }
-`;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     width: 100px;
+//     height: 137px;
+//     position: absolute;
+//     transform: translate(475px, -18rem);
+//   }
+// `;
 const StyledImage3 = styled.img`
   @media (min-width: 300px) {
     /* Extra small devices (phones) */
@@ -226,47 +231,67 @@ const StyledImage5 = styled.img`
     transition: transform 0.5s ease;
   }
 `;
-const StyledImage6 = styled.img`
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    position: relative;
-    transform: translate(14px, 19px);
-    width: 80px;
-    height: 90px;
-    margin-top: -74px;
-    margin-left: 92px;
-    transition: left 0.2s;
-  }
+// const StyledImage6 = styled.img`
+//   @media (min-width: 300px) {
+//     /* Extra small devices (phones) */
+//     position: relative;
+//     transform: translate(14px, 19px);
+//     width: 80px;
+//     height: 90px;
+//     margin-top: -74px;
+//     margin-left: 92px;
+//     transition: left 0.2s;
+//   }
 
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    position: absolute;
-    transform: translate(93px, -60px);
-    width: 80px;
-    height: 90px;
-  }
+//   @media (min-width: 768px) {
+//     /* Small devices (tablets) */
+//     position: absolute;
+//     transform: translate(93px, -60px);
+//     width: 80px;
+//     height: 90px;
+//   }
 
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    position: absolute;
-    transform: translate(93px, -60px);
-    width: 80px;
-    height: 90px;
-  }
+//   @media (min-width: 992px) {
+//     /* Medium devices (desktops) */
+//     position: absolute;
+//     transform: translate(93px, -60px);
+//     width: 80px;
+//     height: 90px;
+//   }
 
-  @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    position: relative;
-    transform: translate(50px, -10px);
-    width: 100px;
-    height: 100px;
-    transition: left 0.2s;
+//   @media (min-width: 1200px) {
+//     /* Large devices (large desktops) */
+//     position: relative;
+//     transform: translate(50px, -10px);
+//     width: 100px;
+//     height: 100px;
+//     transition: left 0.2s;
+//   }
+// `;
+
+const SliderText = styled(Typography)`
+  white-space: nowrap;
+  overflow: hidden;
+  animation: slideAnimation 13s linear infinite; /* Adjust the duration and timing function as needed */
+
+  width: 100%;
+  overflow: hidden;
+  @keyframes slideAnimation {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+    width: 100%;
   }
 `;
 
 export default function AboutUs() {
   const ballRef = useRef<HTMLImageElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const lastScrollTop = useRef(0);
+  const [showTimeline, setShowTimeline] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -298,63 +323,75 @@ export default function AboutUs() {
         }
         lastScrollTop.current = scrollTop;
       }
+
+      if (timelineRef.current) {
+        const timelineRect = timelineRef.current.getBoundingClientRect();
+        const windowHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+
+        if (timelineRect.top < windowHeight * 0.8) {
+          setShowTimeline(true);
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
 
+    // Initial check on mount
+    handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-  const [showTimeline, setShowTimeline] = useState(false);
-
-  useEffect(() => {
-    // Show the timeline component with a delay for animation effect
-    const timer = setTimeout(() => {
-      setShowTimeline(true);
-    }, 500); // Adjust the delay as needed
-
-    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <Box
         sx={{
+          position: "relative",
           width: "100%",
           height: "100%",
-          maxHeight: 600,
-          overflow: "hidden", // Prevent scroll when the element is scaled
-          position: "relative",
-          objectFit: "cover",
-          transition: "transform 0.3s ease",
-          // "&:hover": {
-          //   transform: "scale(1.1)", // Increase scale on hover
-          // },
+          maxHeight: 650,
+          overflow: "hidden",
         }}
       >
         <CardMedia
           component="img"
           image={Image1}
-          alt="Paella dish"
+          alt="Background Image"
           sx={{
             width: "100%",
             height: "100%",
-            objectFit: "cover", // Make sure the image covers the entire container
+            objectFit: "cover",
           }}
         />
         <img
           src={Image2}
-          alt="about dish"
+          alt="Overlay-1Image"
           style={{
             position: "absolute",
             top: "0",
             left: "0",
             width: "100%",
             height: "100%",
-            objectFit: "cover", // Make sure the image covers the entire container
+            objectFit: "cover",
           }}
         />
+        <Box
+          ref={timelineRef}
+          sx={{
+            position: "absolute",
+            width: "100%",
+            bottom: "0%",
+            top: "10%",
+            right: "10%",
+            // transition: "transform 0.9s ease-in-out",
+            // transform: showTimeline ? "translateY(0)" : "translateY(100%)",
+          }}
+        >
+          {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
+        </Box>
       </Box>
       <AppContainer mb={"3rem"} pl={0}>
         <Stack
@@ -375,7 +412,7 @@ export default function AboutUs() {
             flexDirection={"column"}
             gap={"1rem"}
           >
-            <Typography fontSize={"32px"}>About Us</Typography>
+            <Typography fontSize={"42px"}>About Us</Typography>
 
             <Typography
               color={Colors.BLACK}
@@ -384,15 +421,16 @@ export default function AboutUs() {
                 xs: "66px",
                 sm: "66px",
                 md: "66px",
-                lg: "30px",
+                lg: "10px",
               }}
               fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "16px" }}
               maxWidth={{
                 xs: "298px",
                 sm: "298px",
                 md: "298px",
-                lg: "438px",
+                lg: "500px",
               }}
+              paddingRight={"20px"}
             >
               At Playzo33, we extend beyond being a turf booking platform; we're
               a community-driven destination designed for sports enthusiasts and
@@ -429,7 +467,7 @@ export default function AboutUs() {
           container
           maxWidth={1280}
           margin="auto"
-          pt={{ xs: "70px", sm: "70px", md: "70px", lg: "80px" }}
+          pt={{ xs: "70px", sm: "70px", md: "70px", lg: "100px" }}
           pb={{ xs: "60px", sm: "60px", md: "60px", lg: "80px" }}
           pl={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
           pr={{ xs: "15px", sm: "15px", md: "15px", lg: "0px" }}
@@ -564,7 +602,7 @@ export default function AboutUs() {
           >
             PlayZo Facilities
           </Typography>
-          <Grid mt={"4rem !important "} container>
+          <Grid mt={"3rem !important "} container>
             <Stack
               alignItems={{
                 xs: "center",
@@ -759,17 +797,19 @@ export default function AboutUs() {
                   background: Colors.WHITE,
                   color: Colors.BUTTON_COLOR,
                   textTransform: "capitalize",
-                  border: "1px solid #15B5FC",
+                  border: "2px solid #15B5FC",
                   padding: "10px 30px",
                   transition: "background 0.3s",
                   borderRadius: "30px",
+                  fontSize: "16px",
+                  fontWeight: "bold",
                   "&:hover": {
                     background: Colors.BUTTON_COLOR,
                     color: Colors.WHITE,
                   },
                 }}
               >
-                see more services
+                see more Images
               </Button>{" "}
             </Link>
             {/* <EastIcon
@@ -780,66 +820,26 @@ export default function AboutUs() {
               }}
             /> */}
           </Stack>
-          <Box pb={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}>
-            <Grid container spacing={5}>
-              <Grid
-                item
-                xs={12}
-                marginTop={{
-                  xs: "-104px",
-                  sm: "-104px",
-                  md: "-104px",
-                  lg: "40px",
-                }}
-                marginLeft={{ xs: "24px", sm: "24px", md: "24px", lg: "0px" }}
-              >
-                {/* <StyledImage6 src={ball} ref={ballRef} alt="grid-ball" /> */}
-                <Typography
-                  maxWidth={{
-                    xs: "200px",
-                    sm: "200px",
-                    md: "200px",
-                    lg: "441px",
-                  }}
-                  fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "20px" }}
-                  variant="h6"
-                  color={Colors.BLACK}
-                  fontWeight={600}
-                  marginTop={{ xs: "0px", sm: "0px", md: "0px", lg: "-48px" }}
-                >
-                  Ready to play? <br /> Let's make every moment count at
-                  Playzo33!
-                </Typography>
-                {/* <PopupCarousel /> */}
-              </Grid>
-            </Grid>
-          </Box>
         </Stack>
       </Box>
+
       <Box
-        display={"none"}
-        style={{
-          transform: showTimeline ? "translateY(-380vh)" : "translateY(100vh)", // Slide up from bottom
-          transition: "transform 0.9s ease-in-out", // Smooth transition
-          position: "relative",
-        }}
+        mt={"60px"}
+        bgcolor={"#f0f0f0"}
+        height={"130px"}
+        display={"flex"}
+        alignItems={"center"}
+        overflow={"hidden"}
       >
-        {showTimeline && window.innerWidth >= 600 && <TimelineComponent />}
+        <SliderText
+          fontStyle={"italic"}
+          fontSize={"52px"}
+          color={Colors.BLACK}
+          fontWeight={600}
+        >
+          Ready to play? Let's make every moment count at Playzo33!
+        </SliderText>
       </Box>
-      {/* <Box paddingY={10} maxWidth={1200} margin="auto">
-
-
-        <Stack direction="column" spacing={2} >
-          <Box>
-            <Typography variant="body1">Lorem ipsum</Typography>
-            <Typography variant="h4">2020</Typography>
-          </Box>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-          </Typography>
-        </Stack>
-      </Box> */}
     </>
   );
 }

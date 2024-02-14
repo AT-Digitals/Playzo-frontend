@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
-import CustomButton from "../../CommonComponents/CustomButton";
 import CustomSlider from "./CustomSliderService";
 import Grid from "@mui/material/Grid";
 import LeftArrow from "../../assets/LeftArrow.svg";
@@ -177,15 +176,24 @@ export default function ServiceGrid(props: serviceGridProps) {
                 </Typography>
 
                 <Box mt={5}>
-                  <CustomButton
-                    type="submit"
-                    style={{
-                      backgroundColor: Colors.BUTTON_COLOR,
+                  <Button
+                    sx={{
+                      boxShadow: "none",
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
                       textTransform: "capitalize",
+                      border: "1px solid #15B5FC",
+                      padding: "10px 30px",
+                      transition: "background 0.3s",
+                      borderRadius: "30px",
+                      "&:hover": {
+                        background: Colors.BUTTON_COLOR,
+                        color: Colors.WHITE,
+                      },
                     }}
                   >
-                    {props.buttonLabel}
-                  </CustomButton>
+                    see more services
+                  </Button>
                 </Box>
               </Box>
             </Stack>

@@ -66,17 +66,17 @@ export default function Header() {
                 Contact Us
               </Typography>
             </HeaderLink>
-          </Stack>
-          <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.BOOKING_SERVICE}>
               <Typography
                 color={Colors.BUTTON_COLOR}
-                fontWeight="bold"
-                variant="h6"
+                fontSize="18px"
+                fontWeight={600}
               >
                 Book Now
               </Typography>
             </HeaderLink>
+          </Stack>
+          <Stack direction="row" spacing={3} alignItems="center">
             <CustomButton
               variant="outlined"
               color={Colors.WHITE}
@@ -84,16 +84,36 @@ export default function Header() {
               sx={{
                 padding: "8px 20px",
                 textTransform: "none",
-                fontSize: "20px",
+                fontSize: "16px",
                 minWidth: "100px",
                 color: Colors.BUTTON_COLOR,
                 fontWeight: "bold",
+                border: "2px solid #15B5FC;",
               }}
               onClick={handleOpen}
             >
               Login
             </CustomButton>
             <CustomButton
+              variant="contained"
+              color={Colors.WHITE}
+              bgColor={Colors.BUTTON}
+              sx={{
+                border: `2px solid ${Colors.BUTTON_COLOR} !important`,
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "100px",
+                color: Colors.WHITE,
+                fontWeight: "bold",
+                background: Colors.BUTTON_COLOR,
+                "&.MuiButton-outlinedPrimary": {
+                  border: `2px solid ${Colors.BUTTON_COLOR} !important`,
+                },
+              }}
+              onClick={handleOpen}
+            >
+              Join Now
               variant="outlined"
               color={Colors.WHITE}
               bgColor={Colors.BUTTON}
