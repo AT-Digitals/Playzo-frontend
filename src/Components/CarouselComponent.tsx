@@ -1,8 +1,8 @@
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
-import Image1 from "../assets/Rectangle 678.png";
-import Image2 from "../assets/Rectangle 677.png";
-import Image3 from "../assets/Rectangle 673.png";
+import Image1 from "../assets/pexels-karolina-grabowska-4966368.jpg";
+import Image2 from "../assets/pexels-photo-8007500.webp";
+import Image3 from "../assets/pexels-photo-2202685.webp";
 import CarouselCardComponent from "./CarouselCardComponent";
 import Colors from "../CommonComponents/Colors";
 
@@ -13,13 +13,14 @@ interface HotelCard {
     member: string;
     feedback: string;
     ratings: number;
+    
 }
 
 const CardDetails: HotelCard[] = [
     {
         imageSrc: Image3,
         name: "Anand",
-        type: "Badminton",
+        type: "Badminton,",
         member: "Member since 2022",
         feedback:
             "I had a great experience playing badminton at Playzo33! The professional-level courts provided an excellent playing surface, and the well-lit environment made it easy to enjoy games even in the evening. The booking process was straightforward, and the overall atmosphere was friendly and inviting. I appreciate the attention to detail and the effort put into maintaining high-quality badminton facilities. Looking forward to my next game!",
@@ -28,7 +29,7 @@ const CardDetails: HotelCard[] = [
     {
         imageSrc: Image2,
         name: "Shwetha",
-        type: "Badminton",
+        type: "Badminton,",
         member: "Member since 2022",
         feedback:
             "By far the two best features are the ease of use and the customer service. The app is SOOOO easy to use for everyone and customer service answers on the second ring EVERY.",
@@ -37,7 +38,7 @@ const CardDetails: HotelCard[] = [
     {
         imageSrc: Image1,
         name: "Prakash",
-        type: "Badminton",
+        type: "Badminton,",
         member: "Member since 2022",
         feedback:
             "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
@@ -66,15 +67,21 @@ export default function CarouselComponent() {
     //     return () => clearTimeout(timer);
     // }, [cardIndex, visibleCards.length]);
 
+
     const showNextCards = () => {
+        const nextIndex = (cardIndex + 1) % CardDetails.length
     setStartIndex((prevIndex) => Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow));
-    setCardIndex((prevIndex) => (prevIndex + 1) % initialCardsToShow); // Update card index based on visible cards
+    // setCardIndex((prevIndex) => (prevIndex + 1) % initialCardsToShow); // Update card index based on visible cards
+    setCardIndex(nextIndex)
 };
 
 const showPreviousCards = () => {
+    const prevIndex = (cardIndex - 1 + CardDetails.length) % CardDetails.length
     setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    setCardIndex((prevIndex) => (prevIndex - 1 + initialCardsToShow) % initialCardsToShow); // Update card index based on visible cards
+    setCardIndex(prevIndex)
+    // setCardIndex((prevIndex) => (prevIndex - 1 + initialCardsToShow) % initialCardsToShow); // Update card index based on visible cards
 };
+
 
     if (isWeb) {
         visibleCards = CardDetails.slice(startIndex, startIndex + initialCardsToShow).map(
@@ -92,7 +99,7 @@ const showPreviousCards = () => {
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} mb={"32px"} width="100%">
             <Typography
-                pt={"50px"}
+                pt={"60px"}
                 textAlign={"center"}
                 color={Colors.WHITE}
                 fontSize={"42px"}
@@ -103,20 +110,19 @@ const showPreviousCards = () => {
             <Stack
                 flexDirection={{ xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row" }}
                 spacing={3}
-                maxWidth={1200}
+                maxWidth={1400}
                 margin="auto"
-                pt={{ xs: '0px', sm: '0px', md: "0px", lg: "45px" }}
-                pb={{ xs: '0px', sm: '0px', md: "0px", lg: "96px" }}
+                pt={{ xs: '0px', sm: '0px', md: "0px", lg: "0px" }}
+                pb={{ xs: '0px', sm: '0px', md: "0px", lg: "60px" }}
                 alignItems={{ xs: "baseline", sm: 'baseline', md: "baseline", lg: "normal" }}
             >
                 {visibleCards.map((card, index) => (
                     <CarouselCardComponent
                         key={index}
-                        cardDetails={card}
+                        card={CardDetails}
                         showDetails={index === cardIndex}
-                        nextClick={showNextCards}
-                        prevClick={showPreviousCards}
-                    />
+                        nextClick={() => showNextCards()}
+                        prevClick={showPreviousCards} index={card.imageSrc}                         />
                 ))}
             </Stack>
         </Box>

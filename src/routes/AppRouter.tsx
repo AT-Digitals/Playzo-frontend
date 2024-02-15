@@ -29,6 +29,7 @@ import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
+import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 
 export default function AppRouter() {
   return (
@@ -77,6 +78,7 @@ export default function AppRouter() {
           <Route path={routes.CRICKETNET} element={<CricketNet />} />
           <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
           <Route path={routes.FAQ} element={<FaqPage />} />
+          <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
         </Route>
       </Routes>
     </Router>
