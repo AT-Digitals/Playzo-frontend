@@ -64,12 +64,6 @@ export default function ServiceGrid(props: serviceGridProps) {
     >
       <Grid container>
         <Grid item xs={12} sm={12} md={6}>
-          {/* <CustomSwiper
-            navigation={true}
-            modules={[Navigation]}
-            className="mySwiper"
-            slides={props.carouselItems}
-          /> */}
           <CustomSlider
             currentSlide={currentSlide}
             nextSlide={nextSlide}
@@ -82,21 +76,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             justifyContent="center"
             flexWrap="wrap" // Allow bullets to wrap to the next line on smaller screens
             mt={{ xs: 2, md: 0 }} // Adjust top margin for smaller screens
-          >
-            {/* {props.carouselItems.map((_, index) => (
-              <FiberManualRecordIcon
-                key={index}
-                sx={{
-                  fontSize: currentSlide === index ? "18px" : "14px",
-                  color: currentSlide === index ? "#007bff" : "gray",
-                  cursor: "pointer",
-                  mx: 1,
-                  my: 1, // Adjust margin for smaller screens
-                }}
-                onClick={() => handleBulletClick(index)}
-              />
-            ))} */}
-          </Box>
+          ></Box>
         </Grid>
         <Grid
           item

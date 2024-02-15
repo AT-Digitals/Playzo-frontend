@@ -36,10 +36,10 @@ const dataBoxFaq = [
 export default function FaqPage() {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
-  const [selected, setSelected] = useState("ALL FAQ");
+  const [selected, setSelected] = useState(null);
 
-  const HandleButtonClick = (e: any) => {
-    setSelected(e.target.value);
+  const handleButtonClick = (index: any) => {
+    setSelected(index);
   };
 
   const handleToggle = (index: any) => {
@@ -60,14 +60,16 @@ export default function FaqPage() {
           {dataBoxFaq.map((item, index) => (
             <Button
               key={index}
-              onClick={HandleButtonClick}
+              onClick={() => handleButtonClick(index)}
               sx={{
-                background: selected ? Colors.BUTTON_COLOR : Colors.WHITE,
-                color: selected ? Colors.WHITE : Colors.BUTTON_COLOR,
+                background:
+                  selected === index ? Colors.BUTTON_COLOR : Colors.WHITE,
+                color: selected === index ? Colors.WHITE : Colors.BUTTON_COLOR,
                 textTransform: "capitalize",
                 border: "1px solid #15B5FC",
                 padding: "10px 30px",
                 borderRadius: "30px",
+                variant: selected === index ? "contained" : "outlined",
                 ":hover": {
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
