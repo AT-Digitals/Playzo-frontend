@@ -2,6 +2,7 @@ import { Box, Breadcrumbs, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
@@ -98,13 +99,13 @@ const BoardgameImages = [
   },
 ];
 
-type BookingType =
-  | "turf"
-  | "playstation"
-  | "Badminton"
-  | "Boardgames"
-  | "BowlingMachine"
-  | "cricketnet";
+// type BookingType = BookingType;
+  // | "turf"
+  // | "playstation"
+  // | "Badminton"
+  // | "Boardgames"
+  // | "BowlingMachine"
+  // | "cricketnet";
 
 interface TableDataItem {
   type: BookingType;
@@ -126,17 +127,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const [isServiceSelected, setIsServiceSelected] = useState(false);
 
   const images =
-    type === "turf"
+    type === BookingType.Turf
       ? TurfImages
-      : type === "playstation"
+      : type === BookingType.Playstaion
       ? PlaystationImages
-      : type === "Badminton"
+      : type === BookingType.Badminton
       ? BadmintonImages
-      : type === "Boardgames"
+      : type === BookingType.BoardGame
       ? BoardgameImages
-      : type === "BowlingMachine"
+      : type === BookingType.BowlingMachine
       ? [{ image: bowling, name: "Bowling Machine" }]
-      : type === "cricketnet"
+      : type === BookingType.CricketNet
       ? [{ image: cricketnet, name: "Cricket Net" }]
       : [];
 
@@ -258,12 +259,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const allBookings = tableData.filter(
     (item) =>
-      item.type === "turf" ||
-      item.type === "playstation" ||
-      item.type === "Badminton" ||
-      item.type === "Boardgames" ||
-      item.type === "BowlingMachine" ||
-      item.type === "cricketnet"
+      item.type === BookingType.Turf ||
+      item.type === BookingType.Playstaion ||
+      item.type === BookingType.Badminton ||
+      item.type === BookingType.BoardGame ||
+      item.type === BookingType.BowlingMachine ||
+      item.type === BookingType.CricketNet
   );
 
   const breadcrumbs = [
@@ -421,17 +422,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           >
             <img
               src={
-                type === "turf"
+                type === BookingType.Turf
                   ? turf
-                  : type === "playstation"
+                  : type === BookingType.Playstaion
                   ? playstation
-                  : type === "Badminton"
+                  : type === BookingType.Badminton
                   ? badminton
-                  : type === "Boardgames"
+                  : type === BookingType.BoardGame
                   ? boardgames
-                  : type === "BowlingMachine"
+                  : type === BookingType.BowlingMachine
                   ? bowling
-                  : type === "cricketnet"
+                  : type === BookingType.CricketNet
                   ? cricketnet
                   : undefined // Handle other cases or set to undefined
               }
@@ -447,15 +448,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               fontWeight={"600"}
               paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
             >
-              {type === "turf"
+              {type === BookingType.Turf
                 ? "Turf"
-                : type === "playstation"
+                : type === BookingType.Playstaion
                 ? "Playstation"
-                : type === "Badminton"
+                : type === BookingType.Badminton
                 ? "Badminton"
-                : type === "Boardgames"
+                : type === BookingType.BoardGame
                 ? "Board Games"
-                : type === "BowlingMachine"
+                : type === BookingType.BowlingMachine
                 ? "Bowling Machine"
                 : "Unknown Type"}
             </Typography>
@@ -463,7 +464,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         </Box>
         <Stack
           display={
-            type === "BowlingMachine" || type === "cricketnet" ? "none" : "flex"
+            type === BookingType.BowlingMachine || type === BookingType.CricketNet ? "none" : "flex"
           }
           borderLeft={"1px solid #D9D9D9"}
           gap={"8px"}
@@ -482,13 +483,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             fontWeight={"500"}
           >
             Choose{" "}
-            {type === "turf"
+            {type === BookingType.Turf
               ? "Turf"
-              : type === "playstation"
+              : type === BookingType.Playstaion
               ? "Playstation"
-              : type === "Badminton"
+              : type === BookingType.Badminton
               ? "Badminton"
-              : type === "Boardgames"
+              : type === BookingType.BoardGame
               ? "Board Games"
               : "Unknown Type"}{" "}
           </Typography>
@@ -519,13 +520,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   width={"95px"}
                   height={"75px"}
                   alt={
-                    type === "turf"
+                    type === BookingType.Turf
                       ? "Turf"
-                      : type === "playstation"
+                      : type === BookingType.Playstaion
                       ? "Playstation"
-                      : type === "Badminton"
+                      : type === BookingType.Badminton
                       ? "Badminton"
-                      : type === "Boardgames"
+                      : type === BookingType.BoardGame
                       ? "Board Games"
                       : "Unknown Type"
                   }
@@ -560,13 +561,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     images.find((item) => item.name === selectedService)?.image
                   }
                   alt={`selected ${
-                    type === "turf"
+                    type === BookingType.Turf
                       ? "Turf"
-                      : type === "playstation"
+                      : type === BookingType.Playstaion
                       ? "Playstation"
-                      : type === "Badminton"
+                      : type === BookingType.Badminton
                       ? "Badminton"
-                      : type === "Boardgames"
+                      : type === BookingType.BoardGame
                       ? "Board Games"
                       : "Unknown Type"
                   }`}
@@ -583,12 +584,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           )}
         </Stack>
         <Stack borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
-          {(type === "BowlingMachine" ||
-            type === "cricketnet" ||
+          {(type === BookingType.BowlingMachine ||
+            type === BookingType.CricketNet ||
             selectedService) && (
             <Box
               borderLeft={
-                type === "BowlingMachine" || type === "cricketnet"
+                type === BookingType.BowlingMachine || type === BookingType.CricketNet
                   ? "1px solid #D9D9D9"
                   : "none"
               }
@@ -604,8 +605,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         </Stack>
       </Box>
       <Box pt={2}>
-        {(type === "BowlingMachine" ||
-          type === "cricketnet" ||
+        {(type === BookingType.BowlingMachine ||
+          type === BookingType.CricketNet ||
           selectedService) && (
           <>
             <CustomTable
