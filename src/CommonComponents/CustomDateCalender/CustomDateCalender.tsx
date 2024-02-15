@@ -181,66 +181,66 @@ if(userData && userData.userType==="user"){
     } catch (err) {
       console.log("err",err)
     }
-    if(selectedTimings.length>0){
-      selectedTimings.map(async (timeData)=>{
-try {
-  console.log(timeData)
-  let startMilliseconds = 0;
-  let endMilliseconds = 0;
-  const [time, am] = timeData.split(" ");
-  const [time1, am1] = time.split("-");
-  const [hours, minutes] = time1.split(":");
-  console.log("hours",hours,minutes)
-        const startDateTime = new Date(selectedDate);
-        startDateTime.setHours(Number(hours), Number(minutes));
-        startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+//     if(selectedTimings.length>0){
+//       selectedTimings.map(async (timeData)=>{
+// // try {
+// //   console.log(timeData)
+// //   let startMilliseconds = 0;
+// //   let endMilliseconds = 0;
+// //   const [time, am] = timeData.split(" ");
+// //   const [time1, am1] = time.split("-");
+// //   const [hours, minutes] = time1.split(":");
+// //   console.log("hours",hours,minutes)
+// //         const startDateTime = new Date(selectedDate);
+// //         startDateTime.setHours(Number(hours), Number(minutes));
+// //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-        const endDateTime = new Date(startDateTime);
-        endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-        endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-        console.log("bookings.type",bookings.type)
-        console.log("startMilliseconds",startMilliseconds)
-        console.log("endMilliseconds",endMilliseconds)
+// //         const endDateTime = new Date(startDateTime);
+// //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+// //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+// //         console.log("bookings.type",bookings.type)
+// //         console.log("startMilliseconds",startMilliseconds)
+// //         console.log("endMilliseconds",endMilliseconds)
 
-      const response = await BookingApi.getBookedList({
-        type,
-        bookingtype: "online",
-        startTime: startMilliseconds,
-        endTime: endMilliseconds,
-        user: userData.id,
-        startDate: new Date(selectedDate).toISOString().split("T")[0],
-        endDate: new Date(selectedDate).toISOString().split("T")[0],
-      //   bookingId: response.razorpay_payment_id,
-        // court: ,
+// //       const response = await BookingApi.getBookedList({
+// //         type,
+// //         bookingtype: "online",
+// //         startTime: startMilliseconds,
+// //         endTime: endMilliseconds,
+// //         user: userData.id,
+// //         startDate: new Date(selectedDate).toISOString().split("T")[0],
+// //         endDate: new Date(selectedDate).toISOString().split("T")[0],
+// //       //   bookingId: response.razorpay_payment_id,
+// //         // court: ,
       
-        });
-      if (response) {
-        setRes(true);
-      } else {
-        console.log('Booking Failed');
-      }
-    } catch (err) {
-      console.log("err",err)
-    }
+// //         });
+// //       if (response) {
+// //         setRes(true);
+// //       } else {
+// //         console.log('Booking Failed');
+// //       }
+// //     } catch (err) {
+// //       console.log("err",err)
+// //     }
 
-      })
-      console.log("res",res)
-   if(res)   {
-        setTableData((prevTableData: any) => [...prevTableData, bookings]);
+//       })
+//       console.log("res",res)
+//    if(res)   {
+//         setTableData((prevTableData: any) => [...prevTableData, bookings]);
+
+//         // Reset selected date and timings
+//         setSelectedDate("");
+//         setSelectedTimings([]);
+//    }
+
+//     }
+
+
+              setTableData((prevTableData: any) => [...prevTableData, bookings]);
 
         // Reset selected date and timings
         setSelectedDate("");
         setSelectedTimings([]);
-   }
-
-    }
-
-
-        //       setTableData((prevTableData: any) => [...prevTableData, bookings]);
-
-        // // Reset selected date and timings
-        // setSelectedDate("");
-        // setSelectedTimings([]);
   
   }
 }else{
