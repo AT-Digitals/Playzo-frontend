@@ -269,6 +269,18 @@ const StyledTypo = styled(Typography)({
   zIndex: 1,
   overflow: "hidden",
   cursor: "pointer",
+  "&:hover": {
+    "& > span:first-of-type": {
+      transform: "translateX(-100%)",
+    },
+    "& > span:last-of-type": {
+      transform: "translateX(104%)",
+    },
+  },
+  "& > span": {
+    display: "inline-block",
+    transition: "transform 2s ease",
+  },
 });
 
 const images = [Image3, Image4, Image5]; // List of images to loop through
@@ -299,13 +311,13 @@ export default function HomePage() {
 
   const StyledSpan = styled.span<StyledSpanProps>`
     opacity: ${({ showText }) => (showText ? 1 : 0)};
-    transition: opacity 2s ease-in-out;
+    transition: opacity 1s ease-in-out;
     &:first-child {
       ${({ initialLoad, showText }) =>
         initialLoad &&
         showText &&
         css`
-          animation: ${slideFromLeft} 2s ease-out;
+          animation: ${slideFromLeft} 1s ease-out;
         `}
     }
     &:last-child {
@@ -313,7 +325,7 @@ export default function HomePage() {
         initialLoad &&
         showText &&
         css`
-          animation: ${slideFromRight} 2s ease-out;
+          animation: ${slideFromRight} 1s ease-out;
         `}
     }
   `;
@@ -328,7 +340,7 @@ export default function HomePage() {
     }, 1000);
 
     const timer2 = setTimeout(() => {
-      setShowText(true); // Set showText to true for the second timer
+      // Set showText to true for the second timer
       setInitialLoad(false); // Move this line here to set initialLoad to false after animation
     }, 2000);
 
@@ -422,7 +434,7 @@ export default function HomePage() {
             color={Colors.BLACK}
             textAlign="center"
             fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "20px" }}
-            fontWeight={700}
+            fontWeight={400}
             width={{ xs: "300px", sm: "300px", md: "300px", lg: "850px" }}
             margin="auto"
             sx={{ fontFamily: "Inter" }}
@@ -438,7 +450,6 @@ export default function HomePage() {
           maxWidth={1300}
           margin="0 auto"
           spacing={3}
-          pb={3}
           flexDirection={{
             xs: "column",
             sm: "column",
@@ -488,7 +499,7 @@ export default function HomePage() {
               image={Badminton}
             />
           </Grid>
-          <Grid item xs={3}>
+          {/* <Grid item xs={3}>
             <CardComponent
               buttonLabel="Know more"
               title={"Cricket Net"}
@@ -507,15 +518,15 @@ export default function HomePage() {
               }
               image={Machine}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Box
           width="100%"
           maxWidth={1200}
           margin="0 auto"
-          pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-          pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+          pb={{ xs: "32px", sm: "32px", md: "32px", lg: "90px" }}
+          pt={{ xs: "32px", sm: "32px", md: "32px", lg: "30px" }}
         >
           <Stack
             marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
@@ -529,7 +540,7 @@ export default function HomePage() {
           /> */}
             <Button
               sx={{
-                background: Colors.WHITE,
+                
                 color: Colors.BUTTON_COLOR,
                 textTransform: "capitalize",
                 border: "1px solid #15B5FC",
@@ -539,8 +550,8 @@ export default function HomePage() {
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
                 },
-              }}
-            >
+              }} variant="outlined"
+            > 
               see more services
             </Button>
           </Stack>

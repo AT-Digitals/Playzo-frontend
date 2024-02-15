@@ -25,6 +25,7 @@ const DATE_CALENDER = "/date-calender";
 const IMAGE_GALLERY = "/image-gal";
 const CAREERS_PAGE = "/careers-page";
 const FAQ = "/faq-page";
+const PRIVACY_POLICY = "/privacy-policy";
 
 const CRICKETNET = SERVICE + "cricketnet";
 const BOWLINGMACHINE = SERVICE + "bowlingmachine";
@@ -60,6 +61,7 @@ const routes = {
   CAREERS_PAGE,
   FAQ,
   TERMS_AND_CONDITIONS,
+  PRIVACY_POLICY,
 };
 
 export default routes;

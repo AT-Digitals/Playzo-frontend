@@ -29,6 +29,7 @@ import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
+import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 
 export default function AppRouter() {
   return (
@@ -81,6 +82,7 @@ export default function AppRouter() {
             path={routes.TERMS_AND_CONDITIONS}
             element={<TermsandComditions />}
           />
+          <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
         </Route>
       </Routes>
     </Router>
