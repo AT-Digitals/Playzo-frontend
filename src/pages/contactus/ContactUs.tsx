@@ -245,7 +245,7 @@ export default function ContactUs() {
                 spacing={3}
               >
                 <CustomTextField
-                  sx={{ maxWidth: 700 }}
+                  sx={{ maxWidth: 700, borderRadius: "8px" }}
                   label="Name"
                   required={false}
                   placeholder="Enter your name"
@@ -253,7 +253,7 @@ export default function ContactUs() {
                   onChange={setName}
                 />
                 <CustomTextField
-                  sx={{ maxWidth: 700 }}
+                  sx={{ maxWidth: 700, borderRadius: "8px" }}
                   label="Email"
                   required={false}
                   placeholder="Enter your email address"
@@ -263,7 +263,7 @@ export default function ContactUs() {
                 <DropDownComponent
                   label="What service are you interested in"
                   options={DropDownData}
-                  placeHolder="Select project type"
+                  placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
                 />
@@ -278,7 +278,9 @@ export default function ContactUs() {
                   </Typography>
 
                   <TextField
+                    placeholder="Enter your message..."
                     sx={{
+                      borderRadius: "8px",
                       width: "100%",
                       maxWidth: "700px",
                       ".MuiOutlinedInput-input": {

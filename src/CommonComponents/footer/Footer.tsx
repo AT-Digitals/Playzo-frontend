@@ -38,7 +38,12 @@ export default function Footer() {
       //height={"456px"}
     >
       <AppContainer p={0}>
-        <Box maxWidth={1400} padding={2} marginX="auto" color={Colors.WHITE}>
+        <Box
+          maxWidth={1400}
+          padding={"30px"}
+          marginX="auto"
+          color={Colors.WHITE}
+        >
           <Link
             style={
               {
