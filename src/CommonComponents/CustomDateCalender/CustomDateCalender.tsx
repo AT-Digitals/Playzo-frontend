@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import moment from 'moment';
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
@@ -12,11 +13,12 @@ import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import ModalComponent from "./ModalComponent";
+import DateUtils from "../../Utils/DateUtlis";
 
 const Timings = [
   { name: "6:00-7:00 AM" },
   { name: "7:00-8:00 AM" },
-
+  { name: "8:00-9:00 AM" },
   { name: "9:00-10:00 AM" },
   { name: "10:00-11:00 AM", disabled: true },
   { name: "11:00-12:00 PM", disabled: true },
@@ -36,6 +38,12 @@ const Timings = [
   { name: "1:00-2:00 AM" },
 ];
 
+interface TimeSlot {
+  startTime: string;
+  endTime: string;
+}
+
+
 interface CustomDateCalendarProps {
   tableData?: any;
   setTableData?: any;
@@ -44,6 +52,11 @@ interface CustomDateCalendarProps {
   selectedService?: any;
 }
 
+interface datatype {
+  startTime: number,
+  endTime: number,
+  type: String,
+}
 export default function CustomDateCalendar({
   tableData,
   setTableData,
@@ -102,10 +115,13 @@ export default function CustomDateCalendar({
   //   }
   // };
 
+
+
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
   const [res, setRes] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [disableData, setDisableData] = React.useState<datatype[]>([]);
 
   // const handleTimeSelection = (time: string) => {
   //   if (selectedTimings.includes(time)) {
@@ -151,9 +167,88 @@ export default function CustomDateCalendar({
     navigate(routes.ROOT)
   }
 
-  const handleDateSelection = (date: string) => {
-    setSelectedDate(date);
+  const handleDateSelection = (newValue: any) => {
+
+    let datedata = newValue.$d;
+    const parsedDate = moment(datedata);
+    const formattedDate = parsedDate.format('YYYY-MM-DD');
+
+    setSelectedDate(formattedDate);
+    ApiCall(formattedDate);
+
   };
+
+  const data = [{ startTime: 1709001000000, endTime: 1709008200000, type: 'badminton' }];
+  const data2 = [{ startTime: 1708032600000, endTime: 1708047000000, type: "cricketNet" }];
+  const data3 = [{ startTime: 1707438600000, endTime: 1707445800000, type: 'boardGame' }];
+  const data4 = [{ startTime: 1709245800000, endTime: 1709253000000, type: 'turf' }];
+  const data5 = [{ startTime: 1708482600000, endTime: 1708489800000, type: 'bowlingMachine' },
+  { startTime: 1708497000000, endTime: 1708504200000, type: 'bowlingMachine' }];
+
+
+  const ApiCall = async (dateValue: any) => {
+    try {
+      // const response = await BookingApi.filter({
+      //   startDate: dateValue,
+      //   type: type,
+      //   endDate: dateValue
+      // });
+      setDisableData(data2);
+      MilisecondsToHours();
+    } catch (error: any) {
+      console.error('Error:', error.message);
+    }
+  };
+
+
+  const MilisecondsToHours = () => {
+    if (disableData.length > 0) {
+      return disableData.some((item) => {
+        const value1 = convertTo24HourFormat(item.startTime);
+        const value2 = convertTo24HourFormat(item.endTime);
+
+        const TimeSlot = splitTimeRange(value1, value2)
+
+        console.log("startTime", value1, value2, TimeSlot);
+        return;
+      })
+    }
+  }
+
+  const convertTo24HourFormat = (milliseconds: number): string => {
+    const date = new Date(milliseconds);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const formattedHours = hours.toString().padStart(2, '0');
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  };
+
+  const splitTimeRange = (startTime: string, endTime: string): TimeSlot[] => {
+    const timeSlots: TimeSlot[] = [];
+    const startHour = parseInt(startTime.split(':')[0], 10);
+    const endHour = parseInt(endTime.split(':')[0], 10);
+
+    for (let hour = startHour; hour < endHour; hour++) {
+      const startSlot = `${hour}:00`;
+      const endSlot = `${hour + 1}:00`;
+      timeSlots.push({ startTime: startSlot, endTime: endSlot });
+    }
+
+    return timeSlots;
+  };
+
+  React.useEffect(() => {
+    if (disableData) {
+      MilisecondsToHours();
+    }
+  }, [])
+
+  console.log('date', selectedDate, type, disableData);
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => [...prevSelectedTimings, time]);
@@ -372,3 +467,5 @@ export default function CustomDateCalendar({
     </Stack>
   );
 }
+
+
