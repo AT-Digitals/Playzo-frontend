@@ -11,6 +11,7 @@ import leftarrow from "./left-arrow.svg";
 import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
+import ModalComponent from "./ModalComponent";
 
 const Timings = [
   { name: "6:00-7:00 AM" },
@@ -52,7 +53,7 @@ export default function CustomDateCalendar({
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const user = localStorage.getItem('user');
-  const userData = user&&JSON.parse(user);
+  const userData = user && JSON.parse(user);
 
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
@@ -104,6 +105,7 @@ export default function CustomDateCalendar({
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
   const [res, setRes] = React.useState<boolean>(false);
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   // const handleTimeSelection = (time: string) => {
   //   if (selectedTimings.includes(time)) {
@@ -144,6 +146,11 @@ export default function CustomDateCalendar({
   //   }
   // };
 
+  const handleClose = () => {
+    setModalOpen(false);
+    navigate(routes.ROOT)
+  }
+
   const handleDateSelection = (date: string) => {
     setSelectedDate(date);
   };
@@ -153,100 +160,101 @@ export default function CustomDateCalendar({
   };
 
   const handleAddButtonClick = async (type: string, selectedService: string) => {
-if(userData && userData.userType==="user"){
-  if (selectedDate !== "" && selectedTimings.length > 0) {
-    const totalDuration = selectedTimings.length;
-    let ratePerHour = 0;
+    if (userData && userData.userType === "user") {
+      if (selectedDate !== "" && selectedTimings.length > 0) {
+        const totalDuration = selectedTimings.length;
+        let ratePerHour = 0;
 
-    // let totalAmount = 0;
-    const bookings = {
-      type,
-      name: selectedService,
-      date: selectedDate,
-      time: selectedTimings,
-      amount: 0,
-      duration: totalDuration,
-      // ... other properties
-    };
+        // let totalAmount = 0;
+        const bookings = {
+          type,
+          name: selectedService,
+          date: selectedDate,
+          time: selectedTimings,
+          amount: 0,
+          duration: totalDuration,
+          // ... other properties
+        };
 
-    try {
-      const response = await BookingApi.getBookingAmount(bookings.type);
-      if (response) {
-        console.log("response",response);
-        ratePerHour = response.bookingAmount;
-        bookings.amount = totalDuration * ratePerHour;
-      } else {
-        console.log('Booking Failed');
-      }
-    } catch (err) {
-      console.log("err",err)
-    }
-//     if(selectedTimings.length>0){
-//       selectedTimings.map(async (timeData)=>{
-// // try {
-// //   console.log(timeData)
-// //   let startMilliseconds = 0;
-// //   let endMilliseconds = 0;
-// //   const [time, am] = timeData.split(" ");
-// //   const [time1, am1] = time.split("-");
-// //   const [hours, minutes] = time1.split(":");
-// //   console.log("hours",hours,minutes)
-// //         const startDateTime = new Date(selectedDate);
-// //         startDateTime.setHours(Number(hours), Number(minutes));
-// //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+        try {
+          const response = await BookingApi.getBookingAmount(bookings.type);
+          if (response) {
+            console.log("response", response);
+            ratePerHour = response.bookingAmount;
+            bookings.amount = totalDuration * ratePerHour;
+          } else {
+            console.log('Booking Failed');
+          }
+        } catch (err) {
+          console.log("err", err)
+        }
+        //     if(selectedTimings.length>0){
+        //       selectedTimings.map(async (timeData)=>{
+        // // try {
+        // //   console.log(timeData)
+        // //   let startMilliseconds = 0;
+        // //   let endMilliseconds = 0;
+        // //   const [time, am] = timeData.split(" ");
+        // //   const [time1, am1] = time.split("-");
+        // //   const [hours, minutes] = time1.split(":");
+        // //   console.log("hours",hours,minutes)
+        // //         const startDateTime = new Date(selectedDate);
+        // //         startDateTime.setHours(Number(hours), Number(minutes));
+        // //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-// //         const endDateTime = new Date(startDateTime);
-// //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-// //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-// //         console.log("bookings.type",bookings.type)
-// //         console.log("startMilliseconds",startMilliseconds)
-// //         console.log("endMilliseconds",endMilliseconds)
+        // //         const endDateTime = new Date(startDateTime);
+        // //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+        // //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+        // //         console.log("bookings.type",bookings.type)
+        // //         console.log("startMilliseconds",startMilliseconds)
+        // //         console.log("endMilliseconds",endMilliseconds)
 
-// //       const response = await BookingApi.getBookedList({
-// //         type,
-// //         bookingtype: "online",
-// //         startTime: startMilliseconds,
-// //         endTime: endMilliseconds,
-// //         user: userData.id,
-// //         startDate: new Date(selectedDate).toISOString().split("T")[0],
-// //         endDate: new Date(selectedDate).toISOString().split("T")[0],
-// //       //   bookingId: response.razorpay_payment_id,
-// //         // court: ,
-      
-// //         });
-// //       if (response) {
-// //         setRes(true);
-// //       } else {
-// //         console.log('Booking Failed');
-// //       }
-// //     } catch (err) {
-// //       console.log("err",err)
-// //     }
+        // //       const response = await BookingApi.getBookedList({
+        // //         type,
+        // //         bookingtype: "online",
+        // //         startTime: startMilliseconds,
+        // //         endTime: endMilliseconds,
+        // //         user: userData.id,
+        // //         startDate: new Date(selectedDate).toISOString().split("T")[0],
+        // //         endDate: new Date(selectedDate).toISOString().split("T")[0],
+        // //       //   bookingId: response.razorpay_payment_id,
+        // //         // court: ,
 
-//       })
-//       console.log("res",res)
-//    if(res)   {
-//         setTableData((prevTableData: any) => [...prevTableData, bookings]);
+        // //         });
+        // //       if (response) {
+        // //         setRes(true);
+        // //       } else {
+        // //         console.log('Booking Failed');
+        // //       }
+        // //     } catch (err) {
+        // //       console.log("err",err)
+        // //     }
 
-//         // Reset selected date and timings
-//         setSelectedDate("");
-//         setSelectedTimings([]);
-//    }
+        //       })
+        //       console.log("res",res)
+        //    if(res)   {
+        //         setTableData((prevTableData: any) => [...prevTableData, bookings]);
 
-//     }
+        //         // Reset selected date and timings
+        //         setSelectedDate("");
+        //         setSelectedTimings([]);
+        //    }
+
+        //     }
 
 
-              setTableData((prevTableData: any) => [...prevTableData, bookings]);
+        setTableData((prevTableData: any) => [...prevTableData, bookings]);
 
         // Reset selected date and timings
         setSelectedDate("");
         setSelectedTimings([]);
-  
-  }
-}else{
-  navigate(routes.ROOT)
 
-  }
+      }
+    } else {
+      setModalOpen(true);
+
+
+    }
   };
 
   return (
@@ -319,8 +327,8 @@ if(userData && userData.userType==="user"){
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -336,8 +344,8 @@ if(userData && userData.userType==="user"){
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "#15B5FC"
-                      : "black"
+                        ? "#15B5FC"
+                        : "black"
                   }
                   fontSize={{ xs: "14px", sm: "14px", md: "14px", lg: "18px" }}
                 >
@@ -360,6 +368,7 @@ if(userData && userData.userType==="user"){
           </Button>
         </Box>
       </Box>
+      <ModalComponent open={modalOpen} handleClose={handleClose} />
     </Stack>
   );
 }
