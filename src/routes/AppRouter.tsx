@@ -24,10 +24,12 @@ import PlayStation from "../pages/services/PlayStation";
 import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
 import Service from "../pages/services/Service";
 import ServiceBooking from "../BookingService/ServiceBooking";
+import TermsandComditions from "../pages/Terms&conditions/TermsandConditions";
 import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
+import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 
 export default function AppRouter() {
   return (
@@ -76,6 +78,11 @@ export default function AppRouter() {
           <Route path={routes.CRICKETNET} element={<CricketNet />} />
           <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
           <Route path={routes.FAQ} element={<FaqPage />} />
+          <Route
+            path={routes.TERMS_AND_CONDITIONS}
+            element={<TermsandComditions />}
+          />
+          <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
         </Route>
       </Routes>
     </Router>

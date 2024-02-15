@@ -25,9 +25,11 @@ const DATE_CALENDER = "/date-calender";
 const IMAGE_GALLERY = "/image-gal";
 const CAREERS_PAGE = "/careers-page";
 const FAQ = "/faq-page";
+const PRIVACY_POLICY = "/privacy-policy";
 
 const CRICKETNET = SERVICE + "cricketnet";
 const BOWLINGMACHINE = SERVICE + "bowlingmachine";
+const TERMS_AND_CONDITIONS = "/terms-and-conditioins";
 const routes = {
   ROOT,
   LOGIN,
@@ -58,6 +60,8 @@ const routes = {
   BOWLINGMACHINE,
   CAREERS_PAGE,
   FAQ,
+  TERMS_AND_CONDITIONS,
+  PRIVACY_POLICY,
 };
 
 export default routes;

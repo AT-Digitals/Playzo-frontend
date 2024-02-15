@@ -102,10 +102,11 @@ export default function Header() {
               sx={{
                 padding: "8px 20px",
                 textTransform: "none",
-                fontSize: "20px",
+                fontSize: "16px",
                 minWidth: "100px",
                 color: Colors.BUTTON_COLOR,
                 fontWeight: "bold",
+                border: "2px solid #15B5FC;",
               }}
               onClick={handleLogout}
             >

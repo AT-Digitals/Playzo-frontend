@@ -35,17 +35,16 @@ export default function DropDownComponent({
       </Typography>
       <FormControl fullWidth>
         <Select
+          displayEmpty
+          placeholder={placeHolder}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={value}
           onChange={onChange}
-          sx={{ maxWidth: 700 }}
+          // defaultValue="one"
+          sx={{ maxWidth: 700, borderRadius: "8px" }}
         >
-          {placeHolder && (
-            <MenuItem value="" disabled>
-              {placeHolder}
-            </MenuItem>
-          )}
+          {placeHolder && <MenuItem value="">{placeHolder}</MenuItem>}
           {options.map((item) => (
             <MenuItem key={item.value} value={item.value}>
               {item.label}
