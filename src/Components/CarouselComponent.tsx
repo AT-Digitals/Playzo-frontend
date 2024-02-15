@@ -68,19 +68,17 @@ export default function CarouselComponent() {
     // }, [cardIndex, visibleCards.length]);
 
 
-    const showNextCards = () => {
-        const nextIndex = (cardIndex + 1) % CardDetails.length
-    setStartIndex((prevIndex) => Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow));
-    // setCardIndex((prevIndex) => (prevIndex + 1) % initialCardsToShow); // Update card index based on visible cards
-    setCardIndex(nextIndex)
-};
+   const showNextCards = () => {
+        const nextIndex = (cardIndex + 1) % CardDetails.length;
+        setStartIndex((prevIndex) => Math.min(prevIndex + 1, CardDetails.length - initialCardsToShow));
+        setCardIndex(nextIndex);
+    };
 
-const showPreviousCards = () => {
-    const prevIndex = (cardIndex - 1 + CardDetails.length) % CardDetails.length
-    setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    setCardIndex(prevIndex)
-    // setCardIndex((prevIndex) => (prevIndex - 1 + initialCardsToShow) % initialCardsToShow); // Update card index based on visible cards
-};
+    const showPreviousCards = () => {
+        const prevIndex = (cardIndex - 1 + CardDetails.length) % CardDetails.length;
+        setStartIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        setCardIndex(prevIndex);
+    };
 
 
     if (isWeb) {
@@ -121,8 +119,8 @@ const showPreviousCards = () => {
                         key={index}
                         card={CardDetails}
                         showDetails={index === cardIndex}
-                        nextClick={() => showNextCards()}
-                        prevClick={showPreviousCards} index={card.imageSrc}                         />
+                        nextClick={showNextCards}
+                        prevClick={showPreviousCards} index={startIndex + index} />
                 ))}
             </Stack>
         </Box>

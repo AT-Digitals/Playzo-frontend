@@ -16,7 +16,7 @@ import { FiberManualRecord as FiberManualRecordIcon, West as WestIcon, East as E
 import icon from "../assets/img-4 1.png";
 import Layer3 from "../assets/Layer_3.png";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StyledImage = styled.img`
 
@@ -40,6 +40,10 @@ const StyledImage = styled.img`
 
 @media (min-width: 1200px) {
   /* Large devices (large desktops) */
+  &.text-inside {
+    transform: translateX(-50%);
+    transition: transform 0.5s ease-in-out;
+}
   width: 700px; /* Adjust width to fill the container */
   height: 350px; /* Maintain aspect ratio */
 }
@@ -126,8 +130,9 @@ interface HotelCard {
 interface cardProps {
     card: HotelCard[];
     showDetails: boolean;
-    nextClick: () => void;
-    prevClick: () => void;
+    nextClick: (index: any) => void;
+    prevClick: (index: any) => void;
+    index: any;
 }
 
 export default function CarouselCardComponent({
@@ -135,12 +140,16 @@ export default function CarouselCardComponent({
     showDetails,
     nextClick,
     prevClick,
+    index,
 }: cardProps) {
     const [activeIndex, setActiveIndex] = useState(0); // State to keep track of active card index
 
     const handleIconClick = (index: number) => {
         setActiveIndex(index);
     };
+    useEffect(() => {
+        setActiveIndex(index);
+    }, [showDetails, index]);
     const activeCard = card[activeIndex];
 
     return (
@@ -149,6 +158,7 @@ export default function CarouselCardComponent({
             
             sx={{
                 backgroundColor: Colors.BLACK,
+                transition: "transform 0.5s ease-in-out",
             }}
         >
             {showDetails ? (
@@ -193,7 +203,7 @@ export default function CarouselCardComponent({
                             </Stack>
                         </Stack>
                         <Stack  style={{ marginTop: "0px", width: "56px", transform: "translate(-1150%, -30px)" }} direction="row" spacing={2}>
-                        <Button onClick={prevClick} sx={{
+                        <Button onClick={() => prevClick (index)} sx={{
                       padding: "18px 7px",
                       borderRadius: "50%",
                       minWidth: "24px !important",
@@ -207,7 +217,7 @@ export default function CarouselCardComponent({
                         marginLeft: "4px"
         }} />
     </Button>
-    <Button onClick={nextClick} sx={{
+    <Button onClick={() => nextClick (index)} sx={{
         padding: "18px 7px",
         borderRadius: "50%",
         minWidth: "24px !important",
