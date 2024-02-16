@@ -13,36 +13,32 @@ import moment from 'moment';
 import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react";
 
 // import { BookingType } from "../../CommonFiles/BookingType";
 
 
-
-
-
-
-
 const Timings = [
-  { name: "6:00-7:00 AM" },
-  { name: "7:00-8:00 AM" },
-  { name: "8:00-9:00 AM" },
-  { name: "9:00-10:00 AM" },
-  { name: "10:00-11:00 AM", disabled: true },
-  { name: "11:00-12:00 PM", disabled: true },
-  { name: "12:00-1:00 PM" },
-  { name: "1:00-2:00 PM" },
-  { name: "2:00-3:00 PM" },
-  { name: "3:00-4:00 PM" },
-  { name: "4:00-5:00 PM" },
-  { name: "5:00-6:00 PM" },
-  { name: "6:00-7:00 PM" },
-  { name: "7:00-8:00 PM" },
-  { name: "8:00-9:00 PM" },
-  { name: "9:00-10:00 PM" },
-  { name: "10:00-11:00 PM" },
-  { name: "11:00-12:00 PM" },
-  { name: "12:00-1:00 AM" },
-  { name: "1:00-2:00 AM" },
+  { name: "6:00-7:00 AM", disabled: false },
+  { name: "7:00-8:00 AM", disabled: false },
+  { name: "8:00-9:00 AM", disabled: false },
+  { name: "9:00-10:00 AM", disabled: false },
+  { name: "10:00-11:00 AM", disabled: false },
+  { name: "11:00-12:00 PM", disabled: false },
+  { name: "12:00-1:00 PM", disabled: false },
+  { name: "1:00-2:00 PM", disabled: false },
+  { name: "2:00-3:00 PM", disabled: false },
+  { name: "3:00-4:00 PM", disabled: false },
+  { name: "4:00-5:00 PM", disabled: false },
+  { name: "5:00-6:00 PM", disabled: false },
+  { name: "6:00-7:00 PM", disabled: false },
+  { name: "7:00-8:00 PM", disabled: false },
+  { name: "8:00-9:00 PM", disabled: false },
+  { name: "9:00-10:00 PM", disabled: false },
+  { name: "10:00-11:00 PM", disabled: false },
+  { name: "11:00-12:00 PM", disabled: false },
+  { name: "12:00-1:00 AM", disabled: false },
+  { name: "1:00-2:00 AM", disabled: false },
 ];
 
 interface TimeSlot {
@@ -128,6 +124,26 @@ export default function CustomDateCalendar({
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
+  const [items, setItems] = useState([{ name: "6:00-7:00 AM", disabled: false },
+  { name: "7:00-8:00 AM", disabled: false },
+  { name: "8:00-9:00 AM", disabled: false },
+  { name: "9:00-10:00 AM", disabled: false },
+  { name: "10:00-11:00 AM", disabled: false },
+  { name: "11:00-12:00 PM", disabled: false },
+  { name: "12:00-1:00 PM", disabled: false },
+  { name: "1:00-2:00 PM", disabled: false },
+  { name: "2:00-3:00 PM", disabled: false },
+  { name: "3:00-4:00 PM", disabled: false },
+  { name: "4:00-5:00 PM", disabled: false },
+  { name: "5:00-6:00 PM", disabled: false },
+  { name: "6:00-7:00 PM", disabled: false },
+  { name: "7:00-8:00 PM", disabled: false },
+  { name: "8:00-9:00 PM", disabled: false },
+  { name: "9:00-10:00 PM", disabled: false },
+  { name: "10:00-11:00 PM", disabled: false },
+  { name: "11:00-12:00 PM", disabled: false },
+  { name: "12:00-1:00 AM", disabled: false },
+  { name: "1:00-2:00 AM", disabled: false },])
 
   // const handleTimeSelection = (time: string) => {
   //   if (selectedTimings.includes(time)) {
@@ -184,77 +200,70 @@ export default function CustomDateCalendar({
 
   };
 
-  const data = [{ startTime: 1709001000000, endTime: 1709008200000, type: 'badminton' }];
-  const data2 = [{ startTime: 1708032600000, endTime: 1708047000000, type: "cricketNet" }];
-  const data3 = [{ startTime: 1707438600000, endTime: 1707445800000, type: 'boardGame' }];
-  const data4 = [{ startTime: 1709245800000, endTime: 1709253000000, type: 'turf' }];
-  const data5 = [{ startTime: 1708482600000, endTime: 1708489800000, type: 'bowlingMachine' },
-  { startTime: 1708497000000, endTime: 1708504200000, type: 'bowlingMachine' }];
-
-
   const ApiCall = async (dateValue: any) => {
     try {
-      // const response = await BookingApi.filter({
-      //   startDate: dateValue,
-      //   type: type,
-      //   endDate: dateValue
-      // });
-      setDisableData(data2);
-      MilisecondsToHours();
+      const response = await BookingApi.filter({
+        startDate: dateValue,
+        type: type,
+        endDate: dateValue
+      });
+      setDisableData(response);
     } catch (error: any) {
       console.error('Error:', error.message);
     }
   };
 
-
   const MilisecondsToHours = () => {
-    if (disableData.length > 0) {
-      return disableData.some((item) => {
-        const value1 = convertTo24HourFormat(item.startTime);
-        const value2 = convertTo24HourFormat(item.endTime);
 
-        const TimeSlot = splitTimeRange(value1, value2)
+    let combinedIntervals: any[] = [];
 
-        console.log("startTime", value1, value2, TimeSlot);
-        return;
-      })
+    disableData.forEach(item => {
+      const start = item.startTime;
+      const end = item.endTime;
+      const intervals = generateTimeIntervals(new Date(start), new Date(end));
+      combinedIntervals = combinedIntervals.concat(intervals);
+    });
+    if (combinedIntervals.length > 0) {
+      const updatedItems = items.map(item =>
+        combinedIntervals.includes(item.name) ? { ...item, disabled: true } : item
+      );
+      setItems(updatedItems);
+    } else {
+      setItems(Timings);
     }
+
   }
 
-  const convertTo24HourFormat = (milliseconds: number): string => {
-    const date = new Date(milliseconds);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
+  const generateTimeIntervals = (startMillis: string | number | Date, endMillis: number | Date) => {
+    const intervals = [];
+    let currentTime = new Date(startMillis);
 
-    const formattedHours = hours.toString().padStart(2, '0');
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    const formattedSeconds = seconds.toString().padStart(2, '0');
+    while (currentTime < endMillis) {
+      const nextHour = new Date(currentTime);
+      nextHour.setHours(nextHour.getHours() + 1);
 
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-  };
+      const startHour = currentTime.getHours() % 12 || 12;
+      const endHour = nextHour.getHours() % 12 || 12;
+      const startMinutes = ('0' + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
+      const endMinutes = ('0' + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
+      const startPeriod = currentTime.getHours() < 12 ? 'AM' : 'PM';
+      const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
+      const intervalString = `${startHour}:${startMinutes}-${endHour}:${endMinutes} ${startPeriod}`;
+      intervals.push(intervalString);
 
-  const splitTimeRange = (startTime: string, endTime: string): TimeSlot[] => {
-    const timeSlots: TimeSlot[] = [];
-    const startHour = parseInt(startTime.split(':')[0], 10);
-    const endHour = parseInt(endTime.split(':')[0], 10);
-
-    for (let hour = startHour; hour < endHour; hour++) {
-      const startSlot = `${hour}:00`;
-      const endSlot = `${hour + 1}:00`;
-      timeSlots.push({ startTime: startSlot, endTime: endSlot });
+      currentTime = nextHour;
     }
 
-    return timeSlots;
+    return intervals;
   };
+
+
 
   React.useEffect(() => {
     if (disableData) {
       MilisecondsToHours();
     }
-  }, [])
-
-  console.log('date', selectedDate, type, disableData);
+  }, [disableData])
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => [...prevSelectedTimings, time]);
@@ -278,70 +287,70 @@ export default function CustomDateCalendar({
         };
 
 
-    try {
-      const response = await BookingApi.getBookingAmount(bookings.type);
-      if (response) {
-        console.log("response",response);
-        ratePerHour = response.bookingAmount;
-        bookings.amount = totalDuration * ratePerHour;
-      } else {
-        console.log('Booking Failed');
-      }
-    } catch (err) {
-      console.log("err",err)
-    }
-    console.log("selectedTimings",selectedTimings)
-    if(selectedTimings.length>0){
-      selectedTimings.map(async (timeData)=>{
-try {
-  let startMilliseconds = 0;
-  let endMilliseconds = 0;
-  const [time, am] = timeData.split(" ");
-  const [time1, am1] = time.split("-");
-  const [hours, minutes] = time1.split(":");
-  console.log("hours",hours,minutes)
-        const startDateTime = new Date(selectedDate);
-        startDateTime.setHours(Number(hours), Number(minutes));
-        startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-        const endDateTime = new Date(startDateTime);
-        endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-        endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-    await BookingApi.getBookedList({
-          type: bookings.type,
-          bookingtype: "online",
-          startTime: startMilliseconds,
-          endTime: endMilliseconds,
-          user: userData.id,
-          startDate: DateUtils.formatDate(new Date(selectedDate),"YYYY-MM-DD"),
-          endDate: DateUtils.formatDate(new Date(selectedDate),"YYYY-MM-DD"),
+        try {
+          const response = await BookingApi.getBookingAmount(bookings.type);
+          if (response) {
+            console.log("response", response);
+            ratePerHour = response.bookingAmount;
+            bookings.amount = totalDuration * ratePerHour;
+          } else {
+            console.log('Booking Failed');
           }
-        );
-  
-    } catch (err) {
-      console.log("err",err)
-    }
+        } catch (err) {
+          console.log("err", err)
+        }
+        console.log("selectedTimings", selectedTimings)
+        if (selectedTimings.length > 0) {
+          selectedTimings.map(async (timeData) => {
+            try {
+              let startMilliseconds = 0;
+              let endMilliseconds = 0;
+              const [time, am] = timeData.split(" ");
+              const [time1, am1] = time.split("-");
+              const [hours, minutes] = time1.split(":");
+              console.log("hours", hours, minutes)
+              const startDateTime = new Date(selectedDate);
+              startDateTime.setHours(Number(hours), Number(minutes));
+              startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+              const endDateTime = new Date(startDateTime);
+              endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+              endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+              await BookingApi.getBookedList({
+                type: bookings.type,
+                bookingtype: "online",
+                startTime: startMilliseconds,
+                endTime: endMilliseconds,
+                user: userData.id,
+                startDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
+                endDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
+              }
+              );
+
+            } catch (err) {
+              console.log("err", err)
+            }
 
 
 
-      })
-      setTableData((prevTableData: any) => [...prevTableData, bookings]);
+          })
+          setTableData((prevTableData: any) => [...prevTableData, bookings]);
 
-      // Reset selected date and timings
-      setSelectedDate("");
-      setSelectedTimings([]);
+          // Reset selected date and timings
+          setSelectedDate("");
+          setSelectedTimings([]);
 
 
-    }
-  
-  }
-}else{
-  setModalOpen(true);
-
-  navigate(routes.ROOT)
+        }
 
       }
-      
+    } else {
+      setModalOpen(true);
+
+      navigate(routes.ROOT)
+
+    }
+
 
   };
 
@@ -406,7 +415,7 @@ try {
           Pick Time
         </Typography>
         <Box mb={2} display="flex" gap="2rem" flexWrap="wrap">
-          {Timings.map((item, index) => (
+          {items.map((item, index) => (
             <Button
               sx={{
                 maxWidth: 147,

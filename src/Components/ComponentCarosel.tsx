@@ -71,7 +71,7 @@ export default function App() {
                 style={{ height: 660 }}
             >
                 {items.map((item, index) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                         <CardComponent
                             key={index}
                             image={item.image}
