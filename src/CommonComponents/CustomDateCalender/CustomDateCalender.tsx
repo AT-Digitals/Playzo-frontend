@@ -123,6 +123,7 @@ export default function CustomDateCalendar({
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [responseModalOpen, setResponseModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
   const [items, setItems] = useState([{ name: "6:00-7:00 AM", disabled: false },
   { name: "7:00-8:00 AM", disabled: false },
@@ -187,6 +188,10 @@ export default function CustomDateCalendar({
   const handleClose = () => {
     setModalOpen(false);
     navigate(routes.ROOT)
+  }
+
+  const handleCloseModal = () => {
+    setResponseModalOpen(false)
   }
 
   const handleDateSelection = (newValue: any) => {
@@ -316,7 +321,7 @@ export default function CustomDateCalendar({
               const endDateTime = new Date(startDateTime);
               endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
               endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-              await BookingApi.getBookedList({
+              const response = await BookingApi.getBookedList({
                 type: bookings.type,
                 bookingtype: "online",
                 startTime: startMilliseconds,
@@ -326,12 +331,12 @@ export default function CustomDateCalendar({
                 endDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
               }
               );
-
-            } catch (err) {
-              console.log("err", err)
+            } catch (error: any) {
+              if (error.message === 'Please choose another date and slot') {
+                setResponseModalOpen(true);
+                console.log("err", error)
+              }
             }
-
-
 
           })
           setTableData((prevTableData: any) => [...prevTableData, bookings]);
@@ -346,8 +351,6 @@ export default function CustomDateCalendar({
       }
     } else {
       setModalOpen(true);
-
-      navigate(routes.ROOT)
 
     }
 
@@ -465,7 +468,8 @@ export default function CustomDateCalendar({
           </Button>
         </Box>
       </Box>
-      <ModalComponent open={modalOpen} handleClose={handleClose} />
+      <ModalComponent open={modalOpen} handleClose={handleClose} text="Could not add your Bookings!" subText="Login to Your Account" />
+      <ModalComponent open={responseModalOpen} handleClose={handleCloseModal} text="Please choose another date and slot" />
     </Stack>
   );
 }

@@ -3,8 +3,6 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  IconButton,
-  Modal,
   Radio,
   RadioGroup,
   RadioProps,
@@ -18,7 +16,6 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
 import { BookingSubTypes } from "./BookingSubTypes";
-import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
@@ -31,6 +28,7 @@ import crediticon from "../assets/Icon.png";
 import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
 import { useState } from "react";
+import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 
 const PaymentDetails = [
   {
@@ -107,7 +105,7 @@ export default function PaymentBooking() {
   const selectedServiceFromState = location.state?.selectedService;
 
   const user = localStorage.getItem('user');
-  const userData = JSON.parse(user??"");
+  const userData = JSON.parse(user ?? "");
 
   const navigate = useNavigate();
 
@@ -119,29 +117,29 @@ export default function PaymentBooking() {
   const handlePayClick = () => {
     console.log(allBookings, "allbookings");
 
-    allBookings.map(async (bookings:any)=>{
+    allBookings.map(async (bookings: any) => {
 
-try {
-  const response = await BookingApi.createBooking({
-    type: bookings.type,
-    bookingtype: "online",
-    startTime: parseInt(bookings.startTime),
-    endTime: parseInt(bookings.endTime),
-    user: userData.id,
-    startDate: bookings.startDate,
-    endDate: bookings.endDate,
-  //   bookingId: response.razorpay_payment_id,
-    court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
-  
-    });
-  if (response) {
-    setOpen(true);
-  } else {
-    console.log('Booking Failed');
-  }
-} catch (err) {
-  console.log("err",err)
-}
+      try {
+        const response = await BookingApi.createBooking({
+          type: bookings.type,
+          bookingtype: "online",
+          startTime: parseInt(bookings.startTime),
+          endTime: parseInt(bookings.endTime),
+          user: userData.id,
+          startDate: bookings.startDate,
+          endDate: bookings.endDate,
+          //   bookingId: response.razorpay_payment_id,
+          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+
+        });
+        if (response) {
+          setOpen(true);
+        } else {
+          console.log('Booking Failed');
+        }
+      } catch (err) {
+        console.log("err", err)
+      }
 
 
     })
@@ -561,40 +559,8 @@ try {
         <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Box display={"flex"} justifyContent={"end"} marginTop={"-12px"}>
-            <IconButton>
-              <CloseIcon
-                onClick={handleClose}
-                style={{ fontSize: "25px", color: Colors.WHITE }}
-              />
-            </IconButton>
-          </Box>
-          <Typography
-            marginTop={"20px"}
-            textAlign={"center"}
-            fontSize={"17px"}
-            color={Colors.WHITE}
-          >
-            Your booking is confirmed
-          </Typography>
-          <Typography
-            mb={"20px"}
-            textAlign={"center"}
-            fontSize={"15px"}
-            marginTop={"8px"}
-            color={Colors.WHITE}
-          >
-            Thank you, your payment has been successfull.
-          </Typography>
-        </Box>
-      </Modal>
+      <ModalComponent open={open}
+        handleClose={handleClose} text="Your booking is confirmed" subText="Thank you, your payment has been successfull." />
     </>
   );
 }
