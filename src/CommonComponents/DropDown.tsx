@@ -59,7 +59,10 @@ export default function BasicMenu() {
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
                 endIcon={<KeyboardArrowDownIcon />}
-                sx={{ color: Colors.WHITE, fontSize: "18px", textTransform: "none" }}
+                sx={{ fontSize: "14px", letterSpacing: "1.6px", textTransform: "uppercase", color: Colors.WHITE,  transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR,
+                } }}
             >
                 Services
             </Button>

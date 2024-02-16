@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   SelectChangeEvent,
   Stack,
   TextField,
@@ -16,6 +17,9 @@ import { Link } from "react-router-dom";
 import banner from "./cUS.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import ballimage from "../../assets/soccer_ball-14-512.webp"
+import batimage from "../../assets/cricket-game-player-playing-007-1024.webp"
+import { transform } from "typescript";
 
 // import GameIcon from "../../assets/doodl-5 1.png";
 
@@ -38,57 +42,67 @@ const DropDownData = [
   },
 ];
 
-// const StyledImage = styled.img`
-//   position: absolute;
-//   transform: translate(130px, 30px);
-//   /* Set a default width or adjust as needed */
 
-//   @media (min-width: 300px) {
-//     /* Extra small devices (phones) */
-//     width: 130px;
-//     height: 115px;
-//   }
+const StyledImage = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
 
-//   @media (min-width: 768px) {
-//     /* Small devices (tablets) */
-//     width: 130px;
-//     height: 130px;
-//   }
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
 
-//   @media (min-width: 992px) {
-//     /* Medium devices (desktops) */
-//     width: 130px;
-//     height: 130px;
-//   }
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
 
-//   @media (min-width: 1200px) {
-//     /* Large devices (large desktops) */
-//     width: 230px;
-//     height: 215px;
-//   }
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
 
-//   animation: shake 2s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 150px;
+    transform: translate(31%, 172%);
+  }
+  `;
+  const StyledImage1 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
 
-//   @keyframes shake {
-//     0%,
-//     100% {
-//       transform: translate(130px, 30px);
-//     }
-//     10%,
-//     30%,
-//     50%,
-//     70%,
-//     90% {
-//       transform: translate(140px, 30px);
-//     }
-//     20%,
-//     40%,
-//     60%,
-//     80% {
-//       transform: translate(120px, 30px);
-//     }
-//   }
-// `;
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 150px;
+    transform: translate(862%, 332%);
+  }
+  `;
+
+
 
 export default function ContactUs() {
   const [name, setName] = useState("");
@@ -165,12 +179,15 @@ export default function ContactUs() {
       <Box>
         <BannerImage src={banner} alt="banner" />
       </Box>
+      <StyledImage src={ballimage} alt="" />
+      <StyledImage1 src={batimage} alt="" />
       <AppContainer
         paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
         paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
-        maxWidth={1200}
+        maxWidth={1000}
       >
-        <Stack
+      
+        <Stack 
           // height={"100%"}
           spacing={10}
           direction={{ xs: "column", sm: "column", md: "row" }}
@@ -178,50 +195,42 @@ export default function ContactUs() {
           paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "60px" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "90px" }}
         >
-          <Box padding={"0 20px"}>
-            <Stack
-              bgcolor={"aliceblue"}
-              padding={{ xs: "20px 20px", md: "30px 30px", lg: "30px 30px" }}
-              // width={"100%"}
-              direction="column"
-              height={"100%"}
-              maxHeight={600}
-              spacing={2}
-            >
-              <Typography
-                fontSize={{ xs: "19px", sm: "19px", md: "19px", lg: "30px" }}
-                fontWeight={700}
-                color={Colors.BLACK}
+          <Box flexDirection={"column"}
+                display={"flex"}
+                marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+               style={{
+                paddingTop: "54px"
+               }}
               >
-                For More Details Contact Us!
-              </Typography>
-              <Typography
-                color={Colors.BLACK}
-                fontSize={{ xs: "15px", sm: "15px", md: "16px", lg: "18px" }}
-                // width={{ xs: "310px", sm: "100%", md: "310px", lg: "433px" }}
-              >
-                Send our team a quick message with your question, and we’ll get
-                back to you as soon as possible. We’re pretty responsive and
-                will try to respond in a few hours 🙂
-              </Typography>
-
-              <Link
-                style={{
-                  textDecoration: "none",
-                  color: Colors.BUTTON_COLOR,
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
+                  width="400"
+                  height="450"
+                ></iframe>
+                 <Typography
+                sx={{
+                  fontSize: "16px",
                   fontWeight: 600,
-                  fontSize: "18px",
+                  paddingTop: "12px",
                 }}
-                to="mailto:orders@alterknitnewyork.com"
               >
-                playzo.erode@gmail.com
-              </Link>
-            </Stack>
-            {/* <Box>
-              <StyledImage src={GameIcon} alt="contact-us" />
-            </Box> */}
-          </Box>
-          <Box pt="30px" width={"100%"}>
+                Contact Us
+              </Typography>
+                 <Typography fontSize="14px" pt={"8px"} fontWeight={400}>
+                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
+                  <br />
+                  Tamil Nadu - 638011{" "}
+                </Typography>
+                <Typography fontSize="14px" fontWeight={400}>
+                 <span style={{
+                  fontSize: "14px",
+                  fontWeight: "600",
+                 }}>Phone:</span> +91 70944 60944,  +91 91088 83555
+                 
+                </Typography>
+              </Box>
+             
+          <Box style={{marginLeft: "110px"}} pt="30px" width={"100%"}>
             <form onSubmit={onSubmit}>
               <Stack
                 margin={"0 auto"}
@@ -269,7 +278,7 @@ export default function ContactUs() {
                 />
                 <Box margin={"30px"}>
                   <Typography
-                    marginBottom={"4px"}
+                    marginBottom={"10px"}
                     fontSize={"18px"}
                     fontWeight={700}
                     color={Colors.BLACK}
@@ -284,7 +293,7 @@ export default function ContactUs() {
                       width: "100%",
                       maxWidth: "700px",
                       ".MuiOutlinedInput-input": {
-                        marginBottom: "130px",
+                        marginBottom: "150px",
                       },
                       ".MuiFormHelperText-root": {
                         color: "red",
@@ -301,8 +310,8 @@ export default function ContactUs() {
                   />
                 </Box>
 
-                <CustomButton
-                  bgColor={Colors.BUTTON_COLOR}
+                <Button
+                  
                   sx={{
                     borderRadius: "30px",
                     textTransform: "none",
@@ -310,11 +319,19 @@ export default function ContactUs() {
                     fontWeight: 700,
                     padding: "10px",
                     maxWidth: 700,
-                  }}
+                    border: "1px solid #15B5FC",
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                    ":hover": {
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
+                      border: "1px solid #15B5FC",
+                    }
+                  }} variant="outlined"
                   type="submit"
                 >
                   Submit
-                </CustomButton>
+                </Button>
               </Stack>
             </form>
           </Box>

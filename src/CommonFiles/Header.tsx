@@ -7,7 +7,7 @@ import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "../assets/logo.png";
+import logo from "../assets/Playzo.png";
 import routes from "../routes/routes";
 import { useState } from "react";
 
@@ -15,6 +15,7 @@ const HeaderLink = styled("a")`
   text-decoration: none;
   position: relative;
   color: ${Colors.BUTTON_COLOR};
+  transition: color 0.3s ease; /* Add transition for color change */
 
   &:hover {
     color: ${Colors.WHITE};
@@ -56,25 +57,32 @@ export default function Header() {
 
           <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.ABOUTUS}>
-              <Typography color={Colors.WHITE} fontSize="18px">
+              <Typography sx={{
+                color: Colors.WHITE,
+                transition: "color 0.5s ease",
+                textTransform: "uppercase",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR,
+                 
+                }
+              }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
                 About Us
               </Typography>
             </HeaderLink>
             <DropDown />
             <HeaderLink href={routes.CONTACTUS}>
-              <Typography color={Colors.WHITE} fontSize="18px">
+              <Typography sx={{
+               color: Colors.WHITE,
+                transition: "color 0.5s ease",
+                textTransform: "uppercase",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR,
+                }
+              }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
                 Contact Us
               </Typography>
             </HeaderLink>
-            <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize="18px"
-                fontWeight={600}
-              >
-                Book Now
-              </Typography>
-            </HeaderLink>
+           
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
             <CustomButton
@@ -94,45 +102,15 @@ export default function Header() {
             >
               Login
             </CustomButton>
-
-            <CustomButton
-              variant="outlined"
-              color={Colors.WHITE}
-              bgColor={Colors.BUTTON}
-              sx={{
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "100px",
-                color: Colors.BUTTON_COLOR,
-                fontWeight: "bold",
-                border: "2px solid #15B5FC;",
-              }}
-              onClick={handleLogout}
-            >
-              Logout
-            </CustomButton>
-            <CustomButton
-              variant="contained"
-              color={Colors.WHITE}
-              bgColor={Colors.BUTTON}
-              sx={{
-                border: `2px solid ${Colors.BUTTON_COLOR} !important`,
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "100px",
-                color: Colors.WHITE,
-                fontWeight: "bold",
-                background: Colors.BUTTON_COLOR,
-                "&.MuiButton-outlinedPrimary": {
-                  border: `2px solid ${Colors.BUTTON_COLOR} !important`,
-                },
-              }}
-              onClick={handleOpen}
-            >
-              Join Now
-            </CustomButton>
+            <HeaderLink href={routes.BOOKING_SERVICE}>
+              <Typography
+                color={Colors.BUTTON_COLOR}
+                fontSize="18px"
+                fontWeight={600}
+              >
+                Book Now
+              </Typography>
+            </HeaderLink>
           </Stack>
         </Stack>
 

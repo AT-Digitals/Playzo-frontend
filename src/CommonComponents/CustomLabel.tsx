@@ -18,7 +18,7 @@ export default function CustomLabel({
     return (
         <Typography
             variant="body1"
-            mb={0.5}
+            mb={"10px"}
             color={Colors.BLACK}
             textAlign="left"
             {...props}
