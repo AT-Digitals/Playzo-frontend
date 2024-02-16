@@ -1,4 +1,4 @@
-import moment, { DurationInputArg1, unitOfTime } from "moment";
+import moment, { unitOfTime } from "moment";
 
 export type DurationUnit = unitOfTime.DurationConstructor;
 
