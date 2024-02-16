@@ -107,7 +107,7 @@ export default function PaymentBooking() {
   const selectedServiceFromState = location.state?.selectedService;
 
   const user = localStorage.getItem("user");
-  const userData = JSON.parse(user ?? "");
+  const userData = user && JSON.parse(user);
 
   const navigate = useNavigate();
 

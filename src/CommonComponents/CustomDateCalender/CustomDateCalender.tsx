@@ -353,8 +353,6 @@ export default function CustomDateCalendar({
       }
     } else {
       setModalOpen(true);
-
-      navigate(routes.ROOT);
     }
   };
 
