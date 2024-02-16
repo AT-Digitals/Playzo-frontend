@@ -3,8 +3,6 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  IconButton,
-  Modal,
   Radio,
   RadioGroup,
   RadioProps,
@@ -18,10 +16,10 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
 import { BookingSubTypes } from "./BookingSubTypes";
-import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
+import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import React from "react";
 import TodayIcon from "@mui/icons-material/Today";
 import ball from "../assets/ball 4.png";
@@ -120,7 +118,6 @@ export default function PaymentBooking() {
     console.log(allBookings, "allbookings123");
 
     allBookings.map(async (bookings: any) => {
-      console.log(bookings, "API bookings");
       try {
         const response = await BookingApi.createBooking({
           type: bookings.type,
@@ -128,7 +125,6 @@ export default function PaymentBooking() {
           startTime: parseInt(bookings.startTime),
           endTime: parseInt(bookings.endTime),
           user: userData.id,
-
           startDate: bookings.startDate,
           endDate: bookings.endDate,
           //   bookingId: response.razorpay_payment_id,
@@ -144,6 +140,7 @@ export default function PaymentBooking() {
         console.log("err", err);
       }
     });
+
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
@@ -598,40 +595,8 @@ export default function PaymentBooking() {
         <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Box display={"flex"} justifyContent={"end"} marginTop={"-12px"}>
-            <IconButton>
-              <CloseIcon
-                onClick={handleClose}
-                style={{ fontSize: "25px", color: Colors.WHITE }}
-              />
-            </IconButton>
-          </Box>
-          <Typography
-            marginTop={"20px"}
-            textAlign={"center"}
-            fontSize={"17px"}
-            color={Colors.WHITE}
-          >
-            Your booking is confirmed
-          </Typography>
-          <Typography
-            mb={"20px"}
-            textAlign={"center"}
-            fontSize={"15px"}
-            marginTop={"8px"}
-            color={Colors.WHITE}
-          >
-            Thank you, your payment has been successfull.
-          </Typography>
-        </Box>
-      </Modal>
+      <ModalComponent open={open}
+        handleClose={handleClose} text="Your booking is confirmed" subText="Thank you, your payment has been successfull." />
     </>
   );
 }
