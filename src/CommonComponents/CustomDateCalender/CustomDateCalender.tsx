@@ -1,19 +1,26 @@
 import * as React from "react";
 
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import moment from 'moment';
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
-import { BookingType } from "../../CommonFiles/BookingType";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import ModalComponent from "./ModalComponent";
 import leftarrow from "./left-arrow.svg";
+import moment from 'moment';
 import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
-import ModalComponent from "./ModalComponent";
-import DateUtils from "../../Utils/DateUtlis";
+
+// import { BookingType } from "../../CommonFiles/BookingType";
+
+
+
+
+
+
 
 const Timings = [
   { name: "6:00-7:00 AM" },
@@ -118,7 +125,6 @@ export default function CustomDateCalendar({
 
 
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
-  const [res, setRes] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
@@ -271,85 +277,72 @@ export default function CustomDateCalendar({
           // ... other properties
         };
 
-        try {
-          const response = await BookingApi.getBookingAmount(bookings.type);
-          if (response) {
-            console.log("response", response);
-            ratePerHour = response.bookingAmount;
-            bookings.amount = totalDuration * ratePerHour;
-          } else {
-            console.log('Booking Failed');
-          }
-        } catch (err) {
-          console.log("err", err)
-        }
-        //     if(selectedTimings.length>0){
-        //       selectedTimings.map(async (timeData)=>{
-        // // try {
-        // //   console.log(timeData)
-        // //   let startMilliseconds = 0;
-        // //   let endMilliseconds = 0;
-        // //   const [time, am] = timeData.split(" ");
-        // //   const [time1, am1] = time.split("-");
-        // //   const [hours, minutes] = time1.split(":");
-        // //   console.log("hours",hours,minutes)
-        // //         const startDateTime = new Date(selectedDate);
-        // //         startDateTime.setHours(Number(hours), Number(minutes));
-        // //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-        // //         const endDateTime = new Date(startDateTime);
-        // //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-        // //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-        // //         console.log("bookings.type",bookings.type)
-        // //         console.log("startMilliseconds",startMilliseconds)
-        // //         console.log("endMilliseconds",endMilliseconds)
-
-        // //       const response = await BookingApi.getBookedList({
-        // //         type,
-        // //         bookingtype: "online",
-        // //         startTime: startMilliseconds,
-        // //         endTime: endMilliseconds,
-        // //         user: userData.id,
-        // //         startDate: new Date(selectedDate).toISOString().split("T")[0],
-        // //         endDate: new Date(selectedDate).toISOString().split("T")[0],
-        // //       //   bookingId: response.razorpay_payment_id,
-        // //         // court: ,
-
-        // //         });
-        // //       if (response) {
-        // //         setRes(true);
-        // //       } else {
-        // //         console.log('Booking Failed');
-        // //       }
-        // //     } catch (err) {
-        // //       console.log("err",err)
-        // //     }
-
-        //       })
-        //       console.log("res",res)
-        //    if(res)   {
-        //         setTableData((prevTableData: any) => [...prevTableData, bookings]);
-
-        //         // Reset selected date and timings
-        //         setSelectedDate("");
-        //         setSelectedTimings([]);
-        //    }
-
-        //     }
-
-
-        setTableData((prevTableData: any) => [...prevTableData, bookings]);
-
-        // Reset selected date and timings
-        setSelectedDate("");
-        setSelectedTimings([]);
-
+    try {
+      const response = await BookingApi.getBookingAmount(bookings.type);
+      if (response) {
+        console.log("response",response);
+        ratePerHour = response.bookingAmount;
+        bookings.amount = totalDuration * ratePerHour;
+      } else {
+        console.log('Booking Failed');
       }
-    } else {
-      setModalOpen(true);
+    } catch (err) {
+      console.log("err",err)
+    }
+    console.log("selectedTimings",selectedTimings)
+    if(selectedTimings.length>0){
+      selectedTimings.map(async (timeData)=>{
+try {
+  let startMilliseconds = 0;
+  let endMilliseconds = 0;
+  const [time, am] = timeData.split(" ");
+  const [time1, am1] = time.split("-");
+  const [hours, minutes] = time1.split(":");
+  console.log("hours",hours,minutes)
+        const startDateTime = new Date(selectedDate);
+        startDateTime.setHours(Number(hours), Number(minutes));
+        startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+        const endDateTime = new Date(startDateTime);
+        endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+        endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+    await BookingApi.getBookedList({
+          type: bookings.type,
+          bookingtype: "online",
+          startTime: startMilliseconds,
+          endTime: endMilliseconds,
+          user: userData.id,
+          startDate: DateUtils.formatDate(new Date(selectedDate),"YYYY-MM-DD"),
+          endDate: DateUtils.formatDate(new Date(selectedDate),"YYYY-MM-DD"),
+          }
+        );
+  
+    } catch (err) {
+      console.log("err",err)
+    }
+
+
+
+      })
+      setTableData((prevTableData: any) => [...prevTableData, bookings]);
+
+      // Reset selected date and timings
+      setSelectedDate("");
+      setSelectedTimings([]);
 
 
     }
+  
+  }
+}else{
+  setModalOpen(true);
+
+  navigate(routes.ROOT)
+
+      }
+      
+
   };
 
   return (

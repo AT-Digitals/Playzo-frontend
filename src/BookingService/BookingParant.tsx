@@ -6,6 +6,7 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
+import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import badminton from "../assets/Image (7).png";
@@ -182,10 +183,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   // navigate to payment page with state table data  when booking is complete
 
   const handleProceedToPayment = () => {
-    const bookingsWithTime = allBookings.map((booking, index) => {
+    const bookingsWithTime: { type: BookingType; name: string; startDate: string; startTime: number; endDate: string; endTime: number; court: number; }[] =[];
+     allBookings.map((booking, index) => {
+      // console.log("alalala",booking.time)
       // booking["court"] = selectedCourt;
-
-      const timeString = String(booking.time); // Ensure time is a string
+      const boo = booking.time as any;
+      
+      boo.forEach(function (item: any, index: any) {
+        console.log(item, index);
+      
+  
+      const timeString = String(item); // Ensure time is a string
       const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
 
       const startTime = timeMatch ? timeMatch[1] : "";
@@ -218,19 +226,22 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         // ampm = endHours >= 12 ? "PM" : "AM";
       }
 
-      return {
+      
+
+      bookingsWithTime.push( {
         type: booking.type,
         name: booking.name,
-        startDate: new Date(booking.date).toISOString().split("T")[0],
+        startDate: DateUtils.formatDate(new Date(booking.date),"YYYY-MM-DD"),
         startTime: startMilliseconds,
 
         endDate: endTime
-          ? new Date(booking.date).toISOString().split("T")[0]
+          ? DateUtils.formatDate(new Date(booking.date),"YYYY-MM-DD")
           : "",
         endTime: endMilliseconds,
         court: booking.court,
-      };
+      });
     });
+  })
 
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },

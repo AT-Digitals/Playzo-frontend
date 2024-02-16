@@ -17,6 +17,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
+import { BookingSubTypes } from "./BookingSubTypes";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
@@ -130,7 +131,7 @@ try {
     startDate: bookings.startDate,
     endDate: bookings.endDate,
   //   bookingId: response.razorpay_payment_id,
-    // court: ,
+    court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
   
     });
   if (response) {
