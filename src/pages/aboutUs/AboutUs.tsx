@@ -15,6 +15,7 @@ import BasicTimeline from "./VerticalTimeline";
 import Colors from "../../CommonComponents/Colors";
 import Image1 from "../../assets/Rectangle 67.png";
 import Image2 from "../../assets/Rectangle 669.png";
+import Timeline from "./SampleTimeline";
 import bg from "./pexels-pixabay-262524.jpg";
 import group from "./Group 34245.svg";
 import styled from "@emotion/styled";
@@ -393,8 +394,13 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
         </Box>
         <Box position={"absolute"} top={"7%"} right={"75%"}>
-          <Typography color={"white"} fontSize={"52px"} fontWeight={"bold"}>
-            Timeline
+          <Typography
+            color={"white"}
+            fontStyle={"italic"}
+            fontSize={"82px"}
+            fontWeight={"bold"}
+          >
+            Playzo Journey
           </Typography>
         </Box>
       </Box>

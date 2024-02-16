@@ -3,6 +3,7 @@ import "intersection-observer";
 import { Box, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 
+import Colors from "../../CommonComponents/Colors";
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -179,17 +180,29 @@ export default function CustomTimeline() {
                   fontWeight: index === activeIndex ? 900 : 400,
                   fontStyle: index === activeIndex ? "italic" : "italic",
                 }}
-              >
-                {item.year}
-              </TimelineOppositeContent>
+              ></TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineDot
                   sx={{
                     padding: index === activeIndex ? "10px" : "5px",
-                    borderRadius: "0px",
+                    background:
+                      index === activeIndex ? Colors.BUTTON_COLOR : "white",
+                    color: index === activeIndex ? "white" : "black",
+
+                    borderRadius: "50%",
+                    margin: 0,
+                  }}
+                >
+                  {" "}
+                  {item.year}
+                </TimelineDot>
+                <TimelineConnector
+                  style={{
+                    minHeight: 240,
+                    background:
+                      index === activeIndex ? Colors.BUTTON_COLOR : "white",
                   }}
                 />
-                <TimelineConnector style={{ minHeight: 240 }} />
               </TimelineSeparator>
               <TimelineContent>
                 <Box
