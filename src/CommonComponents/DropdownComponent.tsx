@@ -29,7 +29,7 @@ export default function DropDownComponent({
         color={Colors.BLACK}
         fontWeight={700}
         fontSize="18px"
-        mb="4px"
+        mb="10px"
       >
         {label}
       </Typography>
