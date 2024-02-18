@@ -1,8 +1,10 @@
 import "intersection-observer";
 
 import { Box, Typography } from "@mui/material";
+import styled, { keyframes } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 
+import Colors from "../../CommonComponents/Colors";
 import Timeline from "@mui/lab/Timeline";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
@@ -13,31 +15,50 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 
 const data = [
   {
-    title: " Lorem Ipsum",
+    title: "Video Gaming",
     disciption:
-      " Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua.",
+      " PlayStations are popular gaming consoles developed by Sony, providing immersive gaming experiences with advanced graphics and technology. These gaming systems offer a diverse library of titles, including exclusive franchises, and support various multimedia functionalities. ",
     year: "2024",
+    game: "Playstation",
   },
   {
-    title: " Lorem Ipsum",
+    title: "Play Hard",
     disciption:
-      " Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua.",
+      " urf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering",
     year: "2023",
+    game: "Turf",
   },
   {
-    title: " Lorem Ipsum",
+    title: "Won Cup",
     disciption:
-      " Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua.",
+      " Cricket is a popular bat-and-ball sport, known for its excitement, strategy, and global appeal. Played professionally and recreationally worldwide.",
     year: "2022",
+    game: "Cricket",
   },
   {
-    title: " Lorem Ipsum",
+    title: "Mind Relax",
     disciption:
-      " Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua.",
+      " Board games bring joy, strategy, and social interaction. From classics like Monopoly to modern hits like Catan, endless entertainment awaits.",
     year: "2021",
+    game: "Board Games",
   },
 ];
 
+const slideInFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+// Create a styled component with the animation
+const AnimatedTypographyWrapper = styled.div`
+  animation: ${slideInFromRight} 1s ease-out; /* You can adjust the duration and timing function */
+`;
 export default function CustomTimeline() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isInitialMount = useRef(true);
@@ -131,6 +152,7 @@ export default function CustomTimeline() {
   return (
     <>
       <Timeline
+        position="alternate"
         id="custom-timeline"
         style={{
           height: "100%",
@@ -176,39 +198,88 @@ export default function CustomTimeline() {
                   background: index === activeIndex ? "" : "",
                   marginTop: index === activeIndex ? "-1rem" : undefined,
                   padding: index === activeIndex ? "17px 16px" : "6px 16px",
-                  fontWeight: index === activeIndex ? 900 : 400,
+                  fontWeight: index === activeIndex ? 900 : 600,
                   fontStyle: index === activeIndex ? "italic" : "italic",
+                  fontSize: "28px",
                 }}
               >
-                {item.year}
+                {item.game}
               </TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineDot
                   sx={{
-                    padding: index === activeIndex ? "10px" : "5px",
-                    borderRadius: "0px",
+                    padding: index === activeIndex ? "12px" : "5px",
+                    background:
+                      index === activeIndex ? Colors.BUTTON_COLOR : "white",
+                    color:
+                      index === activeIndex ? "white" : Colors.BUTTON_COLOR,
+                    border:
+                      index === activeIndex
+                        ? `1px solid ${Colors.WHITE}`
+                        : `1px solid ${Colors.BUTTON_COLOR}`,
+
+                    borderRadius: "50%",
+                    margin: 0,
+
+                    fontFamily: `'ESL Legend', sans-serif`,
+                    fontSize: "16px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {" "}
+                  {item.year}
+                </TimelineDot>
+                <TimelineConnector
+                  style={{
+                    minHeight: 240,
+                    background:
+                      index === activeIndex ? Colors.BUTTON_COLOR : "white",
+                    transition: "background-color 0.5s ease-out",
                   }}
                 />
-                <TimelineConnector style={{ minHeight: 240 }} />
               </TimelineSeparator>
               <TimelineContent>
                 <Box
-                  maxWidth={400}
                   display={index === activeIndex ? "flex" : "none"}
                   color={index === activeIndex ? "white" : "white"}
-                  flexDirection={"column"}
                   gap={"1rem"}
+                  justifyContent={
+                    index && (activeIndex === 1 || activeIndex === 3)
+                      ? "flex-end"
+                      : ""
+                  }
                 >
                   <Typography
-                    fontSize={"26px"}
-                    fontWeight={index === activeIndex ? 600 : "400"}
+                    maxWidth={300}
+                    lineHeight={"1.7rem"}
+                    fontSize={"18px"}
                   >
-                    {item.title}
+                    {/* {item.title} */}
                   </Typography>
-
-                  <Typography lineHeight={"1.7rem"} fontSize={"18px"}>
-                    {item.disciption}
-                  </Typography>
+                  <AnimatedTypographyWrapper>
+                    <Typography
+                      style={{
+                        background: Colors.BUTTON_COLOR,
+                        padding: "10px 20px",
+                        borderRadius: "30px",
+                      }}
+                      maxWidth={300}
+                      lineHeight={"1.7rem"}
+                      fontSize={"16px"}
+                    >
+                      <span
+                        style={{
+                          fontSize: "28px",
+                          fontFamily: `'ESL Legend', sans-serif`,
+                        }}
+                      >
+                        {" "}
+                        {item.title}
+                      </span>{" "}
+                      <br />
+                      {item.disciption}
+                    </Typography>
+                  </AnimatedTypographyWrapper>
                 </Box>
               </TimelineContent>
             </TimelineItem>
