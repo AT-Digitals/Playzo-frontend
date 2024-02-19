@@ -5,12 +5,12 @@ import Colors from "../Colors";
 import CustomButton from "../CustomButton";
 import CustomTextField from "../CustomTextField";
 import Divider from "@mui/material/Divider";
-import FacebookIcon from "../../assets/Facebook.png";
-import InstaIcon from "../../assets/Instagram.png";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import { Link } from "react-router-dom";
-import LinkedinIcon from "../../assets/LinkedIn.png";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from "../../assets/Twitter.png";
-import YoutubeIcon from "../../assets/YouTube.png";
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import logo from "../../assets/logo.png";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
@@ -81,39 +81,12 @@ export default function Footer() {
                 <Link to={routes.ROOT}>
                   <img src={logo} width={172} height={34} alt="22" />
                 </Link>
-                <Typography fontSize="16px" ml="10px !important">
-                  Lorem ipsum dolor sit amet consectetur dolol drakgonil
-                  adipiscing elit aliquam mauris
+                <Typography fontSize="15px" fontWeight={"400"} ml="10px !important">
+                At Playzo33, we extend beyond being a turf booking platform we're
+                a community-driven destination designed for sports enthusiasts and
+                those seeking recreation and entertainment.
                 </Typography>
-                <CustomTextField
-                  placeholder="Enter your email"
-                  sx={{
-                    backgroundColor: Colors.WHITE,
-                    borderRadius: "50px",
-                    ".css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
-                      padding: "20px 30px",
-                    },
-                    "::-moz-placeholder": {
-                      color: Colors.BLACK,
-                    },
-                    marginLeft: "10px",
-                  }}
-                />
-                <CustomButton
-                  bgColor={Colors.BUTTON_COLOR}
-                  color={Colors.WHITE}
-                  sx={{
-                    width: "100%",
-                    maxWidth: "30px",
-                    padding: "10px 20px",
-                    textTransform: "none",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    marginLeft: "10px !important",
-                  }}
-                >
-                  Subscribe
-                </CustomButton>
+            
               </Stack>
             </Grid>
             <Grid
@@ -131,18 +104,41 @@ export default function Footer() {
                 spacing={{ xs: 5, sm: 16, md: 5 }}
               >
                 <Stack direction="column" spacing={2}>
-                  <StyledLink to={routes.ROOT}>About Us</StyledLink>
-                  <StyledLink to={routes.ROOT}>Services</StyledLink>
-                  <StyledLink to={routes.ROOT}>Offers</StyledLink>
-                  <StyledLink to={routes.ROOT}>My Profile</StyledLink>
+                  <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Company</Typography>
+                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.ROOT}>About</StyledLink>
+                  <StyledLink sx={{fontSize: "16px", lineHeight: 1,transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.ROOT}>Services</StyledLink>
+                  <StyledLink sx={{fontSize: "16px",transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.ROOT}>Contact</StyledLink>
+                  {/* <StyledLink to={routes.ROOT}>My Profile</StyledLink> */}
                 </Stack>
                 <Stack direction="column" spacing={2}>
-                  <StyledLink to={routes.ROOT}>Privacy Policy</StyledLink>
-                  <StyledLink to={routes.TERMS_AND_CONDITIONS}>
+                <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Information</Typography>
+                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.ROOT}>Privacy Policy</StyledLink>
+                  <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.TERMS_AND_CONDITIONS}>
                     Terms of Service
                   </StyledLink>
-                  <StyledLink to={routes.FAQ}>FAQ</StyledLink>
-                  <StyledLink to={routes.CAREERS_PAGE}>Careers</StyledLink>
+                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.FAQ}>FAQ</StyledLink>
+                  <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR, 
+                }}} to={routes.CAREERS_PAGE}>Careers</StyledLink>
                 </Stack>
               </Stack>
               <Divider
@@ -164,19 +160,12 @@ export default function Footer() {
               sm={6}
               md={4}
               lg={4}
+              marginTop={"-21px"}
             >
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  fontWeight: 600,
-                  paddingTop: "12px",
-                }}
-              >
-                Contact Us
-              </Typography>
+             <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Contact us</Typography>
 
               <Stack spacing={2}>
-                <Typography fontSize="14px" pt={"8px"} fontWeight={400}>
+                <Typography fontSize="14px" pt={"17px"} fontWeight={400}>
                   39/6 KCP Thottam, Kumalan Kuttai, Erode,
                   <br />
                   Tamil Nadu - 638011{" "}
@@ -199,37 +188,6 @@ export default function Footer() {
               Lorem ipsum dolor sit amet consectetur dolol drakgonil adipiscing
               elit aliquam mauris
             </Typography>
-            <CustomTextField
-              placeholder="Enter your email"
-              sx={{
-                maxWidth: 600,
-                width: "100%",
-                backgroundColor: Colors.WHITE,
-                borderRadius: "50px",
-                ".css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
-                  padding: "20px 30px",
-                },
-                "::-moz-placeholder": {
-                  color: Colors.BLACK,
-                },
-                marginLeft: "10px",
-              }}
-            />
-            <CustomButton
-              bgColor={Colors.BUTTON_COLOR}
-              color={Colors.WHITE}
-              sx={{
-                width: "100%",
-                maxWidth: "30px",
-                padding: "10px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                fontWeight: 600,
-                marginLeft: "10px !important",
-              }}
-            >
-              Subscribe
-            </CustomButton>
           </Stack>
           <Divider
             variant="fullWidth"
@@ -262,19 +220,19 @@ export default function Footer() {
             spacing={2}
           >
             <Link to={routes.ROOT}>
-              <img src={FacebookIcon} alt="facebook" width={30} height={30} />
+              <FacebookIcon width={30} height={30} />
             </Link>
             <Link to={routes.ROOT}>
               <img src={TwitterIcon} alt="twitter" width={30} height={30} />
             </Link>
             <Link to={routes.ROOT}>
-              <img src={InstaIcon} alt="insta" width={30} height={30} />
+              <InstagramIcon width={30} height={30} />
             </Link>
             <Link to={routes.ROOT}>
-              <img src={LinkedinIcon} alt="linkedIn" width={30} height={30} />
+              <LinkedInIcon width={30} height={30} />
             </Link>
             <Link to={routes.ROOT}>
-              <img src={YoutubeIcon} alt="youtube" width={30} height={30} />
+              <YouTubeIcon width={30} height={30} />
             </Link>
           </Stack>
 
@@ -302,19 +260,51 @@ export default function Footer() {
               spacing={2}
             >
               <Link to={routes.ROOT}>
-                <img src={FacebookIcon} alt="facebook" width={30} height={30} />
+                <FacebookIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease", 
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                }} />
               </Link>
-              <Link to={routes.ROOT}>
+              {/* <Link to={routes.ROOT}>
                 <img src={TwitterIcon} alt="twitter" width={30} height={30} />
+              </Link> */}
+              <Link to={routes.ROOT}>
+                <InstagramIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease", 
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                 }} />
               </Link>
               <Link to={routes.ROOT}>
-                <img src={InstaIcon} alt="insta" width={30} height={30} />
+                <LinkedInIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease", 
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                 }} />
               </Link>
               <Link to={routes.ROOT}>
-                <img src={LinkedinIcon} alt="linkedIn" width={30} height={30} />
-              </Link>
-              <Link to={routes.ROOT}>
-                <img src={YoutubeIcon} alt="youtube" width={30} height={30} />
+                <YouTubeIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease", 
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                 }} />
               </Link>
             </Stack>
           </Stack>

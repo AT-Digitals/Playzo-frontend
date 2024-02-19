@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Colors from "./Colors";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import { Typography } from "@mui/material";
+import { InputBase, Typography, styled } from "@mui/material";
 
 interface dropdownProps {
   label: string;
@@ -15,6 +15,41 @@ interface dropdownProps {
   value?: string;
   onChange?: (value: SelectChangeEvent<string>) => void;
 }
+const BootstrapInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '.Mui-selected': {
+backgroundColor: "white",
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: "white",
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    height: "23px",
+    padding: "17px 10px",
+    fontWeight: "400",
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '"Proxima Nova"',
+      'sans-serif'
+    ].join(','),
+  },
+}));
+const CustomMenuItem = styled(MenuItem)(({ theme, selected }) => ({
+  '&:hover': {
+    backgroundColor: Colors.BUTTON_COLOR,
+    fontSize: "16px",
+    fontWeight: "400",
+  },
+ 
+  '&.placeholder:hover': {
+    backgroundColor: Colors.BUTTON_COLOR,
+  },
+}));
+
 
 export default function DropDownComponent({
   label,
@@ -27,8 +62,8 @@ export default function DropDownComponent({
     <Box>
       <Typography
         color={Colors.BLACK}
-        fontWeight={700}
-        fontSize="18px"
+        fontWeight={400}
+        fontSize="16px"
         mb="10px"
       >
         {label}
@@ -41,14 +76,17 @@ export default function DropDownComponent({
           id="demo-simple-select"
           value={value}
           onChange={onChange}
+          input={<BootstrapInput />}
           // defaultValue="one"
           sx={{ maxWidth: 700, borderRadius: "8px" }}
         >
-          {placeHolder && <MenuItem value="">{placeHolder}</MenuItem>}
+          {placeHolder && <CustomMenuItem style={{
+            backgroundColor: "white"
+          }} value="" className={placeHolder ? 'placeholder' : ''}>{placeHolder}</CustomMenuItem>}
           {options.map((item) => (
-            <MenuItem key={item.value} value={item.value}>
+            <CustomMenuItem  key={item.value} value={item.value}>
               {item.label}
-            </MenuItem>
+            </CustomMenuItem>
           ))}
         </Select>
       </FormControl>

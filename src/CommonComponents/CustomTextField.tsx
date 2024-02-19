@@ -68,7 +68,7 @@ export default function CustomTextField({
 
     return (
         <Box style={{marginTop: "14px"}} width={fullWidth ? "100%" : "auto"}>
-            <CustomLabel label={label} required={required} sx={{ fontWeight: 700, fontSize: "18px" }} />
+            <CustomLabel label={label} required={required} sx={{ fontWeight: 400, fontSize: "16px" }} />
             <TextField
                 required={required}
                 {...props}

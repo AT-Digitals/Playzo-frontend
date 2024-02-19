@@ -17,8 +17,12 @@ import { Link } from "react-router-dom";
 import banner from "./cUS.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import ballimage from "../../assets/soccer_ball-14-512.webp"
-import batimage from "../../assets/cricket-game-player-playing-007-1024.webp"
+import ballimage from "../../assets/ball-306073_960_720.webp"
+import batimage from "../../assets/5360cd03c5ae030e6ab555508a65f614.jpg"
+import shuttleimage from "../../assets/159415.svg"
+import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-download-32.png"
+import playimage from "../../assets/playstation-4-logo-svg-4.png"
+import basketimage from "../../assets/basketball-vector-graphics.png"
 import { transform } from "typescript";
 
 // import GameIcon from "../../assets/doodl-5 1.png";
@@ -30,15 +34,15 @@ import { transform } from "typescript";
 const DropDownData = [
   {
     value: "one",
-    label: "one",
+    label: "Turf",
   },
   {
     value: "two",
-    label: "two",
+    label: "PlayStation",
   },
   {
     value: "three",
-    label: "three",
+    label: "Badminton",
   },
 ];
 
@@ -69,7 +73,7 @@ const StyledImage = styled.img`
    @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 150px;
-    transform: translate(31%, 172%);
+    transform: translate(31%, 222%);
   }
   `;
   const StyledImage1 = styled.img`
@@ -97,8 +101,132 @@ const StyledImage = styled.img`
 
    @media (min-width: 1200px) {
     /* Large devices (large desktops) */
+    width: 170px;
+    height: 200px;
+    transform: translate(14%, 401%);
+  }
+  `;
+  const StyledImage2 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
     width: 150px;
-    transform: translate(862%, 332%);
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 100px;
+    height: 100px;
+    transform: rotate(29deg);
+    top: 85%;
+    left: 43.9%;
+  }
+  `;
+  const StyledImage3 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 150px;
+    transform: translate(880%, 688%);
+  }
+  `;
+  const StyledImage4 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+   width: 150px;
+   left: 86%;
+   top: 47%;
+   transform: rotate(36deg);
+  }
+  `;
+  const StyledImage5 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+   width: 150px;
+   left: 25%;
+   top: 63%;
+   transform: rotate(36deg);
   }
   `;
 
@@ -179,22 +307,27 @@ export default function ContactUs() {
       <Box>
         <BannerImage src={banner} alt="banner" />
       </Box>
-      <StyledImage src={ballimage} alt="" />
+      {/* <StyledImage src={ballimage} alt="" />
       <StyledImage1 src={batimage} alt="" />
+      <StyledImage2 src={shuttleimage} alt="" />
+      <StyledImage3 src={tennisimage} alt="" />
+      <StyledImage4 src={playimage} alt="" /> */}
+      {/* <StyledImage5 src={basketimage} alt="" /> */}
       <AppContainer
         paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
         paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
-        maxWidth={1000}
+        maxWidth={1300}
       >
-      
+       <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
         <Stack 
           // height={"100%"}
           spacing={10}
           direction={{ xs: "column", sm: "column", md: "row" }}
           // container
-          paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "60px" }}
+          paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "90px" }}
         >
+         
           <Box flexDirection={"column"}
                 display={"flex"}
                 marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
@@ -204,13 +337,13 @@ export default function ContactUs() {
               >
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
-                  width="400"
-                  height="450"
+                  width="700"
+                  height="640"
                 ></iframe>
                  <Typography
                 sx={{
                   fontSize: "16px",
-                  fontWeight: 600,
+                  fontWeight: 400,
                   paddingTop: "12px",
                 }}
               >
@@ -224,7 +357,7 @@ export default function ContactUs() {
                 <Typography fontSize="14px" fontWeight={400}>
                  <span style={{
                   fontSize: "14px",
-                  fontWeight: "600",
+                  fontWeight: "400",
                  }}>Phone:</span> +91 70944 60944,  +91 91088 83555
                  
                 </Typography>
@@ -279,8 +412,8 @@ export default function ContactUs() {
                 <Box margin={"30px"}>
                   <Typography
                     marginBottom={"10px"}
-                    fontSize={"18px"}
-                    fontWeight={700}
+                    fontSize={"16px"}
+                    fontWeight={400}
                     color={Colors.BLACK}
                   >
                     Message
@@ -315,8 +448,8 @@ export default function ContactUs() {
                   sx={{
                     borderRadius: "30px",
                     textTransform: "none",
-                    fontSize: "20px",
-                    fontWeight: 700,
+                    fontSize: "16px",
+                    fontWeight: 400,
                     padding: "10px",
                     maxWidth: 700,
                     border: "1px solid #15B5FC",

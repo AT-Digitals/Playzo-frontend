@@ -21,15 +21,15 @@ import { useState } from "react";
 const DropDownData = [
   {
     value: "one",
-    label: "one",
+    label: "Turf", // Change the label here
   },
   {
     value: "two",
-    label: "two",
+    label: "PlayStation", // Change the label here
   },
   {
     value: "three",
-    label: "three",
+    label: "Badminton", // Change the label here
   },
 ];
 

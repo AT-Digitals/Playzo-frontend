@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, styled } from "@mui/material";
+import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 import AppContainer from "../CommonComponents/AppContainer";
@@ -7,7 +7,7 @@ import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "../assets/Playzo.png";
+import logo from "../assets/logo.png";
 import routes from "../routes/routes";
 import { useState } from "react";
 
@@ -85,31 +85,51 @@ export default function Header() {
            
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <CustomButton
+            <Button
               variant="outlined"
-              color={Colors.WHITE}
-              bgColor={Colors.BUTTON}
               sx={{
                 padding: "8px 20px",
                 textTransform: "none",
                 fontSize: "16px",
-                minWidth: "100px",
-                color: Colors.BUTTON_COLOR,
-                fontWeight: "bold",
-                border: "2px solid #15B5FC;",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
               }}
               onClick={handleOpen}
             >
               Login
-            </CustomButton>
+            </Button>
             <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize="18px"
-                fontWeight={600}
-              >
+            <Button
+              variant="outlined"
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
+              }}>
                 Book Now
-              </Typography>
+                </Button>
             </HeaderLink>
           </Stack>
         </Stack>
