@@ -200,7 +200,9 @@ const ImageClick = () => {
           gap={"1rem"}
         >
           <Box mb={"2rem"} ref={heading1Ref}>
-            <Heading>ABOUT</Heading>
+            <Typography fontSize="32px" fontWeight={700}>
+              ABOUT
+            </Typography>
             <Box
               width={"20%"}
               border={`2px solid ${Colors.BUTTON_COLOR}`}
@@ -215,7 +217,9 @@ const ImageClick = () => {
           </Box>
 
           <Box mb={"2rem"} ref={heading2Ref}>
-            <Heading>GOAL</Heading>
+            <Typography fontSize="32px" fontWeight={700}>
+              GOAL
+            </Typography>
             <Box
               width={"20%"}
               border={`2px solid ${Colors.BUTTON_COLOR}`}
@@ -239,7 +243,13 @@ const ImageClick = () => {
                       marginBottom: "10px",
                     }}
                   >
-                    <li>Mission</li>
+                    <li
+                      style={{
+                        fontSize: "32px",
+                      }}
+                    >
+                      Mission
+                    </li>
                   </Typography>
                   <Typography
                     fontSize={{
@@ -278,7 +288,13 @@ const ImageClick = () => {
                       marginBottom: "10px",
                     }}
                   >
-                    <li>Vision</li>
+                    <li
+                      style={{
+                        fontSize: "32px",
+                      }}
+                    >
+                      Vision
+                    </li>
                   </Typography>
                   <Typography
                     fontSize={{
@@ -308,7 +324,9 @@ const ImageClick = () => {
           </Box>
 
           <Box mb={"2rem"} ref={heading3Ref}>
-            <Heading>FREQUENTLY ASKED QUESTIONS</Heading>
+            <Typography fontSize="32px" fontWeight={700}>
+              FREQUENTLY ASKED QUESTIONS
+            </Typography>
             <Box
               width={"30%"}
               border={`2px solid ${Colors.BUTTON_COLOR}`}
