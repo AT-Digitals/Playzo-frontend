@@ -17,7 +17,7 @@ const data = [
   {
     title: "Video Gaming",
     disciption:
-      " PlayStations are popular gaming consoles developed by Sony, providing immersive gaming experiences with advanced graphics and technology. These gaming systems offer a diverse library of titles, including exclusive franchises, and support various multimedia functionalities. ",
+      " PlayStations are popular gaming consoles developed by Sony, providing immersive gaming experiences with advanced graphics and technology. These gaming. ",
     year: "2024",
     game: "Playstation",
   },
@@ -264,13 +264,14 @@ export default function CustomTimeline() {
                         borderRadius: "30px",
                       }}
                       maxWidth={300}
-                      lineHeight={"1.7rem"}
+                      lineHeight={1.4}
                       fontSize={"16px"}
                     >
                       <span
                         style={{
-                          fontSize: "28px",
+                          fontSize: "22px",
                           fontFamily: `'ESL Legend', sans-serif`,
+                          fontWeight: 600,
                         }}
                       >
                         {" "}
