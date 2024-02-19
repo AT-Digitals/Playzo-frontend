@@ -27,11 +27,6 @@ const RightSide = styled.div`
   overflow-y: scroll;
 `;
 
-const Heading = styled.h1`
-  margin: 10px;
-  /* Add your styles for headings */
-`;
-
 const Paragraph = styled.p`
   /* Add your styles for paragraphs */
 `;
@@ -116,7 +111,11 @@ const ImageClick = () => {
         </Box>
       </LeftSide>
       <RightSide
-        style={{ display: expanded ? "block" : "none", scrollbarWidth: "none" }}
+        style={{
+          display: expanded ? "block" : "none",
+          scrollbarWidth: "none",
+          scrollBehavior: "smooth",
+        }}
       >
         <Box
           style={{ position: "sticky", top: 0, zIndex: 1, background: "white" }}

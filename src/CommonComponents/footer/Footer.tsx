@@ -132,7 +132,7 @@ export default function Footer() {
               >
                 <Stack direction="column" spacing={2}>
                   <StyledLink to={routes.ROOT}>About Us</StyledLink>
-                  <StyledLink to={routes.ROOT}>Services</StyledLink>
+                  <StyledLink to={routes.BOOKING_SERVICE}>Services</StyledLink>
                   <StyledLink to={routes.ROOT}>Offers</StyledLink>
                   <StyledLink to={routes.ROOT}>My Profile</StyledLink>
                 </Stack>
