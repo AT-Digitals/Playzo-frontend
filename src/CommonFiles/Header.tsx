@@ -27,6 +27,8 @@ export default function Header() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const userData = user && JSON.parse(user);
   const handleLogout = async () => {
     try {
       UserLoginApi.logoutUser();
@@ -85,6 +87,17 @@ export default function Header() {
            
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
+        
+           
+            <HeaderLink href={routes.BOOKING_SERVICE}>
+              <Typography
+                color={Colors.BUTTON_COLOR}
+                fontSize="18px"
+                fontWeight={600}
+              >
+                Book Now
+              </Typography>
+            </HeaderLink>
             <CustomButton
               variant="outlined"
               color={Colors.WHITE}
@@ -102,15 +115,23 @@ export default function Header() {
             >
               Login
             </CustomButton>
-            <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize="18px"
-                fontWeight={600}
-              >
-                Book Now
-              </Typography>
-            </HeaderLink>
+           {userData && <CustomButton
+              variant="outlined"
+              color={Colors.WHITE}
+              bgColor={Colors.BUTTON}
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "100px",
+                color: Colors.BUTTON_COLOR,
+                fontWeight: "bold",
+                border: "2px solid #15B5FC;",
+              }}
+              onClick={handleLogout}
+            >
+              Logout
+            </CustomButton>}
           </Stack>
         </Stack>
 

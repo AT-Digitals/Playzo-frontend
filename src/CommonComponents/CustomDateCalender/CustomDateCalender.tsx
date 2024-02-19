@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import { useCallback, useState } from "react";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
+import { BookingSubTypes } from "../../BookingService/BookingSubTypes";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -14,6 +14,7 @@ import moment from "moment";
 import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 // import { BookingType } from "../../CommonFiles/BookingType";
 
@@ -35,15 +36,10 @@ const Timings = [
   { name: "8:00-9:00 PM", disabled: false },
   { name: "9:00-10:00 PM", disabled: false },
   { name: "10:00-11:00 PM", disabled: false },
-  { name: "11:00-12:00 PM", disabled: false },
+  { name: "11:00-12:00 AM", disabled: false },
   { name: "12:00-1:00 AM", disabled: false },
   { name: "1:00-2:00 AM", disabled: false },
 ];
-
-interface TimeSlot {
-  startTime: string;
-  endTime: string;
-}
 
 interface CustomDateCalendarProps {
   tableData?: any;
@@ -138,7 +134,7 @@ export default function CustomDateCalendar({
   { name: "8:00-9:00 PM", disabled: false },
   { name: "9:00-10:00 PM", disabled: false },
   { name: "10:00-11:00 PM", disabled: false },
-  { name: "11:00-12:00 PM", disabled: false },
+  { name: "11:00-12:00 AM", disabled: false },
   { name: "12:00-1:00 AM", disabled: false },
   { name: "1:00-2:00 AM", disabled: false },])
 
@@ -245,7 +241,7 @@ export default function CustomDateCalendar({
       const startMinutes = ('0' + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
       const endMinutes = ('0' + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
       const startPeriod = currentTime.getHours() < 12 ? 'AM' : 'PM';
-      const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
+      // const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
       const intervalString = `${startHour}:${startMinutes}-${endHour}:${endMinutes} ${startPeriod}`;
       intervals.push(intervalString);
       currentTime = nextHour;
@@ -294,20 +290,29 @@ export default function CustomDateCalendar({
         };
 
         try {
-          const response = await BookingApi.getBookingAmount(bookings.type);
+          const courtValue = BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
+          console.log("courtValue",courtValue)
+          const response = await BookingApi.getBookingAmount(bookings.type,courtValue);
           if (response) {
-            console.log("response", response);
+            console.log("responseaa",response)
             ratePerHour = response.bookingAmount;
             bookings.amount = totalDuration * ratePerHour;
           } else {
-            console.log('Booking Failed');
+            console.log('amount fetch Failed');
           }
         } catch (err) {
           console.log("err", err)
         }
-        console.log("selectedTimings", selectedTimings)
-        if (selectedTimings.length > 0) {
           selectedTimings.map(async (timeData) => {
+            // const newData = {
+            //   type,
+            //   name: selectedService,
+            //   date: selectedDate,
+            //   time: timeData,
+            //   amount: bookings.amount,
+            //   duration: totalDuration,
+            //   // ... other properties
+            // };
             try {
               let startMilliseconds = 0;
               let endMilliseconds = 0;
@@ -323,7 +328,7 @@ export default function CustomDateCalendar({
               const endDateTime = new Date(startDateTime);
               endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
               endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-              const response = await BookingApi.getBookedList({
+             const response = await BookingApi.getBookedList({
                 type: bookings.type,
                 bookingtype: "online",
                 startTime: startMilliseconds,
@@ -332,21 +337,28 @@ export default function CustomDateCalendar({
                 startDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
                 endDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
               }
+             
               );
+              let newData = tableData;
+              if(response){
+                if(!newData.some((el: { type: string; name: string; date: string; time: string[]; amount: number; duration: number; }) => el === bookings))
+                newData.push(bookings);
+                setTableData((prevTableData: any) => [...prevTableData, newData]);
+              
+              }
+             
             } catch (error: any) {
               if (error.message === 'Please choose another date and slot') {
                 setResponseModalOpen(true);
-                console.log("err", error)
+               
               }
             }
 
           })
-          setTableData((prevTableData: any) => [...prevTableData, bookings]);
-
+          
           // Reset selected date and timings
           setSelectedDate("");
           setSelectedTimings([]);
-        }
 
       }
     } else {
