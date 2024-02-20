@@ -8,9 +8,10 @@ const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
   "Immerse yourself in focused and effective cricket training with Playzo33's state-of-the-art Cricket Net. Tailored for bowlers and batsmen alike, our nets provide a controlled environment for skill refinement.";
-const firstBullet1 = "Ensures a secure and controlled practice space.";
+const firstBullet1 =
+  "Create a secure and controlled practice space with adjustable tension for customized training sessions. Perfect for full-range shots and effective bowling practice.";
 const secBullet1 =
-  "Professional-grade netting ensures a secure environment for players.";
+  "Professional-grade netting ensures a secure environment for players. Adjust the tension settings for specific skill refinement, catering to both batting and bowling practice needs.";
 const buttonLabel = "Book Now";
 export default function CricketNet() {
   const carouselItems = [
@@ -23,7 +24,6 @@ export default function CricketNet() {
       <Service />
       <ServiceGrid
         direction={{ xs: "column", sm: "column", md: "row" }}
-        marginTop={{ xs: 0, sm: 0, md: "11rem" }}
         icon={Cricket_logo}
         carouselItems={carouselItems}
         heading1={heading1}

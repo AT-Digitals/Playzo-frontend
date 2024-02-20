@@ -7,9 +7,11 @@ const heading1 = "CrossFit";
 const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
-  "Challenge yourself at Playzo33's CrossFit area. Equipped with the latest gear and led by certified trainers, our space is designed for fitness enthusiasts seeking dynamic and effective workouts.";
-const firstBullet1 = "Cutting-edge equipment for varied workouts.";
-const secBullet1 = "Varied workouts challenging all fitness levels.";
+  "Take on the challenge at Playzo33's CrossFit area. With the latest gear and certified trainers, our space is tailored for fitness enthusiasts seeking dynamic and effective workouts. Elevate your fitness journey with us.";
+const firstBullet1 =
+  "Access cutting-edge equipment for diverse workouts with certified trainers providing expert guidance. Immerse yourself in an energetic atmosphere that fosters focused and effective workout sessions.";
+const secBullet1 =
+  "Engage in varied workouts challenging all fitness levels with expert guidance from certified professionals. Join a positive fitness community that promotes health and wellness for everyone.";
 const buttonLabel = "Enquire Now";
 export default function CrossFit() {
   const carouselItems = [
@@ -21,8 +23,8 @@ export default function CrossFit() {
     <>
       <Service />
       <ServiceGrid
+        position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
-        marginTop={"11rem"}
         icon={Cross_logo}
         carouselItems={carouselItems}
         heading1={heading1}

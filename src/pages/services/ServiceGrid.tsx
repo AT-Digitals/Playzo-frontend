@@ -5,7 +5,6 @@ import { IconButton, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
 import CustomSlider from "./CustomSliderService";
-import Grid from "@mui/material/Grid";
 import LeftArrow from "../../assets/LeftArrow.svg";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -23,8 +22,8 @@ interface serviceGridProps {
 
   buttonLabel: string;
   icon: string;
-  marginTop?: any;
   direction?: any;
+  position?: any;
 }
 
 export default function ServiceGrid(props: serviceGridProps) {
@@ -75,11 +74,13 @@ export default function ServiceGrid(props: serviceGridProps) {
       }}
     >
       <Stack
+        height={"100%"}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         justifyContent="space-between"
         spacing={4}
         direction={props.direction}
+        alignItems={"flex-start"}
       >
         <Stack width={"100%"}>
           <CustomSlider
@@ -91,38 +92,38 @@ export default function ServiceGrid(props: serviceGridProps) {
           <Box
             display="flex"
             justifyContent="center"
-            flexWrap="wrap" // Allow bullets to wrap to the next line on smaller screens
-            mt={{ xs: 2, md: 0 }} // Adjust top margin for smaller screens
+            flexWrap="wrap"
+            mt={{ xs: 2, md: 0 }}
           ></Box>
         </Stack>
         <Stack
           width={"100%"}
           sx={{
-            // padding: "40px",
-            maxHeight: { xs: undefined, sm: 670, md: 600, lg: 600 },
             marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
           }}
-          alignItems="center"
-          justifyContent="center"
+          // maxHeight={400}
+          height={400}
+          // alignItems="center"
+          justifyContent="space-between"
+          spacing={4}
         >
-          <Stack mt={props.marginTop} direction={"column"} spacing={1}>
+          <Stack direction={"column"} spacing={2}>
             <Box>
               <Typography
                 gutterBottom
                 variant="h5"
                 style={{
-                  fontSize: "50px",
-                  fontStyle: "normal",
+                  fontSize: "82px",
+                  fontStyle: "italic",
                   fontWeight: 700,
-                  fontFamily: `"manorope,sans-serif"`,
                   color: isMouseOver ? Colors.BUTTON_COLOR : "black",
+                  marginBottom: 0,
                 }}
               >
                 {props.heading1}
               </Typography>
               <Typography
                 style={{
-                  fontFamily: `"manorope,sans-serif"`,
                   fontSize: "16px",
                 }}
                 variant="body1"
@@ -138,7 +139,6 @@ export default function ServiceGrid(props: serviceGridProps) {
                 style={{
                   fontStyle: "normal",
                   fontWeight: 700,
-                  fontFamily: `"manorope,sans-serif"`,
                   fontSize: "18px",
                   margin: 0,
                 }}
@@ -148,22 +148,11 @@ export default function ServiceGrid(props: serviceGridProps) {
               <Typography
                 style={{
                   fontStyle: "normal",
-                  fontFamily: `"manorope,sans-serif"`,
                   fontSize: "16px",
                 }}
                 variant="body1"
               >
-                {/* <ul style={{ paddingInlineStart: "28px" }}>
-                  <li
-                    style={{
-                      fontStyle: "normal",
-                      fontFamily: `"manorope,sans-serif"`,
-                      fontSize: "16px",
-                    }}
-                  > */}
                 {props.firstBullet1}
-                {/* </li>
-                </ul> */}
               </Typography>
             </Box>
 
@@ -176,7 +165,6 @@ export default function ServiceGrid(props: serviceGridProps) {
                   margin: 0,
                   fontStyle: "normal",
                   fontWeight: 700,
-                  fontFamily: `"manorope,sans-serif"`,
                 }}
               >
                 {props.heading3}:
@@ -184,69 +172,38 @@ export default function ServiceGrid(props: serviceGridProps) {
               <Typography
                 style={{
                   fontStyle: "normal",
-                  fontFamily: `"manorope,sans-serif"`,
                   fontSize: "16px",
                 }}
                 variant="body1"
               >
-                {/* <ul style={{ paddingInlineStart: "28px" }}>
-                  <li
-                    style={{
-                      fontStyle: "normal",
-                      fontFamily: `"manorope,sans-serif"`,
-                      fontSize: "16px",
-                    }}
-                  > */}
                 {props.secBullet1}
-                {/* </li>
-                </ul> */}
               </Typography>
-
-              {/* <Box mt={5}>
-                  <Button
-                    sx={{
-                      boxShadow: "none",
-                      background: Colors.WHITE,
-                      color: Colors.BUTTON_COLOR,
-                      textTransform: "capitalize",
-                      border: "1px solid #15B5FC",
-                      padding: "10px 30px",
-                      transition: "background 0.3s",
-                      borderRadius: "30px",
-                      "&:hover": {
-                        background: Colors.BUTTON_COLOR,
-                        color: Colors.WHITE,
-                      },
-                    }}
-                  >
-                    see more services
-                  </Button>
-                </Box> */}
-            </Box>
-            <Box
-              style={{
-                fontFamily: `"manorope,sans-serif"`,
-              }}
-              display={"flex"}
-              alignItems={"center"}
-            >
-              <IconButton onClick={prevSlide}>
-                <NavigateBeforeIcon
-                  style={{
-                    color: Colors.BUTTON_COLOR,
-                  }}
-                />
-              </IconButton>
-              0{currentSlide + 1} /0{props.carouselItems.length}{" "}
-              <IconButton onClick={nextSlide}>
-                <NavigateNextIcon
-                  style={{
-                    color: Colors.BUTTON_COLOR,
-                  }}
-                />
-              </IconButton>
             </Box>
           </Stack>
+          <Box
+            sx={{
+              marginTop: "2px !important",
+            }}
+            justifyContent={props.position}
+            display={"flex"}
+            alignItems={"center"}
+          >
+            <IconButton onClick={prevSlide}>
+              <NavigateBeforeIcon
+                style={{
+                  color: Colors.BUTTON_COLOR,
+                }}
+              />
+            </IconButton>
+            0{currentSlide + 1} /0{props.carouselItems.length}{" "}
+            <IconButton onClick={nextSlide}>
+              <NavigateNextIcon
+                style={{
+                  color: Colors.BUTTON_COLOR,
+                }}
+              />
+            </IconButton>
+          </Box>
         </Stack>
       </Stack>
     </Box>

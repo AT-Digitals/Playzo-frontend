@@ -11,9 +11,11 @@ const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
   "Indulge in the fast-paced action of badminton on our professional courts. Whether you're a seasoned player or a casual enthusiast, our facilities are designed for a great badminton experience.";
-const firstBullet1 = "Pro-level courts suitable for all-level play.";
+const firstBullet1 =
+  "Experience pro-level courts suitable for all-level play in a well-lit environment perfect for day or night matches. Enjoy a player-friendly setup for casual or competitive games.";
 
-const secBullet1 = "Versatile play accommodating players of all levels.";
+const secBullet1 =
+  "Enjoy versatile play accommodating all levels, with convenient playing hours, including evening sessions. Experience a competitive atmosphere for both friendly and challenging matches.";
 
 const buttonLabel = "Enquire Now";
 export default function Badminton() {
@@ -29,8 +31,8 @@ export default function Badminton() {
     <>
       <Service />
       <ServiceGrid
+        position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
-        marginTop={"11rem"}
         icon={Badmin_logo}
         carouselItems={carouselItems}
         heading1={heading1}

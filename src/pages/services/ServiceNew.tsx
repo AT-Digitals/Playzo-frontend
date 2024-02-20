@@ -1,4 +1,5 @@
 import Badminton from "./Badminton";
+import BoardGames from "./BoardGames";
 import BowlingMachine from "./BowlingMachine";
 import { Box } from "@mui/material";
 import Cafeteria from "./Cafeteria";
@@ -22,6 +23,7 @@ export default function ServiceNewUI() {
       <CrossFit />
       <PartyCenter />
       <PlayStation />
+      <BoardGames />
     </Box>
   );
 }

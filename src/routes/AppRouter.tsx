@@ -38,7 +38,7 @@ export default function AppRouter() {
       <Routes>
         <Route path={routes.ROOT} element={<AppLayout />}>
           <Route path={routes.ROOT} element={<HomePage />} />
-          <Route path={routes.SERVICE} element={<Service />} />
+          <Route path={routes.SERVICE} element={<ServiceNewUI />} />
           <Route path={routes.PLAYSTATION} element={<PlayStation />} />
           <Route path={routes.CROSSFIT} element={<CrossFit />} />
           <Route path={routes.BADMINTON} element={<Badminton />} />
@@ -51,7 +51,7 @@ export default function AppRouter() {
           <Route path={routes.CAREERS_PAGE} element={<CareersPage />} />
 
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
-          <Route path={routes.BOOKING_SERVICE} element={<ServiceNewUI />} />
+          <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
           <Route path={routes.TURF_BOOKING} element={<TurfBookingCoomon />} />
           <Route
             path={routes.PLAYSTATION_BOOKING}

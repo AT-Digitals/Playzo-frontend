@@ -8,9 +8,10 @@ const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
   "Elevate your cricket practice at Playzo33 with our cutting-edge Bowling Machine. Designed for precision and consistency, it's the perfect companion for players of all levels aiming to enhance their batting skills.";
-const firstBullet1 = "Adjust machine for a personalized practice session.";
+const firstBullet1 =
+  "Personalize your practice session by adjusting the machine. Mimic game scenarios for a dynamic training experience, enabling solo practice sessions without the need for a partner.";
 const secBullet1 =
-  "Hone your batting skills with consistent and controlled deliveries.";
+  "Enhance batting skills with consistent, controlled deliveries suitable for all skill levels. Tailored for individual training, promoting continuous improvement for both beginners and seasoned cricketers.";
 const buttonLabel = "Book Now";
 export default function BowlingMachine() {
   const carouselItems = [
@@ -23,7 +24,6 @@ export default function BowlingMachine() {
       <Service />
       <ServiceGrid
         direction={{ xs: "column", sm: "column", md: "row" }}
-        marginTop={{ xs: 0, sm: 0, md: "11rem" }}
         icon={Bowling_logo}
         carouselItems={carouselItems}
         heading1={heading1}

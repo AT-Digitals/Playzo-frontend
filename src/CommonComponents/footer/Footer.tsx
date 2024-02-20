@@ -1,18 +1,20 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
+
 import AppContainer from "../AppContainer";
 import Colors from "../Colors";
 import CustomButton from "../CustomButton";
 import CustomTextField from "../CustomTextField";
 import Divider from "@mui/material/Divider";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "react-router-dom";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "../../assets/Twitter.png";
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import logo from "../../assets/logo.png";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
+
 const StyledLink = styled(Link)({
   color: Colors.WHITE,
   fontSize: "14px",
@@ -78,10 +80,14 @@ export default function Footer() {
                 <Link to={routes.ROOT}>
                   <img src={logo} width={172} height={34} alt="22" />
                 </Link>
-                <Typography fontSize="15px" fontWeight={"400"} ml="10px !important">
-                At Playzo33, we extend beyond being a turf booking platform we're
-                a community-driven destination designed for sports enthusiasts and
-                those seeking recreation and entertainment.
+                <Typography
+                  fontSize="15px"
+                  fontWeight={"400"}
+                  ml="10px !important"
+                >
+                  At Playzo33, we extend beyond being a turf booking platform
+                  we're a community-driven destination designed for sports
+                  enthusiasts and those seeking recreation and entertainment.
                 </Typography>
               </Stack>
             </Grid>
@@ -100,41 +106,114 @@ export default function Footer() {
                 spacing={{ xs: 5, sm: 16, md: 5 }}
               >
                 <Stack direction="column" spacing={2}>
-                  <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Company</Typography>
-                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.ROOT}>About</StyledLink>
-                  <StyledLink sx={{fontSize: "16px", lineHeight: 1,transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.ROOT}>Services</StyledLink>
-                  <StyledLink sx={{fontSize: "16px",transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.ROOT}>Contact</StyledLink>
+                  <Typography
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    letterSpacing={"1.6px"}
+                    textTransform={"uppercase"}
+                    color={Colors.BUTTON_COLOR}
+                  >
+                    Company
+                  </Typography>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.ROOT}
+                  >
+                    About
+                  </StyledLink>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      lineHeight: 1,
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.SERVICE}
+                  >
+                    Services
+                  </StyledLink>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.ROOT}
+                  >
+                    Contact
+                  </StyledLink>
                   {/* <StyledLink to={routes.ROOT}>My Profile</StyledLink> */}
                 </Stack>
                 <Stack direction="column" spacing={2}>
-                <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Information</Typography>
-                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.ROOT}>Privacy Policy</StyledLink>
-                  <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.TERMS_AND_CONDITIONS}>
+                  <Typography
+                    fontSize={"14px"}
+                    fontWeight={"400"}
+                    letterSpacing={"1.6px"}
+                    textTransform={"uppercase"}
+                    color={Colors.BUTTON_COLOR}
+                  >
+                    Information
+                  </Typography>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.PRIVACY_POLICY}
+                  >
+                    Privacy Policy
+                  </StyledLink>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      lineHeight: 1,
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.TERMS_AND_CONDITIONS}
+                  >
                     Terms of Service
                   </StyledLink>
-                  <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.FAQ}>FAQ</StyledLink>
-                  <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }}} to={routes.CAREERS_PAGE}>Careers</StyledLink>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.FAQ}
+                  >
+                    FAQ
+                  </StyledLink>
+                  <StyledLink
+                    sx={{
+                      fontSize: "16px",
+                      lineHeight: 1,
+                      transition: "color 0.5s ease",
+                      ":hover": {
+                        color: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    to={routes.CAREERS_PAGE}
+                  >
+                    Careers
+                  </StyledLink>
                 </Stack>
               </Stack>
               <Divider
@@ -157,7 +236,15 @@ export default function Footer() {
               lg={4}
               marginTop={"-21px"}
             >
-             <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Contact us</Typography>
+              <Typography
+                fontSize={"14px"}
+                fontWeight={"400"}
+                letterSpacing={"1.6px"}
+                textTransform={"uppercase"}
+                color={Colors.BUTTON_COLOR}
+              >
+                Contact us
+              </Typography>
               <Stack spacing={2}>
                 <Typography fontSize="14px" pt={"17px"} fontWeight={400}>
                   39/6 KCP Thottam, Kumalan Kuttai, Erode,
@@ -248,51 +335,59 @@ export default function Footer() {
               spacing={2}
             >
               <Link to={routes.ROOT}>
-                <FacebookIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                }} />
+                <FacebookIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
               {/* <Link to={routes.ROOT}>
                 <img src={TwitterIcon} alt="twitter" width={30} height={30} />
               </Link> */}
               <Link to={routes.ROOT}>
-                <InstagramIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                 }} />
+                <InstagramIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
               <Link to={routes.ROOT}>
-                <LinkedInIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                 }} />
+                <LinkedInIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
               <Link to={routes.ROOT}>
-                <YouTubeIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                 }} />
+                <YouTubeIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
             </Stack>
           </Stack>
