@@ -28,6 +28,7 @@ import cardicons from "../assets/card icons.png";
 import crediticon from "../assets/Icon.png";
 import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
+import routes from "../routes/routes";
 import { useState } from "react";
 
 // const PaymentDetails = [
@@ -98,10 +99,13 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false)
+    navigate(routes.BOOKING_SERVICE);
+    localStorage.removeItem("bookings");
+  };
 
   const location = useLocation();
-  const allBookings = location.state?.bookingsWithTime || [];
+  let allBookings = location.state?.bookingsWithTime || [];
   const selectedServiceFromState = location.state?.selectedService;
 
   const user = localStorage.getItem("user");
@@ -132,7 +136,9 @@ export default function PaymentBooking() {
         });
 
         if (response) {
-          setOpen(true);
+          
+            setOpen(true);
+       
         } else {
           console.log("Booking Failed");
         }

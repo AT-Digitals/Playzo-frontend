@@ -196,6 +196,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       court: number;
       amount: any;
     }[] = [];
+    console.log("allb",allBookings)
     allBookings.map((booking, index) => {
       // console.log("alalala",booking.time)
       // booking["court"] = selectedCourt;
