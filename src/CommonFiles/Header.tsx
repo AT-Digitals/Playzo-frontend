@@ -1,34 +1,28 @@
-import { Box, Stack, Typography, styled } from "@mui/material";
+import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
 import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "../assets/Playzo.png";
+import logo from "../assets/logo.png";
 import routes from "../routes/routes";
 import { useState } from "react";
-
 const HeaderLink = styled("a")`
   text-decoration: none;
   position: relative;
   color: ${Colors.BUTTON_COLOR};
   transition: color 0.3s ease; /* Add transition for color change */
-
   &:hover {
     color: ${Colors.WHITE};
   }
 `;
-
 export default function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const user = localStorage.getItem("user");
-  const userData = user && JSON.parse(user);
   const handleLogout = async () => {
     try {
       UserLoginApi.logoutUser();
@@ -56,7 +50,6 @@ export default function Header() {
               <img width={172} height={34} src={logo} alt="alterknit" />
             </Link>
           </Box>
-
           <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.ABOUTUS}>
               <Typography sx={{
@@ -65,7 +58,6 @@ export default function Header() {
                 textTransform: "uppercase",
                 ":hover": {
                   color: Colors.BUTTON_COLOR,
-                 
                 }
               }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
                 About Us
@@ -84,57 +76,56 @@ export default function Header() {
                 Contact Us
               </Typography>
             </HeaderLink>
-           
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-        
-           
-            <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize="18px"
-                fontWeight={600}
-              >
-                Book Now
-              </Typography>
-            </HeaderLink>
-            <CustomButton
+            <Button
               variant="outlined"
-              color={Colors.WHITE}
-              bgColor={Colors.BUTTON}
               sx={{
                 padding: "8px 20px",
                 textTransform: "none",
                 fontSize: "16px",
-                minWidth: "100px",
-                color: Colors.BUTTON_COLOR,
-                fontWeight: "bold",
-                border: "2px solid #15B5FC;",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
               }}
               onClick={handleOpen}
             >
               Login
-            </CustomButton>
-           {userData && <CustomButton
+            </Button>
+            <HeaderLink href={routes.BOOKING_SERVICE}>
+            <Button
               variant="outlined"
-              color={Colors.WHITE}
-              bgColor={Colors.BUTTON}
               sx={{
                 padding: "8px 20px",
                 textTransform: "none",
                 fontSize: "16px",
-                minWidth: "100px",
-                color: Colors.BUTTON_COLOR,
-                fontWeight: "bold",
-                border: "2px solid #15B5FC;",
-              }}
-              onClick={handleLogout}
-            >
-              Logout
-            </CustomButton>}
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
+              }}>
+                Book Now
+                </Button>
+            </HeaderLink>
           </Stack>
         </Stack>
-
         <LoginForm handleClose={handleClose} open={open} />
       </AppContainer>
     </Box>

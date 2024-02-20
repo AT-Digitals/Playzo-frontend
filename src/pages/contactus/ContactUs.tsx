@@ -17,10 +17,13 @@ import { Link } from "react-router-dom";
 import banner from "./cUS.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import ballimage from "../../assets/soccer_ball-14-512.webp"
-import batimage from "../../assets/cricket-game-player-playing-007-1024.webp"
+import ballimage from "../../assets/ball-306073_960_720.webp"
+import batimage from "../../assets/5360cd03c5ae030e6ab555508a65f614.jpg"
+import shuttleimage from "../../assets/159415.svg"
+import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-download-32.png"
+import playimage from "../../assets/playstation-4-logo-svg-4.png"
+import basketimage from "../../assets/basketball-vector-graphics.png"
 import { transform } from "typescript";
-import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 
 // import GameIcon from "../../assets/doodl-5 1.png";
 
@@ -30,32 +33,16 @@ import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalCompo
 
 const DropDownData = [
   {
-    value: "badminton",
-    label: "Badminton",
-  },
-  {
-    value: "crossFit",
-    label: "CrossFit",
-  },
-  {
-    value: "turf",
+    value: "one",
     label: "Turf",
   },
   {
-    value: "playstation",
-    label: "Play Station",
+    value: "two",
+    label: "PlayStation",
   },
   {
-    value: "boardGame",
-    label: "Board Game",
-  },
-  {
-    value: "partycenter",
-    label: "Party Center",
-  },
-  {
-    value: "cafeteria",
-    label: "Cafeteria",
+    value: "three",
+    label: "Badminton",
   },
 ];
 
@@ -86,10 +73,72 @@ const StyledImage = styled.img`
    @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 150px;
-    transform: translate(31%, 172%);
+    transform: translate(31%, 222%);
   }
   `;
-const StyledImage1 = styled.img`
+  const StyledImage1 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 170px;
+    height: 200px;
+    transform: translate(14%, 401%);
+  }
+  `;
+  const StyledImage2 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+    width: 100px;
+    height: 100px;
+    transform: rotate(29deg);
+    top: 85%;
+    left: 43.9%;
+  }
+  `;
+  const StyledImage3 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -115,7 +164,69 @@ const StyledImage1 = styled.img`
    @media (min-width: 1200px) {
     /* Large devices (large desktops) */
     width: 150px;
-    transform: translate(862%, 332%);
+    transform: translate(880%, 688%);
+  }
+  `;
+  const StyledImage4 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+   width: 150px;
+   left: 86%;
+   top: 47%;
+   transform: rotate(36deg);
+  }
+  `;
+  const StyledImage5 = styled.img`
+  position: absolute;
+  transform: translate(130px, 30px);
+  /* Set a default width or adjust as needed */
+
+  @media (min-width: 300px) {
+    /* Extra small devices (phones) */
+    width: 130px;
+    height: 115px;
+  }
+
+  @media (min-width: 768px) {
+    /* Small devices (tablets) */
+    width: 130px;
+    height: 130px;
+  }
+
+  @media (min-width: 992px) {
+    /* Medium devices (desktops) */
+    width: 150px;
+    transform: translate(31%, 18%);
+  }
+
+   @media (min-width: 1200px) {
+    /* Large devices (large desktops) */
+   width: 150px;
+   left: 25%;
+   top: 63%;
+   transform: rotate(36deg);
   }
   `;
 
@@ -126,19 +237,8 @@ export default function ContactUs() {
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-
 
   // const [submitted, setSubmitted] = useState(false); // New state to track form submission
-
-  const successNotification = () => {
-    setSuccessMessage(false);
-  }
-
-  const errorNotification = () => {
-    setErrorMessage(false);
-  }
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event?.target.value);
@@ -157,6 +257,7 @@ export default function ContactUs() {
       type: type,
       message: message,
     };
+    console.log("data", data);
     try {
       const response = await EnquiryApi.createEnquiry({
         userName: data.name,
@@ -165,16 +266,13 @@ export default function ContactUs() {
         projectType: data.type,
       });
       if (response) {
-        setSuccessMessage(true);
-        setName('');
-        setEmail('');
-        setType('');
-        setMessage('');
+        // Simulate an asynchronous operation (e.g., API call) with setTimeout
+        setTimeout(() => {}, 5000);
+      } else {
+        console.log("Response Failed");
       }
-
     } catch (err) {
       console.log("err", err);
-      setErrorMessage(true)
     }
   };
 
@@ -209,58 +307,66 @@ export default function ContactUs() {
       <Box>
         <BannerImage src={banner} alt="banner" />
       </Box>
-      <StyledImage src={ballimage} alt="" />
+      {/* <StyledImage src={ballimage} alt="" />
       <StyledImage1 src={batimage} alt="" />
+      <StyledImage2 src={shuttleimage} alt="" />
+      <StyledImage3 src={tennisimage} alt="" />
+      <StyledImage4 src={playimage} alt="" /> */}
+      {/* <StyledImage5 src={basketimage} alt="" /> */}
       <AppContainer
         paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
         paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
-        maxWidth={1000}
+        maxWidth={1300}
       >
-
-        <Stack
+       <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
+        <Stack style={{
+          marginTop: "-35px",
+          marginBottom: "20px"
+        }}
           // height={"100%"}
           spacing={10}
           direction={{ xs: "column", sm: "column", md: "row" }}
           // container
-          paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "60px" }}
-          paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "90px" }}
+          paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
+          paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
         >
+         
           <Box flexDirection={"column"}
-            display={"flex"}
-            marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-            style={{
-              paddingTop: "54px"
-            }}
-          >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
-              width="400"
-              height="450"
-            ></iframe>
-            <Typography
-              sx={{
-                fontSize: "16px",
-                fontWeight: 600,
-                paddingTop: "12px",
-              }}
-            >
-              Contact Us
-            </Typography>
-            <Typography fontSize="14px" pt={"8px"} fontWeight={400}>
-              39/6 KCP Thottam, Kumalan Kuttai, Erode,
-              <br />
-              Tamil Nadu - 638011{" "}
-            </Typography>
-            <Typography fontSize="14px" fontWeight={400}>
-              <span style={{
-                fontSize: "14px",
-                fontWeight: "600",
-              }}>Phone:</span> +91 70944 60944,  +91 91088 83555
-
-            </Typography>
-          </Box>
-
-          <Box style={{ marginLeft: "110px" }} pt="30px" width={"100%"}>
+                display={"flex"}
+                marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+               style={{
+                paddingTop: "54px"
+               }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
+                  width="700"
+                  height="640"
+                ></iframe>
+                 <Typography
+                sx={{
+                  fontSize: "22px",
+                  fontWeight: "bold",
+                  paddingTop: "12px",
+                }}
+              >
+                Contact Us
+              </Typography>
+                 <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
+                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
+                  <br />
+                  Tamil Nadu - 638011{" "}
+                </Typography>
+                <Typography fontSize="16px" fontWeight={400}>
+                 <span style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                 }}>Phone:</span> +91 70944 60944,  +91 91088 83555
+                 
+                </Typography>
+              </Box>
+             
+          <Box style={{marginLeft: "110px"}} pt="30px" width={"100%"}>
             <form onSubmit={onSubmit}>
               <Stack
                 margin={"0 auto"}
@@ -309,8 +415,8 @@ export default function ContactUs() {
                 <Box margin={"30px"}>
                   <Typography
                     marginBottom={"10px"}
-                    fontSize={"18px"}
-                    fontWeight={700}
+                    fontSize={"16px"}
+                    fontWeight={"bold"}
                     color={Colors.BLACK}
                   >
                     Message
@@ -341,12 +447,12 @@ export default function ContactUs() {
                 </Box>
 
                 <Button
-
+                  
                   sx={{
                     borderRadius: "30px",
                     textTransform: "none",
-                    fontSize: "20px",
-                    fontWeight: 700,
+                    fontSize: "16px",
+                    fontWeight: 400,
                     padding: "10px",
                     maxWidth: 700,
                     border: "1px solid #15B5FC",
@@ -364,13 +470,9 @@ export default function ContactUs() {
                 </Button>
               </Stack>
             </form>
-
-            <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
-            <ModalComponent open={errorMessage} handleClose={errorNotification} text="Please provide valid details in the form" />
           </Box>
         </Stack>
       </AppContainer>
-
       {/* <img src={bottomImage} alt="bottom" width="100%" height={50} /> */}
     </>
   );
