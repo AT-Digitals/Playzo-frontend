@@ -2,8 +2,6 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 
 import AppContainer from "../AppContainer";
 import Colors from "../Colors";
-import CustomButton from "../CustomButton";
-import CustomTextField from "../CustomTextField";
 import Divider from "@mui/material/Divider";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";

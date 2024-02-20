@@ -23,7 +23,6 @@ import PaymentBooking from "../BookingService/PaymentBooking";
 import PlayStation from "../pages/services/PlayStation";
 import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
 import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
-import Service from "../pages/services/Service";
 import ServiceBooking from "../BookingService/ServiceBooking";
 import ServiceNewUI from "../pages/services/ServiceNew";
 import TermsandComditions from "../pages/Terms&conditions/TermsandConditions";
