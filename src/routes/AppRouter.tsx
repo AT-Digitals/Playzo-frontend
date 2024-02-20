@@ -22,14 +22,15 @@ import PartyCenter from "../pages/services/PartyCenter";
 import PaymentBooking from "../BookingService/PaymentBooking";
 import PlayStation from "../pages/services/PlayStation";
 import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
+import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 import Service from "../pages/services/Service";
 import ServiceBooking from "../BookingService/ServiceBooking";
+import ServiceNewUI from "../pages/services/ServiceNew";
 import TermsandComditions from "../pages/Terms&conditions/TermsandConditions";
 import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
-import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 
 export default function AppRouter() {
   return (
@@ -50,7 +51,7 @@ export default function AppRouter() {
           <Route path={routes.CAREERS_PAGE} element={<CareersPage />} />
 
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
-          <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
+          <Route path={routes.BOOKING_SERVICE} element={<ServiceNewUI />} />
           <Route path={routes.TURF_BOOKING} element={<TurfBookingCoomon />} />
           <Route
             path={routes.PLAYSTATION_BOOKING}

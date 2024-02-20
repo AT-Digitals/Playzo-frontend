@@ -5,11 +5,9 @@ import ServiceHeaders from "./ServiceHeader";
 export default function Service() {
   return (
     <>
-      <Box marginBottom="60px">
-        <ServiceHeaders />
-      </Box>
+      <Box marginBottom="60px">{/* <ServiceHeaders /> */}</Box>
 
-      <MuiTab />
+      {/* <MuiTab /> */}
     </>
   );
 }
