@@ -1,7 +1,9 @@
 import { Box, Card, CardMedia, Grid, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
+import DateUtils from "../../Utils/DateUtils";
 import Image6 from "../../assets/Image (6).png";
 import ListCard from "./ListCard";
 import RectangleImage from "../../assets/Rectangle 679.png";
@@ -22,51 +24,99 @@ interface userType {
 }
 
 const userDetails: userType[] = [
-  {
-    bookingId: "1234dff",
-    date: "12-Jan-2024",
-    userName: "John Doe",
-    bookingType: "Turf1 & Turf2",
-    timings: "3.30pm-4.30pm",
-    comments: "",
-    bookingCompleted: "no",
-    refundCompleted: "no",
-    ratings: 0,
-  },
-  {
-    bookingId: "1234dff",
-    date: "15-Jan-2024",
-    userName: "John Doe",
-    bookingType: "Turf1 & Turf2",
-    timings: "2.30pm-4.30pm",
-    comments: "",
-    bookingCompleted: "no",
-    refundCompleted: "yes",
-    ratings: 0,
-  },
-  {
-    bookingId: "1234dff",
-    date: "10-Dec-2024",
-    userName: "John Doe",
-    bookingType: "Turf1 & Turf2",
-    timings: "8.30pm-4.30pm",
-    comments: "",
-    bookingCompleted: "yes",
-    ratings: 2,
-  },
-  {
-    bookingId: "1234DFR",
-    date: "15-Dec-2024",
-    userName: "John Doe",
-    bookingType: "Turf1 & Turf2",
-    timings: "8.30pm-4.30pm",
-    comments:
-      "Great badminton experience! The court was well-maintained, and the booking process was smooth. Only suggestion would be to have more lighting. Overall, enjoyed the game",
-    bookingCompleted: "yes",
-    ratings: 5,
-  },
+  // {
+  //   bookingId: "1234dff",
+  //   date: "12-Jan-2024",
+  //   userName: "John Doe",
+  //   bookingType: "Turf1 & Turf2",
+  //   timings: "3.30pm-4.30pm",
+  //   comments: "",
+  //   bookingCompleted: "no",
+  //   refundCompleted: "no",
+  //   ratings: 0,
+  // },
+  // {
+  //   bookingId: "1234dff",
+  //   date: "15-Jan-2024",
+  //   userName: "John Doe",
+  //   bookingType: "Turf1 & Turf2",
+  //   timings: "2.30pm-4.30pm",
+  //   comments: "",
+  //   bookingCompleted: "no",
+  //   refundCompleted: "yes",
+  //   ratings: 0,
+  // },
+  // {
+  //   bookingId: "1234dff",
+  //   date: "10-Dec-2024",
+  //   userName: "John Doe",
+  //   bookingType: "Turf1 & Turf2",
+  //   timings: "8.30pm-4.30pm",
+  //   comments: "",
+  //   bookingCompleted: "yes",
+  //   ratings: 2,
+  // },
+  // {
+  //   bookingId: "1234DFR",
+  //   date: "15-Dec-2024",
+  //   userName: "John Doe",
+  //   bookingType: "Turf1 & Turf2",
+  //   timings: "8.30pm-4.30pm",
+  //   comments:
+  //     "Great badminton experience! The court was well-maintained, and the booking process was smooth. Only suggestion would be to have more lighting. Overall, enjoyed the game",
+  //   bookingCompleted: "yes",
+  //   ratings: 5,
+  // },
 ];
 export default function UserProfile() {
+
+  const [user, setUser] = useState(null);
+  const [userBooking, setUserBooking] = useState([]);
+
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+      const userData =user && JSON.parse(user);
+      setUser(userData);
+  }, []);
+
+  useEffect(() => {
+    if(user){
+    setUserBooking(user["bookingHistory"])
+    }
+   console.log("userr",user&&user["bookingHistory"])
+  }, [user]);
+  useEffect(() => {
+    if(userBooking.length>0){
+      userBooking.map((data) => {
+     return userDetails.push( {
+      bookingId: data["id"],
+      date: DateUtils.formatDate(data["dateOfBooking"],"DD-MMM-YYYY"),
+      userName: "John Doe",
+      bookingType: "Turf1 & Turf2",
+      timings: "3.30pm-4.30pm",
+      comments: "",
+      bookingCompleted: "no",
+      refundCompleted: "no",
+      ratings: 0,
+    });
+      })
+    }
+  }, [userBooking]);
+
+  // const userDetails: userType[] = [
+  //   {
+  //     bookingId: "1234dff",
+  //     date: "12-Jan-2024",
+  //     userName: "John Doe",
+  //     bookingType: "Turf1 & Turf2",
+  //     timings: "3.30pm-4.30pm",
+  //     comments: "",
+  //     bookingCompleted: "no",
+  //     refundCompleted: "no",
+  //     ratings: 0,
+  //   },
+  
   return (
     <>
       <AppContainer p={0}>

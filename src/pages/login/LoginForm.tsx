@@ -14,14 +14,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import CustomTextField from "../../CommonComponents/CustomTextField";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Icon from "../../assets/Variant10.png";
+import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CustomTextField from "../../CommonComponents/CustomTextField";
-import SignUpForm from "./SignUpForm";
 
 interface loginProps {
   handleClose?: () => void;
@@ -88,6 +88,7 @@ export default function Form({ handleClose, open }: loginProps) {
       if (response) {
         localStorage.setItem('user', JSON.stringify(response));
         navigate(routes.BOOKING_SERVICE);
+        navigate(0);
         handleClose?.();
         // setStatus({ success: true });
         // setSubmitting(true);

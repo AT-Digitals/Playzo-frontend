@@ -14,14 +14,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import CustomTextField from "../../CommonComponents/CustomTextField";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Icon from "../../assets/Variant10.png";
+import TextFieldComponent from "./TextFieldComponent";
+import UserApi from "../../api/UserApi";
 import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CustomTextField from "../../CommonComponents/CustomTextField";
-import TextFieldComponent from "./TextFieldComponent";
 
 interface signUpProps {
     handleClose?: () => void;
@@ -78,37 +79,43 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        if (isValidEmail) {
-            setIsValidEmail(false);
+        if (email) {
+            setIsValidEmail(true);
         }
-        if (isPasswordValid) {
-            setIsPasswordValid(false);
+        if (password) {
+            setIsPasswordValid(true);
         }
-        if (isValidName) {
-            setIsValidName(false)
+        if (name) {
+            setIsValidName(true)
         }
-        if (isValidPhone) {
-            setIsValidPhone(false)
+        if (phoneNumber) {
+            setIsValidPhone(true)
         }
 
         const data = {
-            email: email,
-            password: password,
+            name,
+            email,
+            phoneNumber,
+            password,
+
         };
 
         try {
-            const response = await UserLoginApi.loginUser({
+            const response = await UserApi.createUser({
                 email: data.email,
+
                 password: data.password,
-            });
+                name: data.name,
+
+                phone: data.phoneNumber
+              });
             if (response) {
-                localStorage.setItem("user", JSON.stringify(response));
                 navigate(routes.BOOKING_SERVICE);
                 handleClose?.();
                 // setStatus({ success: true });
                 // setSubmitting(true);
             } else {
-                console.log("Login Failed");
+                console.log("Register Failed");
             }
         } catch (err) {
             console.log("err", err);

@@ -1,15 +1,16 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
-import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
+import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
 import logo from "../assets/logo.png";
 import routes from "../routes/routes";
-import { useEffect, useState } from "react";
-import UserComponent from "./UserComponent";
+
 const HeaderLink = styled("a")`
   text-decoration: none;
   position: relative;
@@ -26,6 +27,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // const [userData, serUserData] = useState();
 
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,17 +49,29 @@ export default function Header() {
     try {
       UserLoginApi.logoutUser();
       navigate(routes.ROOT);
+      navigate(0);
       localStorage.clear();
       setAnchorEl(null);
     } catch {
       console.log("Logout failed");
     }
   };
+
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
-    if (!isLoggedIn && localStorage.getItem('user')) {
+    const user = localStorage.getItem('user');
+      const userData =user && JSON.parse(user);
+      setUser(userData);
+  }, []);
+
+  useEffect(() => {
+    if(user){
       setIsLoggedIn(true);
-    }
-  }, [])
+    }else{
+          setIsLoggedIn(false);
+        }
+  },[user]);
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
