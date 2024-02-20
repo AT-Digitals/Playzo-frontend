@@ -7,10 +7,12 @@ const heading1 = "Board Games";
 const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
-  "Dive into a world of classic and modern board games at Playzo33. Whether you're into strategic showdowns or casual play, our dedicated space promises a fun-filled time with friends and family.";
-const firstBullet1 = "Diverse collection of classic and modern board games.";
+  "Immerse yourself in a world of classic and modern board games at Playzo33. Whether it's strategic showdowns or casual play, our dedicated space guarantees a fun-filled time with friends and family.";
+const firstBullet1 =
+  "Discover a diverse collection of classic and modern board games in a dedicated space designed for an enjoyable gaming experience. All-ages entertainment caters to players of all levels.";
 
-const secBullet1 = "Social bonding through laughter-filled moments.";
+const secBullet1 =
+  "Forge social bonds with laughter-filled moments. Diverse game selection suits various moods, creating memorable experiences during board game sessions for lasting enjoyment.";
 
 const buttonLabel = "Book Now";
 export default function BoardGames() {
@@ -25,7 +27,6 @@ export default function BoardGames() {
 
       <ServiceGrid
         direction={{ xs: "column", sm: "column", md: "row" }}
-        marginTop={{ xs: 0, sm: 0, md: "4rem" }}
         icon={Board_logo}
         carouselItems={carouselItems}
         heading1={heading1}

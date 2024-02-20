@@ -12,7 +12,7 @@ const heading3 = "Benefits";
 const desc1 =
   "Elevate your sports experience on our premier turf at Playzo33. Ideal for soccer, field hockey, and flag football enthusiasts, our impeccable surfaces provide the perfect arena for vibrant and thrilling games.";
 const firstBullet1 =
-  "Offering a versatile surface for various sports, well-lit facilities for day and night play, and professional maintenance ensuring a safe environment.";
+  "Offering a versatile surface for various sports, well-lit facilities for day and night play, Ideal for soccer, field hockey, and flag football enthusiasts, and professional maintenance ensuring a safe environment.";
 
 const secBullet1 =
   "Providing a multi-sport experience catering to soccer, field hockey, and flag football, with flexible playing hours for day or night activities and safety assurance through consistent maintenance.";
@@ -32,7 +32,6 @@ export default function Turf() {
       <Service />
       <ServiceGrid
         direction={{ xs: "column", sm: "column", md: "row" }}
-        marginTop={{ xs: 0, sm: 0, md: "6rem" }}
         icon={Turf_logo}
         carouselItems={carouselItems}
         heading1={heading1}

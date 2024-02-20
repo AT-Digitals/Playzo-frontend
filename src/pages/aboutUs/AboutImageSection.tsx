@@ -202,10 +202,7 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               ABOUT
             </Typography>
-            <Box
-              width={"20%"}
-              border={`2px solid ${Colors.BUTTON_COLOR}`}
-            ></Box>
+
             <Paragraph style={{ fontSize: "16px", lineHeight: 1.6 }}>
               At Playzo33, we extend beyond being a turf booking platform; we're
               a community-driven destination designed for sports enthusiasts and
@@ -219,22 +216,13 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               GOAL
             </Typography>
-            <Box
-              width={"20%"}
-              border={`2px solid ${Colors.BUTTON_COLOR}`}
-            ></Box>
 
             <Paragraph>
               <Stack direction={"column"} spacing={4}>
                 <Box>
                   <Typography
                     marginTop={"1rem"}
-                    fontSize={{
-                      xs: "20px",
-                      sm: "20px",
-                      md: "20px",
-                      lg: "25px",
-                    }}
+                    fontSize={"18px"}
                     variant={"h4"}
                     style={{
                       fontStyle: "normal",
@@ -242,13 +230,7 @@ const ImageClick = () => {
                       marginBottom: "10px",
                     }}
                   >
-                    <li
-                      style={{
-                        fontSize: "32px",
-                      }}
-                    >
-                      Mission
-                    </li>
+                    MISSION
                   </Typography>
                   <Typography
                     fontSize={{
@@ -274,12 +256,7 @@ const ImageClick = () => {
                 </Box>
                 <Box>
                   <Typography
-                    fontSize={{
-                      xs: "20px",
-                      sm: "20px",
-                      md: "20px",
-                      lg: "25px",
-                    }}
+                    fontSize={"18px"}
                     variant={"h4"}
                     style={{
                       fontStyle: "normal",
@@ -287,13 +264,7 @@ const ImageClick = () => {
                       marginBottom: "10px",
                     }}
                   >
-                    <li
-                      style={{
-                        fontSize: "32px",
-                      }}
-                    >
-                      Vision
-                    </li>
+                    VISION
                   </Typography>
                   <Typography
                     fontSize={{
@@ -326,10 +297,6 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               FREQUENTLY ASKED QUESTIONS
             </Typography>
-            <Box
-              width={"30%"}
-              border={`2px solid ${Colors.BUTTON_COLOR}`}
-            ></Box>
 
             <AbouFaQ />
           </Box>

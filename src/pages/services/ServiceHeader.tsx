@@ -5,9 +5,8 @@ import ServicePara from "../../assets/ServicePara.svg";
 import ServicePara1 from "../../assets/ServicePara1.svg";
 
 const StyledTypo = styled(Typography)({
-  marginTop: "60px",
+  // marginTop: "60px",
   // position: "absolute",
-  fontStyle: "normal",
   fontWeight: 700,
 });
 
@@ -32,30 +31,15 @@ export default function ServiceHeaders() {
         direction={{ xs: "column", sm: "row" }}
         spacing={0}
       >
-        {/* <Box
-          component="img"
-          src={ServiceHeader}
-          sx={
-            {
-              position: "relative",
-              top: { xs: "5px", md: "7px" },
-              right: isMdScreen
-                ? { xs: "26%", md: "20%" }
-                : { xs: "21%", sm: "38%", md: "32%", lg: "19%" },
-              maxWidth: { xs: "45px", sm: "60px", md: "100%" },
-            } as any
-          }
-        /> */}
-
         <StyledTypo
           color={Colors.BLACK}
           padding={"0 20px"}
           textAlign={{ xs: "center" }}
-          fontSize={{ xs: "20px", sm: "32px", md: "32px", lg: "100px" }}
+          fontSize={"82px"}
           variant="h4"
+          fontStyle={"italic"}
           maxWidth={{ xs: "210px", sm: "none" }}
-          fontFamily={`"manorope,sans-serif"`}
-          lineHeight={0.8}
+          lineHeight={1}
         >
           Your Gateway to Exciting Experiences
         </StyledTypo>
@@ -70,11 +54,7 @@ export default function ServiceHeaders() {
         mt={{ xs: "4rem", sm: "4rem", md: "1rem" }}
         marginRight={{ xs: "none", sm: "none", md: 8 }}
       >
-        <StyledTypoBody
-          fontFamily={`"manorope,sans-serif"`}
-          variant="body1"
-          fontSize={{ xs: "16px", sm: "18px" }}
-        >
+        <StyledTypoBody variant="body1" fontSize={"18px"}>
           We offer a diverse range of services to cater to the varied interests
           of our community. Whether you're a sports enthusiast, a fitness buff,
           or someone looking for a great place to socialize, we have something

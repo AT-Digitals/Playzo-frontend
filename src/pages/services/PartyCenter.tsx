@@ -8,8 +8,10 @@ const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
   "Host unforgettable celebrations at Playzo33's Party Center. Our versatile facilities, tailored party packages, and vibrant atmosphere ensure a stress-free and enjoyable event.";
-const firstBullet1 = "Versatile event spaces for various types of parties.";
-const secBullet1 = "Stress-free planning with assistance in event details.";
+const firstBullet1 =
+  "Discover versatile event spaces suitable for various types of parties. Enjoy tailored party packages designed to suit specific celebration needs, complemented by entertainment options for a lively atmosphere.";
+const secBullet1 =
+  "Enjoy stress-free event planning with assistance in all details. Create lasting memories in a vibrant setting with all-inclusive packages catering to various budgets and preferences.";
 const buttonLabel = "Enquire Now";
 export default function PartyCenter() {
   const carouselItems = [
@@ -23,7 +25,6 @@ export default function PartyCenter() {
       <Service />
       <ServiceGrid
         direction={{ xs: "column", sm: "column", md: "row" }}
-        marginTop={{ xs: 0, sm: 0, md: "11rem" }}
         icon={Party_logo}
         carouselItems={carouselItems}
         heading1={heading1}

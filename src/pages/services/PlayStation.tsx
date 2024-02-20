@@ -7,10 +7,11 @@ const heading1 = "Play Station";
 const heading2 = "Features";
 const heading3 = "Benefits";
 const desc1 =
-  "Immerse yourself in a gaming paradise at Playzo33's PlayStation area. With the latest consoles and a vast selection of games, it's the ultimate destination for gamers seeking excitement and entertainment.";
+  "Dive into a gaming paradise at Playzo33's PlayStation area. Equipped with the latest consoles and a vast game selection, it's the ultimate destination for gamers seeking excitement and entertainment. Immerse yourself in unparalleled gaming experiences.";
 const firstBullet1 =
-  "State-of-the-art consoles for an ultimate gaming experience.";
-const secBullet1 = "Access to the latest games and consoles.";
+  "Embark on the ultimate gaming adventure with top-notch consoles, a diverse range of game genres, and a comfortable setup. Immerse yourself for an enjoyable and immersive gaming experience like never before.";
+const secBullet1 =
+  "Access the latest games and consoles, ideal for solo or group play, catering to diverse gaming preferences. Engage with a vibrant gaming community in an energetic atmosphere.";
 const buttonLabel = "Book Now";
 export default function PlayStation() {
   const carouselItems = [
@@ -22,8 +23,8 @@ export default function PlayStation() {
     <>
       <Service />
       <ServiceGrid
+        position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
-        marginTop={"9rem"}
         icon={Play_logo}
         carouselItems={carouselItems}
         heading1={heading1}

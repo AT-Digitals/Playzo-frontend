@@ -44,7 +44,6 @@ export default function AbouFaQ() {
           borderBottom={"1px solid grey"}
         >
           <Box
-            mb="15px"
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
@@ -78,7 +77,7 @@ export default function AbouFaQ() {
               mb={"10px"}
               color={Colors.BLACK}
               fontWeight={"500"}
-              fontSize={"15px"}
+              fontSize={"16px"}
               padding={"0px 25px"}
             >
               {item.feedback}
