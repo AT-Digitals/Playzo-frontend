@@ -3,8 +3,6 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  IconButton,
-  Modal,
   Radio,
   RadioGroup,
   RadioProps,
@@ -18,10 +16,10 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
 import { BookingSubTypes } from "./BookingSubTypes";
-import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
+import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import React from "react";
 import TodayIcon from "@mui/icons-material/Today";
 import ball from "../assets/ball 4.png";
@@ -30,22 +28,23 @@ import cardicons from "../assets/card icons.png";
 import crediticon from "../assets/Icon.png";
 import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
+import routes from "../routes/routes";
 import { useState } from "react";
 
-const PaymentDetails = [
-  {
-    name: "Turf 1",
-    date: "10 Jan 2024",
-    time: "9:00 - 10:00 AM",
-    amount: "750",
-  },
-  {
-    name: "Turf 1 & 2",
-    date: "10 Jan 2024",
-    time: "9:00 - 10:00 AM",
-    amount: "750",
-  },
-];
+// const PaymentDetails = [
+//   {
+//     name: "Turf 1",
+//     date: "10 Jan 2024",
+//     time: "9:00 - 10:00 AM",
+//     amount: "750",
+//   },
+//   {
+//     name: "Turf 1 & 2",
+//     date: "10 Jan 2024",
+//     time: "9:00 - 10:00 AM",
+//     amount: "750",
+//   },
+// ];
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: "50%",
   width: 16,
@@ -100,14 +99,17 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false)
+    navigate(routes.BOOKING_SERVICE);
+    localStorage.removeItem("bookings");
+  };
 
   const location = useLocation();
-  const allBookings = location.state?.bookingsWithTime || [];
+  let allBookings = location.state?.bookingsWithTime || [];
   const selectedServiceFromState = location.state?.selectedService;
 
-  const user = localStorage.getItem('user');
-  const userData = JSON.parse(user??"");
+  const user = localStorage.getItem("user");
+  const userData = user && JSON.parse(user);
 
   const navigate = useNavigate();
 
@@ -117,34 +119,33 @@ export default function PaymentBooking() {
   };
 
   const handlePayClick = () => {
-    console.log(allBookings, "allbookings");
+    console.log(allBookings, "allbookings123");
 
-    allBookings.map(async (bookings:any)=>{
+    allBookings.map(async (bookings: any) => {
+      try {
+        const response = await BookingApi.createBooking({
+          type: bookings.type,
+          bookingtype: "online",
+          startTime: parseInt(bookings.startTime),
+          endTime: parseInt(bookings.endTime),
+          user: userData.id,
+          startDate: bookings.startDate,
+          endDate: bookings.endDate,
+          //   bookingId: response.razorpay_payment_id,
+          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+        });
 
-try {
-  const response = await BookingApi.createBooking({
-    type: bookings.type,
-    bookingtype: "online",
-    startTime: parseInt(bookings.startTime),
-    endTime: parseInt(bookings.endTime),
-    user: userData.id,
-    startDate: bookings.startDate,
-    endDate: bookings.endDate,
-  //   bookingId: response.razorpay_payment_id,
-    court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
-  
+        if (response) {
+          
+            setOpen(true);
+       
+        } else {
+          console.log("Booking Failed");
+        }
+      } catch (err) {
+        console.log("err", err);
+      }
     });
-  if (response) {
-    setOpen(true);
-  } else {
-    console.log('Booking Failed');
-  }
-} catch (err) {
-  console.log("err",err)
-}
-
-
-    })
 
   };
   const totalAmount = allBookings.reduce(
@@ -153,6 +154,7 @@ try {
     0
   );
 
+  console.log(allBookings, "payment allbooking when come this page");
   return (
     <>
       <Stack
@@ -189,63 +191,101 @@ try {
             </Typography>
           </Box>
           <Stack margin={"0px 25px"}>
-            {PaymentDetails.map((item, index) => (
-              <Stack paddingBottom={"20px"}>
-                <Typography
-                  fontWeight={"500"}
-                  fontSize={"15px"}
-                  color={Colors.BLACK}
-                >
-                  {item.name}
-                </Typography>
-                <Box
-                  pt={"10px"}
-                  gap={"8px"}
-                  display={"flex"}
-                  alignItems={"center"}
-                >
-                  <img src={calendar} alt="" width={"25px"} />
-                  <Typography
-                    fontWeight={"500"}
-                    color={Colors.BLACK}
-                    fontSize={"15px"}
-                  >
-                    {item.date}
-                  </Typography>
-                  <AccessTimeIcon
-                    style={{
-                      color: Colors.BLACK,
-                      fontSize: "15px",
-                      marginLeft: "10px",
-                    }}
-                  />
-                  <Typography
-                    fontWeight={"500"}
-                    color={Colors.BLACK}
-                    fontSize={"15px"}
-                  >
-                    {item.time}
-                  </Typography>
-                </Box>
-                <Box
-                  borderBottom={"1px solid black"}
-                  pb={"20px"}
-                  pt={"10px"}
-                  gap={"8px"}
-                  display={"flex"}
-                  alignItems={"center"}
-                >
-                  <img src={currency} alt="" width={"28px"} />
-                  <Typography
-                    fontWeight={"500"}
-                    color={Colors.BLACK}
-                    fontSize={"15px"}
-                  >
-                    {item.amount}
-                  </Typography>
-                </Box>
-              </Stack>
-            ))}
+            {allBookings.map(
+              (
+                item: {
+                  type: string;
+                  name: string;
+                  startDate: string;
+                  startTime: number;
+                  endDate: string;
+                  amount: string;
+                  endTime: string;
+                },
+                index: any
+              ) => {
+                const startDateTime = new Date(item.startTime);
+                const endDateTime = new Date(item.endTime);
+                const formattedStartDate = startDateTime.toLocaleDateString(
+                  "en-US",
+                  {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  }
+                );
+
+                const formattedStartTime = startDateTime.toLocaleTimeString(
+                  [],
+                  { hour: "numeric", minute: "2-digit" }
+                );
+                const formattedEndTime = endDateTime.toLocaleTimeString([], {
+                  hour: "numeric",
+                  minute: "2-digit",
+                });
+
+                const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;
+                return (
+                  <Stack paddingBottom={"20px"}>
+                    <Typography
+                      fontWeight={"500"}
+                      fontSize={"15px"}
+                      color={Colors.BLACK}
+                    >
+                      {item.name}
+                    </Typography>
+                    <Box
+                      pt={"10px"}
+                      gap={"8px"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      <img src={calendar} alt="" width={"25px"} />
+                      <Typography
+                        whiteSpace={"nowrap"}
+                        fontWeight={"500"}
+                        color={Colors.BLACK}
+                        fontSize={"15px"}
+                      >
+                        {formattedStartDate}
+                      </Typography>
+                      <AccessTimeIcon
+                        style={{
+                          color: Colors.BLACK,
+                          fontSize: "15px",
+                          marginLeft: "10px",
+                        }}
+                      />
+                      <Typography
+                        whiteSpace={"nowrap"}
+                        fontWeight={"500"}
+                        color={Colors.BLACK}
+                        fontSize={"15px"}
+                      >
+                        {formattedTimeRange}
+                      </Typography>
+                    </Box>
+                    <Box
+                      borderBottom={"1px solid black"}
+                      pb={"20px"}
+                      pt={"10px"}
+                      gap={"8px"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      <img src={currency} alt="" width={"28px"} />
+                      <Typography
+                        fontWeight={"500"}
+                        color={Colors.BLACK}
+                        fontSize={"15px"}
+                      >
+                        {item.amount}
+                      </Typography>
+                    </Box>
+                  </Stack>
+                );
+              }
+            )}
             <Typography
               fontWeight={"500"}
               color={Colors.BLACK}
@@ -561,40 +601,8 @@ try {
         <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Box display={"flex"} justifyContent={"end"} marginTop={"-12px"}>
-            <IconButton>
-              <CloseIcon
-                onClick={handleClose}
-                style={{ fontSize: "25px", color: Colors.WHITE }}
-              />
-            </IconButton>
-          </Box>
-          <Typography
-            marginTop={"20px"}
-            textAlign={"center"}
-            fontSize={"17px"}
-            color={Colors.WHITE}
-          >
-            Your booking is confirmed
-          </Typography>
-          <Typography
-            mb={"20px"}
-            textAlign={"center"}
-            fontSize={"15px"}
-            marginTop={"8px"}
-            color={Colors.WHITE}
-          >
-            Thank you, your payment has been successfull.
-          </Typography>
-        </Box>
-      </Modal>
+      <ModalComponent open={open}
+        handleClose={handleClose} text="Your booking is confirmed" subText="Thank you, your payment has been successfull." />
     </>
   );
 }

@@ -1,12 +1,14 @@
 import * as React from "react";
 
-import { Button, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
 import CustomSlider from "./CustomSliderService";
 import Grid from "@mui/material/Grid";
 import LeftArrow from "../../assets/LeftArrow.svg";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useState } from "react";
 
 interface serviceGridProps {
@@ -15,14 +17,14 @@ interface serviceGridProps {
   desc1: string;
   heading2: string;
   firstBullet1: string;
-  firstBullet2: string;
-  firstBullet3: string;
+
   heading3: string;
   secBullet1: string;
-  secBullet2: string;
-  secBullet3: string;
+
   buttonLabel: string;
   icon: string;
+  marginTop?: any;
+  direction?: any;
 }
 
 export default function ServiceGrid(props: serviceGridProps) {
@@ -44,6 +46,16 @@ export default function ServiceGrid(props: serviceGridProps) {
     setCurrentSlide(index);
   };
 
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsMouseOver(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseOver(false);
+  };
+
   return (
     <Box
       margin={{ xs: "30px", md: 7 }}
@@ -62,14 +74,19 @@ export default function ServiceGrid(props: serviceGridProps) {
         },
       }}
     >
-      <Grid container>
-        <Grid item xs={12} sm={12} md={6}>
+      <Stack
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        justifyContent="space-between"
+        spacing={4}
+        direction={props.direction}
+      >
+        <Stack width={"100%"}>
           <CustomSlider
             currentSlide={currentSlide}
-            nextSlide={nextSlide}
-            prevSlide={prevSlide}
             slides={props.carouselItems}
             handleBulletClick={handleBulletClick}
+            nextSlide={nextSlide}
           />
           <Box
             display="flex"
@@ -77,85 +94,115 @@ export default function ServiceGrid(props: serviceGridProps) {
             flexWrap="wrap" // Allow bullets to wrap to the next line on smaller screens
             mt={{ xs: 2, md: 0 }} // Adjust top margin for smaller screens
           ></Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
+        </Stack>
+        <Stack
+          width={"100%"}
           sx={{
-            backgroundColor: "#EBF5FF",
-            // borderRadius: "8px",
-            padding: "40px",
+            // padding: "40px",
             maxHeight: { xs: undefined, sm: 670, md: 600, lg: 600 },
             marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
           }}
           alignItems="center"
           justifyContent="center"
         >
-          <Stack direction={"column"} spacing={2}>
-            <Stack spacing={3}>
-              <Box>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    fontSize: "20px",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                  }}
-                >
-                  {props.heading1}
-                </Typography>
-                <Typography variant="body1">{props.desc1}</Typography>
-              </Box>
-            </Stack>
+          <Stack mt={props.marginTop} direction={"column"} spacing={1}>
+            <Box>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{
+                  fontSize: "50px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  fontFamily: `"manorope,sans-serif"`,
+                  color: isMouseOver ? Colors.BUTTON_COLOR : "black",
+                }}
+              >
+                {props.heading1}
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: `"manorope,sans-serif"`,
+                  fontSize: "16px",
+                }}
+                variant="body1"
+              >
+                {props.desc1}
+              </Typography>
+            </Box>
 
-            <Stack spacing={3}>
-              <Box>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                  }}
-                >
-                  {props.heading2}
-                </Typography>
-                <Typography variant="body1">
-                  <ul style={{ paddingInlineStart: "28px" }}>
-                    <li>{props.firstBullet1}</li>
-                    <li>{props.firstBullet2}</li>
-                    <li>{props.firstBullet3}</li>
-                  </ul>
-                </Typography>
-              </Box>
-            </Stack>
+            <Box display={"flex"} gap={"10px"}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  fontFamily: `"manorope,sans-serif"`,
+                  fontSize: "18px",
+                  margin: 0,
+                }}
+              >
+                {props.heading2}:
+              </Typography>
+              <Typography
+                style={{
+                  fontStyle: "normal",
+                  fontFamily: `"manorope,sans-serif"`,
+                  fontSize: "16px",
+                }}
+                variant="body1"
+              >
+                {/* <ul style={{ paddingInlineStart: "28px" }}>
+                  <li
+                    style={{
+                      fontStyle: "normal",
+                      fontFamily: `"manorope,sans-serif"`,
+                      fontSize: "16px",
+                    }}
+                  > */}
+                {props.firstBullet1}
+                {/* </li>
+                </ul> */}
+              </Typography>
+            </Box>
 
-            <Stack spacing={3}>
-              <Box>
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                  }}
-                >
-                  {props.heading3}
-                </Typography>
-                <Typography variant="body1">
-                  <ul style={{ paddingInlineStart: "28px" }}>
-                    <li>{props.secBullet1}</li>
-                    <li>{props.secBullet2}</li>
-                    <li>{props.secBullet3}</li>
-                  </ul>
-                </Typography>
+            <Box display={"flex"} gap={"10px"}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                style={{
+                  fontSize: "18px",
+                  margin: 0,
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  fontFamily: `"manorope,sans-serif"`,
+                }}
+              >
+                {props.heading3}:
+              </Typography>
+              <Typography
+                style={{
+                  fontStyle: "normal",
+                  fontFamily: `"manorope,sans-serif"`,
+                  fontSize: "16px",
+                }}
+                variant="body1"
+              >
+                {/* <ul style={{ paddingInlineStart: "28px" }}>
+                  <li
+                    style={{
+                      fontStyle: "normal",
+                      fontFamily: `"manorope,sans-serif"`,
+                      fontSize: "16px",
+                    }}
+                  > */}
+                {props.secBullet1}
+                {/* </li>
+                </ul> */}
+              </Typography>
 
-                <Box mt={5}>
+              {/* <Box mt={5}>
                   <Button
                     sx={{
                       boxShadow: "none",
@@ -174,12 +221,34 @@ export default function ServiceGrid(props: serviceGridProps) {
                   >
                     see more services
                   </Button>
-                </Box>
-              </Box>
-            </Stack>
+                </Box> */}
+            </Box>
+            <Box
+              style={{
+                fontFamily: `"manorope,sans-serif"`,
+              }}
+              display={"flex"}
+              alignItems={"center"}
+            >
+              <IconButton onClick={prevSlide}>
+                <NavigateBeforeIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              </IconButton>
+              0{currentSlide + 1} /0{props.carouselItems.length}{" "}
+              <IconButton onClick={nextSlide}>
+                <NavigateNextIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              </IconButton>
+            </Box>
           </Stack>
-        </Grid>
-      </Grid>
+        </Stack>
+      </Stack>
     </Box>
   );
 }

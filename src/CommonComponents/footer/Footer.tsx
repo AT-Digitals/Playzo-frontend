@@ -1,5 +1,4 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
-
 import AppContainer from "../AppContainer";
 import Colors from "../Colors";
 import CustomButton from "../CustomButton";
@@ -14,7 +13,6 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import logo from "../../assets/logo.png";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
-
 const StyledLink = styled(Link)({
   color: Colors.WHITE,
   fontSize: "14px",
@@ -25,7 +23,6 @@ const StyledLink = styled(Link)({
     color: Colors.WHITE,
   },
 });
-
 export default function Footer() {
   return (
     <Box
@@ -86,7 +83,6 @@ export default function Footer() {
                 a community-driven destination designed for sports enthusiasts and
                 those seeking recreation and entertainment.
                 </Typography>
-            
               </Stack>
             </Grid>
             <Grid
@@ -107,15 +103,15 @@ export default function Footer() {
                   <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Company</Typography>
                   <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.ROOT}>About</StyledLink>
                   <StyledLink sx={{fontSize: "16px", lineHeight: 1,transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.ROOT}>Services</StyledLink>
                   <StyledLink sx={{fontSize: "16px",transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.ROOT}>Contact</StyledLink>
                   {/* <StyledLink to={routes.ROOT}>My Profile</StyledLink> */}
                 </Stack>
@@ -123,21 +119,21 @@ export default function Footer() {
                 <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Information</Typography>
                   <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.ROOT}>Privacy Policy</StyledLink>
                   <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.TERMS_AND_CONDITIONS}>
                     Terms of Service
                   </StyledLink>
                   <StyledLink sx={{fontSize: "16px", transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.FAQ}>FAQ</StyledLink>
                   <StyledLink sx={{fontSize: "16px", lineHeight: 1, transition: "color 0.5s ease",
                 ":hover": {
-                  color: Colors.BUTTON_COLOR, 
+                  color: Colors.BUTTON_COLOR,
                 }}} to={routes.CAREERS_PAGE}>Careers</StyledLink>
                 </Stack>
               </Stack>
@@ -152,7 +148,6 @@ export default function Footer() {
                 }}
               />
             </Grid>
-
             <Grid
               pl={{ xs: "10px !important", sm: 8 }}
               item
@@ -163,7 +158,6 @@ export default function Footer() {
               marginTop={"-21px"}
             >
              <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Contact us</Typography>
-
               <Stack spacing={2}>
                 <Typography fontSize="14px" pt={"17px"} fontWeight={400}>
                   39/6 KCP Thottam, Kumalan Kuttai, Erode,
@@ -177,7 +171,6 @@ export default function Footer() {
               </Stack>
             </Grid>
           </Grid>
-
           <Stack
             mt={3}
             display={{ xs: "block", sm: "block", md: "none" }}
@@ -198,9 +191,7 @@ export default function Footer() {
               display: { xs: "block", sm: "none" },
             }}
           />
-
           {/* / */}
-
           <Divider
             variant="fullWidth"
             color={Colors.WHITE}
@@ -210,7 +201,6 @@ export default function Footer() {
               display: { xs: "none", sm: "block" },
             }}
           />
-
           <Stack
             marginTop={6}
             display={{ xs: "flex", sm: "none" }}
@@ -235,7 +225,6 @@ export default function Footer() {
               <YouTubeIcon width={30} height={30} />
             </Link>
           </Stack>
-
           <Divider
             variant="fullWidth"
             color={Colors.WHITE}
@@ -245,7 +234,6 @@ export default function Footer() {
               display: { xs: "block", sm: "none" },
             }}
           />
-
           <Stack
             direction={{ xs: "column", sm: "row" }}
             justifyContent="space-between"
@@ -264,7 +252,7 @@ export default function Footer() {
                   color: Colors.WHITE,
                   width: "25px",
                   height: "30px",
-                  transition: "color 0.3s ease", 
+                  transition: "color 0.3s ease",
                   ":hover": {
                     color: Colors.BUTTON_COLOR
                   }
@@ -278,7 +266,7 @@ export default function Footer() {
                   color: Colors.WHITE,
                   width: "25px",
                   height: "30px",
-                  transition: "color 0.3s ease", 
+                  transition: "color 0.3s ease",
                   ":hover": {
                     color: Colors.BUTTON_COLOR
                   }
@@ -289,7 +277,7 @@ export default function Footer() {
                   color: Colors.WHITE,
                   width: "25px",
                   height: "30px",
-                  transition: "color 0.3s ease", 
+                  transition: "color 0.3s ease",
                   ":hover": {
                     color: Colors.BUTTON_COLOR
                   }
@@ -300,7 +288,7 @@ export default function Footer() {
                   color: Colors.WHITE,
                   width: "25px",
                   height: "30px",
-                  transition: "color 0.3s ease", 
+                  transition: "color 0.3s ease",
                   ":hover": {
                     color: Colors.BUTTON_COLOR
                   }

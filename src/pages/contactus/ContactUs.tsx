@@ -319,13 +319,16 @@ export default function ContactUs() {
         maxWidth={1300}
       >
        <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
-        <Stack 
+        <Stack style={{
+          marginTop: "-35px",
+          marginBottom: "20px"
+        }}
           // height={"100%"}
           spacing={10}
           direction={{ xs: "column", sm: "column", md: "row" }}
           // container
           paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
-          paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "90px" }}
+          paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
         >
          
           <Box flexDirection={"column"}
@@ -342,22 +345,22 @@ export default function ContactUs() {
                 ></iframe>
                  <Typography
                 sx={{
-                  fontSize: "16px",
-                  fontWeight: 400,
+                  fontSize: "22px",
+                  fontWeight: "bold",
                   paddingTop: "12px",
                 }}
               >
                 Contact Us
               </Typography>
-                 <Typography fontSize="14px" pt={"8px"} fontWeight={400}>
+                 <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
                   39/6 KCP Thottam, Kumalan Kuttai, Erode,
                   <br />
                   Tamil Nadu - 638011{" "}
                 </Typography>
-                <Typography fontSize="14px" fontWeight={400}>
+                <Typography fontSize="16px" fontWeight={400}>
                  <span style={{
-                  fontSize: "14px",
-                  fontWeight: "400",
+                  fontSize: "18px",
+                  fontWeight: "bold",
                  }}>Phone:</span> +91 70944 60944,  +91 91088 83555
                  
                 </Typography>
@@ -413,7 +416,7 @@ export default function ContactUs() {
                   <Typography
                     marginBottom={"10px"}
                     fontSize={"16px"}
-                    fontWeight={400}
+                    fontWeight={"bold"}
                     color={Colors.BLACK}
                   >
                     Message

@@ -1,25 +1,20 @@
-import { Box, IconButton } from "@mui/material";
 import React, { ReactNode, useEffect } from "react";
 
+import { Box } from "@mui/material";
 import Colors from "../../CommonComponents/Colors";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 interface CustomSliderProps {
   slides: ReactNode[];
   autoplayInterval?: number;
   nextSlide: any;
-  prevSlide: any;
   currentSlide: any;
   handleBulletClick: any;
 }
 
 const CustomSlider = ({
   slides,
-  autoplayInterval = 6000,
+  autoplayInterval = 3000,
   nextSlide,
-  prevSlide,
   currentSlide,
   handleBulletClick,
 }: CustomSliderProps) => {
@@ -40,7 +35,6 @@ const CustomSlider = ({
           position: "relative",
           width: "100%",
           overflow: "hidden",
-          height: "100%",
         }}
       >
         <Box
@@ -57,8 +51,8 @@ const CustomSlider = ({
                 flex: "0 0 100%",
                 boxSizing: "border-box",
                 width: "100%",
-                maxHeight: 600,
-                height: "100%",
+                maxHeight: 400,
+
                 overflow: "hidden",
                 position: "relative",
               }}
@@ -66,17 +60,14 @@ const CustomSlider = ({
               <Box
                 component={"image"}
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  maxHeight: 600,
                   backgroundImage: `url(${slide})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   overflow: "hidden",
-                  transition: "transform 0.3s ease",
-                  "&:hover": {
-                    transform: "scale(1.1)", // Increase scale on hover
-                  },
+                  // transition: "transform 0.3s ease",
+                  // "&:hover": {
+                  //   transform: "scale(1.1)", // Increase scale on hover
+                  // },
                   // Add this line to fix the issue
                   display: "flex",
                 }}
@@ -87,57 +78,39 @@ const CustomSlider = ({
             </Box>
           ))}
         </Box>
-        <IconButton
-          sx={{
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(-50%)",
-            left: "15px",
-            background: Colors.WHITE,
-            "&:hover": {
-              background: Colors.WHITE, // Set the same background color on hover
-            },
-          }}
-          onClick={prevSlide}
-        >
-          <NavigateBeforeIcon
-            style={{
-              color: Colors.BUTTON_COLOR,
-            }}
-          />
-        </IconButton>
-        <IconButton
-          sx={{
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(-50%)",
-            right: "15px",
-            background: Colors.WHITE,
-            "&:hover": {
-              background: Colors.WHITE, // Set the same background color on hover
-            },
-          }}
-          onClick={nextSlide}
-        >
-          <NavigateNextIcon
-            style={{
-              color: Colors.BUTTON_COLOR,
-            }}
-          />
-        </IconButton>
       </Box>
-      <Box display="flex" justifyContent="center">
+      <Box
+        mt={1}
+        border="1px solid black"
+        display="flex"
+        justifyContent="center"
+        bgcolor="black"
+      >
         {slides.map((_, index) => (
-          <FiberManualRecordIcon
+          <Box
             key={index}
             sx={{
+              position: "relative",
               fontSize: "14px",
-              color: currentSlide === index ? "#007bff" : "gray",
+              color: currentSlide === index ? "red" : "gray",
               cursor: "pointer",
-              mx: 1,
+              width: slides.length === 2 ? "100%" : "100%", // Adjust width dynamically
             }}
             onClick={() => handleBulletClick(index)}
-          />
+          >
+            <Box
+              sx={{
+                fontSize: "14px",
+                color: currentSlide === index ? "red" : "gray",
+                cursor: "pointer",
+                position: "absolute",
+
+                border:
+                  currentSlide === index ? `2px solid ${Colors.BLACK}` : "none",
+                width: slides.length === index ? "100%" : "100%", // Adjust width dynamically
+              }}
+            />
+          </Box>
         ))}
       </Box>
     </>

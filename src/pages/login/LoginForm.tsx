@@ -25,7 +25,7 @@ interface loginProps {
   open: any;
 }
 
-export default function LoginForm({ handleClose, open }: loginProps) {
+export default function Form({ handleClose, open }: loginProps) {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");

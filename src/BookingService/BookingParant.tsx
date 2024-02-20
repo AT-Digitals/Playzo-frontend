@@ -101,12 +101,12 @@ const BoardgameImages = [
 ];
 
 // type BookingType = BookingType;
-  // | "turf"
-  // | "playstation"
-  // | "Badminton"
-  // | "Boardgames"
-  // | "BowlingMachine"
-  // | "cricketnet";
+// | "turf"
+// | "playstation"
+// | "Badminton"
+// | "Boardgames"
+// | "BowlingMachine"
+// | "cricketnet";
 
 interface TableDataItem {
   type: BookingType;
@@ -114,6 +114,7 @@ interface TableDataItem {
   date: string;
   time: string;
   court: number;
+  amount: any;
 }
 
 const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
@@ -143,7 +144,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       : [];
 
   const handleServiceSelection = (service: any) => {
-    console.log("djcndj",service)
+    console.log("djcndj", service);
     setSelectedService(service.name);
     setSelectedCourt(service.value);
     setTableData((prevTableData) => [...prevTableData]);
@@ -160,7 +161,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     if (selectedService) {
       const selectedDate = "29 Feb 2024";
       const selectedTime = "9.00AM-11.00AM";
-      console.log("selectedService",selectedService)
+      const selectedAmount = "1500";
+      console.log("selectedService", selectedService);
 
       setTableData((prevTableData) => [
         ...prevTableData,
@@ -170,6 +172,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           date: selectedDate,
           time: selectedTime,
           court: selectedCourt,
+          amount: selectedAmount,
         },
       ]);
     }
@@ -183,65 +186,73 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   // navigate to payment page with state table data  when booking is complete
 
   const handleProceedToPayment = () => {
-    const bookingsWithTime: { type: BookingType; name: string; startDate: string; startTime: number; endDate: string; endTime: number; court: number; }[] =[];
-     allBookings.map((booking, index) => {
+    const bookingsWithTime: {
+      type: BookingType;
+      name: string;
+      startDate: string;
+      startTime: number;
+      endDate: string;
+      endTime: number;
+      court: number;
+      amount: any;
+    }[] = [];
+    console.log("allb",allBookings)
+    allBookings.map((booking, index) => {
       // console.log("alalala",booking.time)
       // booking["court"] = selectedCourt;
       const boo = booking.time as any;
-      
+
       boo.forEach(function (item: any, index: any) {
         console.log(item, index);
-      
-  
-      const timeString = String(item); // Ensure time is a string
-      const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
 
-      const startTime = timeMatch ? timeMatch[1] : "";
-      let endTime = "";
-      // let ampm = "";
+        const timeString = String(item); // Ensure time is a string
+        const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
 
-      // Calculate start time and end time in milliseconds
-      let startMilliseconds = 0;
-      let endMilliseconds = 0;
-      console.log(booking.court, "court");
-      console.log("booking:", booking); // Print the entire booking object for inspection
+        const startTime = timeMatch ? timeMatch[1] : "";
+        let endTime = "";
+        // let ampm = "";
 
-      if (startTime) {
-        const [hours, minutes] = startTime.split(":");
-        const startDateTime = new Date(booking.date);
-        startDateTime.setHours(Number(hours), Number(minutes));
-        startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+        // Calculate start time and end time in milliseconds
+        let startMilliseconds = 0;
+        let endMilliseconds = 0;
+        console.log(booking.court, "court");
+        console.log("booking:", booking); // Print the entire booking object for inspection
 
-        const endDateTime = new Date(startDateTime);
-        endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-        endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+        if (startTime) {
+          const [hours, minutes] = startTime.split(":");
+          const startDateTime = new Date(booking.date);
+          startDateTime.setHours(Number(hours), Number(minutes));
+          startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-        const endHours = endDateTime.getHours();
-        const endMinutes = endDateTime.getMinutes();
+          const endDateTime = new Date(startDateTime);
+          endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+          endMilliseconds = endDateTime.getTime(); // End time in milliseconds
 
-        endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-          2,
-          "0"
-        )}`;
-        // ampm = endHours >= 12 ? "PM" : "AM";
-      }
+          const endHours = endDateTime.getHours();
+          const endMinutes = endDateTime.getMinutes();
 
-      
+          endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+            2,
+            "0"
+          )}`;
+          // ampm = endHours >= 12 ? "PM" : "AM";
+        }
 
-      bookingsWithTime.push( {
-        type: booking.type,
-        name: booking.name,
-        startDate: DateUtils.formatDate(new Date(booking.date),"YYYY-MM-DD"),
-        startTime: startMilliseconds,
+        bookingsWithTime.push({
+          type: booking.type,
+          name: booking.name,
+          startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
+          startTime: startMilliseconds,
 
-        endDate: endTime
-          ? DateUtils.formatDate(new Date(booking.date),"YYYY-MM-DD")
-          : "",
-        endTime: endMilliseconds,
-        court: booking.court,
+          endDate: endTime
+            ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
+            : "",
+          endTime: endMilliseconds,
+          court: booking.court,
+          amount: booking.amount,
+        });
       });
     });
-  })
 
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
@@ -475,7 +486,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         </Box>
         <Stack
           display={
-            type === BookingType.BowlingMachine || type === BookingType.CricketNet ? "none" : "flex"
+            type === BookingType.BowlingMachine ||
+            type === BookingType.CricketNet
+              ? "none"
+              : "flex"
           }
           borderLeft={"1px solid #D9D9D9"}
           gap={"8px"}
@@ -600,7 +614,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             selectedService) && (
             <Box
               borderLeft={
-                type === BookingType.BowlingMachine || type === BookingType.CricketNet
+                type === BookingType.BowlingMachine ||
+                type === BookingType.CricketNet
                   ? "1px solid #D9D9D9"
                   : "none"
               }

@@ -1,6 +1,5 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
 import CustomButton from "../CommonComponents/CustomButton";
@@ -10,18 +9,15 @@ import UserLoginApi from "../api/UserLoginApi";
 import logo from "../assets/logo.png";
 import routes from "../routes/routes";
 import { useState } from "react";
-
 const HeaderLink = styled("a")`
   text-decoration: none;
   position: relative;
   color: ${Colors.BUTTON_COLOR};
   transition: color 0.3s ease; /* Add transition for color change */
-
   &:hover {
     color: ${Colors.WHITE};
   }
 `;
-
 export default function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -54,7 +50,6 @@ export default function Header() {
               <img width={172} height={34} src={logo} alt="alterknit" />
             </Link>
           </Box>
-
           <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.ABOUTUS}>
               <Typography sx={{
@@ -63,7 +58,6 @@ export default function Header() {
                 textTransform: "uppercase",
                 ":hover": {
                   color: Colors.BUTTON_COLOR,
-                 
                 }
               }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
                 About Us
@@ -82,7 +76,6 @@ export default function Header() {
                 Contact Us
               </Typography>
             </HeaderLink>
-           
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
             <Button
@@ -133,7 +126,6 @@ export default function Header() {
             </HeaderLink>
           </Stack>
         </Stack>
-
         <LoginForm handleClose={handleClose} open={open} />
       </AppContainer>
     </Box>

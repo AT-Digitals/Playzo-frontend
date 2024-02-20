@@ -17,9 +17,11 @@ const style = {
 interface modalProps {
     open: boolean,
     handleClose: () => void;
+    text: string;
+    subText?: string;
 }
 
-export default function ModalComponent({ open, handleClose }: modalProps) {
+export default function ModalComponent({ open, handleClose, text, subText }: modalProps) {
     return (
         <Modal
             open={open}
@@ -42,7 +44,7 @@ export default function ModalComponent({ open, handleClose }: modalProps) {
                     fontSize={"17px"}
                     color={Colors.WHITE}
                 >
-                    Could not add your Bookings!
+                    {text}
                 </Typography>
                 <Typography
                     mb={"20px"}
@@ -51,7 +53,7 @@ export default function ModalComponent({ open, handleClose }: modalProps) {
                     marginTop={"8px"}
                     color={Colors.WHITE}
                 >
-                    Login to Your Account
+                    {subText}
                 </Typography>
             </Box>
         </Modal>

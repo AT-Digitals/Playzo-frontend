@@ -19,7 +19,7 @@ const StyledTypoBody = styled(Typography)({
   fontSize: "18px",
   fontStyle: "normal",
   fontWeight: 400,
-  maxWidth: "710px",
+  maxWidth: "820px",
 });
 
 export default function ServiceHeaders() {
@@ -51,9 +51,11 @@ export default function ServiceHeaders() {
           color={Colors.BLACK}
           padding={"0 20px"}
           textAlign={{ xs: "center" }}
-          fontSize={{ xs: "20px", sm: "32px" }}
+          fontSize={{ xs: "20px", sm: "32px", md: "32px", lg: "100px" }}
           variant="h4"
           maxWidth={{ xs: "210px", sm: "none" }}
+          fontFamily={`"manorope,sans-serif"`}
+          lineHeight={0.8}
         >
           Your Gateway to Exciting Experiences
         </StyledTypo>
@@ -68,7 +70,11 @@ export default function ServiceHeaders() {
         mt={{ xs: "4rem", sm: "4rem", md: "1rem" }}
         marginRight={{ xs: "none", sm: "none", md: 8 }}
       >
-        <StyledTypoBody variant="body1" fontSize={{ xs: "16px", sm: "18px" }}>
+        <StyledTypoBody
+          fontFamily={`"manorope,sans-serif"`}
+          variant="body1"
+          fontSize={{ xs: "16px", sm: "18px" }}
+        >
           We offer a diverse range of services to cater to the varied interests
           of our community. Whether you're a sports enthusiast, a fitness buff,
           or someone looking for a great place to socialize, we have something
@@ -87,7 +93,7 @@ export default function ServiceHeaders() {
               xs: "translate(0px,-200px)",
               sm: "translate(0px,-200px)",
               md: "translate(180px,-180px)",
-              lg: "translate(-30px,-180px)",
+              lg: "translate(20px,-150px)",
             },
             right: { xs: "10%", sm: 0, md: "16%" },
             maxWidth: { xs: "60px", sm: 117, md: "250px", lg: "199px" },
@@ -103,7 +109,7 @@ export default function ServiceHeaders() {
               xs: "translate(-3px,-150px)",
               sm: "translate(20px,-120px)",
               md: "translate(150px,30px)",
-              lg: "translate(-10px,-10px)",
+              lg: "translate(50px,10px)",
             },
             right: { xs: "14%", sm: "5%", md: "22%" },
             maxWidth: { xs: "15px", sm: "60px" },
