@@ -45,7 +45,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         validateEmail(newEmail);
     };
     const validateName = (value: string) => {
-        setIsValidName(value.length >= 15);
+        setIsValidName(value.length >= 6);
     }
 
     const handleNameChange = (event: any) => {

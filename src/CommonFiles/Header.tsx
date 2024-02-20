@@ -8,7 +8,7 @@ import LoginForm from "../pages/login/LoginForm";
 import UserLoginApi from "../api/UserLoginApi";
 import logo from "../assets/logo.png";
 import routes from "../routes/routes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserComponent from "./UserComponent";
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -24,15 +24,9 @@ export default function Header() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const handleMenuClose = () => {
-  //   setMenuOpen(false);
-  // }
 
-  // const handleMenuClick = () => {
-  //   setMenuOpen(true);
-  // }
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openvalue = Boolean(anchorEl);
@@ -48,6 +42,7 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+
   const handleLogout = async () => {
     try {
       UserLoginApi.logoutUser();
@@ -58,6 +53,11 @@ export default function Header() {
       console.log("Logout failed");
     }
   };
+  useEffect(() => {
+    if (!isLoggedIn && localStorage.getItem('user')) {
+      setIsLoggedIn(true);
+    }
+  }, [])
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
@@ -138,6 +138,16 @@ export default function Header() {
               >
                 Book Now
               </Button>
+            </HeaderLink>
+            {isLoggedIn ?
+              <UserComponent
+                handleClose={handleLogout}
+                open={openvalue}
+                handleClick={handleClick}
+                handleMenuClose={handleMenuClose}
+                anchorEl={anchorEl}
+                handleChange={handleChange}
+              /> :
               <Button
                 variant="outlined"
                 sx={{
@@ -161,15 +171,7 @@ export default function Header() {
               >
                 Login
               </Button>
-            </HeaderLink>
-            <UserComponent
-              handleClose={handleLogout}
-              open={openvalue}
-              handleClick={handleClick}
-              handleMenuClose={handleMenuClose}
-              anchorEl={anchorEl}
-              handleChange={handleChange}
-            />
+            }
           </Stack>
         </Stack>
         <LoginForm handleClose={handleClose} open={open} />

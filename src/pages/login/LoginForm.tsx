@@ -40,7 +40,7 @@ export default function Form({ handleClose, open }: loginProps) {
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    // validateEmail(newEmail);
+    validateEmail(newEmail);
   };
 
   const signUpOnClickChange = () => {
@@ -51,19 +51,19 @@ export default function Form({ handleClose, open }: loginProps) {
     setOpenModal(false);
   }
 
-  // const validateEmail = (input: any) => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   const isValid = emailRegex.test(input);
-  //   setIsValidEmail(isValid);
-  // };
+  const validateEmail = (input: any) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(input);
+    setIsValidEmail(isValid);
+  };
 
-  // const validatePassword = (value: string) => {
-  //   setIsPasswordValid(value.length >= 8);
-  // };
+  const validatePassword = (value: string) => {
+    setIsPasswordValid(value.length >= 8);
+  };
 
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
-    //validatePassword(event.target.value);
+    validatePassword(event.target.value);
   };
 
   const onSubmit = async (event: any) => {

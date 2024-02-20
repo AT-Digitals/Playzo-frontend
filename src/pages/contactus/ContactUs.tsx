@@ -258,6 +258,11 @@ export default function ContactUs() {
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidType, setIsValidType] = useState<boolean>(true);
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(true);
+
   // const [submitted, setSubmitted] = useState(false); // New state to track form submission
 
   const successNotification = () => {
@@ -278,6 +283,20 @@ export default function ContactUs() {
 
   const onSubmit = async (event: any) => {
     event?.preventDefault();
+
+    if (!name) {
+      setIsValidName(true);
+    }
+    if (!email) {
+      setIsValidEmail(true);
+    }
+    if (!phoneNumber) {
+      setIsValidPhone(true);
+    }
+
+    // if (!type) {
+    //   setIsValidType(true);
+    // }
 
     const data = {
       name: name,
@@ -429,6 +448,8 @@ export default function ContactUs() {
                   placeholder="Enter your name"
                   value={name}
                   onChange={setName}
+                  error={!!isValidName}
+                  helperText={isValidName ? 'Please provide valid Name' : ''}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -437,6 +458,8 @@ export default function ContactUs() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={setEmail}
+                  error={!!isValidEmail}
+                  helperText={isValidEmail ? 'Please provide valid Email' : ''}
                 />
                 <DropDownComponent
                   label="What service are you interested in"
@@ -444,6 +467,7 @@ export default function ContactUs() {
                   placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
+                //error={isValidType}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -453,6 +477,8 @@ export default function ContactUs() {
                   value={phoneNumber}
                   onChange={setPhoneNumber}
                   type="number"
+                  error={!!isValidPhone}
+                  helperText={isValidPhone ? 'Please provide valid phone number' : ''}
                 />
                 <Box margin={"30px"}>
                   <Typography
