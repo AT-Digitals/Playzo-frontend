@@ -7,6 +7,7 @@ import {
   Link,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,6 +20,8 @@ import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import CustomTextField from "../../CommonComponents/CustomTextField";
+import SignUpForm from "./SignUpForm";
 
 interface loginProps {
   handleClose?: () => void;
@@ -30,28 +33,37 @@ export default function Form({ handleClose, open }: loginProps) {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  
+
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    validateEmail(newEmail);
+    // validateEmail(newEmail);
   };
 
-  const validateEmail = (input: any) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValid = emailRegex.test(input);
-    setIsValidEmail(isValid);
-  };
+  const signUpOnClickChange = () => {
+    setOpenModal(true);
+  }
 
-  const validatePassword = (value: string) => {
-    setIsPasswordValid(value.length >= 8);
-  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  }
+
+  // const validateEmail = (input: any) => {
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   const isValid = emailRegex.test(input);
+  //   setIsValidEmail(isValid);
+  // };
+
+  // const validatePassword = (value: string) => {
+  //   setIsPasswordValid(value.length >= 8);
+  // };
 
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
-    validatePassword(event.target.value);
+    //validatePassword(event.target.value);
   };
 
   const onSubmit = async (event: any) => {
@@ -83,7 +95,7 @@ export default function Form({ handleClose, open }: loginProps) {
         console.log('Login Failed');
       }
     } catch (err) {
-      console.log("err",err)
+      console.log("err", err)
     }
     console.log("data", data);
   };
@@ -160,6 +172,7 @@ export default function Form({ handleClose, open }: loginProps) {
                   borderRadius: "8px",
                 },
               }}
+              type="password"
               placeholder="Enter your password"
               onChange={handlePasswordChange}
               value={password}
@@ -200,6 +213,12 @@ export default function Form({ handleClose, open }: loginProps) {
           >
             Login
           </CustomButton>
+          <Stack direction="row" alignItems="center" spacing={1} justifyContent="center">
+            <Typography
+              color={Colors.WHITE}
+            >Dosen't have an account yet?</Typography>
+            <Link onClick={signUpOnClickChange} sx={{ color: Colors.BUTTON, cursor: "pointer" }}>Sign Up</Link>
+          </Stack>
           <Divider
             variant="middle"
             sx={{
@@ -230,16 +249,17 @@ export default function Form({ handleClose, open }: loginProps) {
                 alt="button"
                 width={40}
                 height={40}
-                // style={{
-                //   position: "absolute",
-                //   transform: `translate(-135px, -20px)`,
-                // }}
+              // style={{
+              //   position: "absolute",
+              //   transform: `translate(-135px, -20px)`,
+              // }}
               />
             }
           >
             Sign in with Google
           </CustomButton>
         </Stack>
+        <SignUpForm open={openModal} handleClose={handleCloseModal} />
       </DialogContent>
     </Dialog>
   );
