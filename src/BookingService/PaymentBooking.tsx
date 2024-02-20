@@ -99,9 +99,15 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
+  const [openError, setOpenError] = React.useState(false);
   const handleClose = () => {setOpen(false)
     navigate(routes.BOOKING_SERVICE);
     localStorage.removeItem("bookings");
+  };
+
+  const handleCloseError = () => {
+    setOpenError(false)
+    
   };
 
   const location = useLocation();
@@ -143,6 +149,8 @@ export default function PaymentBooking() {
           console.log("Booking Failed");
         }
       } catch (err) {
+        setOpenError(true);
+
         console.log("err", err);
       }
     });
@@ -603,6 +611,8 @@ export default function PaymentBooking() {
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
       <ModalComponent open={open}
         handleClose={handleClose} text="Your booking is confirmed" subText="Thank you, your payment has been successfull." />
+   <ModalComponent open={openError}
+        handleClose={handleCloseError} text="User Not Found" />
     </>
   );
 }

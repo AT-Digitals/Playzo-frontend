@@ -24,6 +24,7 @@ import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-downl
 import playimage from "../../assets/playstation-4-logo-svg-4.png"
 import basketimage from "../../assets/basketball-vector-graphics.png"
 import { transform } from "typescript";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 
 // import GameIcon from "../../assets/doodl-5 1.png";
 
@@ -33,16 +34,32 @@ import { transform } from "typescript";
 
 const DropDownData = [
   {
-    value: "one",
+    value: "badminton",
+    label: "Badminton",
+  },
+  {
+    value: "crossFit",
+    label: "CrossFit",
+  },
+  {
+    value: "turf",
     label: "Turf",
   },
   {
-    value: "two",
-    label: "PlayStation",
+    value: "playstation",
+    label: "Play Station",
   },
   {
-    value: "three",
-    label: "Badminton",
+    value: "boardGame",
+    label: "Board Game",
+  },
+  {
+    value: "partycenter",
+    label: "Party Center",
+  },
+  {
+    value: "cafeteria",
+    label: "Cafeteria",
   },
 ];
 
@@ -76,7 +93,7 @@ const StyledImage = styled.img`
     transform: translate(31%, 222%);
   }
   `;
-  const StyledImage1 = styled.img`
+const StyledImage1 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -106,7 +123,7 @@ const StyledImage = styled.img`
     transform: translate(14%, 401%);
   }
   `;
-  const StyledImage2 = styled.img`
+const StyledImage2 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -138,7 +155,7 @@ const StyledImage = styled.img`
     left: 43.9%;
   }
   `;
-  const StyledImage3 = styled.img`
+const StyledImage3 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -167,7 +184,7 @@ const StyledImage = styled.img`
     transform: translate(880%, 688%);
   }
   `;
-  const StyledImage4 = styled.img`
+const StyledImage4 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -198,7 +215,7 @@ const StyledImage = styled.img`
    transform: rotate(36deg);
   }
   `;
-  const StyledImage5 = styled.img`
+const StyledImage5 = styled.img`
   position: absolute;
   transform: translate(130px, 30px);
   /* Set a default width or adjust as needed */
@@ -237,8 +254,24 @@ export default function ContactUs() {
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidType, setIsValidType] = useState<boolean>(true);
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(true);
 
   // const [submitted, setSubmitted] = useState(false); // New state to track form submission
+
+  const successNotification = () => {
+    setSuccessMessage(false);
+  }
+
+  const errorNotification = () => {
+    setErrorMessage(false);
+  }
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event?.target.value);
@@ -251,10 +284,25 @@ export default function ContactUs() {
   const onSubmit = async (event: any) => {
     event?.preventDefault();
 
+    if (!name) {
+      setIsValidName(true);
+    }
+    if (!email) {
+      setIsValidEmail(true);
+    }
+    if (!phoneNumber) {
+      setIsValidPhone(true);
+    }
+
+    // if (!type) {
+    //   setIsValidType(true);
+    // }
+
     const data = {
       name: name,
       email: email,
       type: type,
+      phoneNumber: phoneNumber,
       message: message,
     };
     console.log("data", data);
@@ -263,16 +311,20 @@ export default function ContactUs() {
         userName: data.name,
         userEmail: data.email,
         enquiryMessage: data.message,
+        phoneNumber: data.phoneNumber,
         projectType: data.type,
       });
       if (response) {
-        // Simulate an asynchronous operation (e.g., API call) with setTimeout
-        setTimeout(() => {}, 5000);
-      } else {
-        console.log("Response Failed");
+        setSuccessMessage(true);
+        setName('');
+        setEmail('');
+        setPhoneNumber('')
+        setType('');
+        setMessage('');
       }
+
     } catch (err) {
-      console.log("err", err);
+      setErrorMessage(true)
     }
   };
 
@@ -318,7 +370,7 @@ export default function ContactUs() {
         paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
         maxWidth={1300}
       >
-       <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
+        <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
         <Stack style={{
           marginTop: "-35px",
           marginBottom: "20px"
@@ -330,43 +382,43 @@ export default function ContactUs() {
           paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
         >
-         
+
           <Box flexDirection={"column"}
-                display={"flex"}
-                marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-               style={{
-                paddingTop: "54px"
-               }}
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
-                  width="700"
-                  height="640"
-                ></iframe>
-                 <Typography
-                sx={{
-                  fontSize: "22px",
-                  fontWeight: "bold",
-                  paddingTop: "12px",
-                }}
-              >
-                Contact Us
-              </Typography>
-                 <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
-                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
-                  <br />
-                  Tamil Nadu - 638011{" "}
-                </Typography>
-                <Typography fontSize="16px" fontWeight={400}>
-                 <span style={{
-                  fontSize: "18px",
-                  fontWeight: "bold",
-                 }}>Phone:</span> +91 70944 60944,  +91 91088 83555
-                 
-                </Typography>
-              </Box>
-             
-          <Box style={{marginLeft: "110px"}} pt="30px" width={"100%"}>
+            display={"flex"}
+            marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+            style={{
+              paddingTop: "54px"
+            }}
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
+              width="700"
+              height="640"
+            ></iframe>
+            <Typography
+              sx={{
+                fontSize: "22px",
+                fontWeight: "bold",
+                paddingTop: "12px",
+              }}
+            >
+              Contact Us
+            </Typography>
+            <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
+              39/6 KCP Thottam, Kumalan Kuttai, Erode,
+              <br />
+              Tamil Nadu - 638011{" "}
+            </Typography>
+            <Typography fontSize="16px" fontWeight={400}>
+              <span style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+              }}>Phone:</span> +91 70944 60944,  +91 91088 83555
+
+            </Typography>
+          </Box>
+
+          <Box style={{ marginLeft: "110px" }} pt="30px" width={"100%"}>
             <form onSubmit={onSubmit}>
               <Stack
                 margin={"0 auto"}
@@ -396,6 +448,8 @@ export default function ContactUs() {
                   placeholder="Enter your name"
                   value={name}
                   onChange={setName}
+                  error={!!isValidName}
+                  helperText={isValidName ? 'Please provide valid Name' : ''}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -404,6 +458,8 @@ export default function ContactUs() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={setEmail}
+                  error={!!isValidEmail}
+                  helperText={isValidEmail ? 'Please provide valid Email' : ''}
                 />
                 <DropDownComponent
                   label="What service are you interested in"
@@ -411,6 +467,18 @@ export default function ContactUs() {
                   placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
+                //error={isValidType}
+                />
+                <CustomTextField
+                  sx={{ maxWidth: 700, borderRadius: "8px" }}
+                  label="Phone Number"
+                  required={false}
+                  placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={setPhoneNumber}
+                  type="number"
+                  error={!!isValidPhone}
+                  helperText={isValidPhone ? 'Please provide valid phone number' : ''}
                 />
                 <Box margin={"30px"}>
                   <Typography
@@ -447,7 +515,7 @@ export default function ContactUs() {
                 </Box>
 
                 <Button
-                  
+
                   sx={{
                     borderRadius: "30px",
                     textTransform: "none",
@@ -470,6 +538,8 @@ export default function ContactUs() {
                 </Button>
               </Stack>
             </form>
+            <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
+            <ModalComponent open={errorMessage} handleClose={errorNotification} text="Please provide valid details in the form" />
           </Box>
         </Stack>
       </AppContainer>
