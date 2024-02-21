@@ -2,7 +2,7 @@ import moment, { unitOfTime } from "moment";
 
 export type DurationUnit = unitOfTime.DurationConstructor;
 
-export default class DateUtils {
+export default class TimeUtlis {
   static formatMillisecondsToTimeConvert = (ms: moment.MomentInput) => {
     if (ms === null) {
       return "";

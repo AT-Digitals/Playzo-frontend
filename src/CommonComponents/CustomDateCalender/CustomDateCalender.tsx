@@ -116,6 +116,7 @@ export default function CustomDateCalendar({
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
   const [responseModalOpen, setResponseModalOpen] = React.useState(false);
+  const [dateModalOpen, setDateModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
   const [items, setItems] = useState([{ name: "6:00-7:00 AM", disabled: false },
   { name: "7:00-8:00 AM", disabled: false },
@@ -184,6 +185,10 @@ export default function CustomDateCalendar({
 
   const handleCloseModal = () => {
     setResponseModalOpen(false)
+  }
+
+  const handleCloseDateModal = () => {
+    setDateModalOpen(false)
   }
 
   const handleDateSelection = (newValue: any) => {
@@ -360,6 +365,8 @@ export default function CustomDateCalendar({
           setSelectedDate("");
           setSelectedTimings([]);
 
+      }else{
+        setDateModalOpen(true);
       }
     } else {
       setModalOpen(true);
@@ -482,6 +489,7 @@ export default function CustomDateCalendar({
       </Box>
       <ModalComponent open={modalOpen} handleClose={handleClose} text="Could not add your Bookings!" subText="Login to Your Account" />
       <ModalComponent open={responseModalOpen} handleClose={handleCloseModal} text="Please choose another date and slot" />
+      <ModalComponent open={dateModalOpen} handleClose={handleCloseDateModal} text="Please choose date and slot" />
     </Stack>
   );
 }
