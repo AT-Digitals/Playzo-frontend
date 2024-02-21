@@ -5,7 +5,7 @@ import Colors from "../../CommonComponents/Colors";
 
 interface CustomSliderProps {
   slides: ReactNode[];
-  autoplayInterval?: number;
+  autoplayInterval: number;
   nextSlide: any;
   currentSlide: any;
   handleBulletClick: any;
@@ -13,15 +13,11 @@ interface CustomSliderProps {
 
 const CustomSlider = ({
   slides,
-  autoplayInterval = 3000,
+  autoplayInterval,
   nextSlide,
   currentSlide,
   handleBulletClick,
-}: // radiusTopleft,
-// radiusTopright,
-// radiusbottompleft,
-// radiusbottompright,
-CustomSliderProps) => {
+}: CustomSliderProps) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       nextSlide();
@@ -30,7 +26,7 @@ CustomSliderProps) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentSlide, autoplayInterval, nextSlide]);
+  }, [autoplayInterval, nextSlide]);
 
   return (
     <>
@@ -44,7 +40,6 @@ CustomSliderProps) => {
         <Box
           sx={{
             display: "flex",
-            transition: "transform 0.5s ease", // Smooth transition added here
             transform: `translateX(-${currentSlide * 100}%)`,
             height: "100%", // Make sure the height is 100% for the images to fill the container
           }}
@@ -95,7 +90,7 @@ CustomSliderProps) => {
               fontSize: "14px",
               color: currentSlide === index ? "red" : "gray",
               cursor: "pointer",
-              width: slides.length === 2 ? "100%" : "100%", // Adjust width dynamically
+              width: slides.length === 2 ? "100%" : "100%",
             }}
             onClick={() => handleBulletClick(index)}
           >
@@ -107,7 +102,7 @@ CustomSliderProps) => {
                 position: "absolute",
                 border:
                   currentSlide === index ? `2px solid ${Colors.BLACK}` : "none",
-                width: slides.length === index ? "100%" : "100%", // Adjust width dynamically
+                width: slides.length === index ? "100%" : "100%",
               }}
             />
           </Box>

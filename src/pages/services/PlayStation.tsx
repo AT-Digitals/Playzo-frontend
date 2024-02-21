@@ -1,7 +1,6 @@
 import Play_logo from "../../assets/Play_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
-import plyaStationSlide from "../../assets/plyaStationSlide.svg";
 import plyaStationSlide2 from "../../assets/Playstation/play1.webp";
 import plyaStationSlide3 from "../../assets/Playstation/play2.jpg";
 import plyaStationSlide4 from "../../assets/Playstation/play3.avif";
@@ -18,7 +17,7 @@ const secBullet1 =
 const buttonLabel = "Book Now";
 export default function PlayStation() {
   const carouselItems = [
-    <img style={{ width: "100%" }} src={plyaStationSlide} alt={"title"} />,
+    <img style={{ width: "100%" }} src={plyaStationSlide4} alt={"title"} />,
 
     <img style={{ width: "100%" }} src={plyaStationSlide2} alt={"title"} />,
     <img style={{ width: "100%" }} src={plyaStationSlide3} alt={"title"} />,

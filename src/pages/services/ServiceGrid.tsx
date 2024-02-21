@@ -92,6 +92,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             slides={props.carouselItems}
             handleBulletClick={handleBulletClick}
             nextSlide={nextSlide}
+            autoplayInterval={4000}
           />
           <Box
             display="flex"
