@@ -1,4 +1,7 @@
-import CricketNetSlide1 from "../../assets/CricketNetSlide1.svg";
+import CricketNetSlide1 from "../../assets/CricketNet/crick1.webp";
+import CricketNetSlide2 from "../../assets/CricketNet/crick2.jpg";
+import CricketNetSlide3 from "../../assets/CricketNet/crick3.jpg";
+import CricketNetSlide4 from "../../assets/CricketNet/crick4.jpg";
 import Cricket_logo from "../../assets/Cricket_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
@@ -17,12 +20,19 @@ export default function CricketNet() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={CricketNetSlide1} alt={"title"} />,
 
-    <img style={{ width: "100%" }} src={CricketNetSlide1} alt={"title"} />,
+    <img style={{ width: "100%" }} src={CricketNetSlide2} alt={"title"} />,
+    <img style={{ width: "100%" }} src={CricketNetSlide3} alt={"title"} />,
+
+    <img style={{ width: "100%" }} src={CricketNetSlide4} alt={"title"} />,
   ];
   return (
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"0px"}
+        radiusTopright={"20px"}
+        radiusbottompleft={"0px"}
+        radiusbottompright={"20px"}
         direction={{ xs: "column", sm: "column", md: "row" }}
         icon={Cricket_logo}
         carouselItems={carouselItems}

@@ -1,4 +1,6 @@
-import BowlingSlide1 from "../../assets/BowlingSlide1.svg";
+import BowlingSlide1 from "../../assets/Bowling/bowling1.jpg";
+import BowlingSlide2 from "../../assets/Bowling/bowling2.jpg";
+import BowlingSlide3 from "../../assets/Bowling/bowling3.webp";
 import Bowling_logo from "../../assets/Bowling_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
@@ -17,12 +19,18 @@ export default function BowlingMachine() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={BowlingSlide1} alt={"title"} />,
 
+    <img style={{ width: "100%" }} src={BowlingSlide2} alt={"title"} />,
+    <img style={{ width: "100%" }} src={BowlingSlide3} alt={"title"} />,
     <img style={{ width: "100%" }} src={BowlingSlide1} alt={"title"} />,
   ];
   return (
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"0px"}
+        radiusTopright={"20px"}
+        radiusbottompleft={"0px"}
+        radiusbottompright={"20px"}
         direction={{ xs: "column", sm: "column", md: "row" }}
         icon={Bowling_logo}
         carouselItems={carouselItems}

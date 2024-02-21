@@ -2,6 +2,9 @@ import Play_logo from "../../assets/Play_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
 import plyaStationSlide from "../../assets/plyaStationSlide.svg";
+import plyaStationSlide2 from "../../assets/Playstation/play1.webp";
+import plyaStationSlide3 from "../../assets/Playstation/play2.jpg";
+import plyaStationSlide4 from "../../assets/Playstation/play3.avif";
 
 const heading1 = "Play Station";
 const heading2 = "Features";
@@ -17,12 +20,20 @@ export default function PlayStation() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={plyaStationSlide} alt={"title"} />,
 
-    <img style={{ width: "100%" }} src={plyaStationSlide} alt={"title"} />,
+    <img style={{ width: "100%" }} src={plyaStationSlide2} alt={"title"} />,
+    <img style={{ width: "100%" }} src={plyaStationSlide3} alt={"title"} />,
+
+    <img style={{ width: "100%" }} src={plyaStationSlide4} alt={"title"} />,
+    <img style={{ width: "100%" }} src={plyaStationSlide2} alt={"title"} />,
   ];
   return (
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"20px"}
+        radiusTopright={"0px"}
+        radiusbottompleft={"20px"}
+        radiusbottompright={"0px"}
         position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
         icon={Play_logo}

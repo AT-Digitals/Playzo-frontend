@@ -1,4 +1,7 @@
-import PartyCenterSlide1 from "../../assets/PartyCenterSlide1.svg";
+import PartyCenterSlide1 from "../../assets/Partycenter/party1.webp";
+import PartyCenterSlide2 from "../../assets/Partycenter/party2.jpg";
+import PartyCenterSlide3 from "../../assets/Partycenter/party3.jpeg";
+import PartyCenterSlide4 from "../../assets/Partycenter/party4.jpg";
 import Party_logo from "../../assets/Party_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
@@ -15,15 +18,38 @@ const secBullet1 =
 const buttonLabel = "Enquire Now";
 export default function PartyCenter() {
   const carouselItems = [
-    <img style={{ width: "100%" }} src={PartyCenterSlide1} alt={"title"} />,
+    <img
+      style={{ width: "100%", height: "100%" }}
+      src={PartyCenterSlide1}
+      alt={"title"}
+    />,
 
-    <img style={{ width: "100%" }} src={PartyCenterSlide1} alt={"title"} />,
+    <img
+      style={{ width: "100%", height: "100%" }}
+      src={PartyCenterSlide2}
+      alt={"title"}
+    />,
+    <img
+      style={{ width: "100%", height: "100%" }}
+      src={PartyCenterSlide3}
+      alt={"title"}
+    />,
+
+    <img
+      style={{ width: "100%", height: "100%" }}
+      src={PartyCenterSlide4}
+      alt={"title"}
+    />,
   ];
 
   return (
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"0px"}
+        radiusTopright={"20px"}
+        radiusbottompleft={"0px"}
+        radiusbottompright={"20px"}
         direction={{ xs: "column", sm: "column", md: "row" }}
         icon={Party_logo}
         carouselItems={carouselItems}

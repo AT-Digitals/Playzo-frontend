@@ -1,5 +1,4 @@
 import Badmin_logo from "../../assets/Badmin_logo.svg";
-import Badmintonslide1 from "../../assets/Badmintonslide1.svg";
 import Badmintonslide2 from "../../assets/BadmintonImages/badminton1.jpg";
 import Badmintonslide3 from "../../assets/BadmintonImages/badminton2.jpg";
 import Badmintonslide4 from "../../assets/BadmintonImages/badminton3.jpg";
@@ -20,8 +19,6 @@ const secBullet1 =
 const buttonLabel = "Enquire Now";
 export default function Badminton() {
   const carouselItems = [
-    <img style={{ width: "100%" }} src={Badmintonslide1} alt={"title"} />,
-
     <img style={{ width: "100%" }} src={Badmintonslide2} alt={"title"} />,
     <img style={{ width: "100%" }} src={Badmintonslide3} alt={"title"} />,
 
@@ -31,6 +28,10 @@ export default function Badminton() {
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"20px"}
+        radiusTopright={"0px"}
+        radiusbottompleft={"20px"}
+        radiusbottompright={"0px"}
         position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
         icon={Badmin_logo}

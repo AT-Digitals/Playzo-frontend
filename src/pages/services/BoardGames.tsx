@@ -1,4 +1,6 @@
-import BoardGameSlide1 from "../../assets/BoardGameSlide1.svg";
+import BoardGameSlide1 from "../../assets/BoardGames/Board1.jpg";
+import BoardGameSlide2 from "../../assets/BoardGames/Board2.avif";
+import BoardGameSlide3 from "../../assets/BoardGames/Board3.webp";
 import Board_logo from "../../assets/Board_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
@@ -19,13 +21,22 @@ export default function BoardGames() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={BoardGameSlide1} alt={"title"} />,
 
+    <img style={{ width: "100%" }} src={BoardGameSlide2} alt={"title"} />,
+
+    <img style={{ width: "100%" }} src={BoardGameSlide3} alt={"title"} />,
     <img style={{ width: "100%" }} src={BoardGameSlide1} alt={"title"} />,
+
+    <img style={{ width: "100%" }} src={BoardGameSlide3} alt={"title"} />,
   ];
   return (
     <>
       <Service />
 
       <ServiceGrid
+        radiusTopleft={"0px"}
+        radiusTopright={"20px"}
+        radiusbottompleft={"0px"}
+        radiusbottompright={"20px"}
         direction={{ xs: "column", sm: "column", md: "row" }}
         icon={Board_logo}
         carouselItems={carouselItems}

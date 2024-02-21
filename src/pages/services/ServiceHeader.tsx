@@ -1,14 +1,10 @@
-import { Box, Stack, Typography, keyframes, styled } from "@mui/material";
+import { Box, Typography, keyframes } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
 import ServicePara from "../../assets/ServicePara.svg";
 import ServicePara1 from "../../assets/ServicePara1.svg";
-
-const StyledTypo = styled(Typography)({
-  // marginTop: "60px",
-  // position: "absolute",
-  fontWeight: 700,
-});
+import styled from "@emotion/styled";
 
 const StyledTypoBody = styled(Typography)({
   color: Colors.BLACK,
@@ -20,69 +16,64 @@ const StyledTypoBody = styled(Typography)({
   fontWeight: 400,
   maxWidth: "890px",
 });
-const slideInFromBottom = keyframes`
-  from {
-    transform: translateY(100%);
-    opacity: 0;
+
+interface StyledTextRevealProps {
+  reveal: boolean;
+}
+
+const revealAnimation = keyframes`
+  0% {
+    width: 0;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-// Styled components
-const AnimatedTextContainer = styled(Stack)`
-  justify-content: center;
-  align-items: center;
-  margin-top: 40px;
-  flex-direction: ${({ theme }) =>
-    theme.breakpoints.down("sm") ? "column" : "row"};
-  gap: 0;
-
-  & .animated-text {
-    color: ${({ theme }) => theme.palette.text.primary};
-    padding: 0 20px;
-    text-align: ${({ theme }) =>
-      theme.breakpoints.down("xs") ? "center" : "left"};
-    font-size: 82px;
-    font-style: italic;
-
-    line-height: 1;
-    animation: ${slideInFromBottom} 1s ease-out forwards;
+  100% {
+    width: 100%;
   }
 `;
 
-const AnimatedTextBody = styled(Stack)`
-  padding: 0 20px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  flex-direction: ${({ theme }) =>
-    theme.breakpoints.down("sm") ? "column" : "row"};
-  gap: 0;
-  margin-top: ${({ theme }) =>
-    theme.breakpoints.down("sm") ? "1rem" : "1rem"};
-  margin-right: ${({ theme }) =>
-    theme.breakpoints.down("md") ? "none" : "8px"};
-
-  & .animated-text {
-    opacity: 0;
-    animation: ${slideInFromBottom} 1s ease-out forwards;
+const blurAnimation = keyframes`
+  0% {
+    filter: blur(10px);
   }
+  100% {
+    filter: blur(0);
+  }
+`;
+
+const StyledTextReveal = styled.div<StyledTextRevealProps>`
+  overflow: hidden;
+  white-space: nowrap;
+  animation: ${revealAnimation} 2s ease-in-out, ${blurAnimation} 3s ease-in-out; // Adjust the durations as needed
+  animation-play-state: ${(props) => (props.reveal ? "running" : "paused")};
 `;
 
 export default function ServiceHeaders() {
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setReveal(true);
+    }, 1000); // Adjust the timing as needed
+  }, []);
+
   return (
     <>
-      <AnimatedTextContainer>
-        <StyledTypo variant="h4" className="animated-text">
+      <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        <StyledTextReveal
+          style={{
+            fontSize: "82px",
+            textAlign: "center",
+            fontStyle: "italic",
+            fontWeight: 700,
+            lineHeight: 1.2,
+          }}
+          reveal={reveal}
+        >
           Your Gateway to Exciting <br />
           Experiences
-        </StyledTypo>
-      </AnimatedTextContainer>
-      <AnimatedTextBody>
+        </StyledTextReveal>
+
         <StyledTypoBody
+          marginTop={1}
           variant="body1"
           fontSize="18px"
           className="animated-text"
@@ -92,7 +83,7 @@ export default function ServiceHeaders() {
           or someone looking for a great place to socialize, we have something
           special for you.
         </StyledTypoBody>
-      </AnimatedTextBody>
+      </Box>
       <>
         <Box
           component="img"
@@ -100,7 +91,6 @@ export default function ServiceHeaders() {
           alt="ball"
           sx={{
             position: "absolute",
-            // top: { xs: 172, sm: "118px", md: 130 },
             transform: {
               xs: "translate(0px,-200px)",
               sm: "translate(0px,-200px)",
