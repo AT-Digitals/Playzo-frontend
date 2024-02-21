@@ -61,7 +61,7 @@ export default function CustomDateCalendar({
   type,
   selectedService,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>("");
+  const [selectedDate, setSelectedDate] = React.useState<string>(new Date().toString());
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -190,6 +190,10 @@ export default function CustomDateCalendar({
   const handleCloseDateModal = () => {
     setDateModalOpen(false)
   }
+  
+  React.useEffect(() => {
+    ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
+  }, [])
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;

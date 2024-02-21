@@ -4,17 +4,18 @@ import {
   DialogContent,
   Divider,
   IconButton,
+  InputAdornment,
   Link,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
-import CustomTextField from "../../CommonComponents/CustomTextField";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Icon from "../../assets/Variant10.png";
 import SignUpForm from "./SignUpForm";
@@ -34,9 +35,12 @@ export default function Form({ handleClose, open }: loginProps) {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
@@ -173,19 +177,33 @@ export default function Form({ handleClose, open }: loginProps) {
                   borderRadius: "8px",
                 },
               }}
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               onChange={handlePasswordChange}
               value={password}
               required
               error={!isPasswordValid}
               InputProps={{
-                endAdornment: !isPasswordValid && (
-                  <ErrorOutlineIcon
-                    color="error"
-                    style={{ marginRight: "8px" }}
-                  />
-                ),
+                endAdornment: ( <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+                
+                {!isPasswordValid && 
+                <ErrorOutlineIcon sx={{ml:"5px"}}
+                  color="error"
+                  style={{ marginRight: "8px" }}
+                />
+                }
+              </InputAdornment>
+              
+              ),
+              
+                
               }}
             />
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
