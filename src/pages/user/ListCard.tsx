@@ -3,28 +3,32 @@
 import { Divider, Stack, Typography } from "@mui/material";
 
 import Colors from "../../CommonComponents/Colors";
+import DateUtils from "../../Utils/DateUtils";
 import Rating from "@mui/material/Rating";
+import TimeUtlis from "../../Utils/TimeUtlis";
 import Vector from "../../assets/Vector.png";
 import Vector1 from "../../assets/Vector (1).png";
 import Vector2 from "../../assets/Vector (2).png";
 
-interface userType {
-  bookingId: string;
-  date: string;
-  userName: string;
-  bookingType: string;
-  timings: string;
-  comments: string;
-  bookingCompleted: string;
-  refundCompleted?: string;
-  ratings?: number;
-}
+// interface userType {
+//   bookingId: string;
+//   date: string;
+//   userName: string;
+//   bookingType: string;
+//   timings: string;
+//   comments: string;
+//   bookingCompleted: string;
+//   refundCompleted?: string;
+//   ratings?: number;
+// }
 
 interface dataProps {
-  userDetails: userType[];
+  userDetails: any[];
+  userName:string;
 }
 
-export default function ListCard({ userDetails }: dataProps) {
+export default function ListCard({ userDetails, userName }: dataProps) {
+  console.log("userdetails",userDetails)
   return (
     <>
       {userDetails.map((user, index) => (
@@ -38,7 +42,7 @@ export default function ListCard({ userDetails }: dataProps) {
             <Stack direction="row" spacing={1} alignItems="center">
               <Typography variant="body2">Booking id.</Typography>
               <Typography variant="body2" fontWeight={600}>
-                {user.bookingId}
+                {user.id}
               </Typography>
             </Stack>
             <Rating
@@ -54,13 +58,13 @@ export default function ListCard({ userDetails }: dataProps) {
             />
           </Stack>
           <Typography variant="body2" fontWeight={600}>
-            {user.date}
+            {DateUtils.formatDate(user.dateOfBooking,"DD-MMM-YYYY")}
           </Typography>
           <Stack direction="row" spacing={5} alignItems="center">
-            <Typography variant="body2">{user.userName}</Typography>
-            <Typography variant="body2">{user.bookingType}</Typography>
+            <Typography variant="body2">{userName}</Typography>
+            <Typography variant="body2">{user.type}</Typography>
 
-            <Typography variant="body2">{user.timings}</Typography>
+            <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(user.startTime)} - ${TimeUtlis.formatMillisecondsToTimeConvert(user.endTime)}`}</Typography>
           </Stack>
           <Stack
             direction="row"
@@ -73,7 +77,7 @@ export default function ListCard({ userDetails }: dataProps) {
               justifyContent: "space-between",
             }}
           >
-            {user.comments === "" ? (
+            {!user.comments? (
               <Stack direction="row" spacing={1} alignItems="center">
                 <img src={Vector} width={15} height={15} />
                 <Typography variant="body2">Add comment</Typography>

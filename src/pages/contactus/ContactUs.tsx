@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
@@ -14,17 +15,16 @@ import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import EnquiryApi from "../../api/EnquiryApi";
 import { Link } from "react-router-dom";
-import banner from "./cUS.png";
-import styled from "@emotion/styled";
-import { useState } from "react";
-import ballimage from "../../assets/ball-306073_960_720.webp"
-import batimage from "../../assets/5360cd03c5ae030e6ab555508a65f614.jpg"
-import shuttleimage from "../../assets/159415.svg"
-import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-download-32.png"
-import playimage from "../../assets/playstation-4-logo-svg-4.png"
-import basketimage from "../../assets/basketball-vector-graphics.png"
-import { transform } from "typescript";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
+import ballimage from "../../assets/ball-306073_960_720.webp"
+import banner from "./cUS.png";
+import basketimage from "../../assets/basketball-vector-graphics.png"
+import batimage from "../../assets/5360cd03c5ae030e6ab555508a65f614.jpg"
+import playimage from "../../assets/playstation-4-logo-svg-4.png"
+import shuttleimage from "../../assets/159415.svg"
+import styled from "@emotion/styled";
+import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-download-32.png"
+import { transform } from "typescript";
 
 // import GameIcon from "../../assets/doodl-5 1.png";
 
@@ -250,54 +250,86 @@ const StyledImage5 = styled.img`
 
 
 export default function ContactUs() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const user = localStorage.getItem('user');
+  const userData =user && JSON.parse(user);
+  const [name, setName] = useState(userData?userData["name"]:"");
+  const [email, setEmail] = useState(userData?userData["email"]:"");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(userData?userData["phone"]:"");
   const [successMessage, setSuccessMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(false);
 
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [isValidType, setIsValidType] = useState<boolean>(true);
-  const [isValidName, setIsValidName] = useState(false);
+  const [isValidName, setIsValidName] = useState(true);
   const [isValidPhone, setIsValidPhone] = useState(true);
-
-  // const [submitted, setSubmitted] = useState(false); // New state to track form submission
 
   const successNotification = () => {
     setSuccessMessage(false);
   }
 
-  const errorNotification = () => {
-    setErrorMessage(false);
+  useEffect(() => {
+    if (name) {
+      setIsValidName(false)
   }
+    if (email) {
+      validateEmail(email);
+    }
+    if (phoneNumber) {
+      setIsValidPhone(false);
+    }
+
+    if (type) {
+      setIsValidType(false);
+    }
+  }, []);
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event?.target.value);
+    setIsValidType(event?.target.value?false:true)
   };
 
   const handleMessageChange = (event: any) => {
     setMessage(event?.target.value);
   };
-
+  const handleNameChange = (event: any) => {
+    setName(event);
+    setIsValidName(event?false:true)
+};
+const validateEmail = (input: any) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isValid = emailRegex.test(input);
+  setIsValidEmail(isValid?false:true);
+};
+const handleEmailChange = (event: any) => {
+  setEmail(event);
+  validateEmail(event);
+};
+const validatePhone = (value: string) => {
+  setIsValidPhone(value.length ===10?false:true);
+}
+const handlePhoneChange = (event: any) => {
+  setPhoneNumber(event);
+  validatePhone(event);
+};
   const onSubmit = async (event: any) => {
     event?.preventDefault();
 
-    if (!name) {
-      setIsValidName(true);
+    if (name) {
+      setIsValidName(false)
+  }
+    if (email) {
+      validateEmail(email);
     }
-    if (!email) {
-      setIsValidEmail(true);
-    }
-    if (!phoneNumber) {
-      setIsValidPhone(true);
+    if (phoneNumber) {
+      setIsValidPhone(false);
     }
 
-    // if (!type) {
-    //   setIsValidType(true);
-    // }
-
+    if (type) {
+      setIsValidType(false);
+    }
+if(name && email && phoneNumber && type){
     const data = {
       name: name,
       email: email,
@@ -324,8 +356,11 @@ export default function ContactUs() {
       }
 
     } catch (err) {
-      setErrorMessage(true)
+      console.log("err", err);
+      // setErrorMessage(true)
     }
+}
+
   };
 
   // const StyledImage1 = styled.img`
@@ -447,7 +482,7 @@ export default function ContactUs() {
                   required={false}
                   placeholder="Enter your name"
                   value={name}
-                  onChange={setName}
+                  onChange={handleNameChange}
                   error={!!isValidName}
                   helperText={isValidName ? 'Please provide valid Name' : ''}
                 />
@@ -457,7 +492,7 @@ export default function ContactUs() {
                   required={false}
                   placeholder="Enter your email address"
                   value={email}
-                  onChange={setEmail}
+                  onChange={handleEmailChange}
                   error={!!isValidEmail}
                   helperText={isValidEmail ? 'Please provide valid Email' : ''}
                 />
@@ -467,7 +502,8 @@ export default function ContactUs() {
                   placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
-                //error={isValidType}
+                  error={!!isValidType}
+                  helperText={isValidType? 'Please provide valid Service' : ''}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -475,7 +511,7 @@ export default function ContactUs() {
                   required={false}
                   placeholder="Enter your phone number"
                   value={phoneNumber}
-                  onChange={setPhoneNumber}
+                  onChange={handlePhoneChange}
                   type="number"
                   error={!!isValidPhone}
                   helperText={isValidPhone ? 'Please provide valid phone number' : ''}
@@ -539,7 +575,7 @@ export default function ContactUs() {
               </Stack>
             </form>
             <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
-            <ModalComponent open={errorMessage} handleClose={errorNotification} text="Please provide valid details in the form" />
+            {/* <ModalComponent open={errorMessage} handleClose={errorNotification} text="Please provide valid details in the form" /> */}
           </Box>
         </Stack>
       </AppContainer>

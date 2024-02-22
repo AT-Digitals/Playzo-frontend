@@ -431,7 +431,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           height={{ xs: "100px", sm: "100px", md: "100px", lg: "300px" }}
         >
           <Box
-            display={{ xs: "flex", sm: "flex", md: "flex", lg: "" }}
+            display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
             alignItems={{ xs: "center", sm: "cemter", md: "center", lg: "" }}
             padding={{
               xs: "10px 10px",
@@ -463,7 +463,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               alt="booking"
             />
             <Typography
-              display={{ xs: "block", sm: "block", md: "block", lg: "none" }}
+              display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
               textAlign={"center"}
               fontSize={"14px"}
               color={Colors.BLACK}
@@ -480,6 +480,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 ? "Board Games"
                 : type === BookingType.BowlingMachine
                 ? "Bowling Machine"
+                : type === BookingType.CricketNet
+                ? "Cricket Net"
                 : "Unknown Type"}
             </Typography>
           </Box>

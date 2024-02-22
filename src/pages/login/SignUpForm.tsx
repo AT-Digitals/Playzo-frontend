@@ -2,24 +2,20 @@ import {
     Box,
     Dialog,
     DialogContent,
-    Divider,
     IconButton,
-    Link,
+    InputAdornment,
     Stack,
     TextField,
-    Typography,
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
-import CustomTextField from "../../CommonComponents/CustomTextField";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import Icon from "../../assets/Variant10.png";
 import TextFieldComponent from "./TextFieldComponent";
 import UserApi from "../../api/UserApi";
-import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -39,7 +35,10 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     const [isValidName, setIsValidName] = useState(true);
     const [isValidPhone, setIsValidPhone] = useState(true);
     const navigate = useNavigate();
-
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+      };
     const handleEmailChange = (event: any) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
@@ -169,14 +168,55 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
                         type="number"
                         errorText="Please enter a valid phone number"
                     />
-                    <TextFieldComponent
-                        label="Password"
+                    <Box>
+                    <CustomLabel color={Colors.WHITE} mb={1}>
+                {"Password"}
+            </CustomLabel>
+                    <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    sx={{
+                        backgroundColor: Colors.WHITE,
+                        width: "100%",
+                        borderRadius: "8px",
+                        "& .MuiOutlinedInput-root": {
+                            borderRadius: "8px",
+                        },
+                    }}
+                        // label="Password"
                         value={password}
                         onChange={handlePasswordChange}
-                        validationtext={isPasswordValid}
-                        type="password"
-                        errorText="Please enter a valid password"
+                        // validationtext={isPasswordValid}
+                        type={showPassword ? "text" : "password"}
+                        // errorText="Please enter a valid password"
+                        InputProps={{
+                            endAdornment: ( <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              edge="end"
+                            >
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                            
+                            {!isPasswordValid && 
+                            <ErrorOutlineIcon sx={{ml:"5px"}}
+                              color="error"
+                              style={{ marginRight: "8px" }}
+                            />
+                            }
+                          </InputAdornment>
+                          
+                          ),
+                          
+                            
+                          }}
+
                     />
+                     <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+              {!isPasswordValid ? "Please enter a valid password" : ""}
+            </span>
+                    </Box>
                     <CustomButton
                         color={Colors.WHITE}
                         bgColor={Colors.BUTTON}

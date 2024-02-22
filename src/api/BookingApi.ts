@@ -70,7 +70,7 @@ export default class BookingApi {
   public static async filterPage(request: any) {
     try {
       const datails = await axiosInstance.get<any[]>(
-        `/bookingFilter/filterPage` + FilterUtils.getQueryString(request)
+        `/bookedFilter/filterPage` + FilterUtils.getQueryString(request)
       );
       return datails.data;
     } catch (e) {
@@ -81,7 +81,7 @@ export default class BookingApi {
   public static async filterBook(request: any) {
     try {
       const datails = await axiosInstance.get<any[]>(
-        `/bookingFilter/filterBook` + FilterUtils.getQueryString(request)
+        `/bookedFilter/filterBook` + FilterUtils.getQueryString(request)
       );
       return datails.data;
     } catch (e) {
@@ -106,4 +106,5 @@ export default class BookingApi {
       throw handleApiError(e, "Failed to get amount");
     }
   }
+
 }

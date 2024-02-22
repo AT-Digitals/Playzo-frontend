@@ -1,12 +1,12 @@
 import * as React from "react";
 
+import { FormHelperText, InputBase, Typography, styled } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import Box from "@mui/material/Box";
 import Colors from "./Colors";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import { InputBase, Typography, styled } from "@mui/material";
 
 interface dropdownProps {
   label: string;
@@ -14,6 +14,8 @@ interface dropdownProps {
   placeHolder?: string;
   value?: string;
   onChange?: (value: SelectChangeEvent<string>) => void;
+  error?:boolean;
+  helperText?:string;
 }
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -57,6 +59,8 @@ export default function DropDownComponent({
   placeHolder,
   value,
   onChange,
+  error=false,
+  helperText,
 }: dropdownProps) {
   return (
     <Box>
@@ -89,6 +93,7 @@ export default function DropDownComponent({
             </CustomMenuItem>
           ))}
         </Select>
+        {error ? <FormHelperText error>{helperText}</FormHelperText> : <></>}
       </FormControl>
     </Box>
   );
