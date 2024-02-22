@@ -31,6 +31,10 @@ export default function Turf() {
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"0px"}
+        radiusTopright={"20px"}
+        radiusbottompleft={"0px"}
+        radiusbottompright={"20px"}
         direction={{ xs: "column", sm: "column", md: "row" }}
         icon={Turf_logo}
         carouselItems={carouselItems}

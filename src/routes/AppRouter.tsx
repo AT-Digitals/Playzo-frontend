@@ -9,8 +9,9 @@ import BoardGames from "../pages/services/BoardGames";
 import BowlingMachine from "../pages/services/BowlingMachine";
 import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon";
 import Cafeteria from "../pages/services/Cafeteria";
-import CareersPage from "../pages/Careers/CareersPage";
+import CareersPageNew from "../pages/Careers/CarrersPage";
 import ContactUs from "../pages/contactus/ContactUs";
+import CookiesPage from "../pages/Careers/CookiesPage";
 import CricketNet from "../pages/services/CricketNet";
 import CricketNetBookingCommon from "../BookingService/CricketNetCommon";
 import CrossFit from "../pages/services/CrossFit";
@@ -47,7 +48,7 @@ export default function AppRouter() {
           <Route path={routes.CAFETERIA} element={<Cafeteria />} />
           <Route path={routes.ABOUTUS} element={<AboutUs />} />
           <Route path={routes.CONTACTUS} element={<ContactUs />} />
-          <Route path={routes.CAREERS_PAGE} element={<CareersPage />} />
+          <Route path={routes.CAREERS_PAGE} element={<CareersPageNew />} />
 
           <Route path={routes.USERPROFILE} element={<UserProfile />} />
           <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
@@ -83,6 +84,7 @@ export default function AppRouter() {
             element={<TermsandComditions />}
           />
           <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
+          <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
         </Route>
       </Routes>
     </Router>

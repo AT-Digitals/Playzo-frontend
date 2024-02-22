@@ -5,7 +5,7 @@ import Colors from "../../CommonComponents/Colors";
 
 interface CustomSliderProps {
   slides: ReactNode[];
-  autoplayInterval?: number;
+  autoplayInterval: number;
   nextSlide: any;
   currentSlide: any;
   handleBulletClick: any;
@@ -13,7 +13,7 @@ interface CustomSliderProps {
 
 const CustomSlider = ({
   slides,
-  autoplayInterval = 3000,
+  autoplayInterval,
   nextSlide,
   currentSlide,
   handleBulletClick,
@@ -26,7 +26,7 @@ const CustomSlider = ({
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentSlide, autoplayInterval, nextSlide]);
+  }, [autoplayInterval, nextSlide]);
 
   return (
     <>
@@ -40,8 +40,8 @@ const CustomSlider = ({
         <Box
           sx={{
             display: "flex",
-            transition: "transform 0.5s ease",
             transform: `translateX(-${currentSlide * 100}%)`,
+            height: "100%", // Make sure the height is 100% for the images to fill the container
           }}
         >
           {slides.map((slide, index) => (
@@ -51,8 +51,6 @@ const CustomSlider = ({
                 flex: "0 0 100%",
                 boxSizing: "border-box",
                 width: "100%",
-                maxHeight: 400,
-
                 overflow: "hidden",
                 position: "relative",
               }}
@@ -63,16 +61,14 @@ const CustomSlider = ({
                   backgroundImage: `url(${slide})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  objectFit: "cover", // Set object-fit to cover
                   overflow: "hidden",
-                  // transition: "transform 0.3s ease",
-                  // "&:hover": {
-                  //   transform: "scale(1.1)", // Increase scale on hover
-                  // },
-                  // Add this line to fix the issue
                   display: "flex",
+                  height: "100%", // Ensure the height is 100%
+                  maxHeight: 400,
                 }}
               >
-                {" "}
                 {slide}
               </Box>
             </Box>
@@ -94,7 +90,7 @@ const CustomSlider = ({
               fontSize: "14px",
               color: currentSlide === index ? "red" : "gray",
               cursor: "pointer",
-              width: slides.length === 2 ? "100%" : "100%", // Adjust width dynamically
+              width: slides.length === 2 ? "100%" : "100%",
             }}
             onClick={() => handleBulletClick(index)}
           >
@@ -104,10 +100,9 @@ const CustomSlider = ({
                 color: currentSlide === index ? "red" : "gray",
                 cursor: "pointer",
                 position: "absolute",
-
                 border:
                   currentSlide === index ? `2px solid ${Colors.BLACK}` : "none",
-                width: slides.length === index ? "100%" : "100%", // Adjust width dynamically
+                width: slides.length === index ? "100%" : "100%",
               }}
             />
           </Box>

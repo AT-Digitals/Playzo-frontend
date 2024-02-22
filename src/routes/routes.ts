@@ -30,6 +30,7 @@ const PRIVACY_POLICY = "/privacy-policy";
 const CRICKETNET = SERVICE + "cricketnet";
 const BOWLINGMACHINE = SERVICE + "bowlingmachine";
 const TERMS_AND_CONDITIONS = "/terms-and-conditioins";
+const COOKIES_PAGE = "/cookies";
 const routes = {
   ROOT,
   LOGIN,
@@ -62,6 +63,7 @@ const routes = {
   FAQ,
   TERMS_AND_CONDITIONS,
   PRIVACY_POLICY,
+  COOKIES_PAGE,
 };
 
 export default routes;

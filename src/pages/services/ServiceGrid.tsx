@@ -24,6 +24,10 @@ interface serviceGridProps {
   icon: string;
   direction?: any;
   position?: any;
+  radiusTopright?: any;
+  radiusbottompright?: any;
+  radiusTopleft?: any;
+  radiusbottompleft?: any;
 }
 
 export default function ServiceGrid(props: serviceGridProps) {
@@ -88,6 +92,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             slides={props.carouselItems}
             handleBulletClick={handleBulletClick}
             nextSlide={nextSlide}
+            autoplayInterval={4000}
           />
           <Box
             display="flex"
@@ -97,9 +102,17 @@ export default function ServiceGrid(props: serviceGridProps) {
           ></Box>
         </Stack>
         <Stack
+          marginRight={"0px !important"}
+          marginLeft={"0px !important"}
+          bgcolor={"white"}
+          padding={"0 30px"}
           width={"100%"}
           sx={{
             marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
+            borderTopLeftRadius: props.radiusTopleft,
+            borderBottomLeftRadius: props.radiusbottompleft,
+            borderTopRightRadius: props.radiusTopright,
+            borderBottomRightRadius: props.radiusbottompright,
           }}
           // maxHeight={400}
           height={400}
@@ -113,6 +126,7 @@ export default function ServiceGrid(props: serviceGridProps) {
                 gutterBottom
                 variant="h5"
                 style={{
+                  whiteSpace: "nowrap",
                   fontSize: "82px",
                   fontStyle: "italic",
                   fontWeight: 700,
@@ -181,6 +195,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             </Box>
           </Stack>
           <Box
+            mb={2}
             sx={{
               marginTop: "2px !important",
             }}

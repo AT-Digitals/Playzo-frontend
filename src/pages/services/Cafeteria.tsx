@@ -1,5 +1,8 @@
 import Cafe_logo from "../../assets/Cafe_logo.svg";
-import CafeteriaSlide1 from "../../assets/CafeteriaSlide1.svg";
+import CafeteriaSlide1 from "../../assets/Cafeteriya/cafe1.jpg";
+import CafeteriaSlide2 from "../../assets/Cafeteriya/cafe2.jpg";
+import CafeteriaSlide3 from "../../assets/Cafeteriya/cafe3.jpg";
+import CafeteriaSlide4 from "../../assets/Cafeteriya/cafe4.jpg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
 
@@ -11,18 +14,25 @@ const desc1 =
 const firstBullet1 =
   "Explore a diverse menu with various food options, specials, and promotions for a delightful dining experience. Enjoy comfortable seating in a social environment, creating the perfect ambiance for memorable moments.";
 const secBullet1 =
-  "Enjoy onsite dining without leaving, a social hub for friends, with a variety catering to quick bites or hearty meals. It's the perfect place for convenient gatherings and a delightful dining experience.";
+  "Enjoy onsite dining without leaving, a social hub for friends, with a variety catering to quick bites or hearty meals.";
 const buttonLabel = "Enquire Now";
 export default function Cafeteria() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={CafeteriaSlide1} alt={"title"} />,
 
-    <img style={{ width: "100%" }} src={CafeteriaSlide1} alt={"title"} />,
+    <img style={{ width: "100%" }} src={CafeteriaSlide2} alt={"title"} />,
+    <img style={{ width: "100%" }} src={CafeteriaSlide3} alt={"title"} />,
+
+    <img style={{ width: "100%" }} src={CafeteriaSlide4} alt={"title"} />,
   ];
   return (
     <>
       <Service />
       <ServiceGrid
+        radiusTopleft={"20px"}
+        radiusTopright={"0px"}
+        radiusbottompleft={"20px"}
+        radiusbottompright={"0px"}
         position={"end"}
         direction={{ xs: "column", sm: "column", md: "row-reverse" }}
         icon={Cafe_logo}

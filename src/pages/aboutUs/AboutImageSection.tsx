@@ -141,6 +141,7 @@ const ImageClick = () => {
                     : Colors.BUTTON_COLOR,
                 height: "50px",
                 fontSize: "16px",
+                fontWeight: 600,
               }}
             >
               ABOUT
@@ -161,6 +162,7 @@ const ImageClick = () => {
                   activeButton === "GOAL" ? Colors.WHITE : Colors.BUTTON_COLOR,
                 height: "50px",
                 fontSize: "16px",
+                fontWeight: 600,
               }}
             >
               GOAL
@@ -185,6 +187,7 @@ const ImageClick = () => {
                     : Colors.BUTTON_COLOR,
                 height: "50px",
                 fontSize: "16px",
+                fontWeight: 600,
               }}
             >
               FAQ
@@ -202,6 +205,10 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               ABOUT
             </Typography>
+            <Box
+              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              width={"15%"}
+            ></Box>
 
             <Paragraph style={{ fontSize: "16px", lineHeight: 1.6 }}>
               At Playzo33, we extend beyond being a turf booking platform; we're
@@ -216,6 +223,10 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               GOAL
             </Typography>
+            <Box
+              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              width={"15%"}
+            ></Box>
 
             <Paragraph>
               <Stack direction={"column"} spacing={4}>
@@ -297,6 +308,10 @@ const ImageClick = () => {
             <Typography fontSize="32px" fontWeight={700}>
               FREQUENTLY ASKED QUESTIONS
             </Typography>
+            <Box
+              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              width={"25%"}
+            ></Box>
 
             <AbouFaQ />
           </Box>
