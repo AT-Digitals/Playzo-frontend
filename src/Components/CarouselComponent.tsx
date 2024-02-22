@@ -1,8 +1,10 @@
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
-import Image1 from "../assets/pexels-karolina-grabowska-4966368.jpg";
-import Image2 from "../assets/pexels-photo-8007500.webp";
-import Image3 from "../assets/pexels-photo-2202685.webp";
+import { useState } from "react";
+import Image1 from "../assets/pexels-photo-3660204.jpeg";
+import Image2 from "../assets/pexels-photo-4966378.jpeg";
+import Image3 from "../assets/pexels-photo-13710137.jpeg";
+import Image4 from "../assets/pexels-photo-187329.webp";
+import Image5 from "../assets/pexels-photo-8007173.jpeg";
 import CarouselCardComponent from "./CarouselCardComponent";
 import Colors from "../CommonComponents/Colors";
 
@@ -41,32 +43,40 @@ const CardDetails: HotelCard[] = [
         type: "Badminton,",
         member: "Member since 2022",
         feedback:
-            "I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
+            "The app is SOOOO easy to use for everyone and customer service answers on the second ring EVERY. I also love how quick the Playground team is to support us when we have questions or need something fixed. I also love how quick the Playground team is to support us when we have questions or need something fixed.",
+        ratings: 3,
+    },
+    {
+        imageSrc: Image4,
+        name: "Ananya",
+        type: "Badminton,",
+        member: "Member since 2022",
+        feedback:
+            "I also love how quick the Playground team is to support us when we have questions or need something fixed and team is to support us when we have questions or need something fixed.",
+        ratings: 3,
+    },
+    {
+        imageSrc: Image5,
+        name: "Kamesh",
+        type: "Badminton,",
+        member: "Member since 2022",
+        feedback:
+            "I also love how quick the Playground team is to support us by far the two best features are the ease of use and the customer service is to support us when we have questions or need something fixed and team is to support us when we have questions or need something fixed.",
         ratings: 3,
     },
 ];
 
 export default function CarouselComponent() {
     const initialCardsToShowMobile = 2;
-    const initialCardsToShowWeb = 3;
+    const initialCardsToShowWeb = 5;
 
     const [startIndex, setStartIndex] = useState(0);
     const [cardIndex, setCardIndex] = useState(0);
-    const [loading, setLoading] = useState(true);
     const isWeb = useMediaQuery("(min-width:600px)");
     const initialCardsToShow = isWeb ? initialCardsToShowWeb : initialCardsToShowMobile;
 
     // Initialize visibleCards
     let visibleCards: HotelCard[] = [];
-
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setCardIndex((prevIndex) => (prevIndex + 1) % visibleCards.length);
-    //         setLoading(false);
-    //     }, 5000);
-    //     return () => clearTimeout(timer);
-    // }, [cardIndex, visibleCards.length]);
-
 
    const showNextCards = () => {
         const nextIndex = (cardIndex + 1) % CardDetails.length;
@@ -96,19 +106,28 @@ export default function CarouselComponent() {
 
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} mb={"32px"} width="100%">
+             <Stack  pt={"60px"}>
+            <Box
+              width={"24%"}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
+              marginLeft={"49px"}
+              marginBottom={"10px"}
+            ></Box>
             <Typography
-                pt={"60px"}
-                textAlign={"center"}
-                color={Colors.WHITE}
                 fontSize={"42px"}
-                fontWeight={"bold"}
+                marginLeft={"36px"}
+                fontWeight={"600"}
+                color={Colors.WHITE}
+                fontStyle={"italic"}
+                textTransform={"uppercase"}
             >
-                Our Client Testimonials
+                WHAT OUR CUSTOMER SAYS?
             </Typography>
+            </Stack>
             <Stack
                 flexDirection={{ xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row" }}
                 spacing={3}
-                maxWidth={1400}
+                maxWidth={1270}
                 margin="auto"
                 pt={{ xs: '0px', sm: '0px', md: "0px", lg: "0px" }}
                 pb={{ xs: '0px', sm: '0px', md: "0px", lg: "60px" }}

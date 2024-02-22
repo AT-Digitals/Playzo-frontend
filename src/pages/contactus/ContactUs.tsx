@@ -6,335 +6,52 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
-import CustomButton from "../../CommonComponents/CustomButton";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import EnquiryApi from "../../api/EnquiryApi";
-import { Link } from "react-router-dom";
-import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
-import ballimage from "../../assets/ball-306073_960_720.webp"
 import banner from "./cUS.png";
-import basketimage from "../../assets/basketball-vector-graphics.png"
-import batimage from "../../assets/5360cd03c5ae030e6ab555508a65f614.jpg"
-import playimage from "../../assets/playstation-4-logo-svg-4.png"
-import shuttleimage from "../../assets/159415.svg"
 import styled from "@emotion/styled";
-import tennisimage from "../../assets/tennis-racket-equipment-svg-png-icon-download-32.png"
-import { transform } from "typescript";
-
-// import GameIcon from "../../assets/doodl-5 1.png";
-
-// import ball from "../../assets/ball 3.png";
-
-// import bottomImage from "../../assets/Rectangle 679.png";
+import { useEffect, useState } from "react";
 
 const DropDownData = [
   {
-    value: "badminton",
-    label: "Badminton",
-  },
-  {
-    value: "crossFit",
-    label: "CrossFit",
-  },
-  {
-    value: "turf",
+    value: "one",
     label: "Turf",
   },
   {
-    value: "playstation",
-    label: "Play Station",
+    value: "two",
+    label: "PlayStation",
   },
   {
-    value: "boardGame",
-    label: "Board Game",
-  },
-  {
-    value: "partycenter",
-    label: "Party Center",
-  },
-  {
-    value: "cafeteria",
-    label: "Cafeteria",
+    value: "three",
+    label: "Badminton",
   },
 ];
 
-
-const StyledImage = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 150px;
-    transform: translate(31%, 222%);
-  }
-  `;
-const StyledImage1 = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 170px;
-    height: 200px;
-    transform: translate(14%, 401%);
-  }
-  `;
-const StyledImage2 = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 100px;
-    height: 100px;
-    transform: rotate(29deg);
-    top: 85%;
-    left: 43.9%;
-  }
-  `;
-const StyledImage3 = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-    width: 150px;
-    transform: translate(880%, 688%);
-  }
-  `;
-const StyledImage4 = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-   width: 150px;
-   left: 86%;
-   top: 47%;
-   transform: rotate(36deg);
-  }
-  `;
-const StyledImage5 = styled.img`
-  position: absolute;
-  transform: translate(130px, 30px);
-  /* Set a default width or adjust as needed */
-
-  @media (min-width: 300px) {
-    /* Extra small devices (phones) */
-    width: 130px;
-    height: 115px;
-  }
-
-  @media (min-width: 768px) {
-    /* Small devices (tablets) */
-    width: 130px;
-    height: 130px;
-  }
-
-  @media (min-width: 992px) {
-    /* Medium devices (desktops) */
-    width: 150px;
-    transform: translate(31%, 18%);
-  }
-
-   @media (min-width: 1200px) {
-    /* Large devices (large desktops) */
-   width: 150px;
-   left: 25%;
-   top: 63%;
-   transform: rotate(36deg);
-  }
-  `;
-
-
-
 export default function ContactUs() {
-  const user = localStorage.getItem('user');
-  const userData =user && JSON.parse(user);
-  const [name, setName] = useState(userData?userData["name"]:"");
-  const [email, setEmail] = useState(userData?userData["email"]:"");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(userData?userData["phone"]:"");
-  const [successMessage, setSuccessMessage] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState(false);
-
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidType, setIsValidType] = useState<boolean>(true);
-  const [isValidName, setIsValidName] = useState(true);
-  const [isValidPhone, setIsValidPhone] = useState(true);
-
-  const successNotification = () => {
-    setSuccessMessage(false);
-  }
-
-  useEffect(() => {
-    if (name) {
-      setIsValidName(false)
-  }
-    if (email) {
-      validateEmail(email);
-    }
-    if (phoneNumber) {
-      setIsValidPhone(false);
-    }
-
-    if (type) {
-      setIsValidType(false);
-    }
-  }, []);
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event?.target.value);
-    setIsValidType(event?.target.value?false:true)
   };
 
   const handleMessageChange = (event: any) => {
     setMessage(event?.target.value);
   };
-  const handleNameChange = (event: any) => {
-    setName(event);
-    setIsValidName(event?false:true)
-};
-const validateEmail = (input: any) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const isValid = emailRegex.test(input);
-  setIsValidEmail(isValid?false:true);
-};
-const handleEmailChange = (event: any) => {
-  setEmail(event);
-  validateEmail(event);
-};
-const validatePhone = (value: string) => {
-  setIsValidPhone(value.length ===10?false:true);
-}
-const handlePhoneChange = (event: any) => {
-  setPhoneNumber(event);
-  validatePhone(event);
-};
+
   const onSubmit = async (event: any) => {
     event?.preventDefault();
 
-    if (name) {
-      setIsValidName(false)
-  }
-    if (email) {
-      validateEmail(email);
-    }
-    if (phoneNumber) {
-      setIsValidPhone(false);
-    }
-
-    if (type) {
-      setIsValidType(false);
-    }
-if(name && email && phoneNumber && type){
     const data = {
       name: name,
       email: email,
       type: type,
-      phoneNumber: phoneNumber,
       message: message,
     };
     console.log("data", data);
@@ -343,122 +60,129 @@ if(name && email && phoneNumber && type){
         userName: data.name,
         userEmail: data.email,
         enquiryMessage: data.message,
-        phoneNumber: data.phoneNumber,
         projectType: data.type,
       });
       if (response) {
-        setSuccessMessage(true);
-        setName('');
-        setEmail('');
-        setPhoneNumber('')
-        setType('');
-        setMessage('');
+        // Simulate an asynchronous operation (e.g., API call) with setTimeout
+        setTimeout(() => {}, 5000);
+      } else {
+        console.log("Response Failed");
       }
-
     } catch (err) {
       console.log("err", err);
-      // setErrorMessage(true)
     }
-}
-
   };
-
-  // const StyledImage1 = styled.img`
-  //   position: relative;
-  //   margin: auto;
-  //   display: block;
-  //   transform: translate(-50%, -50%) rotate(0deg);
-  //   width: 110px;
-  //   height: 110px;
-  //   animation: roll 2s linear infinite;
-  //   margin-top: 1rem;
-
-  //   @keyframes roll {
-  //     0% {
-  //       transform: translate(-50%, -50%) rotate(0deg);
-  //     }
-  //     100% {
-  //       transform: translate(-50%, -50%) rotate(360deg);
-  //     }
-  //   }
-  // `;
 
   const BannerImage = styled.img`
     width: 100%;
     max-height: 200px;
     object-fit: cover;
   `;
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
       <Box>
         <BannerImage src={banner} alt="banner" />
       </Box>
-      {/* <StyledImage src={ballimage} alt="" />
-      <StyledImage1 src={batimage} alt="" />
-      <StyledImage2 src={shuttleimage} alt="" />
-      <StyledImage3 src={tennisimage} alt="" />
-      <StyledImage4 src={playimage} alt="" /> */}
-      {/* <StyledImage5 src={basketimage} alt="" /> */}
+      <Box sx={{
+          background: `
+            repeating-linear-gradient(
+              -45deg,
+              transparent,
+              transparent 1em,
+              rgba(127, 215, 245, 0.05) 0,    /* Decreased opacity to 0.05 */
+              rgba(127, 215, 245, 0.05) 0.5em,
+              transparent 0,
+              transparent 1em,
+              rgba(127, 215, 245, 0.05) 0,
+              rgba(127, 215, 245, 0.05) 4em,
+              transparent 0,
+              transparent 1em,
+              rgba(192, 235, 250, 0.05) 0,
+              rgba(192, 235, 250, 0.1) 0em
+            ),
+            repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 1em,
+              rgba(127, 215, 245, 0.1) 0,
+              rgba(127, 215, 245, 0.05) 0.5em,  /* Decreased opacity to 0.05 */
+              transparent 0,
+              transparent 1em,
+              rgba(127, 215, 245, 0.05) 0,
+              rgba(127, 215, 245, 0.05) 4em,
+              transparent 0,
+              transparent 1em,
+              rgba(192, 235, 250, 0.05) 0,
+              rgba(192, 235, 250, 0.05) 0em
+            ),
+            whitesmoke
+          `,
+          backgroundBlendMode: "multiply",
+        }}>
       <AppContainer
         paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
         paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
         maxWidth={1300}
       >
-        <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
+       <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
         <Stack style={{
           marginTop: "-35px",
           marginBottom: "20px"
         }}
-          // height={"100%"}
           spacing={10}
           direction={{ xs: "column", sm: "column", md: "row" }}
-          // container
           paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
         >
-
+         
           <Box flexDirection={"column"}
-            display={"flex"}
-            marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-            style={{
-              paddingTop: "54px"
-            }}
-          >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
-              width="700"
-              height="640"
-            ></iframe>
-            <Typography
-              sx={{
-                fontSize: "22px",
-                fontWeight: "bold",
-                paddingTop: "12px",
-              }}
-            >
-              Contact Us
-            </Typography>
-            <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
-              39/6 KCP Thottam, Kumalan Kuttai, Erode,
-              <br />
-              Tamil Nadu - 638011{" "}
-            </Typography>
-            <Typography fontSize="16px" fontWeight={400}>
-              <span style={{
-                fontSize: "18px",
-                fontWeight: "bold",
-              }}>Phone:</span> +91 70944 60944,  +91 91088 83555
-
-            </Typography>
-          </Box>
-
-          <Box style={{ marginLeft: "110px" }} pt="30px" width={"100%"}>
+                display={"flex"}
+                marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+               style={{
+                paddingTop: "54px"
+               }}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
+                  width="700"
+                  height="640"
+                ></iframe>
+                 <Typography
+                sx={{
+                  fontSize: "22px",
+                  fontWeight: "bold",
+                  paddingTop: "12px",
+                  color: Colors.BUTTON_COLOR
+                }}
+              >
+                Contact Us
+              </Typography>
+                 <Typography fontSize="16px" pt={"8px"} fontWeight={400}>
+                  39/6 KCP Thottam, Kumalan Kuttai, Erode,
+                  <br />
+                  Tamil Nadu - 638011{" "}
+                </Typography>
+                <Typography fontSize="16px" fontWeight={400}>
+                 <span style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: Colors.BUTTON_COLOR
+                 }}>Phone:</span> +91 70944 60944,  +91 91088 83555
+                 
+                </Typography>
+              </Box>
+             
+          <Box style={{marginLeft: "110px"}} pt="30px" width={"100%"}>
             <form onSubmit={onSubmit}>
               <Stack
                 margin={"0 auto"}
-                // marginLeft={{ xs: "-6px", sm: "-6px", md: "-6px", lg: "0px" }}
-                // marginTop={{ xs: "180px", sm: "180px", md: "180px", lg: "0px" }}
                 border={{
                   xs: "1px solid grey",
                   sm: "1px solid grey",
@@ -482,9 +206,7 @@ if(name && email && phoneNumber && type){
                   required={false}
                   placeholder="Enter your name"
                   value={name}
-                  onChange={handleNameChange}
-                  error={!!isValidName}
-                  helperText={isValidName ? 'Please provide valid Name' : ''}
+                  onChange={setName}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -492,9 +214,7 @@ if(name && email && phoneNumber && type){
                   required={false}
                   placeholder="Enter your email address"
                   value={email}
-                  onChange={handleEmailChange}
-                  error={!!isValidEmail}
-                  helperText={isValidEmail ? 'Please provide valid Email' : ''}
+                  onChange={setEmail}
                 />
                 <DropDownComponent
                   label="What service are you interested in"
@@ -502,19 +222,6 @@ if(name && email && phoneNumber && type){
                   placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
-                  error={!!isValidType}
-                  helperText={isValidType? 'Please provide valid Service' : ''}
-                />
-                <CustomTextField
-                  sx={{ maxWidth: 700, borderRadius: "8px" }}
-                  label="Phone Number"
-                  required={false}
-                  placeholder="Enter your phone number"
-                  value={phoneNumber}
-                  onChange={handlePhoneChange}
-                  type="number"
-                  error={!!isValidPhone}
-                  helperText={isValidPhone ? 'Please provide valid phone number' : ''}
                 />
                 <Box margin={"30px"}>
                   <Typography
@@ -551,7 +258,7 @@ if(name && email && phoneNumber && type){
                 </Box>
 
                 <Button
-
+                  
                   sx={{
                     borderRadius: "30px",
                     textTransform: "none",
@@ -574,12 +281,10 @@ if(name && email && phoneNumber && type){
                 </Button>
               </Stack>
             </form>
-            <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
-            {/* <ModalComponent open={errorMessage} handleClose={errorNotification} text="Please provide valid details in the form" /> */}
           </Box>
         </Stack>
       </AppContainer>
-      {/* <img src={bottomImage} alt="bottom" width="100%" height={50} /> */}
+      </Box>
     </>
   );
 }
