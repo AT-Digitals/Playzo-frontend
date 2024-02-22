@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "../../assets/Twitter.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "../../assets/logo.png";
+import logo from "./Playzo.svg";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
 
@@ -55,8 +55,8 @@ export default function Footer() {
                 display: { xs: "block", sm: "block", md: "none", lg: "none" },
               }}
               src={logo}
-              width={172}
-              height={34}
+              width={200}
+              height={48}
             />
           </Link>
           <Grid
@@ -121,7 +121,7 @@ export default function Footer() {
                         color: Colors.BUTTON_COLOR,
                       },
                     }}
-                    to={routes.ROOT}
+                    to={routes.ABOUTUS}
                   >
                     About
                   </StyledLink>
@@ -150,7 +150,6 @@ export default function Footer() {
                   >
                     Contact
                   </StyledLink>
-                  {/* <StyledLink to={routes.ROOT}>My Profile</StyledLink> */}
                 </Stack>
                 <Stack direction="column" spacing={2}>
                   <Typography
@@ -195,9 +194,9 @@ export default function Footer() {
                         color: Colors.BUTTON_COLOR,
                       },
                     }}
-                    to={routes.FAQ}
+                    to={routes.COOKIES_PAGE}
                   >
-                    FAQ
+                    Cookie Policy
                   </StyledLink>
                   <StyledLink
                     sx={{

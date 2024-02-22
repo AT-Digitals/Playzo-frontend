@@ -64,6 +64,12 @@ export default function AboutUs() {
     };
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <Box
