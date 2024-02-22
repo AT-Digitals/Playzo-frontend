@@ -306,6 +306,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       key="2"
       color={Colors.BUTTON}
     >
+      Service Type
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="2"
+      color={Colors.BUTTON}
+    >
       Date & Time
     </Typography>,
     <Typography
