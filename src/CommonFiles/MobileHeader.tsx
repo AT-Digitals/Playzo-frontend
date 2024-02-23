@@ -6,7 +6,7 @@ import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import logo from "../assets/logo.png";
+import logo from "./Playzo.svg";
 import routes from "../routes/routes";
 
 interface MobileHeaderProps {

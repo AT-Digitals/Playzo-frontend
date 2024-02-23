@@ -8,7 +8,7 @@ import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "../assets/logo.png";
+import logo from "./Playzo.svg";
 import routes from "../routes/routes";
 
 const HeaderLink = styled("a")`
@@ -29,7 +29,6 @@ export default function Header() {
 
   // const [userData, serUserData] = useState();
 
-
   const [anchorEl, setAnchorEl] = useState(null);
   const openvalue = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -43,7 +42,6 @@ export default function Header() {
     navigate(routes.USERPROFILE);
     setAnchorEl(null);
   };
-
 
   const handleLogout = async () => {
     try {
@@ -60,18 +58,18 @@ export default function Header() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-      const userData =user && JSON.parse(user);
-      setUser(userData);
+    const user = localStorage.getItem("user");
+    const userData = user && JSON.parse(user);
+    setUser(userData);
   }, []);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       setIsLoggedIn(true);
-    }else{
-          setIsLoggedIn(false);
-        }
-  },[user]);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [user]);
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
@@ -88,7 +86,7 @@ export default function Header() {
         >
           <Box>
             <Link to={routes.ROOT}>
-              <img width={172} height={34} src={logo} alt="alterknit" />
+              <img width={200} height={48} src={logo} alt="alterknit" />
             </Link>
           </Box>
           <Stack direction="row" spacing={3} alignItems="center">
@@ -153,7 +151,7 @@ export default function Header() {
                 Book Now
               </Button>
             </HeaderLink>
-            {isLoggedIn ?
+            {isLoggedIn ? (
               <UserComponent
                 handleClose={handleLogout}
                 open={openvalue}
@@ -161,7 +159,8 @@ export default function Header() {
                 handleMenuClose={handleMenuClose}
                 anchorEl={anchorEl}
                 handleChange={handleChange}
-              /> :
+              />
+            ) : (
               <Button
                 variant="outlined"
                 sx={{
@@ -185,7 +184,7 @@ export default function Header() {
               >
                 Login
               </Button>
-            }
+            )}
           </Stack>
         </Stack>
         <LoginForm handleClose={handleClose} open={open} />

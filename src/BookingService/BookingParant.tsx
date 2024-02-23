@@ -55,7 +55,7 @@ const StyledImage = styled.img`
 const TurfImages = [
   { image: turf, name: "Turf 1", value: 1 },
   { image: turf, name: "Turf 2", value: 2 },
-  { image: turf, name: "Turf 3", value: 3 },
+  { image: turf, name: "Turf 1&2", value: 3 },
 ];
 
 const PlaystationImages = [
@@ -196,7 +196,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       court: number;
       amount: any;
     }[] = [];
-    console.log("allb",allBookings)
+    console.log("allb", allBookings);
     allBookings.map((booking, index) => {
       // console.log("alalala",booking.time)
       // booking["court"] = selectedCourt;
@@ -298,6 +298,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       color={Colors.BLACK}
     >
       Service
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="2"
+      color={Colors.BUTTON}
+    >
+      Service Type
     </Typography>,
     <Typography
       fontSize={"16px"}

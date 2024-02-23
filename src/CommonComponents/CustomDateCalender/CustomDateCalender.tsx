@@ -61,7 +61,9 @@ export default function CustomDateCalendar({
   type,
   selectedService,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>(new Date().toString());
+  const [selectedDate, setSelectedDate] = React.useState<string>(
+    new Date().toString()
+  );
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -118,26 +120,28 @@ export default function CustomDateCalendar({
   const [responseModalOpen, setResponseModalOpen] = React.useState(false);
   const [dateModalOpen, setDateModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
-  const [items, setItems] = useState([{ name: "6:00-7:00 AM", disabled: false },
-  { name: "7:00-8:00 AM", disabled: false },
-  { name: "8:00-9:00 AM", disabled: false },
-  { name: "9:00-10:00 AM", disabled: false },
-  { name: "10:00-11:00 AM", disabled: false },
-  { name: "11:00-12:00 PM", disabled: false },
-  { name: "12:00-1:00 PM", disabled: false },
-  { name: "1:00-2:00 PM", disabled: false },
-  { name: "2:00-3:00 PM", disabled: false },
-  { name: "3:00-4:00 PM", disabled: false },
-  { name: "4:00-5:00 PM", disabled: false },
-  { name: "5:00-6:00 PM", disabled: false },
-  { name: "6:00-7:00 PM", disabled: false },
-  { name: "7:00-8:00 PM", disabled: false },
-  { name: "8:00-9:00 PM", disabled: false },
-  { name: "9:00-10:00 PM", disabled: false },
-  { name: "10:00-11:00 PM", disabled: false },
-  { name: "11:00-12:00 AM", disabled: false },
-  { name: "12:00-1:00 AM", disabled: false },
-  { name: "1:00-2:00 AM", disabled: false },])
+  const [items, setItems] = useState([
+    { name: "6:00-7:00 AM", disabled: false },
+    { name: "7:00-8:00 AM", disabled: false },
+    { name: "8:00-9:00 AM", disabled: false },
+    { name: "9:00-10:00 AM", disabled: false },
+    { name: "10:00-11:00 AM", disabled: false },
+    { name: "11:00-12:00 PM", disabled: false },
+    { name: "12:00-1:00 PM", disabled: false },
+    { name: "1:00-2:00 PM", disabled: false },
+    { name: "2:00-3:00 PM", disabled: false },
+    { name: "3:00-4:00 PM", disabled: false },
+    { name: "4:00-5:00 PM", disabled: false },
+    { name: "5:00-6:00 PM", disabled: false },
+    { name: "6:00-7:00 PM", disabled: false },
+    { name: "7:00-8:00 PM", disabled: false },
+    { name: "8:00-9:00 PM", disabled: false },
+    { name: "9:00-10:00 PM", disabled: false },
+    { name: "10:00-11:00 PM", disabled: false },
+    { name: "11:00-12:00 AM", disabled: false },
+    { name: "12:00-1:00 AM", disabled: false },
+    { name: "1:00-2:00 AM", disabled: false },
+  ]);
 
   // const handleTimeSelection = (time: string) => {
   //   if (selectedTimings.includes(time)) {
@@ -184,16 +188,16 @@ export default function CustomDateCalendar({
   };
 
   const handleCloseModal = () => {
-    setResponseModalOpen(false)
-  }
+    setResponseModalOpen(false);
+  };
 
   const handleCloseDateModal = () => {
-    setDateModalOpen(false)
-  }
-  
+    setDateModalOpen(false);
+  };
+
   React.useEffect(() => {
     ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
-  }, [])
+  }, []);
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
@@ -208,7 +212,7 @@ export default function CustomDateCalendar({
       const response = await BookingApi.filter({
         startDate: dateValue,
         type: type,
-        endDate: dateValue
+        endDate: dateValue,
       });
       setDisableData(response);
     } catch (error: any) {
@@ -217,28 +221,30 @@ export default function CustomDateCalendar({
   };
 
   const MilisecondsToHours = () => {
-
-
     let combinedIntervals: any[] = [];
 
-    disableData.forEach(item => {
+    disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
       const intervals = generateTimeIntervals(new Date(start), new Date(end));
       combinedIntervals = combinedIntervals.concat(intervals);
     });
     if (combinedIntervals.length > 0) {
-      const updatedItems = items.map(item =>
-        combinedIntervals.includes(item.name) ? { ...item, disabled: true } : item
+      const updatedItems = items.map((item) =>
+        combinedIntervals.includes(item.name)
+          ? { ...item, disabled: true }
+          : item
       );
       setItems(updatedItems);
     } else {
       setItems(Timings);
     }
+  };
 
-  }
-
-  const generateTimeIntervals = (startMillis: string | number | Date, endMillis: number | Date) => {
+  const generateTimeIntervals = (
+    startMillis: string | number | Date,
+    endMillis: number | Date
+  ) => {
     const intervals = [];
     let currentTime = new Date(startMillis);
     while (currentTime < endMillis) {
@@ -247,9 +253,9 @@ export default function CustomDateCalendar({
 
       const startHour = currentTime.getHours() % 12 || 12;
       const endHour = nextHour.getHours() % 12 || 12;
-      const startMinutes = ('0' + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
-      const endMinutes = ('0' + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
-      const startPeriod = currentTime.getHours() < 12 ? 'AM' : 'PM';
+      const startMinutes = ("0" + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
+      const endMinutes = ("0" + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
+      const startPeriod = currentTime.getHours() < 12 ? "AM" : "PM";
       // const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
       const intervalString = `${startHour}:${startMinutes}-${endHour}:${endMinutes} ${startPeriod}`;
       intervals.push(intervalString);
@@ -258,13 +264,11 @@ export default function CustomDateCalendar({
     return intervals;
   };
 
-
-
   React.useEffect(() => {
     if (disableData) {
       MilisecondsToHours();
     }
-  }, [disableData])
+  }, [disableData]);
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -299,85 +303,96 @@ export default function CustomDateCalendar({
         };
 
         try {
-          const courtValue = BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
-          console.log("courtValue",courtValue)
-          const response = await BookingApi.getBookingAmount(bookings.type,courtValue);
+          const courtValue =
+            BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
+          console.log("courtValue", courtValue);
+          const response = await BookingApi.getBookingAmount(
+            bookings.type,
+            courtValue
+          );
           if (response) {
-            console.log("responseaa",response)
+            console.log("responseaa", response);
             ratePerHour = response.bookingAmount;
             bookings.amount = totalDuration * ratePerHour;
           } else {
-            console.log('amount fetch Failed');
+            console.log("amount fetch Failed");
           }
         } catch (err) {
-          console.log("err", err)
+          console.log("err", err);
         }
-          selectedTimings.map(async (timeData) => {
-            // const newData = {
-            //   type,
-            //   name: selectedService,
-            //   date: selectedDate,
-            //   time: timeData,
-            //   amount: bookings.amount,
-            //   duration: totalDuration,
-            //   // ... other properties
-            // };
-            try {
-              let startMilliseconds = 0;
-              let endMilliseconds = 0;
-              const [time, am] = timeData.split(" ");
-              const [time1, am1] = time.split("-");
-              const [hours, minutes] = time1.split(":");
+        selectedTimings.map(async (timeData) => {
+          // const newData = {
+          //   type,
+          //   name: selectedService,
+          //   date: selectedDate,
+          //   time: timeData,
+          //   amount: bookings.amount,
+          //   duration: totalDuration,
+          //   // ... other properties
+          // };
+          try {
+            let startMilliseconds = 0;
+            let endMilliseconds = 0;
+            const [time, am] = timeData.split(" ");
+            const [time1, am1] = time.split("-");
+            const [hours, minutes] = time1.split(":");
 
-              console.log("hours", hours, minutes)
-              const startDateTime = new Date(selectedDate);
-              startDateTime.setHours(Number(hours), Number(minutes));
-              startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+            console.log("hours", hours, minutes);
+            const startDateTime = new Date(selectedDate);
+            startDateTime.setHours(Number(hours), Number(minutes));
+            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-              const endDateTime = new Date(startDateTime);
-              endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-              endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-             const response = await BookingApi.getBookedList({
-                type: bookings.type,
-                bookingtype: "online",
-                startTime: startMilliseconds,
-                endTime: endMilliseconds,
-                user: userData.id,
-                startDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
-                endDate: DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
-              }
-             
-              );
-              let newData = tableData;
-              if(response){
-                if(!newData.some((el: { type: string; name: string; date: string; time: string[]; amount: number; duration: number; }) => el === bookings))
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+            const response = await BookingApi.getBookedList({
+              type: bookings.type,
+              bookingtype: "online",
+              startTime: startMilliseconds,
+              endTime: endMilliseconds,
+              user: userData.id,
+              startDate: DateUtils.formatDate(
+                new Date(selectedDate),
+                "YYYY-MM-DD"
+              ),
+              endDate: DateUtils.formatDate(
+                new Date(selectedDate),
+                "YYYY-MM-DD"
+              ),
+            });
+            let newData = tableData;
+            if (response) {
+              if (
+                !newData.some(
+                  (el: {
+                    type: string;
+                    name: string;
+                    date: string;
+                    time: string[];
+                    amount: number;
+                    duration: number;
+                  }) => el === bookings
+                )
+              )
                 newData.push(bookings);
-                setTableData((prevTableData: any) => [...prevTableData, newData]);
-              
-              }
-             
-            } catch (error: any) {
-              if (error.message === 'Please choose another date and slot') {
-                setResponseModalOpen(true);
-               
-              }
+              setTableData((prevTableData: any) => [...prevTableData, newData]);
             }
+          } catch (error: any) {
+            if (error.message === "Please choose another date and slot") {
+              setResponseModalOpen(true);
+            }
+          }
+        });
 
-          })
-          
-          // Reset selected date and timings
-          setSelectedDate("");
-          setSelectedTimings([]);
-
-      }else{
+        // Reset selected date and timings
+        setSelectedDate("");
+        setSelectedTimings([]);
+      } else {
         setDateModalOpen(true);
       }
     } else {
       setModalOpen(true);
-
     }
-
-
   };
 
   return (
@@ -414,15 +429,16 @@ export default function CustomDateCalendar({
               margin: "0px",
               padding: 2,
               "& .MuiPickersDay-root.Mui-selected": {
-                border: "1px solid #15B5FC !important",
-                color: "#15B5FC !important",
-                borderRadius: "12px",
                 background: "white !important",
+                color: "#15B5FC !important",
+                border: "1px solid #15B5FC  !important",
+                borderRadius: "12px",
               },
               "& .MuiPickersDay-today": {
-                background: "#15B5FC !important",
+                border: "1px solid #15B5FC !important",
                 color: "white !important",
-                border: "1px solid #15B5FC  !important",
+                background: "#15B5FC !important",
+                borderRadius: "12px",
               },
             }}
             onChange={(date) => handleDateSelection(date)}
@@ -491,9 +507,22 @@ export default function CustomDateCalendar({
           </Button>
         </Box>
       </Box>
-      <ModalComponent open={modalOpen} handleClose={handleClose} text="Could not add your Bookings!" subText="Login to Your Account" />
-      <ModalComponent open={responseModalOpen} handleClose={handleCloseModal} text="Please choose another date and slot" />
-      <ModalComponent open={dateModalOpen} handleClose={handleCloseDateModal} text="Please choose date and slot" />
+      <ModalComponent
+        open={modalOpen}
+        handleClose={handleClose}
+        text="Could not add your Bookings!"
+        subText="Login to Your Account"
+      />
+      <ModalComponent
+        open={responseModalOpen}
+        handleClose={handleCloseModal}
+        text="Please choose another date and slot"
+      />
+      <ModalComponent
+        open={dateModalOpen}
+        handleClose={handleCloseDateModal}
+        text="Please choose date and slot"
+      />
     </Stack>
   );
 }
