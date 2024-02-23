@@ -1,11 +1,13 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
+import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
-import logo from "../assets/Playzo (1).svg";
+import UserLoginApi from "../api/UserLoginApi";
+import logo from "./Playzo (1).svg";
 import routes from "../routes/routes";
 import { useState } from "react";
 
@@ -24,6 +26,16 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      UserLoginApi.logoutUser();
+      navigate(routes.ROOT);
+      localStorage.clear();
+    } catch {
+      console.log("Logout failed");
+    }
+  };
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer

@@ -7,7 +7,7 @@ import AbouFaQ from "./AboutFAQ";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Colors from "../../CommonComponents/Colors";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import imageBg from "./about-us-bg.jpg";
+import imageBg from "../../assets/AboutPageImages/about-us-bg.jpg";
 import styled from "styled-components";
 
 const Container = styled.div`

@@ -55,7 +55,7 @@ const StyledImage = styled.img`
 const TurfImages = [
   { image: turf, name: "Turf 1", value: 1 },
   { image: turf, name: "Turf 2", value: 2 },
-  { image: turf, name: "Turf 3", value: 3 },
+  { image: turf, name: "Turf 1&2", value: 3 },
 ];
 
 const PlaystationImages = [
@@ -183,9 +183,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // navigate to payment page with state table data  when booking is complete
-
   const handleProceedToPayment = () => {
+    if (allBookings.length === 0) {
+      alert("Please make at least one booking before proceeding to payment");
+      return; // Stop further execution
+    }
+
     const bookingsWithTime: {
       type: BookingType;
       name: string;
@@ -196,7 +199,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       court: number;
       amount: any;
     }[] = [];
-    console.log("allb",allBookings)
+
+    console.log("allb", allBookings);
     allBookings.map((booking, index) => {
       // console.log("alalala",booking.time)
       // booking["court"] = selectedCourt;
@@ -306,6 +310,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       key="2"
       color={Colors.BUTTON}
     >
+      Service Type
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="2"
+      color={Colors.BUTTON}
+    >
       Date & Time
     </Typography>,
     <Typography
@@ -317,8 +330,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Payment
     </Typography>,
   ];
-
-  // const selectedServiceFromState = location.state?.selectedService;
 
   const handlegoBack = () => {
     navigate(-1);

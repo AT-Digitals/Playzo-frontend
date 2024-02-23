@@ -72,8 +72,8 @@ export default function CustomTable({
           <Table>
             <TableHead>
               <TableRow>
-                <StyledCellTitle>Items</StyledCellTitle>
-                <StyledCellTitle>Type</StyledCellTitle>
+                <StyledCellTitle>Service</StyledCellTitle>
+                <StyledCellTitle>Service Type</StyledCellTitle>
                 <StyledCellTitle>Date</StyledCellTitle>
                 <StyledCellTitle>Time</StyledCellTitle>
                 <StyledCellTitle>Qty</StyledCellTitle>

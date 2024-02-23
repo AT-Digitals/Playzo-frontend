@@ -9,8 +9,15 @@ import PartyCenter from "./PartyCenter";
 import PlayStation from "./PlayStation";
 import ServiceHeaders from "./ServiceHeader";
 import Turf from "./Turf";
+import { useEffect } from "react";
 
 export default function ServiceNewUI() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
       <Box
@@ -49,6 +56,7 @@ export default function ServiceNewUI() {
             whitesmoke
           `,
           backgroundBlendMode: "multiply",
+          scrollBehavior: "smooth",
         }}
       >
         <Box padding={"0 40px"}>

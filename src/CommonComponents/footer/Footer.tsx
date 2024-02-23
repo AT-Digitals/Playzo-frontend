@@ -2,6 +2,8 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 
 import AppContainer from "../AppContainer";
 import Colors from "../Colors";
+import CustomButton from "../CustomButton";
+import CustomTextField from "../CustomTextField";
 import Divider from "@mui/material/Divider";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -154,7 +156,7 @@ export default function Footer() {
               sm={6}
               md={4}
               lg={4}
-              marginTop={"13px"}
+              marginTop={"6px"}
             >
              <Typography fontSize={"14px"} fontWeight={"400"} letterSpacing={"1.6px"} textTransform={"uppercase"} color={Colors.BUTTON_COLOR}>Contact us</Typography>
 
@@ -269,6 +271,17 @@ export default function Footer() {
               </Link> */}
               <Link to={routes.ROOT}>
                 <InstagramIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease", 
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                 }} />
+              </Link>
+              <Link to={routes.ROOT}>
+                <LinkedInIcon sx={{
                   color: Colors.WHITE,
                   width: "25px",
                   height: "30px",

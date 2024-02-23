@@ -2,9 +2,10 @@ import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
-import bg from "./cookies.jpg";
-import layer from "./layer-cookies.svg";
+import bg from "../../assets/AboutPageImages/cookies.jpg";
+import layer from "../../assets/AboutPageImages/layer-cookies.svg";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Container = styled(Box)`
   display: flex;
@@ -22,6 +23,12 @@ const StyledImage5 = styled.img`
   transform: translate(1300%, 0px);
 `;
 export default function TermsandConditions() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <Box mb={"90px"}>
       <Container>
@@ -76,7 +83,7 @@ export default function TermsandConditions() {
       </Box>
       <AppContainer maxWidth={1180}>
         <Box>
-          <Typography fontSize={"16px"} fontWeight={600}>
+          <Typography fontSize={"18px"} fontWeight={600}>
             Cookie policy
           </Typography>
           <br />
@@ -94,7 +101,7 @@ export default function TermsandConditions() {
             For performance and analytics. These cookies and pixels collect
             information on how users
           </Typography>
-          <Typography>
+          <Typography fontSize={"16px"}>
             interact with the Services and enable us to improve how we operate.
             For example, we use Google Analytics cookies to help us understand
             how visitors arrive at and browse our website to identify areas for
@@ -103,7 +110,7 @@ export default function TermsandConditions() {
           </Typography>
         </Box>
         <Box>
-          <Typography>
+          <Typography fontSize={"16px"}>
             Targeting Cookies or Advertising Cookies. These cookies collect
             information about your browsing habits in order to make advertising
             relevant to you and your interests. They remember the websites you
@@ -111,7 +118,7 @@ export default function TermsandConditions() {
             as advertising technology service providers and advertisers.
           </Typography>
           <br />
-          <Typography>
+          <Typography fontSize={"16px"}>
             Social media cookies. These cookies are used when you share
             information using a social media sharing button or “like” button on
             our websites or you link your account or engage with our content on
@@ -135,7 +142,7 @@ export default function TermsandConditions() {
 
         <br />
 
-        <Typography>
+        <Typography fontSize={"16px"}>
           Please contact enquiries@powerleague.co.uk if you have any questions.
         </Typography>
       </AppContainer>

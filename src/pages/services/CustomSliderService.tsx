@@ -41,7 +41,7 @@ const CustomSlider = ({
           sx={{
             display: "flex",
             transform: `translateX(-${currentSlide * 100}%)`,
-            height: "100%", // Make sure the height is 100% for the images to fill the container
+            height: "100%",
           }}
         >
           {slides.map((slide, index) => (

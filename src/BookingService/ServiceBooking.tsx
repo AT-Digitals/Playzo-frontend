@@ -76,6 +76,16 @@ export default function ServiceBooking() {
       color={selectedBreadcrumb === "2" ? Colors.BUTTON : Colors.BLACK}
       onClick={() => handleBreadcrumbClick("2")}
     >
+      Service Type
+    </Typography>,
+    <Typography
+      fontSize={"16px"}
+      fontWeight={"bold"}
+      style={{ cursor: "pointer" }}
+      key="2"
+      color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
+      onClick={() => handleBreadcrumbClick("3")}
+    >
       Date & Time
     </Typography>,
     <Typography
@@ -83,8 +93,8 @@ export default function ServiceBooking() {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
-      color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
-      onClick={() => handleBreadcrumbClick("3")}
+      color={selectedBreadcrumb === "4" ? Colors.BUTTON : Colors.BLACK}
+      onClick={() => handleBreadcrumbClick("4")}
     >
       Payment
     </Typography>,
