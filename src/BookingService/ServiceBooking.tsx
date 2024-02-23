@@ -13,6 +13,7 @@ import playstation from "../assets/playstation.png";
 import routes from "../routes/routes";
 import turf from "../assets/turf.png";
 import { useState } from "react";
+import backgroundimage from './7692.jpg'
 
 const TurfDetails = [
   {
@@ -59,7 +60,7 @@ export default function ServiceBooking() {
   };
   const breadcrumbs = [
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -69,7 +70,7 @@ export default function ServiceBooking() {
       Service
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -79,7 +80,7 @@ export default function ServiceBooking() {
       Service Type
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -89,7 +90,7 @@ export default function ServiceBooking() {
       Date & Time
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -102,12 +103,36 @@ export default function ServiceBooking() {
 
   return (
     <>
+    <Box component={"image"}
+                sx={{
+                  position: "relative",
+                  backgroundImage: `url(${backgroundimage})`,
+                  backgroundSize: "cover", // Fit the background image to cover the entire container
+                  backgroundPosition: "bottom",
+                  backgroundRepeat: "no-repeat",
+                  objectFit: "cover", // Set object-fit to cover
+                  height: "100%", // Ensure the height is 100%
+          // Ensure the height is 100%
+                }}>
+                   <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+          }}
+        />
       <Stack
-        marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "120px" }}
+        marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
         marginTop={"50px"}
         spacing={2}
         justifyContent={"center"}
         alignItems={"center"}
+        sx={{
+          opacity: '0.7'
+        }}
       >
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
@@ -128,13 +153,19 @@ export default function ServiceBooking() {
         borderRight={"1px solid #D9D9D9"}
       >
         <Typography
-          fontSize={"14px"}
-          paddingBottom={"7px"}
+          fontSize={"20px"}
+          marginBottom={"10px"}
+          fontWeight={"bold"}
           color={Colors.BLACK}
+          sx={{
+            opacity: '0.7'
+          }}
         >
           Pick a service
         </Typography>
-        <Stack alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
+        <Stack sx={{
+          opacity: '0.7'
+        }} alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
           {TurfDetails.map((item) => (
             <Link style={{ textDecoration: "none" }} to={item.link}>
               <Box
@@ -147,7 +178,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"1px solid #D9D9D9"}
+                border={"3px solid #D9D9D9"}
               >
                 <Box padding={"12px 12px"}>
                   <img src={item.image} width={"100px"} alt="turf" />
@@ -164,7 +195,9 @@ export default function ServiceBooking() {
             </Link>
           ))}
         </Stack>
-        <Stack
+        <Stack sx={{
+          opacity: '0.7'
+        }}
           marginTop={"15px"}
           alignItems={"baseline"}
           gap={"9px"}
@@ -182,7 +215,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"1px solid #D9D9D9"}
+                border={"3px solid #D9D9D9"}
               >
                 <Box padding={"12px 12px"}>
                   <img
@@ -204,7 +237,9 @@ export default function ServiceBooking() {
             </Link>
           ))}
         </Stack>
-        <Stack
+        <Stack sx={{
+          opacity: '0.7'
+        }}
           marginTop={"15px"}
           alignItems={"baseline"}
           gap={"9px"}
@@ -222,7 +257,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"1px solid #D9D9D9"}
+                border={"3px solid #D9D9D9"}
               >
                 <Box padding={"12px 12px"}>
                   <img src={item.image} width={"100px"} alt="cricket" />
@@ -240,10 +275,13 @@ export default function ServiceBooking() {
           ))}
         </Stack>
       </Box>
-      <Box display={"flex"} justifyContent={"end"}>
+      {/* <Box display={"flex"} justifyContent={"end"}>
         <img src={ball} width={"150px"} alt="" />
+      </Box> */}
+      <img width={"100%"} style={{
+        opacity: "0.7"
+      }}  src={grass} alt="" />
       </Box>
-      <img style={{ marginTop: "-40px" }} src={grass} alt="" />
     </>
   );
 }

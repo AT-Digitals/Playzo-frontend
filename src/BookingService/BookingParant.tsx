@@ -27,6 +27,7 @@ import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
+import backgroundimage from './7692.jpg'
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -295,7 +296,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const breadcrumbs = [
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -304,7 +305,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -313,7 +314,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service Type
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -322,7 +323,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Date & Time
     </Typography>,
     <Typography
-      fontSize={"16px"}
+      fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -380,6 +381,27 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   return (
     <>
+    <Box component={"image"}
+                sx={{
+                  position: "relative",
+                  backgroundImage: `url(${backgroundimage})`,
+                  backgroundSize: "cover", // Fit the background image to cover the entire container
+                  backgroundPosition: "bottom",
+                  backgroundRepeat: "no-repeat",
+                  objectFit: "cover", // Set object-fit to cover
+                  height: "100%", 
+          // Ensure the height is 100%
+                }}>
+                   <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+          }}
+        />
       <Stack
         justifyContent={"space-between"}
         maxWidth={800}
@@ -391,7 +413,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         direction={"row"}
         alignItems={"flex-start"}
       >
-        <Button
+        <Button  sx={{
+          opacity: '0.7'
+        }}
           onClick={handlegoBack}
           variant="text"
           startIcon={<KeyboardBackspaceIcon />}
@@ -399,11 +423,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           Back
         </Button>{" "}
         <Stack
-          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "120px" }}
+          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
           // marginTop={"50px"}
           spacing={2}
           justifyContent={"center"}
           alignItems={"center"}
+          sx={{
+            opacity: '0.7'
+          }}
         >
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
@@ -413,7 +440,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           </Breadcrumbs>
         </Stack>
       </Stack>
-      <Box
+      <Box  sx={{
+          opacity: '0.7'
+        }}
         display={"flex"}
         flexDirection={{ xs: "column", sm: "column", ms: "column", lg: "row" }}
         margin={{
@@ -476,9 +505,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             <Typography
               display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
               textAlign={"center"}
-              fontSize={"14px"}
+              fontSize={"18px"}
               color={Colors.BLACK}
               fontWeight={"600"}
+              marginTop={"5px"}
               paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
             >
               {type === BookingType.Turf
@@ -497,7 +527,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Typography>
           </Box>
         </Box>
-        <Stack
+        <Stack 
           display={
             type === BookingType.BowlingMachine ||
             type === BookingType.CricketNet
@@ -516,9 +546,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         >
           <Typography
             display={selectedService ? "none" : "block"}
-            fontSize={"14px"}
+            fontSize={"18px"}
             color={Colors.BLACK}
-            fontWeight={"500"}
+            fontWeight={"600"}
+            paddingBottom={"4px"}
           >
             Choose{" "}
             {type === BookingType.Turf
@@ -537,17 +568,19 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               key={item.name}
               sx={{
                 ":hover": {
-                  backgroundColor: "#A1EBFF",
+                  backgroundColor: Colors.BUTTON_COLOR,
                 },
               }}
-              border={"1px solid #D9D9D9"}
+              border={"3px solid #D9D9D9"}
               width={"100%"}
               maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
               height={"105px"}
               onClick={() => handleServiceSelection(item)}
             >
-              <Box
+              <Box sx={{
+          opacity: '0.7'
+        }}
                 display={"flex"}
                 gap={"16px"}
                 alignItems={"center"}
@@ -580,8 +613,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Box>
           ))}
           {selectedService && (
-            <Box
-              border={"1px solid #D9D9D9"}
+            <Box sx={{
+              opacity: '0.7'
+            }}
+              border={"3px solid #D9D9D9"}
               width={"100%"}
               maxWidth={{ xs: "220px", sm: "220px", md: "220px", lg: "290px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
@@ -610,7 +645,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       : "Unknown Type"
                   }`}
                 />
-                <Typography
+                <Typography 
                   fontSize={"14px"}
                   color={Colors.BLACK}
                   fontWeight={"600"}
@@ -621,7 +656,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Box>
           )}
         </Stack>
-        <Stack borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
+        <Stack  borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
           {(type === BookingType.BowlingMachine ||
             type === BookingType.CricketNet ||
             selectedService) && (
@@ -643,7 +678,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           )}
         </Stack>
       </Box>
-      <Box pt={2}>
+      <Box sx={{
+          opacity: '0.7'
+        }} pt={2}>
         {(type === BookingType.BowlingMachine ||
           type === BookingType.CricketNet ||
           selectedService) && (
@@ -657,12 +694,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               handleAddmore={handleAddMoreItems}
             />
             <Button
-              style={{
+              sx={{
                 margin: "auto",
                 display: "block",
                 marginTop: "2rem",
                 background: Colors.BUTTON_COLOR,
                 color: "white",
+                border: "1px solid #15B5FC",
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
               }}
               onClick={handleProceedToPayment}
             >
@@ -671,10 +714,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           </>
         )}
       </Box>
-      <Box display={"flex"} justifyContent={"end"}>
-        <img src={ball} width={"150px"} alt="" />
       </Box>
-      <img style={{ marginTop: "-40px" }} src={grass} alt="" />
+      {/* <Box display={"flex"} justifyContent={"end"}>
+        <img src={ball} width={"150px"} alt="" />
+      </Box> */}
+      <img src={grass} alt="" />
     </>
   );
 };

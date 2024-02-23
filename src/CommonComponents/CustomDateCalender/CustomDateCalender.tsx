@@ -15,6 +15,7 @@ import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Colors from "../Colors";
 
 // import { BookingType } from "../../CommonFiles/BookingType";
 
@@ -415,6 +416,7 @@ export default function CustomDateCalendar({
         <Typography
           mb={2}
           fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
+          fontWeight={"600"}
         >
           Pick Date
         </Typography>
@@ -455,6 +457,7 @@ export default function CustomDateCalendar({
         <Typography
           mb={2}
           fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
+          fontWeight={"600"}
         >
           Pick Time
         </Typography>
@@ -499,10 +502,15 @@ export default function CustomDateCalendar({
         <Box display="flex" justifyContent="end">
           <Button
             onClick={() => handleAddButtonClick(type, selectedService)}
-            style={{
+            sx={{
               background: "var(--primary-3, #15B5FC)",
               color: "white",
               textTransform: "none",
+              ":hover": {
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                border: "1px solid #15B5FC",
+              }
             }}
           >
             Add
