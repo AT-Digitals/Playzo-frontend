@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
-import banner from "../Terms&conditions/cookies.jpg";
-import layer from "../Terms&conditions/Layer.svg";
+import banner from "../../assets/cookies.jpg";
+import layer from "../../assets/Layer.svg";
 import styled from "styled-components";
 import Colors from "../../CommonComponents/Colors";
 import { useEffect } from "react";

@@ -3,11 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
-import CustomButton from "../CommonComponents/CustomButton";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "./Playzo (1).svg";
+import logo from "../assets/Playzo (1).svg";
 import routes from "../routes/routes";
 import { useState } from "react";
 
