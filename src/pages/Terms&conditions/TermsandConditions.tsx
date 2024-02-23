@@ -1,9 +1,11 @@
 import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
-import banner from "./pexels-markus-spiske-114296.jpg";
-import layer from "../../assets/Rectangle 669.png";
+import banner from "../../assets/cookies.jpg";
+import layer from "../../assets/Layer.svg";
 import styled from "styled-components";
+import Colors from "../../CommonComponents/Colors";
+import { useEffect } from "react";
 
 const Container = styled(Box)`
   display: flex;
@@ -12,226 +14,175 @@ const Container = styled(Box)`
 
 const BannerImage = styled.img`
   width: 100%;
-  max-height: 200px;
+  max-height: 400px;
   object-fit: cover;
 `;
 
 const StyledImage5 = styled.img`
-  width: 100%;
-  max-height: 200px;
+  max-height: 400px;
   object-fit: cover;
   position: absolute;
+  transform: translate(1300%, 0px);
 `;
 
+
 export default function TermsandConditions() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <Box mb={"90px"}>
       <Container>
         <BannerImage src={banner} alt="banner" />
+        <Box sx={{
+          background: Colors.BUTTON_COLOR,
+          width: "800px",
+          height: "400px",
+          position: "absolute",
+        }}> </Box>
         <StyledImage5 src={layer} alt="background" />
+       
       </Container>
       <Box pt={"30px"}>
         <Typography
-          fontWeight={"bold"}
+          fontWeight={"900"}
           position={"absolute"}
-          top={{ xs: "28%", sm: "25%", md: "28%", lg: "28%" }}
+          top={{ xs: "28%", sm: "25%", md: "28%", lg: "24%" }}
           left={"11%"}
           color={"white"}
-          fontSize={{ xs: "20px", sm: "20px", md: "42px", lg: "42px" }}
+          fontSize={{ xs: "20px", sm: "20px", md: "42px", lg: "92px" }}
+          fontStyle={"italic"}
         >
-          Terms of Services
+          Terms & <Typography fontWeight={"900"}
+          position={"absolute"}
+          top={{ xs: "28%", sm: "25%", md: "28%", lg: "28%" }}
+          left={"1%"}
+          color={"white"}
+          fontSize={{ xs: "20px", sm: "20px", md: "42px", lg: "92px" }}  fontStyle={"italic"} lineHeight={"3"}>Conditions</Typography>
         </Typography>
       </Box>
 
       <AppContainer maxWidth={1180}>
         <Box>
-          <Typography>
-            By using or visiting website, mobile applications, software, data
-            feeds, and services provided to you (collectively the "Service") you
-            signify your agreement to these terms and conditions (the "Terms of
-            Service") and privacy policy (the “Privacy Policy”) of the Company.
-            If you do not agree to any of these terms, please do not use the
-            Service.
+          <Typography fontSize={"16px"} fontWeight={"400"} color={Colors.BLACK}>
+            1. Powerleague Fives Ltd (“PWL”) and the hosts of this website (also referred to as “site” accept no responsibility for and exclude all liability in connection with browsing this site, use of information on this site and downloading any material from it including but not limited to any liability for errors, inaccuracies, omissions or misleading or defamatory statements.
             <br />
             <br />
-            Welcome to FABOProperties.com
+            2. Whilst we hope you find the contents of this website interesting and informative; the contents are for general information only. We believe the contents to be true and accurate as at the date of writing but can give no assurances or warranty regarding the accuracy, currency, or applicability of any of the contents in relation to specific situations and particular circumstances. As such, the contents should not be relied upon, and professional advice should be taken in specific cases. In addition, none of the content of this website will form any part of any contract between us or constitutes an offer by us. Specific disclaimers may apply in addition to certain content or parts of the site.
             <br />
             <br />
-            We are a digital real estate advertising / marketing and seller
-            platform connecting people with the real estate market.
-            FABOProperties.com and our subsidiaries and affiliates (collectively
-            the “Company” or "FABOProperties.com") provide you with access to a
-            variety of services, including but not limited to the
-            www.FABOProperties.com website (the "Website") and
-            FABOProperties.com's mobile applications (the “Mobile App”) and all
-            the products and services available through our Website and Mobile
-            App (collectively the "Services"). The Website and Mobile App is
-            owned and operated by FABO Properties Private Limited, a company
-            incorporated under the laws of India.
+            3. The content and design of these pages are subject to copyright owned by PWL or used under licence from third party copyright owners. Reproduction is prohibited other than in accordance with the Full Copyright Notice. The Full Copyright Notice forms part of these terms and conditions. Information may be changed or updated without notice.
             <br />
             <br />
-            This document and the Privacy Policy is an electronic record in
-            terms of Information Technology Act, 2000 and rules there under as
-            applicable and the amended provisions pertaining to electronic
-            records in various statutes as amended by the Information Technology
-            Act, 2000. These ‘Terms of Use’ constitute an electronic record
-            within the meaning of the applicable law. This electronic record is
-            generated by a computer system and does not require any physical or
-            digital signatures.
+            4. From time to time this website may also include links to other websites. These links are provided to give further information and are not intended to signify that PWL endorses any such website and/or content. PWL accepts no responsibility for the content of the linked website. Users must take their own precautions to ensure what is selected for use is free of such items as viruses, worms, trojan horses and other items of a destructive or malicious nature.
             <br />
             <br />
-            <span
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              TO WHOM DOES THIS POLICY APPLY?{" "}
-            </span>
+            5. As our websites often provide links to third party websites, such as those of our business partners and on-line advisers, users should review their respective privacy policies to learn more about, what, why and how they collect and use personal information.
             <br />
             <br />
-            This Policy applies to all “Users” who uses our Services.
+            6. The service and materials on this website are provided “as is”. PWL and the hosts of this site and each of the Powerleague companies expressly disclaims any and all warranties, express or implied, to the extent permitted by law including but not limited to warranties of satisfactory quality, merchantability or fitness for a particular purpose, with respect to the service or any materials.
             <br />
             <br />
-            <span
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              WHAT INFORMATION DO WE COLLECT, AND WHERE DO WE GET IT FROM?{" "}
-            </span>
+            7. Except in respect of death or personal injury arising from negligence, PWL and the hosts of this site and each of the local enterprise companies hereby exclude liability for any claims, losses, demands or damages of any kind whatsoever with respect to any information and/or services provided on our website including but not limited to direct, indirect, incidental or consequential loss or damages, compensatory damages or loss of profits or data whether based on a breach of contract or warranty, delict or tort (including negligence), product liability or otherwise.
             <br />
             <br />
-            We collect information from anyone who uses our Services: We ask for
-            some basic details from User including but not limited to their
-            name, phone number, email address. Furthermore, like many online
-            services, we use technologies like session and persistent cookies,
-            web beacons (tiny image files on web pages that communicate
-            information about the page viewer to the beacon owner), log data,
-            and third-party analytics services to collect and analyze
-            information about all users of our Services. This includes things
-            like User search preferences, interaction with ads on our Services,
-            and location.
+            8. Any discounts for Powerleague products and services communicated in promotional literature can be removed or amended at any given time depending on availability.
             <br />
             <br />
-            Our servers automatically record information ("Log Data") created by
-            your use of the Services. Log Data may include information such as
-            your IP address, browser type, operating system, the referring web
-            page, pages visited, location, your mobile carrier, device, search
-            terms, and cookie information. We receive Log Data when you interact
-            with our Services, for example, when you visit our Website and / or
-            Mobile App, sign into our Services, or interact with our email
-            notifications. We use Log Data to provide our Services and to
-            measure, customize, and improve them, as well as collect and use
-            them in the aggregate. This policy does not apply to, nor do we take
-            any responsibility for any information that is collected by any
-            third party either using the Services or through any links on the
-            Website and / or Mobile App or through any of the advertisements.
+            9. We offer a 48-hour notice period on all pitch bookings for cancellations. If cancellation falls outside the 48-hour notice period, then full pitch price will be applied. All refunds are processed as quickly as possible however, please allow up to 5-7 working days. The same terms apply for any bookings made for Kids Holiday Camps.
             <br />
             <br />
-            Cookies are small data files that we transfer to your computer. We
-            use "session" cookies to keep you logged in while you use our
-            Services, to better understand how you interact with our Services,
-            and to monitor aggregate usage and web traffic information on our
-            Services. We use "persistent" cookies to recognize you each time you
-            return to our Services. For example, we create a persistent cookie
-            that includes some basic information about you, like your most
-            recent search and preferences.
+            10. We offer a full refund on Kids Parties up until 14 days of the booking. Subject to availability, you may instead choose to rearrange your booking to a new date within 3-months of your original booking.
+            If you cancel the party within 14 days of the date of the party, you will be charged 100% of the cost of the booking minus any deposit already paid. Please allow up to 5-7 working days for refunds to be processed. At PWL’s discretion, and subject to availability – we will try to help you rearrange your booking dependent on the reasons for the cancellation. Kids party ‘add-ons’ are subject to availability, alternatives may be offered or refunds provided.
             <br />
             <br />
-            Most internet browsers automatically accept cookies, but you can
-            change your settings or use third-party tools to refuse cookies or
-            prompt you before accepting cookies from the websites you visit. You
-            can also use your browser settings or other tools to delete cookies
-            you already have. Please be aware that some parts of our Services
-            may not work for you if you disable cookies.
+            11. Block Pitch Bookings: Only one booking out of each block of 10 Block Booked pitches can be re-arranged. This booking must be added to the end of the previously booked block. Block Pitch Bookings: We can only accept a re-arrangement requested 7 days in advance for block bookings.
             <br />
             <br />
-            Location Data: If you provide location information (like a ZIP code,
-            street address, or even just a city) during the registration process
-            or at any other time via your account settings, we will store that
-            information and associate it with your account. We may use and store
-            information about your location to provide localized features, to
-            analyze our Services with the help of third-party analytics
-            services, to provide you with relevant advertising and marketing
-            recommendations, and otherwise to improve and customize our
-            Services.
+            12. Functions: We can only accept cancellations which are provided 2 months in advance of the event date.
             <br />
             <br />
-            <span
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              WHY WE COLLECT INFORMATION FROM YOU?
-            </span>
+            13. Management Discretion will be applied to all bookings at all times.
             <br />
             <br />
-            FABOProperties.com provides digital real estate advertising /
-            marketing and information services through its Website, Mobile App
-            and other services. To provide our Services, we use the information
-            we collect to: Help you find the most relevant information for your
-            situation by customizing our Services to optimize your experience.
-            Keep you connected with FABOProperties.com across the internet and
-            update you with residential real estate-related news and
-            information. Put you in touch with the right people to sell, buy,
-            rent and to optimize the information, we share with those parties to
-            initiate a productive and efficient relationship.
+            14. Transfer Market postings are not reviewed by Powerleague, nor are we involved in any subsequent or ongoing communication between Transfer Market users. We do not guarantee the accuracy of Transfer Market postings (inclusive of the copy and/or
+            imagery posted), nor do we accept liability for the content of, or agreement reached within, any subsequent or ongoing communication between Transfer Market users.
             <br />
             <br />
-            Services Description: FABOProperties.com attempts to be as accurate
-            as possible. However, FABOProperties.com does not warrant that
-            descriptions of or content of this site is accurate, complete,
-            reliable, current, or error-free. Also, your access to the Services
-            may also be occasionally suspended or restricted to allow for
-            repairs, maintenance, or the introduction of new facilities or at
-            any time without prior notice. We will attempt to limit the
-            frequency and duration of any such suspension or restriction.
-            FABOProperties.com provides links to other sites over which
-            FABOProperties.com has no control. FABOProperties.com is not
-            responsible for the availability of such external sites or resources
-            and does not endorse and is not responsible or liable for any
-            content, advertising, products or other material on or available
-            from such sites or resources.
+            15. Split payments; our standard cancellation and refund policy applies to all split payments. Cancellation and refund requests need to be made by the lead booker, requests from splitees will not be accepted. Powerleague take no responsibility for unpaid contributions, no shows or the inviting of customers to split payments, this falls with the lead booker.
             <br />
             <br />
-            From time to time, we share the information of those who access our
-            Services with the other reputable organizations whose products or
-            services we think you might find interesting and suits to your
-            requirements. If you do not want us to share your information with
-            other companies or organizations, please let us know by emailing us
-            at hello@FABOProperties.com.
+            <Typography paddingBottom={"18px"} fontWeight={"bold"}>Privacy Notice:</Typography>
+            Using your personal images: by playing on a pitch with camera recording technology you consent to your personal image being recorded. In pressing the download button on the pitch, the last 30 seconds of recorded footage, which may include your personal image, will be downloaded, and made available to all members of the fixture or booking. These downloaded images will be shared by e-mail with players in the fixture or booking that register to receive copy of the images. In pressing the download button on the pitch, the downloaded images will also be supplied to
             <br />
             <br />
-            Persons who supply us with their telephone numbers online may
-            receive telephone calls or text messages from us with information
-            regarding new products or services or upcoming events. You hereby
-            give specific consent to receive the telephone calls or text
-            messages related to our Services and waive the DND registry in case
-            you have subscribed to the same. If you do not wish to receive such
-            telephone calls or text messages, please let us know by emailing us
-            at hello@FABOProperties.com.
+            Powerleague Fives Ltd. Images which you supply to Powerleague Fives Ltd may be used in a number of ways, for example:
+            • Marketing promotions on internet
+            • Marketing promotions on social media platforms
             <br />
             <br />
-            With respect to Ad servers: To try and bring you offers that are of
-            interest to you, we have relationships with other companies to whom
-            we allow to place ads on our Website and Mobile App. As a result of
-            your visit to our Website and / or Mobile App, ad server companies
-            may collect information such as your domain type, your IP address
-            and clickstream information.
+            If you need any further information, please write to us at:
             <br />
             <br />
-            Direct contact with User: If you fill out a form to contact a Sales
-            Expert (or use any other contact forms available on our Services) or
-            request for a callback, we may share personally identifiable
-            information that you share with us and information about your use of
-            our Services with the party you wanted to contact. This may include
-            data you input such as home search criteria or Log Data that we
-            collect as you use the Services. Sometimes, if we are working with a
-            third party to improve the quality of connect we provide to our
-            users, we may provide that third party with additional but limited
-            personally identifiable information for the sole purpose of their
-            carrying out their duty to us. By sharing the information, you agree
-            to share your details to a third party also.
+            Powerleague Fives Ltd, 172 Tottenham
+            Court Rd, Bloomsbury, London W1T 7NS
+            <br />
+            <br />
+            Full copyright notice
+            <br />
+            <br />
+            1. The contents of these pages and all material on this site are the copyright of PWL. Copying or incorporation of part or all of the contents in any form is prohibited save in accordance with the following:
+            <br />
+            <br />
+            2. You may:
+            <br />
+            <br />
+            1. Print or download to a local hard disk extracts for your personal non-
+            commercial use.
+            <br />
+            <br />
+            2. Copy the content to individual third parties for their personal non-
+            commercial use provided:
+            <br />
+            <br />
+            1. you acknowledge the website as the source of the
+            material; and
+            2. you inform the third party that these terms apply, and they
+            agree to comply with them.
+            <br />
+            <br />
+            3. You may provide a link (but not a framed link) to this site from any other business information or business service website, but not (save without prior agreement) in any way which gives the impression that we are associated with or have approved such other site.
+            <br />
+            <br />
+            4. Without limiting the foregoing, no part of the website may be reproduced, transmitted, or stored in any other website or other form of electronic retrieval system.
+            <br />
+            <br />
+            5. The above consents do not authorise you to incorporate any part of this site in any commercial document or in any materials sold or otherwise made available for profit without our prior consent.
+            <br />
+            <br />
+            <Typography paddingBottom={"18px"} fontWeight={"bold"}>Grilla Golden Goal Terms:</Typography>
+            1. Competition only valid for Adult league teams (18+)
+            <br />
+            <br />
+            2. Prize is x8 tickets to Crystal Palace vs Chelsea on 10th February courtesy of Grilla OR 3 x cases of 24 Grilla cans (seasons supply).
+            <br />
+            <br />
+            3. Prize is non-transferable for any other alternative including cash/match-credit.
+            <br />
+            <br />
+            4. Powerleague reserves the right to remove the competition at any point.
+            <br />
+            <br />
+            5. The winning team will be announced by Friday 5th January 2024 on our socials.
+            <br />
+            <br />
+            6. The winning team must not have any outstanding debt and must have turned up and played all their games during the competition period to be eligible for the prize.
+            <br />
+            <br />
+            7. Competition is based on overall goals scored between Wednesday 29th November and Thursday 28thDecember inclusive. It does not include any goals scored outside these dates.
           </Typography>
         </Box>
       </AppContainer>

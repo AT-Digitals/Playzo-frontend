@@ -1,105 +1,105 @@
-import * as React from "react";
-
-import Button from "@mui/material/Button";
-import Colors from "./Colors";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import routes from "../routes/routes";
+import React from "react";
+import { Button } from "@mui/material";
+import Colors from "./Colors";
 
 const menuList = [
-  {
-    href: routes.BADMINTON,
-    label: "Badminton",
-  },
-  {
-    href: routes.CROSSFIT,
-    label: "CrossFit",
-  },
+    {
+        label: "Badminton",
+    },
+    {
+        label: "CrossFit",
+    },
 
-  {
-    href: routes.TURF,
-    label: "Turf",
-  },
-  {
-    href: routes.PLAYSTATION,
-    label: "Play Station",
-  },
+    {
+        label: "Turf",
+    },
+    {
+        label: "Play Station",
+    },
 
-  {
-    href: routes.BOARDGAMES,
-    label: "Board Games",
-  },
-  {
-    href: routes.PARTYCENTER,
-    label: "Party Center",
-  },
-  {
-    href: routes.CAFETERIA,
-    label: "Cafeteria",
-  },
+    {
+        label: "Board Games",
+    },
+    {
+        label: "Party Center",
+    },
+    {
+        label: "Cafeteria",
+    },
 ];
 export default function BasicMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  return (
-    <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-        sx={{
-          fontSize: "14px",
-          letterSpacing: "1.6px",
-          textTransform: "uppercase",
-          color: Colors.WHITE,
-          transition: "color 0.5s ease",
-          ":hover": {
-            color: Colors.BUTTON_COLOR,
-          },
-        }}
-      >
-        Services
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-        sx={{
-          ".css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper": {
-            width: "140px",
-            height: "270px",
-            backgroundColor: Colors.BUTTON_COLOR,
-            color: Colors.WHITE,
-          },
-        }}
-      >
-        {menuList.map((menu, index) => (
-          <MenuItem
-            to={menu.href}
-            component={Link}
-            key={index}
-            onClick={handleClose}
-          >
-            {menu.label}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-  );
+    const handleMenuEnter = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    return (
+        <div>
+            <Link style={{textDecoration: "none"}} to={routes.SERVICE}>
+            <Button
+                // aria-controls={open ? "basic-menu" : undefined}
+                // aria-haspopup="true"
+                // aria-expanded={open ? "true" : undefined}
+                onMouseEnter={handleMenuEnter}
+                onClick={handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+                sx={{ fontSize: "14px", letterSpacing: "1.6px", textTransform: "uppercase", color: Colors.WHITE,  transition: "color 0.5s ease",  border: "none",
+                boxShadow: "none",
+                background: "transparent",
+                ":hover": {
+                  color: Colors.BUTTON_COLOR,
+                } }}
+            >
+                Services
+            </Button>
+            </Link>
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                onMouseLeave={handleClose}
+               
+                
+                sx={{
+                    ".css-9wsdfz-MuiButtonBase-root-MuiMenuItem-root:hover": {
+                        color: Colors.BUTTON_COLOR,
+                        transition: "color 0.5s ease",
+                      
+                        border: "none",
+                        boxShadow: "none",
+                        background: "transparent",
+                    }
+                }}
+            >
+                {menuList.map((menu, index) => (
+                    <MenuItem style={{
+                        border: "none",
+                        boxShadow: "none",
+                        background: "transparent",
+                    }}
+                        to={""}
+                        component={Link}
+                        key={index}
+                        onClick={handleClose}
+                    >
+                        {menu.label}
+                    </MenuItem>
+                ))}
+            </Menu>
+        </div>
+    );
 }

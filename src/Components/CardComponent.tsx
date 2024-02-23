@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, CardMedia, Stack, Typography } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
 import arrow from "../assets/Group.png";
 import { useState } from "react";
@@ -16,66 +16,52 @@ export default function CardComponent({
   description,
   buttonLabel,
 }: cardProps) {
-  const [hovered, setHovered] = useState(false);
-
   return (
+    <>
     <Card
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      // onMouseEnter={() => setHovered(true)}
+      // onMouseLeave={() => setHovered(false)}
       sx={{
         maxWidth: 400,
-        boxShadow: "none",
-        borderRadius: "0px",
-        height: { xs: "400px", sm: '400px', md: "400px", lg: "440px" },
-        width: { xs: "319px", sm: '319px', md: "319px", lg: "287px" },
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
+        borderRadius: "10px",
+        overflow: "hidden",
         position: "relative",
-        ":hover": {
-          boxShadow: { xs: "none", sm: "none", md: "none", lg: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgb(200,200,200)" },
-          cursor: "pointer",
-        },
       }}
     >
-      <Stack
-        direction="column"
-        spacing={2}
-        margin="0 auto"
-        padding={{ xs: "25px", sm: '25px', md: "25px", lg: '' }}
-        sx={{ backgroundColor: Colors.WHITE }}
-      >
-        <Typography fontSize="20px" variant="h6" fontWeight={600} textAlign="start">
-          {title}
-        </Typography>
-        <Typography fontSize="16px" textAlign="start">{description}</Typography>
-        <Box paddingTop={"15px"}  display={"flex"} alignItems={"center"} gap={"5px"} sx={{
-          position: "relative",
-          overflow: "hidden",
-         
-        }}>
-          <span
-            style={{
-              position: "absolute",
-              left: hovered ? 0 : "-100%",
-              transition: "left 0.5s ease",
-              textDecoration: hovered ? "underline" : "none",
-              color: hovered ? Colors.BUTTON_COLOR : Colors.WHITE
-            }}
-          >
-            {buttonLabel}
-          </span>
-          <img src={arrow} style={{ marginTop: "5px", marginLeft: hovered ? "38%" : "-100%", transition: "margin-left 0.5s ease" }} width={"15px"} alt="" />
-        </Box>
-      </Stack>
+      
       <CardMedia
         component="img"
         sx={{
-          height: { xs: "180px", sm: "180px", md: "180px", lg: "195px" }
-        }}
+          height: { xs: "180px", sm: "180px", md: "180px", lg: "450px" },
+          borderRadius: "10px",
+          transition: "transform 0.5s ease",
+          cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+        
         image={image}
         alt="green iguana"
-      />
+      />    
     </Card>
+    <Button style={{
+        background: Colors.WHITE,
+        color: Colors.BLACK,
+        width: "100%",
+        maxWidth: "138px",
+        position: "absolute",
+        borderRadius: "21px",
+        height: "45px",
+        transform: "translate(18px, -64px)",
+        fontSize: "16px",
+        fontWeight: "bold",
+        textTransform: "capitalize",
+      }}>{title}</Button>
+        <Typography width={"292px"} paddingTop={"30px"} fontSize="15px" fontWeight={"400"} textAlign="start">{description}</Typography>
+    </>
   );
 }

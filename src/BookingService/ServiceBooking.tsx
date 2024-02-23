@@ -140,7 +140,7 @@ export default function ServiceBooking() {
               <Box
                 sx={{
                   ":hover": {
-                    backgroundColor: "#A1EBFF",
+                    backgroundColor: Colors.BUTTON_COLOR,
                   },
                 }}
                 width={"100%"}
@@ -175,7 +175,7 @@ export default function ServiceBooking() {
               <Box
                 sx={{
                   ":hover": {
-                    backgroundColor: "#A1EBFF",
+                    backgroundColor: Colors.BUTTON_COLOR,
                   },
                 }}
                 width={"100%"}
@@ -215,7 +215,7 @@ export default function ServiceBooking() {
               <Box
                 sx={{
                   ":hover": {
-                    backgroundColor: "#A1EBFF",
+                    backgroundColor: Colors.BUTTON_COLOR,
                   },
                 }}
                 width={"100%"}
