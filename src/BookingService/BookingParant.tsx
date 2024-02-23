@@ -100,14 +100,6 @@ const BoardgameImages = [
   },
 ];
 
-// type BookingType = BookingType;
-// | "turf"
-// | "playstation"
-// | "Badminton"
-// | "Boardgames"
-// | "BowlingMachine"
-// | "cricketnet";
-
 interface TableDataItem {
   type: BookingType;
   name: string;
@@ -331,8 +323,21 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     </Typography>,
   ];
 
+  // const handlegoBack = () => {
+  //   navigate(-1);
+
+  //   localStorage.removeItem("selectedService");
+  // };
+
   const handlegoBack = () => {
-    navigate(-1);
+    if (selectedService) {
+      // If a service is selected, go back to type selection
+      setSelectedService("");
+      setSelectedCourt(1);
+    } else {
+      // If no service is selected, navigate back to the previous page
+      navigate(-1);
+    }
 
     localStorage.removeItem("selectedService");
   };

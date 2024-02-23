@@ -16,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import routes from "../../routes/routes";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const StyledCell = styled(TableCell)({
   " &.MuiTableCell-root": {
@@ -121,25 +122,6 @@ export default function CustomTable({
           </Table>
         </TableContainer>
       </Box>
-      {/* <Link to={routes.PAYMENT_BOOKING} onClick={() => setTableData(tableData)}>
-        <Button
-          sx={{
-            background: "var(--primary-3, #15B5FC)",
-            color: "white",
-            textTransform: "none",
-            maxWidth: 247,
-            width: "100%",
-            padding: {
-              xs: "6px 40px",
-              sm: "6px 40px",
-              md: "6px 40px",
-              lg: "6px 8px",
-            },
-          }}
-        >
-          Proceed to payment{" "}
-        </Button>
-      </Link> */}
     </Box>
   );
 }
