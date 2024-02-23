@@ -68,16 +68,16 @@ const BpCheckedIcon = styled(BpIcon)({
     backgroundColor: "#15B5FC",
   },
 });
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#000333",
-  borderRadius: "15px",
-  p: 4,
-};
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "#000333",
+//   borderRadius: "15px",
+//   p: 4,
+// };
 
 function BpRadio(props: RadioProps) {
   return (
@@ -223,11 +223,17 @@ export default function PaymentBooking() {
 
                 const formattedStartTime = startDateTime.toLocaleTimeString(
                   [],
-                  { hour: "numeric", minute: "2-digit" }
+                  {
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true, // This will include AM/PM
+                  }
                 );
+
                 const formattedEndTime = endDateTime.toLocaleTimeString([], {
                   hour: "numeric",
                   minute: "2-digit",
+                  hour12: true, // This will include AM/PM
                 });
 
                 const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;

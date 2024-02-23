@@ -16,7 +16,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import routes from "../../routes/routes";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const StyledCell = styled(TableCell)({
   " &.MuiTableCell-root": {
@@ -84,7 +83,7 @@ export default function CustomTable({
             <TableBody>
               {tableData.map((data: any, index: any) => (
                 <TableRow key={index}>
-                  <StyledCell>{data.type}</StyledCell> {/* Add this line */}
+                  <StyledCell>{data.type}</StyledCell>
                   <StyledCell>{data.name}</StyledCell>
                   <StyledCell>
                     {data.date && isValid(new Date(data.date))
