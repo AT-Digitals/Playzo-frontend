@@ -429,16 +429,18 @@ export default function CustomDateCalendar({
               margin: "0px",
               padding: 2,
               "& .MuiPickersDay-root.Mui-selected": {
-                background: "white !important",
-                color: "#15B5FC !important",
+                color: "white !important",
+                background: "#15B5FC !important",
                 border: "1px solid #15B5FC  !important",
                 borderRadius: "12px",
               },
               "& .MuiPickersDay-today": {
                 border: "1px solid #15B5FC !important",
-                color: "white !important",
-                background: "#15B5FC !important",
+
                 borderRadius: "12px",
+
+                background: "white !important",
+                color: "#15B5FC !important",
               },
             }}
             onChange={(date) => handleDateSelection(date)}

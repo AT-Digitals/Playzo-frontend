@@ -183,9 +183,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // navigate to payment page with state table data  when booking is complete
-
   const handleProceedToPayment = () => {
+    if (allBookings.length === 0) {
+      alert("Please make at least one booking before proceeding to payment");
+      return; // Stop further execution
+    }
+
     const bookingsWithTime: {
       type: BookingType;
       name: string;
@@ -196,6 +199,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       court: number;
       amount: any;
     }[] = [];
+
     console.log("allb", allBookings);
     allBookings.map((booking, index) => {
       // console.log("alalala",booking.time)
@@ -326,8 +330,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Payment
     </Typography>,
   ];
-
-  // const selectedServiceFromState = location.state?.selectedService;
 
   const handlegoBack = () => {
     navigate(-1);
