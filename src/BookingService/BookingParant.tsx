@@ -101,14 +101,6 @@ const BoardgameImages = [
   },
 ];
 
-// type BookingType = BookingType;
-// | "turf"
-// | "playstation"
-// | "Badminton"
-// | "Boardgames"
-// | "BowlingMachine"
-// | "cricketnet";
-
 interface TableDataItem {
   type: BookingType;
   name: string;
@@ -127,6 +119,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+
+  // const [tableData, setTableData] = useState<TableDataItem[]>([]);
   const [isServiceSelected, setIsServiceSelected] = useState(false);
 
   const images =
@@ -151,11 +145,25 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setTableData((prevTableData) => [...prevTableData]);
   };
 
+  // const handleRemoveItem = (indexToRemove: number) => {
+  //   const updatedTableData = tableData.filter(
+  //     (_, index) => index !== indexToRemove
+  //   );
+  //   setTableData(updatedTableData);
+  // };
+
+  console.log(tableData, "tableData new array");
+
   const handleRemoveItem = (indexToRemove: number) => {
-    const updatedTableData = tableData.filter(
-      (_, index) => index !== indexToRemove
-    );
-    setTableData(updatedTableData);
+    setTableData((prevTableData) => {
+      console.log(prevTableData, "updatedTabledata");
+
+      const updatedTableData = prevTableData.filter(
+        (_, index) => index !== indexToRemove
+      );
+      console.log(updatedTableData, "updatedTabledata");
+      return updatedTableData;
+    });
   };
 
   const handleAddMoreItems = () => {
@@ -203,8 +211,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
     console.log("allb", allBookings);
     allBookings.map((booking, index) => {
-      // console.log("alalala",booking.time)
-      // booking["court"] = selectedCourt;
       const boo = booking.time as any;
 
       boo.forEach(function (item: any, index: any) {
@@ -278,7 +284,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   useEffect(() => {
     const selectedServiceFromState = location.state?.selectedService;
-
     if (selectedServiceFromState) {
       setSelectedService(selectedServiceFromState);
     }
@@ -333,7 +338,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   ];
 
   const handlegoBack = () => {
-    navigate(-1);
+    if (selectedService) {
+      setSelectedService("");
+      setSelectedCourt(1);
+    } else {
+      navigate(-1);
+    }
 
     localStorage.removeItem("selectedService");
   };
@@ -356,6 +366,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           "You have unsaved changes. Are you sure you want to leave?"
         );
         if (!confirmLeave) {
+          localStorage.removeItem("bookings");
           navigate(location.pathname); // Navigate back to the current location
         }
       }
@@ -408,8 +419,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
         ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
         marginTop={"5rem"}
-        // margin={"0 auto"}
-        // spacing={{ xs: 3, sm: 3, md: 0, lg: 0 }}
         direction={"row"}
         alignItems={"flex-start"}
       >

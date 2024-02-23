@@ -68,16 +68,16 @@ const BpCheckedIcon = styled(BpIcon)({
     backgroundColor: "#15B5FC",
   },
 });
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#000333",
-  borderRadius: "15px",
-  p: 4,
-};
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "#000333",
+//   borderRadius: "15px",
+//   p: 4,
+// };
 
 function BpRadio(props: RadioProps) {
   return (
@@ -100,14 +100,15 @@ export default function PaymentBooking() {
   };
   const [open, setOpen] = React.useState(false);
   const [openError, setOpenError] = React.useState(false);
-  const handleClose = () => {setOpen(false)
+  const handleClose = () => {
+    setOpen(false);
     navigate(routes.BOOKING_SERVICE);
     localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
   };
 
   const handleCloseError = () => {
-    setOpenError(false)
-    
+    setOpenError(false);
   };
 
   const location = useLocation();
@@ -142,9 +143,7 @@ export default function PaymentBooking() {
         });
 
         if (response) {
-          
-            setOpen(true);
-       
+          setOpen(true);
         } else {
           console.log("Booking Failed");
         }
@@ -154,7 +153,6 @@ export default function PaymentBooking() {
         console.log("err", err);
       }
     });
-
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
@@ -225,11 +223,17 @@ export default function PaymentBooking() {
 
                 const formattedStartTime = startDateTime.toLocaleTimeString(
                   [],
-                  { hour: "numeric", minute: "2-digit" }
+                  {
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: true, // This will include AM/PM
+                  }
                 );
+
                 const formattedEndTime = endDateTime.toLocaleTimeString([], {
                   hour: "numeric",
                   minute: "2-digit",
+                  hour12: true, // This will include AM/PM
                 });
 
                 const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;
@@ -609,10 +613,17 @@ export default function PaymentBooking() {
         <img src={ball} width={"150px"} alt="" />
       </Box>
       <img style={{ marginTop: "-40px" }} src={grass} alt="" />
-      <ModalComponent open={open}
-        handleClose={handleClose} text="Your booking is confirmed" subText="Thank you, your payment has been successfull." />
-   <ModalComponent open={openError}
-        handleClose={handleCloseError} text="User Not Found" />
+      <ModalComponent
+        open={open}
+        handleClose={handleClose}
+        text="Your booking is confirmed"
+        subText="Thank you, your payment has been successfull."
+      />
+      <ModalComponent
+        open={openError}
+        handleClose={handleCloseError}
+        text="User Not Found"
+      />
     </>
   );
 }

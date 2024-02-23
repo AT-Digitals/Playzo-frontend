@@ -68,6 +68,10 @@ export default function CustomDateCalendar({
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
+  const [calendarKey, setCalendarKey] = React.useState<string>(
+    Date.now().toString()
+  );
+
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
 
@@ -386,8 +390,9 @@ export default function CustomDateCalendar({
         });
 
         // Reset selected date and timings
-        setSelectedDate("");
+        setSelectedDate(new Date().toString());
         setSelectedTimings([]);
+        setCalendarKey(Date.now().toString());
       } else {
         setDateModalOpen(true);
       }
@@ -422,6 +427,7 @@ export default function CustomDateCalendar({
         </Typography>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar
+            key={calendarKey}
             components={{ CalendarHeader: CustomDateHeader }}
             sx={{
               border: "0.25px solid var(--black, #000)",
