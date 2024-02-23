@@ -8,7 +8,7 @@ import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "./Playzo.svg";
+import logo from "../assets/logo/Playzo.svg";
 import routes from "../routes/routes";
 
 const HeaderLink = styled("a")`
