@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "../../assets/Twitter.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "./Playzo.svg";
+import logo from "../../assets/logo/Playzo.svg";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
 

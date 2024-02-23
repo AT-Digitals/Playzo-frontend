@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import bg from "./carrersbg.jpg";
+import bg from "../../assets/AboutPageImages/carrersbg.jpg";
 
 export default function CareersPageNew() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -42,9 +42,7 @@ export default function CareersPageNew() {
               height: "100vh",
               background: "white", // You can change the background color
             }}
-          >
-            {/* You can add a loading spinner or any other loading indicator here */}
-          </div>
+          ></div>
         )}
         {imageLoaded && (
           <Box

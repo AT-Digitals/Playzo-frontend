@@ -2,8 +2,8 @@ import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
-import bg from "./cookies.jpg";
-import layer from "./layer-cookies.svg";
+import bg from "../../assets/AboutPageImages/cookies.jpg";
+import layer from "../../assets/AboutPageImages/layer-cookies.svg";
 import styled from "styled-components";
 import { useEffect } from "react";
 
