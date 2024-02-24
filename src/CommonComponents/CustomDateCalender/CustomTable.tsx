@@ -66,7 +66,7 @@ export default function CustomTable({
       >
         <TableContainer
           style={{
-            width: "85%",
+            width: "95%",
           }}
         >
           <Table>
@@ -82,7 +82,12 @@ export default function CustomTable({
             </TableHead>
             <TableBody>
               {tableData.map((data: any, index: any) => (
-                <TableRow key={index}>
+                <TableRow
+                  key={index}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? "#f5f5f5" : "white",
+                  }}
+                >
                   <StyledCell>{data.type}</StyledCell>
                   <StyledCell>{data.name}</StyledCell>
                   <StyledCell>
@@ -98,7 +103,14 @@ export default function CustomTable({
                   <StyledCell>{data.duration} hours</StyledCell>
                   <StyledCell>{data.amount}</StyledCell>
                   <StyledCell>
-                    <IconButton onClick={() => handleRemoveItem(index)}>
+                    <IconButton
+                      style={{
+                        color: "black",
+                        padding: "8px",
+                        borderRadius: "4px",
+                      }}
+                      onClick={() => handleRemoveItem(index)}
+                    >
                       <CloseIcon
                         style={{
                           color: "black",

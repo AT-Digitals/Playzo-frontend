@@ -3,6 +3,7 @@ import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
 import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import backgroundimage from "./7692.jpg";
 import badminton from "../assets/Image (7).png";
 import ball from "../assets/ball 4.png";
 import boardgames from "../assets/board games.png";
@@ -13,7 +14,6 @@ import playstation from "../assets/playstation.png";
 import routes from "../routes/routes";
 import turf from "../assets/turf.png";
 import { useState } from "react";
-import backgroundimage from './7692.jpg'
 
 const TurfDetails = [
   {
@@ -83,7 +83,7 @@ export default function ServiceBooking() {
       fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
-      key="2"
+      key="3"
       color={selectedBreadcrumb === "3" ? Colors.BUTTON : Colors.BLACK}
       onClick={() => handleBreadcrumbClick("3")}
     >
@@ -93,7 +93,7 @@ export default function ServiceBooking() {
       fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
-      key="3"
+      key="4"
       color={selectedBreadcrumb === "4" ? Colors.BUTTON : Colors.BLACK}
       onClick={() => handleBreadcrumbClick("4")}
     >
@@ -103,18 +103,19 @@ export default function ServiceBooking() {
 
   return (
     <>
-    <Box component={"image"}
-                sx={{
-                  position: "relative",
-                  backgroundImage: `url(${backgroundimage})`,
-                  backgroundSize: "cover", // Fit the background image to cover the entire container
-                  backgroundPosition: "bottom",
-                  backgroundRepeat: "no-repeat",
-                  objectFit: "cover", // Set object-fit to cover
-                  height: "100%", // Ensure the height is 100%
-          // Ensure the height is 100%
-                }}>
-                   <Box
+      <Box
+        component={"image"}
+        sx={{
+          position: "relative",
+          backgroundImage: `url(${backgroundimage})`,
+          backgroundSize: "cover", // Fit the background image to cover the entire container
+          backgroundPosition: "bottom",
+          backgroundRepeat: "no-repeat",
+          objectFit: "cover", // Set object-fit to cover
+          height: "100%", // Ensure the height is 100%
+        }}
+      >
+        <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -124,163 +125,173 @@ export default function ServiceBooking() {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
-      <Stack
-        marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
-        marginTop={"50px"}
-        spacing={2}
-        justifyContent={"center"}
-        alignItems={"center"}
-        sx={{
-          opacity: '0.7'
-        }}
-      >
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label="breadcrumb"
-        >
-          {breadcrumbs}
-        </Breadcrumbs>
-      </Stack>
-      <Box
-        margin={{
-          xs: "50px 50px",
-          sm: "50px 50px",
-          md: "50px 50px",
-          lg: "50px 170px",
-        }}
-        width={"100%"}
-        maxWidth={"290px"}
-        borderRight={"1px solid #D9D9D9"}
-      >
-        <Typography
-          fontSize={"20px"}
-          marginBottom={"10px"}
-          fontWeight={"bold"}
-          color={Colors.BLACK}
+        <Stack
+          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
+          marginTop={"50px"}
+          spacing={2}
+          justifyContent={"center"}
+          alignItems={"center"}
           sx={{
-            opacity: '0.7'
+            opacity: "0.7",
           }}
         >
-          Pick a service
-        </Typography>
-        <Stack sx={{
-          opacity: '0.7'
-        }} alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
-          {TurfDetails.map((item) => (
-            <Link style={{ textDecoration: "none" }} to={item.link}>
-              <Box
-                sx={{
-                  ":hover": {
-                    backgroundColor: Colors.BUTTON_COLOR,
-                  },
-                }}
-                width={"100%"}
-                borderRadius={"10px"}
-                maxWidth={"124px"}
-                height={"135px"}
-                border={"3px solid #D9D9D9"}
-              >
-                <Box padding={"12px 12px"}>
-                  <img src={item.image} width={"100px"} alt="turf" />
-                  <Typography
-                    fontSize={"12px"}
-                    fontWeight={"600"}
-                    textAlign={"center"}
-                    color={Colors.BLACK}
-                  >
-                    {item.name}
-                  </Typography>
-                </Box>
-              </Box>
-            </Link>
-          ))}
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            {breadcrumbs}
+          </Breadcrumbs>
         </Stack>
-        <Stack sx={{
-          opacity: '0.7'
-        }}
-          marginTop={"15px"}
-          alignItems={"baseline"}
-          gap={"9px"}
-          flexDirection={"row"}
+        <Box
+          margin={{
+            xs: "50px 50px",
+            sm: "50px 50px",
+            md: "50px 50px",
+            lg: "50px 170px",
+          }}
+          width={"100%"}
+          maxWidth={"290px"}
+          borderRight={"1px solid #D9D9D9"}
         >
-          {BoardDetails.map((item) => (
-            <Link style={{ textDecoration: "none" }} to={item.link}>
-              <Box
-                sx={{
-                  ":hover": {
-                    backgroundColor: Colors.BUTTON_COLOR,
-                  },
-                }}
-                width={"100%"}
-                borderRadius={"10px"}
-                maxWidth={"124px"}
-                height={"135px"}
-                border={"3px solid #D9D9D9"}
-              >
-                <Box padding={"12px 12px"}>
-                  <img
-                    src={item.image}
-                    width={"100px"}
-                    height={"90px"}
-                    alt="board"
-                  />
-                  <Typography
-                    fontSize={"12px"}
-                    fontWeight={"600"}
-                    textAlign={"center"}
-                    color={Colors.BLACK}
-                  >
-                    {item.name}
-                  </Typography>
+          <Typography
+            fontSize={"20px"}
+            marginBottom={"10px"}
+            fontWeight={"bold"}
+            color={Colors.BLACK}
+            sx={{
+              opacity: "0.7",
+            }}
+          >
+            Pick a service
+          </Typography>
+          <Stack
+            sx={{
+              opacity: "0.7",
+            }}
+            alignItems={"baseline"}
+            gap={"9px"}
+            flexDirection={"row"}
+          >
+            {TurfDetails.map((item) => (
+              <Link style={{ textDecoration: "none" }} to={item.link}>
+                <Box
+                  sx={{
+                    ":hover": {
+                      backgroundColor: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                  width={"100%"}
+                  borderRadius={"10px"}
+                  maxWidth={"124px"}
+                  height={"135px"}
+                  border={"3px solid #D9D9D9"}
+                >
+                  <Box padding={"12px 12px"}>
+                    <img src={item.image} width={"100px"} alt="turf" />
+                    <Typography
+                      fontSize={"12px"}
+                      fontWeight={"600"}
+                      textAlign={"center"}
+                      color={Colors.BLACK}
+                    >
+                      {item.name}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            </Link>
-          ))}
-        </Stack>
-        <Stack sx={{
-          opacity: '0.7'
-        }}
-          marginTop={"15px"}
-          alignItems={"baseline"}
-          gap={"9px"}
-          flexDirection={"row"}
-        >
-          {CricketDetails.map((item) => (
-            <Link style={{ textDecoration: "none" }} to={item.link}>
-              <Box
-                sx={{
-                  ":hover": {
-                    backgroundColor: Colors.BUTTON_COLOR,
-                  },
-                }}
-                width={"100%"}
-                borderRadius={"10px"}
-                maxWidth={"124px"}
-                height={"135px"}
-                border={"3px solid #D9D9D9"}
-              >
-                <Box padding={"12px 12px"}>
-                  <img src={item.image} width={"100px"} alt="cricket" />
-                  <Typography
-                    fontSize={"12px"}
-                    fontWeight={"600"}
-                    textAlign={"center"}
-                    color={Colors.BLACK}
-                  >
-                    {item.name}
-                  </Typography>
+              </Link>
+            ))}
+          </Stack>
+          <Stack
+            sx={{
+              opacity: "0.7",
+            }}
+            marginTop={"15px"}
+            alignItems={"baseline"}
+            gap={"9px"}
+            flexDirection={"row"}
+          >
+            {BoardDetails.map((item) => (
+              <Link style={{ textDecoration: "none" }} to={item.link}>
+                <Box
+                  sx={{
+                    ":hover": {
+                      backgroundColor: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                  width={"100%"}
+                  borderRadius={"10px"}
+                  maxWidth={"124px"}
+                  height={"135px"}
+                  border={"3px solid #D9D9D9"}
+                >
+                  <Box padding={"12px 12px"}>
+                    <img
+                      src={item.image}
+                      width={"100px"}
+                      height={"90px"}
+                      alt="board"
+                    />
+                    <Typography
+                      fontSize={"12px"}
+                      fontWeight={"600"}
+                      textAlign={"center"}
+                      color={Colors.BLACK}
+                    >
+                      {item.name}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            </Link>
-          ))}
-        </Stack>
-      </Box>
-      {/* <Box display={"flex"} justifyContent={"end"}>
-        <img src={ball} width={"150px"} alt="" />
-      </Box> */}
-      <img width={"100%"} style={{
-        opacity: "0.7"
-      }}  src={grass} alt="" />
+              </Link>
+            ))}
+          </Stack>
+          <Stack
+            sx={{
+              opacity: "0.7",
+            }}
+            marginTop={"15px"}
+            alignItems={"baseline"}
+            gap={"9px"}
+            flexDirection={"row"}
+          >
+            {CricketDetails.map((item) => (
+              <Link style={{ textDecoration: "none" }} to={item.link}>
+                <Box
+                  sx={{
+                    ":hover": {
+                      backgroundColor: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                  width={"100%"}
+                  borderRadius={"10px"}
+                  maxWidth={"124px"}
+                  height={"135px"}
+                  border={"3px solid #D9D9D9"}
+                >
+                  <Box padding={"12px 12px"}>
+                    <img src={item.image} width={"100px"} alt="cricket" />
+                    <Typography
+                      fontSize={"12px"}
+                      fontWeight={"600"}
+                      textAlign={"center"}
+                      color={Colors.BLACK}
+                    >
+                      {item.name}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Link>
+            ))}
+          </Stack>
+        </Box>
+
+        <img
+          width={"100%"}
+          style={{
+            opacity: "0.7",
+          }}
+          src={grass}
+          alt=""
+        />
       </Box>
     </>
   );
