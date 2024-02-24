@@ -5,6 +5,7 @@ import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
 import { BookingSubTypes } from "../../BookingService/BookingSubTypes";
+import Colors from "../Colors";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -15,7 +16,6 @@ import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Colors from "../Colors";
 
 // import { BookingType } from "../../CommonFiles/BookingType";
 
@@ -484,6 +484,15 @@ export default function CustomDateCalendar({
                 display: "flex",
                 justifyContent: "center",
                 borderRadius: "5px",
+                background: item.disabled
+                  ? "#9C9C9C"
+                  : selectedTimings.includes(item.name)
+                  ? "#15B5FC"
+                  : "none",
+                ":hover": {
+                  border: "2px solid #15B5FC",
+                  color: "#15B5FC",
+                },
               }}
               key={index}
               onClick={() => handleTimeSelection(item.name)}
@@ -494,9 +503,14 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "#15B5FC"
+                      ? "white"
                       : "black"
                   }
+                  sx={{
+                    ":hover": {
+                      color: "#15B5FC",
+                    },
+                  }}
                   fontSize={{ xs: "14px", sm: "14px", md: "14px", lg: "18px" }}
                 >
                   {item.name}
@@ -516,7 +530,7 @@ export default function CustomDateCalendar({
                 background: Colors.WHITE,
                 color: Colors.BUTTON_COLOR,
                 border: "1px solid #15B5FC",
-              }
+              },
             }}
           >
             Add

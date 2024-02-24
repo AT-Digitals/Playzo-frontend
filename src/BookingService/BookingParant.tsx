@@ -9,6 +9,7 @@ import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import backgroundimage from "./7692.jpg";
 import badminton from "../assets/Image (7).png";
 import badminton1 from "../assets/Rectangle 685 (3).png";
 import badminton2 from "../assets/Rectangle 685 (4).png";
@@ -27,7 +28,6 @@ import playstation2 from "../assets/Rectangle 685 (1).png";
 import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
 import turf from "../assets/turf.png";
-import backgroundimage from './7692.jpg'
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -305,7 +305,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
-      color={Colors.BLACK}
+      color={type ? Colors.BUTTON : Colors.BLACK}
     >
       Service
     </Typography>,
@@ -314,7 +314,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
-      color={Colors.BUTTON}
+      color={selectedService ? Colors.BUTTON : Colors.BUTTON}
     >
       Service Type
     </Typography>,
@@ -322,8 +322,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
-      key="2"
-      color={Colors.BUTTON}
+      key="3"
+      color={selectedService ? Colors.BUTTON : Colors.BLACK}
     >
       Date & Time
     </Typography>,
@@ -331,7 +331,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       fontSize={"20px"}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
-      key="3"
+      key="4"
     >
       Payment
     </Typography>,
@@ -392,18 +392,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   return (
     <>
-    <Box component={"image"}
-                sx={{
-                  position: "relative",
-                  backgroundImage: `url(${backgroundimage})`,
-                  backgroundSize: "cover", // Fit the background image to cover the entire container
-                  backgroundPosition: "bottom",
-                  backgroundRepeat: "no-repeat",
-                  objectFit: "cover", // Set object-fit to cover
-                  height: "100%", 
+      <Box
+        component={"image"}
+        sx={{
+          position: "relative",
+          backgroundImage: `url(${backgroundimage})`,
+          backgroundSize: "cover", // Fit the background image to cover the entire container
+          backgroundPosition: "bottom",
+          backgroundRepeat: "no-repeat",
+          objectFit: "cover", // Set object-fit to cover
+          height: "100%",
           // Ensure the height is 100%
-                }}>
-                   <Box
+        }}
+      >
+        <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -413,113 +415,161 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
-      <Stack
-        justifyContent={"space-between"}
-        maxWidth={800}
-        width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
-        ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
-        marginTop={"5rem"}
-        direction={"row"}
-        alignItems={"flex-start"}
-      >
-        <Button  sx={{
-          opacity: '0.7'
-        }}
-          onClick={handlegoBack}
-          variant="text"
-          startIcon={<KeyboardBackspaceIcon />}
-        >
-          Back
-        </Button>{" "}
         <Stack
-          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
-          // marginTop={"50px"}
-          spacing={2}
-          justifyContent={"center"}
-          alignItems={"center"}
-          sx={{
-            opacity: '0.7'
-          }}
+          justifyContent={"space-between"}
+          maxWidth={800}
+          width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
+          ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
+          marginTop={"5rem"}
+          direction={"row"}
+          alignItems={"flex-start"}
         >
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
+          <Button
+            sx={{
+              opacity: "0.7",
+            }}
+            onClick={handlegoBack}
+            variant="text"
+            startIcon={<KeyboardBackspaceIcon />}
           >
-            {breadcrumbs}
-          </Breadcrumbs>
+            Back
+          </Button>{" "}
+          <Stack
+            marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
+            // marginTop={"50px"}
+            spacing={2}
+            justifyContent={"center"}
+            alignItems={"center"}
+            sx={{
+              opacity: "0.7",
+            }}
+          >
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              {breadcrumbs}
+            </Breadcrumbs>
+          </Stack>
         </Stack>
-      </Stack>
-      <Box  sx={{
-          opacity: '0.7'
-        }}
-        display={"flex"}
-        flexDirection={{ xs: "column", sm: "column", ms: "column", lg: "row" }}
-        margin={{
-          xs: "0px",
-          sm: "0px",
-          md: "0px",
-          lg: selectedService ? "30px auto" : "30px 110px",
-        }}
-      >
         <Box
+          sx={{
+            opacity: "0.7",
+          }}
+          display={"flex"}
+          flexDirection={{
+            xs: "column",
+            sm: "column",
+            ms: "column",
+            lg: "row",
+          }}
           margin={{
-            xs: "60px 38px",
-            sm: "60px 38px",
-            md: "60px 38px",
-            lg: "60px 50px",
+            xs: "0px",
+            sm: "0px",
+            md: "0px",
+            lg: selectedService ? "30px auto" : "30px 110px",
           }}
-          width={"100%"}
-          border={{
-            xs: "1px solid #D9D9D9",
-            sm: "1px solid #D9D9D9",
-            md: "1px solid #D9D9D9",
-            lg: "none",
-          }}
-          maxWidth={{ xs: "270px", sm: "270px", md: "270px", lg: "300px" }}
-          borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
-          height={{ xs: "100px", sm: "100px", md: "100px", lg: "300px" }}
         >
           <Box
-            display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
-            alignItems={{ xs: "center", sm: "cemter", md: "center", lg: "" }}
-            padding={{
-              xs: "10px 10px",
-              sm: "10px 10px",
-              md: "10px 10px",
-              lg: "20px 20px",
+            margin={{
+              xs: "60px 38px",
+              sm: "60px 38px",
+              md: "60px 38px",
+              lg: "60px 50px",
             }}
-            width={{ xs: "219px", sm: "219px", md: "219px", lg: "260px" }}
-            height={{ xs: "80px", sm: "80px", md: "80px", lg: "260px" }}
+            width={"100%"}
+            border={{
+              xs: "1px solid #D9D9D9",
+              sm: "1px solid #D9D9D9",
+              md: "1px solid #D9D9D9",
+              lg: "none",
+            }}
+            maxWidth={{ xs: "270px", sm: "270px", md: "270px", lg: "300px" }}
+            borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
+            height={{ xs: "100px", sm: "100px", md: "100px", lg: "300px" }}
           >
-            <img
-              src={
-                type === BookingType.Turf
-                  ? turf
+            <Box
+              display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
+              alignItems={{ xs: "center", sm: "cemter", md: "center", lg: "" }}
+              padding={{
+                xs: "10px 10px",
+                sm: "10px 10px",
+                md: "10px 10px",
+                lg: "20px 20px",
+              }}
+              width={{ xs: "219px", sm: "219px", md: "219px", lg: "260px" }}
+              height={{ xs: "80px", sm: "80px", md: "80px", lg: "260px" }}
+            >
+              <img
+                src={
+                  type === BookingType.Turf
+                    ? turf
+                    : type === BookingType.Playstaion
+                    ? playstation
+                    : type === BookingType.Badminton
+                    ? badminton
+                    : type === BookingType.BoardGame
+                    ? boardgames
+                    : type === BookingType.BowlingMachine
+                    ? bowling
+                    : type === BookingType.CricketNet
+                    ? cricketnet
+                    : undefined // Handle other cases or set to undefined
+                }
+                width={"100%"}
+                height={"100%"}
+                alt="booking"
+              />
+              <Typography
+                display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
+                textAlign={"center"}
+                fontSize={"18px"}
+                color={Colors.BLACK}
+                fontWeight={"600"}
+                marginTop={"5px"}
+                paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
+              >
+                {type === BookingType.Turf
+                  ? "Turf"
                   : type === BookingType.Playstaion
-                  ? playstation
+                  ? "Playstation"
                   : type === BookingType.Badminton
-                  ? badminton
+                  ? "Badminton"
                   : type === BookingType.BoardGame
-                  ? boardgames
+                  ? "Board Games"
                   : type === BookingType.BowlingMachine
-                  ? bowling
+                  ? "Bowling Machine"
                   : type === BookingType.CricketNet
-                  ? cricketnet
-                  : undefined // Handle other cases or set to undefined
-              }
-              width={"100%"}
-              height={"100%"}
-              alt="booking"
-            />
+                  ? "Cricket Net"
+                  : "Unknown Type"}
+              </Typography>
+            </Box>
+          </Box>
+          <Stack
+            display={
+              type === BookingType.BowlingMachine ||
+              type === BookingType.CricketNet
+                ? "none"
+                : "flex"
+            }
+            borderLeft={"1px solid #D9D9D9"}
+            gap={"8px"}
+            padding={{
+              xs: "0px 37px",
+              sm: "0px 37px",
+              md: "0px 37px",
+              lg: "40px 37px",
+            }}
+            flexDirection={"column"}
+          >
             <Typography
-              display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
-              textAlign={"center"}
+              display={selectedService ? "none" : "block"}
               fontSize={"18px"}
               color={Colors.BLACK}
               fontWeight={"600"}
-              marginTop={"5px"}
-              paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
+              paddingBottom={"4px"}
             >
+              Choose{" "}
               {type === BookingType.Turf
                 ? "Turf"
                 : type === BookingType.Playstaion
@@ -528,201 +578,191 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 ? "Badminton"
                 : type === BookingType.BoardGame
                 ? "Board Games"
-                : type === BookingType.BowlingMachine
-                ? "Bowling Machine"
-                : type === BookingType.CricketNet
-                ? "Cricket Net"
-                : "Unknown Type"}
+                : "Unknown Type"}{" "}
             </Typography>
-          </Box>
-        </Box>
-        <Stack 
-          display={
-            type === BookingType.BowlingMachine ||
-            type === BookingType.CricketNet
-              ? "none"
-              : "flex"
-          }
-          borderLeft={"1px solid #D9D9D9"}
-          gap={"8px"}
-          padding={{
-            xs: "0px 37px",
-            sm: "0px 37px",
-            md: "0px 37px",
-            lg: "40px 37px",
-          }}
-          flexDirection={"column"}
-        >
-          <Typography
-            display={selectedService ? "none" : "block"}
-            fontSize={"18px"}
-            color={Colors.BLACK}
-            fontWeight={"600"}
-            paddingBottom={"4px"}
-          >
-            Choose{" "}
-            {type === BookingType.Turf
-              ? "Turf"
-              : type === BookingType.Playstaion
-              ? "Playstation"
-              : type === BookingType.Badminton
-              ? "Badminton"
-              : type === BookingType.BoardGame
-              ? "Board Games"
-              : "Unknown Type"}{" "}
-          </Typography>
-          {images.map((item) => (
-            <Box
-              display={selectedService ? "none" : "block"}
-              key={item.name}
-              sx={{
-                ":hover": {
-                  backgroundColor: Colors.BUTTON_COLOR,
-                },
-              }}
-              border={"3px solid #D9D9D9"}
-              width={"100%"}
-              maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
-              borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
-              height={"105px"}
-              onClick={() => handleServiceSelection(item)}
-            >
-              <Box sx={{
-          opacity: '0.7'
-        }}
-                display={"flex"}
-                gap={"16px"}
-                alignItems={"center"}
-                padding={"14px 12px"}
-              >
-                <img
-                  src={item.image}
-                  width={"95px"}
-                  height={"75px"}
-                  alt={
-                    type === BookingType.Turf
-                      ? "Turf"
-                      : type === BookingType.Playstaion
-                      ? "Playstation"
-                      : type === BookingType.Badminton
-                      ? "Badminton"
-                      : type === BookingType.BoardGame
-                      ? "Board Games"
-                      : "Unknown Type"
-                  }
-                />
-                <Typography
-                  fontSize={"14px"}
-                  color={Colors.BLACK}
-                  fontWeight={"600"}
-                >
-                  {item.name}
-                </Typography>
-              </Box>
-            </Box>
-          ))}
-          {selectedService && (
-            <Box sx={{
-              opacity: '0.7'
-            }}
-              border={"3px solid #D9D9D9"}
-              width={"100%"}
-              maxWidth={{ xs: "220px", sm: "220px", md: "220px", lg: "290px" }}
-              borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
-              height={{ xs: "105px", sm: "105px", md: "105px", lg: "155px" }}
-              marginTop={{ xs: "-40px", sm: "-40px", md: "-40px", lg: "24px" }}
-            >
+            {images.map((item) => (
               <Box
-                display={"flex"}
-                gap={"16px"}
-                alignItems={"center"}
-                padding={"14px 12px"}
+                display={selectedService ? "none" : "block"}
+                key={item.name}
+                sx={{
+                  ":hover": {
+                    backgroundColor: Colors.BUTTON_COLOR,
+                  },
+                }}
+                border={"3px solid #D9D9D9"}
+                width={"100%"}
+                maxWidth={{
+                  xs: "215px",
+                  sm: "215px",
+                  md: "215px",
+                  lg: "200px",
+                }}
+                borderRadius={{
+                  xs: "17px",
+                  sm: "17px",
+                  md: "17px",
+                  lg: "10px",
+                }}
+                height={"105px"}
+                onClick={() => handleServiceSelection(item)}
               >
-                <StyledImage
-                  src={
-                    images.find((item) => item.name === selectedService)?.image
-                  }
-                  alt={`selected ${
-                    type === BookingType.Turf
-                      ? "Turf"
-                      : type === BookingType.Playstaion
-                      ? "Playstation"
-                      : type === BookingType.Badminton
-                      ? "Badminton"
-                      : type === BookingType.BoardGame
-                      ? "Board Games"
-                      : "Unknown Type"
-                  }`}
-                />
-                <Typography 
-                  fontSize={"14px"}
-                  color={Colors.BLACK}
-                  fontWeight={"600"}
+                <Box
+                  sx={{
+                    opacity: "0.7",
+                  }}
+                  display={"flex"}
+                  gap={"16px"}
+                  alignItems={"center"}
+                  padding={"14px 12px"}
                 >
-                  {selectedService}
-                </Typography>
+                  <img
+                    src={item.image}
+                    width={"95px"}
+                    height={"75px"}
+                    alt={
+                      type === BookingType.Turf
+                        ? "Turf"
+                        : type === BookingType.Playstaion
+                        ? "Playstation"
+                        : type === BookingType.Badminton
+                        ? "Badminton"
+                        : type === BookingType.BoardGame
+                        ? "Board Games"
+                        : "Unknown Type"
+                    }
+                  />
+                  <Typography
+                    fontSize={"14px"}
+                    color={Colors.BLACK}
+                    fontWeight={"600"}
+                  >
+                    {item.name}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-          )}
-        </Stack>
-        <Stack  borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
+            ))}
+            {selectedService && (
+              <Box
+                sx={{
+                  opacity: "0.7",
+                }}
+                border={"3px solid #D9D9D9"}
+                width={"100%"}
+                maxWidth={{
+                  xs: "220px",
+                  sm: "220px",
+                  md: "220px",
+                  lg: "290px",
+                }}
+                borderRadius={{
+                  xs: "17px",
+                  sm: "17px",
+                  md: "17px",
+                  lg: "10px",
+                }}
+                height={{ xs: "105px", sm: "105px", md: "105px", lg: "155px" }}
+                marginTop={{
+                  xs: "-40px",
+                  sm: "-40px",
+                  md: "-40px",
+                  lg: "24px",
+                }}
+              >
+                <Box
+                  display={"flex"}
+                  gap={"16px"}
+                  alignItems={"center"}
+                  padding={"14px 12px"}
+                >
+                  <StyledImage
+                    src={
+                      images.find((item) => item.name === selectedService)
+                        ?.image
+                    }
+                    alt={`selected ${
+                      type === BookingType.Turf
+                        ? "Turf"
+                        : type === BookingType.Playstaion
+                        ? "Playstation"
+                        : type === BookingType.Badminton
+                        ? "Badminton"
+                        : type === BookingType.BoardGame
+                        ? "Board Games"
+                        : "Unknown Type"
+                    }`}
+                  />
+                  <Typography
+                    fontSize={"14px"}
+                    color={Colors.BLACK}
+                    fontWeight={"600"}
+                  >
+                    {selectedService}
+                  </Typography>
+                </Box>
+              </Box>
+            )}
+          </Stack>
+          <Stack borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
+            {(type === BookingType.BowlingMachine ||
+              type === BookingType.CricketNet ||
+              selectedService) && (
+              <Box
+                borderLeft={
+                  type === BookingType.BowlingMachine ||
+                  type === BookingType.CricketNet
+                    ? "1px solid #D9D9D9"
+                    : "none"
+                }
+              >
+                <CustomDateCalendar
+                  tableData={tableData}
+                  setTableData={setTableData}
+                  selectedService={selectedService}
+                  type={type}
+                />
+              </Box>
+            )}
+          </Stack>
+        </Box>
+        <Box
+          sx={{
+            opacity: "0.7",
+          }}
+          pt={2}
+        >
           {(type === BookingType.BowlingMachine ||
             type === BookingType.CricketNet ||
             selectedService) && (
-            <Box
-              borderLeft={
-                type === BookingType.BowlingMachine ||
-                type === BookingType.CricketNet
-                  ? "1px solid #D9D9D9"
-                  : "none"
-              }
-            >
-              <CustomDateCalendar
-                tableData={tableData}
+            <>
+              <CustomTable
+                tableData={allBookings}
+                handleRemoveItem={handleRemoveItem}
+                serviceName={selectedService}
+                serviceType={type}
                 setTableData={setTableData}
-                selectedService={selectedService}
-                type={type}
+                handleAddmore={handleAddMoreItems}
               />
-            </Box>
-          )}
-        </Stack>
-      </Box>
-      <Box sx={{
-          opacity: '0.7'
-        }} pt={2}>
-        {(type === BookingType.BowlingMachine ||
-          type === BookingType.CricketNet ||
-          selectedService) && (
-          <>
-            <CustomTable
-              tableData={allBookings}
-              handleRemoveItem={handleRemoveItem}
-              serviceName={selectedService}
-              serviceType={type}
-              setTableData={setTableData}
-              handleAddmore={handleAddMoreItems}
-            />
-            <Button
-              sx={{
-                margin: "auto",
-                display: "block",
-                marginTop: "2rem",
-                background: Colors.BUTTON_COLOR,
-                color: "white",
-                border: "1px solid #15B5FC",
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
+              <Button
+                sx={{
+                  margin: "auto",
+                  display: "block",
+                  marginTop: "2rem",
+                  background: Colors.BUTTON_COLOR,
+                  color: "white",
                   border: "1px solid #15B5FC",
-                }
-              }}
-              onClick={handleProceedToPayment}
-            >
-              Proceed to Payment
-            </Button>
-          </>
-        )}
-      </Box>
+                  ":hover": {
+                    background: Colors.WHITE,
+                    color: Colors.BUTTON_COLOR,
+                    border: "1px solid #15B5FC",
+                  },
+                }}
+                onClick={handleProceedToPayment}
+              >
+                Proceed to Payment
+              </Button>
+            </>
+          )}
+        </Box>
       </Box>
       {/* <Box display={"flex"} justifyContent={"end"}>
         <img src={ball} width={"150px"} alt="" />

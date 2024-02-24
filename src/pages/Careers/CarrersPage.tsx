@@ -97,8 +97,6 @@ export default function CareersPageNew() {
                 Email Us
               </Button>{" "}
             </a>
-
-            <a href={"mailto:playzo.erode@gmail.com"}>hiiii click me </a>
           </Box>
         )}
       </Box>
