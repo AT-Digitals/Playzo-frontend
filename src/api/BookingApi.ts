@@ -48,7 +48,6 @@ export default class BookingApi {
   }
   public static async getBookedList(booking?: any) {
     try {
-      console.log("booking",booking)
       const details = await axiosInstance.post<any[]>(`/bookedFilter/booked`,booking);
       return details.data;
     } catch (e) {
