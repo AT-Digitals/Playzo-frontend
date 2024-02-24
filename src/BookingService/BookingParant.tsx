@@ -166,29 +166,62 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     });
   };
 
+  // const handleAddMoreItems = () => {
+  //   if (selectedService) {
+  //     const selectedDate = "29 Feb 2024";
+  //     const selectedTime = "9.00AM-11.00AM";
+  //     const selectedAmount = "1500";
+  //     console.log("selectedService", selectedService);
+
+  //     setTableData((prevTableData) => [
+  //       ...prevTableData,
+  //       {
+  //         type,
+  //         name: selectedService,
+  //         date: selectedDate,
+  //         time: selectedTime,
+  //         court: selectedCourt,
+  //         amount: selectedAmount,
+  //       },
+  //     ]);
+  //   }
+  //   setSelectedService("");
+  //   setSelectedCourt(1);
+  //   localStorage.removeItem("selectedService");
+  // };
+
   const handleAddMoreItems = () => {
     if (selectedService) {
       const selectedDate = "29 Feb 2024";
       const selectedTime = "9.00AM-11.00AM";
       const selectedAmount = "1500";
-      console.log("selectedService", selectedService);
 
-      setTableData((prevTableData) => [
-        ...prevTableData,
-        {
-          type,
-          name: selectedService,
-          date: selectedDate,
-          time: selectedTime,
-          court: selectedCourt,
-          amount: selectedAmount,
-        },
-      ]);
+      // Check if the same item already exists in the tableData array
+      const existingItem = tableData.find(
+        (item) => item.type === type && item.name === selectedService
+      );
+
+      if (!existingItem) {
+        // If the item doesn't exist, add it to the tableData array
+        setTableData((prevTableData) => [
+          ...prevTableData,
+          {
+            type,
+            name: selectedService,
+            date: selectedDate,
+            time: selectedTime,
+            court: selectedCourt,
+            amount: selectedAmount,
+          },
+        ]);
+      }
     }
+
     setSelectedService("");
     setSelectedCourt(1);
     localStorage.removeItem("selectedService");
   };
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -389,6 +422,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
+
+  console.log(tableData, "inital-mount");
 
   return (
     <>

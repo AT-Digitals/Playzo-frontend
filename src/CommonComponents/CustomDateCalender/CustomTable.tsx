@@ -13,22 +13,31 @@ import {
 import { format, isValid } from "date-fns";
 
 import CloseIcon from "@mui/icons-material/Close";
+import Colors from "../Colors";
 import { Link } from "react-router-dom";
 import routes from "../../routes/routes";
 import styled from "styled-components";
 
 const StyledCell = styled(TableCell)({
   " &.MuiTableCell-root": {
-    borderBottom: "none",
-    fontSize: "18px",
+    // borderBottom: "none",
+    fontSize: "16px",
+    textAlign: "center",
+    color: Colors.BLACK,
+    textTransform: "capitalize",
+    fontWeight: 700,
   },
 });
 
 const StyledCellTitle = styled(TableCell)({
   " &.MuiTableCell-root": {
-    borderBottom: "none",
-    fontWeight: "bold",
-    fontSize: "16px",
+    borderTop: "none",
+    fontWeight: 800,
+    fontSize: "18px",
+    color: Colors.BLACK,
+    textAlign: "center",
+    borderRight: "none",
+    borderLeft: "none",
   },
 });
 interface TableProps {
@@ -56,17 +65,23 @@ export default function CustomTable({
       gap={"2rem"}
     >
       <Box
-        border="0.25px solid black"
+        // border="0.25px solid black"
+        border={`1px solid ${Colors.BUTTON_COLOR}`}
         borderRadius="12px"
         display="flex"
         alignItems="center"
         width={{ xs: "90%", sm: "90%", md: "90%", lg: "70%" }}
         margin={"0 auto"}
         justifyContent="center"
+        bgcolor={Colors.BUTTON_COLOR}
+        boxShadow={"0px 2px 20px 0px"}
+        // bgcolor={Colors.BUTTON_COLOR}
       >
         <TableContainer
           style={{
             width: "95%",
+            paddingTop: "10px",
+            // backgroundColor: Colors.BUTTON_COLOR,
           }}
         >
           <Table>
@@ -85,7 +100,8 @@ export default function CustomTable({
                 <TableRow
                   key={index}
                   style={{
-                    backgroundColor: index % 2 === 0 ? "#f5f5f5" : "white",
+                    // display: "flex",
+                    whiteSpace: "normal",
                   }}
                 >
                   <StyledCell>{data.type}</StyledCell>
@@ -103,17 +119,18 @@ export default function CustomTable({
                   <StyledCell>{data.duration} hours</StyledCell>
                   <StyledCell>{data.amount}</StyledCell>
                   <StyledCell>
+                    {" "}
                     <IconButton
                       style={{
                         color: "black",
                         padding: "8px",
-                        borderRadius: "4px",
+                        borderRadius: "50%",
                       }}
                       onClick={() => handleRemoveItem(index)}
                     >
                       <CloseIcon
                         style={{
-                          color: "black",
+                          color: "red",
                         }}
                       />
                     </IconButton>
@@ -128,7 +145,9 @@ export default function CustomTable({
                 textDecoration: "none",
               }}
             >
-              <p style={{ color: "#666666" }}>+ Add more items</p>
+              <p style={{ color: "black", whiteSpace: "nowrap" }}>
+                + Add more items
+              </p>
             </Link>
           </Table>
         </TableContainer>
