@@ -22,6 +22,7 @@ import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
+import backgroundimage from './7692.jpg'
 import ball from "../assets/ball 4.png";
 import calendar from "../assets/Calendar.png";
 import cardicons from "../assets/card icons.png";
@@ -30,7 +31,6 @@ import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
 import { useState } from "react";
-import backgroundimage from './7692.jpg'
 
 // const PaymentDetails = [
 //   {
@@ -139,6 +139,7 @@ export default function PaymentBooking() {
           user: userData.id,
           startDate: bookings.startDate,
           endDate: bookings.endDate,
+          userBookingType:"online",
           //   bookingId: response.razorpay_payment_id,
           court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
         });

@@ -6,15 +6,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import EnquiryApi from "../../api/EnquiryApi";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import banner from "./cUS.png";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 
 const DropDownData = [
   {
@@ -32,46 +33,124 @@ const DropDownData = [
 ];
 
 export default function ContactUs() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const user = localStorage.getItem('user');
+  const userData =user && JSON.parse(user);
+  const [name, setName] = useState(userData?userData["name"]:"");
+  const [email, setEmail] = useState(userData?userData["email"]:"");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(userData?userData["phone"]:"");
+  const [successMessage, setSuccessMessage] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(false);
+
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidType, setIsValidType] = useState<boolean>(false);
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidPhone, setIsValidPhone] = useState(false);
+
+  const successNotification = () => {
+    setSuccessMessage(false);
+  }
+
+  useEffect(() => {
+    if (name==="") {
+      setIsValidName(true)
+  }
+    if (email!=="") {
+      validateEmail(email);
+    }else{
+      setIsValidEmail(true)
+    }
+    if (phoneNumber==="") {
+      setIsValidPhone(true);
+    }
+  
+    if (type==="") {
+      setIsValidType(true);
+    }
+  }, [email, name, phoneNumber, type]);
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event?.target.value);
+    setIsValidType(event?.target.value?false:true)
   };
 
   const handleMessageChange = (event: any) => {
     setMessage(event?.target.value);
   };
+  const handleNameChange = (event: any) => {
+    setName(event);
+    setIsValidName(event?false:true)
+};
+const validateEmail = (input: any) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isValid = emailRegex.test(input);
+  setIsValidEmail(isValid?false:true);
+};
+const handleEmailChange = (event: any) => {
+  setEmail(event);
+  validateEmail(event);
+};
+const validatePhone = (value: string) => {
+  setIsValidPhone(value.length ===10?false:true);
+}
+const handlePhoneChange = (event: any) => {
+  setPhoneNumber(event);
+  validatePhone(event);
+};
 
-  const onSubmit = async (event: any) => {
-    event?.preventDefault();
+const onSubmit = async (event: any) => {
+  event?.preventDefault();
 
-    const data = {
-      name: name,
-      email: email,
-      type: type,
-      message: message,
-    };
-    console.log("data", data);
-    try {
-      const response = await EnquiryApi.createEnquiry({
-        userName: data.name,
-        userEmail: data.email,
-        enquiryMessage: data.message,
-        projectType: data.type,
-      });
-      if (response) {
-        // Simulate an asynchronous operation (e.g., API call) with setTimeout
-        setTimeout(() => {}, 5000);
-      } else {
-        console.log("Response Failed");
-      }
-    } catch (err) {
-      console.log("err", err);
-    }
+  if (name==="") {
+    setIsValidName(true)
+}
+  if (email!=="") {
+    validateEmail(email);
+  }else{
+    setIsValidEmail(true)
+  }
+  if (phoneNumber==="") {
+    setIsValidPhone(true);
+  }
+
+  if (type==="") {
+    setIsValidType(true);
+  }
+if(name && email && phoneNumber && type){
+  const data = {
+    name: name,
+    email: email,
+    type: type,
+    phoneNumber: phoneNumber,
+    message: message,
   };
+  console.log("data", data);
+  try {
+    const response = await EnquiryApi.createEnquiry({
+      userName: data.name,
+      userEmail: data.email,
+      enquiryMessage: data.message,
+      phoneNumber: data.phoneNumber,
+      projectType: data.type,
+    });
+    if (response) {
+      setSuccessMessage(true);
+      setName('');
+      setEmail('');
+      setPhoneNumber('')
+      setType('');
+      setMessage('');
+    }
+
+  } catch (err) {
+    console.log("err", err);
+    // setErrorMessage(true)
+  }
+}
+
+};
+
 
   const BannerImage = styled.img`
     width: 100%;
@@ -206,7 +285,9 @@ export default function ContactUs() {
                   required={false}
                   placeholder="Enter your name"
                   value={name}
-                  onChange={setName}
+                  onChange={handleNameChange}
+                  error={!!isValidName}
+                  helperText={isValidName ? 'Please provide valid Name' : ''}
                 />
                 <CustomTextField
                   sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -214,14 +295,29 @@ export default function ContactUs() {
                   required={false}
                   placeholder="Enter your email address"
                   value={email}
-                  onChange={setEmail}
+                  onChange={handleEmailChange}
+                  error={!!isValidEmail}
+                  helperText={isValidEmail ? 'Please provide valid Email' : ''}
                 />
-                <DropDownComponent
+                   <DropDownComponent
                   label="What service are you interested in"
                   options={DropDownData}
                   placeHolder="Select your service"
                   value={type}
                   onChange={handleTypeChange}
+                  error={!!isValidType}
+                  helperText={isValidType? 'Please provide valid Service' : ''}
+                />
+                <CustomTextField
+                  sx={{ maxWidth: 700, borderRadius: "8px" }}
+                  label="Phone Number"
+                  required={false}
+                  placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={handlePhoneChange}
+                  type="number"
+                  error={!!isValidPhone}
+                  helperText={isValidPhone ? 'Please provide valid phone number' : ''}
                 />
                 <Box margin={"30px"}>
                   <Typography
@@ -281,6 +377,7 @@ export default function ContactUs() {
                 </Button>
               </Stack>
             </form>
+            <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
           </Box>
         </Stack>
       </AppContainer>

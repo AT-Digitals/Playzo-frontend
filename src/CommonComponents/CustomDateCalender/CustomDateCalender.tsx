@@ -5,6 +5,7 @@ import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
 import { BookingSubTypes } from "../../BookingService/BookingSubTypes";
+import { BookingType } from "../../CommonFiles/BookingType";
 import Colors from "../Colors";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
@@ -453,7 +454,7 @@ export default function CustomDateCalendar({
             endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
             endMilliseconds = endDateTime.getTime(); // End time in milliseconds
             const response = await BookingApi.getBookedList({
-              type: bookings.type,
+              type: BookingType.Turf,
               bookingtype: "online",
               startTime: startMilliseconds,
               endTime: endMilliseconds,
@@ -466,6 +467,7 @@ export default function CustomDateCalendar({
                 new Date(selectedDate),
                 "YYYY-MM-DD"
               ),
+              court:BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
             });
             if (response) {
               if (

@@ -1,12 +1,12 @@
 import * as React from "react";
 
+import { FormHelperText, InputBase, Typography, styled } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 import Box from "@mui/material/Box";
 import Colors from "./Colors";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import { InputBase, Typography, styled } from "@mui/material";
 
 interface dropdownProps {
   label: string;
@@ -14,6 +14,8 @@ interface dropdownProps {
   placeHolder?: string;
   value?: string;
   onChange?: (value: SelectChangeEvent<string>) => void;
+  error?:boolean;
+  helperText?:string;
 }
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -21,7 +23,6 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
   '.Mui-selected': {
 backgroundColor: "white",
-color: "white",
   },
   '& .MuiInputBase-input': {
     borderRadius: 4,
@@ -58,12 +59,14 @@ export default function DropDownComponent({
   placeHolder,
   value,
   onChange,
+  error=false,
+  helperText,
 }: dropdownProps) {
   return (
     <Box>
       <Typography
         color={Colors.BLACK}
-        fontWeight={"bold"}
+        fontWeight={400}
         fontSize="16px"
         mb="10px"
       >
@@ -82,9 +85,7 @@ export default function DropDownComponent({
           sx={{ maxWidth: 700, borderRadius: "8px" }}
         >
           {placeHolder && <CustomMenuItem style={{
-            backgroundColor: "white", 
-            color: "white",
-            marginTop: "-35px"
+            backgroundColor: "white"
           }} value="" className={placeHolder ? 'placeholder' : ''}>{placeHolder}</CustomMenuItem>}
           {options.map((item) => (
             <CustomMenuItem  key={item.value} value={item.value}>
@@ -92,6 +93,7 @@ export default function DropDownComponent({
             </CustomMenuItem>
           ))}
         </Select>
+        {error ? <FormHelperText error>{helperText}</FormHelperText> : <></>}
       </FormControl>
     </Box>
   );
