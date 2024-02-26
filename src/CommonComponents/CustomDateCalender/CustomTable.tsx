@@ -25,14 +25,14 @@ const StyledCell = styled(TableCell)({
     textAlign: "center",
     color: Colors.BLACK,
     textTransform: "capitalize",
-    fontWeight: 700,
+    fontWeight: 600,
   },
 });
 
 const StyledCellTitle = styled(TableCell)({
   " &.MuiTableCell-root": {
     borderTop: "none",
-    fontWeight: 800,
+    fontWeight: "bold",
     fontSize: "18px",
     color: Colors.BLACK,
     textAlign: "center",

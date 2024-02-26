@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Skeleton, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
@@ -8,7 +9,7 @@ import CustomSlider from "./CustomSliderService";
 import LeftArrow from "../../assets/LeftArrow.svg";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { useState } from "react";
+import styled from "styled-components";
 
 interface serviceGridProps {
   carouselItems: any[];
@@ -29,6 +30,11 @@ interface serviceGridProps {
   radiusTopleft?: any;
   radiusbottompleft?: any;
 }
+
+const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
+  opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
+`;
 
 export default function ServiceGrid(props: serviceGridProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -58,7 +64,18 @@ export default function ServiceGrid(props: serviceGridProps) {
   const handleMouseLeave = () => {
     setIsMouseOver(false);
   };
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
+  useEffect(() => {
+    // After 4 seconds, set showSkeleton to false to display the actual images
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
   return (
     <Box
       margin={{ xs: "30px", md: 7 }}
@@ -87,20 +104,64 @@ export default function ServiceGrid(props: serviceGridProps) {
         alignItems={"flex-start"}
       >
         <Stack width={"100%"}>
-          <CustomSlider
-            currentSlide={currentSlide}
-            slides={props.carouselItems}
-            handleBulletClick={handleBulletClick}
-            nextSlide={nextSlide}
-            autoplayInterval={4000}
-          />
-          <Box
-            display="flex"
-            justifyContent="center"
-            flexWrap="wrap"
-            mt={{ xs: 2, md: 0 }}
-          ></Box>
+          <Box display={"flex"} flexDirection={"column"} gap={"1px"}>
+            {/* {showSkeleton && (
+              <SkeletonContainer showSkeleton={showSkeleton}>
+                <Skeleton
+                  sx={{
+                    background: "white",
+                  }}
+                  variant="rounded"
+                  animation="pulse"
+                />
+                <Skeleton
+                  sx={{
+                    background: "white",
+                  }}
+                  animation="wave"
+                />
+
+                <Skeleton
+                  variant="rectangular"
+                  sx={{
+                    background: "white",
+                  }}
+                  width={650}
+                  height={300}
+                />
+                <Skeleton
+                  sx={{
+                    background: "white",
+                  }}
+                  animation="wave"
+                />
+                <Skeleton
+                  sx={{
+                    background: "white",
+                  }}
+                  animation="wave"
+                />
+                <Skeleton
+                  sx={{
+                    background: "white",
+                  }}
+                  animation="wave"
+                />
+              </SkeletonContainer>
+            )} */}
+
+            {/* {!showSkeleton && ( */}
+            <CustomSlider
+              currentSlide={currentSlide}
+              slides={props.carouselItems}
+              handleBulletClick={handleBulletClick}
+              nextSlide={nextSlide}
+              autoplayInterval={4000}
+            />
+            {/* )} */}
+          </Box>
         </Stack>
+
         <Stack
           marginRight={"0px !important"}
           marginLeft={"0px !important"}

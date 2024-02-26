@@ -1,7 +1,8 @@
-import React, { ReactNode, useEffect } from "react";
+import { Box, Skeleton } from "@mui/material";
+import React, { ReactNode, useEffect, useState } from "react";
 
-import { Box } from "@mui/material";
 import Colors from "../../CommonComponents/Colors";
+import styled from "styled-components";
 
 interface CustomSliderProps {
   slides: ReactNode[];
@@ -11,6 +12,10 @@ interface CustomSliderProps {
   handleBulletClick: any;
 }
 
+const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
+  opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
+`;
 const CustomSlider = ({
   slides,
   autoplayInterval,
@@ -28,6 +33,19 @@ const CustomSlider = ({
     };
   }, [autoplayInterval, nextSlide]);
 
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  useEffect(() => {
+    // After 4 seconds, set showSkeleton to false to display the actual images
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <>
       <Box
@@ -44,35 +62,84 @@ const CustomSlider = ({
             height: "100%",
           }}
         >
-          {slides.map((slide, index) => (
-            <Box
-              key={index}
-              sx={{
-                flex: "0 0 100%",
-                boxSizing: "border-box",
-                width: "100%",
-                overflow: "hidden",
-                position: "relative",
-              }}
-            >
-              <Box
-                component={"image"}
+          {showSkeleton && (
+            <SkeletonContainer showSkeleton={showSkeleton}>
+              <Skeleton
                 sx={{
-                  backgroundImage: `url(${slide})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  objectFit: "cover", // Set object-fit to cover
-                  overflow: "hidden",
-                  display: "flex",
-                  height: "100%", // Ensure the height is 100%
-                  maxHeight: 400,
+                  background: "white",
                 }}
-              >
-                {slide}
-              </Box>
-            </Box>
-          ))}
+                variant="rounded"
+                animation="pulse"
+              />
+              <Skeleton
+                sx={{
+                  background: "white",
+                }}
+                animation="wave"
+              />
+
+              <Skeleton
+                variant="rectangular"
+                sx={{
+                  background: "white",
+                }}
+                width={650}
+                height={300}
+              />
+              <Skeleton
+                sx={{
+                  background: "white",
+                }}
+                animation="wave"
+              />
+              <Skeleton
+                sx={{
+                  background: "white",
+                }}
+                animation="wave"
+              />
+              <Skeleton
+                sx={{
+                  background: "white",
+                }}
+                animation="wave"
+              />
+            </SkeletonContainer>
+          )}
+
+          {!showSkeleton && (
+            <>
+              {slides.map((slide, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    flex: "0 0 100%",
+                    boxSizing: "border-box",
+                    width: "100%",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <Box
+                    component={"image"}
+                    sx={{
+                      backgroundImage: `url(${slide})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      objectFit: "cover", // Set object-fit to cover
+                      overflow: "hidden",
+                      display: "flex",
+                      height: "100%", // Ensure the height is 100%
+                      maxHeight: 400,
+                    }}
+                  >
+                    {slide}
+                  </Box>
+                </Box>
+              ))}
+            </>
+          )}
         </Box>
       </Box>
       <Box

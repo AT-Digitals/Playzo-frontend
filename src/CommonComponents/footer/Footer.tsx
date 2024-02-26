@@ -33,7 +33,7 @@ export default function Footer() {
       zIndex={1000}
       paddingX={3}
       paddingY={4}
-    //height={"456px"}
+      //height={"456px"}
     >
       <AppContainer p={0}>
         <Box
@@ -122,7 +122,7 @@ export default function Footer() {
                         color: Colors.BUTTON_COLOR,
                       },
                     }}
-                    to={routes.ROOT}
+                    to={routes.ABOUTUS}
                   >
                     About
                   </StyledLink>
@@ -367,15 +367,17 @@ export default function Footer() {
                 />
               </Link>
               <Link to={routes.ROOT}>
-                <YouTubeIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                }} />
+                <YouTubeIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
             </Stack>
           </Stack>
