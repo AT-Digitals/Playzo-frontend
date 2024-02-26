@@ -436,6 +436,7 @@ export default function CustomDateCalendar({
               height: "280px",
               margin: "0px",
               padding: 2,
+              opacity: 1,
               "& .MuiPickersDay-root.Mui-selected": {
                 color: "white !important",
                 background: "#15B5FC !important",

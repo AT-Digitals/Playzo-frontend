@@ -111,8 +111,8 @@ export default function ServiceBooking() {
                   backgroundPosition: "bottom",
                   backgroundRepeat: "no-repeat",
                   objectFit: "cover", // Set object-fit to cover
-                  height: "100%", // Ensure the height is 100%
-          // Ensure the height is 100%
+                  height: "100%",
+       
                 }}>
                    <Box
           sx={{
@@ -124,6 +124,14 @@ export default function ServiceBooking() {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
+         <Box
+    sx={{
+      position: "relative",
+      zIndex: 1, // Ensure content appears above background
+      padding: "20px", // Adjust padding as needed
+      color: "black", // Set text color for content
+    }}
+  >
       <Stack
         marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
         marginTop={"50px"}
@@ -131,7 +139,7 @@ export default function ServiceBooking() {
         justifyContent={"center"}
         alignItems={"center"}
         sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
       >
         <Breadcrumbs
@@ -150,7 +158,7 @@ export default function ServiceBooking() {
         }}
         width={"100%"}
         maxWidth={"290px"}
-        borderRight={"1px solid #D9D9D9"}
+        borderRight={"1px solid gray"}
       >
         <Typography
           fontSize={"20px"}
@@ -158,13 +166,13 @@ export default function ServiceBooking() {
           fontWeight={"bold"}
           color={Colors.BLACK}
           sx={{
-            opacity: '0.7'
+            opacity: '1'
           }}
         >
           Pick a service
         </Typography>
         <Stack sx={{
-          opacity: '0.7'
+          opacity: '1'
         }} alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
           {TurfDetails.map((item) => (
             <Link style={{ textDecoration: "none" }} to={item.link}>
@@ -178,7 +186,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"3px solid #D9D9D9"}
+                border={"1px solid gray"}
               >
                 <Box padding={"12px 12px"}>
                   <img src={item.image} width={"100px"} alt="turf" />
@@ -196,7 +204,7 @@ export default function ServiceBooking() {
           ))}
         </Stack>
         <Stack sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
           marginTop={"15px"}
           alignItems={"baseline"}
@@ -215,7 +223,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"3px solid #D9D9D9"}
+                border={"1px solid gray"}
               >
                 <Box padding={"12px 12px"}>
                   <img
@@ -238,7 +246,7 @@ export default function ServiceBooking() {
           ))}
         </Stack>
         <Stack sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
           marginTop={"15px"}
           alignItems={"baseline"}
@@ -257,7 +265,7 @@ export default function ServiceBooking() {
                 borderRadius={"10px"}
                 maxWidth={"124px"}
                 height={"135px"}
-                border={"3px solid #D9D9D9"}
+                border={"1px solid gray"}
               >
                 <Box padding={"12px 12px"}>
                   <img src={item.image} width={"100px"} alt="cricket" />
@@ -274,6 +282,7 @@ export default function ServiceBooking() {
             </Link>
           ))}
         </Stack>
+        </Box>
       </Box>
       {/* <Box display={"flex"} justifyContent={"end"}>
         <img src={ball} width={"150px"} alt="" />

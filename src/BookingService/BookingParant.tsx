@@ -332,6 +332,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
+      color={Colors.BLACK}
     >
       Payment
     </Typography>,
@@ -413,6 +414,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
+         <Box
+    sx={{
+      position: "relative",
+      zIndex: 1, // Ensure content appears above background
+      padding: "20px", // Adjust padding as needed
+      color: "black", // Set text color for content
+    }}
+  >
       <Stack
         justifyContent={"space-between"}
         maxWidth={800}
@@ -423,7 +432,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         alignItems={"flex-start"}
       >
         <Button  sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
           onClick={handlegoBack}
           variant="text"
@@ -438,7 +447,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           justifyContent={"center"}
           alignItems={"center"}
           sx={{
-            opacity: '0.7'
+            opacity: '1'
           }}
         >
           <Breadcrumbs
@@ -450,7 +459,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         </Stack>
       </Stack>
       <Box  sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
         display={"flex"}
         flexDirection={{ xs: "column", sm: "column", ms: "column", lg: "row" }}
@@ -543,7 +552,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               ? "none"
               : "flex"
           }
-          borderLeft={"1px solid #D9D9D9"}
+          borderLeft={"1px solid gray"}
           gap={"8px"}
           padding={{
             xs: "0px 37px",
@@ -580,7 +589,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   backgroundColor: Colors.BUTTON_COLOR,
                 },
               }}
-              border={"3px solid #D9D9D9"}
+              border={"1px solid gray"}
               width={"100%"}
               maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
@@ -588,7 +597,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               onClick={() => handleServiceSelection(item)}
             >
               <Box sx={{
-          opacity: '0.7'
+          opacity: '1'
         }}
                 display={"flex"}
                 gap={"16px"}
@@ -623,9 +632,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           ))}
           {selectedService && (
             <Box sx={{
-              opacity: '0.7'
+              opacity: '1'
             }}
-              border={"3px solid #D9D9D9"}
+            border={"1px solid gray"}
               width={"100%"}
               maxWidth={{ xs: "220px", sm: "220px", md: "220px", lg: "290px" }}
               borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
@@ -665,7 +674,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Box>
           )}
         </Stack>
-        <Stack  borderLeft={selectedService ? "1px solid #D9D9D9" : "none"}>
+        <Stack  borderLeft={selectedService ? "1px solid gray" : "none"}>
           {(type === BookingType.BowlingMachine ||
             type === BookingType.CricketNet ||
             selectedService) && (
@@ -673,7 +682,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               borderLeft={
                 type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet
-                  ? "1px solid #D9D9D9"
+                  ? "1px solid gray"
                   : "none"
               }
             >
@@ -688,7 +697,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         </Stack>
       </Box>
       <Box sx={{
-          opacity: '0.7'
+          opacity: '1'
         }} pt={2}>
         {(type === BookingType.BowlingMachine ||
           type === BookingType.CricketNet ||
@@ -724,6 +733,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         )}
       </Box>
       </Box>
+      </Box>
+    
       {/* <Box display={"flex"} justifyContent={"end"}>
         <img src={ball} width={"150px"} alt="" />
       </Box> */}
