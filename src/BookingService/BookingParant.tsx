@@ -14,7 +14,6 @@ import badminton from "../assets/Image (7).png";
 import badminton1 from "../assets/Rectangle 685 (3).png";
 import badminton2 from "../assets/Rectangle 685 (4).png";
 import badminton3 from "../assets/Rectangle 685 (5).png";
-import ball from "../assets/ball 4.png";
 import boardgames from "../assets/board games.png";
 import boardgames1 from "../assets/Rectangle 685 (11).png";
 import boardgames2 from "../assets/Rectangle 685 (12).png";
@@ -155,15 +154,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   console.log(tableData, "tableData new array");
 
   const handleRemoveItem = (indexToRemove: number) => {
-    setTableData((prevTableData) => {
-      console.log(prevTableData, "updatedTabledata");
-
-      const updatedTableData = prevTableData.filter(
-        (_, index) => index !== indexToRemove
-      );
-      console.log(updatedTableData, "updatedTabledata");
-      return updatedTableData;
-    });
+    const updatedTableData = [...tableData];
+    updatedTableData.splice(indexToRemove, 1);
+    setTableData(updatedTableData);
+    localStorage.setItem("bookings", JSON.stringify(updatedTableData));
+    console.log(tableData, "after deleted");
   };
 
   // const handleAddMoreItems = () => {
@@ -203,17 +198,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
       if (!existingItem) {
         // If the item doesn't exist, add it to the tableData array
-        setTableData((prevTableData) => [
-          ...prevTableData,
-          {
+        setTableData((prevTableData) =>
+          prevTableData.concat({
             type,
             name: selectedService,
             date: selectedDate,
             time: selectedTime,
             court: selectedCourt,
             amount: selectedAmount,
-          },
-        ]);
+          })
+        );
       }
     }
 
@@ -425,6 +419,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   }, []);
 
   console.log(tableData, "inital-mount");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>

@@ -17,8 +17,6 @@ import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-// import { BookingType } from "../../CommonFiles/BookingType";
-
 const Timings = [
   { name: "6:00-7:00 AM", disabled: false },
   { name: "7:00-8:00 AM", disabled: false },
@@ -288,6 +286,119 @@ export default function CustomDateCalendar({
     });
   };
 
+  // const handleAddButtonClick = async (
+  //   type: string,
+  //   selectedService: string
+  // ) => {
+  //   if (userData && userData.userType === "user") {
+  //     if (selectedDate !== "" && selectedTimings.length > 0) {
+  //       const totalDuration = selectedTimings.length;
+  //       let ratePerHour = 0;
+  //       // let totalAmount = 0;
+  //       const bookings = {
+  //         type,
+  //         name: selectedService,
+  //         date: selectedDate,
+  //         time: selectedTimings,
+  //         amount: 0,
+  //         duration: totalDuration,
+  //         // ... other properties
+  //       };
+
+  //       try {
+  //         const courtValue =
+  //           BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
+  //         console.log("courtValue", courtValue);
+  //         const response = await BookingApi.getBookingAmount(
+  //           bookings.type,
+  //           courtValue
+  //         );
+  //         if (response) {
+  //           console.log("responseaa", response);
+  //           ratePerHour = response.bookingAmount;
+  //           bookings.amount = totalDuration * ratePerHour;
+  //         } else {
+  //           console.log("amount fetch Failed");
+  //         }
+  //       } catch (err) {
+  //         console.log("err", err);
+  //       }
+  //       selectedTimings.map(async (timeData) => {
+  //         // const newData = {
+  //         //   type,
+  //         //   name: selectedService,
+  //         //   date: selectedDate,
+  //         //   time: timeData,
+  //         //   amount: bookings.amount,
+  //         //   duration: totalDuration,
+  //         //   // ... other properties
+  //         // };
+  //         try {
+  //           let startMilliseconds = 0;
+  //           let endMilliseconds = 0;
+  //           const [time, am] = timeData.split(" ");
+  //           const [time1, am1] = time.split("-");
+  //           const [hours, minutes] = time1.split(":");
+
+  //           console.log("hours", hours, minutes);
+  //           const startDateTime = new Date(selectedDate);
+  //           startDateTime.setHours(Number(hours), Number(minutes));
+  //           startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+  //           const endDateTime = new Date(startDateTime);
+  //           endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+  //           endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+  //           const response = await BookingApi.getBookedList({
+  //             type: bookings.type,
+  //             bookingtype: "online",
+  //             startTime: startMilliseconds,
+  //             endTime: endMilliseconds,
+  //             user: userData.id,
+  //             startDate: DateUtils.formatDate(
+  //               new Date(selectedDate),
+  //               "YYYY-MM-DD"
+  //             ),
+  //             endDate: DateUtils.formatDate(
+  //               new Date(selectedDate),
+  //               "YYYY-MM-DD"
+  //             ),
+  //           });
+  //           let newData = tableData;
+  //           if (response) {
+  //             if (
+  //               !newData.some(
+  //                 (el: {
+  //                   type: string;
+  //                   name: string;
+  //                   date: string;
+  //                   time: string[];
+  //                   amount: number;
+  //                   duration: number;
+  //                 }) => el === bookings
+  //               )
+  //             )
+  //               newData.push(bookings);
+  //             setTableData((prevTableData: any) => [...prevTableData, newData]);
+  //           }
+  //         } catch (error: any) {
+  //           if (error.message === "Please choose another date and slot") {
+  //             setResponseModalOpen(true);
+  //           }
+  //         }
+  //       });
+
+  //       // Reset selected date and timings
+  //       setSelectedDate(new Date().toString());
+  //       setSelectedTimings([]);
+  //       setCalendarKey(Date.now().toString());
+  //     } else {
+  //       setDateModalOpen(true);
+  //     }
+  //   } else {
+  //     setModalOpen(true);
+  //   }
+  // };
+
   const handleAddButtonClick = async (
     type: string,
     selectedService: string
@@ -296,7 +407,6 @@ export default function CustomDateCalendar({
       if (selectedDate !== "" && selectedTimings.length > 0) {
         const totalDuration = selectedTimings.length;
         let ratePerHour = 0;
-        // let totalAmount = 0;
         const bookings = {
           type,
           name: selectedService,
@@ -325,16 +435,8 @@ export default function CustomDateCalendar({
         } catch (err) {
           console.log("err", err);
         }
-        selectedTimings.map(async (timeData) => {
-          // const newData = {
-          //   type,
-          //   name: selectedService,
-          //   date: selectedDate,
-          //   time: timeData,
-          //   amount: bookings.amount,
-          //   duration: totalDuration,
-          //   // ... other properties
-          // };
+
+        selectedTimings.forEach(async (timeData) => {
           try {
             let startMilliseconds = 0;
             let endMilliseconds = 0;
@@ -365,10 +467,9 @@ export default function CustomDateCalendar({
                 "YYYY-MM-DD"
               ),
             });
-            let newData = tableData;
             if (response) {
               if (
-                !newData.some(
+                !tableData.some(
                   (el: {
                     type: string;
                     name: string;
@@ -378,9 +479,12 @@ export default function CustomDateCalendar({
                     duration: number;
                   }) => el === bookings
                 )
-              )
-                newData.push(bookings);
-              setTableData((prevTableData: any) => [...prevTableData, newData]);
+              ) {
+                setTableData((prevTableData: any) => [
+                  ...prevTableData,
+                  bookings,
+                ]);
+              }
             }
           } catch (error: any) {
             if (error.message === "Please choose another date and slot") {
@@ -400,7 +504,6 @@ export default function CustomDateCalendar({
       setModalOpen(true);
     }
   };
-
   return (
     <Stack
       padding={{

@@ -10,6 +10,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -20,7 +21,6 @@ import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
-import React from "react";
 import TodayIcon from "@mui/icons-material/Today";
 import ball from "../assets/ball 4.png";
 import calendar from "../assets/Calendar.png";
@@ -162,6 +162,14 @@ export default function PaymentBooking() {
   );
 
   console.log(allBookings, "payment allbooking when come this page");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   return (
     <>
     <Box component={"image"}
@@ -240,12 +248,16 @@ export default function PaymentBooking() {
                   startTime: number;
                   endDate: string;
                   amount: string;
-                  endTime: string;
+                  endTime: number;
                 },
                 index: any
               ) => {
                 const startDateTime = new Date(item.startTime);
                 const endDateTime = new Date(item.endTime);
+
+                const startHours = startDateTime.getHours();
+                const endHours = endDateTime.getHours();
+
                 const formattedStartDate = startDateTime.toLocaleDateString(
                   "en-US",
                   {
@@ -255,22 +267,18 @@ export default function PaymentBooking() {
                   }
                 );
 
-                const formattedStartTime = startDateTime.toLocaleTimeString(
-                  [],
-                  {
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true, // This will include AM/PM
-                  }
-                );
-
-                const formattedEndTime = endDateTime.toLocaleTimeString([], {
-                  hour: "numeric",
-                  minute: "2-digit",
-                  hour12: true, // This will include AM/PM
-                });
+                // Format start and end times without minutes
+                const formattedStartTime = `${startHours % 12 || 12}:00 ${
+                  startHours < 12 ? "AM" : "PM"
+                }`;
+                const formattedEndTime = `${endHours % 12 || 12}:00 ${
+                  endHours < 12 ? "AM" : "PM"
+                }`;
 
                 const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;
+
+                console.log(formattedTimeRange);
+
                 return (
                   <Stack sx={{
                     opacity: '1'
