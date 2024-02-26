@@ -1,4 +1,5 @@
 import { Box, TextField } from "@mui/material";
+
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -41,15 +42,15 @@ export default function TextFieldComponent({
                 required
                 value={value}
                 onChange={onChange}
-                error={!validationtext}
+                error={validationtext}
                 InputProps={{
-                    endAdornment: !validationtext && (
+                    endAdornment: validationtext && (
                         <ErrorOutlineIcon color="error" style={{ marginRight: "8px" }} />
                     ),
                 }}
             />
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
-                {!validationtext ? errorText : ""}
+                {validationtext ? errorText : ""}
             </span>
         </Box>
     );
