@@ -1,11 +1,11 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import backgroundimage from "./7692.jpg";
 import badminton from "../assets/Image (7).png";
-import ball from "../assets/ball 4.png";
 import boardgames from "../assets/board games.png";
 import bowling from "../assets/Image (2).png";
 import cricketnet from "../assets/Image (1).png";
@@ -13,7 +13,6 @@ import grass from "../assets/Rectangle 679.png";
 import playstation from "../assets/playstation.png";
 import routes from "../routes/routes";
 import turf from "../assets/turf.png";
-import { useState } from "react";
 
 const TurfDetails = [
   {
@@ -100,6 +99,13 @@ export default function ServiceBooking() {
       Payment
     </Typography>,
   ];
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
     <>
