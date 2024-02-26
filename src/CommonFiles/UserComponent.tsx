@@ -1,13 +1,13 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+
 import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import headerProfileLogo from "../assets/Header/headerProfileLogo.svg";
 
 interface MenuProps {
     handleClose: () => void;
@@ -36,7 +36,7 @@ export default function AccountMenu({
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
             >
-                <Avatar sx={{ width: 40, height: 40 }}>M</Avatar>
+                <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp" src={headerProfileLogo}>M</Avatar>
             </IconButton>
             <Menu
                 anchorEl={anchorEl}
@@ -73,7 +73,7 @@ export default function AccountMenu({
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
                 <MenuItem onClick={handleChange}>
-                    <Avatar /> My Profile
+                    <Avatar/> My Profile
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleClose}>
