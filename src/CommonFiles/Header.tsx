@@ -62,7 +62,7 @@ export default function Header() {
                 textTransform: "uppercase",
                 ":hover": {
                   color: Colors.BUTTON_COLOR,
-                 
+
                 }
               }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
                 About Us
@@ -71,7 +71,7 @@ export default function Header() {
             <DropDown />
             <HeaderLink href={routes.CONTACTUS}>
               <Typography sx={{
-               color: Colors.WHITE,
+                color: Colors.WHITE,
                 transition: "color 0.5s ease",
                 textTransform: "uppercase",
                 ":hover": {
@@ -81,7 +81,7 @@ export default function Header() {
                 Contact Us
               </Typography>
             </HeaderLink>
-           
+
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
             <Button
@@ -107,8 +107,6 @@ export default function Header() {
             >
               Login
             </Button>
-            
-            <HeaderLink href={routes.BOOKING_SERVICE}>
             <Button
               variant="outlined"
               sx={{
@@ -127,9 +125,33 @@ export default function Header() {
                   color: Colors.BUTTON_COLOR,
                   border: "1px solid #15B5FC",
                 }
-              }}>
+              }} onClick={handleLogout}>
+              Logout
+            </Button>
+            <HeaderLink href={routes.BOOKING_SERVICE}>
+              <Button
+                variant="outlined"
+                sx={{
+                  padding: "8px 20px",
+                  textTransform: "none",
+                  fontSize: "16px",
+                  minWidth: "110px",
+                  fontWeight: "400",
+                  border: "2px solid #15B5FC",
+                  borderRadius: "30px",
+                  letterSpacing: "1.6px",
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                  ":hover": {
+                    background: Colors.WHITE,
+                    color: Colors.BUTTON_COLOR,
+                    border: "1px solid #15B5FC",
+                  }
+                }}>
                 Book Now
-                </Button>
+              </Button>
+
+
             </HeaderLink>
           </Stack>
         </Stack>
