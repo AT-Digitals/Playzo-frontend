@@ -33,7 +33,7 @@ export default function Footer() {
       zIndex={1000}
       paddingX={3}
       paddingY={4}
-      //height={"456px"}
+    //height={"456px"}
     >
       <AppContainer p={0}>
         <Box
@@ -235,7 +235,7 @@ export default function Footer() {
               sm={6}
               md={4}
               lg={4}
-              marginTop={"6px"}
+              marginTop={"13px"}
             >
               <Typography
                 fontSize={"14px"}
@@ -313,9 +313,6 @@ export default function Footer() {
               <InstagramIcon width={30} height={30} />
             </Link>
             <Link to={routes.ROOT}>
-              <LinkedInIcon width={30} height={30} />
-            </Link>
-            <Link to={routes.ROOT}>
               <YouTubeIcon width={30} height={30} />
             </Link>
           </Stack>
@@ -356,9 +353,6 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              {/* <Link to={routes.ROOT}>
-                <img src={TwitterIcon} alt="twitter" width={30} height={30} />
-              </Link> */}
               <Link to={routes.ROOT}>
                 <InstagramIcon
                   sx={{
@@ -373,30 +367,15 @@ export default function Footer() {
                 />
               </Link>
               <Link to={routes.ROOT}>
-                <LinkedInIcon
-                  sx={{
-                    color: Colors.WHITE,
-                    width: "25px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
-                      color: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                />
-              </Link>
-              <Link to={routes.ROOT}>
-                <YouTubeIcon
-                  sx={{
-                    color: Colors.WHITE,
-                    width: "25px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
-                      color: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                />
+                <YouTubeIcon sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR
+                  }
+                }} />
               </Link>
             </Stack>
           </Stack>

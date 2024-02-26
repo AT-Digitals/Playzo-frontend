@@ -30,6 +30,7 @@ import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
 import { useState } from "react";
+import backgroundimage from './7692.jpg'
 
 // const PaymentDetails = [
 //   {
@@ -163,7 +164,38 @@ export default function PaymentBooking() {
   console.log(allBookings, "payment allbooking when come this page");
   return (
     <>
-      <Stack
+    <Box component={"image"}
+                sx={{
+                  position: "relative",
+                  backgroundImage: `url(${backgroundimage})`,
+                  backgroundSize: "cover", // Fit the background image to cover the entire container
+                  backgroundPosition: "bottom",
+                  backgroundRepeat: "no-repeat",
+                  objectFit: "cover", // Set object-fit to cover
+                  height: "100%",
+       
+                }}>
+                   <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+          }}
+        />
+         <Box
+    sx={{
+      position: "relative",
+      zIndex: 1, // Ensure content appears above background
+      padding: "20px", // Adjust padding as needed
+      color: "black", // Set text color for content
+    }}
+  >
+      <Stack sx={{
+          opacity: '1'
+        }}
         margin={{ xs: "0px", sm: "0px", md: "0px", lg: "50px 190px" }}
         flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
       >
@@ -177,7 +209,7 @@ export default function PaymentBooking() {
           width={"100%"}
           maxWidth={{ xs: "313px", sm: "313px", md: "313px", lg: "330px" }}
           borderRadius={"10px"}
-          border={"1px solid #D9D9D9"}
+          border={"1px solid gray"}
         >
           <Box
             padding={"27px 20px"}
@@ -196,7 +228,9 @@ export default function PaymentBooking() {
               Booking Summary
             </Typography>
           </Box>
-          <Stack margin={"0px 25px"}>
+          <Stack sx={{
+          opacity: '1'
+        }} margin={"0px 25px"}>
             {allBookings.map(
               (
                 item: {
@@ -238,7 +272,9 @@ export default function PaymentBooking() {
 
                 const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;
                 return (
-                  <Stack paddingBottom={"20px"}>
+                  <Stack sx={{
+                    opacity: '1'
+                  }} paddingBottom={"20px"}>
                     <Typography
                       fontWeight={"500"}
                       fontSize={"15px"}
@@ -318,16 +354,24 @@ export default function PaymentBooking() {
               }}
               id="outlined-password-input"
             />
-            <Box borderBottom={"1px solid black"} pb={"20px"}>
+            <Box sx={{
+          opacity: '1'
+        }} borderBottom={"1px solid black"} pb={"20px"}>
               <Button
-                style={{
+                sx={{
                   border: "1px solid #15B5FC",
-                  color: Colors.BUTTON,
                   width: "100%",
                   maxWidth: "60px",
                   height: "30px",
                   marginTop: "16px",
                   textTransform: "capitalize",
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                  ":hover": {
+                    background: Colors.WHITE,
+                    color: Colors.BUTTON_COLOR,
+                    border: "1px solid #15B5FC",
+                  }
                 }}
                 variant="outlined"
               >
@@ -357,7 +401,9 @@ export default function PaymentBooking() {
             </Box>
           </Stack>
         </Box>
-        <Box
+        <Box sx={{
+          opacity: '1'
+        }}
           padding={{
             xs: "17px 35px",
             sm: "17px 35px",
@@ -401,7 +447,9 @@ export default function PaymentBooking() {
           >
             Payment Methods
           </Typography>
-          <Box display={"flex"} alignItems={"center"}>
+          <Box sx={{
+          opacity: '1'
+        }} display={"flex"} alignItems={"center"}>
             <FormControl>
               <RadioGroup
                 style={{ marginTop: "10px" }}
@@ -445,7 +493,9 @@ export default function PaymentBooking() {
             height={"35px"}
             bgcolor={"#F9F9F9"}
           >
-            <Stack
+            <Stack sx={{
+          opacity: '1'
+        }}
               flexDirection={"row"}
               justifyContent={"space-between"}
               padding={"5px 10px"}
@@ -472,7 +522,9 @@ export default function PaymentBooking() {
               height={"35px"}
               bgcolor={"#F9F9F9"}
             >
-              <Stack
+              <Stack sx={{
+          opacity: '1'
+        }}
                 flexDirection={"row"}
                 justifyContent={"space-between"}
                 padding={"5px 10px"}
@@ -487,7 +539,7 @@ export default function PaymentBooking() {
                 <TodayIcon style={{ fontSize: "20px" }} />
               </Stack>
             </Box>
-            <Box
+            <Box 
               width={"100%"}
               maxWidth={"100px"}
               height={"35px"}
@@ -528,7 +580,7 @@ export default function PaymentBooking() {
             </FormControl>
             <Typography
               pt={"9px"}
-              color={"#666666"}
+              color={"black"}
               fontSize={"16px"}
               fontWeight={"bold"}
             >
@@ -537,7 +589,7 @@ export default function PaymentBooking() {
           </Box>
           <Typography
             pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
-            color={"#666666"}
+            color={"black"}
             fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
             fontWeight={"500"}
           >
@@ -558,7 +610,7 @@ export default function PaymentBooking() {
             </FormControl>
             <Typography
               pt={"9px"}
-              color={"#666666"}
+              color={"black"}
               fontSize={"16px"}
               fontWeight={"bold"}
             >
@@ -567,22 +619,30 @@ export default function PaymentBooking() {
           </Box>
           <Typography
             pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
-            color={"#666666"}
+            color={"black"}
             fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
             fontWeight={"500"}
           >
             Make payment through Gpay, Paytm etc
           </Typography>
-          <Box mt={"10px"} display={"flex"} justifyContent={"end"}>
+          <Box sx={{
+          opacity: '1'
+        }} mt={"10px"} display={"flex"} justifyContent={"end"}>
             <Button
               onClick={handlePayClick}
-              style={{
-                backgroundColor: Colors.BUTTON,
+              sx={{
                 width: "100%",
                 maxWidth: "120px",
                 height: "40px",
                 textTransform: "capitalize",
                 fontWeight: "bold",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
               }}
               variant="contained"
             >
@@ -590,13 +650,19 @@ export default function PaymentBooking() {
             </Button>
             <Button
               onClick={handlegoBack}
-              style={{
-                backgroundColor: Colors.BUTTON,
+              sx={{
                 width: "100%",
                 maxWidth: "120px",
                 height: "40px",
                 textTransform: "capitalize",
                 fontWeight: "bold",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
               }}
               variant="contained"
             >
@@ -605,14 +671,16 @@ export default function PaymentBooking() {
           </Box>
         </Box>
       </Stack>
+      </Box>
+      </Box>
       <Box
-        mt={{ xs: "50px", sm: "50px", md: "50px", g: "0px" }}
+        mt={{ xs: "50px", sm: "50px", md: "50px", lg: "0px" }}
         display={"flex"}
         justifyContent={"end"}
       >
-        <img src={ball} width={"150px"} alt="" />
+        {/* <img src={ball} width={"150px"} alt="" /> */}
       </Box>
-      <img style={{ marginTop: "-40px" }} src={grass} alt="" />
+      <img src={grass} alt="" />
       <ModalComponent
         open={open}
         handleClose={handleClose}

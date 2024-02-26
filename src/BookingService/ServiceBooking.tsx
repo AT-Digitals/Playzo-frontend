@@ -103,8 +103,7 @@ export default function ServiceBooking() {
 
   return (
     <>
-      <Box
-        component={"image"}
+      <Box component={"image"}
         sx={{
           position: "relative",
           backgroundImage: `url(${backgroundimage})`,
@@ -112,9 +111,9 @@ export default function ServiceBooking() {
           backgroundPosition: "bottom",
           backgroundRepeat: "no-repeat",
           objectFit: "cover", // Set object-fit to cover
-          height: "100%", // Ensure the height is 100%
-        }}
-      >
+          height: "100%",
+
+        }}>
         <Box
           sx={{
             position: "absolute",
@@ -125,173 +124,172 @@ export default function ServiceBooking() {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
-        <Stack
-          marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
-          marginTop={"50px"}
-          spacing={2}
-          justifyContent={"center"}
-          alignItems={"center"}
-          sx={{
-            opacity: "0.7",
-          }}
-        >
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
-          >
-            {breadcrumbs}
-          </Breadcrumbs>
-        </Stack>
         <Box
-          margin={{
-            xs: "50px 50px",
-            sm: "50px 50px",
-            md: "50px 50px",
-            lg: "50px 170px",
+          sx={{
+            position: "relative",
+            zIndex: 1, // Ensure content appears above background
+            padding: "20px", // Adjust padding as needed
+            color: "black", // Set text color for content
           }}
-          width={"100%"}
-          maxWidth={"290px"}
-          borderRight={"1px solid #D9D9D9"}
         >
-          <Typography
-            fontSize={"20px"}
-            marginBottom={"10px"}
-            fontWeight={"bold"}
-            color={Colors.BLACK}
-            sx={{
-              opacity: "0.7",
-            }}
-          >
-            Pick a service
-          </Typography>
           <Stack
+            marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
+            marginTop={"50px"}
+            spacing={2}
+            justifyContent={"center"}
+            alignItems={"center"}
             sx={{
-              opacity: "0.7",
+              opacity: '1'
             }}
-            alignItems={"baseline"}
-            gap={"9px"}
-            flexDirection={"row"}
           >
-            {TurfDetails.map((item) => (
-              <Link style={{ textDecoration: "none" }} to={item.link}>
-                <Box
-                  sx={{
-                    ":hover": {
-                      backgroundColor: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                  width={"100%"}
-                  borderRadius={"10px"}
-                  maxWidth={"124px"}
-                  height={"135px"}
-                  border={"3px solid #D9D9D9"}
-                >
-                  <Box padding={"12px 12px"}>
-                    <img src={item.image} width={"100px"} alt="turf" />
-                    <Typography
-                      fontSize={"12px"}
-                      fontWeight={"600"}
-                      textAlign={"center"}
-                      color={Colors.BLACK}
-                    >
-                      {item.name}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
-            ))}
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              {breadcrumbs}
+            </Breadcrumbs>
           </Stack>
-          <Stack
-            sx={{
-              opacity: "0.7",
+          <Box
+            margin={{
+              xs: "50px 50px",
+              sm: "50px 50px",
+              md: "50px 50px",
+              lg: "50px 170px",
             }}
-            marginTop={"15px"}
-            alignItems={"baseline"}
-            gap={"9px"}
-            flexDirection={"row"}
+            width={"100%"}
+            maxWidth={"290px"}
+            borderRight={"1px solid gray"}
           >
-            {BoardDetails.map((item) => (
-              <Link style={{ textDecoration: "none" }} to={item.link}>
-                <Box
-                  sx={{
-                    ":hover": {
-                      backgroundColor: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                  width={"100%"}
-                  borderRadius={"10px"}
-                  maxWidth={"124px"}
-                  height={"135px"}
-                  border={"3px solid #D9D9D9"}
-                >
-                  <Box padding={"12px 12px"}>
-                    <img
-                      src={item.image}
-                      width={"100px"}
-                      height={"90px"}
-                      alt="board"
-                    />
-                    <Typography
-                      fontSize={"12px"}
-                      fontWeight={"600"}
-                      textAlign={"center"}
-                      color={Colors.BLACK}
-                    >
-                      {item.name}
-                    </Typography>
+            <Typography
+              fontSize={"20px"}
+              marginBottom={"10px"}
+              fontWeight={"bold"}
+              color={Colors.BLACK}
+              sx={{
+                opacity: '1'
+              }}
+            >
+              Pick a service
+            </Typography>
+            <Stack sx={{
+              opacity: '1'
+            }} alignItems={"baseline"} gap={"9px"} flexDirection={"row"}>
+              {TurfDetails.map((item) => (
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <Box
+                    sx={{
+                      ":hover": {
+                        backgroundColor: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    width={"100%"}
+                    borderRadius={"10px"}
+                    maxWidth={"124px"}
+                    height={"135px"}
+                    border={"1px solid gray"}
+                  >
+                    <Box padding={"12px 12px"}>
+                      <img src={item.image} width={"100px"} alt="turf" />
+                      <Typography
+                        fontSize={"12px"}
+                        fontWeight={"600"}
+                        textAlign={"center"}
+                        color={Colors.BLACK}
+                      >
+                        {item.name}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-            ))}
-          </Stack>
-          <Stack
-            sx={{
-              opacity: "0.7",
+                </Link>
+              ))}
+            </Stack>
+            <Stack sx={{
+              opacity: '1'
             }}
-            marginTop={"15px"}
-            alignItems={"baseline"}
-            gap={"9px"}
-            flexDirection={"row"}
-          >
-            {CricketDetails.map((item) => (
-              <Link style={{ textDecoration: "none" }} to={item.link}>
-                <Box
-                  sx={{
-                    ":hover": {
-                      backgroundColor: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                  width={"100%"}
-                  borderRadius={"10px"}
-                  maxWidth={"124px"}
-                  height={"135px"}
-                  border={"3px solid #D9D9D9"}
-                >
-                  <Box padding={"12px 12px"}>
-                    <img src={item.image} width={"100px"} alt="cricket" />
-                    <Typography
-                      fontSize={"12px"}
-                      fontWeight={"600"}
-                      textAlign={"center"}
-                      color={Colors.BLACK}
-                    >
-                      {item.name}
-                    </Typography>
+              marginTop={"15px"}
+              alignItems={"baseline"}
+              gap={"9px"}
+              flexDirection={"row"}
+            >
+              {BoardDetails.map((item) => (
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <Box
+                    sx={{
+                      ":hover": {
+                        backgroundColor: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    width={"100%"}
+                    borderRadius={"10px"}
+                    maxWidth={"124px"}
+                    height={"135px"}
+                    border={"1px solid gray"}
+                  >
+                    <Box padding={"12px 12px"}>
+                      <img
+                        src={item.image}
+                        width={"100px"}
+                        height={"90px"}
+                        alt="board"
+                      />
+                      <Typography
+                        fontSize={"12px"}
+                        fontWeight={"600"}
+                        textAlign={"center"}
+                        color={Colors.BLACK}
+                      >
+                        {item.name}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-            ))}
-          </Stack>
+                </Link>
+              ))}
+            </Stack>
+            <Stack sx={{
+              opacity: '1'
+            }}
+              marginTop={"15px"}
+              alignItems={"baseline"}
+              gap={"9px"}
+              flexDirection={"row"}
+            >
+              {CricketDetails.map((item) => (
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <Box
+                    sx={{
+                      ":hover": {
+                        backgroundColor: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    width={"100%"}
+                    borderRadius={"10px"}
+                    maxWidth={"124px"}
+                    height={"135px"}
+                    border={"1px solid gray"}
+                  >
+                    <Box padding={"12px 12px"}>
+                      <img src={item.image} width={"100px"} alt="cricket" />
+                      <Typography
+                        fontSize={"12px"}
+                        fontWeight={"600"}
+                        textAlign={"center"}
+                        color={Colors.BLACK}
+                      >
+                        {item.name}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Link>
+              ))}
+            </Stack>
+          </Box>
         </Box>
-
-        <img
-          width={"100%"}
-          style={{
-            opacity: "0.7",
-          }}
-          src={grass}
-          alt=""
-        />
+        {/* <Box display={"flex"} justifyContent={"end"}>
+        <img src={ball} width={"150px"} alt="" />
+      </Box> */}
+        <img width={"100%"} style={{
+          opacity: "0.7"
+        }} src={grass} alt="" />
       </Box>
     </>
   );
