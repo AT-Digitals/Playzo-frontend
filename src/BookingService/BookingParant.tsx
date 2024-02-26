@@ -441,6 +441,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             <Button
               sx={{
                 opacity: "1",
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.BUTTON_COLOR,
+                 
+                },
               }}
               onClick={handlegoBack}
               variant="text"
