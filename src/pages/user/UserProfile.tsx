@@ -30,7 +30,9 @@ export default function UserProfile() {
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
 
-
+  const CapitalizeFirstLetter = (str:any)=> {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   useEffect(() => {
     const user = localStorage.getItem('user');
       const userData =user && JSON.parse(user);
@@ -63,6 +65,8 @@ export default function UserProfile() {
   useEffect(() => {
     fetchInfo();
   }, [fetchInfo]);
+
+
   return (
     <>
       <AppContainer p={0}>
@@ -122,7 +126,7 @@ export default function UserProfile() {
                   component="div"
                   fontWeight={600}
                 >
-                  {user&&user["name"]}
+                  {user&&CapitalizeFirstLetter(user["name"])}
                 </Typography>
                 <Typography variant="body1">Badminton & Board games</Typography>
               </Stack>
@@ -144,7 +148,7 @@ export default function UserProfile() {
                 <Typography variant="body1" fontWeight={600}>
                   Email Address
                 </Typography>
-                <Typography variant="body1">{user&&user["email"]}</Typography>
+                <Typography variant="body1">{user&&CapitalizeFirstLetter(user["email"])}</Typography>
                 <img src={layer} width={13} height={12} alt="edit" />
               </Stack>
               <Stack direction="row" spacing={1} alignItems="center">
@@ -175,7 +179,7 @@ export default function UserProfile() {
                 }}
               />
             </Stack>
-            <ListCard userDetails={filteredData} userName={user?user["name"]:""} />
+            <ListCard userDetails={filteredData} userName={user?CapitalizeFirstLetter(user["name"]):""} />
             <Pagination count={count} page={page} onChange={(event,val)=> setPage(val)} sx={{mt:"15px"}} />
           </Grid>
         </Grid>

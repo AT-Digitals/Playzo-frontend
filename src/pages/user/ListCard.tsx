@@ -28,7 +28,9 @@ interface dataProps {
 }
 
 export default function ListCard({ userDetails, userName }: dataProps) {
-  console.log("userdetails",userDetails)
+  const CapitalizeFirstLetter = (str:any)=> {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
   return (
     <>
       {userDetails.map((user, index) => (
@@ -62,7 +64,7 @@ export default function ListCard({ userDetails, userName }: dataProps) {
           </Typography>
           <Stack direction="row" spacing={5} alignItems="center">
             <Typography variant="body2">{userName}</Typography>
-            <Typography variant="body2">{user.type}</Typography>
+            <Typography variant="body2">{CapitalizeFirstLetter(user.type)}</Typography>
 
             <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(user.startTime)} - ${TimeUtlis.formatMillisecondsToTimeConvert(user.endTime)}`}</Typography>
           </Stack>
