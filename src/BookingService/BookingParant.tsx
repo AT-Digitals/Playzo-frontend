@@ -451,6 +451,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         );
         if (!confirmLeave) {
           localStorage.removeItem("bookings");
+          localStorage.removeItem("selectedService");
+
           navigate(location.pathname); // Navigate back to the current location
         }
       }
