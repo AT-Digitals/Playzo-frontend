@@ -83,12 +83,12 @@ export default function TermsandConditions() {
       </Box>
       <AppContainer maxWidth={1180}>
         <Box>
-          <Typography fontSize={"18px"} fontWeight={600}>
+          <Typography fontSize={"20px"} fontWeight={600}>
             Cookie policy
           </Typography>
           <br />
 
-          <Typography fontSize={"16px"} fontWeight={400}>
+          <Typography fontSize={"18px"} fontWeight={400}>
             Cookies and Other Tracking Technologies:
             <br />
             Powerleague Fives Ltd uses cookies and tracking pixels to collect
@@ -97,11 +97,11 @@ export default function TermsandConditions() {
         </Box>
 
         <Box>
-          <Typography fontSize={"16px"} fontWeight={400}>
+          <Typography fontSize={"18px"} fontWeight={400}>
             For performance and analytics. These cookies and pixels collect
             information on how users
           </Typography>
-          <Typography fontSize={"16px"}>
+          <Typography fontSize={"18px"}>
             interact with the Services and enable us to improve how we operate.
             For example, we use Google Analytics cookies to help us understand
             how visitors arrive at and browse our website to identify areas for
@@ -110,7 +110,7 @@ export default function TermsandConditions() {
           </Typography>
         </Box>
         <Box>
-          <Typography fontSize={"16px"}>
+          <Typography fontSize={"18px"}>
             Targeting Cookies or Advertising Cookies. These cookies collect
             information about your browsing habits in order to make advertising
             relevant to you and your interests. They remember the websites you
@@ -118,7 +118,7 @@ export default function TermsandConditions() {
             as advertising technology service providers and advertisers.
           </Typography>
           <br />
-          <Typography fontSize={"16px"}>
+          <Typography fontSize={"18px"}>
             Social media cookies. These cookies are used when you share
             information using a social media sharing button or “like” button on
             our websites or you link your account or engage with our content on
@@ -126,15 +126,15 @@ export default function TermsandConditions() {
             you have done this.
           </Typography>
         </Box>
-        <Typography fontSize={"16px"} fontWeight={400}>
+        <Typography fontSize={"18px"} fontWeight={400}>
           This information may be linked to targeting/advertising activities.
           <br />
         </Typography>
-        <Typography fontSize={"16px"} fontWeight={600}>
+        <Typography fontSize={"18px"} fontWeight={600}>
           How can you opt-out?
         </Typography>
 
-        <Typography fontSize={"16px"} fontWeight={500}>
+        <Typography fontSize={"18px"} fontWeight={500}>
           To opt-out of our use of cookies, you can instruct your browser, by
           changing its options, to stop accepting cookies or to prompt you
           before accepting a cookie from websites you visit.
