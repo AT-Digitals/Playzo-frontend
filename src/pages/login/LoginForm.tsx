@@ -90,20 +90,16 @@ export default function Form({ handleClose, open }: loginProps) {
         email: data.email,
         password: data.password
       });
-      if (response) {
+      const resData = await response;
+      if (resData) {
         localStorage.setItem('user', JSON.stringify(response));
         navigate(routes.BOOKING_SERVICE);
         navigate(0);
         handleClose?.();
-        // setStatus({ success: true });
-        // setSubmitting(true);
-      } else {
-        console.log('Login Failed');
       }
-    } catch (err) {
-      console.log("err", err)
+    } catch (err:any) {
+      console.log("err", err.message)
     }
-    console.log("data", data);
   };
   return (
     <Dialog

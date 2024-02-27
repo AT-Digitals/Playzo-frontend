@@ -1,14 +1,15 @@
 import { Box, Button, Stack, Typography, styled } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
+import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
 import logo from "../assets/Playzo (1).svg";
 import routes from "../routes/routes";
-import { useState } from "react";
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -26,15 +27,53 @@ export default function Header() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // const [userData, serUserData] = useState();
+
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openvalue = Boolean(anchorEl);
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleChange = () => {
+    navigate(routes.USERPROFILE);
+    setAnchorEl(null);
+  };
+
+
   const handleLogout = async () => {
     try {
       UserLoginApi.logoutUser();
       navigate(routes.ROOT);
+      navigate(0);
       localStorage.clear();
+      setAnchorEl(null);
     } catch {
       console.log("Logout failed");
     }
   };
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+      const userData =user && JSON.parse(user);
+      setUser(userData);
+  }, []);
+
+  useEffect(() => {
+    if(user){
+      setIsLoggedIn(true);
+    }else{
+          setIsLoggedIn(false);
+        }
+  },[user]);
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -84,50 +123,7 @@ export default function Header() {
 
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <Button
-              variant="outlined"
-              sx={{
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "110px",
-                fontWeight: "400",
-                border: "2px solid #15B5FC",
-                borderRadius: "30px",
-                letterSpacing: "1.6px",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                  border: "1px solid #15B5FC",
-                }
-              }}
-              onClick={handleOpen}
-            >
-              Login
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "110px",
-                fontWeight: "400",
-                border: "2px solid #15B5FC",
-                borderRadius: "30px",
-                letterSpacing: "1.6px",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                  border: "1px solid #15B5FC",
-                }
-              }} onClick={handleLogout}>
-              Logout
-            </Button>
+          
             <HeaderLink href={routes.BOOKING_SERVICE}>
               <Button
                 variant="outlined"
@@ -153,6 +149,39 @@ export default function Header() {
 
 
             </HeaderLink>
+            {isLoggedIn ?
+              <UserComponent
+                handleClose={handleLogout}
+                open={openvalue}
+                handleClick={handleClick}
+                handleMenuClose={handleMenuClose}
+                anchorEl={anchorEl}
+                handleChange={handleChange}
+              /> :
+              <Button
+              variant="outlined"
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "1px solid #15B5FC",
+                }
+              }}
+              onClick={handleOpen}
+            >
+              Login
+            </Button>
+            }
           </Stack>
         </Stack>
 

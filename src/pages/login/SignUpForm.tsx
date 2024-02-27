@@ -8,6 +8,7 @@ import {
     TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
@@ -18,7 +19,6 @@ import TextFieldComponent from "./TextFieldComponent";
 import UserApi from "../../api/UserApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 interface signUpProps {
     handleClose?: () => void;
@@ -30,10 +30,10 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
-    const [isValidEmail, setIsValidEmail] = useState(true);
-    const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
-    const [isValidName, setIsValidName] = useState(true);
-    const [isValidPhone, setIsValidPhone] = useState(true);
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
+    const [isValidName, setIsValidName] = useState(false);
+    const [isValidPhone, setIsValidPhone] = useState(false);
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -45,7 +45,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         validateEmail(newEmail);
     };
     const validateName = (value: string) => {
-        setIsValidName(value.length >= 6);
+        setIsValidName(value.length >= 16);
     }
 
     const handleNameChange = (event: any) => {
@@ -64,7 +64,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     const validateEmail = (input: any) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const isValid = emailRegex.test(input);
-        setIsValidEmail(isValid);
+        setIsValidEmail(isValid?false:true);
     };
 
     const validatePassword = (value: string) => {
@@ -75,19 +75,39 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         setPassword(event.target.value);
         validatePassword(event.target.value);
     };
-
-    const onSubmit = async (event: any) => {
-        event.preventDefault();
-        if (email) {
-            setIsValidEmail(true);
+    useEffect(() => {
+        if (name==="") {
+          setIsValidName(true)
+      }
+        if (email!=="") {
+          validateEmail(email);
+        }else{
+          setIsValidEmail(true)
         }
-        if (password) {
+        if (phoneNumber==="") {
+          setIsValidPhone(true);
+        }
+      
+        if (password==="") {
             setIsPasswordValid(true);
         }
-        if (name) {
-            setIsValidName(true)
+      }, [email, name, phoneNumber, password]);
+    
+    const onSubmit = async (event: any) => {
+        event?.preventDefault();
+        if (email!=="") {
+            validateEmail(email);
+          }else{
+            setIsValidEmail(true)
+          }
+        if (password==="") {
+            setIsPasswordValid(true);
         }
-        if (phoneNumber) {
+       
+  if (name==="") {
+    setIsValidName(true)
+}
+        if (phoneNumber==="") {
             setIsValidPhone(true)
         }
 
@@ -98,7 +118,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             password,
 
         };
-
+        if(name && email && phoneNumber && password){
         try {
             const response = await UserApi.createUser({
                 email: data.email,
@@ -120,6 +140,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             console.log("err", err);
         }
         console.log("data", data);
+    }
     };
     return (
         <Dialog
