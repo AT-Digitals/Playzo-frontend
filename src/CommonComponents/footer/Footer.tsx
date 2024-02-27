@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "../../assets/Twitter.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/Playzo (1).svg";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
 
@@ -77,7 +77,7 @@ export default function Footer() {
             >
               <Stack direction="column" spacing={4}>
                 <Link to={routes.ROOT}>
-                  <img src={logo} width={172} height={34} alt="22" />
+                  <img src={logo} width={200} height={50} alt="22" />
                 </Link>
                 <Typography
                   fontSize="15px"
@@ -122,7 +122,7 @@ export default function Footer() {
                         color: Colors.BUTTON_COLOR,
                       },
                     }}
-                    to={routes.ROOT}
+                    to={routes.ABOUTUS}
                   >
                     About
                   </StyledLink>
@@ -235,7 +235,7 @@ export default function Footer() {
               sm={6}
               md={4}
               lg={4}
-              marginTop={"13px"}
+              marginTop={"-10px"}
             >
               <Typography
                 fontSize={"14px"}
@@ -340,7 +340,7 @@ export default function Footer() {
               direction="row"
               spacing={2}
             >
-              <Link to={routes.ROOT}>
+              <Link to={"https://www.facebook.com/PlayZo33"}>
                 <FacebookIcon
                   sx={{
                     color: Colors.WHITE,
@@ -353,7 +353,7 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              <Link to={routes.ROOT}>
+              <Link to={"https://www.instagram.com/playzo_33/"}>
                 <InstagramIcon
                   sx={{
                     color: Colors.WHITE,
@@ -366,7 +366,7 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              <Link to={routes.ROOT}>
+              <Link to={"https://www.youtube.com/results?search_query=PLAYZO+33"}>
                 <YouTubeIcon sx={{
                   color: Colors.WHITE,
                   width: "25px",

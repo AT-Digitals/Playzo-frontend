@@ -37,6 +37,10 @@ export default function AbouFaQ() {
     <Box mt={2} borderTop={"1px solid gray"}>
       {FaqItems.map((item, index) => (
         <Box
+          onClick={() => handleToggle(index)}
+          sx={{
+            cursor: "pointer",
+          }}
           key={index}
           width={"100%"}
           maxWidth={{ xs: "323px", sm: "323px", md: "323px", lg: "1200px" }}
@@ -62,7 +66,6 @@ export default function AbouFaQ() {
               {item.paragraph}
             </Typography>
             <KeyboardArrowDownIcon
-              onClick={() => handleToggle(index)}
               sx={{
                 fontSize: "25px",
                 margin: "10px 15px",

@@ -206,7 +206,7 @@ const ImageClick = () => {
               ABOUT
             </Typography>
             <Box
-              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
               width={"15%"}
             ></Box>
 
@@ -224,7 +224,7 @@ const ImageClick = () => {
               GOAL
             </Typography>
             <Box
-              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
               width={"15%"}
             ></Box>
 
@@ -309,7 +309,7 @@ const ImageClick = () => {
               FREQUENTLY ASKED QUESTIONS
             </Typography>
             <Box
-              border={`1px solid ${Colors.BUTTON_COLOR}`}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
               width={"25%"}
             ></Box>
 

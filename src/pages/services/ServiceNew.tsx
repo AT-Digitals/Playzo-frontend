@@ -18,6 +18,7 @@ export default function ServiceNewUI() {
       behavior: "smooth",
     });
   }, []);
+
   return (
     <>
       <Box

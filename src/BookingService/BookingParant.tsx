@@ -126,16 +126,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     type === BookingType.Turf
       ? TurfImages
       : type === BookingType.Playstaion
-        ? PlaystationImages
-        : type === BookingType.Badminton
-          ? BadmintonImages
-          : type === BookingType.BoardGame
-            ? BoardgameImages
-            : type === BookingType.BowlingMachine
-              ? [{ image: bowling, name: "Bowling Machine" }]
-              : type === BookingType.CricketNet
-                ? [{ image: cricketnet, name: "Cricket Net" }]
-                : [];
+      ? PlaystationImages
+      : type === BookingType.Badminton
+      ? BadmintonImages
+      : type === BookingType.BoardGame
+      ? BoardgameImages
+      : type === BookingType.BowlingMachine
+      ? [{ image: bowling, name: "Bowling Machine" }]
+      : type === BookingType.CricketNet
+      ? [{ image: cricketnet, name: "Cricket Net" }]
+      : [];
 
   const handleServiceSelection = (service: any) => {
     console.log("djcndj", service);
@@ -143,13 +143,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setSelectedCourt(service.value);
     setTableData((prevTableData) => [...prevTableData]);
   };
-
-  // const handleRemoveItem = (indexToRemove: number) => {
-  //   const updatedTableData = tableData.filter(
-  //     (_, index) => index !== indexToRemove
-  //   );
-  //   setTableData(updatedTableData);
-  // };
 
   console.log(tableData, "tableData new array");
 
@@ -160,30 +153,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.setItem("bookings", JSON.stringify(updatedTableData));
     console.log(tableData, "after deleted");
   };
-
-  // const handleAddMoreItems = () => {
-  //   if (selectedService) {
-  //     const selectedDate = "29 Feb 2024";
-  //     const selectedTime = "9.00AM-11.00AM";
-  //     const selectedAmount = "1500";
-  //     console.log("selectedService", selectedService);
-
-  //     setTableData((prevTableData) => [
-  //       ...prevTableData,
-  //       {
-  //         type,
-  //         name: selectedService,
-  //         date: selectedDate,
-  //         time: selectedTime,
-  //         court: selectedCourt,
-  //         amount: selectedAmount,
-  //       },
-  //     ]);
-  //   }
-  //   setSelectedService("");
-  //   setSelectedCourt(1);
-  //   localStorage.removeItem("selectedService");
-  // };
 
   const handleAddMoreItems = () => {
     if (selectedService) {
@@ -222,88 +191,175 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const handleProceedToPayment = () => {
     if (allBookings.length === 0) {
       alert("Please make at least one booking before proceeding to payment");
-      return; // Stop further execution
+      return;
     }
 
-    const bookingsWithTime: {
-      type: BookingType;
-      name: string;
-      startDate: string;
-      startTime: number;
-      endDate: string;
-      endTime: number;
-      court: number;
-      amount: any;
-    }[] = [];
+    const bookingsWithTime = allBookings.reduce(
+      (
+        acc: {
+          type: BookingType;
+          name: string;
+          startDate: string;
+          startTime: number;
+          endDate: string;
+          endTime: number;
+          court: number;
+          amount: any;
+        }[],
+        booking
+      ) => {
+        const boo = booking.time as any;
 
-    console.log("allb", allBookings);
-    allBookings.map((booking, index) => {
-      const boo = booking.time as any;
+        boo.forEach(function (item: any) {
+          const timeString = String(item);
+          const timeMatch = timeString.match(/(\d{1,2}:\d{2} [APMapm]+)/);
 
-      boo.forEach(function (item: any, index: any) {
-        console.log(item, index);
+          const startTime = timeMatch ? timeMatch[1] : "";
+          let endTime = "";
 
-        const timeString = String(item); // Ensure time is a string
-        const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
+          // Calculate start time and end time in milliseconds
+          let startMilliseconds = 0;
+          let endMilliseconds = 0;
 
-        const startTime = timeMatch ? timeMatch[1] : "";
-        let endTime = "";
-        // let ampm = "";
+          if (startTime) {
+            const [hours, minutes, ampm] = startTime.split(/[:\s]+/);
+            const startDateTime = new Date(booking.date);
+            startDateTime.setHours(
+              ampm.toUpperCase() === "PM" ? Number(hours) + 12 : Number(hours),
+              Number(minutes)
+            );
+            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-        // Calculate start time and end time in milliseconds
-        let startMilliseconds = 0;
-        let endMilliseconds = 0;
-        console.log(booking.court, "court");
-        console.log("booking:", booking); // Print the entire booking object for inspection
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
 
-        if (startTime) {
-          const [hours, minutes] = startTime.split(":");
-          const startDateTime = new Date(booking.date);
-          startDateTime.setHours(Number(hours), Number(minutes));
-          startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+            const endHours = endDateTime.getHours();
+            const endMinutes = endDateTime.getMinutes();
 
-          const endDateTime = new Date(startDateTime);
-          endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-          endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+            endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+              2,
+              "0"
+            )} ${endHours >= 12 ? "PM" : "AM"}`;
+          }
 
-          const endHours = endDateTime.getHours();
-          const endMinutes = endDateTime.getMinutes();
-
-          endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-            2,
-            "0"
-          )}`;
-          // ampm = endHours >= 12 ? "PM" : "AM";
-        }
-
-        bookingsWithTime.push({
-          type: booking.type,
-          name: booking.name,
-          startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
-          startTime: startMilliseconds,
-
-          endDate: endTime
-            ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
-            : "",
-          endTime: endMilliseconds,
-          court: booking.court,
-          amount: booking.amount,
+          acc.push({
+            type: booking.type,
+            name: booking.name,
+            startDate: DateUtils.formatDate(
+              new Date(booking.date),
+              "YYYY-MM-DD"
+            ),
+            startTime: startMilliseconds,
+            endDate: endTime
+              ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
+              : "",
+            endTime: endMilliseconds,
+            court: booking.court,
+            amount: booking.amount,
+          });
         });
-      });
-    });
+
+        return acc;
+      },
+      []
+    );
 
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
 
-    // navigate("/payment-booking", { state: { allBookings, selectedService } });
     localStorage.setItem("selectedService", selectedService);
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
-
-    // Log the array of objects
     console.log("All Bookings Structure:", bookingsWithTime);
   };
+
+  // const handleProceedToPayment = () => {
+  //   if (allBookings.length === 0) {
+  //     alert("Please make at least one booking before proceeding to payment");
+  //     return; // Stop further execution
+  //   }
+
+  //   const bookingsWithTime: {
+  //     type: BookingType;
+  //     name: string;
+  //     startDate: string;
+  //     startTime: number;
+  //     endDate: string;
+  //     endTime: number;
+  //     court: number;
+  //     amount: any;
+  //   }[] = [];
+
+  //   console.log("allb", allBookings);
+  //   allBookings.map((booking, index) => {
+  //     const boo = booking.time as any;
+
+  //     boo.forEach(function (item: any, index: any) {
+  //       console.log(item, index);
+
+  //       const timeString = String(item); // Ensure time is a string
+  //       const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
+
+  //       const startTime = timeMatch ? timeMatch[1] : "";
+  //       let endTime = "";
+  //       // let ampm = "";
+
+  //       // Calculate start time and end time in milliseconds
+  //       let startMilliseconds = 0;
+  //       let endMilliseconds = 0;
+  //       console.log(booking.court, "court");
+  //       console.log("booking:", booking); // Print the entire booking object for inspection
+
+  //       if (startTime) {
+  //         const [hours, minutes] = startTime.split(":");
+  //         const startDateTime = new Date(booking.date);
+  //         startDateTime.setHours(Number(hours), Number(minutes));
+  //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+  //         const endDateTime = new Date(startDateTime);
+  //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+  //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+
+  //         const endHours = endDateTime.getHours();
+  //         const endMinutes = endDateTime.getMinutes();
+
+  //         endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+  //           2,
+  //           "0"
+  //         )}`;
+  //         // ampm = endHours >= 12 ? "PM" : "AM";
+  //       }
+
+  //       bookingsWithTime.push({
+  //         type: booking.type,
+  //         name: booking.name,
+  //         startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
+  //         startTime: startMilliseconds,
+
+  //         endDate: endTime
+  //           ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
+  //           : "",
+  //         endTime: endMilliseconds,
+  //         court: booking.court,
+  //         amount: booking.amount,
+  //       });
+  //     });
+  //   });
+
+  //   navigate("/payment-booking", {
+  //     state: { selectedService, bookingsWithTime },
+  //   });
+
+  //   // navigate("/payment-booking", { state: { allBookings, selectedService } });
+  //   localStorage.setItem("selectedService", selectedService);
+
+  //   console.log("Proceeding to Payment with allBookings:", allBookings);
+
+  //   // Log the array of objects
+  //   console.log("All Bookings Structure:", bookingsWithTime);
+  // };
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
@@ -429,7 +485,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   return (
     <>
-      <Box component={"image"}
+      <Box
+        component={"image"}
         sx={{
           position: "relative",
           backgroundImage: `url(${backgroundimage})`,
@@ -439,7 +496,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           objectFit: "cover", // Set object-fit to cover
           height: "100%",
           // Ensure the height is 100%
-        }}>
+        }}
+      >
         <Box
           sx={{
             position: "absolute",
@@ -467,9 +525,23 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             direction={"row"}
             alignItems={"flex-start"}
           >
-            <Button sx={{
-              opacity: '1'
-            }}
+            <Button
+              sx={{
+                opacity: "1",
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.BUTTON_COLOR,
+                },
+              }}
               onClick={handlegoBack}
               variant="text"
               startIcon={<KeyboardBackspaceIcon />}
@@ -483,7 +555,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               justifyContent={"center"}
               alignItems={"center"}
               sx={{
-                opacity: '1'
+                opacity: "1",
               }}
             >
               <Breadcrumbs
@@ -494,11 +566,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               </Breadcrumbs>
             </Stack>
           </Stack>
-          <Box sx={{
-            opacity: '1'
-          }}
+          <Box
+            sx={{
+              opacity: "1",
+            }}
             display={"flex"}
-            flexDirection={{ xs: "column", sm: "column", ms: "column", lg: "row" }}
+            flexDirection={{
+              xs: "column",
+              sm: "column",
+              ms: "column",
+              lg: "row",
+            }}
             margin={{
               xs: "0px",
               sm: "0px",
@@ -526,7 +604,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             >
               <Box
                 display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
-                alignItems={{ xs: "center", sm: "cemter", md: "center", lg: "" }}
+                alignItems={{
+                  xs: "center",
+                  sm: "cemter",
+                  md: "center",
+                  lg: "",
+                }}
                 padding={{
                   xs: "10px 10px",
                   sm: "10px 10px",
@@ -541,50 +624,60 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     type === BookingType.Turf
                       ? turf
                       : type === BookingType.Playstaion
-                        ? playstation
-                        : type === BookingType.Badminton
-                          ? badminton
-                          : type === BookingType.BoardGame
-                            ? boardgames
-                            : type === BookingType.BowlingMachine
-                              ? bowling
-                              : type === BookingType.CricketNet
-                                ? cricketnet
-                                : undefined // Handle other cases or set to undefined
+                      ? playstation
+                      : type === BookingType.Badminton
+                      ? badminton
+                      : type === BookingType.BoardGame
+                      ? boardgames
+                      : type === BookingType.BowlingMachine
+                      ? bowling
+                      : type === BookingType.CricketNet
+                      ? cricketnet
+                      : undefined // Handle other cases or set to undefined
                   }
                   width={"100%"}
                   height={"100%"}
                   alt="booking"
                 />
                 <Typography
-                  display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
+                  display={{
+                    xs: "block",
+                    sm: "block",
+                    md: "block",
+                    lg: "block",
+                  }}
                   textAlign={"center"}
                   fontSize={"18px"}
                   color={Colors.BLACK}
                   fontWeight={"600"}
                   marginTop={"5px"}
-                  paddingLeft={{ xs: "30px", sm: "30px", md: "30px", lg: "0px" }}
+                  paddingLeft={{
+                    xs: "30px",
+                    sm: "30px",
+                    md: "30px",
+                    lg: "0px",
+                  }}
                 >
                   {type === BookingType.Turf
                     ? "Turf"
                     : type === BookingType.Playstaion
-                      ? "Playstation"
-                      : type === BookingType.Badminton
-                        ? "Badminton"
-                        : type === BookingType.BoardGame
-                          ? "Board Games"
-                          : type === BookingType.BowlingMachine
-                            ? "Bowling Machine"
-                            : type === BookingType.CricketNet
-                              ? "Cricket Net"
-                              : "Unknown Type"}
+                    ? "Playstation"
+                    : type === BookingType.Badminton
+                    ? "Badminton"
+                    : type === BookingType.BoardGame
+                    ? "Board Games"
+                    : type === BookingType.BowlingMachine
+                    ? "Bowling Machine"
+                    : type === BookingType.CricketNet
+                    ? "Cricket Net"
+                    : "Unknown Type"}
                 </Typography>
               </Box>
             </Box>
             <Stack
               display={
                 type === BookingType.BowlingMachine ||
-                  type === BookingType.CricketNet
+                type === BookingType.CricketNet
                   ? "none"
                   : "flex"
               }
@@ -609,12 +702,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 {type === BookingType.Turf
                   ? "Turf"
                   : type === BookingType.Playstaion
-                    ? "Playstation"
-                    : type === BookingType.Badminton
-                      ? "Badminton"
-                      : type === BookingType.BoardGame
-                        ? "Board Games"
-                        : "Unknown Type"}{" "}
+                  ? "Playstation"
+                  : type === BookingType.Badminton
+                  ? "Badminton"
+                  : type === BookingType.BoardGame
+                  ? "Board Games"
+                  : "Unknown Type"}{" "}
               </Typography>
               {images.map((item) => (
                 <Box
@@ -627,14 +720,25 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   }}
                   border={"1px solid gray"}
                   width={"100%"}
-                  maxWidth={{ xs: "215px", sm: "215px", md: "215px", lg: "200px" }}
-                  borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
+                  maxWidth={{
+                    xs: "215px",
+                    sm: "215px",
+                    md: "215px",
+                    lg: "200px",
+                  }}
+                  borderRadius={{
+                    xs: "17px",
+                    sm: "17px",
+                    md: "17px",
+                    lg: "10px",
+                  }}
                   height={"105px"}
                   onClick={() => handleServiceSelection(item)}
                 >
-                  <Box sx={{
-                    opacity: '1'
-                  }}
+                  <Box
+                    sx={{
+                      opacity: "1",
+                    }}
                     display={"flex"}
                     gap={"16px"}
                     alignItems={"center"}
@@ -648,12 +752,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                         type === BookingType.Turf
                           ? "Turf"
                           : type === BookingType.Playstaion
-                            ? "Playstation"
-                            : type === BookingType.Badminton
-                              ? "Badminton"
-                              : type === BookingType.BoardGame
-                                ? "Board Games"
-                                : "Unknown Type"
+                          ? "Playstation"
+                          : type === BookingType.Badminton
+                          ? "Badminton"
+                          : type === BookingType.BoardGame
+                          ? "Board Games"
+                          : "Unknown Type"
                       }
                     />
                     <Typography
@@ -667,15 +771,36 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 </Box>
               ))}
               {selectedService && (
-                <Box sx={{
-                  opacity: '1'
-                }}
+                <Box
+                  sx={{
+                    opacity: "1",
+                  }}
                   border={"1px solid gray"}
                   width={"100%"}
-                  maxWidth={{ xs: "220px", sm: "220px", md: "220px", lg: "290px" }}
-                  borderRadius={{ xs: "17px", sm: "17px", md: "17px", lg: "10px" }}
-                  height={{ xs: "105px", sm: "105px", md: "105px", lg: "155px" }}
-                  marginTop={{ xs: "-40px", sm: "-40px", md: "-40px", lg: "24px" }}
+                  maxWidth={{
+                    xs: "220px",
+                    sm: "220px",
+                    md: "220px",
+                    lg: "290px",
+                  }}
+                  borderRadius={{
+                    xs: "17px",
+                    sm: "17px",
+                    md: "17px",
+                    lg: "10px",
+                  }}
+                  height={{
+                    xs: "105px",
+                    sm: "105px",
+                    md: "105px",
+                    lg: "155px",
+                  }}
+                  marginTop={{
+                    xs: "-40px",
+                    sm: "-40px",
+                    md: "-40px",
+                    lg: "24px",
+                  }}
                 >
                   <Box
                     display={"flex"}
@@ -685,18 +810,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   >
                     <StyledImage
                       src={
-                        images.find((item) => item.name === selectedService)?.image
+                        images.find((item) => item.name === selectedService)
+                          ?.image
                       }
-                      alt={`selected ${type === BookingType.Turf
+                      alt={`selected ${
+                        type === BookingType.Turf
                           ? "Turf"
                           : type === BookingType.Playstaion
-                            ? "Playstation"
-                            : type === BookingType.Badminton
-                              ? "Badminton"
-                              : type === BookingType.BoardGame
-                                ? "Board Games"
-                                : "Unknown Type"
-                        }`}
+                          ? "Playstation"
+                          : type === BookingType.Badminton
+                          ? "Badminton"
+                          : type === BookingType.BoardGame
+                          ? "Board Games"
+                          : "Unknown Type"
+                      }`}
                     />
                     <Typography
                       fontSize={"14px"}
@@ -713,59 +840,62 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
-                  <Box
-                    borderLeft={
-                      type === BookingType.BowlingMachine ||
-                        type === BookingType.CricketNet
-                        ? "1px solid gray"
-                        : "none"
-                    }
-                  >
-                    <CustomDateCalendar
-                      tableData={tableData}
-                      setTableData={setTableData}
-                      selectedService={selectedService}
-                      type={type}
-                    />
-                  </Box>
-                )}
+                <Box
+                  borderLeft={
+                    type === BookingType.BowlingMachine ||
+                    type === BookingType.CricketNet
+                      ? "1px solid gray"
+                      : "none"
+                  }
+                >
+                  <CustomDateCalendar
+                    tableData={tableData}
+                    setTableData={setTableData}
+                    selectedService={selectedService}
+                    type={type}
+                  />
+                </Box>
+              )}
             </Stack>
           </Box>
-          <Box sx={{
-            opacity: '1'
-          }} pt={2}>
+          <Box
+            sx={{
+              opacity: "1",
+            }}
+            pt={2}
+          >
             {(type === BookingType.BowlingMachine ||
               type === BookingType.CricketNet ||
               selectedService) && (
-                <>
-                  <CustomTable
-                    tableData={allBookings}
-                    handleRemoveItem={handleRemoveItem}
-                    serviceName={selectedService}
-                    serviceType={type}
-                    setTableData={setTableData}
-                    handleAddmore={handleAddMoreItems}
-                  />
-                  <Button
-                    sx={{
-                      margin: "auto",
-                      display: "block",
-                      marginTop: "2rem",
-                      background: Colors.BUTTON_COLOR,
-                      color: "white",
+              <>
+                <CustomTable
+                  tableData={allBookings}
+                  handleRemoveItem={handleRemoveItem}
+                  serviceName={selectedService}
+                  serviceType={type}
+                  setTableData={setTableData}
+                  handleAddmore={handleAddMoreItems}
+                />
+                <Button
+                  sx={{
+                    margin: "auto",
+                    display: "block",
+                    marginTop: "2rem",
+                    background: Colors.BUTTON_COLOR,
+                    color: "white",
+                    border: "1px solid #15B5FC",
+                    ":hover": {
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
                       border: "1px solid #15B5FC",
-                      ":hover": {
-                        background: Colors.WHITE,
-                        color: Colors.BUTTON_COLOR,
-                        border: "1px solid #15B5FC",
-                      }
-                    }}
-                    onClick={handleProceedToPayment}
-                  >
-                    Proceed to Payment
-                  </Button>
-                </>
-              )}
+                    },
+                  }}
+                  onClick={handleProceedToPayment}
+                >
+                  Proceed to Payment
+                </Button>
+              </>
+            )}
           </Box>
         </Box>
       </Box>
