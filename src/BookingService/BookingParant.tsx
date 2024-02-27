@@ -119,6 +119,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     return storedTableData;
   });
 
+
   // const [tableData, setTableData] = useState<TableDataItem[]>([]);
   const [isServiceSelected, setIsServiceSelected] = useState(false);
 
@@ -188,7 +189,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = async() => {
     if (allBookings.length === 0) {
       alert("Please make at least one booking before proceeding to payment");
       return;
@@ -209,40 +210,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         booking
       ) => {
         const boo = booking.time as any;
-
-        boo.forEach(function (item: any) {
-          const timeString = String(item);
-          const timeMatch = timeString.match(/(\d{1,2}:\d{2} [APMapm]+)/);
-
-          const startTime = timeMatch ? timeMatch[1] : "";
-          let endTime = "";
-
-          // Calculate start time and end time in milliseconds
-          let startMilliseconds = 0;
-          let endMilliseconds = 0;
-
-          if (startTime) {
-            const [hours, minutes, ampm] = startTime.split(/[:\s]+/);
-            const startDateTime = new Date(booking.date);
-            startDateTime.setHours(
-              ampm.toUpperCase() === "PM" ? Number(hours) + 12 : Number(hours),
-              Number(minutes)
-            );
-            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-            const endDateTime = new Date(startDateTime);
-            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-
-            const endHours = endDateTime.getHours();
-            const endMinutes = endDateTime.getMinutes();
-
-            endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-              2,
-              "0"
-            )} ${endHours >= 12 ? "PM" : "AM"}`;
-          }
-
+        const splitamount = booking.amount/boo.length
+     
+        boo.forEach(  function (item: any) {
+       
+          const startDateTime = DateUtils.startTimeAddtoDate(item);
+          const endDateTime = DateUtils.endTimeAddtoDate(item);
+           const endMilli = DateUtils.joinDate(booking.date,endDateTime)
+          const startMilli = DateUtils.joinDate(booking.date,startDateTime)
+          const startMilliSec =  new Date(startMilli).getTime(); 
+          const endMilliSec =  new Date(endMilli).getTime();
+          console.log(endMilliSec)
           acc.push({
             type: booking.type,
             name: booking.name,
@@ -250,13 +228,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               new Date(booking.date),
               "YYYY-MM-DD"
             ),
-            startTime: startMilliseconds,
-            endDate: endTime
-              ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
-              : "",
-            endTime: endMilliseconds,
+            startTime: startMilliSec,
+            endDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
+            endTime: endMilliSec,
             court: booking.court,
-            amount: booking.amount,
+            amount: splitamount,
           });
         });
 
@@ -264,10 +240,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       },
       []
     );
-
-    navigate("/payment-booking", {
-      state: { selectedService, bookingsWithTime },
-    });
+// 
+    
+      navigate("/payment-booking", {
+        state: { selectedService, bookingsWithTime },
+      });
+    
+  
 
     localStorage.setItem("selectedService", selectedService);
 

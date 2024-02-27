@@ -271,7 +271,7 @@ if(name && email && phoneNumber && type){
                sx={{
                 paddingTop: {xs: "0px", sm: "0px", md: "0px", lg: "0px"}
                }}
-              >
+          >
                 <StyledIframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
                 ></StyledIframe>
