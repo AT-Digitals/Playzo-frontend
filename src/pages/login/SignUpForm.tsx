@@ -164,10 +164,23 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             }
         }
     };
+
+    const ModlaCloseChange = () => {
+        handleClose?.();
+        setName('');
+        setEmail('');
+        setPassword('')
+        setPhoneNumber("");
+        setSportsName([]);
+        setIsValidEmail(false);
+        setIsPasswordValid(false);
+        setIsValidName(false);
+        setIsValidPhone(false);
+    }
     return (
         <Dialog
             open={open}
-            onClose={handleClose}
+            onClose={ModlaCloseChange}
             maxWidth="xs"
             fullWidth
             sx={{
@@ -183,7 +196,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
                 }}
             >
                 <Stack direction="row" justifyContent="end">
-                    <IconButton onClick={handleClose}>
+                    <IconButton onClick={ModlaCloseChange}>
                         <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
                     </IconButton>
                 </Stack>

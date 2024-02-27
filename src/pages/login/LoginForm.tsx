@@ -134,10 +134,18 @@ export default function Form({ handleClose, open }: loginProps) {
       }
     }
   };
+
+  const ModlaCloseChange = () => {
+    handleClose?.();
+    setEmail('');
+    setPassword('')
+    setIsValidEmail(false);
+    setIsPasswordValid(false);
+  }
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={ModlaCloseChange}
       maxWidth="xs"
       fullWidth
       sx={{
@@ -153,7 +161,7 @@ export default function Form({ handleClose, open }: loginProps) {
         }}
       >
         <Stack direction="row" justifyContent="end">
-          <IconButton onClick={handleClose}>
+          <IconButton onClick={ModlaCloseChange}>
             <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
           </IconButton>
         </Stack>
