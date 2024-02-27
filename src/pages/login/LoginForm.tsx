@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Dialog,
   DialogContent,
   Divider,
@@ -219,19 +220,23 @@ export default function Form({ handleClose, open }: loginProps) {
           >
             Forgot Password?
           </Link>
-          <CustomButton
-            color={Colors.WHITE}
-            bgColor={Colors.BUTTON}
+          <Button
             sx={{
               borderRadius: "8px",
               padding: "14px 14px",
               textTransform: "none",
-              fontSize: "20px",
+              fontSize: "18px",
+              background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                }
             }}
             onClick={onSubmit}
           >
             Login
-          </CustomButton>
+          </Button>
           <Stack direction="row" alignItems="center" spacing={1} justifyContent="center">
             <Typography
               color={Colors.WHITE}
