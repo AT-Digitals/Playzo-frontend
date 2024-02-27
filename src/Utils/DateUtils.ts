@@ -44,6 +44,30 @@ export default class DateUtils {
     const date = new Date(momentObj1.year(), momentObj1.month(), momentObj1.date(), momentObj2.hour(), momentObj2.minutes(), 0);
     return moment(date).format("YYYY-MM-DD hh:mm:ss A");
   }
+  static startTimeAddtoDate(time:string) {
+    const splitTime1 = time.split(" ");
+    const splitTime2 = splitTime1[0].split("-");
+    let timeValue = "";
+    if(splitTime1[1]==='AM'&&splitTime2[1]==="12:00"){
+      timeValue = moment(`${splitTime2[0]} PM`, ["h:mm A"]).format("HH:mm")
+    }else if(splitTime1[1]==='PM'&&splitTime2[1]==="12:00"){
+      timeValue = moment(`${splitTime2[0]} AM`, ["h:mm A"]).format("HH:mm")
+    }else{
+      timeValue = moment(`${splitTime2[0]} ${splitTime1[1]}`, ["h:mm A"]).format("HH:mm")
+    }
+    // const dt = moment(`${splitTime2[0]} ${splitTime1[1]}`, ["h:mm A"]).format("HH:mm");
+    const convertTime = moment( timeValue, 'HH:mm');
+    const dateTime = new Date(`${convertTime}`);
+    return dateTime;
+  }
+  static endTimeAddtoDate(time:string) {
+    const splitTime1 = time.split(" ");
+    const splitTime2 = splitTime1[0].split("-");
+    const dt = moment(`${splitTime2[1]} ${splitTime1[1]}`, ["h:mm A"]).format("HH:mm");
+    const convertTime = moment( dt, 'HH:mm');
+    const dateTime = new Date(`${convertTime}`);
+    return dateTime;
+  }
 
   static checkIsAfter(date1: Date, date2: Date){
     const formattedDate1 = moment(date1).format("YYYY-MM-DD");
