@@ -17,6 +17,51 @@ import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalCompo
 import banner from "./cUS.png";
 import styled from "@emotion/styled";
 
+const StyledIframe = styled.iframe`
+@media (min-width: 300px) {
+  width: 340px; 
+  height: 340px;
+  margin: auto;
+}
+@media (min-width: 414px) {
+  width: 370px; 
+  height: 340px;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  width: 700px; 
+  height: 440px;
+  margin: auto;
+}
+@media (min-width: 820px) {
+  width: 730px; 
+  height: 440px;
+  margin: auto;
+}
+@media (min-width: 912px) {
+  width: 830px; 
+  height: 440px;
+  margin: auto;
+}
+
+@media (min-width: 992px) {
+  width: 840px; 
+  height: 440px;
+  margin: auto;
+}
+@media (min-width: 1000px) {
+  width: 940px; 
+  height: 440px;
+  margin: auto;
+}
+
+@media (min-width: 1200px) {
+  width: 700px; 
+  height: 680px;
+}
+`;
+
 const DropDownData = [
   {
     value: "one",
@@ -207,32 +252,30 @@ if(name && email && phoneNumber && type){
         }}>
       <AppContainer
         paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
-        paddingLeft={{ xs: "0px", sm: "0px", md: "32px" }}
+        paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
         maxWidth={1300}
       >
-       <Typography pt={"20px"} color={Colors.BLACK} fontSize={"42px"} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
+       <Typography pb={{xs: "20px", sm: "20px", md: "20px", lg: '0px'}} pl={{xs: "15px", sm: "28px", md: "28px", lg: '0px'}} pt={"20px"} color={Colors.BLACK} fontSize={{xs: "32px", sm: "32px", md: "32px", lg: "42px"}} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
         <Stack style={{
-          marginTop: "-35px",
-          marginBottom: "20px"
+          marginBottom: "20px",
+          marginTop: "0px"
         }}
           spacing={10}
-          direction={{ xs: "column", sm: "column", md: "row" }}
-          paddingTop={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
+          direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
           paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
         >
          
           <Box flexDirection={"column"}
                 display={"flex"}
                 marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-               style={{
-                paddingTop: "54px"
+               sx={{
+                paddingTop: {xs: "0px", sm: "0px", md: "0px", lg: "0px"}
                }}
               >
-                <iframe
+                <StyledIframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
-                  width="700"
-                  height="640"
-                ></iframe>
+                ></StyledIframe>
+                <Box ml={{xs: "16px", sm: "28px", md: "35px", lg: '0px'}}>
                  <Typography
                 sx={{
                   fontSize: "22px",
@@ -256,12 +299,12 @@ if(name && email && phoneNumber && type){
                  }}>Phone:</span> +91 70944 60944,  +91 91088 83555
                  
                 </Typography>
+                </Box>
               </Box>
              
-          <Box style={{marginLeft: "110px"}} pt="30px" width={"100%"}>
+          <Box style={{marginTop: "40px"}} marginLeft={{xs: "0px", sm: "0px", md: '0px', lg: "110px"}} pt={{xs: "0px", sm: "0px", md: "0px", lg: "0px"}} width={"100%"}>
             <form onSubmit={onSubmit}>
-              <Stack
-                margin={"0 auto"}
+              <Stack margin={{xs: "0 auto", sm: '0 auto', md: "0 auto", lg: "0 auto"}}
                 border={{
                   xs: "1px solid grey",
                   sm: "1px solid grey",
