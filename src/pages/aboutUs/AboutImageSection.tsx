@@ -14,6 +14,11 @@ const Container = styled.div`
   display: flex;
   height: 650px;
   overflow: hidden;
+  flex-direction: column;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
 `;
 
 const LeftSide = styled.div`
@@ -53,7 +58,19 @@ const ImageClick = () => {
   const [activeButton, setActiveButton] = useState("ABOUT");
 
   return (
-    <Container>
+    <Container
+      style={
+        {
+          display: "flex",
+          flexDirection: {
+            xs: "column",
+            sm: "column",
+            md: "column",
+            lg: "row",
+          },
+        } as any
+      }
+    >
       <LeftSide>
         <Box position="relative" display="flex" width={"100%"} height="100%">
           <Box
@@ -61,22 +78,41 @@ const ImageClick = () => {
             right={expanded ? "2%" : "10px"}
             zIndex={2}
             top={"40%"}
-            style={{ cursor: "pointer", transition: "right 0.5s ease" }}
+            sx={{
+              cursor: "pointer",
+              transition: "right 0.5s ease",
+              display: {
+                xs: "none",
+                sm: "block",
+                md: "block",
+                lg: "block",
+              },
+            }}
           >
             {expanded ? (
               <IconButton
-                style={{
-                  background: Colors.BUTTON_COLOR,
-                }}
+                style={
+                  {
+                    background: Colors.BUTTON_COLOR,
+                  } as any
+                }
                 onClick={toggleImageSize}
               >
                 <ArrowForwardIcon fontSize="large" style={{ color: "white" }} />
               </IconButton>
             ) : (
               <IconButton
-                style={{
-                  background: Colors.BUTTON_COLOR,
-                }}
+                style={
+                  {
+                    background: Colors.BUTTON_COLOR,
+                    display: {
+                      xs: "none",
+                      sm: "none",
+                      md: "block",
+                      lg: "block",
+                    },
+                  } as any
+                }
                 onClick={toggleImageSize}
               >
                 <KeyboardBackspaceIcon
@@ -196,7 +232,7 @@ const ImageClick = () => {
         </Box>
 
         <Box
-          padding={"40px 40px"}
+          padding={{ xs: "40px 40px", sm: "40px 30px", md: "40px 40px" }}
           display={"flex"}
           flexDirection={"column"}
           gap={"1rem"}
