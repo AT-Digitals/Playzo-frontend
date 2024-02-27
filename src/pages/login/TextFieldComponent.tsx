@@ -11,6 +11,7 @@ interface textFieldProps {
     validationtext: boolean;
     type?: string;
     errorText: string;
+    placeholdertext?: string;
 }
 
 export default function TextFieldComponent({
@@ -20,6 +21,7 @@ export default function TextFieldComponent({
     validationtext,
     type,
     errorText,
+    placeholdertext
 }: textFieldProps) {
     return (
         <Box>
@@ -37,7 +39,7 @@ export default function TextFieldComponent({
                         borderRadius: "8px",
                     },
                 }}
-                placeholder="Enter your email"
+                placeholder={placeholdertext}
                 type={type}
                 required
                 value={value}

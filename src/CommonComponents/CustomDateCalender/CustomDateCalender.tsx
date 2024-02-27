@@ -211,12 +211,14 @@ export default function CustomDateCalendar({
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
   };
+  console.log("select")
   const ApiCall = async (dateValue: any) => {
     try {
       const response = await BookingApi.filter({
         startDate: dateValue,
         type: type,
         endDate: dateValue,
+        court: BookingSubTypes[selctedname as keyof typeof BookingSubTypes]
       });
       setDisableData(response);
     } catch (error: any) {
@@ -353,7 +355,7 @@ export default function CustomDateCalendar({
                 new Date(selectedDate),
                 "YYYY-MM-DD"
               ),
-              court:BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
+              court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
             });
             if (response) {
             }
@@ -466,8 +468,8 @@ export default function CustomDateCalendar({
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -476,8 +478,8 @@ export default function CustomDateCalendar({
                 background: item.disabled
                   ? "#9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
+                    ? "#15B5FC"
+                    : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -492,8 +494,8 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
+                        ? "white"
+                        : "black"
                   }
                   sx={{
                     ":hover": {
