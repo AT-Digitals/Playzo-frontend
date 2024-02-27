@@ -119,6 +119,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     return storedTableData;
   });
 
+
+  // const [tableData, setTableData] = useState<TableDataItem[]>([]);
+
   const images =
     type === BookingType.Turf
       ? TurfImages
@@ -185,7 +188,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = async() => {
     if (allBookings.length === 0) {
       alert("Please make at least one booking before proceeding to payment");
       return;
@@ -261,15 +264,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       },
       []
     );
-
+    
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
 
     localStorage.setItem("selectedService", selectedService);
-
-    console.log("Proceeding to Payment with allBookings:", allBookings);
-    console.log("All Bookings Structure:", bookingsWithTime);
   };
 
   useEffect(() => {

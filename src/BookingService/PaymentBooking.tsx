@@ -96,6 +96,12 @@ export default function PaymentBooking() {
   const initialPaymentMethod = "female";
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState(initialPaymentMethod);
+    // const [singleAmount, setSingleAmount] =
+    // useState(0);
+    // const [totalBookingAmount, setTotalBookingAmount] =
+    // useState(0);
+    // const [bookingAmount, setBookingAmount] =
+    // useState<any>([]);
 
   const handlePaymentMethodChange = (event: any) => {
     setSelectedPaymentMethod(event.target.value);
@@ -254,7 +260,7 @@ export default function PaymentBooking() {
                 margin={"0px 25px"}
               >
                 {allBookings.map(
-                  (
+                   (
                     item: {
                       type: string;
                       name: string;
@@ -282,16 +288,15 @@ export default function PaymentBooking() {
                     );
 
                     // Format start and end times without minutes
-                    const formattedStartTime = `${startHours % 12 || 12} ${
-                      startHours < 12 ? "AM" : "PM"
-                    }`;
-                    const formattedEndTime = `${endHours % 12 || 12} ${
+                    const formattedStartTime = `${startHours % 12 || 12}:00`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
                       endHours < 12 ? "AM" : "PM"
                     }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
                     console.log(formattedTimeRange);
+
 
                     return (
                       <Stack
