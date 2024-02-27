@@ -22,6 +22,7 @@ import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
+import backgroundimage from "./7692.jpg";
 import ball from "../assets/ball 4.png";
 import calendar from "../assets/Calendar.png";
 import cardicons from "../assets/card icons.png";
@@ -30,7 +31,6 @@ import currency from "../assets/Frame 39554.png";
 import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
 import { useState } from "react";
-import backgroundimage from './7692.jpg'
 
 // const PaymentDetails = [
 //   {
@@ -172,18 +172,19 @@ export default function PaymentBooking() {
 
   return (
     <>
-    <Box component={"image"}
-                sx={{
-                  position: "relative",
-                  backgroundImage: `url(${backgroundimage})`,
-                  backgroundSize: "cover", // Fit the background image to cover the entire container
-                  backgroundPosition: "bottom",
-                  backgroundRepeat: "no-repeat",
-                  objectFit: "cover", // Set object-fit to cover
-                  height: "100%",
-       
-                }}>
-                   <Box
+      <Box
+        component={"image"}
+        sx={{
+          position: "relative",
+          backgroundImage: `url(${backgroundimage})`,
+          backgroundSize: "cover", // Fit the background image to cover the entire container
+          backgroundPosition: "bottom",
+          backgroundRepeat: "no-repeat",
+          objectFit: "cover", // Set object-fit to cover
+          height: "100%",
+        }}
+      >
+        <Box
           sx={{
             position: "absolute",
             top: 0,
@@ -193,493 +194,530 @@ export default function PaymentBooking() {
             backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
-         <Box
-    sx={{
-      position: "relative",
-      zIndex: 1, // Ensure content appears above background
-      padding: "20px", // Adjust padding as needed
-      color: "black", // Set text color for content
-    }}
-  >
-      <Stack sx={{
-          opacity: '1'
-        }}
-        margin={{ xs: "0px", sm: "0px", md: "0px", lg: "50px 190px" }}
-        flexDirection={{ xs: "column", sm: "column", md: "column", lg: "row" }}
-      >
         <Box
-          margin={{
-            xs: "30px 30px",
-            sm: "30px 30px",
-            md: "30px 30px",
-            lg: "50px",
+          sx={{
+            position: "relative",
+            zIndex: 1, // Ensure content appears above background
+            padding: "20px", // Adjust padding as needed
+            color: "black", // Set text color for content
           }}
-          width={"100%"}
-          maxWidth={{ xs: "313px", sm: "313px", md: "313px", lg: "330px" }}
-          borderRadius={"10px"}
-          border={"1px solid gray"}
         >
-          <Box
-            padding={"27px 20px"}
-            gap={"7px"}
-            display={"flex"}
-            alignItems={"center"}
+          <Stack
+            sx={{
+              opacity: "1",
+            }}
+            margin={{ xs: "0px", sm: "0px", md: "0px", lg: "50px 190px" }}
+            flexDirection={{
+              xs: "column",
+              sm: "column",
+              md: "column",
+              lg: "row",
+            }}
           >
-            <ArrowBackIosNewIcon
-              style={{ fontSize: "20px", color: Colors.BUTTON }}
-            />
-            <Typography
-              fontWeight={"600"}
-              fontSize={"18px"}
-              color={Colors.BUTTON}
-            >
-              Booking Summary
-            </Typography>
-          </Box>
-          <Stack sx={{
-          opacity: '1'
-        }} margin={"0px 25px"}>
-            {allBookings.map(
-              (
-                item: {
-                  type: string;
-                  name: string;
-                  startDate: string;
-                  startTime: number;
-                  endDate: string;
-                  amount: string;
-                  endTime: number;
-                },
-                index: any
-              ) => {
-                const startDateTime = new Date(item.startTime);
-                const endDateTime = new Date(item.endTime);
-
-                const startHours = startDateTime.getHours();
-                const endHours = endDateTime.getHours();
-
-                const formattedStartDate = startDateTime.toLocaleDateString(
-                  "en-US",
-                  {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  }
-                );
-
-                // Format start and end times without minutes
-                const formattedStartTime = `${startHours % 12 || 12}:00 ${
-                  startHours < 12 ? "AM" : "PM"
-                }`;
-                const formattedEndTime = `${endHours % 12 || 12}:00 ${
-                  endHours < 12 ? "AM" : "PM"
-                }`;
-
-                const formattedTimeRange = `${formattedStartTime} - ${formattedEndTime}`;
-
-                console.log(formattedTimeRange);
-
-                return (
-                  <Stack sx={{
-                    opacity: '1'
-                  }} paddingBottom={"20px"}>
-                    <Typography
-                      fontWeight={"500"}
-                      fontSize={"15px"}
-                      color={Colors.BLACK}
-                    >
-                      {item.name}
-                    </Typography>
-                    <Box
-                      pt={"10px"}
-                      gap={"8px"}
-                      display={"flex"}
-                      alignItems={"center"}
-                    >
-                      <img src={calendar} alt="" width={"25px"} />
-                      <Typography
-                        whiteSpace={"nowrap"}
-                        fontWeight={"500"}
-                        color={Colors.BLACK}
-                        fontSize={"15px"}
-                      >
-                        {formattedStartDate}
-                      </Typography>
-                      <AccessTimeIcon
-                        style={{
-                          color: Colors.BLACK,
-                          fontSize: "15px",
-                          marginLeft: "10px",
-                        }}
-                      />
-                      <Typography
-                        whiteSpace={"nowrap"}
-                        fontWeight={"500"}
-                        color={Colors.BLACK}
-                        fontSize={"15px"}
-                      >
-                        {formattedTimeRange}
-                      </Typography>
-                    </Box>
-                    <Box
-                      borderBottom={"1px solid black"}
-                      pb={"20px"}
-                      pt={"10px"}
-                      gap={"8px"}
-                      display={"flex"}
-                      alignItems={"center"}
-                    >
-                      <img src={currency} alt="" width={"28px"} />
-                      <Typography
-                        fontWeight={"500"}
-                        color={Colors.BLACK}
-                        fontSize={"15px"}
-                      >
-                        {item.amount}
-                      </Typography>
-                    </Box>
-                  </Stack>
-                );
-              }
-            )}
-            <Typography
-              fontWeight={"500"}
-              color={Colors.BLACK}
-              fontSize={"15px"}
-            >
-              Promo code
-            </Typography>
-            <CustomTextField
-              sx={{
-                width: "100%",
-                maxWidth: "300px",
-                height: "30px",
-                ".MuiOutlinedInput-root": {
-                  width: "100%",
-                  maxWidth: "300px",
-                  height: "30px",
-                },
+            <Box
+              margin={{
+                xs: "30px 30px",
+                sm: "30px 30px",
+                md: "30px 30px",
+                lg: "50px",
               }}
-              id="outlined-password-input"
-            />
-            <Box sx={{
-          opacity: '1'
-        }} borderBottom={"1px solid black"} pb={"20px"}>
-              <Button
-                sx={{
-                  border: "1px solid #15B5FC",
-                  width: "100%",
-                  maxWidth: "60px",
-                  height: "30px",
-                  marginTop: "16px",
-                  textTransform: "capitalize",
-                  background: Colors.BUTTON_COLOR,
-                  color: Colors.WHITE,
-                  ":hover": {
-                    background: Colors.WHITE,
-                    color: Colors.BUTTON_COLOR,
-                    border: "1px solid #15B5FC",
-                  }
-                }}
-                variant="outlined"
+              width={"100%"}
+              maxWidth={{ xs: "313px", sm: "313px", md: "313px", lg: "330px" }}
+              borderRadius={"10px"}
+              border={"1px solid gray"}
+            >
+              <Box
+                padding={"27px 20px"}
+                gap={"7px"}
+                display={"flex"}
+                alignItems={"center"}
               >
-                Apply
-              </Button>
+                <ArrowBackIosNewIcon
+                  style={{ fontSize: "20px", color: Colors.BUTTON }}
+                />
+                <Typography
+                  fontWeight={"600"}
+                  fontSize={"18px"}
+                  color={Colors.BUTTON}
+                >
+                  Booking Summary
+                </Typography>
+              </Box>
+              <Stack
+                sx={{
+                  opacity: "1",
+                }}
+                margin={"0px 25px"}
+              >
+                {allBookings.map(
+                  (
+                    item: {
+                      type: string;
+                      name: string;
+                      startDate: string;
+                      startTime: number;
+                      endDate: string;
+                      amount: string;
+                      endTime: number;
+                    },
+                    index: any
+                  ) => {
+                    const startDateTime = new Date(item.startTime);
+                    const endDateTime = new Date(item.endTime);
+
+                    const startHours = startDateTime.getHours();
+                    const endHours = endDateTime.getHours();
+
+                    const formattedStartDate = startDateTime.toLocaleDateString(
+                      "en-US",
+                      {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      }
+                    );
+
+                    // Format start and end times without minutes
+                    const formattedStartTime = `${startHours % 12 || 12} ${
+                      startHours < 12 ? "AM" : "PM"
+                    }`;
+                    const formattedEndTime = `${endHours % 12 || 12} ${
+                      endHours < 12 ? "AM" : "PM"
+                    }`;
+
+                    const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
+
+                    console.log(formattedTimeRange);
+
+                    return (
+                      <Stack
+                        sx={{
+                          opacity: "1",
+                        }}
+                        paddingBottom={"20px"}
+                      >
+                        <Typography
+                          fontWeight={"500"}
+                          fontSize={"15px"}
+                          color={Colors.BLACK}
+                        >
+                          {item.name}
+                        </Typography>
+                        <Box
+                          pt={"10px"}
+                          gap={"8px"}
+                          display={"flex"}
+                          alignItems={"center"}
+                        >
+                          <img src={calendar} alt="" width={"25px"} />
+                          <Typography
+                            whiteSpace={"nowrap"}
+                            fontWeight={"500"}
+                            color={Colors.BLACK}
+                            fontSize={"15px"}
+                          >
+                            {formattedStartDate}
+                          </Typography>
+                          <AccessTimeIcon
+                            style={{
+                              color: Colors.BLACK,
+                              fontSize: "15px",
+                              marginLeft: "10px",
+                            }}
+                          />
+                          <Typography
+                            whiteSpace={"nowrap"}
+                            fontWeight={"500"}
+                            color={Colors.BLACK}
+                            fontSize={"15px"}
+                          >
+                            {formattedTimeRange}
+                          </Typography>
+                        </Box>
+                        <Box
+                          borderBottom={"1px solid black"}
+                          pb={"20px"}
+                          pt={"10px"}
+                          gap={"8px"}
+                          display={"flex"}
+                          alignItems={"center"}
+                        >
+                          <img src={currency} alt="" width={"28px"} />
+                          <Typography
+                            fontWeight={"500"}
+                            color={Colors.BLACK}
+                            fontSize={"15px"}
+                          >
+                            {item.amount}
+                          </Typography>
+                        </Box>
+                      </Stack>
+                    );
+                  }
+                )}
+                <Typography
+                  fontWeight={"500"}
+                  color={Colors.BLACK}
+                  fontSize={"15px"}
+                >
+                  Promo code
+                </Typography>
+                <CustomTextField
+                  sx={{
+                    width: "100%",
+                    maxWidth: "300px",
+                    height: "30px",
+                    ".MuiOutlinedInput-root": {
+                      width: "100%",
+                      maxWidth: "300px",
+                      height: "30px",
+                    },
+                  }}
+                  id="outlined-password-input"
+                />
+                <Box
+                  sx={{
+                    opacity: "1",
+                  }}
+                  borderBottom={"1px solid black"}
+                  pb={"20px"}
+                >
+                  <Button
+                    sx={{
+                      border: "1px solid #15B5FC",
+                      width: "100%",
+                      maxWidth: "60px",
+                      height: "30px",
+                      marginTop: "16px",
+                      textTransform: "capitalize",
+                      background: Colors.BUTTON_COLOR,
+                      color: Colors.WHITE,
+                      ":hover": {
+                        background: Colors.WHITE,
+                        color: Colors.BUTTON_COLOR,
+                        border: "1px solid #15B5FC",
+                      },
+                    }}
+                    variant="outlined"
+                  >
+                    Apply
+                  </Button>
+                </Box>
+                <Box
+                  pb={{ xs: "16px", sm: "16px", md: "16px", lg: "0px" }}
+                  mt={"7px"}
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                >
+                  <Typography
+                    fontWeight={"500"}
+                    color={Colors.BLACK}
+                    fontSize={"15px"}
+                  >
+                    Total
+                  </Typography>
+                  <Typography
+                    fontWeight={"500"}
+                    color={Colors.BLACK}
+                    fontSize={"15px"}
+                  >
+                    {totalAmount}
+                  </Typography>
+                </Box>
+              </Stack>
             </Box>
             <Box
-              pb={{ xs: "16px", sm: "16px", md: "16px", lg: "0px" }}
-              mt={"7px"}
+              sx={{
+                opacity: "1",
+              }}
+              padding={{
+                xs: "17px 35px",
+                sm: "17px 35px",
+                md: "17px 35px",
+                lg: "70px 45px",
+              }}
+              width={"100%"}
+              maxWidth={{ xs: "295px", sm: "295px", md: "295px", lg: "379px" }}
               display={"flex"}
-              justifyContent={"space-between"}
+              flexDirection={"column"}
             >
               <Typography
-                fontWeight={"500"}
-                color={Colors.BLACK}
-                fontSize={"15px"}
+                fontWeight={"600"}
+                color={Colors.BUTTON}
+                fontSize={"19px"}
               >
-                Total
+                Phone Number
               </Typography>
+              <Box
+                mt={"5px"}
+                width={"100%"}
+                maxWidth={"140px"}
+                height={"35px"}
+                bgcolor={"#F9F9F9"}
+              >
+                <Typography
+                  pt={"7px"}
+                  textAlign={"center"}
+                  fontWeight={"500"}
+                  color={Colors.BLACK}
+                  fontSize={"15px"}
+                >
+                  9876543210
+                </Typography>
+              </Box>
               <Typography
-                fontWeight={"500"}
-                color={Colors.BLACK}
-                fontSize={"15px"}
+                pt={"30px"}
+                fontWeight={"600"}
+                color={Colors.BUTTON}
+                fontSize={"19px"}
               >
-                {totalAmount}
+                Payment Methods
               </Typography>
+              <Box
+                sx={{
+                  opacity: "1",
+                }}
+                display={"flex"}
+                alignItems={"center"}
+              >
+                <FormControl>
+                  <RadioGroup
+                    style={{ marginTop: "10px" }}
+                    defaultValue="female"
+                    aria-labelledby="demo-customized-radios"
+                    name="customized-radios"
+                    value={selectedPaymentMethod}
+                    onChange={handlePaymentMethodChange}
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<BpRadio />}
+                      label=""
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Typography
+                  pt={"9px"}
+                  fontWeight={"600"}
+                  color={Colors.BLACK}
+                  fontSize={"16px"}
+                >
+                  Credit/Debit Cards
+                </Typography>
+              </Box>
+              <Box
+                mt={"-10px"}
+                gap={"42px"}
+                display={"flex"}
+                alignItems={"center"}
+              >
+                <Typography
+                  pl={"38px"}
+                  fontWeight={"500"}
+                  color={Colors.BLACK}
+                  fontSize={"15px"}
+                >
+                  Pay with your Credit / Debit Card
+                </Typography>
+                <img src={cardicons} alt="" width={"80px"} />
+              </Box>
+              <Box
+                margin={"15px 35px"}
+                width={"100%"}
+                maxWidth={"340px"}
+                height={"35px"}
+                bgcolor={"#F9F9F9"}
+              >
+                <Stack
+                  sx={{
+                    opacity: "1",
+                  }}
+                  flexDirection={"row"}
+                  justifyContent={"space-between"}
+                  padding={"5px 10px"}
+                >
+                  <Typography
+                    fontWeight={"500"}
+                    color={Colors.BLACK}
+                    fontSize={"15px"}
+                  >
+                    Card Number
+                  </Typography>
+                  <img src={crediticon} alt="" width={"25px"} />
+                </Stack>
+              </Box>
+              <Box
+                width={"100%"}
+                display={"flex"}
+                margin={"15px 35px"}
+                gap={"12px"}
+              >
+                <Box
+                  width={"100%"}
+                  maxWidth={"230px"}
+                  height={"35px"}
+                  bgcolor={"#F9F9F9"}
+                >
+                  <Stack
+                    sx={{
+                      opacity: "1",
+                    }}
+                    flexDirection={"row"}
+                    justifyContent={"space-between"}
+                    padding={"5px 10px"}
+                  >
+                    <Typography
+                      fontWeight={"500"}
+                      color={Colors.BLACK}
+                      fontSize={"15px"}
+                    >
+                      MM / YY
+                    </Typography>
+                    <TodayIcon style={{ fontSize: "20px" }} />
+                  </Stack>
+                </Box>
+                <Box
+                  width={"100%"}
+                  maxWidth={"100px"}
+                  height={"35px"}
+                  bgcolor={"#F9F9F9"}
+                >
+                  <Stack
+                    flexDirection={"row"}
+                    justifyContent={"space-between"}
+                    padding={"5px 10px"}
+                  >
+                    <Typography
+                      fontWeight={"500"}
+                      color={Colors.BLACK}
+                      fontSize={"15px"}
+                    >
+                      CVV
+                    </Typography>
+                    <LockIcon style={{ fontSize: "20px" }} />
+                  </Stack>
+                </Box>
+              </Box>
+              <Box display={"flex"} alignItems={"center"}>
+                <FormControl>
+                  <RadioGroup
+                    style={{ marginTop: "10px" }}
+                    defaultValue="other"
+                    aria-labelledby="demo-customized-radios"
+                    name="customized-radios"
+                    value={selectedPaymentMethod}
+                    onChange={handlePaymentMethodChange}
+                  >
+                    <FormControlLabel
+                      value="other"
+                      control={<BpRadio />}
+                      label=""
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Typography
+                  pt={"9px"}
+                  color={"black"}
+                  fontSize={"16px"}
+                  fontWeight={"bold"}
+                >
+                  Direct Bank Transfer
+                </Typography>
+              </Box>
+              <Typography
+                pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
+                color={"black"}
+                fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
+                fontWeight={"500"}
+              >
+                Make payment directly through bank account.
+              </Typography>
+              <Box display={"flex"} alignItems={"center"}>
+                <FormControl>
+                  <RadioGroup
+                    style={{ marginTop: "10px" }}
+                    defaultValue="male"
+                    aria-labelledby="demo-customized-radios"
+                    name="customized-radios"
+                    value={selectedPaymentMethod}
+                    onChange={handlePaymentMethodChange}
+                  >
+                    <FormControlLabel
+                      value="male"
+                      control={<BpRadio />}
+                      label=""
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Typography
+                  pt={"9px"}
+                  color={"black"}
+                  fontSize={"16px"}
+                  fontWeight={"bold"}
+                >
+                  Other Payment Methods
+                </Typography>
+              </Box>
+              <Typography
+                pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
+                color={"black"}
+                fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
+                fontWeight={"500"}
+              >
+                Make payment through Gpay, Paytm etc
+              </Typography>
+              <Box
+                sx={{
+                  opacity: "1",
+                }}
+                mt={"10px"}
+                display={"flex"}
+                justifyContent={"end"}
+              >
+                <Button
+                  onClick={handlePayClick}
+                  sx={{
+                    width: "100%",
+                    maxWidth: "120px",
+                    height: "40px",
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                    ":hover": {
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
+                      border: "1px solid #15B5FC",
+                    },
+                  }}
+                  variant="contained"
+                >
+                  Pay {totalAmount}
+                </Button>
+                <Button
+                  onClick={handlegoBack}
+                  sx={{
+                    width: "100%",
+                    maxWidth: "120px",
+                    height: "40px",
+                    textTransform: "capitalize",
+                    fontWeight: "bold",
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                    ":hover": {
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
+                      border: "1px solid #15B5FC",
+                    },
+                  }}
+                  variant="contained"
+                >
+                  back{" "}
+                </Button>
+              </Box>
             </Box>
           </Stack>
         </Box>
-        <Box sx={{
-          opacity: '1'
-        }}
-          padding={{
-            xs: "17px 35px",
-            sm: "17px 35px",
-            md: "17px 35px",
-            lg: "70px 45px",
-          }}
-          width={"100%"}
-          maxWidth={{ xs: "295px", sm: "295px", md: "295px", lg: "379px" }}
-          display={"flex"}
-          flexDirection={"column"}
-        >
-          <Typography
-            fontWeight={"600"}
-            color={Colors.BUTTON}
-            fontSize={"19px"}
-          >
-            Phone Number
-          </Typography>
-          <Box
-            mt={"5px"}
-            width={"100%"}
-            maxWidth={"140px"}
-            height={"35px"}
-            bgcolor={"#F9F9F9"}
-          >
-            <Typography
-              pt={"7px"}
-              textAlign={"center"}
-              fontWeight={"500"}
-              color={Colors.BLACK}
-              fontSize={"15px"}
-            >
-              9876543210
-            </Typography>
-          </Box>
-          <Typography
-            pt={"30px"}
-            fontWeight={"600"}
-            color={Colors.BUTTON}
-            fontSize={"19px"}
-          >
-            Payment Methods
-          </Typography>
-          <Box sx={{
-          opacity: '1'
-        }} display={"flex"} alignItems={"center"}>
-            <FormControl>
-              <RadioGroup
-                style={{ marginTop: "10px" }}
-                defaultValue="female"
-                aria-labelledby="demo-customized-radios"
-                name="customized-radios"
-                value={selectedPaymentMethod}
-                onChange={handlePaymentMethodChange}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<BpRadio />}
-                  label=""
-                />
-              </RadioGroup>
-            </FormControl>
-            <Typography
-              pt={"9px"}
-              fontWeight={"600"}
-              color={Colors.BLACK}
-              fontSize={"16px"}
-            >
-              Credit/Debit Cards
-            </Typography>
-          </Box>
-          <Box mt={"-10px"} gap={"42px"} display={"flex"} alignItems={"center"}>
-            <Typography
-              pl={"38px"}
-              fontWeight={"500"}
-              color={Colors.BLACK}
-              fontSize={"15px"}
-            >
-              Pay with your Credit / Debit Card
-            </Typography>
-            <img src={cardicons} alt="" width={"80px"} />
-          </Box>
-          <Box
-            margin={"15px 35px"}
-            width={"100%"}
-            maxWidth={"340px"}
-            height={"35px"}
-            bgcolor={"#F9F9F9"}
-          >
-            <Stack sx={{
-          opacity: '1'
-        }}
-              flexDirection={"row"}
-              justifyContent={"space-between"}
-              padding={"5px 10px"}
-            >
-              <Typography
-                fontWeight={"500"}
-                color={Colors.BLACK}
-                fontSize={"15px"}
-              >
-                Card Number
-              </Typography>
-              <img src={crediticon} alt="" width={"25px"} />
-            </Stack>
-          </Box>
-          <Box
-            width={"100%"}
-            display={"flex"}
-            margin={"15px 35px"}
-            gap={"12px"}
-          >
-            <Box
-              width={"100%"}
-              maxWidth={"230px"}
-              height={"35px"}
-              bgcolor={"#F9F9F9"}
-            >
-              <Stack sx={{
-          opacity: '1'
-        }}
-                flexDirection={"row"}
-                justifyContent={"space-between"}
-                padding={"5px 10px"}
-              >
-                <Typography
-                  fontWeight={"500"}
-                  color={Colors.BLACK}
-                  fontSize={"15px"}
-                >
-                  MM / YY
-                </Typography>
-                <TodayIcon style={{ fontSize: "20px" }} />
-              </Stack>
-            </Box>
-            <Box 
-              width={"100%"}
-              maxWidth={"100px"}
-              height={"35px"}
-              bgcolor={"#F9F9F9"}
-            >
-              <Stack
-                flexDirection={"row"}
-                justifyContent={"space-between"}
-                padding={"5px 10px"}
-              >
-                <Typography
-                  fontWeight={"500"}
-                  color={Colors.BLACK}
-                  fontSize={"15px"}
-                >
-                  CVV
-                </Typography>
-                <LockIcon style={{ fontSize: "20px" }} />
-              </Stack>
-            </Box>
-          </Box>
-          <Box display={"flex"} alignItems={"center"}>
-            <FormControl>
-              <RadioGroup
-                style={{ marginTop: "10px" }}
-                defaultValue="other"
-                aria-labelledby="demo-customized-radios"
-                name="customized-radios"
-                value={selectedPaymentMethod}
-                onChange={handlePaymentMethodChange}
-              >
-                <FormControlLabel
-                  value="other"
-                  control={<BpRadio />}
-                  label=""
-                />
-              </RadioGroup>
-            </FormControl>
-            <Typography
-              pt={"9px"}
-              color={"black"}
-              fontSize={"16px"}
-              fontWeight={"bold"}
-            >
-              Direct Bank Transfer
-            </Typography>
-          </Box>
-          <Typography
-            pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
-            color={"black"}
-            fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
-            fontWeight={"500"}
-          >
-            Make payment directly through bank account.
-          </Typography>
-          <Box display={"flex"} alignItems={"center"}>
-            <FormControl>
-              <RadioGroup
-                style={{ marginTop: "10px" }}
-                defaultValue="male"
-                aria-labelledby="demo-customized-radios"
-                name="customized-radios"
-                value={selectedPaymentMethod}
-                onChange={handlePaymentMethodChange}
-              >
-                <FormControlLabel value="male" control={<BpRadio />} label="" />
-              </RadioGroup>
-            </FormControl>
-            <Typography
-              pt={"9px"}
-              color={"black"}
-              fontSize={"16px"}
-              fontWeight={"bold"}
-            >
-              Other Payment Methods
-            </Typography>
-          </Box>
-          <Typography
-            pl={{ xs: "42px", sm: "42px", md: "42px", lg: "38px" }}
-            color={"black"}
-            fontSize={{ xs: "12px", sm: "12px", md: "12px", lg: "16px" }}
-            fontWeight={"500"}
-          >
-            Make payment through Gpay, Paytm etc
-          </Typography>
-          <Box sx={{
-          opacity: '1'
-        }} mt={"10px"} display={"flex"} justifyContent={"end"}>
-            <Button
-              onClick={handlePayClick}
-              sx={{
-                width: "100%",
-                maxWidth: "120px",
-                height: "40px",
-                textTransform: "capitalize",
-                fontWeight: "bold",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                  border: "1px solid #15B5FC",
-                }
-              }}
-              variant="contained"
-            >
-              Pay {totalAmount}
-            </Button>
-            <Button
-              onClick={handlegoBack}
-              sx={{
-                width: "100%",
-                maxWidth: "120px",
-                height: "40px",
-                textTransform: "capitalize",
-                fontWeight: "bold",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                  border: "1px solid #15B5FC",
-                }
-              }}
-              variant="contained"
-            >
-              back{" "}
-            </Button>
-          </Box>
-        </Box>
-      </Stack>
-      </Box>
       </Box>
       <Box
         mt={{ xs: "50px", sm: "50px", md: "50px", lg: "0px" }}

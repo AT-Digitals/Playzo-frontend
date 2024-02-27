@@ -191,88 +191,175 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const handleProceedToPayment = () => {
     if (allBookings.length === 0) {
       alert("Please make at least one booking before proceeding to payment");
-      return; // Stop further execution
+      return;
     }
 
-    const bookingsWithTime: {
-      type: BookingType;
-      name: string;
-      startDate: string;
-      startTime: number;
-      endDate: string;
-      endTime: number;
-      court: number;
-      amount: any;
-    }[] = [];
+    const bookingsWithTime = allBookings.reduce(
+      (
+        acc: {
+          type: BookingType;
+          name: string;
+          startDate: string;
+          startTime: number;
+          endDate: string;
+          endTime: number;
+          court: number;
+          amount: any;
+        }[],
+        booking
+      ) => {
+        const boo = booking.time as any;
 
-    console.log("allb", allBookings);
-    allBookings.map((booking, index) => {
-      const boo = booking.time as any;
+        boo.forEach(function (item: any) {
+          const timeString = String(item);
+          const timeMatch = timeString.match(/(\d{1,2}:\d{2} [APMapm]+)/);
 
-      boo.forEach(function (item: any, index: any) {
-        console.log(item, index);
+          const startTime = timeMatch ? timeMatch[1] : "";
+          let endTime = "";
 
-        const timeString = String(item); // Ensure time is a string
-        const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
+          // Calculate start time and end time in milliseconds
+          let startMilliseconds = 0;
+          let endMilliseconds = 0;
 
-        const startTime = timeMatch ? timeMatch[1] : "";
-        let endTime = "";
-        // let ampm = "";
+          if (startTime) {
+            const [hours, minutes, ampm] = startTime.split(/[:\s]+/);
+            const startDateTime = new Date(booking.date);
+            startDateTime.setHours(
+              ampm.toUpperCase() === "PM" ? Number(hours) + 12 : Number(hours),
+              Number(minutes)
+            );
+            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-        // Calculate start time and end time in milliseconds
-        let startMilliseconds = 0;
-        let endMilliseconds = 0;
-        console.log(booking.court, "court");
-        console.log("booking:", booking); // Print the entire booking object for inspection
+            const endDateTime = new Date(startDateTime);
+            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
 
-        if (startTime) {
-          const [hours, minutes] = startTime.split(":");
-          const startDateTime = new Date(booking.date);
-          startDateTime.setHours(Number(hours), Number(minutes));
-          startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+            const endHours = endDateTime.getHours();
+            const endMinutes = endDateTime.getMinutes();
 
-          const endDateTime = new Date(startDateTime);
-          endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-          endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+            endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+              2,
+              "0"
+            )} ${endHours >= 12 ? "PM" : "AM"}`;
+          }
 
-          const endHours = endDateTime.getHours();
-          const endMinutes = endDateTime.getMinutes();
-
-          endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-            2,
-            "0"
-          )}`;
-          // ampm = endHours >= 12 ? "PM" : "AM";
-        }
-
-        bookingsWithTime.push({
-          type: booking.type,
-          name: booking.name,
-          startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
-          startTime: startMilliseconds,
-
-          endDate: endTime
-            ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
-            : "",
-          endTime: endMilliseconds,
-          court: booking.court,
-          amount: booking.amount,
+          acc.push({
+            type: booking.type,
+            name: booking.name,
+            startDate: DateUtils.formatDate(
+              new Date(booking.date),
+              "YYYY-MM-DD"
+            ),
+            startTime: startMilliseconds,
+            endDate: endTime
+              ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
+              : "",
+            endTime: endMilliseconds,
+            court: booking.court,
+            amount: booking.amount,
+          });
         });
-      });
-    });
+
+        return acc;
+      },
+      []
+    );
 
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
 
-    // navigate("/payment-booking", { state: { allBookings, selectedService } });
     localStorage.setItem("selectedService", selectedService);
 
     console.log("Proceeding to Payment with allBookings:", allBookings);
-
-    // Log the array of objects
     console.log("All Bookings Structure:", bookingsWithTime);
   };
+
+  // const handleProceedToPayment = () => {
+  //   if (allBookings.length === 0) {
+  //     alert("Please make at least one booking before proceeding to payment");
+  //     return; // Stop further execution
+  //   }
+
+  //   const bookingsWithTime: {
+  //     type: BookingType;
+  //     name: string;
+  //     startDate: string;
+  //     startTime: number;
+  //     endDate: string;
+  //     endTime: number;
+  //     court: number;
+  //     amount: any;
+  //   }[] = [];
+
+  //   console.log("allb", allBookings);
+  //   allBookings.map((booking, index) => {
+  //     const boo = booking.time as any;
+
+  //     boo.forEach(function (item: any, index: any) {
+  //       console.log(item, index);
+
+  //       const timeString = String(item); // Ensure time is a string
+  //       const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
+
+  //       const startTime = timeMatch ? timeMatch[1] : "";
+  //       let endTime = "";
+  //       // let ampm = "";
+
+  //       // Calculate start time and end time in milliseconds
+  //       let startMilliseconds = 0;
+  //       let endMilliseconds = 0;
+  //       console.log(booking.court, "court");
+  //       console.log("booking:", booking); // Print the entire booking object for inspection
+
+  //       if (startTime) {
+  //         const [hours, minutes] = startTime.split(":");
+  //         const startDateTime = new Date(booking.date);
+  //         startDateTime.setHours(Number(hours), Number(minutes));
+  //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+
+  //         const endDateTime = new Date(startDateTime);
+  //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+  //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+
+  //         const endHours = endDateTime.getHours();
+  //         const endMinutes = endDateTime.getMinutes();
+
+  //         endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
+  //           2,
+  //           "0"
+  //         )}`;
+  //         // ampm = endHours >= 12 ? "PM" : "AM";
+  //       }
+
+  //       bookingsWithTime.push({
+  //         type: booking.type,
+  //         name: booking.name,
+  //         startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
+  //         startTime: startMilliseconds,
+
+  //         endDate: endTime
+  //           ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
+  //           : "",
+  //         endTime: endMilliseconds,
+  //         court: booking.court,
+  //         amount: booking.amount,
+  //       });
+  //     });
+  //   });
+
+  //   navigate("/payment-booking", {
+  //     state: { selectedService, bookingsWithTime },
+  //   });
+
+  //   // navigate("/payment-booking", { state: { allBookings, selectedService } });
+  //   localStorage.setItem("selectedService", selectedService);
+
+  //   console.log("Proceeding to Payment with allBookings:", allBookings);
+
+  //   // Log the array of objects
+  //   console.log("All Bookings Structure:", bookingsWithTime);
+  // };
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
@@ -453,7 +540,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 color: Colors.WHITE,
                 ":hover": {
                   background: Colors.BUTTON_COLOR,
-                 
                 },
               }}
               onClick={handlegoBack}
