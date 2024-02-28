@@ -13,8 +13,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import KeyboardArrowUpTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
-import Userprofile from "../assets/Image (6).png";
 import routes from "../routes/routes";
+import assets from "../assets";
+
+const {"Image (6).png": Userprofile} = assets
 
 const HeaderLink = styled("a")`
   text-decoration: none;

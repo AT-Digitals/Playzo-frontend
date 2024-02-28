@@ -2,9 +2,10 @@ import { Box, Typography, keyframes } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
-import ServicePara from "../../assets/ServicePara.svg";
-import ServicePara1 from "../../assets/ServicePara1.svg";
 import styled from "@emotion/styled";
+import assets from "../../assets";
+
+const {"ServicePara.svg": ServicePara, "ServicePara1.svg": ServicePara1} = assets
 
 const StyledTypoBody = styled(Typography)({
   color: Colors.BLACK,

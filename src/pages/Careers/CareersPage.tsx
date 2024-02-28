@@ -1,10 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
-import CareersImage from "../../assets/careers-images.svg";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
+import assets from "../../assets";
+
+const {"careers-images.svg": CareersImage} = assets
 
 const CareersTexts = [
   {

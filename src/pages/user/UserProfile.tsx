@@ -4,24 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import AppContainer from "../../CommonComponents/AppContainer";
 import BookingApi from "../../api/BookingApi";
 import Colors from "../../CommonComponents/Colors";
-import Image6 from "../../assets/Image (6).png";
 import ListCard from "./ListCard";
-import RectangleImage from "../../assets/Rectangle 679.png";
-import ball from "../../assets/ball 1.png";
-import ball2 from "../../assets/ball 2.png";
-import layer from "../../assets/Layer_1.png";
+import assets from "../../assets";
 
-// interface userType {
-//   bookingId: string;
-//   date: string;
-//   userName: string;
-//   bookingType: string;
-//   timings: string;
-//   comments: string;
-//   bookingCompleted: string;
-//   refundCompleted?: string;
-//   ratings?: number;
-// }
+const {"Image (6).png": Image6, "Rectangle 679.png": RectangleImage, "ball 1.png": ball, "ball 2.png": ball2, "Layer_1.png": layer} = assets
+
 
 export default function UserProfile() {
 

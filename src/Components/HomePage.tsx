@@ -6,26 +6,15 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import Badminton from "../assets/pexels-ben-muk-5488874 (1).jpg";
 import CardComponent from "./CardComponent";
 import CarouselComponent from "./CarouselComponent";
 import Colors from "../CommonComponents/Colors";
-import Image3 from "../assets/pexels-guduru-ajay-bhargav-863988.jpg";
-import Image4 from "../assets/pexels-pixabay-209977.jpg";
-import Image5 from "../assets/pexels-pixabay-46798.jpg";
-import boardGames from "../assets/pexels-pixabay-269630.jpg";
-import playstation from "../assets/pexels-vazhnik-7864443.jpg";
-import turf from "../assets/pexels-thiago-kai-9381737.jpg";
 import EastIcon from '@mui/icons-material/East';
-import videoFile from "../assets/playzo.mp4";
 import { Link } from "react-router-dom";
 import routes from "../routes/routes";
-import logo from "../assets/Playzo.png";
-import insta from "../assets/instagram-ico.png";
-import pic1 from "../assets/278453372_302010395428882_1782198866577334663_n.jpg";
-import pic2 from "../assets/292237898_605074144217428_6740391706468899652_n.jpg";
-import pic3 from "../assets/296017376_1229442621218307_3144906300765873571_n.jpg";
-import pic4 from "../assets/307209848_504498594836255_6289868240102465405_n.jpg";
+import assets from "../assets";
+
+const {"pexels-ben-muk-5488874 (1).jpg": Badminton, "pexels-guduru-ajay-bhargav-863988.jpg": Image3, "pexels-pixabay-209977.jog": Image4, "pexels-pixabay-46798.jpg": Image5, "pexels-pixabay-269630.jpg": boardGames, "pexels-vazhnik-7864443.jpg": playstation, "pexels-thiago-kai-9381737.jpg": turf, "playzo.mp4": videoFile, "Playzo.png": logo, "instagram-ico.png": insta, "278453372_302010395428882_1782198866577334663_n.jpg": pic1, "292237898_605074144217428_6740391706468899652_n.jpg": pic2, "296017376_1229442621218307_3144906300765873571_n.jpg": pic3, "307209848_504498594836255_6289868240102465405_n.jpg": pic4 } = assets
 
 const images = [Image3, Image4, Image5]; // List of images to loop through
 const intervalTime = 5000; // Interval time in milliseconds

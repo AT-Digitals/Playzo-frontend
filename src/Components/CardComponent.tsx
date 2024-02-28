@@ -1,7 +1,5 @@
-import { Box, Button, Card, CardMedia, Stack, Typography } from "@mui/material";
+import { Button, Card, CardMedia, Typography } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
-import arrow from "../assets/Group.png";
-import { useState } from "react";
 
 interface cardProps {
   image: string;
@@ -19,8 +17,6 @@ export default function CardComponent({
   return (
     <>
     <Card
-      // onMouseEnter={() => setHovered(true)}
-      // onMouseLeave={() => setHovered(false)}
       sx={{
         maxWidth: 400,
         borderRadius: "10px",

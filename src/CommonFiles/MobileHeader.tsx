@@ -6,8 +6,10 @@ import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import logo from "../assets/logo/Playzo.svg";
 import routes from "../routes/routes";
+import logoImage from "../assets/logo";
+
+const {"Playzo.svg": logo} = logoImage
 
 interface MobileHeaderProps {
   setActiveTab: (event: any) => void;

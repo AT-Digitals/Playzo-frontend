@@ -1,15 +1,17 @@
 import * as React from "react";
 
-import { IconButton, Skeleton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
 import CustomSlider from "./CustomSliderService";
-import LeftArrow from "../../assets/LeftArrow.svg";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import assets from "../../assets";
 import styled from "styled-components";
+
+const { "LeftArrow.svg": LeftArrow } = assets;
 
 interface serviceGridProps {
   carouselItems: any[];
@@ -103,54 +105,8 @@ export default function ServiceGrid(props: serviceGridProps) {
         direction={props.direction}
         alignItems={"flex-start"}
       >
-        <Stack width={"100%"}>
+        <Stack width={"100%"} height={"100%"}>
           <Box display={"flex"} flexDirection={"column"} gap={"1px"}>
-            {/* {showSkeleton && (
-              <SkeletonContainer showSkeleton={showSkeleton}>
-                <Skeleton
-                  sx={{
-                    background: "white",
-                  }}
-                  variant="rounded"
-                  animation="pulse"
-                />
-                <Skeleton
-                  sx={{
-                    background: "white",
-                  }}
-                  animation="wave"
-                />
-
-                <Skeleton
-                  variant="rectangular"
-                  sx={{
-                    background: "white",
-                  }}
-                  width={650}
-                  height={300}
-                />
-                <Skeleton
-                  sx={{
-                    background: "white",
-                  }}
-                  animation="wave"
-                />
-                <Skeleton
-                  sx={{
-                    background: "white",
-                  }}
-                  animation="wave"
-                />
-                <Skeleton
-                  sx={{
-                    background: "white",
-                  }}
-                  animation="wave"
-                />
-              </SkeletonContainer>
-            )} */}
-
-            {/* {!showSkeleton && ( */}
             <CustomSlider
               currentSlide={currentSlide}
               slides={props.carouselItems}
@@ -158,11 +114,11 @@ export default function ServiceGrid(props: serviceGridProps) {
               nextSlide={nextSlide}
               autoplayInterval={4000}
             />
-            {/* )} */}
           </Box>
         </Stack>
 
         <Stack
+          height={"100%"}
           marginRight={"0px !important"}
           marginLeft={"0px !important"}
           bgcolor={"white"}
@@ -175,9 +131,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             borderTopRightRadius: props.radiusTopright,
             borderBottomRightRadius: props.radiusbottompright,
           }}
-          // maxHeight={400}
-          height={400}
-          // alignItems="center"
+          minHeight={400}
           justifyContent="space-between"
           spacing={4}
         >
