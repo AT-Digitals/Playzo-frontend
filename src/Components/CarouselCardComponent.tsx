@@ -88,13 +88,12 @@ export default function CarouselCardComponent({
             direction="row"
             sx={{
                 backgroundColor: Colors.BLACK,
-                transform: showDetails ? "translateX(-100%, 0px)" : "translateX(100%, 0px)", // Apply dynamic transformation
                 height: showDetails ? "auto" : "0",
                 transition: showDetails ? "height 0.5s ease-in-out, transform 0.9s ease-in-out" : "height 0.5s ease-in-out",
             }}
         >
             {showDetails ? (
-                <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: ""}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
+                <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: "20px 32px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
                     <StyledImage
                         src={activeCard.imageSrc}
                         alt="green iguana"

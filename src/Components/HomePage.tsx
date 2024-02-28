@@ -62,7 +62,7 @@ export default function HomePage() {
       <video width="100%" autoPlay loop muted controls={false}>
         <source src={videoFile} type="video/mp4" />
       </video>
-      <Box sx={{ backgroundColor: "#f0f0f0" }}>
+      <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
         <Stack  pt={"60px"}>
        <Box
               width={"24%"}
@@ -106,8 +106,7 @@ export default function HomePage() {
         </Stack>
         <Grid
           container
-          width="100%"
-          maxWidth={1480}
+          width="96%"
           margin="0 auto"
           spacing={3}
           flexDirection={{
@@ -160,7 +159,6 @@ export default function HomePage() {
         </Grid>
         <Box
           width="100%"
-          maxWidth={1470}
           margin="0 auto"
           pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
           pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
@@ -198,7 +196,7 @@ export default function HomePage() {
         </Box>
       </Box>
       <CarouselComponent />
-      <Box width="100%" maxWidth={1480} paddingY={4}>
+      <Box width="100%" paddingY={4}>
         <Box display={"flex"} justifyContent={"center"}>
       <img src={logo} width={340} height={100} alt="22" />
       </Box>
@@ -222,7 +220,6 @@ export default function HomePage() {
             <Grid
           container
           width="100%"
-          maxWidth={1460}
           margin="0 auto"
           spacing={3}
           paddingTop={"20px"}
