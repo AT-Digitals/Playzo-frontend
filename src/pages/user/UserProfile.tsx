@@ -16,6 +16,7 @@ export default function UserProfile() {
   const [filteredData, setFilteredData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
+  const [userSports, setUserSports] = useState<string[]>();
 
   const CapitalizeFirstLetter = (str:any)=> {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -24,6 +25,7 @@ export default function UserProfile() {
     const user = localStorage.getItem('user');
       const userData =user && JSON.parse(user);
       setUser(userData);
+      setUserSports(userData["interestedSports"]??[])
   }, []);
 
 
@@ -115,7 +117,7 @@ export default function UserProfile() {
                 >
                   {user&&CapitalizeFirstLetter(user["name"])}
                 </Typography>
-                <Typography variant="body1">Badminton & Board games</Typography>
+               { userSports&&userSports.length>0 && <Typography variant="body1">{userSports.join(" & ")}</Typography>}
               </Stack>
             </Card>
           </Grid>
@@ -167,7 +169,7 @@ export default function UserProfile() {
               />
             </Stack>
             <ListCard userDetails={filteredData} userName={user?CapitalizeFirstLetter(user["name"]):""} />
-            <Pagination count={count} page={page} onChange={(event,val)=> setPage(val)} sx={{mt:"15px"}} />
+           { filteredData.length>0&& <Pagination count={count} page={page} onChange={(event,val)=> setPage(val)} sx={{mt:"15px"}} />}
           </Grid>
         </Grid>
       </AppContainer>

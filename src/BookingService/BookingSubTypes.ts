@@ -15,3 +15,24 @@ export const BookingSubTypes = {
    'Court 3':3,
    'Court 4':4
 };
+
+export const BookingNameTypes = {
+    "turf1":'Turf 1',
+    "turf2":'Turf 2',
+    "turf3":'Turf 1&2',
+    "boardGame1":'Chess',
+    "boardGame2":'Monopoly',
+    "boardGame3":'Scrabble',
+    "playstation1":'PS 1',
+    "playstation2":'PS 2',
+    "playstation3":'PS 1&2',
+    "badminton1":'Court 1',
+    "badminton2":'Court 2',
+    "badminton3":'Court 3',
+    "badminton4":'Court 4',
+    "bowlingMachine1":"Bowling Machine",
+    "cricketNet1":"Cricket Net"
+    
+};
+
+
