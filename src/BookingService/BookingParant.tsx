@@ -9,9 +9,9 @@ import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import styled from "@emotion/styled";
-import assets from "../assets";
 
 const {"Image (7).png": badminton, "Rectangle 685 (3).png": badminton1, "Rectangle 685 (4).png": badminton2, "Rectangle 685 (5).png": badminton3, "board games.png": boardgames, "Rectangle 685 (11).png": boardgames1, "Rectangle 685 (12).png": boardgames2, "Rectangle 685 (9).png": boardgames3, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "Rectangle 685.png": playstation1, "Rectangle 685 (1).png": playstation2, "Rectangle 685 (2).png": playstation3, "turf.png": turf} = assets
 
@@ -197,38 +197,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       ) => {
         const boo = booking.time as any;
 
-        boo.forEach(function (item: any) {
-          const timeString = String(item);
-          const timeMatch = timeString.match(/(\d{1,2}:\d{2} [APMapm]+)/);
-
-          const startTime = timeMatch ? timeMatch[1] : "";
-          let endTime = "";
-
-          // Calculate start time and end time in milliseconds
-          let startMilliseconds = 0;
-          let endMilliseconds = 0;
-
-          if (startTime) {
-            const [hours, minutes, ampm] = startTime.split(/[:\s]+/);
-            const startDateTime = new Date(booking.date);
-            startDateTime.setHours(
-              ampm.toUpperCase() === "PM" ? Number(hours) + 12 : Number(hours),
-              Number(minutes)
-            );
-            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-            const endDateTime = new Date(startDateTime);
-            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-            endMilliseconds = endDateTime.getTime();
-
-            const endHours = endDateTime.getHours();
-            const endMinutes = endDateTime.getMinutes();
-
-            endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-              2,
-              "0"
-            )} ${endHours >= 12 ? "PM" : "AM"}`;
-          }
+        const splitamount = booking.amount/boo.length
+     
+        boo.forEach(  function (item: any) {
+       
+          const startDateTime = DateUtils.startTimeAddtoDate(item);
+          const endDateTime = DateUtils.endTimeAddtoDate(item);
+          const endMilli = DateUtils.joinDate(booking.date,endDateTime)
+          const startMilli = DateUtils.joinDate(booking.date,startDateTime)
+          const startMilliSec =  new Date(startMilli).getTime(); 
+          const endMilliSec =  new Date(endMilli).getTime();
 
           acc.push({
             type: booking.type,
@@ -237,13 +215,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               new Date(booking.date),
               "YYYY-MM-DD"
             ),
-            startTime: startMilliseconds,
-            endDate: endTime
-              ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
-              : "",
-            endTime: endMilliseconds,
+            startTime: startMilliSec,
+            endDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
+            endTime: endMilliSec,
             court: booking.court,
-            amount: booking.amount,
+            amount: splitamount,
           });
         });
 
