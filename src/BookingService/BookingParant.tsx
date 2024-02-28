@@ -216,11 +216,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
        
           const startDateTime = DateUtils.startTimeAddtoDate(item);
           const endDateTime = DateUtils.endTimeAddtoDate(item);
-           const endMilli = DateUtils.joinDate(booking.date,endDateTime)
+          const endMilli = DateUtils.joinDate(booking.date,endDateTime)
           const startMilli = DateUtils.joinDate(booking.date,startDateTime)
           const startMilliSec =  new Date(startMilli).getTime(); 
           const endMilliSec =  new Date(endMilli).getTime();
-          console.log(endMilliSec)
           acc.push({
             type: booking.type,
             name: booking.name,
