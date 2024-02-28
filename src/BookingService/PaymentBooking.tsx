@@ -3,6 +3,7 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  IconButton,
   Radio,
   RadioGroup,
   RadioProps,
@@ -145,7 +146,7 @@ export default function PaymentBooking() {
           user: userData.id,
           startDate: bookings.startDate,
           endDate: bookings.endDate,
-          userBookingType:"online",
+          userBookingType: "online",
           //   bookingId: response.razorpay_payment_id,
           court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
         });
@@ -239,9 +240,11 @@ export default function PaymentBooking() {
                 display={"flex"}
                 alignItems={"center"}
               >
-                <ArrowBackIosNewIcon
-                  style={{ fontSize: "20px", color: Colors.BUTTON }}
-                />
+                <IconButton onClick={handlegoBack}>
+                  <ArrowBackIosNewIcon
+                    style={{ fontSize: "20px", color: Colors.BUTTON }}
+                  />
+                </IconButton>
                 <Typography
                   fontWeight={"600"}
                   fontSize={"18px"}
@@ -676,9 +679,9 @@ export default function PaymentBooking() {
                 sx={{
                   opacity: "1",
                 }}
-                mt={"10px"}
+                mt={"20px"}
                 display={"flex"}
-                justifyContent={"end"}
+                justifyContent={"space-between"}
               >
                 <Button
                   onClick={handlePayClick}
