@@ -5,7 +5,7 @@ import BasicTimeline from "./VerticalTimeline";
 import ImageClick from "./AboutImageSection";
 import assets from "../../assets";
 
-const {"Rectangle 67.png": Image1, "Rectangle 669.png": Image2} = assets
+const { "Rectangle 67.png": Image1, "Rectangle 669.png": Image2 } = assets;
 
 export default function AboutUs() {
   const ballRef = useRef<HTMLImageElement>(null);
@@ -118,11 +118,11 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
           {/* {showTimeline && window.innerWidth >= 600 && <Timeline />} */}
         </Box>
-        <Box position={"absolute"} top={"7%"} right={"66%"}>
+        <Box position={"absolute"} top={"7%"} right={"64%"}>
           <Typography
             color={"white"}
             fontStyle={"italic"}
-            fontSize={"82px"}
+            fontSize={"78px"}
             fontWeight={"bold"}
             lineHeight={1}
           >
