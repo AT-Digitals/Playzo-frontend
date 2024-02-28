@@ -8,8 +8,10 @@ import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
-import logo from "../assets/Playzo (1).svg";
 import routes from "../routes/routes";
+import assets from "../assets";
+
+const {"Playzo (1).svg": logo} = assets
 
 const HeaderLink = styled("a")`
   text-decoration: none;

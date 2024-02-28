@@ -1,12 +1,10 @@
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
-import Image1 from "../assets/pexels-photo-3660204.jpeg";
-import Image2 from "../assets/pexels-photo-4966378.jpeg";
-import Image3 from "../assets/pexels-photo-13710137.jpeg";
-import Image4 from "../assets/pexels-photo-187329.webp";
-import Image5 from "../assets/pexels-photo-8007173.jpeg";
 import CarouselCardComponent from "./CarouselCardComponent";
 import Colors from "../CommonComponents/Colors";
+import assets from "../assets";
+
+const {"pexels-photo-3660204.jpeg": Image1, "pexels-photo-4966378.jpeg": Image2, "pexels-photo-13710137.jpeg": Image3, "pexels-photo-187329.webp": Image4, "pexels-photo-8007173.jpeg": Image5} = assets
 
 interface HotelCard {
     imageSrc: string;

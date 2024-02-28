@@ -1,19 +1,18 @@
-import React, { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image3 from "../assets/Image (3).png";
-import Image4 from "../assets/Image (4).png";
-import Image5 from "../assets/Image (5).png";
 import { Box } from "@mui/material";
+import assets from '../assets';
 
 
 // import required modules
 import { Pagination } from 'swiper/modules';
 import CardComponent from './CardComponent';
+
+const {"Image (3).png": Image3, "Image (4).png": Image4, "Image (5).png": Image5} = assets
 
 const items = [
     {

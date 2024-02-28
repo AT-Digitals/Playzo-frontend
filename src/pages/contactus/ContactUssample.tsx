@@ -10,13 +10,12 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
-import GameIcon from "../../assets/doodl-5 1.png";
 import { Link } from "react-router-dom";
-import ball from "../../assets/ball 3.png";
-import banner from "../../assets/turf.png";
-import bottomImage from "../../assets/Rectangle 679.png";
 import styled from "@emotion/styled";
 import { useState } from "react";
+import assets from "../../assets";
+
+const {"doodl-5 1.png": GameIcon, "ball 3.png": ball, "turf.png": banner, "Rectangle 679.png": bottomImage} = assets
 
 const DropDownData = [
   {

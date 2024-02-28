@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
-import banner from "../../assets/cookies.jpg";
-import layer from "../../assets/Layer.svg";
 import styled from "styled-components";
 import Colors from "../../CommonComponents/Colors";
 import { useEffect } from "react";
+import assets from "../../assets/index";
+
+const {"cookies.jpg": banner, "Layer.svg": layer } = assets
 
 const Container = styled(Box)`
   display: flex;
@@ -13,16 +14,103 @@ const Container = styled(Box)`
 `;
 
 const BannerImage = styled.img`
+@media (min-width: 300px) {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  width: 100%;
+  height: 282px;
+  object-fit: cover;
+}
+@media (min-width: 820px) {
   width: 100%;
   max-height: 400px;
   object-fit: cover;
+}
+
+@media (min-width: 912px) {
+  height: 379px;
+  width: 100%;
+  object-fit: cover;
+}
+
+
+@media (min-width: 1200px) {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+  
 `;
 
 const StyledImage5 = styled.img`
+@media (min-width: 300px) {
   max-height: 400px;
   object-fit: cover;
   position: absolute;
   transform: translate(1300%, 0px);
+}
+
+@media (min-width: 768px) {
+  max-height: 400px;
+  object-fit: cover;
+  position: absolute;
+  transform: translate(679%, -117px);
+}
+@media (min-width: 820px) {
+  max-height: 400px;
+  object-fit: cover;
+  position: absolute;
+  transform: translate(726%, -117px);
+}
+
+@media (min-width: 900px) {
+  max-height: 400px;
+  object-fit: cover;
+  position: absolute;
+  transform: translate(1020%, -21px);
+}
+
+
+@media (min-width: 1200px) {
+  max-height: 400px;
+  object-fit: cover;
+  position: absolute;
+  transform: translate(1300%, -21px);
+}
+  
+`;
+const StyledTypography = styled(Typography)`
+  /* Media queries for different screen sizes */
+  @media (min-width: 300px) {
+    top: 26%;
+    left: 12%;
+  }
+
+  @media (min-width: 414px) {
+    top: 20%;
+    left: 13%;
+  }
+  @media (min-width: 768px) {
+    top: 18%;
+    left: 14%;
+  }
+
+  @media (min-width: 820px) {
+    top: 16%;
+    left: 14%;
+  }
+  @media (min-width: 1024px) {
+    top: 33%;
+    left: 14%;
+  }
+  @media (min-width: 1200px) {
+    top: 20%;
+    left: 14%;
+  }
 `;
 
 
@@ -39,36 +127,36 @@ export default function PrivacyPolicy() {
         <BannerImage src={banner} alt="banner" />
         <Box sx={{
           background: Colors.BUTTON_COLOR,
-          width: "800px",
-          height: "400px",
+          width:{xs: "800px", sm: "428px", md: "617px", lg: "800px"},
+          height: {xs: "250px", sm: "282px", md: "380px", lg: "379px"},
           position: "absolute",
         }}> </Box>
         <StyledImage5 src={layer} alt="background" />
        
       </Container>
       <Box pt={"30px"}>
-        <Typography
+        <StyledTypography
           fontWeight={"900"}
           position={"absolute"}
-          top={{ xs: "28%", sm: "25%", md: "28%", lg: "28%" }}
-          left={"11%"}
+          // top={{ xs: "26%", sm: "16%", md: "33%", lg: "28%" }}
+          // left={{ xs: "14%", sm: "6%", md: "14%", lg: "11%" }}
           color={"white"}
-          fontSize={{ xs: "20px", sm: "20px", md: "42px", lg: "92px" }}
+          fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}
           fontStyle={"italic"}
           textTransform={"uppercase"}
         >
           Privacy <Typography fontWeight={"900"}
           position={"absolute"}
-          top={{ xs: "28%", sm: "25%", md: "28%", lg: "28%" }}
+          top={{ xs: "26%", sm: "16%", md: "14%", lg: "28%" }}
           left={"1%"}
           color={"white"}
           textTransform={"uppercase"}
-          fontSize={{ xs: "20px", sm: "20px", md: "42px", lg: "92px" }}  fontStyle={"italic"} lineHeight={"3"}>Policy</Typography>
-        </Typography>
+          fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}  fontStyle={"italic"} lineHeight={"3"}>Policy</Typography>
+        </StyledTypography>
       </Box>
 
       <AppContainer maxWidth={1180}>
-        <Box>
+        <Box width={"100%"} maxWidth={{xs: "320px", sm: "700px", md: "850px", lg: "1200px"}} paddingTop={{xs: "3px", sm: "0px", md: "0px", lg: "0px"}}>
            <Typography fontSize={"16px"} fontWeight={"400"} color={Colors.BLACK}>
           <Typography paddingBottom={"3px"} fontSize={"18px"} fontWeight={"bold"}>Privacy statement</Typography> 
 GDPR Privacy Statement

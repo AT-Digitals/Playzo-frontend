@@ -9,24 +9,11 @@ import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import assets from "../assets";
 import backgroundimage from "./7692.jpg";
-import badminton from "../assets/Image (7).png";
-import badminton1 from "../assets/Rectangle 685 (3).png";
-import badminton2 from "../assets/Rectangle 685 (4).png";
-import badminton3 from "../assets/Rectangle 685 (5).png";
-import boardgames from "../assets/board games.png";
-import boardgames1 from "../assets/Rectangle 685 (11).png";
-import boardgames2 from "../assets/Rectangle 685 (12).png";
-import boardgames3 from "../assets/Rectangle 685 (9).png";
-import bowling from "../assets/Image (2).png";
-import cricketnet from "../assets/Image (1).png";
-import grass from "../assets/Rectangle 679.png";
-import playstation from "../assets/playstation.png";
-import playstation1 from "../assets/Rectangle 685.png";
-import playstation2 from "../assets/Rectangle 685 (1).png";
-import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
-import turf from "../assets/turf.png";
+
+const {"Image (7).png": badminton, "Rectangle 685 (3).png": badminton1, "Rectangle 685 (4).png": badminton2, "Rectangle 685 (5).png": badminton3, "board games.png": boardgames, "Rectangle 685 (11).png": boardgames1, "Rectangle 685 (12).png": boardgames2, "Rectangle 685 (9).png": boardgames3, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "Rectangle 685.png": playstation1, "Rectangle 685 (1).png": playstation2, "Rectangle 685 (2).png": playstation3, "turf.png": turf} = assets
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -121,7 +108,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
 
   // const [tableData, setTableData] = useState<TableDataItem[]>([]);
-  const [isServiceSelected, setIsServiceSelected] = useState(false);
 
   const images =
     type === BookingType.Turf
@@ -210,6 +196,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         booking
       ) => {
         const boo = booking.time as any;
+
         const splitamount = booking.amount/boo.length
      
         boo.forEach(  function (item: any) {
@@ -220,6 +207,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           const startMilli = DateUtils.joinDate(booking.date,startDateTime)
           const startMilliSec =  new Date(startMilli).getTime(); 
           const endMilliSec =  new Date(endMilli).getTime();
+
           acc.push({
             type: booking.type,
             name: booking.name,
@@ -239,105 +227,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       },
       []
     );
-// 
     
-      navigate("/payment-booking", {
-        state: { selectedService, bookingsWithTime },
-      });
-    
-  
+    navigate("/payment-booking", {
+      state: { selectedService, bookingsWithTime },
+    });
 
     localStorage.setItem("selectedService", selectedService);
-
-    console.log("Proceeding to Payment with allBookings:", allBookings);
-    console.log("All Bookings Structure:", bookingsWithTime);
   };
-
-  // const handleProceedToPayment = () => {
-  //   if (allBookings.length === 0) {
-  //     alert("Please make at least one booking before proceeding to payment");
-  //     return; // Stop further execution
-  //   }
-
-  //   const bookingsWithTime: {
-  //     type: BookingType;
-  //     name: string;
-  //     startDate: string;
-  //     startTime: number;
-  //     endDate: string;
-  //     endTime: number;
-  //     court: number;
-  //     amount: any;
-  //   }[] = [];
-
-  //   console.log("allb", allBookings);
-  //   allBookings.map((booking, index) => {
-  //     const boo = booking.time as any;
-
-  //     boo.forEach(function (item: any, index: any) {
-  //       console.log(item, index);
-
-  //       const timeString = String(item); // Ensure time is a string
-  //       const timeMatch = timeString.match(/(\d{1,2}:\d{2})/);
-
-  //       const startTime = timeMatch ? timeMatch[1] : "";
-  //       let endTime = "";
-  //       // let ampm = "";
-
-  //       // Calculate start time and end time in milliseconds
-  //       let startMilliseconds = 0;
-  //       let endMilliseconds = 0;
-  //       console.log(booking.court, "court");
-  //       console.log("booking:", booking); // Print the entire booking object for inspection
-
-  //       if (startTime) {
-  //         const [hours, minutes] = startTime.split(":");
-  //         const startDateTime = new Date(booking.date);
-  //         startDateTime.setHours(Number(hours), Number(minutes));
-  //         startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-  //         const endDateTime = new Date(startDateTime);
-  //         endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-  //         endMilliseconds = endDateTime.getTime(); // End time in milliseconds
-
-  //         const endHours = endDateTime.getHours();
-  //         const endMinutes = endDateTime.getMinutes();
-
-  //         endTime = `${endHours % 12 || 12}:${String(endMinutes).padStart(
-  //           2,
-  //           "0"
-  //         )}`;
-  //         // ampm = endHours >= 12 ? "PM" : "AM";
-  //       }
-
-  //       bookingsWithTime.push({
-  //         type: booking.type,
-  //         name: booking.name,
-  //         startDate: DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD"),
-  //         startTime: startMilliseconds,
-
-  //         endDate: endTime
-  //           ? DateUtils.formatDate(new Date(booking.date), "YYYY-MM-DD")
-  //           : "",
-  //         endTime: endMilliseconds,
-  //         court: booking.court,
-  //         amount: booking.amount,
-  //       });
-  //     });
-  //   });
-
-  //   navigate("/payment-booking", {
-  //     state: { selectedService, bookingsWithTime },
-  //   });
-
-  //   // navigate("/payment-booking", { state: { allBookings, selectedService } });
-  //   localStorage.setItem("selectedService", selectedService);
-
-  //   console.log("Proceeding to Payment with allBookings:", allBookings);
-
-  //   // Log the array of objects
-  //   console.log("All Bookings Structure:", bookingsWithTime);
-  // };
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
@@ -410,38 +306,42 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.removeItem("selectedService");
   };
 
-  useEffect(() => {
-    setIsServiceSelected(!!selectedService);
+  const useBloger = () => {
+    useEffect(() => {
+      const cleanupLocalStorage = () => {
+        localStorage.removeItem("bookings");
+        localStorage.removeItem("selectedService");
+      };
 
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (isServiceSelected) {
+      const handleBeforeUnload = (event: any) => {
+        cleanupLocalStorage();
         const message =
           "Are you sure you want to leave? Your selected service will be lost.";
         event.returnValue = message;
         return message;
-      }
-    };
+      };
 
-    const handleRouteChange = () => {
-      if (isServiceSelected) {
+      const handleRouteChange = () => {
+        cleanupLocalStorage();
         const confirmLeave = window.confirm(
           "You have unsaved changes. Are you sure you want to leave?"
         );
+
         if (!confirmLeave) {
-          localStorage.removeItem("bookings");
-          navigate(location.pathname); // Navigate back to the current location
+          // Navigate back to the current location to prevent leaving
+          window.history.pushState({}, "");
         }
-      }
-    };
+      };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    window.addEventListener("popstate", handleRouteChange);
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      window.addEventListener("popstate", handleRouteChange);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("popstate", handleRouteChange);
-    };
-  }, [isServiceSelected, selectedService, navigate, location]);
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+        window.removeEventListener("popstate", handleRouteChange);
+      };
+    }, []);
+  };
 
   useEffect(() => {
     // Read selected service from local storage
@@ -460,6 +360,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       behavior: "smooth",
     });
   }, []);
+  useBloger();
 
   return (
     <>

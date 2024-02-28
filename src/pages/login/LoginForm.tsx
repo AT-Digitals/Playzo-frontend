@@ -18,12 +18,15 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import Icon from "../../assets/Variant10.png";
 import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
+import assets from "../../assets";
+
+const {"Variant10.png": Icon} = assets
 
 interface loginProps {
   handleClose?: () => void;
@@ -32,12 +35,15 @@ interface loginProps {
 
 export default function Form({ handleClose, open }: loginProps) {
   const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidEmail, setIsValidEmail] = useState(false);
   const [password, setPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalErrorOpen, setModalErrorOpen] = useState(false);
   const navigate = useNavigate();
+  const [errorText, setErrorText] = useState('');
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -45,11 +51,26 @@ export default function Form({ handleClose, open }: loginProps) {
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    validateEmail(newEmail);
+    setIsValidEmail(false);
   };
+
+  const handleCloseLoginModal = () => {
+    setModalOpen(false);
+    navigate(routes.BOOKING_SERVICE);
+    navigate(0);
+    handleClose?.();
+  };
+
+  const handleErrorModal = () => {
+    setModalErrorOpen(false);
+    setErrorText('');
+  }
+
 
   const signUpOnClickChange = () => {
     setOpenModal(true);
+    setEmail('');
+    setPassword('');
   }
 
   const handleCloseModal = () => {
@@ -59,52 +80,74 @@ export default function Form({ handleClose, open }: loginProps) {
   const validateEmail = (input: any) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(input);
-    setIsValidEmail(isValid);
+    return isValid;
   };
 
-  const validatePassword = (value: string) => {
-    setIsPasswordValid(value.length >= 8);
-  };
 
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
-    validatePassword(event.target.value);
+    setIsPasswordValid(false);
   };
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
-    if (isValidEmail) {
-      setIsValidEmail(false);
-    }
-    if (isPasswordValid) {
-      setIsPasswordValid(false);
+    if (!email) {
+      setIsValidEmail(true);
+      return;
     }
 
+    if (!validateEmail(email)) {
+      setIsValidEmail(true);
+      return;
+    }
+
+    if (!password) {
+      setIsPasswordValid(true);
+      return;
+    }
+
+
+    if (password.length < 8) {
+      setIsPasswordValid(true);
+      return;
+    }
     const data = {
       email: email,
       password: password,
     };
-
-    try {
-      const response = await UserLoginApi.loginUser({
-        email: data.email,
-        password: data.password
-      });
-      const resData = await response;
-      if (resData) {
-        localStorage.setItem('user', JSON.stringify(response));
-        navigate(routes.BOOKING_SERVICE);
-        navigate(0);
-        handleClose?.();
+    if (email && password) {
+      try {
+        const response = await UserLoginApi.loginUser({
+          email: data.email,
+          password: data.password
+        });
+        const resData = await response;
+        if (resData) {
+          localStorage.setItem('user', JSON.stringify(response));
+          setEmail('');
+          setPassword('');
+          setIsValidEmail(false);
+          setIsPasswordValid(false);
+          setModalOpen(true);
+        }
+      } catch (err: any) {
+        setModalErrorOpen(true);
+        setErrorText(err.message);
       }
-    } catch (err:any) {
-      console.log("err", err.message)
     }
   };
+
+  const ModlaCloseChange = () => {
+    handleClose?.();
+    setEmail('');
+    setPassword('')
+    setIsValidEmail(false);
+    setIsPasswordValid(false);
+  }
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={ModlaCloseChange}
       maxWidth="xs"
       fullWidth
       sx={{
@@ -120,7 +163,7 @@ export default function Form({ handleClose, open }: loginProps) {
         }}
       >
         <Stack direction="row" justifyContent="end">
-          <IconButton onClick={handleClose}>
+          <IconButton onClick={ModlaCloseChange}>
             <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
           </IconButton>
         </Stack>
@@ -145,9 +188,9 @@ export default function Form({ handleClose, open }: loginProps) {
               required
               value={email}
               onChange={handleEmailChange}
-              error={!isValidEmail}
+              error={!!isValidEmail}
               InputProps={{
-                endAdornment: !isValidEmail && (
+                endAdornment: isValidEmail && (
                   <ErrorOutlineIcon
                     color="error"
                     style={{ marginRight: "8px" }}
@@ -156,7 +199,7 @@ export default function Form({ handleClose, open }: loginProps) {
               }}
             />
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
-              {!isValidEmail ? "Please enter a valid email address" : ""}
+              {isValidEmail ? "Please enter a valid email address" : ""}
             </span>
           </Box>
           <Box>
@@ -179,32 +222,32 @@ export default function Form({ handleClose, open }: loginProps) {
               onChange={handlePasswordChange}
               value={password}
               required
-              error={!isPasswordValid}
+              error={!!isPasswordValid}
               InputProps={{
-                endAdornment: ( <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-                
-                {!isPasswordValid && 
-                <ErrorOutlineIcon sx={{ml:"5px"}}
-                  color="error"
-                  style={{ marginRight: "8px" }}
-                />
-                }
-              </InputAdornment>
-              
-              ),
-              
-                
+                endAdornment: (<InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+
+                  {isPasswordValid &&
+                    <ErrorOutlineIcon sx={{ ml: "5px" }}
+                      color="error"
+                      style={{ marginRight: "8px" }}
+                    />
+                  }
+                </InputAdornment>
+
+                ),
+
+
               }}
             />
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
-              {!isPasswordValid ? "Please enter a valid password" : ""}
+              {isPasswordValid ? "Please enter a valid password" : ""}
             </span>
           </Box>
           <Link
@@ -218,16 +261,21 @@ export default function Form({ handleClose, open }: loginProps) {
           </Link>
           <Button
             sx={{
-              borderRadius: "8px",
-              padding: "14px 14px",
+              padding: "12px 20px",
               textTransform: "none",
-              fontSize: "18px",
+              fontSize: "16px",
+              minWidth: "110px",
+              fontWeight: "400",
+              border: "2px solid #15B5FC",
+              borderRadius: "50px",
+              letterSpacing: "1.6px",
               background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                }
+              color: Colors.WHITE,
+              ":hover": {
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                border: "1px solid #15B5FC",
+              }
             }}
             onClick={onSubmit}
           >
@@ -257,7 +305,6 @@ export default function Form({ handleClose, open }: loginProps) {
             color={Colors.WHITE}
             bgColor={Colors.BUTTON_ONE}
             sx={{
-              borderRadius: "8px",
               padding: "14px 14px",
               textTransform: "none",
               fontSize: "16px",
@@ -267,12 +314,8 @@ export default function Form({ handleClose, open }: loginProps) {
               <img
                 src={Icon}
                 alt="button"
-                width={40}
-                height={40}
-              // style={{
-              //   position: "absolute",
-              //   transform: `translate(-135px, -20px)`,
-              // }}
+                width={30}
+                height={30}
               />
             }
           >
@@ -280,6 +323,8 @@ export default function Form({ handleClose, open }: loginProps) {
           </CustomButton>
         </Stack>
         <SignUpForm open={openModal} handleClose={handleCloseModal} />
+        <ModalComponent open={modalOpen} handleClose={handleCloseLoginModal} text={"Your login is successful"} />
+        <ModalComponent open={modalErrorOpen} handleClose={handleErrorModal} text={errorText} />
       </DialogContent>
     </Dialog>
   );

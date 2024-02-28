@@ -1,10 +1,10 @@
-import CricketNetSlide1 from "../../assets/CricketNet/crick1.webp";
-import CricketNetSlide2 from "../../assets/CricketNet/crick2.jpg";
-import CricketNetSlide3 from "../../assets/CricketNet/crick3.jpg";
-import CricketNetSlide4 from "../../assets/CricketNet/crick4.jpg";
-import Cricket_logo from "../../assets/Cricket_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import cricketNetImage from "../../assets/CricketNet";
+
+const {"Cricket_logo.svg": Cricket_logo} = assets
+const {"crick1.webp": CricketNetSlide1, "crick2.jpg": CricketNetSlide2, "crick3.jpg": CricketNetSlide3, "crick4.jpg": CricketNetSlide4} = cricketNetImage
 
 const heading1 = "Cricket Net";
 const heading2 = "Features";

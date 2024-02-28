@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
@@ -16,7 +16,6 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 export default function PopupCarousel() {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-
 
     return (
         <>

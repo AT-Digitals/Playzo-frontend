@@ -3,6 +3,7 @@ import {
   Button,
   FormControl,
   FormControlLabel,
+  IconButton,
   Radio,
   RadioGroup,
   RadioProps,
@@ -10,7 +11,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -23,29 +24,11 @@ import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
 import backgroundimage from "./7692.jpg";
-import ball from "../assets/ball 4.png";
-import calendar from "../assets/Calendar.png";
-import cardicons from "../assets/card icons.png";
-import crediticon from "../assets/Icon.png";
-import currency from "../assets/Frame 39554.png";
-import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
-import { useState } from "react";
+import assets from "../assets";
 
-// const PaymentDetails = [
-//   {
-//     name: "Turf 1",
-//     date: "10 Jan 2024",
-//     time: "9:00 - 10:00 AM",
-//     amount: "750",
-//   },
-//   {
-//     name: "Turf 1 & 2",
-//     date: "10 Jan 2024",
-//     time: "9:00 - 10:00 AM",
-//     amount: "750",
-//   },
-// ];
+const {"Calendar.png": calendar,"card icons.png": cardicons, "Icon.png": crediticon,"Frame 39554.png": currency, "Rectangle 679.png": grass} = assets
+
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: "50%",
   width: 16,
@@ -145,7 +128,7 @@ export default function PaymentBooking() {
           user: userData.id,
           startDate: bookings.startDate,
           endDate: bookings.endDate,
-          userBookingType:"online",
+          userBookingType: "online",
           //   bookingId: response.razorpay_payment_id,
           court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
         });
@@ -239,9 +222,11 @@ export default function PaymentBooking() {
                 display={"flex"}
                 alignItems={"center"}
               >
-                <ArrowBackIosNewIcon
-                  style={{ fontSize: "20px", color: Colors.BUTTON }}
-                />
+                <IconButton onClick={handlegoBack}>
+                  <ArrowBackIosNewIcon
+                    style={{ fontSize: "20px", color: Colors.BUTTON }}
+                  />
+                </IconButton>
                 <Typography
                   fontWeight={"600"}
                   fontSize={"18px"}
@@ -676,9 +661,9 @@ export default function PaymentBooking() {
                 sx={{
                   opacity: "1",
                 }}
-                mt={"10px"}
+                mt={"20px"}
                 display={"flex"}
-                justifyContent={"end"}
+                justifyContent={"space-between"}
               >
                 <Button
                   onClick={handlePayClick}

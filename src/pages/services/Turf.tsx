@@ -1,10 +1,10 @@
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
-import TurfSlide1 from "../../assets/TurfImages/turf1.jpg";
-import TurfSlide2 from "../../assets/TurfImages/turf2.jpg";
-import TurfSlide3 from "../../assets/TurfImages/turf3.jpg";
-import TurfSlide4 from "../../assets/TurfImages/turf4.jpg";
-import Turf_logo from "../../assets/Turf_logo.svg";
+import assets from "../../assets";
+import turfImages from "../../assets/TurfImages";
+
+const {"Turf_logo.svg": Turf_logo} = assets
+const {"turf1.jpg": TurfSlide1, "turf2.jpg": TurfSlide2, "turf3.jpg": TurfSlide3, "turf4.jpg": TurfSlide4} = turfImages
 
 const heading1 = "Turf";
 const heading2 = "Features";

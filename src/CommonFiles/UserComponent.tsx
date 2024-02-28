@@ -7,7 +7,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Logout from "@mui/icons-material/Logout";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import headerProfileLogo from "../assets/Header/headerProfileLogo.svg";
+import headerImage from "../assets/Header";
+
+const {"headerProfileLogo.png": headerProfileLogo} = headerImage
 
 interface MenuProps {
     handleClose: () => void;
