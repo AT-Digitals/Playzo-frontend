@@ -65,7 +65,7 @@ export default function ContactUs() {
     setName(event);
     setIsValidName(false)
   };
-
+  console.log("data");
   const handleEmailChange = (event: any) => {
     setEmail(event);
     setIsValidEmail(false)
