@@ -8,10 +8,10 @@ import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
-import routes from "../routes/routes";
 import assets from "../assets";
+import routes from "../routes/routes";
 
-const {"Playzo (1).svg": logo} = assets
+const { "Playzo (1).svg": logo } = assets;
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -33,7 +33,6 @@ export default function Header() {
 
   // const [userData, serUserData] = useState();
 
-
   const [anchorEl, setAnchorEl] = useState(null);
   const openvalue = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -47,7 +46,6 @@ export default function Header() {
     navigate(routes.USERPROFILE);
     setAnchorEl(null);
   };
-
 
   const handleLogout = async () => {
     try {
@@ -64,18 +62,18 @@ export default function Header() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-      const userData =user && JSON.parse(user);
-      setUser(userData);
+    const user = localStorage.getItem("user");
+    const userData = user && JSON.parse(user);
+    setUser(userData);
   }, []);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       setIsLoggedIn(true);
-    }else{
-          setIsLoggedIn(false);
-        }
-  },[user]);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [user]);
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -97,36 +95,76 @@ export default function Header() {
 
           <Stack direction="row" spacing={3} alignItems="center">
             <HeaderLink href={routes.ABOUTUS}>
-              <Typography sx={{
-                color: Colors.WHITE,
-                transition: "color 0.5s ease",
-                textTransform: "uppercase",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-
-                }
-              }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
+              <Typography
+                sx={{
+                  color: Colors.WHITE,
+                  transition: "color 0.5s ease",
+                  textTransform: "uppercase",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR,
+                  },
+                }}
+                fontWeight={"400"}
+                fontSize="14px"
+                letterSpacing={"1.6px"}
+              >
                 About Us
               </Typography>
             </HeaderLink>
             <DropDown />
             <HeaderLink href={routes.CONTACTUS}>
-              <Typography sx={{
-                color: Colors.WHITE,
-                transition: "color 0.5s ease",
-                textTransform: "uppercase",
-                ":hover": {
-                  color: Colors.BUTTON_COLOR,
-                }
-              }} fontWeight={"400"} fontSize="14px" letterSpacing={"1.6px"}>
+              <Typography
+                sx={{
+                  color: Colors.WHITE,
+                  transition: "color 0.5s ease",
+                  textTransform: "uppercase",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR,
+                  },
+                }}
+                fontWeight={"400"}
+                fontSize="14px"
+                letterSpacing={"1.6px"}
+              >
                 Contact Us
               </Typography>
             </HeaderLink>
-
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-          
             <HeaderLink href={routes.BOOKING_SERVICE}>
+              <Button
+                variant="outlined"
+                sx={{
+                  padding: "8px 20px",
+                  textTransform: "none",
+                  fontSize: "16px",
+                  minWidth: "110px",
+                  fontWeight: "400",
+                  border: "2px solid #15B5FC",
+                  borderRadius: "30px",
+                  letterSpacing: "1.6px",
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                  "&:hover": {
+                    background: Colors.WHITE,
+                    color: Colors.BUTTON_COLOR,
+                    border: "2px solid #15B5FC",
+                  },
+                }}
+              >
+                Book Now
+              </Button>
+            </HeaderLink>
+            {isLoggedIn ? (
+              <UserComponent
+                handleClose={handleLogout}
+                open={openvalue}
+                handleClick={handleClick}
+                handleMenuClose={handleMenuClose}
+                anchorEl={anchorEl}
+                handleChange={handleChange}
+              />
+            ) : (
               <Button
                 variant="outlined"
                 sx={{
@@ -144,46 +182,13 @@ export default function Header() {
                     background: Colors.WHITE,
                     color: Colors.BUTTON_COLOR,
                     border: "1px solid #15B5FC",
-                  }
-                }}>
-                Book Now
+                  },
+                }}
+                onClick={handleOpen}
+              >
+                Login
               </Button>
-
-
-            </HeaderLink>
-            {isLoggedIn ?
-              <UserComponent
-                handleClose={handleLogout}
-                open={openvalue}
-                handleClick={handleClick}
-                handleMenuClose={handleMenuClose}
-                anchorEl={anchorEl}
-                handleChange={handleChange}
-              /> :
-              <Button
-              variant="outlined"
-              sx={{
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "110px",
-                fontWeight: "400",
-                border: "2px solid #15B5FC",
-                borderRadius: "30px",
-                letterSpacing: "1.6px",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
-                  background: Colors.WHITE,
-                  color: Colors.BUTTON_COLOR,
-                  border: "1px solid #15B5FC",
-                }
-              }}
-              onClick={handleOpen}
-            >
-              Login
-            </Button>
-            }
+            )}
           </Stack>
         </Stack>
 

@@ -5,7 +5,7 @@ import Colors from "../../CommonComponents/Colors";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import aboutPage from "../../assets/AboutPageImages";
 
-const {"carrersbg.jpg": bg} = aboutPage
+const { "carrersbg.jpg": bg } = aboutPage;
 
 export default function CareersPageNew() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -26,7 +26,7 @@ export default function CareersPageNew() {
       <Box position="relative">
         <img
           src={bg}
-          alt="Low OpacitImage"
+          alt="Low Opacitymage"
           style={{
             width: "100%",
             height: "100%",
@@ -42,7 +42,7 @@ export default function CareersPageNew() {
             style={{
               width: "100%",
               height: "100vh",
-              background: "white", // You can change the background color
+              background: "white",
             }}
           ></div>
         )}
@@ -59,16 +59,26 @@ export default function CareersPageNew() {
             }}
           >
             <Typography
-              color={"Black"}
+              color={"black"}
               fontStyle={"italic"}
               fontSize={"82px"}
               fontWeight={"bold"}
               whiteSpace={"nowrap"}
               gutterBottom
+              sx={{
+                fontSize: { xs: "40px", sm: "60px", md: "70px", lg: "82px" },
+              }}
             >
               Welcome to Our Careers Page
             </Typography>
-            <Typography color={"Black"} fontSize={"32px"} paragraph>
+            <Typography
+              color={"black"}
+              fontSize={"32px"}
+              paragraph
+              sx={{
+                fontSize: { xs: "16px", sm: "24px", md: "28px", lg: "32px" },
+              }}
+            >
               Explore exciting opportunities to join our talented team and make
               a difference.
             </Typography>
@@ -88,10 +98,15 @@ export default function CareersPageNew() {
                   letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
-                  ":hover": {
+                  "&:hover": {
                     background: Colors.WHITE,
                     color: Colors.BUTTON_COLOR,
-                    border: "1px solid #15B5FC",
+                    border: "2px solid #15B5FC",
+                  },
+                  // Responsive styles for the button
+                  "@media (max-width: 600px)": {
+                    fontSize: "14px",
+                    minWidth: "120px",
                   },
                 }}
                 startIcon={<MailOutlineIcon />}
