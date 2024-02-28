@@ -147,45 +147,6 @@ export default function CustomDateCalendar({
     { name: "1:00 - 2:00 AM", disabled: false },
   ]);
 
-  // const handleTimeSelection = (time: string) => {
-  //   if (selectedTimings.includes(time)) {
-  //     setSelectedTimings((prevSelectedTimings) =>
-  //       prevSelectedTimings.filter((selectedTime) => selectedTime !== time)
-  //     );
-  //   } else {
-  //     setSelectedTimings((prevSelectedTimings) => [
-  //       ...prevSelectedTimings,
-  //       time,
-  //     ]);
-  //   }
-  // };
-
-  // const handleAddButtonClick = () => {
-  //   console.log("Before adding:", selectedDate, selectedTimings);
-
-  //   if (selectedDate !== "" && selectedTimings.length > 0) {
-  //     const totalDuration = selectedTimings.length;
-  //     const ratePerHour = 1500;
-  //     const totalAmount = totalDuration * ratePerHour;
-
-  //     setTableData([
-  //       ...tableData,
-  //       {
-  //         date: selectedDate,
-  //         time: selectedTimings,
-  //         duratoin: totalDuration,
-  //         amount: totalAmount,
-  //         name: selctedname,
-  //       },
-  //     ]);
-
-  //     console.log("After adding:", selectedDate, selectedTimings);
-
-  //     setSelectedDate("");
-  //     setSelectedTimings([]);
-  //   }
-  // };
-
   const handleClose = () => {
     setModalOpen(false);
     navigate(routes.ROOT);
@@ -275,6 +236,8 @@ export default function CustomDateCalendar({
       MilisecondsToHours();
     }
   }, [disableData]);
+
+  console.log(disableData, "disableData");
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {

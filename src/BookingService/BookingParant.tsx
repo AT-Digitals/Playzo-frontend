@@ -13,7 +13,24 @@ import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import styled from "@emotion/styled";
 
-const {"Image (7).png": badminton, "Rectangle 685 (3).png": badminton1, "Rectangle 685 (4).png": badminton2, "Rectangle 685 (5).png": badminton3, "board games.png": boardgames, "Rectangle 685 (11).png": boardgames1, "Rectangle 685 (12).png": boardgames2, "Rectangle 685 (9).png": boardgames3, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "Rectangle 685.png": playstation1, "Rectangle 685 (1).png": playstation2, "Rectangle 685 (2).png": playstation3, "turf.png": turf} = assets
+const {
+  "Image (7).png": badminton,
+  "Rectangle 685 (3).png": badminton1,
+  "Rectangle 685 (4).png": badminton2,
+  "Rectangle 685 (5).png": badminton3,
+  "board games.png": boardgames,
+  "Rectangle 685 (11).png": boardgames1,
+  "Rectangle 685 (12).png": boardgames2,
+  "Rectangle 685 (9).png": boardgames3,
+  "Image (2).png": bowling,
+  "Image (1).png": cricketnet,
+  "Rectangle 679.png": grass,
+  "playstation.png": playstation,
+  "Rectangle 685.png": playstation1,
+  "Rectangle 685 (1).png": playstation2,
+  "Rectangle 685 (2).png": playstation3,
+  "turf.png": turf,
+} = assets;
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
@@ -48,7 +65,7 @@ const TurfImages = [
 const PlaystationImages = [
   { image: playstation1, name: "PS 1", value: 1 },
   { image: playstation2, name: "PS 2", value: 2 },
-  { image: playstation3, name: "PS 3", value: 3 },
+  { image: playstation3, name: "PS 1&2", value: 3 },
 ];
 
 const BadmintonImages = [
@@ -66,6 +83,11 @@ const BadmintonImages = [
     image: badminton3,
     name: "Court 3",
     value: 3,
+  },
+  {
+    image: badminton3,
+    name: "Court 4",
+    value: 4,
   },
 ];
 
@@ -105,7 +127,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
-
 
   // const [tableData, setTableData] = useState<TableDataItem[]>([]);
 
@@ -175,7 +196,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleProceedToPayment = async() => {
+  const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
       alert("Please make at least one booking before proceeding to payment");
       return;
@@ -197,16 +218,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       ) => {
         const boo = booking.time as any;
 
-        const splitamount = booking.amount/boo.length
-     
-        boo.forEach(  function (item: any) {
-       
+        const splitamount = booking.amount / boo.length;
+
+        boo.forEach(function (item: any) {
           const startDateTime = DateUtils.startTimeAddtoDate(item);
           const endDateTime = DateUtils.endTimeAddtoDate(item);
-          const endMilli = DateUtils.joinDate(booking.date,endDateTime)
-          const startMilli = DateUtils.joinDate(booking.date,startDateTime)
-          const startMilliSec =  new Date(startMilli).getTime(); 
-          const endMilliSec =  new Date(endMilli).getTime();
+          const endMilli = DateUtils.joinDate(booking.date, endDateTime);
+          const startMilli = DateUtils.joinDate(booking.date, startDateTime);
+          const startMilliSec = new Date(startMilli).getTime();
+          const endMilliSec = new Date(endMilli).getTime();
 
           acc.push({
             type: booking.type,
@@ -227,7 +247,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       },
       []
     );
-    
+
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
@@ -384,7 +404,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+            backgroundColor: "rgba(255, 255, 255, 0.96)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
         <Box

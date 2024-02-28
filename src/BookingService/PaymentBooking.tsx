@@ -23,11 +23,17 @@ import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
+import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
-import assets from "../assets";
 
-const {"Calendar.png": calendar,"card icons.png": cardicons, "Icon.png": crediticon,"Frame 39554.png": currency, "Rectangle 679.png": grass} = assets
+const {
+  "Calendar.png": calendar,
+  "card icons.png": cardicons,
+  "Icon.png": crediticon,
+  "Frame 39554.png": currency,
+  "Rectangle 679.png": grass,
+} = assets;
 
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: "50%",
@@ -78,12 +84,12 @@ export default function PaymentBooking() {
   const initialPaymentMethod = "female";
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState(initialPaymentMethod);
-    // const [singleAmount, setSingleAmount] =
-    // useState(0);
-    // const [totalBookingAmount, setTotalBookingAmount] =
-    // useState(0);
-    // const [bookingAmount, setBookingAmount] =
-    // useState<any>([]);
+  // const [singleAmount, setSingleAmount] =
+  // useState(0);
+  // const [totalBookingAmount, setTotalBookingAmount] =
+  // useState(0);
+  // const [bookingAmount, setBookingAmount] =
+  // useState<any>([]);
 
   const handlePaymentMethodChange = (event: any) => {
     setSelectedPaymentMethod(event.target.value);
@@ -181,7 +187,7 @@ export default function PaymentBooking() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+            backgroundColor: "rgba(255, 255, 255, 0.96)",
           }}
         />
         <Box
@@ -215,6 +221,7 @@ export default function PaymentBooking() {
               maxWidth={{ xs: "313px", sm: "313px", md: "313px", lg: "330px" }}
               borderRadius={"10px"}
               border={"1px solid gray"}
+              maxHeight="600px"
             >
               <Box
                 padding={"27px 20px"}
@@ -236,13 +243,20 @@ export default function PaymentBooking() {
                 </Typography>
               </Box>
               <Stack
+                overflow="auto"
+                // sx={{
+
+                // }}
                 sx={{
                   opacity: "1",
+                  scrollbarWidth: "none",
+                  scrollBehavior: "smooth",
+                  maxHeight: 350,
                 }}
                 margin={"0px 25px"}
               >
                 {allBookings.map(
-                   (
+                  (
                     item: {
                       type: string;
                       name: string;
@@ -278,7 +292,6 @@ export default function PaymentBooking() {
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
                     console.log(formattedTimeRange);
-
 
                     return (
                       <Stack
@@ -346,6 +359,8 @@ export default function PaymentBooking() {
                     );
                   }
                 )}
+              </Stack>
+              <Box padding={"0 20px"}>
                 <Typography
                   fontWeight={"500"}
                   color={Colors.BLACK}
@@ -415,7 +430,7 @@ export default function PaymentBooking() {
                     {totalAmount}
                   </Typography>
                 </Box>
-              </Stack>
+              </Box>
             </Box>
             <Box
               sx={{
