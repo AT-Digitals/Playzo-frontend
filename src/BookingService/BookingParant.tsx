@@ -10,23 +10,10 @@ import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import backgroundimage from "./7692.jpg";
-import badminton from "../assets/Image (7).png";
-import badminton1 from "../assets/Rectangle 685 (3).png";
-import badminton2 from "../assets/Rectangle 685 (4).png";
-import badminton3 from "../assets/Rectangle 685 (5).png";
-import boardgames from "../assets/board games.png";
-import boardgames1 from "../assets/Rectangle 685 (11).png";
-import boardgames2 from "../assets/Rectangle 685 (12).png";
-import boardgames3 from "../assets/Rectangle 685 (9).png";
-import bowling from "../assets/Image (2).png";
-import cricketnet from "../assets/Image (1).png";
-import grass from "../assets/Rectangle 679.png";
-import playstation from "../assets/playstation.png";
-import playstation1 from "../assets/Rectangle 685.png";
-import playstation2 from "../assets/Rectangle 685 (1).png";
-import playstation3 from "../assets/Rectangle 685 (2).png";
 import styled from "@emotion/styled";
-import turf from "../assets/turf.png";
+import assets from "../assets";
+
+const {"Image (7).png": badminton, "Rectangle 685 (3).png": badminton1, "Rectangle 685 (4).png": badminton2, "Rectangle 685 (5).png": badminton3, "board games.png": boardgames, "Rectangle 685 (11).png": boardgames1, "Rectangle 685 (12).png": boardgames2, "Rectangle 685 (9).png": boardgames3, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "Rectangle 685.png": playstation1, "Rectangle 685 (1).png": playstation2, "Rectangle 685 (2).png": playstation3, "turf.png": turf} = assets
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {

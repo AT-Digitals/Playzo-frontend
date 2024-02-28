@@ -6,22 +6,9 @@ import Colors from "../../CommonComponents/Colors";
 import DateUtils from "../../Utils/DateUtils";
 import Rating from "@mui/material/Rating";
 import TimeUtlis from "../../Utils/TimeUtlis";
-import Vector from "../../assets/Vector.png";
-import Vector1 from "../../assets/Vector (1).png";
-import Vector2 from "../../assets/Vector (2).png";
+import assets from "../../assets";
 
-// interface userType {
-//   bookingId: string;
-//   date: string;
-//   userName: string;
-//   bookingType: string;
-//   timings: string;
-//   comments: string;
-//   bookingCompleted: string;
-//   refundCompleted?: string;
-//   ratings?: number;
-// }
-
+const {"Vector.png": Vector, "Vector (1).png": Vector1, "Vector (2).png": Vector2} = assets
 interface dataProps {
   userDetails: any[];
   userName:string;

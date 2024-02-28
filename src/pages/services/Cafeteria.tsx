@@ -1,10 +1,10 @@
-import Cafe_logo from "../../assets/Cafe_logo.svg";
-import CafeteriaSlide1 from "../../assets/Cafeteriya/cafe1.jpg";
-import CafeteriaSlide2 from "../../assets/Cafeteriya/cafe2.jpg";
-import CafeteriaSlide3 from "../../assets/Cafeteriya/cafe3.jpg";
-import CafeteriaSlide4 from "../../assets/Cafeteriya/cafe4.jpg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import cafeteriaImage from "../../assets/Cafeteriya";
+
+const {"Cafe_logo.svg": Cafe_logo} = assets
+const {"cafe1.jpg": CafeteriaSlide1, "cafe2.jpg": CafeteriaSlide2, "cafe3.jpg": CafeteriaSlide3, "cafe4.jpg": CafeteriaSlide4} = cafeteriaImage
 
 const heading1 = "Cafeteria";
 const heading2 = "Features";

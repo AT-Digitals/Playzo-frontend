@@ -1,9 +1,10 @@
-import BowlingSlide1 from "../../assets/Bowling/bowling1.jpg";
-import BowlingSlide2 from "../../assets/Bowling/bowling2.jpg";
-import BowlingSlide3 from "../../assets/Bowling/bowling3.webp";
-import Bowling_logo from "../../assets/Bowling_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import bowlingImage from "../../assets/Bowling";
+
+const {"Bowling_logo.svg": Bowling_logo} = assets
+const {"bowling1.jpg": BowlingSlide1, "bowling2.jpg": BowlingSlide2, "bowling3.webp": BowlingSlide3} = bowlingImage
 
 const heading1 = "Bowling Machine";
 const heading2 = "Features";

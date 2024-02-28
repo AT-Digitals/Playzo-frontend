@@ -1,9 +1,10 @@
-import BoardGameSlide1 from "../../assets/BoardGames/Board1.jpg";
-import BoardGameSlide2 from "../../assets/BoardGames/Board2.avif";
-import BoardGameSlide3 from "../../assets/BoardGames/Board3.webp";
-import Board_logo from "../../assets/Board_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import boardGameImage from "../../assets/BoardGames";
+
+const {"Board_logo.svg": Board_logo} = assets
+const {"Board1.jpg": BoardGameSlide1, "Board2.avif": BoardGameSlide2, "Board3.webp": BoardGameSlide3} = boardGameImage
 
 const heading1 = "Board Games";
 const heading2 = "Features";

@@ -2,10 +2,11 @@ import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
-import bg from "../../assets/AboutPageImages/cookies.jpg";
-import layer from "../../assets/AboutPageImages/layer-cookies.svg";
 import styled from "styled-components";
 import { useEffect } from "react";
+import aboutPage from "../../assets/AboutPageImages";
+
+const {"cookies.jpg": bg, "layer-cookies.svg": layer} = aboutPage
 
 const Container = styled(Box)`
   display: flex;

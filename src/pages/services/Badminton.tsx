@@ -1,9 +1,10 @@
-import Badmin_logo from "../../assets/Badmin_logo.svg";
-import Badmintonslide2 from "../../assets/BadmintonImages/badminton1.jpg";
-import Badmintonslide3 from "../../assets/BadmintonImages/badminton2.jpg";
-import Badmintonslide4 from "../../assets/BadmintonImages/badminton3.jpg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import badmintonImage from "../../assets/BadmintonImages";
+
+const {"Badmin_logo.svg": Badmin_logo} = assets
+const {"badminton1.jpg": Badmintonslide2, "badminton2.jpg": Badmintonslide3, "badminton3.jpg": Badmintonslide4} = badmintonImage
 
 const heading1 = "Badminton";
 const heading2 = "Features";

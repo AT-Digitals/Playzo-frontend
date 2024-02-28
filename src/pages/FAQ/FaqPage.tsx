@@ -5,9 +5,6 @@ import Colors from "../../CommonComponents/Colors";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 
-// import ball from "../../assets/ball 4.png";
-// import grass from "../../assets/Rectangle 679.png";
-
 const FaqItems = [
   {
     paragraph: "How do I book a turf or facility?",

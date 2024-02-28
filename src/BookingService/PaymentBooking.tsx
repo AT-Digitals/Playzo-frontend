@@ -11,7 +11,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -24,29 +24,11 @@ import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
 import backgroundimage from "./7692.jpg";
-import ball from "../assets/ball 4.png";
-import calendar from "../assets/Calendar.png";
-import cardicons from "../assets/card icons.png";
-import crediticon from "../assets/Icon.png";
-import currency from "../assets/Frame 39554.png";
-import grass from "../assets/Rectangle 679.png";
 import routes from "../routes/routes";
-import { useState } from "react";
+import assets from "../assets";
 
-// const PaymentDetails = [
-//   {
-//     name: "Turf 1",
-//     date: "10 Jan 2024",
-//     time: "9:00 - 10:00 AM",
-//     amount: "750",
-//   },
-//   {
-//     name: "Turf 1 & 2",
-//     date: "10 Jan 2024",
-//     time: "9:00 - 10:00 AM",
-//     amount: "750",
-//   },
-// ];
+const {"Calendar.png": calendar,"card icons.png": cardicons, "Icon.png": crediticon,"Frame 39554.png": currency, "Rectangle 679.png": grass} = assets
+
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: "50%",
   width: 16,

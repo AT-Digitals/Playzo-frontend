@@ -1,10 +1,10 @@
-import CrossFitslide1 from "../../assets/CrossFit/cross1.jpg";
-import CrossFitslide2 from "../../assets/CrossFit/cross2.jpg";
-import CrossFitslide3 from "../../assets/CrossFit/cross3.jpg";
-import CrossFitslide4 from "../../assets/CrossFit/cross4.webp";
-import Cross_logo from "../../assets/Cross_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import crossFitImage from "../../assets/CrossFit";
+
+const {"Cross_logo.svg": Cross_logo} = assets
+const {"cross1.jpg": CrossFitslide1, "cross2.jpg": CrossFitslide2, "cross3.jpg": CrossFitslide3, "cross4.webp": CrossFitslide4} = crossFitImage
 
 const heading1 = "CrossFit";
 const heading2 = "Features";

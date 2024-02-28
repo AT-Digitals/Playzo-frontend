@@ -1,15 +1,17 @@
 import * as React from "react";
 
-import { IconButton, Skeleton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
 import CustomSlider from "./CustomSliderService";
-import LeftArrow from "../../assets/LeftArrow.svg";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import styled from "styled-components";
+import assets from "../../assets";
+
+const {"LeftArrow.svg": LeftArrow} = assets
 
 interface serviceGridProps {
   carouselItems: any[];
