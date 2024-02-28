@@ -5,15 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import Colors from "../CommonComponents/Colors";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import backgroundimage from "./7692.jpg";
-import badminton from "../assets/Image (7).png";
-import boardgames from "../assets/board games.png";
-import bowling from "../assets/Image (2).png";
-import cricketnet from "../assets/Image (1).png";
-import grass from "../assets/Rectangle 679.png";
-import playstation from "../assets/playstation.png";
 import routes from "../routes/routes";
 import styled from "styled-components";
-import turf from "../assets/turf.png";
+import assets from "../assets";
+
+const {"Image (7).png": badminton, "board games.png": boardgames, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "turf.png": turf} = assets
 
 const TurfDetails = [
   {

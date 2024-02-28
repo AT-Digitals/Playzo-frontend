@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
-import banner from "../../assets/cookies.jpg";
-import layer from "../../assets/Layer.svg";
 import styled from "styled-components";
 import Colors from "../../CommonComponents/Colors";
 import { useEffect } from "react";
+import assets from "../../assets/index";
+
+const {"cookies.jpg": banner, "Layer.svg": layer } = assets
 
 const Container = styled(Box)`
   display: flex;

@@ -1,9 +1,10 @@
-import Play_logo from "../../assets/Play_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
-import plyaStationSlide2 from "../../assets/Playstation/play1.webp";
-import plyaStationSlide3 from "../../assets/Playstation/play2.jpg";
-import plyaStationSlide4 from "../../assets/Playstation/play3.avif";
+import assets from "../../assets";
+import playstationImage from "../../assets/Playstation";
+
+const {"Play_logo.svg": Play_logo} = assets
+const {"play1.webp": plyaStationSlide2, "play2.jpg": plyaStationSlide3, "play3.avif": plyaStationSlide4} = playstationImage
 
 const heading1 = "Play Station";
 const heading2 = "Features";

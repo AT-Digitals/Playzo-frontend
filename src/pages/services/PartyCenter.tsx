@@ -1,10 +1,10 @@
-import PartyCenterSlide1 from "../../assets/Partycenter/party1.webp";
-import PartyCenterSlide2 from "../../assets/Partycenter/party2.jpg";
-import PartyCenterSlide3 from "../../assets/Partycenter/party3.jpeg";
-import PartyCenterSlide4 from "../../assets/Partycenter/party4.jpg";
-import Party_logo from "../../assets/Party_logo.svg";
 import Service from "./Service";
 import ServiceGrid from "./ServiceGrid";
+import assets from "../../assets";
+import partycenterImage from "../../assets/Partycenter";
+
+const {"Party_logo.svg": Party_logo} = assets
+const {"party1.webp": PartyCenterSlide1, "party2.jpg": PartyCenterSlide2, "party3.jpeg": PartyCenterSlide3, "party4.jpg": PartyCenterSlide4} = partycenterImage
 
 const heading1 = "Party Center";
 const heading2 = "Features";

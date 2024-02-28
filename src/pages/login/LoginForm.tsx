@@ -18,13 +18,15 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import Icon from "../../assets/Variant10.png";
 import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
+import assets from "../../assets";
+
+const {"Variant10.png": Icon} = assets
 
 interface loginProps {
   handleClose?: () => void;

@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import bg from "../../assets/AboutPageImages/carrersbg.jpg";
+import aboutPage from "../../assets/AboutPageImages";
+
+const {"carrersbg.jpg": bg} = aboutPage
 
 export default function CareersPageNew() {
   const [imageLoaded, setImageLoaded] = useState(false);

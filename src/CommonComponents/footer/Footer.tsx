@@ -6,12 +6,12 @@ import Divider from "@mui/material/Divider";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "react-router-dom";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "../../assets/Twitter.png";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import logo from "../../assets/Playzo (1).svg";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
+import assets from "../../assets";
+
+const {"Playzo (1).svg": logo, "Twitter.png": TwitterIcon} = assets
 
 const StyledLink = styled(Link)({
   color: Colors.WHITE,

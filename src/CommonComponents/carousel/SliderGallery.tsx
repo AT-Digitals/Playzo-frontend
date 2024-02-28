@@ -3,14 +3,12 @@ import React, { useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import image1 from "./Rectangle 688.png";
-import image2 from "../../assets/image 17.png";
-import image3 from "../../assets/image 16.png";
-import image4 from "../../assets/image 15.png";
-import image5 from "../../assets/Image (7).png";
-import image6 from "../../assets/Image (8).png";
 import leftNavi from "./left-navi.svg";
 import righttNavi from "./right-navi.svg";
 import styled from "styled-components";
+import assets from "../../assets";
+
+const {"image 17.png": image2, "image 16.png": image3, "image 15.png": image4, "Image (7).png": image5, "Image (8).png": image6} = assets
 
 const GalleryImages = [image1, image2, image3, image4, image5, image6, image1];
 

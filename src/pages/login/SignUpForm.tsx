@@ -8,12 +8,11 @@ import {
     Stack,
     TextField,
 } from "@mui/material";
-import { Error, Visibility, VisibilityOff } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
-import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import TextFieldComponent from "./TextFieldComponent";
