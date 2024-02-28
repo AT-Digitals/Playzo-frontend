@@ -252,6 +252,7 @@ export default function PaymentBooking() {
                   scrollbarWidth: "none",
                   scrollBehavior: "smooth",
                   maxHeight: 350,
+                  height: "50%",
                 }}
                 margin={"0px 25px"}
               >

@@ -195,6 +195,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
@@ -424,29 +425,46 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             direction={"row"}
             alignItems={"flex-start"}
           >
-            <Button
-              sx={{
-                opacity: "1",
-                padding: "8px 20px",
-                textTransform: "none",
-                fontSize: "16px",
-                minWidth: "110px",
-                fontWeight: "400",
-                border: "2px solid #15B5FC",
-                borderRadius: "30px",
-                letterSpacing: "1.6px",
-                background: Colors.BUTTON_COLOR,
-                color: Colors.WHITE,
-                ":hover": {
+            <Box display={"flex"}>
+              <Button
+                sx={{
+                  opacity: "1",
+                  padding: "8px 20px",
+                  textTransform: "none",
+                  fontSize: "16px",
+                  minWidth: "110px",
+                  fontWeight: "400",
+                  border: "2px solid #15B5FC",
+                  // borderRadius: "30px",
+                  letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
-                },
-              }}
-              onClick={handlegoBack}
-              variant="text"
-              startIcon={<KeyboardBackspaceIcon />}
-            >
-              Back
-            </Button>{" "}
+                  color: Colors.WHITE,
+                  ":hover": {
+                    background: Colors.BUTTON_COLOR,
+                  },
+                  display: isBackButtonVisible ? "block" : "none",
+                  whiteSpace: "nowrap",
+                }}
+                onClick={handlegoBack}
+                variant="text"
+                // startIcon={}
+              >
+                <span
+                  style={{
+                    display: "flex",
+
+                    alignItems: "center",
+                  }}
+                >
+                  <KeyboardBackspaceIcon
+                    style={{
+                      color: "white",
+                    }}
+                  />
+                  Back
+                </span>
+              </Button>{" "}
+            </Box>
             <Stack
               marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
               // marginTop={"50px"}
@@ -752,6 +770,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     setTableData={setTableData}
                     selectedService={selectedService}
                     type={type}
+                    setIsBackButtonVisible={setIsBackButtonVisible}
                   />
                 </Box>
               )}
