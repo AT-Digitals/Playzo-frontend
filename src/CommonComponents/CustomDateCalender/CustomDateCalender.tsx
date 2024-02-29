@@ -67,9 +67,7 @@ export default function CustomDateCalendar({
   selectedService,
   setIsBackButtonVisible,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>(
-    new Date().toString()
-  );
+  const [selectedDate, setSelectedDate] = React.useState<string>('');
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -160,30 +158,6 @@ export default function CustomDateCalendar({
     setDateModalOpen(false);
   };
 
-  React.useEffect(() => {
-    ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
-  }, [selectedDate]);
-
-  // const handleDateSelection = (newValue: any) => {
-  //   let datedata = newValue.$d;
-  //   const parsedDate = moment(datedata);
-  //   const formattedDate = parsedDate.format("YYYY-MM-DD");
-
-  //   setSelectedDate(formattedDate);
-  //   ApiCall(formattedDate);
-  //   console.log(tableData, "clicked Date");
-
-  //   let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-  //   selectedTimings.forEach((selectedTime) => {
-  //     updatedItems = updatedItems.map((item) =>
-  //       item.name === selectedTime && selectedDate
-  //         ? { ...item, disabled: true }
-  //         : item
-  //     );
-  //   });
-
-  // };
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
@@ -194,25 +168,26 @@ export default function CustomDateCalendar({
     ApiCall(formattedDate);
     console.log(tableData, "clicked Date");
 
-   
- 
+
+
 
   };
 
   const ApiCall = async (dateValue: any) => {
-    if(dateValue&&type&&selectedService){
-    try {
-      const response = await BookingApi.filter({
-        startDate: dateValue,
-        type: type,
-        endDate: dateValue,
-        court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
-      });
-      setDisableData(response);
-    } catch (error: any) {
-      console.error("Error:", error.message);
+    console.log('date', dateValue, type, selectedService);
+    if (dateValue && type && selectedService) {
+      try {
+        const response = await BookingApi.filter({
+          startDate: dateValue,
+          type: type,
+          endDate: dateValue,
+          court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
+        });
+        setDisableData(response);
+      } catch (error: any) {
+        console.error("Error:", error.message);
+      }
     }
-  }
   };
 
   const MilisecondsToHours = () => {
@@ -223,78 +198,80 @@ export default function CustomDateCalendar({
       const intervals = generateTimeIntervals(new Date(start), new Date(end));
       combinedIntervals = combinedIntervals.concat(intervals);
     });
- 
-    let isBookingExists:any = [];
-    switch(selectedService){
+
+    let isBookingExists: any = [];
+    switch (selectedService) {
       case "PS 1&2":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-           (booking.name === 'PS 1' ||  booking.name === 'PS 2'|| booking.name ==="PS 1&2")
-  
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === 'PS 2' || booking.name === "PS 1&2")
+
           );
         });
-          break;
+        break;
       case 'PS 1':
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-            (booking.name === 'PS 1' || booking.name ==="PS 1&2")
-  
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === "PS 1&2")
+
           );
         });
-          break;
+        break;
       case 'PS 2':
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-            (booking.name === 'PS 2' || booking.name ==="PS 1&2")
-  
+            booking.type === type &&
+            (booking.name === 'PS 2' || booking.name === "PS 1&2")
+
           );
         });
-            break;
+        break;
       case 'Turf 1&2':
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-            (booking.name === 'Turf 1' ||  booking.name === 'Turf 2'|| booking.name ==='Turf 1&2')
-          
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
           );
         });
-            break;
+        break;
       case 'Turf 1':
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-            (booking.name === 'Turf 1' || booking.name ==='Turf 1&2')
-                  
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 1&2')
+
           );
         });
-            break;
+        break;
       case 'Turf 2':
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
-            booking.type === type&&
-            (booking.name === 'Turf 2' || booking.name ==='Turf 1&2')
-                          
-            );
-          });
-              break;
+            booking.type === type &&
+            (booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
       default:
         isBookingExists = tableData.filter((booking: any) => {
+
           return (
             booking.date === selectedDate &&
             booking.name === selectedService &&
             booking.type === type
           );
         });
-  }
+    }
+
     isBookingExists.map((items: any) => combinedIntervals.push(...items.time));
     const uniqueArray = combinedIntervals.reduce((accumulator, currentValue) => {
       if (!accumulator.includes(currentValue)) {
@@ -302,14 +279,16 @@ export default function CustomDateCalendar({
       }
       return accumulator;
     }, []);
+
     if (uniqueArray.length > 0) {
       const updatedItems = items.map((item) =>
-      uniqueArray.includes(item.name) ? { ...item, disabled: true } : item
+        uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
       );
       setItems(updatedItems)
-    } else{
+    } else {
       setItems(Timings)
     }
+
 
   };
 
@@ -340,11 +319,11 @@ export default function CustomDateCalendar({
     if (disableData || selectedDate) {
       MilisecondsToHours();
     }
-   
 
-  }, [disableData,selectedDate]);
 
-  // console.log(disableData, "disableData");
+  }, [disableData, selectedDate]);
+
+
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -401,7 +380,7 @@ export default function CustomDateCalendar({
             const [time1, am1] = time.split("-");
             const [hours, minutes] = time1.split(":");
 
-            console.log("hours", hours, minutes);
+
             const startDateTime = new Date(selectedDate);
             startDateTime.setHours(Number(hours), Number(minutes));
             startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
@@ -448,7 +427,7 @@ export default function CustomDateCalendar({
         }
 
         // Reset selected date and timings
-        setSelectedDate(new Date().toString());
+        setSelectedDate("");
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
         setIsBackButtonVisible(false);
@@ -539,8 +518,8 @@ export default function CustomDateCalendar({
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -549,8 +528,8 @@ export default function CustomDateCalendar({
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
+                    ? "#15B5FC"
+                    : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -565,8 +544,8 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
+                        ? "white"
+                        : "black"
                   }
                   sx={{
                     ":hover": {
