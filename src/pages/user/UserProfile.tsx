@@ -16,7 +16,7 @@ export default function UserProfile() {
   const [filteredData, setFilteredData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
-  const [userSports, setUserSports] = useState<string[]>();
+  const [userSports, setUserSports] = useState<string[]>([]);
 
   const CapitalizeFirstLetter = (str:any)=> {
     return str.charAt(0).toUpperCase() + str.slice(1);
