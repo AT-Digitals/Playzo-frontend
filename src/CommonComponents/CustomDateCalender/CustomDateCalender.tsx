@@ -164,6 +164,27 @@ export default function CustomDateCalendar({
     ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
   }, []);
 
+  // const handleDateSelection = (newValue: any) => {
+  //   let datedata = newValue.$d;
+  //   const parsedDate = moment(datedata);
+  //   const formattedDate = parsedDate.format("YYYY-MM-DD");
+
+  //   setSelectedDate(formattedDate);
+  //   ApiCall(formattedDate);
+  //   console.log(tableData, "clicked Date");
+
+  //   let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
+
+  //   selectedTimings.forEach((selectedTime) => {
+  //     updatedItems = updatedItems.map((item) =>
+  //       item.name === selectedTime && selectedDate
+  //         ? { ...item, disabled: true }
+  //         : item
+  //     );
+  //   });
+
+  // };
+
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
     const parsedDate = moment(datedata);
@@ -171,9 +192,61 @@ export default function CustomDateCalendar({
 
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
+    console.log(tableData, "clicked Date");
+
+    let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
+
+    // selectedTimings.forEach((selectedTime) => {
+    // Check if the selected date and time exist in tableData
+    const isBookingExists = tableData.filter((booking: any) => {
+      return (
+        booking.date === formattedDate &&
+        booking.name === selectedService &&
+        booking.type === type
+      );
+    });
+
+    console.log(isBookingExists, "bookingTime");
+
+    console.log("isBookingExists:", isBookingExists);
+    let times: any[] = [];
+
+    isBookingExists.map((items: any) => times.push(...items.time));
+
+    console.log(times, "times");
+
+    // setItems((prevItems) =>
+    //   prevItems.map((item) => {
+    //     // console.log(item.name, "nameinITEm");
+
+    //       // isBookingExists && item.name === selectedTime
+    //       // times.includes(item.name) ? { ...item, disabled: true } : item
+    //       times.map((time) => {
+    //         if(time ===  item.name ){
+    //           item.disabled = true
+    //         }
+    //       })
+    //   })
+    // );
+
+    if (times.length > 0) {
+      const updatedItems = items.map((item) =>
+        times.includes(item.name) ? { ...item, disabled: true } : item
+      );
+      setItems(updatedItems);
+    } else {
+      setItems(Timings);
+    }
+
+    console.log(formattedDate, "formattedDate");
+    console.log("updatedItems:from clickdate", updatedItems);
+
+    console.log(type, "selectedType");
+    console.log(selectedService, "selectedService");
+    // console.log(selctedname, "selctedname");
+    console.log(selectedDate, "selectedDate");
   };
 
-  console.log("select");
   const ApiCall = async (dateValue: any) => {
     try {
       const response = await BookingApi.filter({
@@ -238,7 +311,7 @@ export default function CustomDateCalendar({
     }
   }, [disableData]);
 
-  console.log(disableData, "disableData");
+  // console.log(disableData, "disableData");
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -298,9 +371,45 @@ export default function CustomDateCalendar({
               : item
           );
         });
-        console.log(selectedDate, "selectedDate");
+        // console.log(selectedDate, "selectedDate");
         setItems(updatedItems);
-        console.log(updatedItems, "updatedItems");
+        // console.log(updatedItems, "updatedItems");
+
+        await Promise.all(
+          selectedTimings.map(async (timeData) => {
+            let isBookingExists = false;
+
+            // Check if the booking already exists in tableData
+            tableData.forEach((booking: any) => {
+              if (
+                booking.type === type &&
+                booking.name === selectedService &&
+                booking.date === selectedDate &&
+                booking.time.includes(timeData)
+              ) {
+                isBookingExists = true;
+              }
+            });
+
+            // If booking does not exist, perform further actions
+            if (!isBookingExists) {
+              // ... (unchanged part)
+
+              updatedItems = updatedItems.map((item) =>
+                isBookingExists && item.name === timeData
+                  ? { ...item, disabled: true }
+                  : item
+              );
+
+              // Set the updated items in the state
+              setItems(updatedItems);
+            } else {
+              console.log(
+                `Booking already exists for ${selectedDate} and ${timeData}`
+              );
+            }
+          })
+        );
 
         selectedTimings.forEach(async (timeData) => {
           try {
