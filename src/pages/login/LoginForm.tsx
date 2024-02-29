@@ -26,7 +26,7 @@ import { useState } from "react";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import assets from "../../assets";
 
-const {"Variant10.png": Icon} = assets
+const { "Variant10.png": Icon } = assets
 
 interface loginProps {
   handleClose?: () => void;
@@ -57,7 +57,7 @@ export default function Form({ handleClose, open }: loginProps) {
   const handleCloseLoginModal = () => {
     setModalOpen(false);
     navigate(routes.BOOKING_SERVICE);
-    navigate(0);
+    //navigate(0);
     handleClose?.();
   };
 
@@ -128,7 +128,10 @@ export default function Form({ handleClose, open }: loginProps) {
           setPassword('');
           setIsValidEmail(false);
           setIsPasswordValid(false);
-          setModalOpen(true);
+          //setModalOpen(true);
+          navigate(routes.BOOKING_SERVICE);
+          navigate(0);
+          handleClose?.();
         }
       } catch (err: any) {
         setModalErrorOpen(true);
