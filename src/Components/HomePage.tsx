@@ -10,9 +10,101 @@ import CardComponent from "./CardComponent";
 import CarouselComponent from "./CarouselComponent";
 import Colors from "../CommonComponents/Colors";
 import EastIcon from '@mui/icons-material/East';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import routes from "../routes/routes";
 import assets from "../assets";
+
+const StyledImage = styled.img`
+@media (min-width: 300px) {
+  width: 200px;
+  height: 80px;
+}
+
+@media (min-width: 768px) {
+  width: 200px;
+  height: 80px;
+}
+@media (min-width: 820px) {
+  width: 200px;
+  height: 80px;
+}
+
+@media (min-width: 900px) {
+  width: 200px;
+  height: 80px;
+}
+
+
+@media (min-width: 1200px) {
+  width: 340px;
+  height: 100px;
+}
+  
+`;
+const StyledImage1 = styled.img`
+@media (min-width: 300px) {
+  width: 45px;
+  height: 45px;
+}
+
+@media (min-width: 768px) {
+  width: 45px;
+  height: 45px;
+}
+@media (min-width: 820px) {
+  width: 45px;
+  height: 45px;
+}
+
+@media (min-width: 900px) {
+  width: 45px;
+  height: 45px;
+}
+
+
+@media (min-width: 1200px) {
+  width: 70px;
+  height: 70px;
+}
+  
+`;
+
+const StyledImage2 = styled.img`
+@media (min-width: 300px) {
+  width: 320px;
+  height: 325px;
+}
+@media (min-width: 414px) {
+  width: 315px;
+  height: 325px;
+}
+
+@media (min-width: 768px) {
+  width: 325px;
+  height: 325px;
+}
+@media (min-width: 820px) {
+  width: 325px;
+  height: 325px;
+}
+
+@media (min-width: 912px) {
+  width: 388px;
+  height: 370px;
+}
+@media (min-width: 1024px) {
+  width: 388px;
+  height: 370px;
+}
+
+
+@media (min-width: 1200px) {
+  width: 345px;
+  height: 345px;
+}
+  
+`;
 
 const {"pexels-ben-muk-5488874 (1).jpg": Badminton, "pexels-guduru-ajay-bhargav-863988.jpg": Image3, "pexels-pixabay-209977.jog": Image4, "pexels-pixabay-46798.jpg": Image5, "pexels-pixabay-269630.jpg": boardGames, "pexels-vazhnik-7864443.jpg": playstation, "pexels-thiago-kai-9381737.jpg": turf, "playzo.mp4": videoFile, "Playzo.png": logo, "instagram-ico.png": insta, "278453372_302010395428882_1782198866577334663_n.jpg": pic1, "292237898_605074144217428_6740391706468899652_n.jpg": pic2, "296017376_1229442621218307_3144906300765873571_n.jpg": pic3, "307209848_504498594836255_6289868240102465405_n.jpg": pic4 } = assets
 
@@ -63,16 +155,16 @@ export default function HomePage() {
         <source src={videoFile} type="video/mp4" />
       </video>
       <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
-        <Stack  pt={"60px"}>
+        <Stack  pt={{xs: "30px", sm: '30px', md: "30px", lg: "60px"}}>
        <Box
               width={"24%"}
               border={`2px solid ${Colors.BUTTON_COLOR}`}
-              marginLeft={"59px"}
+              marginLeft={{xs: "29px", sm: "29px", md: "29px", lg: "59px"}}
               marginBottom={"10px"}
             ></Box>
         <Typography
-          fontSize={"42px"}
-          marginLeft={"50px"}
+          fontSize={{xs: "22px", sm: "32px", md: "22px", lg: "42px"}}
+          marginLeft={{xs: "20px", sm: "20px", md: "20px", lg: "50px"}}
           fontWeight={"600"}
           color={Colors.BLACK}
           fontStyle={"italic"}
@@ -90,10 +182,10 @@ export default function HomePage() {
           <Typography
             variant="h2"
             color={Colors.BLACK}
-            fontSize={{ xs: "18px", sm: "18px", md: "18px", lg: "20px" }}
+            fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
             fontWeight={400}
-            width={{ xs: "300px", sm: "300px", md: "300px", lg: "850px" }}
-            marginLeft={"57px"}
+            width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
+            marginLeft={{xs: "27px", sm: "27px", md: "27px", lg: "57px"}}
             sx={{ fontFamily: "Inter" }}
           >
             We offer a diverse range of{" "}
@@ -111,12 +203,12 @@ export default function HomePage() {
           spacing={3}
           flexDirection={{
             xs: "column",
-            sm: "column",
-            md: "column",
+            sm: "row",
+            md: "row",
             lg: "row",
           }}
         >
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
             <CardComponent
               buttonLabel="Know more"
               title={"Turf"}
@@ -126,7 +218,7 @@ export default function HomePage() {
               image={turf}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
             <CardComponent
               buttonLabel="Know more"
               title={"Play Station"}
@@ -136,7 +228,7 @@ export default function HomePage() {
               image={playstation}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
             <CardComponent
               buttonLabel="Know more"
               title={"Board Games"}
@@ -146,7 +238,7 @@ export default function HomePage() {
               image={boardGames}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
             <CardComponent
               buttonLabel="Know more"
               title={"Badminton"}
@@ -198,9 +290,9 @@ export default function HomePage() {
       <CarouselComponent />
       <Box width="100%" paddingY={4}>
         <Box display={"flex"} justifyContent={"center"}>
-      <img src={logo} width={340} height={100} alt="22" />
+      <StyledImage src={logo} alt="22" />
       </Box>
-      <Typography fontSize={"54px"}
+      <Typography fontSize={{xs: "26px", sm: "26px", md: "26px", lg: "54px"}}
           fontWeight={"600"}
           color={Colors.BLACK}
           textAlign={"center"}
@@ -211,10 +303,10 @@ export default function HomePage() {
               border={`2px solid ${Colors.BUTTON_COLOR}`}
               margin={"auto"}
             ></Box>
-            <Typography pt={"15px"} textAlign={"center"} fontSize={"20px"} fontWeight={"400"} color={Colors.BLACK}>Relentless is more than a brand</Typography>
+            <Typography pt={"15px"} textAlign={"center"} fontSize={{xs: "16px", sm: "16px", md: "16px", lg: "20px"}} fontWeight={"400"} color={Colors.BLACK}>Relentless is more than a brand</Typography>
              <Box mt={"20px"} display={"flex"} justifyContent={"center"}>
              <Link to={"https://www.instagram.com/"}>
-            <img src={insta} width={"70px"} height={"70px"} alt="22" />
+            <StyledImage1 src={insta} alt="22" />
             </Link>
             </Box>
             <Grid
@@ -222,32 +314,33 @@ export default function HomePage() {
           width="100%"
           margin="0 auto"
           spacing={3}
+          maxWidth={{xs: "365px", sm: "740px", md: "867px", lg: "fit-content"}}
           paddingTop={"20px"}
           flexDirection={{
             xs: "column",
-            sm: "column",
-            md: "column",
+            sm: "row",
+            md: "row",
             lg: "row",
           }}
         >
-          <Grid item xs={3}>
+           <Grid item xs={12} sm={6} md={6} lg={3}> 
             <Link to={"https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"}>
-            <img style={{borderRadius: "10px"}} src={pic1} width={"345px"} height={"345px"} alt="" />
+            <StyledImage2 style={{borderRadius: "10px"}} src={pic1} alt="" />
             </Link>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
           <Link to={"https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"}>
-            <img style={{borderRadius: "10px"}} src={pic2} width={"345px"} height={"345px"} alt="" />
+            <StyledImage2 style={{borderRadius: "10px"}} src={pic2} alt="" />
             </Link>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
           <Link to={"https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"}>
-            <img style={{borderRadius: "10px"}} src={pic3} width={"345px"} height={"345px"} alt="" />
+            <StyledImage2 style={{borderRadius: "10px"}} src={pic3} alt="" />
             </Link>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={6} md={6} lg={3}> 
           <Link to={"https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"}>
-            <img style={{borderRadius: "10px"}} src={pic4} width={"345px"} height={"345px"} alt="" />
+            <StyledImage2 style={{borderRadius: "10px"}} src={pic4} alt="" />
             </Link>
           </Grid>
         </Grid>

@@ -104,16 +104,16 @@ export default function CarouselComponent() {
 
     return (
         <Box sx={{ backgroundColor: Colors.BLACK }} mb={"32px"} width="100%">
-             <Stack  pt={"60px"}>
+             <Stack  pt={{xs: "30px", sm: "30px", md: "30px", lg: "60px"}}>
             <Box
               width={"24%"}
               border={`2px solid ${Colors.BUTTON_COLOR}`}
-              marginLeft={"49px"}
+              marginLeft={{xs: "20px", sm: "20px", md: '20px', lg: "49px"}}
               marginBottom={"10px"}
             ></Box>
             <Typography
-                fontSize={"42px"}
-                marginLeft={"36px"}
+                fontSize={{xs: "22px", sm: '22px', md: "22px", lg: "42px"}}
+                marginLeft={{xs: "16px", sm: "16px", md: "16px", lg: "36px"}}
                 fontWeight={"600"}
                 color={Colors.WHITE}
                 fontStyle={"italic"}
