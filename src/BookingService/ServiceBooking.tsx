@@ -4,12 +4,20 @@ import { useEffect, useRef, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
 import styled from "styled-components";
-import assets from "../assets";
 
-const {"Image (7).png": badminton, "board games.png": boardgames, "Image (2).png": bowling, "Image (1).png": cricketnet, "Rectangle 679.png": grass, "playstation.png": playstation, "turf.png": turf} = assets
+const {
+  "Image (7).png": badminton,
+  "board games.png": boardgames,
+  "Image (2).png": bowling,
+  "Image (1).png": cricketnet,
+  "Rectangle 679.png": grass,
+  "playstation.png": playstation,
+  "turf.png": turf,
+} = assets;
 
 const TurfDetails = [
   {
@@ -168,7 +176,7 @@ export default function ServiceBooking() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(255, 255, 255, 0.9)", // Adjust the alpha value (0.5 for 50% opacity)
+            backgroundColor: "rgba(255, 255, 255, 0.96)", // Adjust the alpha value (0.5 for 50% opacity)
           }}
         />
         <Box

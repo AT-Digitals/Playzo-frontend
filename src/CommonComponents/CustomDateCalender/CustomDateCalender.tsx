@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import * as React from "react";
 
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
@@ -19,26 +22,26 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Timings = [
-  { name: "6:00 - 7:00 AM", disabled: false },
-  { name: "7:00 - 8:00 AM", disabled: false },
-  { name: "8:00 - 9:00 AM", disabled: false },
-  { name: "9:00 - 10:00 AM", disabled: false },
-  { name: "10:00 - 11:00 AM", disabled: false },
-  { name: "11:00 - 12:00 PM", disabled: false },
-  { name: "12:00 - 1:00 PM", disabled: false },
-  { name: "1:00 - 2:00 PM", disabled: false },
-  { name: "2:00 - 3:00 PM", disabled: false },
-  { name: "3:00 - 4:00 PM", disabled: false },
-  { name: "4:00 - 5:00 PM", disabled: false },
-  { name: "5:00 - 6:00 PM", disabled: false },
-  { name: "6:00 - 7:00 PM", disabled: false },
-  { name: "7:00 - 8:00 PM", disabled: false },
-  { name: "8:00 - 9:00 PM", disabled: false },
-  { name: "9:00 - 10:00 PM", disabled: false },
-  { name: "10:00 - 11:00 PM", disabled: false },
-  { name: "11:00 - 12:00 AM", disabled: false },
-  { name: "12:00 - 1:00 AM", disabled: false },
-  { name: "1:00 - 2:00 AM", disabled: false },
+  { name: "6:00-7:00 AM", disabled: false },
+  { name: "7:00-8:00 AM", disabled: false },
+  { name: "8:00-9:00 AM", disabled: false },
+  { name: "9:00-10:00 AM", disabled: false },
+  { name: "10:00-11:00 AM", disabled: false },
+  { name: "11:00-12:00 PM", disabled: false },
+  { name: "12:00-1:00 PM", disabled: false },
+  { name: "1:00-2:00 PM", disabled: false },
+  { name: "2:00-3:00 PM", disabled: false },
+  { name: "3:00-4:00 PM", disabled: false },
+  { name: "4:00-5:00 PM", disabled: false },
+  { name: "5:00-6:00 PM", disabled: false },
+  { name: "6:00-7:00 PM", disabled: false },
+  { name: "7:00-8:00 PM", disabled: false },
+  { name: "8:00-9:00 PM", disabled: false },
+  { name: "9:00-10:00 PM", disabled: false },
+  { name: "10:00-11:00 PM", disabled: false },
+  { name: "11:00-12:00 AM", disabled: false },
+  { name: "12:00-1:00 AM", disabled: false },
+  { name: "1:00-2:00 AM", disabled: false },
 ];
 
 interface CustomDateCalendarProps {
@@ -47,6 +50,7 @@ interface CustomDateCalendarProps {
   selctedname?: any;
   type?: any;
   selectedService?: any;
+  setIsBackButtonVisible?: any;
 }
 
 interface datatype {
@@ -54,12 +58,14 @@ interface datatype {
   endTime: number;
   type: String;
 }
+
 export default function CustomDateCalendar({
   tableData,
   setTableData,
   selctedname,
   type,
   selectedService,
+  setIsBackButtonVisible,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>(
     new Date().toString()
@@ -112,12 +118,6 @@ export default function CustomDateCalendar({
     );
   };
 
-  // const handleDateSelection = (date: string) => {
-  //   if (date) {
-  //     setSelectedDate(date);
-  //   }
-  // };
-
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -125,66 +125,27 @@ export default function CustomDateCalendar({
   const [dateModalOpen, setDateModalOpen] = React.useState(false);
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
   const [items, setItems] = useState([
-    { name: "6:00 - 7:00 AM", disabled: false },
-    { name: "7:00 - 8:00 AM", disabled: false },
-    { name: "8:00 - 9:00 AM", disabled: false },
-    { name: "9:00 - 10:00 AM", disabled: false },
-    { name: "10:00 - 11:00 AM", disabled: false },
-    { name: "11:00 - 12:00 PM", disabled: false },
-    { name: "12:00 - 1:00 PM", disabled: false },
-    { name: "1:00 - 2:00 PM", disabled: false },
-    { name: "2:00 - 3:00 PM", disabled: false },
-    { name: "3:00 - 4:00 PM", disabled: false },
-    { name: "4:00 - 5:00 PM", disabled: false },
-    { name: "5:00 - 6:00 PM", disabled: false },
-    { name: "6:00 - 7:00 PM", disabled: false },
-    { name: "7:00 - 8:00 PM", disabled: false },
-    { name: "8:00 - 9:00 PM", disabled: false },
-    { name: "9:00 - 10:00 PM", disabled: false },
-    { name: "10:00 - 11:00 PM", disabled: false },
-    { name: "11:00 - 12:00 AM", disabled: false },
-    { name: "12:00 - 1:00 AM", disabled: false },
-    { name: "1:00 - 2:00 AM", disabled: false },
+    { name: "6:00-7:00 AM", disabled: false },
+    { name: "7:00-8:00 AM", disabled: false },
+    { name: "8:00-9:00 AM", disabled: false },
+    { name: "9:00-10:00 AM", disabled: false },
+    { name: "10:00-11:00 AM", disabled: false },
+    { name: "11:00-12:00 PM", disabled: false },
+    { name: "12:00-1:00 PM", disabled: false },
+    { name: "1:00-2:00 PM", disabled: false },
+    { name: "2:00-3:00 PM", disabled: false },
+    { name: "3:00-4:00 PM", disabled: false },
+    { name: "4:00-5:00 PM", disabled: false },
+    { name: "5:00-6:00 PM", disabled: false },
+    { name: "6:00-7:00 PM", disabled: false },
+    { name: "7:00-8:00 PM", disabled: false },
+    { name: "8:00-9:00 PM", disabled: false },
+    { name: "9:00-10:00 PM", disabled: false },
+    { name: "10:00-11:00 PM", disabled: false },
+    { name: "11:00-12:00 AM", disabled: false },
+    { name: "12:00-1:00 AM", disabled: false },
+    { name: "1:00-2:00 AM", disabled: false },
   ]);
-
-  // const handleTimeSelection = (time: string) => {
-  //   if (selectedTimings.includes(time)) {
-  //     setSelectedTimings((prevSelectedTimings) =>
-  //       prevSelectedTimings.filter((selectedTime) => selectedTime !== time)
-  //     );
-  //   } else {
-  //     setSelectedTimings((prevSelectedTimings) => [
-  //       ...prevSelectedTimings,
-  //       time,
-  //     ]);
-  //   }
-  // };
-
-  // const handleAddButtonClick = () => {
-  //   console.log("Before adding:", selectedDate, selectedTimings);
-
-  //   if (selectedDate !== "" && selectedTimings.length > 0) {
-  //     const totalDuration = selectedTimings.length;
-  //     const ratePerHour = 1500;
-  //     const totalAmount = totalDuration * ratePerHour;
-
-  //     setTableData([
-  //       ...tableData,
-  //       {
-  //         date: selectedDate,
-  //         time: selectedTimings,
-  //         duratoin: totalDuration,
-  //         amount: totalAmount,
-  //         name: selctedname,
-  //       },
-  //     ]);
-
-  //     console.log("After adding:", selectedDate, selectedTimings);
-
-  //     setSelectedDate("");
-  //     setSelectedTimings([]);
-  //   }
-  // };
 
   const handleClose = () => {
     setModalOpen(false);
@@ -203,6 +164,27 @@ export default function CustomDateCalendar({
     ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
   }, []);
 
+  // const handleDateSelection = (newValue: any) => {
+  //   let datedata = newValue.$d;
+  //   const parsedDate = moment(datedata);
+  //   const formattedDate = parsedDate.format("YYYY-MM-DD");
+
+  //   setSelectedDate(formattedDate);
+  //   ApiCall(formattedDate);
+  //   console.log(tableData, "clicked Date");
+
+  //   let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
+
+  //   selectedTimings.forEach((selectedTime) => {
+  //     updatedItems = updatedItems.map((item) =>
+  //       item.name === selectedTime && selectedDate
+  //         ? { ...item, disabled: true }
+  //         : item
+  //     );
+  //   });
+
+  // };
+
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
     const parsedDate = moment(datedata);
@@ -210,15 +192,68 @@ export default function CustomDateCalendar({
 
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
+    console.log(tableData, "clicked Date");
+
+    let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
+
+    // selectedTimings.forEach((selectedTime) => {
+    // Check if the selected date and time exist in tableData
+    const isBookingExists = tableData.filter((booking: any) => {
+      return (
+        booking.date === formattedDate &&
+        booking.name === selectedService &&
+        booking.type === type
+      );
+    });
+
+    console.log(isBookingExists, "bookingTime");
+
+    console.log("isBookingExists:", isBookingExists);
+    let times: any[] = [];
+
+    isBookingExists.map((items: any) => times.push(...items.time));
+
+    console.log(times, "times");
+
+    // setItems((prevItems) =>
+    //   prevItems.map((item) => {
+    //     // console.log(item.name, "nameinITEm");
+
+    //       // isBookingExists && item.name === selectedTime
+    //       // times.includes(item.name) ? { ...item, disabled: true } : item
+    //       times.map((time) => {
+    //         if(time ===  item.name ){
+    //           item.disabled = true
+    //         }
+    //       })
+    //   })
+    // );
+
+    if (times.length > 0) {
+      const updatedItems = items.map((item) =>
+        times.includes(item.name) ? { ...item, disabled: true } : item
+      );
+      setItems(updatedItems);
+    } else {
+      setItems(Timings);
+    }
+
+    console.log(formattedDate, "formattedDate");
+    console.log("updatedItems:from clickdate", updatedItems);
+
+    console.log(type, "selectedType");
+    console.log(selectedService, "selectedService");
+    // console.log(selctedname, "selctedname");
+    console.log(selectedDate, "selectedDate");
   };
-  console.log("select");
+
   const ApiCall = async (dateValue: any) => {
     try {
       const response = await BookingApi.filter({
         startDate: dateValue,
         type: type,
         endDate: dateValue,
-        court: BookingSubTypes[selctedname as keyof typeof BookingSubTypes],
+        court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
       });
       setDisableData(response);
     } catch (error: any) {
@@ -276,6 +311,8 @@ export default function CustomDateCalendar({
     }
   }, [disableData]);
 
+  // console.log(disableData, "disableData");
+
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
       if (prevSelectedTimings.includes(time)) {
@@ -324,6 +361,55 @@ export default function CustomDateCalendar({
         } catch (err) {
           console.log("err", err);
         }
+
+        let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
+
+        selectedTimings.forEach((selectedTime) => {
+          updatedItems = updatedItems.map((item) =>
+            item.name === selectedTime && selectedDate
+              ? { ...item, disabled: true }
+              : item
+          );
+        });
+        // console.log(selectedDate, "selectedDate");
+        setItems(updatedItems);
+        // console.log(updatedItems, "updatedItems");
+
+        await Promise.all(
+          selectedTimings.map(async (timeData) => {
+            let isBookingExists = false;
+
+            // Check if the booking already exists in tableData
+            tableData.forEach((booking: any) => {
+              if (
+                booking.type === type &&
+                booking.name === selectedService &&
+                booking.date === selectedDate &&
+                booking.time.includes(timeData)
+              ) {
+                isBookingExists = true;
+              }
+            });
+
+            // If booking does not exist, perform further actions
+            if (!isBookingExists) {
+              // ... (unchanged part)
+
+              updatedItems = updatedItems.map((item) =>
+                isBookingExists && item.name === timeData
+                  ? { ...item, disabled: true }
+                  : item
+              );
+
+              // Set the updated items in the state
+              setItems(updatedItems);
+            } else {
+              console.log(
+                `Booking already exists for ${selectedDate} and ${timeData}`
+              );
+            }
+          })
+        );
 
         selectedTimings.forEach(async (timeData) => {
           try {
@@ -383,6 +469,7 @@ export default function CustomDateCalendar({
         setSelectedDate(new Date().toString());
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
+        setIsBackButtonVisible(false);
       } else {
         setDateModalOpen(true);
       }
@@ -462,6 +549,7 @@ export default function CustomDateCalendar({
         <Box mb={2} display="flex" gap="2rem" flexWrap="wrap">
           {items.map((item, index) => (
             <Button
+              disabled={item.disabled}
               sx={{
                 maxWidth: 147,
                 width: "100%",
@@ -477,7 +565,7 @@ export default function CustomDateCalendar({
                 justifyContent: "center",
                 borderRadius: "5px",
                 background: item.disabled
-                  ? "#9C9C9C"
+                  ? ""
                   : selectedTimings.includes(item.name)
                   ? "#15B5FC"
                   : "none",
@@ -505,7 +593,7 @@ export default function CustomDateCalendar({
                   }}
                   fontSize={{ xs: "14px", sm: "14px", md: "14px", lg: "18px" }}
                 >
-                  {item.name}
+                  {item.name.replace("-", " - ")}
                 </Typography>
               </Box>
             </Button>
@@ -515,13 +603,15 @@ export default function CustomDateCalendar({
           <Button
             onClick={() => handleAddButtonClick(type, selectedService)}
             sx={{
-              background: "var(--primary-3, #15B5FC)",
+              background: " #15B5FC",
               color: "white",
               textTransform: "none",
-              ":hover": {
+              border: "2px solid #15B5FC",
+
+              "&:hover": {
                 background: Colors.WHITE,
                 color: Colors.BUTTON_COLOR,
-                border: "1px solid #15B5FC",
+                border: "2px solid #15B5FC",
               },
             }}
           >

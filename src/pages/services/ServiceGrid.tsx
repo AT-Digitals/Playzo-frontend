@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { IconButton, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
@@ -9,7 +8,7 @@ import CustomSlider from "./CustomSliderService";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../../assets";
-import styled from "styled-components";
+import { useState } from "react";
 
 const { "LeftArrow.svg": LeftArrow } = assets;
 
@@ -33,10 +32,10 @@ interface serviceGridProps {
   radiusbottompleft?: any;
 }
 
-const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
-  opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
-  transition: opacity 0.5s ease-in-out;
-`;
+// const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
+//   opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
+//   transition: opacity 0.5s ease-in-out;
+// `;
 
 export default function ServiceGrid(props: serviceGridProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -66,18 +65,7 @@ export default function ServiceGrid(props: serviceGridProps) {
   const handleMouseLeave = () => {
     setIsMouseOver(false);
   };
-  const [showSkeleton, setShowSkeleton] = useState(true);
 
-  useEffect(() => {
-    // After 4 seconds, set showSkeleton to false to display the actual images
-    const timer = setTimeout(() => {
-      setShowSkeleton(false);
-    }, 4000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
   return (
     <Box
       margin={{ xs: "30px", md: 7 }}
