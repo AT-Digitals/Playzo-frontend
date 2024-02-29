@@ -9,21 +9,21 @@ import {
     TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
 
+import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem from "@mui/material/MenuItem";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
+import Select from "@mui/material/Select";
 import TextFieldComponent from "./TextFieldComponent";
 import UserApi from "../../api/UserApi";
 import routes from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
-import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
+import { useState } from "react";
 
 interface signUpProps {
     handleClose?: () => void;
@@ -146,6 +146,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
                     name: data.name,
 
                     phone: data.phoneNumber,
+                    interestedSports:data.sportsName
                 });
                 if (response) {
                     setModalOpen(true);

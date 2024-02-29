@@ -23,9 +23,9 @@ import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
+import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
-import assets from "../assets";
 
 const {"Calendar.png": calendar,"card icons.png": cardicons, "Icon.png": crediticon,"Frame 39554.png": currency, "Rectangle 679.png": grass} = assets
 
@@ -727,7 +727,7 @@ export default function PaymentBooking() {
       <ModalComponent
         open={openError}
         handleClose={handleCloseError}
-        text="User Not Found"
+        text="Your booking is not confirmed"
       />
     </>
   );
