@@ -25,7 +25,7 @@ export default function UserProfile() {
     const user = localStorage.getItem('user');
       const userData =user && JSON.parse(user);
       setUser(userData);
-      setUserSports(userData["interestedSports"]??[])
+      setUserSports(userData["interestedSports"])
   }, []);
 
 
