@@ -125,7 +125,7 @@ export default function CarouselComponent() {
             <Stack
                 flexDirection={{ xs: "row-reverse", sm: "row-reverse", md: "row-reverse", lg: "row" }}
                 spacing={3}
-                maxWidth={1270}
+                width={"100%"}
                 margin="auto"
                 pt={{ xs: '0px', sm: '0px', md: "0px", lg: "0px" }}
                 pb={{ xs: '0px', sm: '0px', md: "0px", lg: "60px" }}
