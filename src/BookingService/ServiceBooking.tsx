@@ -1,13 +1,13 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import styled, { keyframes } from "styled-components";
+import { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
+import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
-import styled from "styled-components";
 
 const {
   "Image (7).png": badminton,
@@ -112,49 +112,28 @@ export default function ServiceBooking() {
     });
   }, []);
 
-  const ZoomedBox = styled(Box)<{ zoomedIn: boolean }>`
-    transition: transform 1s ease-in-out;
+  // const ZoomedBox = styled(Box)<{ zoomedIn: boolean }>`
+  //   transition: transform 1s ease-in-out;
 
-    &:hover {
-      background-color: ${Colors.BUTTON_COLOR};
-      transform: ${({ zoomedIn }) => (zoomedIn ? "scale(1.2)" : "scale(1)")};
-    }
+  //   &:hover {
+  //     background-color: ${Colors.BUTTON_COLOR};
+  //     transform: ${({ zoomedIn }) => (zoomedIn ? "scale(1.2)" : "scale(1)")};
+  //   }
+  // `;
+
+  const zoomInAnimation = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
+
+  const AnimatedZoomIn = styled.div`
+    animation: ${zoomInAnimation} 1s ease-in-out;
   `;
-  const [zoomedIn, setZoomedIn] = useState(false);
-  const [zoomedTurf, setZoomedTurfn] = useState(false);
-  const [zoomedCrick, setZoomedCrick] = useState(false);
 
-  const navigate = useNavigate();
-  const zoomedBoxRef = useRef<HTMLDivElement>(null);
-  const zoomedBoxTurf = useRef<HTMLDivElement>(null);
-
-  const zoomedBoxCrick = useRef<HTMLDivElement>(null);
-
-  const handleBoardClick = (link: any) => {
-    setZoomedIn(true);
-    setZoomedCrick(true);
-    setZoomedTurfn(true);
-
-    // Navigate to the link after the delay
-    setTimeout(() => {
-      navigate(link);
-    }, 2000);
-  };
-
-  useEffect(() => {
-    const element = zoomedBoxRef.current;
-
-    if (zoomedIn && element) {
-      element.classList.add("zoomed");
-
-      setTimeout(() => {
-        setZoomedIn(false);
-        setZoomedCrick(false);
-        setZoomedTurfn(false);
-        element.classList.remove("zoomed");
-      }, 2000);
-    }
-  }, [zoomedIn]);
   return (
     <>
       <Box
@@ -235,34 +214,33 @@ export default function ServiceBooking() {
               flexDirection={"row"}
             >
               {TurfDetails.map((item) => (
-                <Link style={{ textDecoration: "none" }} to={""}>
-                  <ZoomedBox
-                    ref={zoomedBoxTurf}
-                    zoomedIn={zoomedTurf}
-                    sx={{
-                      ":hover": {
-                        backgroundColor: Colors.BUTTON_COLOR,
-                      },
-                    }}
-                    width={"100%"}
-                    borderRadius={"10px"}
-                    maxWidth={"124px"}
-                    height={"135px"}
-                    border={"1px solid gray"}
-                    onClick={() => handleBoardClick(item.link)}
-                  >
-                    <Box padding={"12px 12px"}>
-                      <img src={item.image} width={"100px"} alt="turf" />
-                      <Typography
-                        fontSize={"12px"}
-                        fontWeight={"600"}
-                        textAlign={"center"}
-                        color={Colors.BLACK}
-                      >
-                        {item.name}
-                      </Typography>
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <AnimatedZoomIn>
+                    <Box
+                      sx={{
+                        ":hover": {
+                          backgroundColor: Colors.BUTTON_COLOR,
+                        },
+                      }}
+                      width={"100%"}
+                      borderRadius={"10px"}
+                      maxWidth={"124px"}
+                      height={"135px"}
+                      border={"1px solid gray"}
+                    >
+                      <Box padding={"12px 12px"}>
+                        <img src={item.image} width={"100px"} alt="turf" />
+                        <Typography
+                          fontSize={"12px"}
+                          fontWeight={"600"}
+                          textAlign={"center"}
+                          color={Colors.BLACK}
+                        >
+                          {item.name}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </ZoomedBox>
+                  </AnimatedZoomIn>
                 </Link>
               ))}
             </Stack>
@@ -276,34 +254,38 @@ export default function ServiceBooking() {
               flexDirection={"row"}
             >
               {BoardDetails.map((item) => (
-                <Link style={{ textDecoration: "none" }} to={""}>
-                  <ZoomedBox
-                    ref={zoomedBoxRef}
-                    zoomedIn={zoomedIn}
-                    width={"100%"}
-                    borderRadius={"10px"}
-                    maxWidth={"124px"}
-                    height={"135px"}
-                    border={"1px solid gray"}
-                    onClick={() => handleBoardClick(item.link)}
-                  >
-                    <Box padding={"12px 12px"}>
-                      <img
-                        src={item.image}
-                        width={"100px"}
-                        height={"90px"}
-                        alt="board"
-                      />
-                      <Typography
-                        fontSize={"12px"}
-                        fontWeight={"600"}
-                        textAlign={"center"}
-                        color={Colors.BLACK}
-                      >
-                        {item.name}
-                      </Typography>
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <AnimatedZoomIn>
+                    <Box
+                      sx={{
+                        ":hover": {
+                          backgroundColor: Colors.BUTTON_COLOR,
+                        },
+                      }}
+                      width={"100%"}
+                      borderRadius={"10px"}
+                      maxWidth={"124px"}
+                      height={"135px"}
+                      border={"1px solid gray"}
+                    >
+                      <Box padding={"12px 12px"}>
+                        <img
+                          src={item.image}
+                          width={"100px"}
+                          height={"90px"}
+                          alt="board"
+                        />
+                        <Typography
+                          fontSize={"12px"}
+                          fontWeight={"600"}
+                          textAlign={"center"}
+                          color={Colors.BLACK}
+                        >
+                          {item.name}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </ZoomedBox>
+                  </AnimatedZoomIn>
                 </Link>
               ))}
             </Stack>
@@ -317,34 +299,33 @@ export default function ServiceBooking() {
               flexDirection={"row"}
             >
               {CricketDetails.map((item) => (
-                <Link style={{ textDecoration: "none" }} to={""}>
-                  <ZoomedBox
-                    ref={zoomedBoxCrick}
-                    zoomedIn={zoomedCrick}
-                    sx={{
-                      ":hover": {
-                        backgroundColor: Colors.BUTTON_COLOR,
-                      },
-                    }}
-                    width={"100%"}
-                    borderRadius={"10px"}
-                    maxWidth={"124px"}
-                    height={"135px"}
-                    border={"1px solid gray"}
-                    onClick={() => handleBoardClick(item.link)}
-                  >
-                    <Box padding={"12px 12px"}>
-                      <img src={item.image} width={"100px"} alt="cricket" />
-                      <Typography
-                        fontSize={"12px"}
-                        fontWeight={"600"}
-                        textAlign={"center"}
-                        color={Colors.BLACK}
-                      >
-                        {item.name}
-                      </Typography>
+                <Link style={{ textDecoration: "none" }} to={item.link}>
+                  <AnimatedZoomIn>
+                    <Box
+                      sx={{
+                        ":hover": {
+                          backgroundColor: Colors.BUTTON_COLOR,
+                        },
+                      }}
+                      width={"100%"}
+                      borderRadius={"10px"}
+                      maxWidth={"124px"}
+                      height={"135px"}
+                      border={"1px solid gray"}
+                    >
+                      <Box padding={"12px 12px"}>
+                        <img src={item.image} width={"100px"} alt="cricket" />
+                        <Typography
+                          fontSize={"12px"}
+                          fontWeight={"600"}
+                          textAlign={"center"}
+                          color={Colors.BLACK}
+                        >
+                          {item.name}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </ZoomedBox>
+                  </AnimatedZoomIn>
                 </Link>
               ))}
             </Stack>
