@@ -443,15 +443,15 @@ export default function CustomDateCalendar({
     <Stack
       padding={{
         xs: "18px 0px",
-        sm: "18px 0px",
-        md: "18px 0px",
+        sm: "18px 38px",
+        md: "18px 38px",
         lg: "0px 20px",
       }}
       display="flex"
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-      alignItems="center"
+      alignItems={{xs: "center", sm: "flex-start", md: 'flex-start', lg: "center"}}
       width="100%"
       margin="0 auto"
     >
@@ -496,7 +496,7 @@ export default function CustomDateCalendar({
         </LocalizationProvider>
       </Box>
       <Box
-        pl={{ xs: "26px", sm: "26px", md: "26px", lg: "0px" }}
+        pl={{ xs: "26px", sm: "6px", md: "6px", lg: "0px" }}
         width="100%"
         maxWidth={330}
       >

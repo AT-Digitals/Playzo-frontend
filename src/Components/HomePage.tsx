@@ -102,6 +102,10 @@ const StyledImage2 = styled.img`
 @media (min-width: 1200px) {
   width: 345px;
   height: 345px;
+
+  @media (min-width: 1280px) {
+    width: 290px;
+    height: 345px;
 }
   
 `;
@@ -198,7 +202,8 @@ export default function HomePage() {
         </Stack>
         <Grid
           container
-          width="96%"
+          width="100%"
+          maxWidth={1460}
           margin="0 auto"
           spacing={3}
           flexDirection={{
