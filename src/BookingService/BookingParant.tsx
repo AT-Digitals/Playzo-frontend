@@ -140,9 +140,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       : type === BookingType.BoardGame
       ? BoardgameImages
       : type === BookingType.BowlingMachine
-      ? [{ image: bowling, name: "Bowling Machine" }]
+      ? [{ image: bowling, name: "Bowling Machine", value:1 }]
       : type === BookingType.CricketNet
-      ? [{ image: cricketnet, name: "Cricket Net" }]
+      ? [{ image: cricketnet, name: "Cricket Net", value:1 }]
       : [];
 
   const handleServiceSelection = (service: any) => {

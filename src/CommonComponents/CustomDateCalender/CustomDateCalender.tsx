@@ -14,6 +14,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ModalComponent from "./ModalComponent";
+import TimeUtlis from "../../Utils/TimeUtlis";
 import leftarrow from "./left-arrow.svg";
 import moment from "moment";
 import rightarrow from "./right-arrow.svg";
@@ -174,14 +175,13 @@ export default function CustomDateCalendar({
   };
 
   const ApiCall = async (dateValue: any) => {
-    console.log('date', dateValue, type, selectedService);
     if (dateValue && type && selectedService) {
       try {
         const response = await BookingApi.filter({
           startDate: dateValue,
           type: type,
           endDate: dateValue,
-          court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
+          court: type===BookingType.BowlingMachine||type===BookingType.CricketNet?1:BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
         });
         setDisableData(response);
       } catch (error: any) {
@@ -198,7 +198,6 @@ export default function CustomDateCalendar({
       const intervals = generateTimeIntervals(new Date(start), new Date(end));
       combinedIntervals = combinedIntervals.concat(intervals);
     });
-
     let isBookingExists: any = [];
     switch (selectedService) {
       case "PS 1&2":
@@ -296,23 +295,12 @@ export default function CustomDateCalendar({
     startMillis: string | number | Date,
     endMillis: number | Date
   ) => {
-    const intervals = [];
-    let currentTime = new Date(startMillis);
-    while (currentTime < endMillis) {
-      const nextHour = new Date(currentTime);
-      nextHour.setHours(nextHour.getHours() + 1);
 
-      const startHour = currentTime.getHours() % 12 || 12;
-      const endHour = nextHour.getHours() % 12 || 12;
-      const startMinutes = ("0" + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
-      const endMinutes = ("0" + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
-      const startPeriod = currentTime.getHours() < 12 ? "AM" : "PM";
-      // const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
-      const intervalString = `${startHour}:${startMinutes}-${endHour}:${endMinutes} ${startPeriod}`;
-      intervals.push(intervalString);
-      currentTime = nextHour;
-    }
-    return intervals;
+      const startTime = TimeUtlis.formatMillisecondsToTimeConvert(startMillis).split(" ")
+      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(endMillis)
+      const finalTime = startTime[0].concat(`-${endTime}`)
+
+    return [finalTime];
   };
 
   React.useEffect(() => {
@@ -357,7 +345,7 @@ export default function CustomDateCalendar({
 
         try {
           const courtValue =
-            BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
+          type===BookingType.BowlingMachine||type===BookingType.CricketNet?1: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
             courtValue
@@ -403,7 +391,7 @@ export default function CustomDateCalendar({
                 "YYYY-MM-DD"
               ),
               court:
-                BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+              type===BookingType.BowlingMachine||type===BookingType.CricketNet?1:BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
             });
           } catch (error: any) {
             if (error.message === "Please choose another date and slot") {
@@ -423,6 +411,12 @@ export default function CustomDateCalendar({
             }) => el === bookings
           )
         ) {
+          if(bookings.type === BookingType.BowlingMachine){
+            bookings.name = "Bowling Machine"
+          }
+          if(bookings.type === BookingType.CricketNet){
+            bookings.name = "Cricket Net"
+          }
           setTableData((prevTableData: any) => [...prevTableData, bookings]);
         }
 
