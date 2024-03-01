@@ -7,10 +7,10 @@ import AbouFaQ from "./AboutFAQ";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Colors from "../../CommonComponents/Colors";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import styled from "styled-components";
 import aboutPage from "../../assets/AboutPageImages";
+import styled from "styled-components";
 
-const {"about-us-bg.jpg": imageBg} = aboutPage
+const { "about-us-bg.jpg": imageBg } = aboutPage;
 
 const Container = styled.div`
   display: flex;
@@ -21,12 +21,6 @@ const Container = styled.div`
   @media (min-width: 600px) {
     flex-direction: row;
   }
-`;
-
-const LeftSide = styled.div`
-  flex: 1;
-  overflow: hidden;
-  animations: transform 8s ease-in-out;
 `;
 
 const RightSide = styled.div`
@@ -73,7 +67,16 @@ const ImageClick = () => {
         } as any
       }
     >
-      <LeftSide>
+      <Box
+        sx={
+          {
+            display: { xs: "none", sm: "none", md: "block" },
+            flex: 1,
+            overflow: "hidden",
+            animations: "transform 8s ease-in-out",
+          } as any
+        }
+      >
         <Box position="relative" display="flex" width={"100%"} height="100%">
           <Box
             position="absolute"
@@ -147,7 +150,7 @@ const ImageClick = () => {
             />
           </Box>
         </Box>
-      </LeftSide>
+      </Box>
       <RightSide
         style={{
           display: expanded ? "block" : "none",

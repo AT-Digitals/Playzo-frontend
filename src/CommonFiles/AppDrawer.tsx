@@ -13,10 +13,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import KeyboardArrowUpTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
-import routes from "../routes/routes";
 import assets from "../assets";
+import routes from "../routes/routes";
 
-const {"Image (6).png": Userprofile} = assets
+const { "Image (6).png": Userprofile } = assets;
 
 const HeaderLink = styled("a")`
   text-decoration: none;
@@ -51,33 +51,33 @@ interface AppDrawerProps {
 
 const MenuList = [
   {
-    href: routes.BADMINTON,
+    href: routes.SERVICE,
     label: "Badminton",
   },
   {
-    href: routes.CROSSFIT,
+    href: routes.SERVICE,
     label: "CrossFit",
   },
 
   {
-    href: routes.TURF,
+    href: routes.SERVICE,
     label: "Turf",
   },
   {
-    href: routes.PLAYSTATION,
+    href: routes.SERVICE,
     label: "Play Station",
   },
 
   {
-    href: routes.BOARDGAMES,
+    href: routes.SERVICE,
     label: "Board Games",
   },
   {
-    href: routes.PARTYCENTER,
+    href: routes.SERVICE,
     label: "Party Center",
   },
   {
-    href: routes.CAFETERIA,
+    href: routes.SERVICE,
     label: "Cafeteria",
   },
 ];
@@ -133,7 +133,7 @@ export default function AppDrawer({
               fontSize="16px"
               style={{ cursor: "pointer" }}
             >
-              Serviced
+              Services
             </Typography>
             {isMenuOpen ? (
               <KeyboardArrowUpTwoToneIcon
@@ -153,7 +153,7 @@ export default function AppDrawer({
           {isMenuOpen && (
             <Stack padding={"0 20px"} direction="column" spacing={1}>
               {MenuList.map((item, index) => (
-                <HeaderLink key={index} href={item.href}>
+                <HeaderLink key={index} href={""}>
                   <Box>
                     <Typography color={Colors.WHITE} fontSize="16px">
                       {item.label}

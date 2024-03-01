@@ -127,7 +127,14 @@ export default function AboutUs() {
             lineHeight={1}
           >
             <span style={{ display: "inline-block" }}>Playzo</span> <br />
-            <span style={{ display: "inline-block", marginLeft: "10rem" }}>
+            <span
+              style={
+                {
+                  // display: "inline-block",
+                  marginLeft: { xs: "2rem", sm: "5rem", md: "10rem" },
+                } as any
+              }
+            >
               Journey
             </span>
           </Typography>

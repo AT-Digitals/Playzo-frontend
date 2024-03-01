@@ -164,27 +164,6 @@ export default function CustomDateCalendar({
     ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
   }, []);
 
-  // const handleDateSelection = (newValue: any) => {
-  //   let datedata = newValue.$d;
-  //   const parsedDate = moment(datedata);
-  //   const formattedDate = parsedDate.format("YYYY-MM-DD");
-
-  //   setSelectedDate(formattedDate);
-  //   ApiCall(formattedDate);
-  //   console.log(tableData, "clicked Date");
-
-  //   let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-  //   selectedTimings.forEach((selectedTime) => {
-  //     updatedItems = updatedItems.map((item) =>
-  //       item.name === selectedTime && selectedDate
-  //         ? { ...item, disabled: true }
-  //         : item
-  //     );
-  //   });
-
-  // };
-
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
     const parsedDate = moment(datedata);
@@ -214,20 +193,6 @@ export default function CustomDateCalendar({
     isBookingExists.map((items: any) => times.push(...items.time));
 
     console.log(times, "times");
-
-    // setItems((prevItems) =>
-    //   prevItems.map((item) => {
-    //     // console.log(item.name, "nameinITEm");
-
-    //       // isBookingExists && item.name === selectedTime
-    //       // times.includes(item.name) ? { ...item, disabled: true } : item
-    //       times.map((time) => {
-    //         if(time ===  item.name ){
-    //           item.disabled = true
-    //         }
-    //       })
-    //   })
-    // );
 
     if (times.length > 0) {
       const updatedItems = items.map((item) =>
@@ -393,8 +358,6 @@ export default function CustomDateCalendar({
 
             // If booking does not exist, perform further actions
             if (!isBookingExists) {
-              // ... (unchanged part)
-
               updatedItems = updatedItems.map((item) =>
                 isBookingExists && item.name === timeData
                   ? { ...item, disabled: true }
@@ -469,7 +432,6 @@ export default function CustomDateCalendar({
         setSelectedDate(new Date().toString());
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
-        setIsBackButtonVisible(false);
       } else {
         setDateModalOpen(true);
       }
@@ -477,6 +439,14 @@ export default function CustomDateCalendar({
       setModalOpen(true);
     }
   };
+
+  React.useEffect(() => {
+    if (tableData && tableData.length === 0) {
+      setIsBackButtonVisible(true);
+    } else {
+      setIsBackButtonVisible(false);
+    }
+  }, [tableData]);
 
   return (
     <Stack

@@ -59,7 +59,12 @@ export default function ServiceHeaders() {
 
   return (
     <>
-      <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems={"center"}
+        mt={"2rem"}
+      >
         <StyledTextReveal reveal={reveal}>
           <Typography
             sx={{

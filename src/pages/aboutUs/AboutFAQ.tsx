@@ -43,7 +43,7 @@ export default function AbouFaQ() {
           }}
           key={index}
           width={"100%"}
-          maxWidth={{ xs: "323px", sm: "323px", md: "323px", lg: "1200px" }}
+          // maxWidth={{ xs: "323px", sm: "323px", md: "323px", lg: "1200px" }}
           mt={"15px"}
           borderBottom={"1px solid grey"}
         >

@@ -118,6 +118,7 @@ export default function PaymentBooking() {
 
   const handlegoBack = () => {
     navigate(-1);
+
     console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 

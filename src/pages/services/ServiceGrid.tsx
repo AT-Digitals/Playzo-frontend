@@ -97,7 +97,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             display={"flex"}
             flexDirection={"column"}
             gap={"1px"}
-            height={400}
+            // height={447}
           >
             <CustomSlider
               currentSlide={currentSlide}
@@ -122,7 +122,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             borderTopRightRadius: props.radiusTopright,
             borderBottomRightRadius: props.radiusbottompright,
           }}
-          minHeight={400}
+          minHeight={447}
           justifyContent="space-between"
           spacing={4}
         >
@@ -138,7 +138,6 @@ export default function ServiceGrid(props: serviceGridProps) {
                 variant="h5"
                 style={{
                   whiteSpace: "nowrap",
-                  // fontSize: "82px",
                   fontStyle: "italic",
                   fontWeight: 700,
                   color: isMouseOver ? Colors.BUTTON_COLOR : "black",
@@ -157,7 +156,11 @@ export default function ServiceGrid(props: serviceGridProps) {
               </Typography>
             </Box>
 
-            <Box display={"flex"}>
+            <Box
+              display={"flex"}
+              gap={"10px"}
+              flexDirection={{ xs: "column", sm: "column", md: "row" }}
+            >
               <Typography
                 gutterBottom
                 variant="h5"
@@ -181,7 +184,11 @@ export default function ServiceGrid(props: serviceGridProps) {
               </Typography>
             </Box>
 
-            <Box display={"flex"} gap={"10px"}>
+            <Box
+              display={"flex"}
+              gap={"10px"}
+              flexDirection={{ xs: "column", sm: "column", md: "row" }}
+            >
               <Typography
                 gutterBottom
                 variant="h5"

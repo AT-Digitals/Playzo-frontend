@@ -11,6 +11,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import AppContainer from "../CommonComponents/AppContainer";
@@ -20,12 +21,12 @@ import LoginForm from "../pages/login/LoginForm";
 import { Logout } from "@mui/icons-material";
 import UserLoginApi from "../api/UserLoginApi";
 import assets from "../assets";
+import headerImage from "../assets/Header";
 import routes from "../routes/routes";
-import { useNavigate } from "react-router-dom";
 
 const { "Playzo (1).svg": logo } = assets;
 
-const HeaderLink = styled("a")`
+const HeaderLink = styled(Link)`
   text-decoration: none;
   position: relative;
   color: ${Colors.BUTTON_COLOR};
@@ -71,32 +72,14 @@ export default function Header() {
     }
   };
 
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem("user");
-  //   const userData = user && JSON.parse(user);
-  //   setUser(userData);
-  // }, []);
+  const { "headerProfileLogo.png": headerProfileLogo } = headerImage;
+  console.log("headerProfileLogo:", headerProfileLogo);
 
   interface User {
     name?: string;
   }
 
   const [user, setUser] = useState<User | null>(null);
-
-  // useEffect(() => {
-  //   const userData = localStorage.getItem("user");
-  //   const parsedUserData = userData && JSON.parse(userData);
-
-  //   if (parsedUserData) {
-  //     setUser(parsedUserData);
-  //     setIsLoggedIn(true);
-  //   } else {
-  //     setUser(null);
-  //     setIsLoggedIn(false);
-  //   }
-  // }, []);
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -110,14 +93,6 @@ export default function Header() {
       setIsLoggedIn(false); // Set to false if there is no user data
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setIsLoggedIn(true);
-  //   } else {
-  //     setIsLoggedIn(false);
-  //   }
-  // }, [user]);
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
@@ -133,13 +108,13 @@ export default function Header() {
           paddingY={3}
         >
           <Box>
-            <HeaderLink href={routes.ROOT}>
+            <HeaderLink to={routes.ROOT}>
               <img width={200} height={50} src={logo} alt="alterknit" />
             </HeaderLink>
           </Box>
 
           <Stack direction="row" spacing={3} alignItems="center">
-            <HeaderLink href={routes.ABOUTUS}>
+            <HeaderLink to={routes.ABOUTUS}>
               <Typography
                 sx={{
                   color: Colors.WHITE,
@@ -158,7 +133,7 @@ export default function Header() {
             </HeaderLink>
 
             <DropDown />
-            <HeaderLink href={routes.CONTACTUS}>
+            <HeaderLink to={routes.CONTACTUS}>
               <Typography
                 sx={{
                   color: Colors.WHITE,
@@ -177,7 +152,7 @@ export default function Header() {
             </HeaderLink>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <HeaderLink href={routes.BOOKING_SERVICE}>
+            <HeaderLink to={routes.BOOKING_SERVICE}>
               <Button
                 variant="outlined"
                 sx={{
@@ -257,7 +232,7 @@ export default function Header() {
                   style={{
                     color: "black",
                   }}
-                  href={routes.USERPROFILE}
+                  to={routes.USERPROFILE}
                 >
                   <MenuItem onClick={handleChange}>
                     <Avatar /> My Profile
