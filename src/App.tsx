@@ -14,7 +14,7 @@ const theme = createTheme({
   },
 });
 
-const clientId = process.env.REACT_GOOGLE_CLIENT_ID ?? "" 
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID ?? "" 
 
 function App() {
   return (
