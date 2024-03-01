@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Colors from "./Colors";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import routes from "../routes/routes";
 import styled from "styled-components";
@@ -16,7 +17,7 @@ const menuList = [
   { label: "Cafeteria" },
 ];
 
-const HeaderLink = styled("a")`
+const HeaderLink = styled(Link)`
   text-decoration: none;
   position: relative;
   color: ${Colors.BUTTON_COLOR};
@@ -52,28 +53,7 @@ export default function BasicMenu() {
         onMouseLeave={handleMouseLeave}
         style={{ position: "relative" }}
       >
-        {/* <Link style={{ textDecoration: "none" }} to={routes.SERVICE}>
-          <Button
-            endIcon={}
-            sx={{
-              fontSize: "14px",
-              letterSpacing: "1.6px",
-              textTransform: "uppercase",
-              color: Colors.WHITE,
-              transition: "color 0.5s ease",
-              border: "none",
-              boxShadow: "none",
-              background: "transparent",
-              ":hover": {
-                color: Colors.BUTTON_COLOR,
-              },
-            }}
-          >
-            Services
-          </Button>
-        </Link> */}
-
-        <HeaderLink href={routes.SERVICE}>
+        <HeaderLink to={routes.SERVICE}>
           <Typography
             sx={{
               color: Colors.WHITE,
