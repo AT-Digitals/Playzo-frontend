@@ -175,13 +175,19 @@ export default function CustomDateCalendar({
   };
 
   const ApiCall = async (dateValue: any) => {
+    if (type === BookingType.BowlingMachine) {
+      selectedService = "Bowling Machine"
+    }
+    if (type === BookingType.CricketNet) {
+      selectedService = "Cricket Net"
+    }
     if (dateValue && type && selectedService) {
       try {
         const response = await BookingApi.filter({
           startDate: dateValue,
           type: type,
           endDate: dateValue,
-          court: type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
+          court: type === BookingType.BowlingMachine || type === BookingType.CricketNet ? "1" : BookingSubTypes[selectedService as keyof typeof BookingSubTypes].toString(),
         });
         setDisableData(response);
       } catch (error: any) {
@@ -355,6 +361,8 @@ export default function CustomDateCalendar({
         let flag = false;
         for (const timeData of selectedTimings) {
           try {
+            const newCourt = type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
+                
             const startDateTime = DateUtils.startTimeAddtoDate(timeData);
             const endDateTime = DateUtils.endTimeAddtoDate(timeData);
             const endMilli = DateUtils.joinDate(DateUtils.formatDate(
@@ -368,7 +376,7 @@ export default function CustomDateCalendar({
             const startMilliSec = new Date(startMilli).getTime();
             const endMilliSec = new Date(endMilli).getTime();
             await BookingApi.getBookedList({
-              type: BookingType.Turf,
+              type: type,
               bookingtype: "online",
               startTime: startMilliSec,
               endTime: endMilliSec,
@@ -381,10 +389,8 @@ export default function CustomDateCalendar({
                 new Date(selectedDate),
                 "YYYY-MM-DD"
               ),
-              court:
-                type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+              court:newCourt.toString()
             });
-            flag = false;
           } catch (error: any) {
             flag = true;
             if (error.message === "Please choose another date and slot") {

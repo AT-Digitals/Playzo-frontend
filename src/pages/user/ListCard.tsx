@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import { BookingNameTypes, BookingSubTypes } from "../../BookingService/BookingSubTypes";
 import { Button, Divider, Stack, Typography } from "@mui/material";
 
+import { BookingNameTypes } from "../../BookingService/BookingSubTypes";
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import DateUtils from "../../Utils/DateUtils";
