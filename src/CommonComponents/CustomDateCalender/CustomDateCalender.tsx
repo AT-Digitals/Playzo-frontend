@@ -352,28 +352,40 @@ export default function CustomDateCalendar({
         } catch (err) {
           console.log("err", err);
         }
-let flag = false;
-for (const timeData of selectedTimings){
+        let flag = false;
+        for (const timeData of selectedTimings) {
           try {
-            let startMilliseconds = 0;
-            let endMilliseconds = 0;
-            const [time, am] = timeData.split(" ");
-            const [time1, am1] = time.split("-");
-            const [hours, minutes] = time1.split(":");
+            const startDateTime = DateUtils.startTimeAddtoDate(timeData);
+            const endDateTime = DateUtils.endTimeAddtoDate(timeData);
+            const endMilli = DateUtils.joinDate(DateUtils.formatDate(
+              new Date(selectedDate),
+              "YYYY-MM-DD"
+            ), endDateTime);
+            const startMilli = DateUtils.joinDate(DateUtils.formatDate(
+              new Date(selectedDate),
+              "YYYY-MM-DD"
+            ), startDateTime);
+            const startMilliSec = new Date(startMilli).getTime();
+            const endMilliSec = new Date(endMilli).getTime();
+            // let startMilliseconds = 0;
+            // let endMilliseconds = 0;
+            // const [time, am] = timeData.split(" ");
+            // const [time1, am1] = time.split("-");
+            // const [hours, minutes] = time1.split(":");
 
 
-            const startDateTime = new Date(selectedDate);
-            startDateTime.setHours(Number(hours), Number(minutes));
-            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
+            // const startDateTime = new Date(selectedDate);
+            // startDateTime.setHours(Number(hours), Number(minutes));
+            // startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
 
-            const endDateTime = new Date(startDateTime);
-            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+            // const endDateTime = new Date(startDateTime);
+            // endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
+            // endMilliseconds = endDateTime.getTime(); // End time in milliseconds
             await BookingApi.getBookedList({
               type: BookingType.Turf,
               bookingtype: "online",
-              startTime: startMilliseconds,
-              endTime: endMilliseconds,
+              startTime: startMilliSec,
+              endTime: endMilliSec,
               user: userData.id,
               startDate: DateUtils.formatDate(
                 new Date(selectedDate),
@@ -412,9 +424,9 @@ for (const timeData of selectedTimings){
           if (bookings.type === BookingType.CricketNet) {
             bookings.name = "Cricket Net"
           }
-if(!flag){
-          setTableData((prevTableData: any) => [...prevTableData, bookings]);
-}
+          if (!flag) {
+            setTableData((prevTableData: any) => [...prevTableData, bookings]);
+          }
         }
 
         // Reset selected date and timings
