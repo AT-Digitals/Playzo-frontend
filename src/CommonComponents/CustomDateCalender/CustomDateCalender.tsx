@@ -167,7 +167,7 @@ export default function CustomDateCalendar({
 
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
-    console.log(tableData, "clicked Date");
+
 
 
 
@@ -181,7 +181,7 @@ export default function CustomDateCalendar({
           startDate: dateValue,
           type: type,
           endDate: dateValue,
-          court: type===BookingType.BowlingMachine||type===BookingType.CricketNet?1:BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
+          court: type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
         });
         setDisableData(response);
       } catch (error: any) {
@@ -195,9 +195,12 @@ export default function CustomDateCalendar({
     disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
-      const intervals = generateTimeIntervals(new Date(start), new Date(end));
-      combinedIntervals = combinedIntervals.concat(intervals);
+      const startTime = TimeUtlis.formatMillisecondsToTimeConvert(start).split(" ")
+      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(end)
+      const finalTime = startTime[0].concat(`-${endTime}`)
+      combinedIntervals = combinedIntervals.concat(finalTime);
     });
+
     let isBookingExists: any = [];
     switch (selectedService) {
       case "PS 1&2":
@@ -273,16 +276,17 @@ export default function CustomDateCalendar({
 
     isBookingExists.map((items: any) => combinedIntervals.push(...items.time));
     const uniqueArray = combinedIntervals.reduce((accumulator, currentValue) => {
+
       if (!accumulator.includes(currentValue)) {
         accumulator.push(currentValue);
       }
       return accumulator;
     }, []);
-
     if (uniqueArray.length > 0) {
       const updatedItems = items.map((item) =>
         uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
-      );
+      )
+
       setItems(updatedItems)
     } else {
       setItems(Timings)
@@ -291,17 +295,6 @@ export default function CustomDateCalendar({
 
   };
 
-  const generateTimeIntervals = (
-    startMillis: string | number | Date,
-    endMillis: number | Date
-  ) => {
-
-      const startTime = TimeUtlis.formatMillisecondsToTimeConvert(startMillis).split(" ")
-      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(endMillis)
-      const finalTime = startTime[0].concat(`-${endTime}`)
-
-    return [finalTime];
-  };
 
   React.useEffect(() => {
     if (disableData || selectedDate) {
@@ -345,7 +338,7 @@ export default function CustomDateCalendar({
 
         try {
           const courtValue =
-          type===BookingType.BowlingMachine||type===BookingType.CricketNet?1: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
+            type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
             courtValue
@@ -391,7 +384,7 @@ export default function CustomDateCalendar({
                 "YYYY-MM-DD"
               ),
               court:
-              type===BookingType.BowlingMachine||type===BookingType.CricketNet?1:BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+                type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
             });
           } catch (error: any) {
             if (error.message === "Please choose another date and slot") {
@@ -411,10 +404,10 @@ export default function CustomDateCalendar({
             }) => el === bookings
           )
         ) {
-          if(bookings.type === BookingType.BowlingMachine){
+          if (bookings.type === BookingType.BowlingMachine) {
             bookings.name = "Bowling Machine"
           }
-          if(bookings.type === BookingType.CricketNet){
+          if (bookings.type === BookingType.CricketNet) {
             bookings.name = "Cricket Net"
           }
           setTableData((prevTableData: any) => [...prevTableData, bookings]);

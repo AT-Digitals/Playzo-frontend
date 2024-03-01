@@ -7,7 +7,7 @@ export default class TimeUtlis {
     if (ms === null) {
       return "";
     }
-    const formattedTime = moment(ms).format("hh:mm A");
+    const formattedTime = moment(ms).format("h:mm A");
     return formattedTime;
   };
   static formatMillisecondsToTime = (ms: moment.MomentInput) => {
