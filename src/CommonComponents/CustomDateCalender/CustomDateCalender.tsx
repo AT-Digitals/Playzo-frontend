@@ -67,9 +67,7 @@ export default function CustomDateCalendar({
   selectedService,
   setIsBackButtonVisible,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>(
-    new Date().toString()
-  );
+  const [selectedDate, setSelectedDate] = React.useState<string>('');
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -160,30 +158,6 @@ export default function CustomDateCalendar({
     setDateModalOpen(false);
   };
 
-  React.useEffect(() => {
-    ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
-  }, []);
-
-  // const handleDateSelection = (newValue: any) => {
-  //   let datedata = newValue.$d;
-  //   const parsedDate = moment(datedata);
-  //   const formattedDate = parsedDate.format("YYYY-MM-DD");
-
-  //   setSelectedDate(formattedDate);
-  //   ApiCall(formattedDate);
-  //   console.log(tableData, "clicked Date");
-
-  //   let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-  //   selectedTimings.forEach((selectedTime) => {
-  //     updatedItems = updatedItems.map((item) =>
-  //       item.name === selectedTime && selectedDate
-  //         ? { ...item, disabled: true }
-  //         : item
-  //     );
-  //   });
-
-  // };
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
@@ -194,92 +168,128 @@ export default function CustomDateCalendar({
     ApiCall(formattedDate);
     console.log(tableData, "clicked Date");
 
-    let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
 
-    // selectedTimings.forEach((selectedTime) => {
-    // Check if the selected date and time exist in tableData
-    const isBookingExists = tableData.filter((booking: any) => {
-      return (
-        booking.date === formattedDate &&
-        booking.name === selectedService &&
-        booking.type === type
-      );
-    });
 
-    console.log(isBookingExists, "bookingTime");
 
-    console.log("isBookingExists:", isBookingExists);
-    let times: any[] = [];
-
-    isBookingExists.map((items: any) => times.push(...items.time));
-
-    console.log(times, "times");
-
-    // setItems((prevItems) =>
-    //   prevItems.map((item) => {
-    //     // console.log(item.name, "nameinITEm");
-
-    //       // isBookingExists && item.name === selectedTime
-    //       // times.includes(item.name) ? { ...item, disabled: true } : item
-    //       times.map((time) => {
-    //         if(time ===  item.name ){
-    //           item.disabled = true
-    //         }
-    //       })
-    //   })
-    // );
-
-    if (times.length > 0) {
-      const updatedItems = items.map((item) =>
-        times.includes(item.name) ? { ...item, disabled: true } : item
-      );
-      setItems(updatedItems);
-    } else {
-      setItems(Timings);
-    }
-
-    console.log(formattedDate, "formattedDate");
-    console.log("updatedItems:from clickdate", updatedItems);
-
-    console.log(type, "selectedType");
-    console.log(selectedService, "selectedService");
-    // console.log(selctedname, "selctedname");
-    console.log(selectedDate, "selectedDate");
   };
 
   const ApiCall = async (dateValue: any) => {
-    try {
-      const response = await BookingApi.filter({
-        startDate: dateValue,
-        type: type,
-        endDate: dateValue,
-        court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
-      });
-      setDisableData(response);
-    } catch (error: any) {
-      console.error("Error:", error.message);
+    console.log('date', dateValue, type, selectedService);
+    if (dateValue && type && selectedService) {
+      try {
+        const response = await BookingApi.filter({
+          startDate: dateValue,
+          type: type,
+          endDate: dateValue,
+          court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
+        });
+        setDisableData(response);
+      } catch (error: any) {
+        console.error("Error:", error.message);
+      }
     }
   };
 
   const MilisecondsToHours = () => {
     let combinedIntervals: any[] = [];
-
     disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
       const intervals = generateTimeIntervals(new Date(start), new Date(end));
       combinedIntervals = combinedIntervals.concat(intervals);
     });
-    if (combinedIntervals.length > 0) {
-      const updatedItems = items.map((item) =>
-        combinedIntervals.includes(item.name)
-          ? { ...item, disabled: true }
-          : item
-      );
-      setItems(updatedItems);
-    } else {
-      setItems(Timings);
+
+    let isBookingExists: any = [];
+    switch (selectedService) {
+      case "PS 1&2":
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === 'PS 2' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'PS 1':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'PS 2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 2' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'Turf 1&2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      case 'Turf 1':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      case 'Turf 2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      default:
+        isBookingExists = tableData.filter((booking: any) => {
+
+          return (
+            booking.date === selectedDate &&
+            booking.name === selectedService &&
+            booking.type === type
+          );
+        });
     }
+
+    isBookingExists.map((items: any) => combinedIntervals.push(...items.time));
+    const uniqueArray = combinedIntervals.reduce((accumulator, currentValue) => {
+      if (!accumulator.includes(currentValue)) {
+        accumulator.push(currentValue);
+      }
+      return accumulator;
+    }, []);
+
+    if (uniqueArray.length > 0) {
+      const updatedItems = items.map((item) =>
+        uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
+      );
+      setItems(updatedItems)
+    } else {
+      setItems(Timings)
+    }
+
+
   };
 
   const generateTimeIntervals = (
@@ -306,12 +316,14 @@ export default function CustomDateCalendar({
   };
 
   React.useEffect(() => {
-    if (disableData) {
+    if (disableData || selectedDate) {
       MilisecondsToHours();
     }
-  }, [disableData]);
 
-  // console.log(disableData, "disableData");
+
+  }, [disableData, selectedDate]);
+
+
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -346,13 +358,11 @@ export default function CustomDateCalendar({
         try {
           const courtValue =
             BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
-          console.log("courtValue", courtValue);
           const response = await BookingApi.getBookingAmount(
             bookings.type,
             courtValue
           );
           if (response) {
-            console.log("responseaa", response);
             ratePerHour = response.bookingAmount;
             bookings.amount = totalDuration * ratePerHour;
           } else {
@@ -362,55 +372,6 @@ export default function CustomDateCalendar({
           console.log("err", err);
         }
 
-        let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-        selectedTimings.forEach((selectedTime) => {
-          updatedItems = updatedItems.map((item) =>
-            item.name === selectedTime && selectedDate
-              ? { ...item, disabled: true }
-              : item
-          );
-        });
-        // console.log(selectedDate, "selectedDate");
-        setItems(updatedItems);
-        // console.log(updatedItems, "updatedItems");
-
-        await Promise.all(
-          selectedTimings.map(async (timeData) => {
-            let isBookingExists = false;
-
-            // Check if the booking already exists in tableData
-            tableData.forEach((booking: any) => {
-              if (
-                booking.type === type &&
-                booking.name === selectedService &&
-                booking.date === selectedDate &&
-                booking.time.includes(timeData)
-              ) {
-                isBookingExists = true;
-              }
-            });
-
-            // If booking does not exist, perform further actions
-            if (!isBookingExists) {
-              // ... (unchanged part)
-
-              updatedItems = updatedItems.map((item) =>
-                isBookingExists && item.name === timeData
-                  ? { ...item, disabled: true }
-                  : item
-              );
-
-              // Set the updated items in the state
-              setItems(updatedItems);
-            } else {
-              console.log(
-                `Booking already exists for ${selectedDate} and ${timeData}`
-              );
-            }
-          })
-        );
-
         selectedTimings.forEach(async (timeData) => {
           try {
             let startMilliseconds = 0;
@@ -419,7 +380,7 @@ export default function CustomDateCalendar({
             const [time1, am1] = time.split("-");
             const [hours, minutes] = time1.split(":");
 
-            console.log("hours", hours, minutes);
+
             const startDateTime = new Date(selectedDate);
             startDateTime.setHours(Number(hours), Number(minutes));
             startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
@@ -466,7 +427,7 @@ export default function CustomDateCalendar({
         }
 
         // Reset selected date and timings
-        setSelectedDate(new Date().toString());
+        setSelectedDate("");
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
         setIsBackButtonVisible(false);
@@ -557,8 +518,8 @@ export default function CustomDateCalendar({
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -567,8 +528,8 @@ export default function CustomDateCalendar({
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
+                    ? "#15B5FC"
+                    : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -583,8 +544,8 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
+                        ? "white"
+                        : "black"
                   }
                   sx={{
                     ":hover": {

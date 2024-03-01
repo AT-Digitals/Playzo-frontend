@@ -132,6 +132,7 @@ export default function Form({ handleClose, open }: loginProps) {
           navigate(routes.BOOKING_SERVICE);
           navigate(0);
           handleClose?.();
+          setShowPassword(false);
         }
       } catch (err: any) {
         setModalErrorOpen(true);
@@ -146,6 +147,7 @@ export default function Form({ handleClose, open }: loginProps) {
     setPassword('')
     setIsValidEmail(false);
     setIsPasswordValid(false);
+    setShowPassword(false);
   }
 
   const googleLogin = useGoogleLogin({

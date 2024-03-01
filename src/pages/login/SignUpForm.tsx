@@ -56,6 +56,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         setModalOpen(false);
         navigate(routes.BOOKING_SERVICE);
         handleClose?.();
+
     };
 
     const handleErrorModal = () => {
@@ -121,7 +122,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             setIsValidEmail(true);
             return;
         }
-        if (phoneNumber.length < 10) {
+        if (phoneNumber !== '' && phoneNumber.length > 10) {
             setIsValidPhone(true);
             return;
         }
@@ -146,7 +147,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
                     name: data.name,
 
                     phone: data.phoneNumber,
-                    interestedSports:data.sportsName
+                    interestedSports: data.sportsName
                 });
                 if (response) {
                     setModalOpen(true);
@@ -155,6 +156,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
                     setPassword("");
                     setPhoneNumber("");
                     setSportsName([]);
+                    setShowPassword(false);
                 } else {
                     console.log("Register Failed");
                 }
@@ -176,6 +178,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         setIsPasswordValid(false);
         setIsValidName(false);
         setIsValidPhone(false);
+        setShowPassword(false);
     }
     return (
         <Dialog
