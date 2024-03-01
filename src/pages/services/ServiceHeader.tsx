@@ -2,10 +2,11 @@ import { Box, Typography, keyframes } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
-import styled from "@emotion/styled";
 import assets from "../../assets";
+import styled from "@emotion/styled";
 
-const {"ServicePara.svg": ServicePara, "ServicePara1.svg": ServicePara1} = assets
+const { "ServicePara.svg": ServicePara, "ServicePara1.svg": ServicePara1 } =
+  assets;
 
 const StyledTypoBody = styled(Typography)({
   color: Colors.BLACK,
@@ -59,18 +60,19 @@ export default function ServiceHeaders() {
   return (
     <>
       <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-        <StyledTextReveal
-          style={{
-            fontSize: "82px",
-            textAlign: "center",
-            fontStyle: "italic",
-            fontWeight: 700,
-            lineHeight: 1.2,
-          }}
-          reveal={reveal}
-        >
-          Your Gateway to Exciting <br />
-          Experiences
+        <StyledTextReveal reveal={reveal}>
+          <Typography
+            sx={{
+              fontSize: { xs: "28px", sm: "50px", md: "50px", lg: "82px" },
+              textAlign: "center",
+              fontStyle: "italic",
+              fontWeight: 700,
+              lineHeight: 1.2,
+            }}
+          >
+            Your Gateway to Exciting <br />
+            Experiences
+          </Typography>
         </StyledTextReveal>
 
         <StyledTypoBody
@@ -78,6 +80,7 @@ export default function ServiceHeaders() {
           variant="body1"
           fontSize="18px"
           className="animated-text"
+          padding={"0 20px"}
         >
           We offer a diverse range of services to cater to the varied interests
           of our community. Whether you're a sports enthusiast, a fitness buff,
@@ -87,6 +90,7 @@ export default function ServiceHeaders() {
       </Box>
       <>
         <Box
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
           component="img"
           src={ServicePara}
           alt="ball"
@@ -103,6 +107,7 @@ export default function ServiceHeaders() {
           }}
         />
         <Box
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
           component="img"
           src={ServicePara1}
           alt=""

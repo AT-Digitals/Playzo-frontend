@@ -77,7 +77,6 @@ export default function ServiceGrid(props: serviceGridProps) {
             backgroundSize: "100% auto",
             backgroundPosition: "center",
           },
-
           ".swiper-button-next::after": {
             display: "none",
           },
@@ -94,7 +93,12 @@ export default function ServiceGrid(props: serviceGridProps) {
         alignItems={"flex-start"}
       >
         <Stack width={"100%"} height={"100%"}>
-          <Box display={"flex"} flexDirection={"column"} gap={"1px"}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            gap={"1px"}
+            height={400}
+          >
             <CustomSlider
               currentSlide={currentSlide}
               slides={props.carouselItems}
@@ -110,7 +114,6 @@ export default function ServiceGrid(props: serviceGridProps) {
           marginRight={"0px !important"}
           marginLeft={"0px !important"}
           bgcolor={"white"}
-          padding={"0 30px"}
           width={"100%"}
           sx={{
             marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
@@ -123,14 +126,19 @@ export default function ServiceGrid(props: serviceGridProps) {
           justifyContent="space-between"
           spacing={4}
         >
-          <Stack direction={"column"} spacing={2}>
+          <Stack
+            padding={{ xs: "20px 22px", sm: "0 22px" }}
+            direction={"column"}
+            spacing={2}
+          >
             <Box>
               <Typography
+                fontSize={{ xs: "35px", sm: "70px", md: "82px" }}
                 gutterBottom
                 variant="h5"
                 style={{
                   whiteSpace: "nowrap",
-                  fontSize: "82px",
+                  // fontSize: "82px",
                   fontStyle: "italic",
                   fontWeight: 700,
                   color: isMouseOver ? Colors.BUTTON_COLOR : "black",
@@ -149,7 +157,7 @@ export default function ServiceGrid(props: serviceGridProps) {
               </Typography>
             </Box>
 
-            <Box display={"flex"} gap={"10px"}>
+            <Box display={"flex"}>
               <Typography
                 gutterBottom
                 variant="h5"

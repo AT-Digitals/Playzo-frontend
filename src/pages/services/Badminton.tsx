@@ -3,8 +3,12 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import badmintonImage from "../../assets/BadmintonImages";
 
-const {"Badmin_logo.svg": Badmin_logo} = assets
-const {"badminton1.jpg": Badmintonslide2, "badminton2.jpg": Badmintonslide3, "badminton3.jpg": Badmintonslide4} = badmintonImage
+const { "Badmin_logo.svg": Badmin_logo } = assets;
+const {
+  "badminton1.jpg": Badmintonslide2,
+  "badminton2.jpg": Badmintonslide3,
+  "badminton3.jpg": Badmintonslide4,
+} = badmintonImage;
 
 const heading1 = "Badminton";
 const heading2 = "Features";
@@ -34,7 +38,12 @@ export default function Badminton() {
         radiusbottompleft={"20px"}
         radiusbottompright={"0px"}
         position={"end"}
-        direction={{ xs: "column", sm: "column", md: "row-reverse" }}
+        direction={{
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "row-reverse",
+        }}
         icon={Badmin_logo}
         carouselItems={carouselItems}
         heading1={heading1}

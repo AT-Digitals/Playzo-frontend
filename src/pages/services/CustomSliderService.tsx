@@ -130,7 +130,7 @@ const CustomSlider = ({
                       objectFit: "cover", // Set object-fit to cover
                       overflow: "hidden",
                       display: "flex",
-                      height: "100%", // Ensure the height is 100%
+                      height: "100%",
                       maxHeight: 400,
                     }}
                   >

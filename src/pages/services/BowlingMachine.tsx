@@ -3,8 +3,12 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import bowlingImage from "../../assets/Bowling";
 
-const {"Bowling_logo.svg": Bowling_logo} = assets
-const {"bowling1.jpg": BowlingSlide1, "bowling2.jpg": BowlingSlide2, "bowling3.webp": BowlingSlide3} = bowlingImage
+const { "Bowling_logo.svg": Bowling_logo } = assets;
+const {
+  "bowling1.jpg": BowlingSlide1,
+  "bowling2.jpg": BowlingSlide2,
+  "bowling3.webp": BowlingSlide3,
+} = bowlingImage;
 
 const heading1 = "Bowling Machine";
 const heading2 = "Features";
@@ -32,7 +36,7 @@ export default function BowlingMachine() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{ xs: "column", sm: "column", md: "row" }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Bowling_logo}
         carouselItems={carouselItems}
         heading1={heading1}

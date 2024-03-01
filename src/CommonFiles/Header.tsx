@@ -11,7 +11,6 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import AppContainer from "../CommonComponents/AppContainer";
@@ -19,10 +18,10 @@ import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import { Logout } from "@mui/icons-material";
-import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
 import assets from "../assets";
 import routes from "../routes/routes";
+import { useNavigate } from "react-router-dom";
 
 const { "Playzo (1).svg": logo } = assets;
 
@@ -42,7 +41,7 @@ export default function Header() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // const [userData, serUserData] = useState();
 
@@ -56,7 +55,7 @@ export default function Header() {
   };
 
   const handleChange = () => {
-    navigate(routes.USERPROFILE);
+    // navigate(routes.USERPROFILE);
     setAnchorEl(null);
   };
 
@@ -80,7 +79,24 @@ export default function Header() {
   //   setUser(userData);
   // }, []);
 
-  const [user, setUser] = useState(null);
+  interface User {
+    name?: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
+
+  // useEffect(() => {
+  //   const userData = localStorage.getItem("user");
+  //   const parsedUserData = userData && JSON.parse(userData);
+
+  //   if (parsedUserData) {
+  //     setUser(parsedUserData);
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setUser(null);
+  //     setIsLoggedIn(false);
+  //   }
+  // }, []);
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -88,20 +104,20 @@ export default function Header() {
 
     if (parsedUserData) {
       setUser(parsedUserData);
-      setIsLoggedIn(true);
+      setIsLoggedIn(true); // Set to true if there is user data
     } else {
       setUser(null);
-      setIsLoggedIn(false);
+      setIsLoggedIn(false); // Set to false if there is no user data
     }
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [user]);
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
@@ -117,9 +133,9 @@ export default function Header() {
           paddingY={3}
         >
           <Box>
-            <Link to={routes.ROOT}>
+            <HeaderLink href={routes.ROOT}>
               <img width={200} height={50} src={logo} alt="alterknit" />
-            </Link>
+            </HeaderLink>
           </Box>
 
           <Stack direction="row" spacing={3} alignItems="center">
@@ -140,6 +156,7 @@ export default function Header() {
                 About Us
               </Typography>
             </HeaderLink>
+
             <DropDown />
             <HeaderLink href={routes.CONTACTUS}>
               <Typography
@@ -184,97 +201,101 @@ export default function Header() {
                 Book Now
               </Button>
             </HeaderLink>
-            {isLoggedIn ? (
-              <Box>
-                <IconButton
-                  onClick={handleClick}
-                  size="small"
-                  sx={{ ml: 2 }}
-                  aria-controls={openvalue ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={openvalue ? "true" : undefined}
+            <Box display={isLoggedIn ? "flex" : "none"}>
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={openvalue ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openvalue ? "true" : undefined}
+              >
+                <Avatar
+                  sx={{ width: 40, height: 40 }}
+                  alt="Remy Sharp"
+                  // src={headerProfileLogo}
                 >
-                  <Avatar
-                    sx={{ width: 40, height: 40 }}
-                    alt="Remy Sharp"
-                    // src={headerProfileLogo}
-                  >
-                    M
-                  </Avatar>
-                </IconButton>
+                  {user ? user.name?.charAt(0).toUpperCase() : "U"}
+                </Avatar>
+              </IconButton>
 
-                <Menu
-                  anchorEl={anchorEl}
-                  id="account-menu"
-                  open={openvalue}
-                  onClose={handleMenuClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                      "& .MuiAvatar-root": {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
-                      },
-                      "&::before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={openvalue}
+                onClose={handleMenuClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
                     },
+                    "&::before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <HeaderLink
+                  style={{
+                    color: "black",
                   }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  href={routes.USERPROFILE}
                 >
                   <MenuItem onClick={handleChange}>
                     <Avatar /> My Profile
                   </MenuItem>
-                  <Divider />
-                  <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                      <Logout fontSize="small" />
-                    </ListItemIcon>
-                    Logout
-                  </MenuItem>
-                </Menu>
-              </Box>
-            ) : (
-              <Button
-                variant="outlined"
-                sx={{
-                  padding: "8px 20px",
-                  textTransform: "none",
-                  fontSize: "16px",
-                  minWidth: "110px",
-                  fontWeight: "400",
+                </HeaderLink>
+                <Divider />
+                <MenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Box>
+            <Button
+              variant="outlined"
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "110px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
                   border: "2px solid #15B5FC",
-                  borderRadius: "30px",
-                  letterSpacing: "1.6px",
-                  background: Colors.BUTTON_COLOR,
-                  color: Colors.WHITE,
-                  ":hover": {
-                    background: Colors.WHITE,
-                    color: Colors.BUTTON_COLOR,
-                    border: "2px solid #15B5FC",
-                  },
-                  display: isLoggedIn ? "none" : "flex",
-                }}
-                onClick={handleOpen}
-              >
-                Login
-              </Button>
-            )}{" "}
+                },
+                display: isLoggedIn ? "none" : "flex",
+              }}
+              onClick={handleOpen}
+            >
+              Login
+            </Button>
           </Stack>
         </Stack>
 

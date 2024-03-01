@@ -109,53 +109,24 @@ export default function CustomTimeline() {
       isInitialMount.current = false;
     }
 
-    // Add scroll event listener
-    // const handleScroll = () => {
-    //   const updateActiveIndex = () => {
-    //     let currentActiveIndex = activeIndex;
-
-    //     // Check if user has scrolled to the top
-    //     if (window.scrollY === 0) {
-    //       currentActiveIndex = 0; // Set to the initial index (2024)
-    //     } else {
-    //       // Check the visibility of timeline items
-    //       timelineItems.forEach((item, index) => {
-    //         const rect = item.getBoundingClientRect();
-    //         const isVisible =
-    //           rect.top <= window.innerHeight / 2 &&
-    //           rect.bottom >= window.innerHeight / 2;
-
-    //         if (isVisible) {
-    //           currentActiveIndex = index;
-    //         }
-    //       });
-    //     }
-
-    //     if (currentActiveIndex !== activeIndex) {
-    //       setActiveIndex(currentActiveIndex);
-    //     }
-    //   };
-
-    //   // Use requestAnimationFrame for smoother scrolling
-    //   requestAnimationFrame(updateActiveIndex);
-    // };
-
     const handleScroll = () => {
       const updateActiveIndex = () => {
         let currentActiveIndex = activeIndex;
 
         // Check if user has scrolled to the top
-        if (window.scrollY === 0) {
+        if (timelineElement.scrollTop === 0) {
           currentActiveIndex = 0; // Set to the initial index (2024)
         } else {
-          // Check the visibility of timeline items
+          // Check the visibility of timeline items within the timeline box
           timelineItems.forEach((item, index) => {
             const rect = item.getBoundingClientRect();
-            const isVisible =
-              rect.top <= window.innerHeight / 2 &&
-              rect.bottom >= window.innerHeight / 2;
+            const itemMidpoint = (rect.top + rect.bottom) / 2;
 
-            if (isVisible) {
+            // Check if the midpoint of the item is above or below the timeline box midpoint
+            const isAboveTimelineBoxMidpoint =
+              itemMidpoint <= timelineElement.clientHeight / 2;
+
+            if (isAboveTimelineBoxMidpoint) {
               currentActiveIndex = index;
             }
           });

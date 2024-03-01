@@ -3,8 +3,13 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import partycenterImage from "../../assets/Partycenter";
 
-const {"Party_logo.svg": Party_logo} = assets
-const {"party1.webp": PartyCenterSlide1, "party2.jpg": PartyCenterSlide2, "party3.jpeg": PartyCenterSlide3, "party4.jpg": PartyCenterSlide4} = partycenterImage
+const { "Party_logo.svg": Party_logo } = assets;
+const {
+  "party1.webp": PartyCenterSlide1,
+  "party2.jpg": PartyCenterSlide2,
+  "party3.jpeg": PartyCenterSlide3,
+  "party4.jpg": PartyCenterSlide4,
+} = partycenterImage;
 
 const heading1 = "Party Center";
 const heading2 = "Features";
@@ -50,7 +55,7 @@ export default function PartyCenter() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{ xs: "column", sm: "column", md: "row" }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Party_logo}
         carouselItems={carouselItems}
         heading1={heading1}

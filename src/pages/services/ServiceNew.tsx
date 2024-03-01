@@ -13,10 +13,7 @@ import { useEffect } from "react";
 
 export default function ServiceNewUI() {
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    document.documentElement.scrollTop = 0;
   }, []);
 
   return (
@@ -60,7 +57,7 @@ export default function ServiceNewUI() {
           scrollBehavior: "smooth",
         }}
       >
-        <Box padding={"0 40px"}>
+        <Box padding={{ xs: 0, sm: 0, md: "0 10px", lg: "0 40px" }}>
           <ServiceHeaders />
 
           <Turf />

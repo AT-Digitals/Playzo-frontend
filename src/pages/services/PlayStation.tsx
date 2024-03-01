@@ -3,8 +3,12 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import playstationImage from "../../assets/Playstation";
 
-const {"Play_logo.svg": Play_logo} = assets
-const {"play1.webp": plyaStationSlide2, "play2.jpg": plyaStationSlide3, "play3.avif": plyaStationSlide4} = playstationImage
+const { "Play_logo.svg": Play_logo } = assets;
+const {
+  "play1.webp": plyaStationSlide2,
+  "play2.jpg": plyaStationSlide3,
+  "play3.avif": plyaStationSlide4,
+} = playstationImage;
 
 const heading1 = "Play Station";
 const heading2 = "Features";
@@ -35,7 +39,12 @@ export default function PlayStation() {
         radiusbottompleft={"20px"}
         radiusbottompright={"0px"}
         position={"end"}
-        direction={{ xs: "column", sm: "column", md: "row-reverse" }}
+        direction={{
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "row-reverse",
+        }}
         icon={Play_logo}
         carouselItems={carouselItems}
         heading1={heading1}
