@@ -19,4 +19,13 @@ export default class UserLoginApi {
       throw handleApiError(e, 'Failed to logout user');
     }
   };
+
+  public static getGoogleToken = async (code: string) => {
+    try{
+      const tokenData = await axiosInstance.post("/auth/google", {code})
+      return tokenData.data
+    }catch (e){
+      throw handleApiError(e, 'Failed to logout user');
+    }
+  }
 }
