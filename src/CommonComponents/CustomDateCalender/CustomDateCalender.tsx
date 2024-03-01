@@ -367,20 +367,6 @@ export default function CustomDateCalendar({
             ), startDateTime);
             const startMilliSec = new Date(startMilli).getTime();
             const endMilliSec = new Date(endMilli).getTime();
-            // let startMilliseconds = 0;
-            // let endMilliseconds = 0;
-            // const [time, am] = timeData.split(" ");
-            // const [time1, am1] = time.split("-");
-            // const [hours, minutes] = time1.split(":");
-
-
-            // const startDateTime = new Date(selectedDate);
-            // startDateTime.setHours(Number(hours), Number(minutes));
-            // startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-            // const endDateTime = new Date(startDateTime);
-            // endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-            // endMilliseconds = endDateTime.getTime(); // End time in milliseconds
             await BookingApi.getBookedList({
               type: BookingType.Turf,
               bookingtype: "online",
