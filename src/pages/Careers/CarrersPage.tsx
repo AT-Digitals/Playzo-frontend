@@ -59,6 +59,7 @@ export default function CareersPageNew() {
             }}
           >
             <Typography
+              mb={{ xs: 0, sm: 0, md: 4 }}
               color={"black"}
               fontStyle={"italic"}
               fontSize={"82px"}
@@ -66,17 +67,19 @@ export default function CareersPageNew() {
               whiteSpace={"nowrap"}
               gutterBottom
               sx={{
-                fontSize: { xs: "40px", sm: "60px", md: "70px", lg: "82px" },
+                fontSize: { xs: "20px", sm: "48px", md: "70px", lg: "82px" },
               }}
             >
               Welcome to Our Careers Page
             </Typography>
             <Typography
+              mb={{ xs: 0, sm: 0, md: 4 }}
               color={"black"}
               fontSize={"32px"}
+              textAlign={"center"}
               paragraph
               sx={{
-                fontSize: { xs: "16px", sm: "24px", md: "28px", lg: "32px" },
+                fontSize: { xs: "12px", sm: "24px", md: "28px", lg: "32px" },
               }}
             >
               Explore exciting opportunities to join our talented team and make
@@ -88,6 +91,7 @@ export default function CareersPageNew() {
               <Button
                 variant="outlined"
                 sx={{
+                  whiteSpace: "nowrap",
                   padding: "8px 20px",
                   textTransform: "none",
                   fontSize: "16px",
@@ -98,6 +102,7 @@ export default function CareersPageNew() {
                   letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
+                  width: "100%",
                   "&:hover": {
                     background: Colors.WHITE,
                     color: Colors.BUTTON_COLOR,

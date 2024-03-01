@@ -1,6 +1,6 @@
 import "intersection-observer";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import styled, { keyframes } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 
@@ -110,6 +110,36 @@ export default function CustomTimeline() {
     }
 
     // Add scroll event listener
+    // const handleScroll = () => {
+    //   const updateActiveIndex = () => {
+    //     let currentActiveIndex = activeIndex;
+
+    //     // Check if user has scrolled to the top
+    //     if (window.scrollY === 0) {
+    //       currentActiveIndex = 0; // Set to the initial index (2024)
+    //     } else {
+    //       // Check the visibility of timeline items
+    //       timelineItems.forEach((item, index) => {
+    //         const rect = item.getBoundingClientRect();
+    //         const isVisible =
+    //           rect.top <= window.innerHeight / 2 &&
+    //           rect.bottom >= window.innerHeight / 2;
+
+    //         if (isVisible) {
+    //           currentActiveIndex = index;
+    //         }
+    //       });
+    //     }
+
+    //     if (currentActiveIndex !== activeIndex) {
+    //       setActiveIndex(currentActiveIndex);
+    //     }
+    //   };
+
+    //   // Use requestAnimationFrame for smoother scrolling
+    //   requestAnimationFrame(updateActiveIndex);
+    // };
+
     const handleScroll = () => {
       const updateActiveIndex = () => {
         let currentActiveIndex = activeIndex;
@@ -140,6 +170,8 @@ export default function CustomTimeline() {
       requestAnimationFrame(updateActiveIndex);
     };
 
+    // window.addEventListener("scroll", handleScroll);
+
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -149,10 +181,14 @@ export default function CustomTimeline() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const isHideBannerImage = useMediaQuery(
+    "(min-width: 280px) and (max-width: 900px)"
+  );
+
   return (
     <>
       <Timeline
-        position="alternate"
+        position={isHideBannerImage ? "right" : "alternate"}
         id="custom-timeline"
         style={{
           height: "100%",
@@ -242,7 +278,7 @@ export default function CustomTimeline() {
                 <Box
                   display={index === activeIndex ? "flex" : "none"}
                   color={index === activeIndex ? "white" : "white"}
-                  gap={"1rem"}
+                  gap={{ xs: 0, sm: 0, md: 0, lg: "1rem" }}
                   justifyContent={
                     index && (activeIndex === 1 || activeIndex === 3)
                       ? "flex-end"
@@ -265,18 +301,25 @@ export default function CustomTimeline() {
                       }}
                       maxWidth={300}
                       lineHeight={1.4}
-                      fontSize={"16px"}
+                      fontSize={{ xs: "9px", sm: "9px", md: "16px" }}
                     >
-                      <span
-                        style={{
-                          fontSize: "22px",
-                          fontFamily: `'ESL Legend', sans-serif`,
-                          fontWeight: 600,
+                      <Typography
+                        fontSize={{
+                          xs: "15px ",
+                          sm: "15px ",
+                          md: "22px ",
+                          lg: "22px",
                         }}
+                        style={
+                          {
+                            fontFamily: `'ESL Legend', sans-serif`,
+                            fontWeight: 600,
+                          } as any
+                        }
                       >
                         {" "}
                         {item.title}
-                      </span>{" "}
+                      </Typography>{" "}
                       <br />
                       {item.disciption}
                     </Typography>
