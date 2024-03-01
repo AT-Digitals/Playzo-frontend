@@ -11,20 +11,29 @@ import { useEffect, useState } from "react";
 const StyledImage = styled.img`
 @media (min-width: 300px) {
   /* Extra small devices (phones) */
-  width: 100%; /* Adjust width to fill the container */
-  height: auto; /* Maintain aspect ratio */
+  width: 330px;
+  height: 180px;
+  border-radius: 10px; /* Maintain aspect ratio */
 }
 
 @media (min-width: 768px) {
-  /* Small devices (tablets) */
-  width: 100%; /* Adjust width to fill the container */
-  height: auto; /* Maintain aspect ratio */
+    transition: transform 0.5s ease-in-out;
+    width: 600px;
+    height: 350px;
+    border-radius: 10px;
 }
 
-@media (min-width: 992px) {
-  /* Medium devices (desktops) */
-  width: 100%; /* Adjust width to fill the container */
-  height: auto; /* Maintain aspect ratio */
+@media (min-width: 912px) {
+    transition: transform 0.5s ease-in-out;
+    width: 710px;
+    height: 400px;
+    border-radius: 10px;
+}
+@media (min-width: 1024px) {
+    transition: transform 0.5s ease-in-out;
+    width: 800px;
+    height: 450px;
+    border-radius: 10px;
 }
 
 @media (min-width: 1200px) {
@@ -38,6 +47,42 @@ const StyledImage = styled.img`
 const CarouselContainer = styled(Stack)`
   transition: transform 0.9s ease-in-out;
 `;
+const StyledStack = styled(Stack)`
+  /* Media queries for different screen sizes */
+  @media (min-width: 300px) {
+    transform: translate(-24px, 10px);
+  }
+
+  @media (min-width: 414px) {
+    transform: translate(-61px, 10px);
+  }
+  @media (min-width: 390px) {
+    transform: translate(-43px, 10px);
+  }
+
+  @media (min-width: 430px) {
+    transform: translate(-74px, 10px);
+  }
+  @media (min-width: 360px) {
+    transform: translate(-13px, 10px);
+  }
+  @media (min-width: 412px) {
+    transform: translate(-59px, 10px);
+  }
+  @media (min-width: 768px) {
+    transform: translate(-149px, 10px);
+  }
+  @media (min-width: 820px) {
+    transform: translate(-177px, 10px);
+  }
+  @media (min-width: 1024px) {
+    transform: translate(-200px, 10px);
+  }
+  @media (min-width: 1200px) {
+    transform: translate(2px, 10px);
+  }
+`;
+
 
 interface HotelCard {
     feedback: string;
@@ -93,7 +138,7 @@ export default function CarouselCardComponent({
             }}
         >
             {showDetails ? (
-                <Stack margin={{xs: "30px -93px", sm: '30px -93px', md: "30px -93px", lg: "20px 32px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
+                <StyledStack margin={{xs: "30px 0px", sm: '30px 0px', md: "30px 0px", lg: "20px 32px"}} direction={{xs: "column", sm: "column", md: "column", lg: "row"}} spacing={3}>
                     <StyledImage
                         src={activeCard.imageSrc}
                         alt="green iguana"
@@ -101,15 +146,15 @@ export default function CarouselCardComponent({
                             
                         }}
                     />
-                    <Stack height={"100%"} sx={{transform: "translate(22%, 0px)"}} direction="column" spacing={2} py={2}>
-                        <Typography width={"100%"} maxWidth={{xs: "322px", sm: "322px", md: '322px', lg: "550px"}} color={Colors.WHITE} fontSize={{xs: '15px', sm: "15px", md: '15px', lg: "16px"}} fontWeight={"400"}>
+                    <Stack height={"100%"} sx={{transform: {xs: "translate(2%, 0px)", sm: "translate(1%, 0px)", md: "translate(1%, 0px)", lg: "translate(17%, 0px)"}}} direction="column" spacing={2} pb={{xs: '0px', sm: "0px", md: "0px", lg: "16px"}}>
+                        <Typography width={"100%"} maxWidth={{xs: "300px", sm: "600px", md: '650px', lg: "550px"}} color={Colors.WHITE} fontSize={{xs: '14px', sm: "14px", md: '14px', lg: "16px"}} fontWeight={"400"}>
                             {activeCard.feedback}
                         </Typography>
-                        <Stack alignItems={"end"} height={"100%"} direction="column" sx={{ backgroundColor: Colors.BLACK }}>
+                        <Stack alignItems={{xs: "flex-start", sm: "flex-start", md: "flex-start", lg: "end"}} height={"100%"} direction="column" sx={{ backgroundColor: Colors.BLACK }}>
                             <Typography mb={"0px"}
                                 gutterBottom
                                 component="div"
-                                fontSize="20px"
+                                fontSize={{xs: "16px", sm: "16px", md: '16px', lg: "20px"}}
                                 fontWeight={600}
                                 color={Colors.WHITE}
                             >
@@ -118,7 +163,7 @@ export default function CarouselCardComponent({
                             <Stack fontStyle={"italic"} direction={"row"} display={"flex"} gap={"5px"}>
                             <Typography
                                 gutterBottom
-                                fontSize="16px"
+                                fontSize={{xs: '14px', sm: "14px", md: '14px', lg: "16px"}}
                                 component="div"
                                 color={Colors.WHITE}
                             >
@@ -126,7 +171,7 @@ export default function CarouselCardComponent({
                             </Typography>
                             <Typography
                                 gutterBottom
-                                fontSize="16px"
+                                fontSize={{xs: '14px', sm: "14px", md: '14px', lg: "16px"}}
                                 component="div"
                                 color={Colors.WHITE}
                             >
@@ -134,14 +179,14 @@ export default function CarouselCardComponent({
                             </Typography>
                             </Stack>
                         </Stack>
-                <Stack style={{transform: "translate(-70%, 45px)", }} direction="row" spacing={0.5} justifyContent="center" mt={1}>
+                <Stack sx={{transform: {xs: "translate(1%, 10px)", sm: "translate(12%, 10px)", md: "translate(10%, 10px)", lg: "translate(-50%, 45px)"}}} direction="row" spacing={0.5} justifyContent="center" mt={1}>
                     {card.map((card, index) => (
                             <FiberManualRecordIcon
                                 key={index}
                                 sx={{
                                     color: index === activeIndex ? Colors.WHITE : Colors.WHITE,
                                     cursor: 'pointer',
-                                    fontSize: "14px",
+                                    fontSize: {xs: "12px", sm: "12px", md: "12px", lg: "14px"},
                                     opacity: index === activeIndex ? "100%" : "40%",
                                     transition: "opacity 0.5s ease-in-out",
                                     
@@ -152,7 +197,7 @@ export default function CarouselCardComponent({
                         ))}
                     </Stack>
                     </Stack>
-                </Stack>
+                </StyledStack>
             ) : (
                 <Box>
                 </Box>

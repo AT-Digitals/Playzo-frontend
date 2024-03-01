@@ -18,6 +18,7 @@ export default function CardComponent({
     <>
     <Card
       sx={{
+        width: {xs: "309px", sm: "340px", md: "390px", lg: "340px"},
         maxWidth: 400,
         borderRadius: "10px",
         overflow: "hidden",
@@ -28,7 +29,7 @@ export default function CardComponent({
       <CardMedia
         component="img"
         sx={{
-          height: { xs: "180px", sm: "180px", md: "180px", lg: "450px" },
+          height: { xs: "330px", sm: "350px", md: "390px", lg: "450px" },
           borderRadius: "10px",
           transition: "transform 0.5s ease",
           cursor: "pointer",
@@ -57,7 +58,7 @@ export default function CardComponent({
         fontWeight: "bold",
         textTransform: "capitalize",
       }}>{title}</Button>
-        <Typography width={"292px"} paddingTop={"30px"} fontSize="15px" fontWeight={"400"} textAlign="start">{description}</Typography>
+        <Typography width={{xs: "292px", sm: "310px", md: "400px", lg: "292px"}} paddingTop={"30px"} fontSize="15px" fontWeight={"400"} textAlign="start">{description}</Typography>
     </>
   );
 }
