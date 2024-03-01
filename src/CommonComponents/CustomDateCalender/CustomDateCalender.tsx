@@ -359,8 +359,8 @@ export default function CustomDateCalendar({
         } catch (err) {
           console.log("err", err);
         }
-
-        selectedTimings.forEach(async (timeData) => {
+let flag = false;
+for (const timeData of selectedTimings){
           try {
             let startMilliseconds = 0;
             let endMilliseconds = 0;
@@ -393,12 +393,14 @@ export default function CustomDateCalendar({
               court:
               type===BookingType.BowlingMachine||type===BookingType.CricketNet?1:BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
             });
+            flag = false;
           } catch (error: any) {
+            flag = true;
             if (error.message === "Please choose another date and slot") {
               setResponseModalOpen(true);
             }
           }
-        });
+        };
         if (
           !tableData.some(
             (el: {
@@ -417,7 +419,9 @@ export default function CustomDateCalendar({
           if(bookings.type === BookingType.CricketNet){
             bookings.name = "Cricket Net"
           }
+if(!flag){
           setTableData((prevTableData: any) => [...prevTableData, bookings]);
+}
         }
 
         // Reset selected date and timings
