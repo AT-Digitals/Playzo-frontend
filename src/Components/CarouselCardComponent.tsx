@@ -64,7 +64,7 @@ const StyledStack = styled(Stack)`
     transform: translate(-74px, 10px);
   }
   @media (min-width: 360px) {
-    transform: translate(-13px, 10px);
+    transform: translate(-23px, 10px);
   }
   @media (min-width: 412px) {
     transform: translate(-59px, 10px);
@@ -80,6 +80,11 @@ const StyledStack = styled(Stack)`
   }
   @media (min-width: 1200px) {
     transform: translate(2px, 10px);
+  }
+`;
+const StyledStack1 = styled(Stack)`
+  @media (min-width: 1280px) {
+    transform: translate(0%, 0px);
   }
 `;
 
@@ -146,7 +151,7 @@ export default function CarouselCardComponent({
                             
                         }}
                     />
-                    <Stack height={"100%"} sx={{transform: {xs: "translate(2%, 0px)", sm: "translate(1%, 0px)", md: "translate(1%, 0px)", lg: "translate(17%, 0px)"}}} direction="column" spacing={2} pb={{xs: '0px', sm: "0px", md: "0px", lg: "16px"}}>
+                    <StyledStack1 height={"100%"} sx={{transform: {xs: "translate(2%, 0px)", sm: "translate(1%, 0px)", md: "translate(1%, 0px)", lg: "translate(17%, 0px)"}}} direction="column" spacing={2} pb={{xs: '0px', sm: "0px", md: "0px", lg: "16px"}}>
                         <Typography width={"100%"} maxWidth={{xs: "300px", sm: "600px", md: '650px', lg: "550px"}} color={Colors.WHITE} fontSize={{xs: '14px', sm: "14px", md: '14px', lg: "16px"}} fontWeight={"400"}>
                             {activeCard.feedback}
                         </Typography>
@@ -196,7 +201,7 @@ export default function CarouselCardComponent({
                             />
                         ))}
                     </Stack>
-                    </Stack>
+                    </StyledStack1>
                 </StyledStack>
             ) : (
                 <Box>

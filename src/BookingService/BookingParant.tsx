@@ -39,15 +39,13 @@ const StyledImage = styled.img`
   }
 
   @media (min-width: 768px) {
-    width: 100%;
-    max-height: 130px;
-    height: 100%;
-    max-width: 130px;
+    width: 130px;
+    height: 80px;
   }
 
   @media (min-width: 992px) {
     width: 130px;
-    height: 130px;
+    height: 80px;
   }
 
   @media (min-width: 1200px) {
@@ -279,7 +277,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const breadcrumbs = [
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -288,7 +286,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -297,7 +295,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service Type
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -306,7 +304,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Date & Time
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="4"
@@ -429,13 +427,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               <Button
                 sx={{
                   opacity: "1",
-                  padding: "8px 20px",
+                  padding: {xs: "0px 0px", sm: '0px 0px', md: "0px 5px", lg: "8px 20px"},
                   textTransform: "none",
-                  fontSize: "16px",
-                  minWidth: "110px",
+                  fontSize: {xs: "14px", sm: '14px', md: "14px", lg: "16px"},
+                  width: "100%",
+                  maxWidth: {xs: "70px", sm: '70px', md: "80px", lg: "115px"},
                   fontWeight: "400",
                   border: "2px solid #15B5FC",
-                  // borderRadius: "30px",
+                  marginLeft: {xs: "0px", sm: '-45px', md: "0px", lg: "0px"},
                   letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
@@ -473,6 +472,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               alignItems={"center"}
               sx={{
                 opacity: "1",
+                marginLeft: {xs: "15px", sm: "11px", md: '11px', lg: "0px"}
               }}
             >
               <Breadcrumbs
@@ -503,7 +503,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           >
             <Box
               margin={{
-                xs: "60px 38px",
+                xs: "50px 28px",
                 sm: "60px 38px",
                 md: "60px 38px",
                 lg: "60px 50px",
@@ -523,7 +523,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
                 alignItems={{
                   xs: "center",
-                  sm: "cemter",
+                  sm: "flex-start",
                   md: "center",
                   lg: "",
                 }}

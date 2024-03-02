@@ -1,12 +1,17 @@
 import { Button, Card, CardMedia, Typography } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
-
+import styled from "@emotion/styled";
 interface cardProps {
   image: string;
   title: string;
   description: string;
   buttonLabel: string;
 }
+const StyledCard = styled(Card)`
+  @media (min-width: 1280px) {
+    width: 290px;
+  }
+`;
 
 export default function CardComponent({
   image,
@@ -18,7 +23,7 @@ export default function CardComponent({
     <>
     <Card
       sx={{
-        width: {xs: "309px", sm: "340px", md: "390px", lg: "340px"},
+        width: {xs: "328px", sm: "353px", md: "390px", lg: "340px"},
         maxWidth: 400,
         borderRadius: "10px",
         overflow: "hidden",
