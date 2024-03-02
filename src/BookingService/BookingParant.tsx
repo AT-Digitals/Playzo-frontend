@@ -148,15 +148,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(
     ({ currentLocation, nextLocation }) =>{
-      localStorage.setItem("nextLocation", nextLocation.pathname)
-      return tableData.length !== 0 &&
-      currentLocation.pathname !== nextLocation.pathname
+      if(tableData.length !== 0 && currentLocation.pathname !== nextLocation.pathname && nextLocation.pathname !== "/payment-booking"){
+        localStorage.setItem("nextLocation", nextLocation.pathname)
+        return true
+      }
+      return false
     }
   );
 
-
   const nextLocation = localStorage.getItem("nextLocation")
-
 
   const images =
     type === BookingType.Turf
@@ -407,7 +407,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   }, [blocker, blocker.state])
 
   useEffect(() => {
-    if(nextLocation && blocker.state === "unblocked"){
+    if(nextLocation && blocker.state === "unblocked"){  
       localStorage.removeItem("nextLocation")
       navigate(nextLocation)
     }

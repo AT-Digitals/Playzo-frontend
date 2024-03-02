@@ -65,7 +65,7 @@ export default function CustomTimeline() {
 
   const handleIntersect = (entries: any, observer: any) => {
     entries.forEach((entry: any) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting || entry.rootBounds.y < 0) {  
         const index = parseInt(entry.target.getAttribute("data-index"), 10);
         setActiveIndex(index);
       }
@@ -116,32 +116,14 @@ export default function CustomTimeline() {
         // Check if user has scrolled to the top
         if (timelineElement.scrollTop === 0) {
           currentActiveIndex = 0; // Set to the initial index (2024)
-        } else {
-          // Check the visibility of timeline items within the timeline box
-          timelineItems.forEach((item, index) => {
-            const rect = item.getBoundingClientRect();
-            const itemMidpoint = (rect.top + rect.bottom) / 2;
-
-            // Check if the midpoint of the item is above or below the timeline box midpoint
-            const isAboveTimelineBoxMidpoint =
-              itemMidpoint <= timelineElement.clientHeight / 2;
-
-            if (isAboveTimelineBoxMidpoint) {
-              currentActiveIndex = index;
-            }
-          });
-        }
-
-        if (currentActiveIndex !== activeIndex) {
-          setActiveIndex(currentActiveIndex);
-        }
+        } 
+          
+        setActiveIndex(currentActiveIndex)    
       };
 
       // Use requestAnimationFrame for smoother scrolling
       requestAnimationFrame(updateActiveIndex);
     };
-
-    // window.addEventListener("scroll", handleScroll);
 
     window.addEventListener("scroll", handleScroll);
 
@@ -160,7 +142,6 @@ export default function CustomTimeline() {
     <>
       <Timeline
         position={isHideBannerImage ? "right" : "alternate"}
-        id="custom-timeline"
         style={{
           height: "100%",
           overflow: "auto",

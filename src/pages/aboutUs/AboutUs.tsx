@@ -78,6 +78,7 @@ export default function AboutUs() {
           maxHeight: 650,
           overflow: "hidden",
         }}
+        id="custom-timeline"
       >
         <CardMedia
           component="img"
