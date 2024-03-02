@@ -57,17 +57,24 @@ export default function Header() {
     }
   };
 
+  interface User {
+    name?: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     const parsedUserData = userData && JSON.parse(userData);
 
     if (parsedUserData) {
-      setIsLoggedIn(true);
+      setUser(parsedUserData);
+      setIsLoggedIn(true); // Set to true if there is user data
     } else {
-      setIsLoggedIn(false);
+      setUser(null);
+      setIsLoggedIn(false); // Set to false if there is no user data
     }
   }, []);
-
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -164,7 +171,7 @@ export default function Header() {
                     alt="Remy Sharp"
                     // src={headerProfileLogo}
                   >
-                    M
+                    {user ? user.name?.charAt(0).toUpperCase() : "U"}
                   </Avatar>
                 </IconButton>
 

@@ -53,6 +53,7 @@ const CustomSlider = ({
           position: "relative",
           width: "100%",
           overflow: "hidden",
+          // height: "447px",
         }}
       >
         <Box
@@ -130,8 +131,8 @@ const CustomSlider = ({
                       objectFit: "cover", // Set object-fit to cover
                       overflow: "hidden",
                       display: "flex",
-                      height: "100%", // Ensure the height is 100%
-                      maxHeight: 400,
+                      // height: "100%",
+                      maxHeight: 447,
                     }}
                   >
                     {slide}

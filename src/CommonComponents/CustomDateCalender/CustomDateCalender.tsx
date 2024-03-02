@@ -167,11 +167,6 @@ export default function CustomDateCalendar({
 
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
-
-
-
-
-
   };
 
   const ApiCall = async (dateValue: any) => {
@@ -358,6 +353,7 @@ export default function CustomDateCalendar({
         } catch (err) {
           console.log("err", err);
         }
+
         let flag = false;
         for (const timeData of selectedTimings) {
           try {
@@ -425,7 +421,6 @@ export default function CustomDateCalendar({
         setSelectedDate("");
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
-        setIsBackButtonVisible(false);
       } else {
         setDateModalOpen(true);
       }
@@ -433,6 +428,14 @@ export default function CustomDateCalendar({
       setModalOpen(true);
     }
   };
+
+  React.useEffect(() => {
+    if (tableData && tableData.length === 0) {
+      setIsBackButtonVisible(true);
+    } else {
+      setIsBackButtonVisible(false);
+    }
+  }, [tableData]);
 
   return (
     <Stack

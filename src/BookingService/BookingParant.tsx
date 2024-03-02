@@ -1,4 +1,11 @@
-import { Box, Breadcrumbs, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Button,
+  Stack,
+  Typography,
+  keyframes,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useBlocker } from "react-router-dom";
 
@@ -51,6 +58,19 @@ const StyledImage = styled.img`
   @media (min-width: 1200px) {
     width: 145px;
     height: 105px;
+  }
+
+  &.animate-zoom-in {
+    animation: zoomInAnimation 0.5s ease-in-out;
+  }
+
+  @keyframes zoomInAnimation {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.2);
+    }
   }
 `;
 
@@ -134,7 +154,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   );
 
+
   const nextLocation = localStorage.getItem("nextLocation")
+
 
   const images =
     type === BookingType.Turf
@@ -150,6 +172,19 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       : type === BookingType.CricketNet
       ? [{ image: cricketnet, name: "Cricket Net", value:1 }]
       : [];
+
+  const zoomInAnimation = keyframes`
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
+
+  const AnimatedZoomIn = styled.div`
+    animation: ${zoomInAnimation} 1s ease-in-out;
+  `;
 
   const handleServiceSelection = (service: any) => {
     setSelectedService(service.name);
@@ -631,130 +666,134 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   : "Unknown Type"}{" "}
               </Typography>
               {images.map((item) => (
-                <Box
-                  display={selectedService ? "none" : "block"}
-                  key={item.name}
-                  sx={{
-                    ":hover": {
-                      backgroundColor: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                  border={"1px solid gray"}
-                  width={"100%"}
-                  maxWidth={{
-                    xs: "215px",
-                    sm: "215px",
-                    md: "215px",
-                    lg: "200px",
-                  }}
-                  borderRadius={{
-                    xs: "17px",
-                    sm: "17px",
-                    md: "17px",
-                    lg: "10px",
-                  }}
-                  height={"105px"}
-                  onClick={() => handleServiceSelection(item)}
-                >
+                <AnimatedZoomIn key={item.name}>
+                  <Box
+                    display={selectedService ? "none" : "block"}
+                    sx={{
+                      ":hover": {
+                        backgroundColor: Colors.BUTTON_COLOR,
+                      },
+                    }}
+                    border={"1px solid gray"}
+                    width={"100%"}
+                    maxWidth={{
+                      xs: "215px",
+                      sm: "215px",
+                      md: "215px",
+                      lg: "200px",
+                    }}
+                    borderRadius={{
+                      xs: "17px",
+                      sm: "17px",
+                      md: "17px",
+                      lg: "10px",
+                    }}
+                    height={"105px"}
+                    onClick={() => handleServiceSelection(item)}
+                    className={selectedService === item.name ? "selected" : ""}
+                  >
+                    <Box
+                      sx={{
+                        opacity: "1",
+                      }}
+                      display={"flex"}
+                      gap={"16px"}
+                      alignItems={"center"}
+                      padding={"14px 12px"}
+                    >
+                      <img
+                        src={item.image}
+                        width={"95px"}
+                        height={"75px"}
+                        alt={
+                          type === BookingType.Turf
+                            ? "Turf"
+                            : type === BookingType.Playstaion
+                            ? "Playstation"
+                            : type === BookingType.Badminton
+                            ? "Badminton"
+                            : type === BookingType.BoardGame
+                            ? "Board Games"
+                            : "Unknown Type"
+                        }
+                      />
+                      <Typography
+                        fontSize={"14px"}
+                        color={Colors.BLACK}
+                        fontWeight={"600"}
+                      >
+                        {item.name}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </AnimatedZoomIn>
+              ))}
+              {selectedService && (
+                <AnimatedZoomIn>
                   <Box
                     sx={{
                       opacity: "1",
                     }}
-                    display={"flex"}
-                    gap={"16px"}
-                    alignItems={"center"}
-                    padding={"14px 12px"}
+                    border={"1px solid gray"}
+                    width={"100%"}
+                    maxWidth={{
+                      xs: "220px",
+                      sm: "220px",
+                      md: "220px",
+                      lg: "290px",
+                    }}
+                    borderRadius={{
+                      xs: "17px",
+                      sm: "17px",
+                      md: "17px",
+                      lg: "10px",
+                    }}
+                    height={{
+                      xs: "105px",
+                      sm: "105px",
+                      md: "105px",
+                      lg: "155px",
+                    }}
+                    marginTop={{
+                      xs: "-40px",
+                      sm: "-40px",
+                      md: "-40px",
+                      lg: "24px",
+                    }}
                   >
-                    <img
-                      src={item.image}
-                      width={"95px"}
-                      height={"75px"}
-                      alt={
-                        type === BookingType.Turf
-                          ? "Turf"
-                          : type === BookingType.Playstaion
-                          ? "Playstation"
-                          : type === BookingType.Badminton
-                          ? "Badminton"
-                          : type === BookingType.BoardGame
-                          ? "Board Games"
-                          : "Unknown Type"
-                      }
-                    />
-                    <Typography
-                      fontSize={"14px"}
-                      color={Colors.BLACK}
-                      fontWeight={"600"}
+                    <Box
+                      display={"flex"}
+                      gap={"16px"}
+                      alignItems={"center"}
+                      padding={"14px 12px"}
                     >
-                      {item.name}
-                    </Typography>
+                      <StyledImage
+                        src={
+                          images.find((item) => item.name === selectedService)
+                            ?.image
+                        }
+                        alt={`selected ${
+                          type === BookingType.Turf
+                            ? "Turf"
+                            : type === BookingType.Playstaion
+                            ? "Playstation"
+                            : type === BookingType.Badminton
+                            ? "Badminton"
+                            : type === BookingType.BoardGame
+                            ? "Board Games"
+                            : "Unknown Type"
+                        }`}
+                      />
+                      <Typography
+                        fontSize={"14px"}
+                        color={Colors.BLACK}
+                        fontWeight={"600"}
+                      >
+                        {selectedService}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              ))}
-              {selectedService && (
-                <Box
-                  sx={{
-                    opacity: "1",
-                  }}
-                  border={"1px solid gray"}
-                  width={"100%"}
-                  maxWidth={{
-                    xs: "220px",
-                    sm: "220px",
-                    md: "220px",
-                    lg: "290px",
-                  }}
-                  borderRadius={{
-                    xs: "17px",
-                    sm: "17px",
-                    md: "17px",
-                    lg: "10px",
-                  }}
-                  height={{
-                    xs: "105px",
-                    sm: "105px",
-                    md: "105px",
-                    lg: "155px",
-                  }}
-                  marginTop={{
-                    xs: "-40px",
-                    sm: "-40px",
-                    md: "-40px",
-                    lg: "24px",
-                  }}
-                >
-                  <Box
-                    display={"flex"}
-                    gap={"16px"}
-                    alignItems={"center"}
-                    padding={"14px 12px"}
-                  >
-                    <StyledImage
-                      src={
-                        images.find((item) => item.name === selectedService)
-                          ?.image
-                      }
-                      alt={`selected ${
-                        type === BookingType.Turf
-                          ? "Turf"
-                          : type === BookingType.Playstaion
-                          ? "Playstation"
-                          : type === BookingType.Badminton
-                          ? "Badminton"
-                          : type === BookingType.BoardGame
-                          ? "Board Games"
-                          : "Unknown Type"
-                      }`}
-                    />
-                    <Typography
-                      fontSize={"14px"}
-                      color={Colors.BLACK}
-                      fontWeight={"600"}
-                    >
-                      {selectedService}
-                    </Typography>
-                  </Box>
-                </Box>
+                </AnimatedZoomIn>
               )}
             </Stack>
             <Stack borderLeft={selectedService ? "1px solid gray" : "none"}>
@@ -821,9 +860,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           </Box>
         </Box>
       </Box>
-      {/* <Box display={"flex"} justifyContent={"end"}>
-        <img src={ball} width={"150px"} alt="" />
-      </Box> */}
+
       <img src={grass} alt="" />
     </>
   );

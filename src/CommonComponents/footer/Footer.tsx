@@ -7,11 +7,11 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "react-router-dom";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import assets from "../../assets";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
-import assets from "../../assets";
 
-const {"Playzo (1).svg": logo, "Twitter.png": TwitterIcon} = assets
+const { "Playzo (1).svg": logo, "Twitter.png": TwitterIcon } = assets;
 
 const StyledLink = styled(Link)({
   color: Colors.WHITE,
@@ -33,7 +33,7 @@ export default function Footer() {
       zIndex={1000}
       paddingX={3}
       paddingY={4}
-    //height={"456px"}
+      //height={"456px"}
     >
       <AppContainer p={0}>
         <Box
@@ -50,7 +50,7 @@ export default function Footer() {
             }
             to={routes.ROOT}
           >
-            <Box
+            {/* <Box
               component="img"
               sx={{
                 display: { xs: "block", sm: "block", md: "none", lg: "none" },
@@ -58,7 +58,7 @@ export default function Footer() {
               src={logo}
               width={172}
               height={34}
-            />
+            /> */}
           </Link>
           <Grid
             alignItems="center"
@@ -69,7 +69,7 @@ export default function Footer() {
           >
             <Grid
               pl={"10px !important"}
-              display={{ xs: "none", sm: "none", md: "block" }}
+              // display={{ xs: "none", sm: "none", md: "block" }}
               item
               xs={12}
               md={4}
@@ -261,17 +261,6 @@ export default function Footer() {
             </Grid>
           </Grid>
 
-          <Stack
-            mt={3}
-            display={{ xs: "block", sm: "block", md: "none" }}
-            direction="column"
-            spacing={4}
-          >
-            <Typography fontSize="16px" ml="10px !important">
-              Lorem ipsum dolor sit amet consectetur dolol drakgonil adipiscing
-              elit aliquam mauris
-            </Typography>
-          </Stack>
           <Divider
             variant="fullWidth"
             color={Colors.WHITE}
@@ -366,16 +355,20 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              <Link to={"https://www.youtube.com/results?search_query=PLAYZO+33"}>
-                <YouTubeIcon sx={{
-                  color: Colors.WHITE,
-                  width: "25px",
-                  height: "30px",
-                  transition: "color 0.3s ease",
-                  ":hover": {
-                    color: Colors.BUTTON_COLOR
-                  }
-                }} />
+              <Link
+                to={"https://www.youtube.com/results?search_query=PLAYZO+33"}
+              >
+                <YouTubeIcon
+                  sx={{
+                    color: Colors.WHITE,
+                    width: "25px",
+                    height: "30px",
+                    transition: "color 0.3s ease",
+                    ":hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                />
               </Link>
             </Stack>
           </Stack>

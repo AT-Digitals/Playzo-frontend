@@ -3,8 +3,13 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import crossFitImage from "../../assets/CrossFit";
 
-const {"Cross_logo.svg": Cross_logo} = assets
-const {"cross1.jpg": CrossFitslide1, "cross2.jpg": CrossFitslide2, "cross3.jpg": CrossFitslide3, "cross4.webp": CrossFitslide4} = crossFitImage
+const { "Cross_logo.svg": Cross_logo } = assets;
+const {
+  "cross1.jpg": CrossFitslide1,
+  "cross2.jpg": CrossFitslide2,
+  "cross3.jpg": CrossFitslide3,
+  "cross4.webp": CrossFitslide4,
+} = crossFitImage;
 
 const heading1 = "CrossFit";
 const heading2 = "Features";
@@ -55,7 +60,12 @@ export default function CrossFit() {
         radiusbottompleft={"20px"}
         radiusbottompright={"0px"}
         position={"end"}
-        direction={{ xs: "column", sm: "column", md: "row-reverse" }}
+        direction={{
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "row-reverse",
+        }}
         icon={Cross_logo}
         carouselItems={carouselItems}
         heading1={heading1}

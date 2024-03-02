@@ -66,10 +66,7 @@ export default function AboutUs() {
   }, []);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    document.documentElement.scrollTop = 0;
   }, []);
   return (
     <>
@@ -116,18 +113,28 @@ export default function AboutUs() {
           }}
         >
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
-          {/* {showTimeline && window.innerWidth >= 600 && <Timeline />} */}
         </Box>
-        <Box position={"absolute"} top={"7%"} right={"64%"}>
+        <Box
+          position={"absolute"}
+          top={"7%"}
+          right={{ xs: "60%", sm: "76%", md: "68%", lg: "65%" }}
+        >
           <Typography
             color={"white"}
             fontStyle={"italic"}
-            fontSize={"78px"}
+            fontSize={{ xs: "30px", sm: "40px", md: "78px" }}
             fontWeight={"bold"}
             lineHeight={1}
           >
             <span style={{ display: "inline-block" }}>Playzo</span> <br />
-            <span style={{ display: "inline-block", marginLeft: "12rem" }}>
+            <span
+              style={
+                {
+                  // display: "inline-block",
+                  marginLeft: { xs: "2rem", sm: "5rem", md: "10rem" },
+                } as any
+              }
+            >
               Journey
             </span>
           </Typography>

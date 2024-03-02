@@ -3,8 +3,12 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import boardGameImage from "../../assets/BoardGames";
 
-const {"Board_logo.svg": Board_logo} = assets
-const {"Board1.jpg": BoardGameSlide1, "Board2.avif": BoardGameSlide2, "Board3.webp": BoardGameSlide3} = boardGameImage
+const { "Board_logo.svg": Board_logo } = assets;
+const {
+  "Board1.jpg": BoardGameSlide1,
+  "Board2.avif": BoardGameSlide2,
+  "Board3.webp": BoardGameSlide3,
+} = boardGameImage;
 
 const heading1 = "Board Games";
 const heading2 = "Features";
@@ -38,7 +42,7 @@ export default function BoardGames() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{ xs: "column", sm: "column", md: "row" }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Board_logo}
         carouselItems={carouselItems}
         heading1={heading1}

@@ -3,8 +3,13 @@ import ServiceGrid from "./ServiceGrid";
 import assets from "../../assets";
 import cafeteriaImage from "../../assets/Cafeteriya";
 
-const {"Cafe_logo.svg": Cafe_logo} = assets
-const {"cafe1.jpg": CafeteriaSlide1, "cafe2.jpg": CafeteriaSlide2, "cafe3.jpg": CafeteriaSlide3, "cafe4.jpg": CafeteriaSlide4} = cafeteriaImage
+const { "Cafe_logo.svg": Cafe_logo } = assets;
+const {
+  "cafe1.jpg": CafeteriaSlide1,
+  "cafe2.jpg": CafeteriaSlide2,
+  "cafe3.jpg": CafeteriaSlide3,
+  "cafe4.jpg": CafeteriaSlide4,
+} = cafeteriaImage;
 
 const heading1 = "Cafeteria";
 const heading2 = "Features";
@@ -34,7 +39,12 @@ export default function Cafeteria() {
         radiusbottompleft={"20px"}
         radiusbottompright={"0px"}
         position={"end"}
-        direction={{ xs: "column", sm: "column", md: "row-reverse" }}
+        direction={{
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "row-reverse",
+        }}
         icon={Cafe_logo}
         carouselItems={carouselItems}
         heading1={heading1}

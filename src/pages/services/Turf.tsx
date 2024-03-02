@@ -23,6 +23,7 @@ const secBullet1 =
   "Providing a multi-sport experience catering to soccer, Cricket, and flag football, with flexible playing hours for day or night activities and safety assurance through consistent maintenance.";
 
 const buttonLabel = "Book Now";
+
 export default function Turf() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={TurfSlide1} alt={"title"} />,
@@ -32,6 +33,7 @@ export default function Turf() {
 
     <img style={{ width: "100%" }} src={TurfSlide4} alt={"title"} />,
   ];
+
   return (
     <>
       <Service />
@@ -40,7 +42,7 @@ export default function Turf() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{ xs: "column", sm: "column", md: "row" }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Turf_logo}
         carouselItems={carouselItems}
         heading1={heading1}
