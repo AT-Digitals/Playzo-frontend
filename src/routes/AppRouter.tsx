@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
 import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
@@ -32,10 +32,9 @@ import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
 
-export default function AppRouter() {
-  return (
-    <Router>
-      <Routes>
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
         <Route path={routes.ROOT} element={<AppLayout />}>
           <Route path={routes.ROOT} element={<HomePage />} />
           <Route path={routes.SERVICE} element={<ServiceNewUI />} />
@@ -86,7 +85,12 @@ export default function AppRouter() {
           <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
           <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
         </Route>
-      </Routes>
-    </Router>
+      </Route>
+  )
+);
+
+export default function AppRouter() {
+  return (
+    <RouterProvider router={router}/>
   );
 }

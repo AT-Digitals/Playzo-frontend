@@ -9,7 +9,6 @@ import {
   MenuItem,
   Stack,
   Typography,
-  styled,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -19,23 +18,11 @@ import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
 import { Logout } from "@mui/icons-material";
-import UserComponent from "./UserComponent";
 import UserLoginApi from "../api/UserLoginApi";
 import assets from "../assets";
 import routes from "../routes/routes";
 
 const { "Playzo (1).svg": logo } = assets;
-
-const HeaderLink = styled("a")`
-  text-decoration: none;
-  position: relative;
-  color: ${Colors.BUTTON_COLOR};
-  transition: color 0.3s ease; /* Add transition for color change */
-
-  &:hover {
-    color: ${Colors.WHITE};
-  }
-`;
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -43,8 +30,6 @@ export default function Header() {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // const [userData, serUserData] = useState();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openvalue = Boolean(anchorEl);
@@ -72,36 +57,16 @@ export default function Header() {
     }
   };
 
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   const user = localStorage.getItem("user");
-  //   const userData = user && JSON.parse(user);
-  //   setUser(userData);
-  // }, []);
-
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
     const userData = localStorage.getItem("user");
     const parsedUserData = userData && JSON.parse(userData);
 
     if (parsedUserData) {
-      setUser(parsedUserData);
       setIsLoggedIn(true);
     } else {
-      setUser(null);
       setIsLoggedIn(false);
     }
   }, []);
-
-  useEffect(() => {
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [user]);
 
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
@@ -123,7 +88,7 @@ export default function Header() {
           </Box>
 
           <Stack direction="row" spacing={3} alignItems="center">
-            <HeaderLink href={routes.ABOUTUS}>
+            <Link to={routes.ABOUTUS}>
               <Typography
                 sx={{
                   color: Colors.WHITE,
@@ -139,9 +104,9 @@ export default function Header() {
               >
                 About Us
               </Typography>
-            </HeaderLink>
+            </Link>
             <DropDown />
-            <HeaderLink href={routes.CONTACTUS}>
+            <Link to={routes.CONTACTUS}>
               <Typography
                 sx={{
                   color: Colors.WHITE,
@@ -157,10 +122,10 @@ export default function Header() {
               >
                 Contact Us
               </Typography>
-            </HeaderLink>
+            </Link>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <HeaderLink href={routes.BOOKING_SERVICE}>
+            <Link to={routes.BOOKING_SERVICE}>
               <Button
                 variant="outlined"
                 sx={{
@@ -183,7 +148,7 @@ export default function Header() {
               >
                 Book Now
               </Button>
-            </HeaderLink>
+            </Link>
             {isLoggedIn ? (
               <Box>
                 <IconButton

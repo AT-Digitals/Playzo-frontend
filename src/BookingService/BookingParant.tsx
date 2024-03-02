@@ -1,6 +1,6 @@
 import { Box, Breadcrumbs, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useBlocker } from "react-router-dom";
 
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
@@ -125,8 +125,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+  // Block navigating elsewhere when data has been entered into the input
+  let blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>{
+      localStorage.setItem("nextLocation", nextLocation.pathname)
+      return tableData.length !== 0 &&
+      currentLocation.pathname !== nextLocation.pathname
+    }
+  );
 
-  // const [tableData, setTableData] = useState<TableDataItem[]>([]);
+  const nextLocation = localStorage.getItem("nextLocation")
 
   const images =
     type === BookingType.Turf
@@ -144,20 +152,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       : [];
 
   const handleServiceSelection = (service: any) => {
-    console.log("djcndj", service);
     setSelectedService(service.name);
     setSelectedCourt(service.value);
     setTableData((prevTableData) => [...prevTableData]);
   };
-
-  console.log(tableData, "tableData new array");
 
   const handleRemoveItem = (indexToRemove: number) => {
     const updatedTableData = [...tableData];
     updatedTableData.splice(indexToRemove, 1);
     setTableData(updatedTableData);
     localStorage.setItem("bookings", JSON.stringify(updatedTableData));
-    console.log(tableData, "after deleted");
   };
 
   const handleAddMoreItems = () => {
@@ -314,6 +318,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     </Typography>,
   ];
 
+  const cleanupLocalStorage = () => {
+    localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
+  };
+
   const handlegoBack = () => {
     if (selectedService) {
       setSelectedService("");
@@ -325,43 +334,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.removeItem("selectedService");
   };
 
-  const useBloger = () => {
-    useEffect(() => {
-      const cleanupLocalStorage = () => {
-        localStorage.removeItem("bookings");
-        localStorage.removeItem("selectedService");
-      };
-
-      const handleBeforeUnload = (event: any) => {
-        cleanupLocalStorage();
-        const message =
-          "Are you sure you want to leave? Your selected service will be lost.";
-        event.returnValue = message;
-        return message;
-      };
-
-      const handleRouteChange = () => {
-        cleanupLocalStorage();
-        const confirmLeave = window.confirm(
-          "You have unsaved changes. Are you sure you want to leave?"
-        );
-
-        if (!confirmLeave) {
-          // Navigate back to the current location to prevent leaving
-          window.history.pushState({}, "");
-        }
-      };
-
-      window.addEventListener("beforeunload", handleBeforeUnload);
-      window.addEventListener("popstate", handleRouteChange);
-
-      return () => {
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-        window.removeEventListener("popstate", handleRouteChange);
-      };
-    }, []);
-  };
-
   useEffect(() => {
     // Read selected service from local storage
     const storedSelectedService = localStorage.getItem("selectedService");
@@ -370,8 +342,41 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
+  
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      event.preventDefault()
+      cleanupLocalStorage();
+      const message =
+        "Are you sure you want to leave? Your selected service will be lost.";
+      event.returnValue = message;
+      return message;
+    };
 
-  console.log(tableData, "inital-mount");
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    if(blocker.state === "blocked"){
+      const val = window.confirm( "Are you sure you want to leave? Your selected service will be lost.")
+      if(val){
+        setTableData([])
+        cleanupLocalStorage()
+        blocker.reset()
+      }
+    }
+  }, [blocker, blocker.state])
+
+  useEffect(() => {
+    if(nextLocation && blocker.state === "unblocked"){
+      localStorage.removeItem("nextLocation")
+      navigate(nextLocation)
+    }
+  }, [nextLocation, blocker.state, navigate, blocker])
 
   useEffect(() => {
     window.scrollTo({
@@ -379,7 +384,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       behavior: "smooth",
     });
   }, []);
-  useBloger();
 
   return (
     <>
