@@ -7,7 +7,7 @@ import {
   keyframes,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useBlocker } from "react-router-dom";
 
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
@@ -46,15 +46,13 @@ const StyledImage = styled.img`
   }
 
   @media (min-width: 768px) {
-    width: 100%;
-    max-height: 130px;
-    height: 100%;
-    max-width: 130px;
+    width: 130px;
+    height: 80px;
   }
 
   @media (min-width: 992px) {
     width: 130px;
-    height: 130px;
+    height: 80px;
   }
 
   @media (min-width: 1200px) {
@@ -147,6 +145,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+  // Block navigating elsewhere when data has been entered into the input
+  let blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>{
+      localStorage.setItem("nextLocation", nextLocation.pathname)
+      return tableData.length !== 0 &&
+      currentLocation.pathname !== nextLocation.pathname
+    }
+  );
+
+
+  const nextLocation = localStorage.getItem("nextLocation")
+
 
   const images =
     type === BookingType.Turf
@@ -158,9 +168,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       : type === BookingType.BoardGame
       ? BoardgameImages
       : type === BookingType.BowlingMachine
-      ? [{ image: bowling, name: "Bowling Machine" }]
+      ? [{ image: bowling, name: "Bowling Machine", value:1 }]
       : type === BookingType.CricketNet
-      ? [{ image: cricketnet, name: "Cricket Net" }]
+      ? [{ image: cricketnet, name: "Cricket Net", value:1 }]
       : [];
 
   const zoomInAnimation = keyframes`
@@ -182,14 +192,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     setTableData((prevTableData) => [...prevTableData]);
   };
 
-  console.log(tableData, "tableData new array");
-
   const handleRemoveItem = (indexToRemove: number) => {
     const updatedTableData = [...tableData];
     updatedTableData.splice(indexToRemove, 1);
     setTableData(updatedTableData);
     localStorage.setItem("bookings", JSON.stringify(updatedTableData));
-    console.log(tableData, "after deleted");
   };
 
   const handleAddMoreItems = () => {
@@ -309,7 +316,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const breadcrumbs = [
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -318,7 +325,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -327,7 +334,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Service Type
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -336,7 +343,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Date & Time
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="4"
@@ -345,6 +352,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       Payment
     </Typography>,
   ];
+
+  const cleanupLocalStorage = () => {
+    localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
+  };
 
   const handlegoBack = () => {
     if (selectedService) {
@@ -357,43 +369,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.removeItem("selectedService");
   };
 
-  const useBloger = () => {
-    useEffect(() => {
-      const cleanupLocalStorage = () => {
-        localStorage.removeItem("bookings");
-        localStorage.removeItem("selectedService");
-      };
-
-      const handleBeforeUnload = (event: any) => {
-        cleanupLocalStorage();
-        const message =
-          "Are you sure you want to leave? Your selected service will be lost.";
-        event.returnValue = message;
-        return message;
-      };
-
-      const handleRouteChange = () => {
-        cleanupLocalStorage();
-        const confirmLeave = window.confirm(
-          "You have unsaved changes. Are you sure you want to leave?"
-        );
-
-        if (!confirmLeave) {
-          // Navigate back to the current location to prevent leaving
-          window.history.pushState({}, "");
-        }
-      };
-
-      window.addEventListener("beforeunload", handleBeforeUnload);
-      window.addEventListener("popstate", handleRouteChange);
-
-      return () => {
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-        window.removeEventListener("popstate", handleRouteChange);
-      };
-    }, []);
-  };
-
   useEffect(() => {
     // Read selected service from local storage
     const storedSelectedService = localStorage.getItem("selectedService");
@@ -402,8 +377,41 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
+  
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      event.preventDefault()
+      cleanupLocalStorage();
+      const message =
+        "Are you sure you want to leave? Your selected service will be lost.";
+      event.returnValue = message;
+      return message;
+    };
 
-  console.log(tableData, "inital-mount");
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    if(blocker.state === "blocked"){
+      const val = window.confirm( "Are you sure you want to leave? Your selected service will be lost.")
+      if(val){
+        setTableData([])
+        cleanupLocalStorage()
+        blocker.reset()
+      }
+    }
+  }, [blocker, blocker.state])
+
+  useEffect(() => {
+    if(nextLocation && blocker.state === "unblocked"){
+      localStorage.removeItem("nextLocation")
+      navigate(nextLocation)
+    }
+  }, [nextLocation, blocker.state, navigate, blocker])
 
   useEffect(() => {
     window.scrollTo({
@@ -411,7 +419,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       behavior: "smooth",
     });
   }, []);
-  useBloger();
 
   return (
     <>
@@ -459,13 +466,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               <Button
                 sx={{
                   opacity: "1",
-                  padding: "8px 20px",
+                  padding: {xs: "0px 0px", sm: '0px 0px', md: "0px 5px", lg: "8px 20px"},
                   textTransform: "none",
-                  fontSize: "16px",
-                  minWidth: "110px",
+                  fontSize: {xs: "14px", sm: '14px', md: "14px", lg: "16px"},
+                  width: "100%",
+                  maxWidth: {xs: "70px", sm: '70px', md: "80px", lg: "115px"},
                   fontWeight: "400",
                   border: "2px solid #15B5FC",
-                  // borderRadius: "30px",
+                  marginLeft: {xs: "0px", sm: '-45px', md: "0px", lg: "0px"},
                   letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
@@ -503,6 +511,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               alignItems={"center"}
               sx={{
                 opacity: "1",
+                marginLeft: {xs: "15px", sm: "11px", md: '11px', lg: "0px"}
               }}
             >
               <Breadcrumbs
@@ -533,7 +542,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           >
             <Box
               margin={{
-                xs: "60px 38px",
+                xs: "50px 28px",
                 sm: "60px 38px",
                 md: "60px 38px",
                 lg: "60px 50px",
@@ -553,7 +562,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
                 alignItems={{
                   xs: "center",
-                  sm: "cemter",
+                  sm: "flex-start",
                   md: "center",
                   lg: "",
                 }}

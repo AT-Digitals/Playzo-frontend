@@ -14,6 +14,7 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ModalComponent from "./ModalComponent";
+import TimeUtlis from "../../Utils/TimeUtlis";
 import leftarrow from "./left-arrow.svg";
 import moment from "moment";
 import rightarrow from "./right-arrow.svg";
@@ -67,9 +68,7 @@ export default function CustomDateCalendar({
   selectedService,
   setIsBackButtonVisible,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>(
-    new Date().toString()
-  );
+  const [selectedDate, setSelectedDate] = React.useState<string>('');
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -160,9 +159,6 @@ export default function CustomDateCalendar({
     setDateModalOpen(false);
   };
 
-  React.useEffect(() => {
-    ApiCall(DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"));
-  }, []);
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
@@ -171,112 +167,145 @@ export default function CustomDateCalendar({
 
     setSelectedDate(formattedDate);
     ApiCall(formattedDate);
-    console.log(tableData, "clicked Date");
-
-    let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-    // selectedTimings.forEach((selectedTime) => {
-    // Check if the selected date and time exist in tableData
-    const isBookingExists = tableData.filter((booking: any) => {
-      return (
-        booking.date === formattedDate &&
-        booking.name === selectedService &&
-        booking.type === type
-      );
-    });
-
-    console.log(isBookingExists, "bookingTime");
-
-    console.log("isBookingExists:", isBookingExists);
-    let times: any[] = [];
-
-    isBookingExists.map((items: any) => times.push(...items.time));
-
-    console.log(times, "times");
-
-    if (times.length > 0) {
-      const updatedItems = items.map((item) =>
-        times.includes(item.name) ? { ...item, disabled: true } : item
-      );
-      setItems(updatedItems);
-    } else {
-      setItems(Timings);
-    }
-
-    console.log(formattedDate, "formattedDate");
-    console.log("updatedItems:from clickdate", updatedItems);
-
-    console.log(type, "selectedType");
-    console.log(selectedService, "selectedService");
-    // console.log(selctedname, "selctedname");
-    console.log(selectedDate, "selectedDate");
   };
 
   const ApiCall = async (dateValue: any) => {
-    try {
-      const response = await BookingApi.filter({
-        startDate: dateValue,
-        type: type,
-        endDate: dateValue,
-        court: BookingSubTypes[selectedService as keyof typeof BookingSubTypes],
-      });
-      setDisableData(response);
-    } catch (error: any) {
-      console.error("Error:", error.message);
+    if (type === BookingType.BowlingMachine) {
+      selectedService = "Bowling Machine"
+    }
+    if (type === BookingType.CricketNet) {
+      selectedService = "Cricket Net"
+    }
+    if (dateValue && type && selectedService) {
+      try {
+        const response = await BookingApi.filter({
+          startDate: dateValue,
+          type: type,
+          endDate: dateValue,
+          court: type === BookingType.BowlingMachine || type === BookingType.CricketNet ? "1" : BookingSubTypes[selectedService as keyof typeof BookingSubTypes].toString(),
+        });
+        setDisableData(response);
+      } catch (error: any) {
+        console.error("Error:", error.message);
+      }
     }
   };
 
   const MilisecondsToHours = () => {
     let combinedIntervals: any[] = [];
-
     disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
-      const intervals = generateTimeIntervals(new Date(start), new Date(end));
-      combinedIntervals = combinedIntervals.concat(intervals);
+      const startTime = TimeUtlis.formatMillisecondsToTimeConvert(start).split(" ")
+      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(end)
+      const finalTime = startTime[0].concat(`-${endTime}`)
+      combinedIntervals = combinedIntervals.concat(finalTime);
     });
-    if (combinedIntervals.length > 0) {
+
+    let isBookingExists: any = [];
+    switch (selectedService) {
+      case "PS 1&2":
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === 'PS 2' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'PS 1':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 1' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'PS 2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'PS 2' || booking.name === "PS 1&2")
+
+          );
+        });
+        break;
+      case 'Turf 1&2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      case 'Turf 1':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 1' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      case 'Turf 2':
+        isBookingExists = tableData.filter((booking: any) => {
+          return (
+            booking.date === selectedDate &&
+            booking.type === type &&
+            (booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
+
+          );
+        });
+        break;
+      default:
+        isBookingExists = tableData.filter((booking: any) => {
+
+          return (
+            booking.date === selectedDate &&
+            booking.name === selectedService &&
+            booking.type === type
+          );
+        });
+    }
+
+    isBookingExists.map((items: any) => combinedIntervals.push(...items.time));
+    const uniqueArray = combinedIntervals.reduce((accumulator, currentValue) => {
+
+      if (!accumulator.includes(currentValue)) {
+        accumulator.push(currentValue);
+      }
+      return accumulator;
+    }, []);
+    if (uniqueArray.length > 0) {
       const updatedItems = items.map((item) =>
-        combinedIntervals.includes(item.name)
-          ? { ...item, disabled: true }
-          : item
-      );
-      setItems(updatedItems);
+        uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
+      )
+
+      setItems(updatedItems)
     } else {
-      setItems(Timings);
+      setItems(Timings)
     }
+
+
   };
 
-  const generateTimeIntervals = (
-    startMillis: string | number | Date,
-    endMillis: number | Date
-  ) => {
-    const intervals = [];
-    let currentTime = new Date(startMillis);
-    while (currentTime < endMillis) {
-      const nextHour = new Date(currentTime);
-      nextHour.setHours(nextHour.getHours() + 1);
-
-      const startHour = currentTime.getHours() % 12 || 12;
-      const endHour = nextHour.getHours() % 12 || 12;
-      const startMinutes = ("0" + currentTime.getMinutes()).slice(-2); // Adding leading zero if needed
-      const endMinutes = ("0" + nextHour.getMinutes()).slice(-2); // Adding leading zero if needed
-      const startPeriod = currentTime.getHours() < 12 ? "AM" : "PM";
-      // const endPeriod = nextHour.getHours() < 12 ? 'AM' : 'PM';
-      const intervalString = `${startHour}:${startMinutes}-${endHour}:${endMinutes} ${startPeriod}`;
-      intervals.push(intervalString);
-      currentTime = nextHour;
-    }
-    return intervals;
-  };
 
   React.useEffect(() => {
-    if (disableData) {
+    if (disableData || selectedDate) {
       MilisecondsToHours();
     }
-  }, [disableData]);
 
-  // console.log(disableData, "disableData");
+
+  }, [disableData, selectedDate]);
+
+
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -310,14 +339,12 @@ export default function CustomDateCalendar({
 
         try {
           const courtValue =
-            BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
-          console.log("courtValue", courtValue);
+            type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
             courtValue
           );
           if (response) {
-            console.log("responseaa", response);
             ratePerHour = response.bookingAmount;
             bookings.amount = totalDuration * ratePerHour;
           } else {
@@ -327,74 +354,28 @@ export default function CustomDateCalendar({
           console.log("err", err);
         }
 
-        let updatedItems = [...items]; // Copy the array to avoid mutating the state directly
-
-        selectedTimings.forEach((selectedTime) => {
-          updatedItems = updatedItems.map((item) =>
-            item.name === selectedTime && selectedDate
-              ? { ...item, disabled: true }
-              : item
-          );
-        });
-        // console.log(selectedDate, "selectedDate");
-        setItems(updatedItems);
-        // console.log(updatedItems, "updatedItems");
-
-        await Promise.all(
-          selectedTimings.map(async (timeData) => {
-            let isBookingExists = false;
-
-            // Check if the booking already exists in tableData
-            tableData.forEach((booking: any) => {
-              if (
-                booking.type === type &&
-                booking.name === selectedService &&
-                booking.date === selectedDate &&
-                booking.time.includes(timeData)
-              ) {
-                isBookingExists = true;
-              }
-            });
-
-            // If booking does not exist, perform further actions
-            if (!isBookingExists) {
-              updatedItems = updatedItems.map((item) =>
-                isBookingExists && item.name === timeData
-                  ? { ...item, disabled: true }
-                  : item
-              );
-
-              // Set the updated items in the state
-              setItems(updatedItems);
-            } else {
-              console.log(
-                `Booking already exists for ${selectedDate} and ${timeData}`
-              );
-            }
-          })
-        );
-
-        selectedTimings.forEach(async (timeData) => {
+        let flag = false;
+        for (const timeData of selectedTimings) {
           try {
-            let startMilliseconds = 0;
-            let endMilliseconds = 0;
-            const [time, am] = timeData.split(" ");
-            const [time1, am1] = time.split("-");
-            const [hours, minutes] = time1.split(":");
-
-            console.log("hours", hours, minutes);
-            const startDateTime = new Date(selectedDate);
-            startDateTime.setHours(Number(hours), Number(minutes));
-            startMilliseconds = startDateTime.getTime(); // Start time in milliseconds
-
-            const endDateTime = new Date(startDateTime);
-            endDateTime.setHours(startDateTime.getHours() + 1); // Adding 1 hour, you can adjust this based on your requirement
-            endMilliseconds = endDateTime.getTime(); // End time in milliseconds
+            const newCourt = type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
+                
+            const startDateTime = DateUtils.startTimeAddtoDate(timeData);
+            const endDateTime = DateUtils.endTimeAddtoDate(timeData);
+            const endMilli = DateUtils.joinDate(DateUtils.formatDate(
+              new Date(selectedDate),
+              "YYYY-MM-DD"
+            ), endDateTime);
+            const startMilli = DateUtils.joinDate(DateUtils.formatDate(
+              new Date(selectedDate),
+              "YYYY-MM-DD"
+            ), startDateTime);
+            const startMilliSec = new Date(startMilli).getTime();
+            const endMilliSec = new Date(endMilli).getTime();
             await BookingApi.getBookedList({
-              type: BookingType.Turf,
+              type: type,
               bookingtype: "online",
-              startTime: startMilliseconds,
-              endTime: endMilliseconds,
+              startTime: startMilliSec,
+              endTime: endMilliSec,
               user: userData.id,
               startDate: DateUtils.formatDate(
                 new Date(selectedDate),
@@ -404,15 +385,15 @@ export default function CustomDateCalendar({
                 new Date(selectedDate),
                 "YYYY-MM-DD"
               ),
-              court:
-                BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+              court:newCourt.toString()
             });
           } catch (error: any) {
+            flag = true;
             if (error.message === "Please choose another date and slot") {
               setResponseModalOpen(true);
             }
           }
-        });
+        };
         if (
           !tableData.some(
             (el: {
@@ -425,11 +406,19 @@ export default function CustomDateCalendar({
             }) => el === bookings
           )
         ) {
-          setTableData((prevTableData: any) => [...prevTableData, bookings]);
+          if (bookings.type === BookingType.BowlingMachine) {
+            bookings.name = "Bowling Machine"
+          }
+          if (bookings.type === BookingType.CricketNet) {
+            bookings.name = "Cricket Net"
+          }
+          if (!flag) {
+            setTableData((prevTableData: any) => [...prevTableData, bookings]);
+          }
         }
 
         // Reset selected date and timings
-        setSelectedDate(new Date().toString());
+        setSelectedDate("");
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
       } else {
@@ -452,15 +441,15 @@ export default function CustomDateCalendar({
     <Stack
       padding={{
         xs: "18px 0px",
-        sm: "18px 0px",
-        md: "18px 0px",
+        sm: "18px 38px",
+        md: "18px 38px",
         lg: "0px 20px",
       }}
       display="flex"
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-      alignItems="center"
+      alignItems={{xs: "center", sm: "flex-start", md: 'flex-start', lg: "center"}}
       width="100%"
       margin="0 auto"
     >
@@ -505,7 +494,7 @@ export default function CustomDateCalendar({
         </LocalizationProvider>
       </Box>
       <Box
-        pl={{ xs: "26px", sm: "26px", md: "26px", lg: "0px" }}
+        pl={{ xs: "26px", sm: "6px", md: "6px", lg: "0px" }}
         width="100%"
         maxWidth={330}
       >
@@ -527,8 +516,8 @@ export default function CustomDateCalendar({
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -537,8 +526,8 @@ export default function CustomDateCalendar({
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
+                    ? "#15B5FC"
+                    : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -553,8 +542,8 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
+                        ? "white"
+                        : "black"
                   }
                   sx={{
                     ":hover": {

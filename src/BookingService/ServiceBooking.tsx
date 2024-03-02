@@ -64,7 +64,7 @@ export default function ServiceBooking() {
   };
   const breadcrumbs = [
     <Typography
-      fontSize={"20px"}
+      fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -74,7 +74,7 @@ export default function ServiceBooking() {
       Service
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -84,7 +84,7 @@ export default function ServiceBooking() {
       Service Type
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -94,7 +94,7 @@ export default function ServiceBooking() {
       Date & Time
     </Typography>,
     <Typography
-      fontSize={"20px"}
+    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="4"
@@ -174,6 +174,7 @@ export default function ServiceBooking() {
             alignItems={"center"}
             sx={{
               opacity: "1",
+              marginLeft: {xs: "11px", sm: "11px", md: '11px', lg: "0px"}
             }}
           >
             <Breadcrumbs
@@ -185,9 +186,9 @@ export default function ServiceBooking() {
           </Stack>
           <Box
             margin={{
-              xs: "50px 50px",
-              sm: "50px 50px",
-              md: "50px 50px",
+              xs: "30px 10px",
+              sm: "50px 22px",
+              md: "50px 20px",
               lg: "50px 170px",
             }}
             width={"100%"}
@@ -195,7 +196,7 @@ export default function ServiceBooking() {
             borderRight={"1px solid gray"}
           >
             <Typography
-              fontSize={"20px"}
+             fontSize={{xs: "16px", sm: "16px", md: "16px", lg: "20px"}}
               marginBottom={"10px"}
               fontWeight={"bold"}
               color={Colors.BLACK}

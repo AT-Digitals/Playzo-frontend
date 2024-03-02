@@ -137,7 +137,7 @@ export default function PaymentBooking() {
           endDate: bookings.endDate,
           userBookingType: "online",
           //   bookingId: response.razorpay_payment_id,
-          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes],
+          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes].toString(),
         });
 
         if (response) {

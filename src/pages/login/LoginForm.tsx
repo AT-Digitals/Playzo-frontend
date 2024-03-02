@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import assets from "../../assets";
+import { useGoogleLogin } from "@react-oauth/google"
 
 const { "Variant10.png": Icon } = assets
 
@@ -121,8 +122,7 @@ export default function Form({ handleClose, open }: loginProps) {
           email: data.email,
           password: data.password
         });
-        const resData = await response;
-        if (resData) {
+        if (response) {
           localStorage.setItem('user', JSON.stringify(response));
           setEmail('');
           setPassword('');
@@ -132,6 +132,7 @@ export default function Form({ handleClose, open }: loginProps) {
           navigate(routes.BOOKING_SERVICE);
           navigate(0);
           handleClose?.();
+          setShowPassword(false);
         }
       } catch (err: any) {
         setModalErrorOpen(true);
@@ -146,7 +147,21 @@ export default function Form({ handleClose, open }: loginProps) {
     setPassword('')
     setIsValidEmail(false);
     setIsPasswordValid(false);
+    setShowPassword(false);
   }
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const user = await UserLoginApi.getGoogleToken(tokenResponse.code)
+      if(user){
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate(routes.BOOKING_SERVICE);
+        navigate(0)
+      }
+    },
+    flow: 'auth-code'
+  })
+
   return (
     <Dialog
       open={open}
@@ -321,6 +336,7 @@ export default function Form({ handleClose, open }: loginProps) {
                 height={30}
               />
             }
+            onClick={() => googleLogin()}
           >
             Sign in with Google
           </CustomButton>
