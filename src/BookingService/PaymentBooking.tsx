@@ -11,8 +11,8 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -117,8 +117,9 @@ export default function PaymentBooking() {
   const navigate = useNavigate();
 
   const handlegoBack = () => {
-    navigate(-1);
+    sampleref.current = true;
 
+    navigate(-1);
     console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 
@@ -175,37 +176,120 @@ export default function PaymentBooking() {
     localStorage.removeItem("selectedService");
   };
 
-  const handleBeforeUnload = (event: any) => {
-    const hasLocalStorageData =
-      localStorage.getItem("bookings") ||
-      localStorage.getItem("selectedService");
+  // const handleBeforeUnload = (event: any) => {
+  //   const hasLocalStorageData =
+  //     localStorage.getItem("bookings") ||
+  //     localStorage.getItem("selectedService");
 
-    const currentPathname = window.location.pathname;
+  //   const currentPathname = window.location.pathname;
 
-    if (hasLocalStorageData && currentPathname !== "/payment-page") {
-      const userConfirmed = window.confirm(
-        "Are you sure you want to leave? Your selected service will be lost."
-      );
+  //   if (hasLocalStorageData && currentPathname !== "/payment-page") {
+  //     const userConfirmed = window.confirm(
+  //       "Are you sure you want to leave? Your selected service will be lost."
+  //     );
 
-      if (userConfirmed) {
-        cleanupLocalStorage();
-      } else {
-        event.preventDefault();
-        const message =
-          "You have unsaved changes. Are you sure you want to leave?";
-        event.returnValue = message;
-        return message;
-      }
+  //     if (userConfirmed) {
+  //       cleanupLocalStorage();
+  //     } else {
+  //       event.preventDefault();
+  //       const message =
+  //         "You have unsaved changes. Are you sure you want to leave?";
+  //       event.returnValue = message;
+  //       return message;
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []);
+
+  // const location = useLocation();
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event: any) => {
+  //     const hasLocalStorageData =
+  //       localStorage.getItem("bookings") ||
+  //       localStorage.getItem("selectedService");
+
+  //     if (
+  //       hasLocalStorageData &&
+  //       window.location.pathname !== "/payment-booking"
+  //     ) {
+  //       const userConfirmed = window.confirm(
+  //         "Are you sure you want to leave? Your selected service will be lost."
+  //       );
+
+  //       if (!userConfirmed) {
+  //         event.preventDefault();
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []);
+
+  const nextLocation = localStorage.getItem("nextLocation");
+
+  const sampleref = useRef(false);
+
+  // const excutedBlocker = ["/payment-booking", "/service-booking"];
+
+  // Block navigating elsewhere when data has been entered into the input
+  let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
+    if (
+      currentLocation.pathname !== nextLocation.pathname &&
+      !sampleref.current
+    ) {
+      localStorage.setItem("nextLocation", nextLocation.pathname);
+      return true;
     }
-  };
+    return false;
+  });
 
   useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      event.preventDefault();
+      cleanupLocalStorage();
+      const message =
+        "Are you sure you want to leave? Your selected service will be lost.";
+      event.returnValue = message;
+      return message;
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      const val = window.confirm(
+        "Are you sure you want to leave? Your selected service will be lost."
+      );
+      if (val) {
+        sampleref.current = true;
+        cleanupLocalStorage();
+        blocker.reset();
+      }
+    }
+  }, [blocker, blocker.state]);
+
+  useEffect(() => {
+    if (nextLocation && blocker.state === "unblocked") {
+      localStorage.removeItem("nextLocation");
+      navigate(nextLocation);
+    }
+  }, [nextLocation, blocker.state, navigate, blocker]);
 
   return (
     <>

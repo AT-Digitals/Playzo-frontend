@@ -148,6 +148,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
 
+  // const allow1 = [ "/"];
+
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
     if (

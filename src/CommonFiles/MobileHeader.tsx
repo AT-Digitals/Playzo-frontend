@@ -66,7 +66,7 @@ export default function MoblieHeader({
             <HeaderLink href={routes.BOOKING_SERVICE}>
               <IconButton
                 style={{
-                  maxWidth: "80px",
+                  maxWidth: "100px",
                   position: "fixed",
                   bottom: "10%",
                   right: "5%",
