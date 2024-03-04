@@ -45,7 +45,8 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = async (event: any) => {
+    event.preventDefault();
     try {
       UserLoginApi.logoutUser();
       navigate(routes.ROOT);

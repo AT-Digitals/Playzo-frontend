@@ -116,9 +116,10 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
         </Box>
         <Box
+          display={{ xs: "none", sm: "none", md: "block" }}
           position={"absolute"}
           top={"7%"}
-          right={{ xs: "60%", sm: "76%", md: "68%", lg: "65%" }}
+          right={{ xs: "60%", sm: "67%", md: "68%", lg: "66%" }}
         >
           <Typography
             color={"white"}
@@ -128,16 +129,18 @@ export default function AboutUs() {
             lineHeight={1}
           >
             <span style={{ display: "inline-block" }}>Playzo</span> <br />
-            <span
-              style={
+            <Typography
+              fontSize={{ xs: "30px", sm: "40px", md: "78px" }}
+              fontWeight={"bold"}
+              sx={
                 {
                   // display: "inline-block",
-                  marginLeft: { xs: "2rem", sm: "5rem", md: "10rem" },
+                  marginLeft: { xs: "2rem", sm: "5rem", md: "8rem" },
                 } as any
               }
             >
               Journey
-            </span>
+            </Typography>
           </Typography>
         </Box>
       </Box>

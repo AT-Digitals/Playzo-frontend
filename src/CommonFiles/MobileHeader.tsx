@@ -6,10 +6,11 @@ import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import routes from "../routes/routes";
+import booknow from "./booking (1).png";
 import logoImage from "../assets/logo";
+import routes from "../routes/routes";
 
-const {"Playzo.svg": logo} = logoImage
+const { "Playzo.svg": logo } = logoImage;
 
 interface MobileHeaderProps {
   setActiveTab: (event: any) => void;
@@ -63,13 +64,20 @@ export default function MoblieHeader({
           </Link>
           <Box display={"flex"} alignItems={"center"}>
             <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
+              {/* <Typography
                 color={Colors.BUTTON_COLOR}
                 fontSize={"16px"}
                 fontWeight={700}
-              >
-                Book now
-              </Typography>
+              > */}
+              <img
+                width={"100%"}
+                style={{
+                  maxWidth: "50px",
+                }}
+                src={booknow}
+                alt="book"
+              />
+              {/* </Typography> */}
             </HeaderLink>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon

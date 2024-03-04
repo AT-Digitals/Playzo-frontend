@@ -65,7 +65,7 @@ export default function CustomTimeline() {
 
   const handleIntersect = (entries: any, observer: any) => {
     entries.forEach((entry: any) => {
-      if (entry.isIntersecting || entry.rootBounds.y < 0) {  
+      if (entry.isIntersecting || entry.rootBounds.y < 0) {
         const index = parseInt(entry.target.getAttribute("data-index"), 10);
         setActiveIndex(index);
       }
@@ -116,9 +116,9 @@ export default function CustomTimeline() {
         // Check if user has scrolled to the top
         if (timelineElement.scrollTop === 0) {
           currentActiveIndex = 0; // Set to the initial index (2024)
-        } 
-          
-        setActiveIndex(currentActiveIndex)    
+        }
+
+        setActiveIndex(currentActiveIndex);
       };
 
       // Use requestAnimationFrame for smoother scrolling
@@ -142,18 +142,20 @@ export default function CustomTimeline() {
     <>
       <Timeline
         position={isHideBannerImage ? "right" : "alternate"}
-        style={{
-          height: "100%",
-          overflow: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "9rem",
-          width: "100%",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          WebkitOverflowScrolling: "touch",
-          scrollBehavior: "smooth",
-        }}
+        style={
+          {
+            height: "100%",
+            overflow: "auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: { xs: "0rem", sm: "0rem", md: "9rem" },
+            width: "100%",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            scrollBehavior: "smooth",
+          } as any
+        }
       >
         <br />
         <br />
@@ -173,10 +175,6 @@ export default function CustomTimeline() {
           {data.map((item, index) => (
             <TimelineItem
               key={index}
-              style={{
-                gap: "1rem",
-                // alignItems:index === activeIndex ? "baseline" :"center"
-              }}
               className={`timeline-item ${index === activeIndex ? "red" : ""}`}
             >
               <TimelineOppositeContent
@@ -188,7 +186,12 @@ export default function CustomTimeline() {
                   padding: index === activeIndex ? "17px 16px" : "6px 16px",
                   fontWeight: index === activeIndex ? 900 : 600,
                   fontStyle: index === activeIndex ? "italic" : "italic",
-                  fontSize: "28px",
+                  fontSize: {
+                    xs: "9px ",
+                    sm: "22px ",
+                    md: "22px ",
+                    lg: "28px",
+                  },
                 }}
               >
                 {item.game}
@@ -210,7 +213,14 @@ export default function CustomTimeline() {
                     margin: 0,
 
                     fontFamily: `'ESL Legend', sans-serif`,
-                    fontSize: "16px",
+                    // fontSize: "16px",
+
+                    fontSize: {
+                      xs: "9px ",
+                      sm: "10x ",
+                      md: "12px ",
+                      lg: "16px",
+                    },
                     fontWeight: 600,
                   }}
                 >
@@ -253,7 +263,7 @@ export default function CustomTimeline() {
                       }}
                       maxWidth={300}
                       lineHeight={1.4}
-                      fontSize={{ xs: "9px", sm: "9px", md: "16px" }}
+                      // fontSize={{ xs: "9px", sm: "9px", md: "13px" }}
                     >
                       <Typography
                         fontSize={{
