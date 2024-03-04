@@ -137,7 +137,10 @@ export default function PaymentBooking() {
           endDate: bookings.endDate,
           userBookingType: "online",
           //   bookingId: response.razorpay_payment_id,
-          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes].toString(),
+          court:
+            BookingSubTypes[
+              bookings.name as keyof typeof BookingSubTypes
+            ].toString(),
         });
 
         if (response) {
@@ -165,6 +168,43 @@ export default function PaymentBooking() {
       top: 0,
       behavior: "smooth",
     });
+  }, []);
+
+  const cleanupLocalStorage = () => {
+    localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
+  };
+
+  const handleBeforeUnload = (event: any) => {
+    const hasLocalStorageData =
+      localStorage.getItem("bookings") ||
+      localStorage.getItem("selectedService");
+
+    const currentPathname = window.location.pathname;
+
+    if (hasLocalStorageData && currentPathname !== "/payment-page") {
+      const userConfirmed = window.confirm(
+        "Are you sure you want to leave? Your selected service will be lost."
+      );
+
+      if (userConfirmed) {
+        cleanupLocalStorage();
+      } else {
+        event.preventDefault();
+        const message =
+          "You have unsaved changes. Are you sure you want to leave?";
+        event.returnValue = message;
+        return message;
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
   return (

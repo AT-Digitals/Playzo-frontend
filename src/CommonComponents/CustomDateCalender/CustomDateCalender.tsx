@@ -4,6 +4,7 @@
 import * as React from "react";
 
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BookingApi from "../../api/BookingApi";
@@ -19,7 +20,6 @@ import leftarrow from "./left-arrow.svg";
 import moment from "moment";
 import rightarrow from "./right-arrow.svg";
 import routes from "../../routes/routes";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const Timings = [
@@ -68,7 +68,7 @@ export default function CustomDateCalendar({
   selectedService,
   setIsBackButtonVisible,
 }: CustomDateCalendarProps) {
-  const [selectedDate, setSelectedDate] = React.useState<string>('');
+  const [selectedDate, setSelectedDate] = React.useState<string>("");
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
 
@@ -159,7 +159,6 @@ export default function CustomDateCalendar({
     setDateModalOpen(false);
   };
 
-
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
     const parsedDate = moment(datedata);
@@ -171,10 +170,10 @@ export default function CustomDateCalendar({
 
   const ApiCall = async (dateValue: any) => {
     if (type === BookingType.BowlingMachine) {
-      selectedService = "Bowling Machine"
+      selectedService = "Bowling Machine";
     }
     if (type === BookingType.CricketNet) {
-      selectedService = "Cricket Net"
+      selectedService = "Cricket Net";
     }
     if (dateValue && type && selectedService) {
       try {
@@ -182,7 +181,13 @@ export default function CustomDateCalendar({
           startDate: dateValue,
           type: type,
           endDate: dateValue,
-          court: type === BookingType.BowlingMachine || type === BookingType.CricketNet ? "1" : BookingSubTypes[selectedService as keyof typeof BookingSubTypes].toString(),
+          court:
+            type === BookingType.BowlingMachine ||
+            type === BookingType.CricketNet
+              ? "1"
+              : BookingSubTypes[
+                  selectedService as keyof typeof BookingSubTypes
+                ].toString(),
         });
         setDisableData(response);
       } catch (error: any) {
@@ -196,19 +201,18 @@ export default function CustomDateCalendar({
     disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
-      const startTime = TimeUtlis.formatMillisecondsToTimeConvert(start).split(" ")
-      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(end)
-      const finalTime = startTime[0].concat(`-${endTime}`)
+      const startTime =
+        TimeUtlis.formatMillisecondsToTimeConvert(start).split(" ");
+      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(end);
+      const finalTime = startTime[0].concat(`-${endTime}`);
       combinedIntervals = combinedIntervals.concat(finalTime);
     });
-if(type === BookingType.CricketNet){
-  selectedService = "Cricket Net";
-
-}
-if(type === BookingType.BowlingMachine){
-  selectedService = "Bowling Machine";
-
-}
+    if (type === BookingType.CricketNet) {
+      selectedService = "Cricket Net";
+    }
+    if (type === BookingType.BowlingMachine) {
+      selectedService = "Bowling Machine";
+    }
     let isBookingExists: any = [];
     switch (selectedService) {
       case "PS 1&2":
@@ -216,64 +220,61 @@ if(type === BookingType.BowlingMachine){
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'PS 1' || booking.name === 'PS 2' || booking.name === "PS 1&2")
-
+            (booking.name === "PS 1" ||
+              booking.name === "PS 2" ||
+              booking.name === "PS 1&2")
           );
         });
         break;
-      case 'PS 1':
+      case "PS 1":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'PS 1' || booking.name === "PS 1&2")
-
+            (booking.name === "PS 1" || booking.name === "PS 1&2")
           );
         });
         break;
-      case 'PS 2':
+      case "PS 2":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'PS 2' || booking.name === "PS 1&2")
-
+            (booking.name === "PS 2" || booking.name === "PS 1&2")
           );
         });
         break;
-      case 'Turf 1&2':
+      case "Turf 1&2":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'Turf 1' || booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
-
+            (booking.name === "Turf 1" ||
+              booking.name === "Turf 2" ||
+              booking.name === "Turf 1&2")
           );
         });
         break;
-      case 'Turf 1':
+      case "Turf 1":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'Turf 1' || booking.name === 'Turf 1&2')
-
+            (booking.name === "Turf 1" || booking.name === "Turf 1&2")
           );
         });
         break;
-      case 'Turf 2':
+      case "Turf 2":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === 'Turf 2' || booking.name === 'Turf 1&2')
-
+            (booking.name === "Turf 2" || booking.name === "Turf 1&2")
           );
         });
         break;
       default:
         isBookingExists = tableData.filter((booking: any) => {
-
           return (
             booking.date === selectedDate &&
             booking.name === selectedService &&
@@ -283,35 +284,32 @@ if(type === BookingType.BowlingMachine){
     }
 
     isBookingExists.map((items: any) => combinedIntervals.push(...items.time));
-    const uniqueArray = combinedIntervals.reduce((accumulator, currentValue) => {
-
-      if (!accumulator.includes(currentValue)) {
-        accumulator.push(currentValue);
-      }
-      return accumulator;
-    }, []);
+    const uniqueArray = combinedIntervals.reduce(
+      (accumulator, currentValue) => {
+        if (!accumulator.includes(currentValue)) {
+          accumulator.push(currentValue);
+        }
+        return accumulator;
+      },
+      []
+    );
     if (uniqueArray.length > 0) {
       const updatedItems = items.map((item) =>
-        uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
-      )
-      setItems(updatedItems)
+        uniqueArray.includes(item.name)
+          ? { ...item, disabled: true }
+          : { ...item, disabled: false }
+      );
+      setItems(updatedItems);
     } else {
-      setItems(Timings)
+      setItems(Timings);
     }
-
-
   };
-
 
   React.useEffect(() => {
     if (disableData || selectedDate) {
       MilisecondsToHours();
     }
-
-
   }, [disableData, selectedDate]);
-
-
 
   const handleTimeSelection = (time: string) => {
     setSelectedTimings((prevSelectedTimings) => {
@@ -345,7 +343,10 @@ if(type === BookingType.BowlingMachine){
 
         try {
           const courtValue =
-            type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
+            type === BookingType.BowlingMachine ||
+            type === BookingType.CricketNet
+              ? 1
+              : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
             courtValue
@@ -363,18 +364,24 @@ if(type === BookingType.BowlingMachine){
         let flag = false;
         for (const timeData of selectedTimings) {
           try {
-            const newCourt = type === BookingType.BowlingMachine || type === BookingType.CricketNet ? 1 : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes]
-                
+            const newCourt =
+              type === BookingType.BowlingMachine ||
+              type === BookingType.CricketNet
+                ? 1
+                : BookingSubTypes[
+                    bookings.name as keyof typeof BookingSubTypes
+                  ];
+
             const startDateTime = DateUtils.startTimeAddtoDate(timeData);
             const endDateTime = DateUtils.endTimeAddtoDate(timeData);
-            const endMilli = DateUtils.joinDate(DateUtils.formatDate(
-              new Date(selectedDate),
-              "YYYY-MM-DD"
-            ), endDateTime);
-            const startMilli = DateUtils.joinDate(DateUtils.formatDate(
-              new Date(selectedDate),
-              "YYYY-MM-DD"
-            ), startDateTime);
+            const endMilli = DateUtils.joinDate(
+              DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
+              endDateTime
+            );
+            const startMilli = DateUtils.joinDate(
+              DateUtils.formatDate(new Date(selectedDate), "YYYY-MM-DD"),
+              startDateTime
+            );
             const startMilliSec = new Date(startMilli).getTime();
             const endMilliSec = new Date(endMilli).getTime();
             await BookingApi.getBookedList({
@@ -391,7 +398,7 @@ if(type === BookingType.BowlingMachine){
                 new Date(selectedDate),
                 "YYYY-MM-DD"
               ),
-              court:newCourt.toString()
+              court: newCourt.toString(),
             });
           } catch (error: any) {
             flag = true;
@@ -399,7 +406,7 @@ if(type === BookingType.BowlingMachine){
               setResponseModalOpen(true);
             }
           }
-        };
+        }
         if (
           !tableData.some(
             (el: {
@@ -413,10 +420,10 @@ if(type === BookingType.BowlingMachine){
           )
         ) {
           if (bookings.type === BookingType.BowlingMachine) {
-            bookings.name = "Bowling Machine"
+            bookings.name = "Bowling Machine";
           }
           if (bookings.type === BookingType.CricketNet) {
-            bookings.name = "Cricket Net"
+            bookings.name = "Cricket Net";
           }
           if (!flag) {
             setTableData((prevTableData: any) => [...prevTableData, bookings]);
@@ -435,6 +442,8 @@ if(type === BookingType.BowlingMachine){
     }
   };
 
+  const location = useLocation();
+
   React.useEffect(() => {
     if (tableData && tableData.length === 0) {
       setIsBackButtonVisible(true);
@@ -442,6 +451,16 @@ if(type === BookingType.BowlingMachine){
       setIsBackButtonVisible(false);
     }
   }, [tableData]);
+
+  React.useEffect(() => {
+    // Check if the current route is "/service-booking"
+    if (location.pathname === "/service-booking") {
+      setIsBackButtonVisible(false);
+    } else {
+      // Reset the state for other routes
+      setIsBackButtonVisible(true);
+    }
+  }, [location]);
 
   return (
     <Stack
@@ -455,7 +474,12 @@ if(type === BookingType.BowlingMachine){
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-      alignItems={{xs: "center", sm: "flex-start", md: 'flex-start', lg: "center"}}
+      alignItems={{
+        xs: "center",
+        sm: "flex-start",
+        md: "flex-start",
+        lg: "center",
+      }}
       width="100%"
       margin="0 auto"
     >
@@ -522,8 +546,8 @@ if(type === BookingType.BowlingMachine){
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                    ? "2px solid #15B5FC"
-                    : "1px solid black",
+                  ? "2px solid #15B5FC"
+                  : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -532,8 +556,8 @@ if(type === BookingType.BowlingMachine){
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                    ? "#15B5FC"
-                    : "none",
+                  ? "#15B5FC"
+                  : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -548,8 +572,8 @@ if(type === BookingType.BowlingMachine){
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                        ? "white"
-                        : "black"
+                      ? "white"
+                      : "black"
                   }
                   sx={{
                     ":hover": {

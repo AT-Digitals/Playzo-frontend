@@ -104,12 +104,17 @@ export default function AboutUs() {
         />
 
         <Box
+          top={{
+            xs: "-52%",
+            sm: "-10%",
+            md: "-10%",
+          }}
           ref={timelineRef}
           sx={{
             position: "absolute",
             width: "100%",
             bottom: "0%",
-            top: "-10%",
+            // top: "-10%",
             right: "1%",
           }}
         >

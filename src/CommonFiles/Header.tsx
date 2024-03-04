@@ -114,7 +114,7 @@ export default function Header() {
               </Typography>
             </Link>
             <DropDown />
-            <Link to={routes.CONTACTUS}>
+            <Link className="react-router-link" to={routes.CONTACTUS}>
               <Typography
                 sx={{
                   color: Colors.WHITE,
