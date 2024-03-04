@@ -383,14 +383,33 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event: any) => {
+  //     event.preventDefault();
+  //     cleanupLocalStorage();
+  //     const message =
+  //       "Are you sure you want to leave? Your selected service will be lost.";
+  //     event.returnValue = message;
+  //     return message;
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, []);
+
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
-      event.preventDefault();
-      cleanupLocalStorage();
-      const message =
-        "Are you sure you want to leave? Your selected service will be lost.";
-      event.returnValue = message;
-      return message;
+      if (tableData.length !== 0) {
+        event.preventDefault();
+        cleanupLocalStorage();
+        const message =
+          "Are you sure you want to leave? Your selected service will be lost.";
+        event.returnValue = message;
+        return message;
+      }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -398,7 +417,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [tableData.length]);
 
   useEffect(() => {
     if (blocker.state === "blocked") {
