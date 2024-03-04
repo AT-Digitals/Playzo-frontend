@@ -201,7 +201,14 @@ export default function CustomDateCalendar({
       const finalTime = startTime[0].concat(`-${endTime}`)
       combinedIntervals = combinedIntervals.concat(finalTime);
     });
+if(type === BookingType.CricketNet){
+  selectedService = "Cricket Net";
 
+}
+if(type === BookingType.BowlingMachine){
+  selectedService = "Bowling Machine";
+
+}
     let isBookingExists: any = [];
     switch (selectedService) {
       case "PS 1&2":
@@ -287,7 +294,6 @@ export default function CustomDateCalendar({
       const updatedItems = items.map((item) =>
         uniqueArray.includes(item.name) ? { ...item, disabled: true } : { ...item, disabled: false }
       )
-
       setItems(updatedItems)
     } else {
       setItems(Timings)
