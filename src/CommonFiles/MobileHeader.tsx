@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, styled } from "@mui/material";
+import { Box, Stack, styled } from "@mui/material";
 import React, { useCallback } from "react";
 
 import AppDrawer from "./AppDrawer";
@@ -64,20 +64,16 @@ export default function MoblieHeader({
           </Link>
           <Box display={"flex"} alignItems={"center"}>
             <HeaderLink href={routes.BOOKING_SERVICE}>
-              {/* <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize={"16px"}
-                fontWeight={700}
-              > */}
-              <img
-                width={"100%"}
+              <IconButton
                 style={{
-                  maxWidth: "50px",
+                  maxWidth: "80px",
+                  position: "fixed",
+                  bottom: "10%",
+                  right: "5%",
                 }}
-                src={booknow}
-                alt="book"
-              />
-              {/* </Typography> */}
+              >
+                <img width={"100%"} src={booknow} alt="book" />
+              </IconButton>
             </HeaderLink>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon
