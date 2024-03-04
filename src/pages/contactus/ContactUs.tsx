@@ -28,6 +28,11 @@ const StyledIframe = styled.iframe`
   height: 340px;
   margin: auto;
 }
+@media (min-width: 540px) {
+  width: 490px; 
+  height: 340px;
+  margin: auto;
+}
 
 @media (min-width: 768px) {
   width: 700px; 
@@ -263,9 +268,9 @@ export default function ContactUs() {
         <AppContainer
           paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
           paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
-          maxWidth={1300}
+          maxWidth={1200}
         >
-          <Typography pb={{ xs: "20px", sm: "20px", md: "20px", lg: '0px' }} pl={{ xs: "15px", sm: "28px", md: "28px", lg: '0px' }} pt={"20px"} color={Colors.BLACK} fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
+          <Typography pb={{ xs: "20px", sm: "20px", md: "20px", lg: '20px' }} pl={{ xs: "15px", sm: "28px", md: "28px", lg: '0px' }} pt={"20px"} color={Colors.BLACK} fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
           <Stack style={{
             marginBottom: "20px",
             marginTop: "0px"
@@ -283,7 +288,7 @@ export default function ContactUs() {
               }}
             >
               <StyledIframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15573.737649706532!2d80.1963331!3d12.6194818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a53acac30ee8d5d%3A0xad2be778ecae5918!2sTina%20Blue%20View!5e0!3m2!1sen!2sin!4v1702554954296!5m2!1sen!2sin"
+               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15553.383003662614!2d77.6973392!3d11.3341512!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6d17503b1dad5cfb!2sPlayzo%2033!5e0!3m2!1sen!2sus!4v1643151588496!5m2!1sen!2sus"
               ></StyledIframe>
               <Box ml={{ xs: "16px", sm: "28px", md: "35px", lg: '0px' }}>
                 <Typography
@@ -314,7 +319,9 @@ export default function ContactUs() {
 
             <Box style={{ marginTop: "40px" }} marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }} width={"100%"}>
               <form onSubmit={onSubmit}>
-                <Stack margin={{ xs: "0 auto", sm: '0 auto', md: "0 auto", lg: "0 auto" }}
+                <Stack sx={{
+                  marginTop: {xs: "0px", sm: "0px", md: "0px", lg: "-50px"}
+                }} margin={{ xs: "0 auto", sm: '0 auto', md: "0 auto", lg: "0 auto" }}
                   border={{
                     xs: "1px solid grey",
                     sm: "1px solid grey",
