@@ -58,16 +58,6 @@ const BpCheckedIcon = styled(BpIcon)({
     backgroundColor: "#15B5FC",
   },
 });
-// const style = {
-//   position: "absolute" as "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 400,
-//   bgcolor: "#000333",
-//   borderRadius: "15px",
-//   p: 4,
-// };
 
 function BpRadio(props: RadioProps) {
   return (
@@ -84,12 +74,6 @@ export default function PaymentBooking() {
   const initialPaymentMethod = "female";
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState(initialPaymentMethod);
-  // const [singleAmount, setSingleAmount] =
-  // useState(0);
-  // const [totalBookingAmount, setTotalBookingAmount] =
-  // useState(0);
-  // const [bookingAmount, setBookingAmount] =
-  // useState<any>([]);
 
   const handlePaymentMethodChange = (event: any) => {
     setSelectedPaymentMethod(event.target.value);
@@ -176,73 +160,10 @@ export default function PaymentBooking() {
     localStorage.removeItem("selectedService");
   };
 
-  // const handleBeforeUnload = (event: any) => {
-  //   const hasLocalStorageData =
-  //     localStorage.getItem("bookings") ||
-  //     localStorage.getItem("selectedService");
-
-  //   const currentPathname = window.location.pathname;
-
-  //   if (hasLocalStorageData && currentPathname !== "/payment-page") {
-  //     const userConfirmed = window.confirm(
-  //       "Are you sure you want to leave? Your selected service will be lost."
-  //     );
-
-  //     if (userConfirmed) {
-  //       cleanupLocalStorage();
-  //     } else {
-  //       event.preventDefault();
-  //       const message =
-  //         "You have unsaved changes. Are you sure you want to leave?";
-  //       event.returnValue = message;
-  //       return message;
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
-  // const location = useLocation();
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event: any) => {
-  //     const hasLocalStorageData =
-  //       localStorage.getItem("bookings") ||
-  //       localStorage.getItem("selectedService");
-
-  //     if (
-  //       hasLocalStorageData &&
-  //       window.location.pathname !== "/payment-booking"
-  //     ) {
-  //       const userConfirmed = window.confirm(
-  //         "Are you sure you want to leave? Your selected service will be lost."
-  //       );
-
-  //       if (!userConfirmed) {
-  //         event.preventDefault();
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
   const nextLocation = localStorage.getItem("nextLocation");
 
   const sampleref = useRef(false);
 
-  // const excutedBlocker = ["/payment-booking", "/service-booking"];
-
-  // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
     if (
       currentLocation.pathname !== nextLocation.pathname &&
@@ -259,7 +180,7 @@ export default function PaymentBooking() {
       event.preventDefault();
       cleanupLocalStorage();
       const message =
-        "Are you sure you want to leave? Your selected service will be lost.";
+        "Are you sure you want to leave? Your selected bookings will be lost.";
       event.returnValue = message;
       return message;
     };
@@ -274,7 +195,7 @@ export default function PaymentBooking() {
   useEffect(() => {
     if (blocker.state === "blocked") {
       const val = window.confirm(
-        "Are you sure you want to leave? Your selected service will be lost."
+        "Are you sure you want to leave? Your selected bookings will be lost."
       );
       if (val) {
         sampleref.current = true;
