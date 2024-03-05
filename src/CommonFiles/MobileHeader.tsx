@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, styled } from "@mui/material";
+import { Box, Stack, styled } from "@mui/material";
 import React, { useCallback } from "react";
 
 import AppDrawer from "./AppDrawer";
@@ -6,10 +6,11 @@ import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import routes from "../routes/routes";
+import booknow from "./booking (1).png";
 import logoImage from "../assets/logo";
+import routes from "../routes/routes";
 
-const {"Playzo.svg": logo} = logoImage
+const { "Playzo.svg": logo } = logoImage;
 
 interface MobileHeaderProps {
   setActiveTab: (event: any) => void;
@@ -63,13 +64,16 @@ export default function MoblieHeader({
           </Link>
           <Box display={"flex"} alignItems={"center"}>
             <HeaderLink href={routes.BOOKING_SERVICE}>
-              <Typography
-                color={Colors.BUTTON_COLOR}
-                fontSize={"16px"}
-                fontWeight={700}
+              <IconButton
+                style={{
+                  maxWidth: "100px",
+                  position: "fixed",
+                  bottom: "10%",
+                  right: "5%",
+                }}
               >
-                Book now
-              </Typography>
+                <img width={"100%"} src={booknow} alt="book" />
+              </IconButton>
             </HeaderLink>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon

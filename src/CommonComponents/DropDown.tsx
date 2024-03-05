@@ -84,11 +84,11 @@ export default function BasicMenu() {
               position: "absolute",
               top: "100%",
               left: 0,
-              width: "100%",
               background: "#fff", // You can customize the background color
               boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)", // You can customize the box shadow
               zIndex: 1000,
               borderRadius: "4px",
+              width: 120,
             }}
           >
             {menuList.map((menu, index) => (
