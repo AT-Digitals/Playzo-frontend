@@ -1,5 +1,5 @@
-import axios from "axios";
 import UserLoginApi from "./UserLoginApi";
+import axios from "axios";
 import routes from "../routes/routes";
 
 const axiosInstance = axios.create({
@@ -43,7 +43,6 @@ const handleTokenExpiration = async () => {
   UserLoginApi.logoutUser();
   alert("Session expired. Please log in again.");
   window.location.href = routes.ROOT;
-  window.location.reload();
 };
 
 export default axiosInstance;

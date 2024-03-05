@@ -148,8 +148,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
 
-  // const allow1 = [ "/"];
-
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
     if (
@@ -204,6 +202,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     updatedTableData.splice(indexToRemove, 1);
     setTableData(updatedTableData);
     localStorage.setItem("bookings", JSON.stringify(updatedTableData));
+    localStorage.removeItem("selectedService");
   };
 
   const handleAddMoreItems = () => {
@@ -385,23 +384,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event: any) => {
-  //     event.preventDefault();
-  //     cleanupLocalStorage();
-  //     const message =
-  //       "Are you sure you want to leave? Your selected service will be lost.";
-  //     event.returnValue = message;
-  //     return message;
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
@@ -518,7 +500,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 }}
                 onClick={handlegoBack}
                 variant="text"
-                // startIcon={}
               >
                 <span
                   style={{
@@ -538,7 +519,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Box>
             <Stack
               marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
-              // marginTop={"50px"}
               spacing={2}
               justifyContent={"center"}
               alignItems={"center"}
