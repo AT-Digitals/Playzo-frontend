@@ -18,6 +18,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import routes from "../routes/routes";
 import styled from "@emotion/styled";
 
 const {
@@ -147,9 +148,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   });
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
+  const rootlocak = [routes.ROOT];
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    const isLocalStorageCleared = localStorage.getItem("bookings") === null;
+
+    if (rootlocak && isLocalStorageCleared) {
+      return false;
+    }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
@@ -383,7 +390,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
-  
+
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
