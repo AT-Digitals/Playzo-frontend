@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import AppContainer from "../CommonComponents/AppContainer";
@@ -76,6 +76,19 @@ export default function Header() {
       setIsLoggedIn(false); // Set to false if there is no user data
     }
   }, []);
+
+  const location = useLocation();
+  const currentRoute = location.pathname;
+  const disabledRoutes = [
+    routes.TURF_BOOKING,
+    routes.BOOKING_SERVICE,
+    routes.PLAYSTATION_BOOKING,
+    routes.BOARDGAME_BOOKING,
+    routes.BADMINTON_BOOKING,
+    routes.BOWLINGMACHINE_BOOKING,
+    routes.CRICKETNET_BOOKING,
+  ];
+  const isDisabled = disabledRoutes.includes(currentRoute);
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -133,7 +146,14 @@ export default function Header() {
             </Link>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <Link to={routes.BOOKING_SERVICE}>
+            <Link
+              to={isDisabled ? "#" : routes.BOOKING_SERVICE}
+              style={{
+                cursor: disabledRoutes.includes(currentRoute)
+                  ? "default"
+                  : "pointer",
+              }}
+            >
               <Button
                 variant="outlined"
                 sx={{
@@ -145,7 +165,10 @@ export default function Header() {
                   border: "2px solid #15B5FC",
                   borderRadius: "30px",
                   letterSpacing: "1.6px",
-                  background: Colors.BUTTON_COLOR,
+                  background: disabledRoutes.includes(currentRoute)
+                    ? "#CCCCCC"
+                    : Colors.BUTTON_COLOR,
+
                   color: Colors.WHITE,
                   "&:hover": {
                     background: Colors.WHITE,
@@ -153,6 +176,7 @@ export default function Header() {
                     border: "2px solid #15B5FC",
                   },
                 }}
+                disabled={disabledRoutes.includes(currentRoute)}
               >
                 Book Now
               </Button>
