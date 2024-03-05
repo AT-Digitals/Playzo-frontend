@@ -15,10 +15,22 @@ const StyledImage = styled.img`
   height: 180px;
   border-radius: 10px; /* Maintain aspect ratio */
 }
+@media (min-width: 540px) {
+    transition: transform 0.5s ease-in-out;
+    width: 460px;
+    height: 200px;
+    border-radius: 10px;
+}
 
 @media (min-width: 768px) {
     transition: transform 0.5s ease-in-out;
     width: 600px;
+    height: 350px;
+    border-radius: 10px;
+}
+@media (min-width: 853px) {
+    transition: transform 0.5s ease-in-out;
+    width: 640px;
     height: 350px;
     border-radius: 10px;
 }
@@ -63,8 +75,11 @@ const StyledStack = styled(Stack)`
   @media (min-width: 430px) {
     transform: translate(-74px, 10px);
   }
-  @media (min-width: 360px) {
+  @media (min-width: 375px) {
     transform: translate(-23px, 10px);
+  }
+  @media (min-width: 360px) {
+    transform: translate(-13px, -6px);
   }
   @media (min-width: 412px) {
     transform: translate(-59px, 10px);
@@ -76,7 +91,7 @@ const StyledStack = styled(Stack)`
     transform: translate(-177px, 10px);
   }
   @media (min-width: 1024px) {
-    transform: translate(-200px, 10px);
+    transform: translate(-190px, 10px);
   }
   @media (min-width: 1200px) {
     transform: translate(2px, 10px);

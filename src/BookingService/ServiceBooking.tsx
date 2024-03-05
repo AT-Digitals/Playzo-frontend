@@ -186,14 +186,14 @@ export default function ServiceBooking() {
           </Stack>
           <Box
             margin={{
-              xs: "30px 10px",
-              sm: "50px 22px",
-              md: "50px 20px",
+              xs: "30px auto",
+              sm: "50px auto",
+              md: "50px auto",
               lg: "50px 170px",
             }}
             width={"100%"}
             maxWidth={"310px"}
-            borderRight={"1px solid gray"}
+            borderRight={{xs: "none", sm: "none", md: "none", lg: "1px solid gray"}}
           >
             <Typography
              fontSize={{xs: "16px", sm: "16px", md: "16px", lg: "20px"}}

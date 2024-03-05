@@ -148,8 +148,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
 
-  // const allow1 = [ "/"];
-
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
     if (
@@ -384,24 +382,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event: any) => {
-  //     event.preventDefault();
-  //     cleanupLocalStorage();
-  //     const message =
-  //       "Are you sure you want to leave? Your selected service will be lost.";
-  //     event.returnValue = message;
-  //     return message;
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
@@ -460,7 +440,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           backgroundRepeat: "no-repeat",
           objectFit: "cover", // Set object-fit to cover
           height: "100%",
-          // Ensure the height is 100%
         }}
       >
         <Box
@@ -518,7 +497,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 }}
                 onClick={handlegoBack}
                 variant="text"
-                // startIcon={}
               >
                 <span
                   style={{

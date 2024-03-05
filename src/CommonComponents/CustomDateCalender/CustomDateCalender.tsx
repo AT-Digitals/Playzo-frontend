@@ -474,12 +474,8 @@ export default function CustomDateCalendar({
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-      alignItems={{
-        xs: "center",
-        sm: "flex-start",
-        md: "flex-start",
-        lg: "center",
-      }}
+
+      alignItems={{xs: "center", sm: "center", md: 'center', lg: "center"}}
       width="100%"
       margin="0 auto"
     >
@@ -524,7 +520,7 @@ export default function CustomDateCalendar({
         </LocalizationProvider>
       </Box>
       <Box
-        pl={{ xs: "26px", sm: "6px", md: "6px", lg: "0px" }}
+        pl={{ xs: "26px", sm: "0px", md: "0px", lg: "0px" }}
         width="100%"
         maxWidth={330}
       >

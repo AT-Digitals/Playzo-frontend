@@ -8,8 +8,14 @@ interface cardProps {
   buttonLabel: string;
 }
 const StyledCard = styled(Card)`
-  @media (min-width: 1280px) {
-    width: 290px;
+  width: 290px; /* Default width */
+
+  @media (max-width: 1280px) {
+    width: 280px; /* For 1280px width */
+  }
+
+  @media (max-width: 1200px) {
+    width: 340px; /* For 1200px width */
   }
 `;
 
@@ -21,7 +27,7 @@ export default function CardComponent({
 }: cardProps) {
   return (
     <>
-    <Card
+    <StyledCard
       sx={{
         width: {xs: "328px", sm: "353px", md: "390px", lg: "340px"},
         maxWidth: 400,
@@ -49,7 +55,7 @@ export default function CardComponent({
         image={image}
         alt="green iguana"
       />    
-    </Card>
+    </StyledCard>
     <Button style={{
         background: Colors.WHITE,
         color: Colors.BLACK,
