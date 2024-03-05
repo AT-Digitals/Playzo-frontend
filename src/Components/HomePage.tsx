@@ -94,7 +94,7 @@ const StyledImage2 = styled.img`
   width: 345px;
   height: 345px;
 
-  @media (min-width: 1280px) {
+  @media (max-width: 1280px) {
     width: 290px;
     height: 345px;
 }

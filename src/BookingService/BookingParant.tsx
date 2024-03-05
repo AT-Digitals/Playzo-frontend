@@ -383,7 +383,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
-
+  
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
@@ -442,7 +442,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           backgroundRepeat: "no-repeat",
           objectFit: "cover", // Set object-fit to cover
           height: "100%",
-          // Ensure the height is 100%
         }}
       >
         <Box
