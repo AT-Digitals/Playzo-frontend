@@ -18,8 +18,9 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
-import routes from "../routes/routes";
 import styled from "@emotion/styled";
+
+// import routes from "../routes/routes";
 
 const {
   "Image (7).png": badminton,
@@ -148,15 +149,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   });
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-  const rootlocak = [routes.ROOT];
+  // const rootLocal = [routes.ROOT];
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    const isLocalStorageCleared = localStorage.getItem("bookings") === null;
+    // const isLocalCleared = localStorage.getItem("bookings") !== null;
+    // console.log(isLocalCleared, "cleared");
 
-    if (rootlocak && isLocalStorageCleared) {
-      return false;
-    }
+    // if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
+    //   // Local storage is already cleared, and pathname matches rootLocal[0]
+    //   console.log("working inside");
+    //   return false;
+    // }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
@@ -167,7 +171,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
     return false;
   });
-
   const nextLocation = localStorage.getItem("nextLocation");
 
   const images =
@@ -449,6 +452,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           backgroundRepeat: "no-repeat",
           objectFit: "cover", // Set object-fit to cover
           height: "100%",
+          // Ensure the height is 100%
         }}
       >
         <Box
