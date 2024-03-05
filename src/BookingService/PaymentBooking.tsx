@@ -162,12 +162,15 @@ export default function PaymentBooking() {
 
   const nextLocation = localStorage.getItem("nextLocation");
 
+  const excutedBlocker = ["/service-booking"];
+
   const sampleref = useRef(false);
 
   let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
     if (
       currentLocation.pathname !== nextLocation.pathname &&
-      !sampleref.current
+      !sampleref.current &&
+      !excutedBlocker.includes(nextLocation.pathname)
     ) {
       localStorage.setItem("nextLocation", nextLocation.pathname);
       return true;
