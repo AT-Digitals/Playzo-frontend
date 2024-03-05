@@ -49,8 +49,7 @@ export default function Header() {
     event.preventDefault();
     try {
       UserLoginApi.logoutUser();
-      navigate(routes.ROOT);
-      navigate(0);
+      window.location.href = '/';
       localStorage.clear();
       setAnchorEl(null);
     } catch {
@@ -194,7 +193,7 @@ export default function Header() {
                   <Avatar
                     sx={{ width: 40, height: 40 }}
                     alt="Remy Sharp"
-                    // src={headerProfileLogo}
+                  // src={headerProfileLogo}
                   >
                     {user ? user.name?.charAt(0).toUpperCase() : "U"}
                   </Avatar>

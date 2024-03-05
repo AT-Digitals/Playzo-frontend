@@ -125,9 +125,7 @@ export default function Form({ handleClose, open }: loginProps) {
           setPassword("");
           setIsValidEmail(false);
           setIsPasswordValid(false);
-          //setModalOpen(true);
-          navigate(routes.BOOKING_SERVICE);
-          navigate(0);
+          window.location.href = '/service-booking';
           handleClose?.();
           setShowPassword(false);
         }
@@ -152,8 +150,7 @@ export default function Form({ handleClose, open }: loginProps) {
       const user = await UserLoginApi.getGoogleToken(tokenResponse.code);
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
-        navigate(routes.BOOKING_SERVICE);
-        navigate(0);
+        window.location.href = '/service-booking';
       }
     },
     flow: "auth-code",
