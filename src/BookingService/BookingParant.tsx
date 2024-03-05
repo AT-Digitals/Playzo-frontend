@@ -202,6 +202,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     updatedTableData.splice(indexToRemove, 1);
     setTableData(updatedTableData);
     localStorage.setItem("bookings", JSON.stringify(updatedTableData));
+    localStorage.removeItem("selectedService");
   };
 
   const handleAddMoreItems = () => {
@@ -382,6 +383,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
+  
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
@@ -516,7 +518,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             </Box>
             <Stack
               marginRight={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
-              // marginTop={"50px"}
               spacing={2}
               justifyContent={"center"}
               alignItems={"center"}

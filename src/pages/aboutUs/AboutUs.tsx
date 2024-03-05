@@ -121,7 +121,7 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
         </Box>
         <Box
-          display={{ xs: "none", sm: "none", md: "block" }}
+          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
           position={"absolute"}
           top={"7%"}
           right={{ xs: "60%", sm: "67%", md: "68%", lg: "66%" }}
