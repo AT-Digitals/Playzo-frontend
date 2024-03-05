@@ -15,6 +15,7 @@ interface CustomSliderProps {
 const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
   opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.9);
 `;
 const CustomSlider = ({
   slides,
@@ -61,6 +62,7 @@ const CustomSlider = ({
             display: "flex",
             transform: `translateX(-${currentSlide * 100}%)`,
             height: "100%",
+            boxShadow: "0 7px 10px rgba(0, 0, 0, 0.9)",
           }}
         >
           {showSkeleton && (
@@ -92,18 +94,21 @@ const CustomSlider = ({
                   background: "white",
                 }}
                 animation="wave"
+                  variant="rectangular"
               />
               <Skeleton
                 sx={{
                   background: "white",
                 }}
                 animation="wave"
+                variant="rectangular"
               />
               <Skeleton
                 sx={{
                   background: "white",
                 }}
                 animation="wave"
+                variant="rectangular"
               />
             </SkeletonContainer>
           )}
