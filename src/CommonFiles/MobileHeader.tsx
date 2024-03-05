@@ -1,4 +1,4 @@
-import { Box, Stack, styled } from "@mui/material";
+import { Box, Button, Stack, styled } from "@mui/material";
 import React, { useCallback } from "react";
 
 import AppDrawer from "./AppDrawer";
@@ -75,6 +75,21 @@ export default function MoblieHeader({
                 <img width={"100%"} src={booknow} alt="book" />
               </IconButton>
             </HeaderLink>
+
+            <Button
+              style={{
+                maxWidth: "100px",
+                position: "fixed",
+                bottom: "10%",
+                left: "5%",
+                background: Colors.BUTTON_COLOR,
+                color: "white",
+                borderRadius: "50%",
+                height: "60px",
+              }}
+            >
+              Click
+            </Button>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon
                 style={{ fontSize: 40, color: Colors.BUTTON_COLOR }}

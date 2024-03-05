@@ -16,8 +16,10 @@ import { useEffect, useState } from "react";
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
+import EditIcon from "@mui/icons-material/Edit";
 import LoginForm from "../pages/login/LoginForm";
 import { Logout } from "@mui/icons-material";
+import MessageIcon from "@mui/icons-material/Message";
 import UserLoginApi from "../api/UserLoginApi";
 import assets from "../assets";
 import routes from "../routes/routes";
@@ -30,6 +32,7 @@ export default function Header() {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openvalue = Boolean(anchorEl);
@@ -181,6 +184,31 @@ export default function Header() {
                 Book Now
               </Button>
             </Link>
+            <IconButton
+              style={{
+                maxWidth: "60px",
+                position: "fixed",
+                bottom: "10%",
+                right: "2%",
+                background: isHovered ? Colors.WHITE : Colors.BUTTON_COLOR, // Change color on hover
+                color: "white",
+                borderRadius: "50%",
+                height: "60px",
+                width: "100%",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {isHovered ? (
+                <EditIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              ) : (
+                <MessageIcon />
+              )}
+            </IconButton>
             {isLoggedIn ? (
               <Box>
                 <IconButton

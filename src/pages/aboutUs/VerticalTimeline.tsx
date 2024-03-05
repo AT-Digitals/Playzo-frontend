@@ -283,7 +283,11 @@ export default function CustomTimeline() {
                         {item.title}
                       </Typography>{" "}
                       <br />
-                      {item.disciption}
+                      <Typography
+                        display={{ xs: "none", sm: "block", md: "block" }}
+                      >
+                        {item.disciption}
+                      </Typography>
                     </Typography>
                   </AnimatedTypographyWrapper>
                 </Box>
