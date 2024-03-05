@@ -11,8 +11,8 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -58,16 +58,6 @@ const BpCheckedIcon = styled(BpIcon)({
     backgroundColor: "#15B5FC",
   },
 });
-// const style = {
-//   position: "absolute" as "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 400,
-//   bgcolor: "#000333",
-//   borderRadius: "15px",
-//   p: 4,
-// };
 
 function BpRadio(props: RadioProps) {
   return (
@@ -84,12 +74,6 @@ export default function PaymentBooking() {
   const initialPaymentMethod = "female";
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState(initialPaymentMethod);
-  // const [singleAmount, setSingleAmount] =
-  // useState(0);
-  // const [totalBookingAmount, setTotalBookingAmount] =
-  // useState(0);
-  // const [bookingAmount, setBookingAmount] =
-  // useState<any>([]);
 
   const handlePaymentMethodChange = (event: any) => {
     setSelectedPaymentMethod(event.target.value);
@@ -117,8 +101,9 @@ export default function PaymentBooking() {
   const navigate = useNavigate();
 
   const handlegoBack = () => {
-    navigate(-1);
+    sampleref.current = true;
 
+    navigate(-1);
     console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 
@@ -137,7 +122,10 @@ export default function PaymentBooking() {
           endDate: bookings.endDate,
           userBookingType: "online",
           //   bookingId: response.razorpay_payment_id,
-          court: BookingSubTypes[bookings.name as keyof typeof BookingSubTypes].toString(),
+          court:
+            BookingSubTypes[
+              bookings.name as keyof typeof BookingSubTypes
+            ].toString(),
         });
 
         if (response) {
@@ -166,6 +154,66 @@ export default function PaymentBooking() {
       behavior: "smooth",
     });
   }, []);
+
+  const cleanupLocalStorage = () => {
+    localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
+  };
+
+  const nextLocation = localStorage.getItem("nextLocation");
+
+  const excutedBlocker = ["/service-booking"];
+
+  const sampleref = useRef(false);
+
+  let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
+    if (
+      currentLocation.pathname !== nextLocation.pathname &&
+      !sampleref.current &&
+      !excutedBlocker.includes(nextLocation.pathname)
+    ) {
+      localStorage.setItem("nextLocation", nextLocation.pathname);
+      return true;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      event.preventDefault();
+      cleanupLocalStorage();
+      const message =
+        "Are you sure you want to leave? Your selected bookings will be lost.";
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      const val = window.confirm(
+        "Are you sure you want to leave? Your selected bookings will be lost."
+      );
+      if (val) {
+        sampleref.current = true;
+        cleanupLocalStorage();
+        blocker.reset();
+      }
+    }
+  }, [blocker, blocker.state]);
+
+  useEffect(() => {
+    if (nextLocation && blocker.state === "unblocked") {
+      localStorage.removeItem("nextLocation");
+      navigate(nextLocation);
+    }
+  }, [nextLocation, blocker.state, navigate, blocker]);
 
   return (
     <>

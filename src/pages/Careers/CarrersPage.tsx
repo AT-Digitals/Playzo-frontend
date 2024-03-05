@@ -11,10 +11,7 @@ export default function CareersPageNew() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    document.documentElement.scrollTop = 0;
   }, []);
 
   const handleImageLoad = () => {

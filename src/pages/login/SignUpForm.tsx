@@ -95,6 +95,12 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         return isValid;
     };
 
+    const validatePhone = (input: any) => {
+        const phonePattern = /^\d{10}$/;
+        const isValid = phonePattern.test(input);
+        return isValid;
+    };
+
     const handlePasswordChange = (event: any) => {
         setPassword(event.target.value);
         setIsPasswordValid(false);
@@ -122,7 +128,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             setIsValidEmail(true);
             return;
         }
-        if (phoneNumber !== '' && phoneNumber.length > 10) {
+        if (!validatePhone(phoneNumber)) {
             setIsValidPhone(true);
             return;
         }

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
@@ -65,9 +65,13 @@ export default function ServiceGrid(props: serviceGridProps) {
   const handleMouseLeave = () => {
     setIsMouseOver(false);
   };
+  const isMediumScreen = useMediaQuery(
+    "(min-width: 900px) and (max-width: 1280px)"
+  );
 
   return (
     <Box
+      height={"100%"}
       margin={{ xs: "30px", md: 7 }}
       sx={{
         ".mySwiper": {
@@ -83,22 +87,23 @@ export default function ServiceGrid(props: serviceGridProps) {
         },
       }}
     >
-      <Stack
-        height={"100%"}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        justifyContent="space-between"
-        spacing={4}
-        direction={props.direction}
-        alignItems={"flex-start"}
+      <Box
+        height={{
+          xs: "100%",
+          md: isMediumScreen ? "none" : "480px",
+          lg: "480px",
+        }}
       >
-        <Stack width={"100%"} height={"100%"}>
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
-            gap={"1px"}
-            // height={447}
-          >
+        <Stack
+          height={"100%"}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          justifyContent="space-between"
+          spacing={4}
+          direction={props.direction}
+          alignItems={"flex-start"}
+        >
+          <Box width={"100%"} height={"100%"}>
             <CustomSlider
               currentSlide={currentSlide}
               slides={props.carouselItems}
@@ -107,138 +112,139 @@ export default function ServiceGrid(props: serviceGridProps) {
               autoplayInterval={4000}
             />
           </Box>
-        </Stack>
 
-        <Stack
-          height={"100%"}
-          marginRight={"0px !important"}
-          marginLeft={"0px !important"}
-          bgcolor={"white"}
-          width={"100%"}
-          sx={{
-            marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
-            borderTopLeftRadius: props.radiusTopleft,
-            borderBottomLeftRadius: props.radiusbottompleft,
-            borderTopRightRadius: props.radiusTopright,
-            borderBottomRightRadius: props.radiusbottompright,
-          }}
-          minHeight={447}
-          justifyContent="space-between"
-          spacing={4}
-        >
-          <Stack
-            padding={{ xs: "20px 22px", sm: "0 22px" }}
-            direction={"column"}
-            spacing={2}
-          >
-            <Box>
-              <Typography
-                fontSize={{ xs: "35px", sm: "70px", md: "82px" }}
-                gutterBottom
-                variant="h5"
-                style={{
-                  whiteSpace: "nowrap",
-                  fontStyle: "italic",
-                  fontWeight: 700,
-                  color: isMouseOver ? Colors.BUTTON_COLOR : "black",
-                  marginBottom: 0,
-                }}
-              >
-                {props.heading1}
-              </Typography>
-              <Typography
-                style={{
-                  fontSize: "16px",
-                }}
-                variant="body1"
-              >
-                {props.desc1}
-              </Typography>
-            </Box>
-
-            <Box
-              display={"flex"}
-              gap={"10px"}
-              flexDirection={{ xs: "column", sm: "column", md: "row" }}
-            >
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  fontSize: "18px",
-                  margin: 0,
-                }}
-              >
-                {props.heading2}:
-              </Typography>
-              <Typography
-                style={{
-                  fontStyle: "normal",
-                  fontSize: "16px",
-                }}
-                variant="body1"
-              >
-                {props.firstBullet1}
-              </Typography>
-            </Box>
-
-            <Box
-              display={"flex"}
-              gap={"10px"}
-              flexDirection={{ xs: "column", sm: "column", md: "row" }}
-            >
-              <Typography
-                gutterBottom
-                variant="h5"
-                style={{
-                  fontSize: "18px",
-                  margin: 0,
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                }}
-              >
-                {props.heading3}:
-              </Typography>
-              <Typography
-                style={{
-                  fontStyle: "normal",
-                  fontSize: "16px",
-                }}
-                variant="body1"
-              >
-                {props.secBullet1}
-              </Typography>
-            </Box>
-          </Stack>
           <Box
-            mb={2}
-            sx={{
-              marginTop: "2px !important",
-            }}
-            justifyContent={props.position}
+            height={"100%"}
             display={"flex"}
-            alignItems={"center"}
+            flexDirection={"column"}
+            marginRight={"0px !important"}
+            marginLeft={"0px !important"}
+            bgcolor={"white"}
+            width={"100%"}
+            sx={{
+              marginTop: { xs: 3, sm: 3, md: 3, lg: 0 },
+              borderTopLeftRadius: props.radiusTopleft,
+              borderBottomLeftRadius: props.radiusbottompleft,
+              borderTopRightRadius: props.radiusTopright,
+              borderBottomRightRadius: props.radiusbottompright,
+            }}
+            justifyContent="space-between"
+            // spacing={2}
           >
-            <IconButton onClick={prevSlide}>
-              <NavigateBeforeIcon
-                style={{
-                  color: Colors.BUTTON_COLOR,
-                }}
-              />
-            </IconButton>
-            0{currentSlide + 1} /0{props.carouselItems.length}{" "}
-            <IconButton onClick={nextSlide}>
-              <NavigateNextIcon
-                style={{
-                  color: Colors.BUTTON_COLOR,
-                }}
-              />
-            </IconButton>
+            <Stack
+              padding={{ xs: "20px 22px", sm: "0 22px" }}
+              direction={"column"}
+              spacing={2}
+            >
+              <Box>
+                <Typography
+                  fontSize={{ xs: "35px", sm: "70px", md: "82px" }}
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    whiteSpace: "nowrap",
+                    fontStyle: "italic",
+                    fontWeight: 700,
+                    color: isMouseOver ? Colors.BUTTON_COLOR : "black",
+                    marginBottom: 0,
+                  }}
+                >
+                  {props.heading1}
+                </Typography>
+                <Typography
+                  style={{
+                    fontSize: "16px",
+                  }}
+                  variant="body1"
+                >
+                  {props.desc1}
+                </Typography>
+              </Box>
+
+              <Box
+                display={"flex"}
+                gap={"10px"}
+                flexDirection={{ xs: "column", sm: "column", md: "row" }}
+              >
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                    fontSize: "18px",
+                    margin: 0,
+                  }}
+                >
+                  {props.heading2}:
+                </Typography>
+                <Typography
+                  style={{
+                    fontStyle: "normal",
+                    fontSize: "16px",
+                  }}
+                  variant="body1"
+                >
+                  {props.firstBullet1}
+                </Typography>
+              </Box>
+
+              <Box
+                display={"flex"}
+                gap={"10px"}
+                flexDirection={{ xs: "column", sm: "column", md: "row" }}
+              >
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{
+                    fontSize: "18px",
+                    margin: 0,
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                  }}
+                >
+                  {props.heading3}:
+                </Typography>
+                <Typography
+                  style={{
+                    fontStyle: "normal",
+                    fontSize: "16px",
+                  }}
+                  variant="body1"
+                >
+                  {props.secBullet1}
+                </Typography>
+              </Box>
+            </Stack>
+            <Box
+              // mb={2}
+              // sx={{
+              //   marginTop: "2px !important",
+              // }}
+              justifyContent={props.position}
+              display={"flex"}
+              alignItems={"center"}
+            >
+              <IconButton onClick={prevSlide}>
+                <NavigateBeforeIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              </IconButton>
+              0{currentSlide + 1} /0{props.carouselItems.length}{" "}
+              <IconButton onClick={nextSlide}>
+                <NavigateNextIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              </IconButton>
+            </Box>
           </Box>
         </Stack>
-      </Stack>
+      </Box>
     </Box>
   );
 }

@@ -18,16 +18,16 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
+import assets from "../../assets";
 import routes from "../../routes/routes";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
-import assets from "../../assets";
-import { useGoogleLogin } from "@react-oauth/google"
 
-const { "Variant10.png": Icon } = assets
+const { "Variant10.png": Icon } = assets;
 
 interface loginProps {
   handleClose?: () => void;
@@ -44,7 +44,7 @@ export default function Form({ handleClose, open }: loginProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalErrorOpen, setModalErrorOpen] = useState(false);
   const navigate = useNavigate();
-  const [errorText, setErrorText] = useState('');
+  const [errorText, setErrorText] = useState("");
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -64,26 +64,24 @@ export default function Form({ handleClose, open }: loginProps) {
 
   const handleErrorModal = () => {
     setModalErrorOpen(false);
-    setErrorText('');
-  }
-
+    setErrorText("");
+  };
 
   const signUpOnClickChange = () => {
     setOpenModal(true);
-    setEmail('');
-    setPassword('');
-  }
+    setEmail("");
+    setPassword("");
+  };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-  }
+  };
 
   const validateEmail = (input: any) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(input);
     return isValid;
   };
-
 
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
@@ -107,7 +105,6 @@ export default function Form({ handleClose, open }: loginProps) {
       return;
     }
 
-
     if (password.length < 8) {
       setIsPasswordValid(true);
       return;
@@ -120,12 +117,12 @@ export default function Form({ handleClose, open }: loginProps) {
       try {
         const response = await UserLoginApi.loginUser({
           email: data.email,
-          password: data.password
+          password: data.password,
         });
         if (response) {
-          localStorage.setItem('user', JSON.stringify(response));
-          setEmail('');
-          setPassword('');
+          localStorage.setItem("user", JSON.stringify(response));
+          setEmail("");
+          setPassword("");
           setIsValidEmail(false);
           setIsPasswordValid(false);
           //setModalOpen(true);
@@ -143,24 +140,24 @@ export default function Form({ handleClose, open }: loginProps) {
 
   const ModlaCloseChange = () => {
     handleClose?.();
-    setEmail('');
-    setPassword('')
+    setEmail("");
+    setPassword("");
     setIsValidEmail(false);
     setIsPasswordValid(false);
     setShowPassword(false);
-  }
+  };
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      const user = await UserLoginApi.getGoogleToken(tokenResponse.code)
-      if(user){
-        localStorage.setItem('user', JSON.stringify(user));
+      const user = await UserLoginApi.getGoogleToken(tokenResponse.code);
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
         navigate(routes.BOOKING_SERVICE);
-        navigate(0)
+        navigate(0);
       }
     },
-    flow: 'auth-code'
-  })
+    flow: "auth-code",
+  });
 
   return (
     <Dialog
@@ -242,26 +239,25 @@ export default function Form({ handleClose, open }: loginProps) {
               required
               error={!!isPasswordValid}
               InputProps={{
-                endAdornment: (<InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
 
-                  {isPasswordValid &&
-                    <ErrorOutlineIcon sx={{ ml: "5px" }}
-                      color="error"
-                      style={{ marginRight: "8px" }}
-                    />
-                  }
-                </InputAdornment>
-
+                    {isPasswordValid && (
+                      <ErrorOutlineIcon
+                        sx={{ ml: "5px" }}
+                        color="error"
+                        style={{ marginRight: "8px" }}
+                      />
+                    )}
+                  </InputAdornment>
                 ),
-
-
               }}
             />
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
@@ -278,6 +274,7 @@ export default function Form({ handleClose, open }: loginProps) {
             Forgot Password?
           </Link>
           <Button
+            type="button"
             sx={{
               padding: "12px 20px",
               textTransform: "none",
@@ -293,17 +290,27 @@ export default function Form({ handleClose, open }: loginProps) {
                 background: Colors.WHITE,
                 color: Colors.BUTTON_COLOR,
                 border: "1px solid #15B5FC",
-              }
+              },
             }}
             onClick={onSubmit}
           >
             Login
           </Button>
-          <Stack direction="row" alignItems="center" spacing={1} justifyContent="center">
-            <Typography
-              color={Colors.WHITE}
-            >Dosen't have an account yet?</Typography>
-            <Link onClick={signUpOnClickChange} sx={{ color: Colors.BUTTON, cursor: "pointer" }}>Sign Up</Link>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            justifyContent="center"
+          >
+            <Typography color={Colors.WHITE}>
+              Dosen't have an account yet?
+            </Typography>
+            <Link
+              onClick={signUpOnClickChange}
+              sx={{ color: Colors.BUTTON, cursor: "pointer" }}
+            >
+              Sign Up
+            </Link>
           </Stack>
           <Divider
             variant="middle"
@@ -328,22 +335,23 @@ export default function Form({ handleClose, open }: loginProps) {
               fontSize: "16px",
               fontWeight: 700,
             }}
-            startIcon={
-              <img
-                src={Icon}
-                alt="button"
-                width={30}
-                height={30}
-              />
-            }
+            startIcon={<img src={Icon} alt="button" width={30} height={30} />}
             onClick={() => googleLogin()}
           >
             Sign in with Google
           </CustomButton>
         </Stack>
         <SignUpForm open={openModal} handleClose={handleCloseModal} />
-        <ModalComponent open={modalOpen} handleClose={handleCloseLoginModal} text={"Your login is successful"} />
-        <ModalComponent open={modalErrorOpen} handleClose={handleErrorModal} text={errorText} />
+        <ModalComponent
+          open={modalOpen}
+          handleClose={handleCloseLoginModal}
+          text={"Your login is successful"}
+        />
+        <ModalComponent
+          open={modalErrorOpen}
+          handleClose={handleErrorModal}
+          text={errorText}
+        />
       </DialogContent>
     </Dialog>
   );

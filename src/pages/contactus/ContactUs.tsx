@@ -150,6 +150,12 @@ export default function ContactUs() {
     setErrorText('');
   }
 
+  const validatePhone = (input: any) => {
+    const phonePattern = /^\d{10}$/;
+    const isValid = phonePattern.test(input);
+    return isValid;
+  };
+
 
   const onSubmit = async (event: any) => {
     event?.preventDefault();
@@ -171,7 +177,7 @@ export default function ContactUs() {
       setIsValidEmail(true);
       return;
     }
-    if (phoneNumber.length < 10) {
+    if (!validatePhone(phoneNumber)) {
       setIsValidPhone(true);
       return;
     }

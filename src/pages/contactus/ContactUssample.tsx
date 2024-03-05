@@ -5,17 +5,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import { Link } from "react-router-dom";
-import styled from "@emotion/styled";
-import { useState } from "react";
 import assets from "../../assets";
+import styled from "@emotion/styled";
 
-const {"doodl-5 1.png": GameIcon, "ball 3.png": ball, "turf.png": banner, "Rectangle 679.png": bottomImage} = assets
+const {
+  "doodl-5 1.png": GameIcon,
+  "ball 3.png": ball,
+  "turf.png": banner,
+  "Rectangle 679.png": bottomImage,
+} = assets;
 
 const DropDownData = [
   {
@@ -142,6 +147,9 @@ export default function ContactUsSample() {
     max-height: 400px;
     object-fit: cover;
   `;
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+  }, []);
 
   return (
     <Box>

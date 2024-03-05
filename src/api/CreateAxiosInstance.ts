@@ -1,6 +1,6 @@
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import UserLoginApi from "./UserLoginApi";
+import routes from "../routes/routes";
 
 const axiosInstance = axios.create({
   headers: {
@@ -40,15 +40,10 @@ axiosInstance.interceptors.response.use(
 
 const handleTokenExpiration = async () => {
   localStorage.clear();
-  toast.error("Session expired. Please log in again.", {
-    autoClose: 8000,
-    position: toast.POSITION.TOP_CENTER,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: false,
-    theme: "colored",
-  });
-  window.location.href = "/";
+  UserLoginApi.logoutUser();
+  alert("Session expired. Please log in again.");
+  window.location.href = routes.ROOT;
+  window.location.reload();
 };
 
 export default axiosInstance;
