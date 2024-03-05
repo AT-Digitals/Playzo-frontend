@@ -93,7 +93,6 @@ export default function PaymentBooking() {
 
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
-  const selectedServiceFromState = location.state?.selectedService;
 
   const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
@@ -104,12 +103,9 @@ export default function PaymentBooking() {
     sampleref.current = true;
 
     navigate(-1);
-    console.log(selectedServiceFromState, "selectedServiceFromState");
   };
 
   const handlePayClick = () => {
-    console.log(allBookings, "allbookings123");
-
     allBookings.map(async (bookings: any) => {
       try {
         const response = await BookingApi.createBooking({
@@ -139,6 +135,7 @@ export default function PaymentBooking() {
         console.log("err", err);
       }
     });
+    sampleref.current = true;
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
@@ -162,15 +159,12 @@ export default function PaymentBooking() {
 
   const nextLocation = localStorage.getItem("nextLocation");
 
-  const excutedBlocker = ["/service-booking"];
-
   const sampleref = useRef(false);
 
   let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
     if (
       currentLocation.pathname !== nextLocation.pathname &&
-      !sampleref.current &&
-      !excutedBlocker.includes(nextLocation.pathname)
+      !sampleref.current
     ) {
       localStorage.setItem("nextLocation", nextLocation.pathname);
       return true;

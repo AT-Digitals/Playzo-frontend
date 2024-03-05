@@ -20,6 +20,8 @@ import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import styled from "@emotion/styled";
 
+// import routes from "../routes/routes";
+
 const {
   "Image (7).png": badminton,
   "Rectangle 685 (3).png": badminton1,
@@ -147,9 +149,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   });
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
+  // const rootLocal = [routes.ROOT];
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    // const isLocalCleared = localStorage.getItem("bookings") !== null;
+    // console.log(isLocalCleared, "cleared");
+
+    // if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
+    //   // Local storage is already cleared, and pathname matches rootLocal[0]
+    //   console.log("working inside");
+    //   return false;
+    // }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
@@ -160,7 +171,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
     return false;
   });
-
   const nextLocation = localStorage.getItem("nextLocation");
 
   const images =
@@ -383,7 +393,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       setSelectedService(storedSelectedService);
     }
   }, []);
-  
+
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
       if (tableData.length !== 0) {
@@ -442,6 +452,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           backgroundRepeat: "no-repeat",
           objectFit: "cover", // Set object-fit to cover
           height: "100%",
+          // Ensure the height is 100%
         }}
       >
         <Box
