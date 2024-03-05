@@ -166,7 +166,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       currentLocation.pathname !== nextLocation.pathname &&
       !excutedBlocker.includes(nextLocation.pathname)
     ) {
-      localStorage.setItem("nextLocation", nextLocation.pathname);
+      // localStorage.setItem("nextLocation", nextLocation.pathname);
       return true;
     }
     return false;
