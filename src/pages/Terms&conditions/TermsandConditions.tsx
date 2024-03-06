@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
@@ -100,11 +100,11 @@ const StyledTypography = styled(Typography)`
     left: 8%;
   }
   @media (min-width: 1024px) {
-    top: 33%;
+    top: 330%;
     left: 7%;
   }
   @media (min-width: 1200px) {
-    top: 26%;
+    top: 161%;
     left: 10%;
   }
 `;
@@ -113,23 +113,35 @@ export default function TermsandConditions() {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
+  const isHideBannerImage = useMediaQuery(
+    "(min-width: 280px) and (max-width: 900px)"
+  );
+
   return (
     <Box mb={"90px"}>
       <Container>
-        <BannerImage src={banner} alt="banner" />
+        {isHideBannerImage ? null : <BannerImage src={banner} alt="banner" />}
         <Box
           sx={{
             background: Colors.BUTTON_COLOR,
-            width: { xs: "800px", sm: "428px", md: "617px", lg: "800px" },
+            maxWidth: { xs: "100%", sm: "100%", md: "603px", lg: "800px" },
+            width: { xs: "100%", sm: "100%" },
             height: { xs: "250px", sm: "282px", md: "380px", lg: "379px" },
             position: "absolute",
           }}
         >
           {" "}
         </Box>
-        <StyledImage5 src={layer} alt="background" />
+        {isHideBannerImage ? null : (
+          <StyledImage5 src={layer} alt="background" />
+        )}
       </Container>
-      <Box pt={"30px"}>
+      <Box
+        position={"absolute"}
+        top={{ xs: "22%", sm: "15%", md: "17%", lg: "25%" }}
+        left={"9%"}
+        pt={"30px"}
+      >
         <StyledTypography
           fontWeight={"900"}
           position={"absolute"}
@@ -138,24 +150,16 @@ export default function TermsandConditions() {
           color={"white"}
           fontSize={{ xs: "56px", sm: "60px", md: "90px", lg: "92px" }}
           fontStyle={"italic"}
+          lineHeight={1}
         >
           Terms &{" "}
-          <Typography
-            fontWeight={"900"}
-            position={"absolute"}
-            top={{ xs: "26%", sm: "16%", md: "14%", lg: "28%" }}
-            left={"1%"}
-            color={"white"}
-            fontSize={{ xs: "56px", sm: "60px", md: "90px", lg: "92px" }}
-            fontStyle={"italic"}
-            lineHeight={"3"}
-          >
+          <br />
             Conditions
-          </Typography>
+         
         </StyledTypography>
       </Box>
 
-      <AppContainer maxWidth={1180}>
+      <AppContainer width={"100%"} maxWidth={1180}>
         <Box>
           <Typography
             fontSize={"16px"}
@@ -163,9 +167,9 @@ export default function TermsandConditions() {
             color={Colors.BLACK}
             width={"100%"}
             maxWidth={{ xs: "320px", sm: "700px", md: "850px", lg: "1200px" }}
-            paddingTop={{ xs: "3px", sm: "0px", md: "0px", lg: "0px" }}
+            paddingTop={{ xs: "272px", sm: "322px", md: "40px", lg: "50px" }}
           >
-            1. Playzo33 and the hosts of this website (also referred to as
+            1. Playzo33 and the hosts of this website also referred to as
             “site” accept no responsibility for and exclude all liability in
             connection with browsing this site, use of information on this site
             and downloading any material from it including but not limited to

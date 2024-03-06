@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
@@ -85,10 +85,14 @@ const StyledTypography = styled(Typography)`
     top: 26%;
     left: 12%;
   }
+  @media (min-width: 390px) {
+    top: 22%;
+    left: 12%;
+  }
 
   @media (min-width: 414px) {
     top: 20%;
-    left: 13%;
+    left: 12%;
   }
   @media (min-width: 768px) {
     top: 18%;
@@ -104,7 +108,7 @@ const StyledTypography = styled(Typography)`
     left: 14%;
   }
   @media (min-width: 1200px) {
-    top: 20%;
+    top: 30%;
     left: 14%;
   }
 `;
@@ -113,23 +117,34 @@ export default function PrivacyPolicy() {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
+  const isHideBannerImage = useMediaQuery(
+    "(min-width: 280px) and (max-width: 900px)"
+  );
   return (
     <Box mb={"90px"}>
       <Container>
-        <BannerImage src={banner} alt="banner" />
+        {isHideBannerImage ? null : <BannerImage src={banner} alt="banner" />}
         <Box
           sx={{
             background: Colors.BUTTON_COLOR,
-            width: { xs: "800px", sm: "428px", md: "617px", lg: "800px" },
+            maxWidth: { xs: "100%", sm: "100%", md: "560px", lg: "800px" },
+            width: { xs: "100%", sm: "100%" },
             height: { xs: "250px", sm: "282px", md: "380px", lg: "379px" },
             position: "absolute",
           }}
         >
           {" "}
         </Box>
-        <StyledImage5 src={layer} alt="background" />
+        {isHideBannerImage ? null : (
+          <StyledImage5 src={layer} alt="background" />
+        )}
       </Container>
-      <Box pt={"30px"}>
+      <Box
+        position={"absolute"}
+        top={{ xs: "22%", sm: "15%", md: "17%", lg: "25%" }}
+        left={"9%"}
+        pt={"30px"}
+      >
         <StyledTypography
           fontWeight={"900"}
           position={"absolute"}
@@ -139,25 +154,15 @@ export default function PrivacyPolicy() {
           fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}
           fontStyle={"italic"}
           textTransform={"uppercase"}
+          lineHeight={1}
         >
           Privacy{" "}
-          <Typography
-            fontWeight={"900"}
-            position={"absolute"}
-            top={{ xs: "26%", sm: "16%", md: "14%", lg: "28%" }}
-            left={"1%"}
-            color={"white"}
-            textTransform={"uppercase"}
-            fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}
-            fontStyle={"italic"}
-            lineHeight={"3"}
-          >
+          <br />
             Policy
-          </Typography>
         </StyledTypography>
       </Box>
 
-      <AppContainer maxWidth={1180}>
+      <AppContainer width={"100%"} maxWidth={1180}>
         <Box
           width={"100%"}
           maxWidth={{ xs: "320px", sm: "700px", md: "850px", lg: "1200px" }}

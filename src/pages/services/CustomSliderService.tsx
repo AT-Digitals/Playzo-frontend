@@ -2,7 +2,7 @@ import { Box, Skeleton } from "@mui/material";
 import React, { ReactNode, useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 interface CustomSliderProps {
   slides: ReactNode[];
@@ -12,11 +12,31 @@ interface CustomSliderProps {
   handleBulletClick: any;
 }
 
+const shineAnimation = keyframes`
+  to {
+    background-position: right -40px top 0;
+  }
+`;
+
 const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
   opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
-  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.9);
+
+  .skeleton {
+    background-color: #d4ebf2;
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    );
+    background-size: 40px 100%;
+    background-repeat: no-repeat;
+    background-position: left -40px top 0;
+    animation: ${shineAnimation} 1s ease infinite;
+  }
 `;
+
 const CustomSlider = ({
   slides,
   autoplayInterval,
@@ -62,41 +82,46 @@ const CustomSlider = ({
             display: "flex",
             transform: `translateX(-${currentSlide * 100}%)`,
             height: "100%",
-            boxShadow: "0 7px 10px rgba(0, 0, 0, 0.9)",
           }}
         >
           {showSkeleton && (
             <SkeletonContainer showSkeleton={showSkeleton}>
               <Skeleton
+                className="skeleton"
                 sx={{
                   background: "white",
                 }}
                 variant="rounded"
-                animation="pulse"
+                animation="wave"
               />
               <Skeleton
+                className="skeleton"
                 sx={{
                   background: "white",
                 }}
-                animation="wave"
+                animation="pulse"
               />
 
               <Skeleton
+                className="skeleton"
                 variant="rectangular"
                 sx={{
                   background: "white",
                 }}
                 width={650}
-                height={300}
+                height={400}
+                animation="wave"
               />
               <Skeleton
+                className="skeleton"
                 sx={{
                   background: "white",
                 }}
-                animation="wave"
-                  variant="rectangular"
+                animation="pulse"
+                variant="rectangular"
               />
               <Skeleton
+                className="skeleton"
                 sx={{
                   background: "white",
                 }}
@@ -104,10 +129,11 @@ const CustomSlider = ({
                 variant="rectangular"
               />
               <Skeleton
+                className="skeleton"
                 sx={{
                   background: "white",
                 }}
-                animation="wave"
+                animation="pulse"
                 variant="rectangular"
               />
             </SkeletonContainer>
@@ -135,7 +161,7 @@ const CustomSlider = ({
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
-                      objectFit: "cover", // Set object-fit to cover
+                      objectFit: "cover",
                       overflow: "hidden",
                       display: "flex",
                       height: "100%",

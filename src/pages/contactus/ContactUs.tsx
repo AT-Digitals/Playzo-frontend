@@ -282,8 +282,8 @@ export default function ContactUs() {
             marginTop: "0px"
           }}
             spacing={10}
-            direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
-            paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
+            direction={{ xs: "column-reverse", sm: "column-reverse", md: "column-reverse", lg: "row" }}
+            paddingBottom={{ xs: "30px", sm: "60px", md: "60px", lg: "0px" }}
           >
 
             <Box flexDirection={"column"}
@@ -323,27 +323,31 @@ export default function ContactUs() {
               </Box>
             </Box>
 
-            <Box style={{ marginTop: "40px" }} marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }} width={"100%"}>
+            <Box marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} width={"100%"}>
               <form onSubmit={onSubmit}>
                 <Stack sx={{
                   marginTop: {xs: "0px", sm: "0px", md: "0px", lg: "-50px"}
                 }} margin={{ xs: "0 auto", sm: '0 auto', md: "0 auto", lg: "0 auto" }}
                   border={{
-                    xs: "1px solid grey",
-                    sm: "1px solid grey",
-                    md: "1px solid grey",
-                    lg: "none",
+                    xs: "1px solid #d4ebf2",
+                    sm: "1px solid #d4ebf2",
+                    md: "1px solid #d4ebf2",
+                    lg: "1px solid #d4ebf2",
                   }}
                   width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
-                  borderRadius={{ xs: "10px", sm: "10px", md: "10px", lg: "0px" }}
+                  borderRadius={{ xs: "20px", sm: "20px", md: "20px", lg: "20px" }}
                   padding={{
                     xs: "21px 16px",
                     sm: "21px 16px",
                     md: "21px 16px",
-                    lg: "0px",
+                    lg: "10px 21px",
                   }}
                   direction="column"
                   spacing={3}
+                  style={{
+                    backgroundColor: "#d4ebf2",
+                   boxShadow: "1px 7px 11px 2px dimgrey",
+                  }}
                 >
                   <CustomTextField
                     sx={{ maxWidth: 700, borderRadius: "8px" }}

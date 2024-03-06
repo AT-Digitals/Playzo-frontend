@@ -350,7 +350,7 @@ export default function Footer() {
             alignItems="center"
           >
             <Typography fontSize="16px">
-              Copyright © 2023 Playzo33 | All Rights Reserved
+              Copyright © 2024 Playzo33 | All Rights Reserved
             </Typography>
             <Stack
               display={{ xs: "none", sm: "block" }}
