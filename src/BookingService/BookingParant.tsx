@@ -18,10 +18,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
-import routes from "../routes/routes";
 import styled from "@emotion/styled";
-
-// import routes from "../routes/routes";
 
 const {
   "Image (7).png": badminton,
@@ -148,10 +145,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
-  const isBlocked = useRef<any>(true)
+  const isBlocked = useRef<any>(true);
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
@@ -160,7 +156,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       currentLocation.pathname !== nextLocation.pathname &&
       !excutedBlocker.includes(nextLocation.pathname)
     ) {
-      isBlocked.current = true
+      isBlocked.current = true;
       return true;
     }
     return false;
@@ -414,8 +410,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       );
       localStorage.removeItem("nextLocation");
       if (val) {
-        localStorage.setItem("nextLocation", blocker.location.pathname)
-        isBlocked.current = false
+        localStorage.setItem("nextLocation", blocker.location.pathname);
+        isBlocked.current = false;
         setTableData([]);
         cleanupLocalStorage();
       }
@@ -657,9 +653,14 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   ? "none"
                   : "flex"
               }
-              borderLeft={{xs: "none", sm: "none", md: "none", lg: "1px solid gray"}}
+              borderLeft={{
+                xs: "none",
+                sm: "none",
+                md: "none",
+                lg: "1px solid gray",
+              }}
               gap={"8px"}
-              margin={{xs: "0 auto", sm: "0 auto", md: "0 auto", lg: "0px"}}
+              margin={{ xs: "0 auto", sm: "0 auto", md: "0 auto", lg: "0px" }}
               padding={{
                 xs: "0px 37px",
                 sm: "0px 37px",
@@ -817,21 +818,23 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 </AnimatedZoomIn>
               )}
             </Stack>
-            <Stack  sx={{
-        borderLeft: selectedService ? "1px solid gray" : "none",
-        '@media (max-width: 768px)': {
-          borderLeft: 'none'
-        },
-        '@media (max-width: 820px)': {
-          borderLeft: 'none'
-        },
-        '@media (max-width: 912px)': {
-          borderLeft: 'none'
-        },
-        '@media (max-width: 1024px)': {
-          borderLeft: 'none'
-        }
-      }}>
+            <Stack
+              sx={{
+                borderLeft: selectedService ? "1px solid gray" : "none",
+                "@media (max-width: 768px)": {
+                  borderLeft: "none",
+                },
+                "@media (max-width: 820px)": {
+                  borderLeft: "none",
+                },
+                "@media (max-width: 912px)": {
+                  borderLeft: "none",
+                },
+                "@media (max-width: 1024px)": {
+                  borderLeft: "none",
+                },
+              }}
+            >
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (

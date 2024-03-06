@@ -53,7 +53,6 @@ export default function Header() {
     try {
       UserLoginApi.logoutUser();
       navigate(routes.ROOT);
-      navigate(0);
       localStorage.clear();
       setAnchorEl(null);
     } catch {
