@@ -1,4 +1,11 @@
-import { Box, Card, CardMedia, Grid, Pagination, Stack, Typography } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  Grid,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
@@ -7,54 +14,55 @@ import Colors from "../../CommonComponents/Colors";
 import ListCard from "./ListCard";
 import assets from "../../assets";
 
-const {"Image (6).png": Image6, "Rectangle 679.png": RectangleImage, "ball 1.png": ball, "ball 2.png": ball2, "Layer_1.png": layer} = assets
-
+const {
+  "Image (6).png": Image6,
+  "Rectangle 679.png": RectangleImage,
+  "ball 1.png": ball,
+  "Layer_1.png": layer,
+} = assets;
 
 export default function UserProfile() {
-
   const [user, setUser] = useState(null);
   const [filteredData, setFilteredData] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
   const [userSports, setUserSports] = useState<string[]>([]);
 
-  const CapitalizeFirstLetter = (str:any)=> {
+  const CapitalizeFirstLetter = (str: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  };
   useEffect(() => {
-    const user = localStorage.getItem('user');
-      const userData =user && JSON.parse(user);
-      setUser(userData);
-      setUserSports(userData["interestedSports"])
+    const user = localStorage.getItem("user");
+    const userData = user && JSON.parse(user);
+    setUser(userData);
+    setUserSports(userData["interestedSports"]);
   }, []);
 
-
   const fetchInfo = useCallback(async () => {
-    if(user&&user["id"]){
-    try {
+    if (user && user["id"]) {
+      try {
         await BookingApi.filterBook({
-          user:user["id"],
+          user: user["id"],
         }).then((data) => {
-          setCount(Math.round(data.length/4));
+          setCount(Math.round(data.length / 4));
         });
-      
+
         await BookingApi.filterPage({
-          user:user["id"],
-          page:page,
-          limit:4
+          user: user["id"],
+          page: page,
+          limit: 4,
         }).then((data) => {
           setFilteredData(data);
         });
-    } catch {
-      console.log('Error fetching data');
+      } catch {
+        console.log("Error fetching data");
+      }
     }
-  }
   }, [page, user]);
 
   useEffect(() => {
     fetchInfo();
   }, [fetchInfo]);
-
 
   return (
     <>
@@ -115,9 +123,13 @@ export default function UserProfile() {
                   component="div"
                   fontWeight={600}
                 >
-                  {user&&CapitalizeFirstLetter(user["name"])}
+                  {user && CapitalizeFirstLetter(user["name"])}
                 </Typography>
-               { userSports&&userSports.length>0 && <Typography variant="body1">{userSports.join(" & ")}</Typography>}
+                {userSports && userSports.length > 0 && (
+                  <Typography variant="body1">
+                    {userSports.join(" & ")}
+                  </Typography>
+                )}
               </Stack>
             </Card>
           </Grid>
@@ -137,14 +149,16 @@ export default function UserProfile() {
                 <Typography variant="body1" fontWeight={600}>
                   Email Address
                 </Typography>
-                <Typography variant="body1">{user&&CapitalizeFirstLetter(user["email"])}</Typography>
+                <Typography variant="body1">
+                  {user && CapitalizeFirstLetter(user["email"])}
+                </Typography>
                 <img src={layer} width={13} height={12} alt="edit" />
               </Stack>
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography variant="body1" fontWeight={600}>
                   Phone Number
                 </Typography>
-                <Typography variant="body1">{user&&user["phone"]}</Typography>
+                <Typography variant="body1">{user && user["phone"]}</Typography>
                 <img src={layer} width={13} height={12} alt="edit" />
               </Stack>
             </Stack>
@@ -168,23 +182,22 @@ export default function UserProfile() {
                 }}
               />
             </Stack>
-            <ListCard userDetails={filteredData} userName={user?CapitalizeFirstLetter(user["name"]):""} />
-           { filteredData.length>0&& <Pagination count={count} page={page} onChange={(event,val)=> setPage(val)} sx={{mt:"15px"}} />}
+            <ListCard
+              userDetails={filteredData}
+              userName={user ? CapitalizeFirstLetter(user["name"]) : ""}
+            />
+            {filteredData.length > 0 && (
+              <Pagination
+                count={count}
+                page={page}
+                onChange={(event, val) => setPage(val)}
+                sx={{ mt: "15px" }}
+              />
+            )}
           </Grid>
         </Grid>
       </AppContainer>
-      <Box
-        component="img"
-        src={ball2}
-        width={200}
-        height={200}
-        alt="ball2"
-        sx={{
-          position: "absolute",
-          transform: `translate(130px, 61rem)`,
-          display: { xs: "none", sm: "none", md: "none", lg: "block" },
-        }}
-      />
+
       <img src={RectangleImage} width="100%" height={50} alt="bottom" />
     </>
   );

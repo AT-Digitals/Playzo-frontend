@@ -507,6 +507,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <span
                   style={{
                     display: "flex",
+                    gap: "0.5rem",
 
                     alignItems: "center",
                   }}

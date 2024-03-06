@@ -16,11 +16,10 @@ import { useEffect, useState } from "react";
 import AppContainer from "../CommonComponents/AppContainer";
 import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
-import EditIcon from "@mui/icons-material/Edit";
 import LoginForm from "../pages/login/LoginForm";
 import { Logout } from "@mui/icons-material";
-import MessageIcon from "@mui/icons-material/Message";
 import UserLoginApi from "../api/UserLoginApi";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import assets from "../assets";
 import routes from "../routes/routes";
 
@@ -91,6 +90,15 @@ export default function Header() {
     routes.CRICKETNET_BOOKING,
   ];
   const isDisabled = disabledRoutes.includes(currentRoute);
+
+  const handleButtonClick = () => {
+    // Replace the phone number with the desired one
+    const phoneNumber = "7094460944";
+    const whatsappLink = `https://wa.me/${phoneNumber}`;
+
+    // Open WhatsApp link in a new window
+    window.open(whatsappLink, "_blank");
+  };
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -195,17 +203,22 @@ export default function Header() {
                 height: "60px",
                 width: "100%",
               }}
+              onClick={handleButtonClick}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
               {isHovered ? (
-                <EditIcon
+                <WhatsAppIcon
                   style={{
                     color: Colors.BUTTON_COLOR,
                   }}
                 />
               ) : (
-                <MessageIcon />
+                <WhatsAppIcon
+                  style={{
+                    color: Colors.WHITE,
+                  }}
+                />
               )}
             </IconButton>
             {isLoggedIn ? (

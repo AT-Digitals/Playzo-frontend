@@ -1,13 +1,12 @@
-import { Box, Stack, styled } from "@mui/material";
+import { Box, Button, Stack, styled } from "@mui/material";
 import React, { useCallback, useState } from "react";
 
 import AppDrawer from "./AppDrawer";
 import Colors from "../CommonComponents/Colors";
-import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
-import MessageIcon from "@mui/icons-material/Message";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import booknow from "./booking (1).png";
 import logoImage from "../assets/logo";
 import routes from "../routes/routes";
@@ -19,7 +18,7 @@ interface MobileHeaderProps {
   activeTab: string;
 }
 
-const HeaderLink = styled("a")`
+const HeaderLink = styled(Link)`
   text-decoration: none;
   position: relative;
   color: graytext;
@@ -37,7 +36,14 @@ export default function MoblieHeader({
   const handleDrawerOpen = useCallback(() => setOpen(true), []);
   const handleDrawerClose = useCallback(() => setOpen(false), []);
   const [isHovered, setIsHovered] = useState(false);
+  const handleButtonClick = () => {
+    // Replace the phone number with the desired one
+    const phoneNumber = "7094460944";
+    const whatsappLink = `https://wa.me/${phoneNumber}`;
 
+    // Open WhatsApp link in a new window
+    window.open(whatsappLink, "_blank");
+  };
   return (
     <>
       <Box
@@ -54,7 +60,7 @@ export default function MoblieHeader({
           justifyContent="space-between"
           width="100%"
         >
-          <Link to={routes.HOME}>
+          <HeaderLink to={"/"}>
             <img
               width={"100%"}
               style={{
@@ -64,21 +70,20 @@ export default function MoblieHeader({
               alt="alterknit"
               height={25}
             />
-          </Link>
+          </HeaderLink>
           <Box display={"flex"} alignItems={"center"}>
-            <HeaderLink href={routes.BOOKING_SERVICE}>
+            <HeaderLink to={routes.BOOKING_SERVICE}>
               <IconButton
                 style={{
                   maxWidth: "100px",
                   position: "fixed",
                   bottom: "10%",
-                  right: "5%",
+                  right: "3%",
                 }}
               >
                 <img width={"100%"} src={booknow} alt="book" />
               </IconButton>
             </HeaderLink>
-
             <IconButton
               style={{
                 maxWidth: "60px",
@@ -93,17 +98,24 @@ export default function MoblieHeader({
               }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
+              onClick={handleButtonClick}
             >
               {isHovered ? (
-                <EditIcon
+                <WhatsAppIcon
                   style={{
                     color: Colors.BUTTON_COLOR,
                   }}
                 />
               ) : (
-                <MessageIcon />
+                <WhatsAppIcon
+                  style={{
+                    color: Colors.WHITE,
+                  }}
+                />
               )}
             </IconButton>
+
+            <Button>Login</Button>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon
                 style={{ fontSize: 40, color: Colors.BUTTON_COLOR }}
