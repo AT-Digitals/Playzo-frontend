@@ -18,7 +18,6 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
 import assets from "../../assets";
@@ -41,10 +40,8 @@ export default function Form({ handleClose, open }: loginProps) {
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalErrorOpen, setModalErrorOpen] = useState(false);
   const navigate = useNavigate();
-  const [errorText, setErrorText] = useState("");
+
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -55,17 +52,6 @@ export default function Form({ handleClose, open }: loginProps) {
     setIsValidEmail(false);
   };
 
-  const handleCloseLoginModal = () => {
-    setModalOpen(false);
-    navigate(routes.BOOKING_SERVICE);
-    //navigate(0);
-    handleClose?.();
-  };
-
-  const handleErrorModal = () => {
-    setModalErrorOpen(false);
-    setErrorText("");
-  };
 
   const signUpOnClickChange = () => {
     setOpenModal(true);
@@ -125,15 +111,13 @@ export default function Form({ handleClose, open }: loginProps) {
           setPassword("");
           setIsValidEmail(false);
           setIsPasswordValid(false);
-          //setModalOpen(true);
           navigate(routes.BOOKING_SERVICE);
           navigate(0);
           handleClose?.();
           setShowPassword(false);
         }
       } catch (err: any) {
-        setModalErrorOpen(true);
-        setErrorText(err.message);
+        alert(err.message);
       }
     }
   };
@@ -342,16 +326,6 @@ export default function Form({ handleClose, open }: loginProps) {
           </CustomButton>
         </Stack>
         <SignUpForm open={openModal} handleClose={handleCloseModal} />
-        <ModalComponent
-          open={modalOpen}
-          handleClose={handleCloseLoginModal}
-          text={"Your login is successful"}
-        />
-        <ModalComponent
-          open={modalErrorOpen}
-          handleClose={handleErrorModal}
-          text={errorText}
-        />
       </DialogContent>
     </Dialog>
   );

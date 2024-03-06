@@ -79,7 +79,7 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
-  const [openError, setOpenError] = React.useState(false);
+
   const handleClose = () => {
     setOpen(false);
     navigate(routes.BOOKING_SERVICE);
@@ -87,9 +87,7 @@ export default function PaymentBooking() {
     localStorage.removeItem("selectedService");
   };
 
-  const handleCloseError = () => {
-    setOpenError(false);
-  };
+
 
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
@@ -129,10 +127,9 @@ export default function PaymentBooking() {
         } else {
           console.log("Booking Failed");
         }
-      } catch (err) {
-        setOpenError(true);
+      } catch (err: any) {
+        alert(err.message);
 
-        console.log("err", err);
       }
     });
     sampleref.current = true;
@@ -332,9 +329,8 @@ export default function PaymentBooking() {
 
                     // Format start and end times without minutes
                     const formattedStartTime = `${startHours % 12 || 12}:00`;
-                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
-                      endHours < 12 ? "AM" : "PM"
-                    }`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${endHours < 12 ? "AM" : "PM"
+                      }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
@@ -783,13 +779,8 @@ export default function PaymentBooking() {
       <ModalComponent
         open={open}
         handleClose={handleClose}
-        text="Your booking is confirmed"
-        subText="Thank you, your payment has been successfull."
-      />
-      <ModalComponent
-        open={openError}
-        handleClose={handleCloseError}
-        text="Your booking is not confirmed"
+        text="Thank you, Your booking is confirmed"
+        headingText="Booking Confirmation"
       />
     </>
   );
