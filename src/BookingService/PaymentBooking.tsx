@@ -158,15 +158,15 @@ export default function PaymentBooking() {
   };
 
   const nextLocation = localStorage.getItem("nextLocation");
-
   const sampleref = useRef(false);
+  const isBlocked = useRef<any>(true)
 
   let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
     if (
       currentLocation.pathname !== nextLocation.pathname &&
       !sampleref.current
     ) {
-      localStorage.setItem("nextLocation", nextLocation.pathname);
+      isBlocked.current = true
       return true;
     }
     return false;
@@ -194,20 +194,23 @@ export default function PaymentBooking() {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected bookings will be lost."
       );
+      localStorage.removeItem("nextLocation");
       if (val) {
+        localStorage.setItem("nextLocation", blocker.location.pathname)
+        isBlocked.current = false
         sampleref.current = true;
         cleanupLocalStorage();
-        blocker.reset();
       }
+      blocker.reset();
     }
   }, [blocker, blocker.state]);
 
   useEffect(() => {
-    if (nextLocation && blocker.state === "unblocked") {
+    if (nextLocation && !isBlocked.current) {
       localStorage.removeItem("nextLocation");
       navigate(nextLocation);
     }
-  }, [nextLocation, blocker.state, navigate, blocker]);
+  }, [nextLocation, navigate]);
 
   return (
     <>
