@@ -6,7 +6,7 @@ import {
   Typography,
   keyframes,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 
 import { BookingType } from "../CommonFiles/BookingType";
@@ -147,26 +147,18 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+  const isBlocked = useRef<any>(true)
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-  // const rootLocal = [routes.ROOT];
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    // const isLocalCleared = localStorage.getItem("bookings") !== null;
-    // console.log(isLocalCleared, "cleared");
-
-    // if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
-    //   // Local storage is already cleared, and pathname matches rootLocal[0]
-    //   console.log("working inside");
-    //   return false;
-    // }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
       !excutedBlocker.includes(nextLocation.pathname)
     ) {
-      localStorage.setItem("nextLocation", nextLocation.pathname);
+      isBlocked.current = true
       return true;
     }
     return false;
@@ -418,20 +410,23 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected service will be lost."
       );
+      localStorage.removeItem("nextLocation");
       if (val) {
+        localStorage.setItem("nextLocation", blocker.location.pathname)
+        isBlocked.current = false
         setTableData([]);
         cleanupLocalStorage();
-        blocker.reset();
       }
+      blocker.reset();
     }
   }, [blocker, blocker.state]);
 
   useEffect(() => {
-    if (nextLocation && blocker.state === "unblocked") {
+    if (nextLocation && !isBlocked.current) {
       localStorage.removeItem("nextLocation");
       navigate(nextLocation);
     }
-  }, [nextLocation, blocker.state, navigate, blocker]);
+  }, [nextLocation, navigate]);
 
   useEffect(() => {
     window.scrollTo({
