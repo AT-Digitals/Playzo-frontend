@@ -18,6 +18,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import routes from "../routes/routes";
 import styled from "@emotion/styled";
 
 // import routes from "../routes/routes";
@@ -150,6 +151,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const isBlocked = useRef<any>(true)
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
+
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
@@ -386,24 +388,24 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event: any) => {
-      if (tableData.length !== 0) {
-        event.preventDefault();
-        cleanupLocalStorage();
-        const message =
-          "Are you sure you want to leave? Your selected service will be lost.";
-        event.returnValue = message;
-        return message;
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event: any) => {
+  //     if (tableData.length !== 0) {
+  //       event.preventDefault();
+  //       cleanupLocalStorage();
+  //       const message =
+  //         "Are you sure you want to leave? Your selected service will be lost.";
+  //       event.returnValue = message;
+  //       return message;
+  //     }
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [tableData.length]);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [tableData.length]);
 
   useEffect(() => {
     if (blocker.state === "blocked") {

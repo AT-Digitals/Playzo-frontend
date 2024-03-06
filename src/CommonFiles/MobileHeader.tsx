@@ -1,11 +1,13 @@
-import { Box, Stack, styled } from "@mui/material";
-import React, { useCallback } from "react";
+import { Box, Button, Stack, styled } from "@mui/material";
+import React, { useCallback, useState } from "react";
 
 import AppDrawer from "./AppDrawer";
 import Colors from "../CommonComponents/Colors";
+import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
+import MessageIcon from "@mui/icons-material/Message";
 import booknow from "./booking (1).png";
 import logoImage from "../assets/logo";
 import routes from "../routes/routes";
@@ -34,6 +36,7 @@ export default function MoblieHeader({
 
   const handleDrawerOpen = useCallback(() => setOpen(true), []);
   const handleDrawerClose = useCallback(() => setOpen(false), []);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
@@ -75,6 +78,32 @@ export default function MoblieHeader({
                 <img width={"100%"} src={booknow} alt="book" />
               </IconButton>
             </HeaderLink>
+
+            <IconButton
+              style={{
+                maxWidth: "60px",
+                position: "fixed",
+                bottom: "12%",
+                left: "5%",
+                background: isHovered ? Colors.WHITE : Colors.BUTTON_COLOR, // Change color on hover
+                color: "white",
+                borderRadius: "50%",
+                height: "60px",
+                width: "100%",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {isHovered ? (
+                <EditIcon
+                  style={{
+                    color: Colors.BUTTON_COLOR,
+                  }}
+                />
+              ) : (
+                <MessageIcon />
+              )}
+            </IconButton>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon
                 style={{ fontSize: 40, color: Colors.BUTTON_COLOR }}
