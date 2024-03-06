@@ -18,6 +18,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import routes from "../routes/routes";
 import styled from "@emotion/styled";
 
 // import routes from "../routes/routes";
@@ -149,24 +150,24 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   });
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-  // const rootLocal = [routes.ROOT];
+  const rootLocal = [routes.ROOT];
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    // const isLocalCleared = localStorage.getItem("bookings") !== null;
-    // console.log(isLocalCleared, "cleared");
+    const isLocalCleared = localStorage.getItem("bookings");
+    console.log(isLocalCleared, "cleared");
 
-    // if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
-    //   // Local storage is already cleared, and pathname matches rootLocal[0]
-    //   console.log("working inside");
-    //   return false;
-    // }
+    if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
+      // Local storage is already cleared, and pathname matches rootLocal[0]
+      console.log("working inside");
+      return false;
+    }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
       !excutedBlocker.includes(nextLocation.pathname)
     ) {
-      // localStorage.setItem("nextLocation", nextLocation.pathname);
+      localStorage.setItem("nextLocation", nextLocation.pathname);
       return true;
     }
     return false;
@@ -394,24 +395,24 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     }
   }, []);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event: any) => {
-      if (tableData.length !== 0) {
-        event.preventDefault();
-        cleanupLocalStorage();
-        const message =
-          "Are you sure you want to leave? Your selected service will be lost.";
-        event.returnValue = message;
-        return message;
-      }
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event: any) => {
+  //     if (tableData.length !== 0) {
+  //       event.preventDefault();
+  //       cleanupLocalStorage();
+  //       const message =
+  //         "Are you sure you want to leave? Your selected service will be lost.";
+  //       event.returnValue = message;
+  //       return message;
+  //     }
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [tableData.length]);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [tableData.length]);
 
   useEffect(() => {
     if (blocker.state === "blocked") {

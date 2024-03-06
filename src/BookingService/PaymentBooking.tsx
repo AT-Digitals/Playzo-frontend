@@ -166,7 +166,7 @@ export default function PaymentBooking() {
       currentLocation.pathname !== nextLocation.pathname &&
       !sampleref.current
     ) {
-      // localStorage.setItem("nextLocation", nextLocation.pathname);
+      localStorage.setItem("nextLocation", nextLocation.pathname);
       return true;
     }
     return false;
