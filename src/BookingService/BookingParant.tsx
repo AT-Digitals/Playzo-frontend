@@ -471,7 +471,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           <Stack
             justifyContent={"space-between"}
             maxWidth={800}
-            width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
+            width={{ xs: "90%", sm: "72%", md: "73%", lg: "100%" }}
             ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
             marginTop={"5rem"}
             direction={"row"}
@@ -560,9 +560,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           >
             <Box
               margin={{
-                xs: "50px 28px",
-                sm: "60px 38px",
-                md: "60px 38px",
+                xs: "50px auto",
+                sm: "60px auto",
+                md: "60px auto",
                 lg: "60px 50px",
               }}
               width={"100%"}
@@ -655,8 +655,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   ? "none"
                   : "flex"
               }
-              borderLeft={"1px solid gray"}
+              borderLeft={{xs: "none", sm: "none", md: "none", lg: "1px solid gray"}}
               gap={"8px"}
+              margin={{xs: "0 auto", sm: "0 auto", md: "0 auto", lg: "0px"}}
               padding={{
                 xs: "0px 37px",
                 sm: "0px 37px",
@@ -814,7 +815,21 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 </AnimatedZoomIn>
               )}
             </Stack>
-            <Stack borderLeft={selectedService ? "1px solid gray" : "none"}>
+            <Stack  sx={{
+        borderLeft: selectedService ? "1px solid gray" : "none",
+        '@media (max-width: 768px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 820px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 912px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 1024px)': {
+          borderLeft: 'none'
+        }
+      }}>
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
