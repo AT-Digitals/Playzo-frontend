@@ -6,7 +6,7 @@ import {
   Typography,
   keyframes,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 
 import { BookingType } from "../CommonFiles/BookingType";
@@ -148,26 +148,19 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     );
     return storedTableData;
   });
+  const isBlocked = useRef<any>(true)
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-  const rootLocal = [routes.ROOT];
+
 
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    const isLocalCleared = localStorage.getItem("bookings");
-    console.log(isLocalCleared, "cleared");
-
-    if (nextLocation.pathname === rootLocal[0] && isLocalCleared) {
-      // Local storage is already cleared, and pathname matches rootLocal[0]
-      console.log("working inside");
-      return false;
-    }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
       !excutedBlocker.includes(nextLocation.pathname)
     ) {
-      localStorage.setItem("nextLocation", nextLocation.pathname);
+      isBlocked.current = true
       return true;
     }
     return false;
@@ -419,20 +412,23 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected service will be lost."
       );
+      localStorage.removeItem("nextLocation");
       if (val) {
+        localStorage.setItem("nextLocation", blocker.location.pathname)
+        isBlocked.current = false
         setTableData([]);
         cleanupLocalStorage();
-        blocker.reset();
       }
+      blocker.reset();
     }
   }, [blocker, blocker.state]);
 
   useEffect(() => {
-    if (nextLocation && blocker.state === "unblocked") {
+    if (nextLocation && !isBlocked.current) {
       localStorage.removeItem("nextLocation");
       navigate(nextLocation);
     }
-  }, [nextLocation, blocker.state, navigate, blocker]);
+  }, [nextLocation, navigate]);
 
   useEffect(() => {
     window.scrollTo({
@@ -477,7 +473,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           <Stack
             justifyContent={"space-between"}
             maxWidth={800}
-            width={{ xs: "90%", sm: "60%", md: "60%", lg: "100%" }}
+            width={{ xs: "90%", sm: "72%", md: "73%", lg: "100%" }}
             ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
             marginTop={"5rem"}
             direction={"row"}
@@ -566,9 +562,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           >
             <Box
               margin={{
-                xs: "50px 28px",
-                sm: "60px 38px",
-                md: "60px 38px",
+                xs: "50px auto",
+                sm: "60px auto",
+                md: "60px auto",
                 lg: "60px 50px",
               }}
               width={"100%"}
@@ -661,8 +657,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   ? "none"
                   : "flex"
               }
-              borderLeft={"1px solid gray"}
+              borderLeft={{xs: "none", sm: "none", md: "none", lg: "1px solid gray"}}
               gap={"8px"}
+              margin={{xs: "0 auto", sm: "0 auto", md: "0 auto", lg: "0px"}}
               padding={{
                 xs: "0px 37px",
                 sm: "0px 37px",
@@ -820,7 +817,21 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 </AnimatedZoomIn>
               )}
             </Stack>
-            <Stack borderLeft={selectedService ? "1px solid gray" : "none"}>
+            <Stack  sx={{
+        borderLeft: selectedService ? "1px solid gray" : "none",
+        '@media (max-width: 768px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 820px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 912px)': {
+          borderLeft: 'none'
+        },
+        '@media (max-width: 1024px)': {
+          borderLeft: 'none'
+        }
+      }}>
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
