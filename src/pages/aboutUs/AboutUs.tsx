@@ -108,6 +108,7 @@ export default function AboutUs() {
             xs: "-52%",
             sm: "-10%",
             md: "-10%",
+            lg: "-5%",
           }}
           ref={timelineRef}
           sx={{
