@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@mui/material";
+import { Backdrop, Box, CircularProgress, Skeleton } from "@mui/material";
 import React, { ReactNode, useEffect, useState } from "react";
 
 import Colors from "../../CommonComponents/Colors";
@@ -55,6 +55,16 @@ const CustomSlider = ({
   }, [autoplayInterval, nextSlide]);
 
   const [showSkeleton, setShowSkeleton] = useState(true);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
+
+  useEffect(() => {
+    // Simulate loading delay with setTimeout
+    const timer = setTimeout(() => {
+      setLoading(false); // After timeout, set loading state to false
+    }, 3000); // Adjust timeout duration as needed
+
+    return () => clearTimeout(timer); // Cleanup function to clear the timer
+  }, []);
 
   useEffect(() => {
     // After 4 seconds, set showSkeleton to false to display the actual images
@@ -84,7 +94,7 @@ const CustomSlider = ({
             height: "100%",
           }}
         >
-          {showSkeleton && (
+          {/* {showSkeleton && (
             <SkeletonContainer showSkeleton={showSkeleton}>
               <Skeleton
                 className="skeleton"
@@ -137,9 +147,9 @@ const CustomSlider = ({
                 variant="rectangular"
               />
             </SkeletonContainer>
-          )}
+          )} */}
 
-          {!showSkeleton && (
+          {/* {!showSkeleton && ( */}
             <>
               {slides.map((slide, index) => (
                 <Box
@@ -154,6 +164,9 @@ const CustomSlider = ({
                     objectFit: "cover",
                   }}
                 >
+                  <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
                   <Box
                     component={"image"}
                     sx={{
@@ -172,7 +185,7 @@ const CustomSlider = ({
                 </Box>
               ))}
             </>
-          )}
+          {/* )} */}
         </Box>
       </Box>
       <Box
