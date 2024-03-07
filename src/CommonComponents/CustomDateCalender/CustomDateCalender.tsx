@@ -186,11 +186,20 @@ export default function CustomDateCalendar({
     disableData.forEach((item) => {
       const start = item.startTime;
       const end = item.endTime;
-      const startTime =
-        TimeUtlis.formatMillisecondsToTimeConvert(start).split(" ");
-      const endTime = TimeUtlis.formatMillisecondsToTimeConvert(end);
-      const finalTime = startTime[0].concat(`-${endTime}`);
-      combinedIntervals = combinedIntervals.concat(finalTime);
+      let fromTime = moment(start);
+let toTime = moment(end);
+let duration = moment.duration(toTime.diff(fromTime));
+let diff = duration.hours();
+let array = [];
+
+for (let i = 0; diff > i; i++) {
+  let result = moment(fromTime).add(i, 'hours').format('h:mm')
+  array.push(
+    result+"-"+moment(fromTime).add(i+1, 'hours').format('h:mm A')
+  )
+}
+
+      combinedIntervals = combinedIntervals.concat(array);
     });
     if (type === BookingType.CricketNet) {
       selectedService = "Cricket Net";
@@ -278,7 +287,7 @@ export default function CustomDateCalendar({
       },
       []
     );
-    if (uniqueArray.length > 0) {
+    if (uniqueArray.length > 0 && selectedDate!=="") {
       const updatedItems = items.map((item) =>
         uniqueArray.includes(item.name)
           ? { ...item, disabled: true }
@@ -291,7 +300,7 @@ export default function CustomDateCalendar({
   };
 
   React.useEffect(() => {
-    if (disableData || selectedDate) {
+    if (disableData || selectedDate!=="") {
       MilisecondsToHours();
     }
   }, [disableData, selectedDate]);
