@@ -10,14 +10,14 @@ import Rating from "@mui/material/Rating";
 import TimeUtlis from "../../Utils/TimeUtlis";
 import assets from "../../assets";
 
-const {"Vector.png": Vector, "Vector (1).png": Vector1, "Vector (2).png": Vector2} = assets
+const { "Vector.png": Vector, "Vector (1).png": Vector1, "Vector (2).png": Vector2 } = assets
 interface dataProps {
   userDetails: any[];
-  userName:string;
+  userName: string;
 }
 
 export default function ListCard({ userDetails, userName }: dataProps) {
-  const CapitalizeFirstLetter = (str:any)=> {
+  const CapitalizeFirstLetter = (str: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   return (
@@ -49,12 +49,12 @@ export default function ListCard({ userDetails, userName }: dataProps) {
             /> */}
           </Stack>
           <Typography variant="body2" fontWeight={600}>
-            {DateUtils.formatDate(user.startDate,"DD-MMM-YYYY")}
+            {DateUtils.formatDate(user.startDate, "DD-MMM-YYYY")}
           </Typography>
           <Stack direction="row" spacing={5} alignItems="center">
             <Typography variant="body2">{userName}</Typography>
             <Typography variant="body2">{CapitalizeFirstLetter(user.type)}</Typography>
-            <Typography variant="body2">{CapitalizeFirstLetter(BookingNameTypes[user.type+user.court  as keyof typeof BookingNameTypes])}</Typography>
+            <Typography variant="body2">{CapitalizeFirstLetter(BookingNameTypes[user.type + user.court as keyof typeof BookingNameTypes])}</Typography>
 
             <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(user.startTime)} - ${TimeUtlis.formatMillisecondsToTimeConvert(user.endTime)}`}</Typography>
             {/* <Button
@@ -85,11 +85,11 @@ export default function ListCard({ userDetails, userName }: dataProps) {
             spacing={1}
             alignItems="flex-end"
             justifyContent="flex-end"
-            // sx={{
-            //   display: "flex",
-            //   flexWrap: "wrap", // Add flexWrap property
-            //   justifyContent: "space-between",
-            // }}
+          // sx={{
+          //   display: "flex",
+          //   flexWrap: "wrap", // Add flexWrap property
+          //   justifyContent: "space-between",
+          // }}
           >
             {/* {!user.comments? (
               <Stack direction="row" spacing={1} alignItems="center">
@@ -148,43 +148,43 @@ export default function ListCard({ userDetails, userName }: dataProps) {
               </Stack>
             )} */}
             <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={3}
-                alignItems="center"
-                sx={{
-                  display: "flex",
+              direction={{ xs: "column", md: "row" }}
+              spacing={3}
+              alignItems="center"
+              sx={{
+                display: "flex",
 
-                  flexWrap: "wrap", // Add flexWrap property
-                }}
-              >
-                
-                <Stack direction="row" spacing={1} alignItems="center">
-                  {/* <img src={Vector2} width={9} height={10} />
+                flexWrap: "wrap", // Add flexWrap property
+              }}
+            >
+
+              <Stack direction="row" spacing={1} alignItems="center">
+                {/* <img src={Vector2} width={9} height={10} />
                   <Typography variant="body2">Refund initiated</Typography> */}
-                   <Button
-                variant="outlined"
-                sx={{
-                  padding: "8px 20px",
-                  textTransform: "none",
-                  fontSize: "16px",
-                  minWidth: "110px",
-                  fontWeight: "400",
-                  border: "2px solid #15B5FC",
-                  borderRadius: "30px",
-                  letterSpacing: "1.6px",
-                  background: Colors.BUTTON_COLOR,
-                  color: Colors.WHITE,
-                  "&:hover": {
-                    background: Colors.WHITE,
-                    color: Colors.BUTTON_COLOR,
+                <Button
+                  variant="outlined"
+                  sx={{
+                    padding: "8px 20px",
+                    textTransform: "none",
+                    fontSize: "16px",
+                    minWidth: "110px",
+                    fontWeight: "400",
                     border: "2px solid #15B5FC",
-                  },
-                }}
-              >
-                Booking cancelled
-              </Button>
-                </Stack>
+                    borderRadius: "30px",
+                    letterSpacing: "1.6px",
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                    "&:hover": {
+                      background: Colors.WHITE,
+                      color: Colors.BUTTON_COLOR,
+                      border: "2px solid #15B5FC",
+                    },
+                  }}
+                >
+                  Refund
+                </Button>
               </Stack>
+            </Stack>
           </Stack>
           <Divider variant="fullWidth" sx={{ borderColor: Colors.BLACK }} />
         </Stack>

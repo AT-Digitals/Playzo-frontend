@@ -1,27 +1,30 @@
-import { Box, IconButton, Modal, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, Stack, Typography } from "@mui/material";
 import Colors from "../Colors";
-
+import assets from "../../assets";
 import CloseIcon from "@mui/icons-material/Close";
+import CustomButton from "../CustomButton";
+
+const { "Playzo (1).svg": logo } = assets;
 
 const style = {
     position: "absolute" as "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 350,
     bgcolor: "#000333",
     borderRadius: "15px",
-    p: 4,
+    p: 5,
 };
 
 interface modalProps {
     open: boolean,
     handleClose: () => void;
     text: string;
-    subText?: string;
+    headingText: string;
 }
 
-export default function ModalComponent({ open, handleClose, text, subText }: modalProps) {
+export default function ModalComponent({ open, handleClose, text, headingText }: modalProps) {
     return (
         <Modal
             open={open}
@@ -30,31 +33,47 @@ export default function ModalComponent({ open, handleClose, text, subText }: mod
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Box display={"flex"} justifyContent={"end"} marginTop={"-12px"}>
-                    <IconButton>
-                        <CloseIcon
-                            onClick={handleClose}
-                            style={{ fontSize: "25px", color: Colors.WHITE }}
-                        />
-                    </IconButton>
-                </Box>
-                <Typography
-                    marginTop={"20px"}
-                    textAlign={"center"}
-                    fontSize={"17px"}
-                    color={Colors.WHITE}
-                >
-                    {text}
-                </Typography>
-                <Typography
-                    mb={"20px"}
-                    textAlign={"center"}
-                    fontSize={"15px"}
-                    marginTop={"8px"}
-                    color={Colors.WHITE}
-                >
-                    {subText}
-                </Typography>
+                <Stack direction="column" alignItems="center" spacing={2} >
+                    <img width={150} height={50} src={logo} alt="alterknit" />
+                    <Typography
+                        textAlign={"center"}
+                        fontSize={"20px"}
+                        color={Colors.WHITE}
+                        fontWeight={600}
+                    >
+                        {headingText}
+                    </Typography>
+                    <Typography
+                        textAlign={"center"}
+                        fontSize={"17px"}
+                        color={Colors.WHITE}
+                    >
+                        {text}
+                    </Typography>
+                    <Button
+                        variant="outlined"
+                        sx={{
+                            padding: "8px 20px",
+                            textTransform: "none",
+                            fontSize: "16px",
+                            minWidth: "150px",
+                            fontWeight: "400",
+                            border: "2px solid #15B5FC",
+                            borderRadius: "30px",
+                            letterSpacing: "1.6px",
+                            background: Colors.BUTTON_COLOR,
+                            color: Colors.WHITE,
+                            ":hover": {
+                                background: Colors.WHITE,
+                                color: Colors.BUTTON_COLOR,
+                                border: "2px solid #15B5FC",
+                            },
+                        }}
+                        onClick={handleClose}
+                    >
+                        OK
+                    </Button>
+                </Stack>
             </Box>
         </Modal>
 

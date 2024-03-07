@@ -14,7 +14,6 @@ import Colors from "../Colors";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import ModalComponent from "./ModalComponent";
 import TimeUtlis from "../../Utils/TimeUtlis";
 import leftarrow from "./left-arrow.svg";
 import moment from "moment";
@@ -119,9 +118,7 @@ export default function CustomDateCalendar({
 
   const [selectedTimings, setSelectedTimings] = React.useState<string[]>([]);
   const navigate = useNavigate();
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [responseModalOpen, setResponseModalOpen] = React.useState(false);
-  const [dateModalOpen, setDateModalOpen] = React.useState(false);
+
   const [disableData, setDisableData] = React.useState<datatype[]>([]);
   const [items, setItems] = useState([
     { name: "6:00-7:00 AM", disabled: false },
@@ -146,18 +143,6 @@ export default function CustomDateCalendar({
     { name: "1:00-2:00 AM", disabled: false },
   ]);
 
-  const handleClose = () => {
-    setModalOpen(false);
-    navigate(routes.ROOT);
-  };
-
-  const handleCloseModal = () => {
-    setResponseModalOpen(false);
-  };
-
-  const handleCloseDateModal = () => {
-    setDateModalOpen(false);
-  };
 
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
@@ -183,11 +168,11 @@ export default function CustomDateCalendar({
           endDate: dateValue,
           court:
             type === BookingType.BowlingMachine ||
-            type === BookingType.CricketNet
+              type === BookingType.CricketNet
               ? "1"
               : BookingSubTypes[
-                  selectedService as keyof typeof BookingSubTypes
-                ].toString(),
+                selectedService as keyof typeof BookingSubTypes
+              ].toString(),
         });
         setDisableData(response);
       } catch (error: any) {
@@ -344,7 +329,7 @@ export default function CustomDateCalendar({
         try {
           const courtValue =
             type === BookingType.BowlingMachine ||
-            type === BookingType.CricketNet
+              type === BookingType.CricketNet
               ? 1
               : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
@@ -366,11 +351,11 @@ export default function CustomDateCalendar({
           try {
             const newCourt =
               type === BookingType.BowlingMachine ||
-              type === BookingType.CricketNet
+                type === BookingType.CricketNet
                 ? 1
                 : BookingSubTypes[
-                    bookings.name as keyof typeof BookingSubTypes
-                  ];
+                bookings.name as keyof typeof BookingSubTypes
+                ];
 
             const startDateTime = DateUtils.startTimeAddtoDate(timeData);
             const endDateTime = DateUtils.endTimeAddtoDate(timeData);
@@ -403,7 +388,7 @@ export default function CustomDateCalendar({
           } catch (error: any) {
             flag = true;
             if (error.message === "Please choose another date and slot") {
-              setResponseModalOpen(true);
+              alert("Please choose another date and slot");
             }
           }
         }
@@ -435,10 +420,11 @@ export default function CustomDateCalendar({
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
       } else {
-        setDateModalOpen(true);
+        alert('Please choose date and time slots')
       }
     } else {
-      setModalOpen(true);
+      alert('Could not add your bookings!\nPlease Login to Your Account');
+      navigate(routes.ROOT);
     }
   };
 
@@ -474,7 +460,9 @@ export default function CustomDateCalendar({
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-      alignItems={{ xs: "center", sm: "center", md: "center", lg: "center" }}
+
+
+      alignItems={{ xs: "center", sm: "center", md: 'center', lg: "center" }}
       width="100%"
       margin="0 auto"
     >
@@ -555,8 +543,8 @@ export default function CustomDateCalendar({
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -565,8 +553,8 @@ export default function CustomDateCalendar({
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
+                    ? "#15B5FC"
+                    : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -581,8 +569,8 @@ export default function CustomDateCalendar({
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
+                        ? "white"
+                        : "black"
                   }
                   sx={{
                     ":hover": {
@@ -617,22 +605,6 @@ export default function CustomDateCalendar({
           </Button>
         </Box>
       </Box>
-      <ModalComponent
-        open={modalOpen}
-        handleClose={handleClose}
-        text="Could not add your Bookings!"
-        subText="Login to Your Account"
-      />
-      <ModalComponent
-        open={responseModalOpen}
-        handleClose={handleCloseModal}
-        text="Please choose another date and slot"
-      />
-      <ModalComponent
-        open={dateModalOpen}
-        handleClose={handleCloseDateModal}
-        text="Please choose date and slot"
-      />
     </Stack>
   );
 }
