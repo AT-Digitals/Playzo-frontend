@@ -1,6 +1,4 @@
-import UserLoginApi from "./UserLoginApi";
 import axios from "axios";
-import routes from "../routes/routes";
 
 const axiosInstance = axios.create({
   headers: {
@@ -31,18 +29,9 @@ axiosInstance.interceptors.response.use(
       error.response &&
       error.response.status === 401 &&
       error.response.data.message === "Unauthorized! Access Token was expired!"
-    ) {
-      handleTokenExpiration();
-    }
-    return Promise.reject(error);
+    )
+      return Promise.reject(error);
   }
 );
-
-const handleTokenExpiration = async () => {
-  localStorage.clear();
-  UserLoginApi.logoutUser();
-  alert("Session expired. Please log in again.");
-  window.location.href = routes.ROOT;
-};
 
 export default axiosInstance;

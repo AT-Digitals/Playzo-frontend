@@ -18,53 +18,53 @@ import banner from "./cUS.png";
 import styled from "@emotion/styled";
 
 const StyledIframe = styled.iframe`
-@media (min-width: 300px) {
-  width: 340px; 
-  height: 340px;
-  margin: auto;
-}
-@media (min-width: 414px) {
-  width: 370px; 
-  height: 340px;
-  margin: auto;
-}
-@media (min-width: 540px) {
-  width: 490px; 
-  height: 340px;
-  margin: auto;
-}
+  @media (min-width: 300px) {
+    width: 340px;
+    height: 340px;
+    margin: auto;
+  }
+  @media (min-width: 414px) {
+    width: 370px;
+    height: 340px;
+    margin: auto;
+  }
+  @media (min-width: 540px) {
+    width: 490px;
+    height: 340px;
+    margin: auto;
+  }
 
-@media (min-width: 768px) {
-  width: 700px; 
-  height: 440px;
-  margin: auto;
-}
-@media (min-width: 820px) {
-  width: 730px; 
-  height: 440px;
-  margin: auto;
-}
-@media (min-width: 912px) {
-  width: 830px; 
-  height: 440px;
-  margin: auto;
-}
+  @media (min-width: 768px) {
+    width: 700px;
+    height: 440px;
+    margin: auto;
+  }
+  @media (min-width: 820px) {
+    width: 730px;
+    height: 440px;
+    margin: auto;
+  }
+  @media (min-width: 912px) {
+    width: 830px;
+    height: 440px;
+    margin: auto;
+  }
 
-@media (min-width: 992px) {
-  width: 840px; 
-  height: 440px;
-  margin: auto;
-}
-@media (min-width: 1000px) {
-  width: 940px; 
-  height: 440px;
-  margin: auto;
-}
+  @media (min-width: 992px) {
+    width: 840px;
+    height: 440px;
+    margin: auto;
+  }
+  @media (min-width: 1000px) {
+    width: 940px;
+    height: 440px;
+    margin: auto;
+  }
 
-@media (min-width: 1200px) {
-  width: 700px; 
-  height: 680px;
-}
+  @media (min-width: 1200px) {
+    width: 700px;
+    height: 680px;
+  }
 `;
 
 const DropDownData = [
@@ -95,16 +95,16 @@ const DropDownData = [
 ];
 
 export default function ContactUs() {
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem("user");
   const userData = user && JSON.parse(user);
   const [name, setName] = useState(userData ? userData["name"] : "");
   const [email, setEmail] = useState(userData ? userData["email"] : "");
   const [type, setType] = useState("");
   const [message, setMessage] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(userData ? userData["phone"] : "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    userData ? userData["phone"] : ""
+  );
   const [successMessage, setSuccessMessage] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [errorText, setErrorText] = useState('');
 
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidType, setIsValidType] = useState<boolean>(false);
@@ -113,11 +113,11 @@ export default function ContactUs() {
 
   const handleNameChange = (event: any) => {
     setName(event);
-    setIsValidName(false)
+    setIsValidName(false);
   };
   const handleEmailChange = (event: any) => {
     setEmail(event);
-    setIsValidEmail(false)
+    setIsValidEmail(false);
   };
 
   const validateEmail = (input: any) => {
@@ -140,15 +140,9 @@ export default function ContactUs() {
     setMessage(event?.target.value);
   };
 
-
   const successNotification = () => {
     setSuccessMessage(false);
-  }
-
-  const handleErrorModal = () => {
-    setErrorMessage(false);
-    setErrorText('');
-  }
+  };
 
   const validatePhone = (input: any) => {
     const phonePattern = /^\d{10}$/;
@@ -156,15 +150,14 @@ export default function ContactUs() {
     return isValid;
   };
 
-
   const onSubmit = async (event: any) => {
     event?.preventDefault();
 
     if (!name) {
-      setIsValidName(true)
+      setIsValidName(true);
     }
     if (!email) {
-      setIsValidEmail(true)
+      setIsValidEmail(true);
     }
     if (!phoneNumber) {
       setIsValidPhone(true);
@@ -199,24 +192,17 @@ export default function ContactUs() {
         });
         if (response) {
           setSuccessMessage(true);
-          setName('');
-          setEmail('');
-          setPhoneNumber('')
-          setType('');
-          setMessage('');
+          setName("");
+          setEmail("");
+          setPhoneNumber("");
+          setType("");
+          setMessage("");
         }
-
       } catch (err: any) {
-        console.log("err", err);
-        setErrorMessage(true);
-        setErrorText(err.message);
+        alert(err.message);
       }
     }
-
   };
-
-
-
 
   const BannerImage = styled.img`
     width: 100%;
@@ -235,8 +221,9 @@ export default function ContactUs() {
       <Box>
         <BannerImage src={banner} alt="banner" />
       </Box>
-      <Box sx={{
-        background: `
+      <Box
+        sx={{
+          background: `
             repeating-linear-gradient(
               -45deg,
               transparent,
@@ -269,40 +256,51 @@ export default function ContactUs() {
             ),
             whitesmoke
           `,
-        backgroundBlendMode: "multiply",
-      }}>
+          backgroundBlendMode: "multiply",
+        }}
+      >
         <AppContainer
           paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
           paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
           maxWidth={1200}
         >
-          <Typography pb={{ xs: "20px", sm: "20px", md: "20px", lg: '20px' }} pl={{ xs: "15px", sm: "28px", md: "28px", lg: '0px' }} pt={"20px"} color={Colors.BLACK} fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }} fontWeight={"900"} fontStyle={"italic"} textTransform={"uppercase"}>Reach Us!!!</Typography>
-          <Stack style={{
-            marginBottom: "20px",
-            marginTop: "0px"
-          }}
+          <Typography
+            pb={{ xs: "20px", sm: "20px", md: "20px", lg: "20px" }}
+            pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
+            pt={"20px"}
+            color={Colors.BLACK}
+            fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
+            fontWeight={"900"}
+            fontStyle={"italic"}
+            textTransform={"uppercase"}
+          >
+            Reach Us!!!
+          </Typography>
+          <Stack
+            style={{
+              marginBottom: "20px",
+              marginTop: "0px",
+            }}
             spacing={10}
             direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
             paddingBottom={{ xs: "50px", sm: "60px", md: "60px", lg: "0px" }}
           >
-
-            <Box flexDirection={"column"}
+            <Box
+              flexDirection={"column"}
               display={"flex"}
               marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
               sx={{
-                paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" }
+                paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" },
               }}
             >
-              <StyledIframe
-               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15553.383003662614!2d77.6973392!3d11.3341512!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6d17503b1dad5cfb!2sPlayzo%2033!5e0!3m2!1sen!2sus!4v1643151588496!5m2!1sen!2sus"
-              ></StyledIframe>
-              <Box ml={{ xs: "16px", sm: "28px", md: "35px", lg: '0px' }}>
+              <StyledIframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15553.383003662614!2d77.6973392!3d11.3341512!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6d17503b1dad5cfb!2sPlayzo%2033!5e0!3m2!1sen!2sus!4v1643151588496!5m2!1sen!2sus"></StyledIframe>
+              <Box ml={{ xs: "16px", sm: "28px", md: "35px", lg: "0px" }}>
                 <Typography
                   sx={{
                     fontSize: "22px",
                     fontWeight: "bold",
                     paddingTop: "12px",
-                    color: Colors.BUTTON_COLOR
+                    color: Colors.BUTTON_COLOR,
                   }}
                 >
                   Contact Us
@@ -313,21 +311,37 @@ export default function ContactUs() {
                   Tamil Nadu - 638011{" "}
                 </Typography>
                 <Typography fontSize="16px" fontWeight={400}>
-                  <span style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    color: Colors.BUTTON_COLOR
-                  }}>Phone:</span> +91 70944 60944,  +91 91088 83555
-
+                  <span
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      color: Colors.BUTTON_COLOR,
+                    }}
+                  >
+                    Phone:
+                  </span>{" "}
+                  +91 70944 60944, +91 91088 83555
                 </Typography>
               </Box>
             </Box>
 
-            <Box style={{ marginTop: "40px" }} marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }} width={"100%"}>
+            <Box
+              style={{ marginTop: "40px" }}
+              marginLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "110px" }}
+              pt={{ xs: "0px", sm: "0px", md: "0px", lg: "0px" }}
+              width={"100%"}
+            >
               <form onSubmit={onSubmit}>
-                <Stack sx={{
-                  marginTop: {xs: "0px", sm: "0px", md: "0px", lg: "-50px"}
-                }} margin={{ xs: "0 auto", sm: '0 auto', md: "0 auto", lg: "0 auto" }}
+                <Stack
+                  sx={{
+                    marginTop: { xs: "0px", sm: "0px", md: "0px", lg: "-50px" },
+                  }}
+                  margin={{
+                    xs: "0 auto",
+                    sm: "0 auto",
+                    md: "0 auto",
+                    lg: "0 auto",
+                  }}
                   border={{
                     xs: "1px solid grey",
                     sm: "1px solid grey",
@@ -335,7 +349,12 @@ export default function ContactUs() {
                     lg: "none",
                   }}
                   width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
-                  borderRadius={{ xs: "10px", sm: "10px", md: "10px", lg: "0px" }}
+                  borderRadius={{
+                    xs: "10px",
+                    sm: "10px",
+                    md: "10px",
+                    lg: "0px",
+                  }}
                   padding={{
                     xs: "21px 16px",
                     sm: "21px 16px",
@@ -353,7 +372,7 @@ export default function ContactUs() {
                     value={name}
                     onChange={handleNameChange}
                     error={!!isValidName}
-                    helperText={isValidName ? 'Please provide valid Name' : ''}
+                    helperText={isValidName ? "Please provide valid Name" : ""}
                   />
                   <CustomTextField
                     sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -363,7 +382,9 @@ export default function ContactUs() {
                     value={email}
                     onChange={handleEmailChange}
                     error={!!isValidEmail}
-                    helperText={isValidEmail ? 'Please provide valid Email' : ''}
+                    helperText={
+                      isValidEmail ? "Please provide valid Email" : ""
+                    }
                   />
                   <DropDownComponent
                     label="What service are you interested in"
@@ -372,7 +393,9 @@ export default function ContactUs() {
                     value={type}
                     onChange={handleTypeChange}
                     error={!!isValidType}
-                    helperText={isValidType ? 'Please provide valid Service' : ''}
+                    helperText={
+                      isValidType ? "Please provide valid Service" : ""
+                    }
                   />
                   <CustomTextField
                     sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -383,7 +406,9 @@ export default function ContactUs() {
                     onChange={handlePhoneChange}
                     type="number"
                     error={!!isValidPhone}
-                    helperText={isValidPhone ? 'Please provide valid phone number' : ''}
+                    helperText={
+                      isValidPhone ? "Please provide valid phone number" : ""
+                    }
                   />
                   <Box margin={"30px"}>
                     <Typography
@@ -420,7 +445,6 @@ export default function ContactUs() {
                   </Box>
 
                   <Button
-
                     sx={{
                       borderRadius: "30px",
                       textTransform: "none",
@@ -435,16 +459,21 @@ export default function ContactUs() {
                         background: Colors.WHITE,
                         color: Colors.BUTTON_COLOR,
                         border: "1px solid #15B5FC",
-                      }
-                    }} variant="outlined"
+                      },
+                    }}
+                    variant="outlined"
                     type="submit"
                   >
                     Submit
                   </Button>
                 </Stack>
               </form>
-              <ModalComponent open={successMessage} handleClose={successNotification} text="Your Enquiry is Successfully added" />
-              <ModalComponent open={errorMessage} handleClose={handleErrorModal} text={errorText} />
+              <ModalComponent
+                open={successMessage}
+                handleClose={successNotification}
+                text="Your Enquiry is Successfully added"
+                headingText="Enquiry Confirmation"
+              />
             </Box>
           </Stack>
         </AppContainer>
