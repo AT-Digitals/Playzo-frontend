@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import CardComponent from "./CardComponent";
@@ -153,11 +153,25 @@ export default function HomePage() {
       return () => clearInterval(interval);
     }
   }, [initialLoad]);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
+
+  useEffect(() => {
+    // Simulate loading delay with setTimeout
+    const timer = setTimeout(() => {
+      setLoading(false); // After timeout, set loading state to false
+    }, 3000); // Adjust timeout duration as needed
+
+    return () => clearTimeout(timer); // Cleanup function to clear the timer
+  }, []);
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
+  
   return (
     <Box width="100%">
+       <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <video width="100%" autoPlay loop muted controls={false}>
         <source src={videoFile} type="video/mp4" />
       </video>

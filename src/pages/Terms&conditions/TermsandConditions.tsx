@@ -79,35 +79,6 @@ const StyledImage5 = styled.img`
     transform: translate(1300%, -21px);
   }
 `;
-const StyledTypography = styled(Typography)`
-  /* Media queries for different screen sizes */
-  @media (min-width: 300px) {
-    top: 23%;
-    left: 6%;
-  }
-
-  @media (min-width: 414px) {
-    top: 20%;
-    left: 11%;
-  }
-  @media (min-width: 768px) {
-    top: 18%;
-    left: 7%;
-  }
-
-  @media (min-width: 820px) {
-    top: 16%;
-    left: 8%;
-  }
-  @media (min-width: 1024px) {
-    top: 330%;
-    left: 7%;
-  }
-  @media (min-width: 1200px) {
-    top: 161%;
-    left: 10%;
-  }
-`;
 
 export default function TermsandConditions() {
   useEffect(() => {
@@ -138,17 +109,16 @@ export default function TermsandConditions() {
       </Container>
       <Box
         position={"absolute"}
-        top={{ xs: "22%", sm: "15%", md: "17%", lg: "25%" }}
+        // top={{ xs: "22%", sm: "15%", md: "17%", lg: "25%" }}
         left={"9%"}
         pt={"30px"}
       >
-        <StyledTypography
+        <Typography
           fontWeight={"900"}
           position={"absolute"}
-          // top={{ xs: "26%", sm: "16%", md: "33%", lg: "28%" }}
-          // left={{ xs: "14%", sm: "6%", md: "14%", lg: "11%" }}
+          top={{ xs: "235%", sm: "235%", md: "-841%",}}
           color={"white"}
-          fontSize={{ xs: "56px", sm: "60px", md: "90px", lg: "92px" }}
+          fontSize={{ xs: "56px", sm: "80px", md: "90px", lg: "92px" }}
           fontStyle={"italic"}
           lineHeight={1}
         >
@@ -156,18 +126,27 @@ export default function TermsandConditions() {
           <br />
             Conditions
          
-        </StyledTypography>
+        </Typography>
       </Box>
 
-      <AppContainer width={"100%"} maxWidth={1180}>
-        <Box>
-          <Typography
+      <AppContainer
+        mt={{ xs: "18rem", sm: "20rem", md: "2rem" }}
+        padding={0}
+        maxWidth={1180}
+      >
+        <Box
+          padding={"0 20px"}
+          display={"flex"}
+          flexDirection={"column"}
+          gap={"3rem"}
+        >
+           <Typography
             fontSize={"16px"}
             fontWeight={"400"}
             color={Colors.BLACK}
             width={"100%"}
-            maxWidth={{ xs: "320px", sm: "700px", md: "850px", lg: "1200px" }}
-            paddingTop={{ xs: "272px", sm: "322px", md: "40px", lg: "50px" }}
+            maxWidth={{ xs: "393px", sm: "700px", md: "850px", lg: "1200px" }}
+            paddingTop={{ xs: "9px", sm: "9px", md: "40px", lg: "50px" }}
           >
             1. Playzo33 and the hosts of this website also referred to as
             “site” accept no responsibility for and exclude all liability in
