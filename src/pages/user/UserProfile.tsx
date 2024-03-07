@@ -95,7 +95,7 @@ export default function UserProfile() {
           >
             <Card
               sx={{
-                maxWidth: 404,
+                maxWidth: { xs: 300, sm: 404, md: 404 },
                 width: "100%",
                 boxShadow: `0 12px 14px 0 rgba(0,0,0,0.2)`,
                 transition: "0.3s",
