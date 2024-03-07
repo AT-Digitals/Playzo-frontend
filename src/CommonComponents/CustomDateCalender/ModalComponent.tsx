@@ -1,8 +1,17 @@
-import { Box, Button, IconButton, Modal, Stack, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    IconButton,
+    Modal,
+    Stack,
+    Typography,
+    useMediaQuery,
+} from "@mui/material";
 import Colors from "../Colors";
 import assets from "../../assets";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomButton from "../CustomButton";
+
 
 const { "Playzo (1).svg": logo } = assets;
 
@@ -11,29 +20,45 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 350,
+    width: '100%',
+    maxWidth: 350,
     bgcolor: "#000333",
     borderRadius: "15px",
     p: 5,
 };
 
+
 interface modalProps {
-    open: boolean,
+    open: boolean;
     handleClose: () => void;
     text: string;
     headingText: string;
 }
 
-export default function ModalComponent({ open, handleClose, text, headingText }: modalProps) {
+export default function ModalComponent({
+    open,
+    handleClose,
+    text,
+    headingText,
+}: modalProps) {
+
     return (
         <Modal
             open={open}
-            onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
-                <Stack direction="column" alignItems="center" spacing={2} >
+            <Box sx={{
+                ...style,
+                '@media (max-width: 600px)': {
+                    maxWidth: 230,
+                    // transform: "translate(-50%, -50%)",
+                },
+                // '@media (min-width: 900px)': {
+                //     top: "40%",
+                // },
+            }}>
+                <Stack direction="column" alignItems="center" spacing={2}>
                     <img width={150} height={50} src={logo} alt="alterknit" />
                     <Typography
                         textAlign={"center"}
@@ -76,6 +101,5 @@ export default function ModalComponent({ open, handleClose, text, headingText }:
                 </Stack>
             </Box>
         </Modal>
-
-    )
+    );
 }
