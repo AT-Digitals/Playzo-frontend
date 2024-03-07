@@ -461,6 +461,7 @@ export default function CustomDateCalendar({
       spacing={2}
       maxWidth={1146}
 
+
       alignItems={{ xs: "center", sm: "center", md: 'center', lg: "center" }}
       width="100%"
       margin="0 auto"
@@ -508,7 +509,7 @@ export default function CustomDateCalendar({
       <Box
         pl={{ xs: "26px", sm: "0px", md: "0px", lg: "0px" }}
         width="100%"
-        maxWidth={330}
+        maxWidth={350}
       >
         <Typography
           mb={2}
@@ -517,7 +518,21 @@ export default function CustomDateCalendar({
         >
           Pick Time
         </Typography>
-        <Box mb={2} display="flex" gap="2rem" flexWrap="wrap">
+        <Box
+          sx={{
+            maxWidth: 350,
+            width: "100%",
+            maxHeight: 400,
+            overflow: "scroll", // Set overflow to scroll
+            overflowX: "hidden",
+            // scrollbarWidth: "none",
+          }}
+          mb={2}
+          display="flex"
+          gap="2rem"
+          flexWrap="wrap"
+          padding={"0 20px  0 0"}
+        >
           {items.map((item, index) => (
             <Button
               disabled={item.disabled}
