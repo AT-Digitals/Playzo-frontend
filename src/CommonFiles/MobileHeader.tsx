@@ -1,11 +1,12 @@
-import { Box, Button, Stack, styled } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import { Avatar, Box, Stack, styled } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
 
 import AppDrawer from "./AppDrawer";
 import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
-import { Link } from "react-router-dom";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
+import UserLoginApi from "../api/UserLoginApi";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import booknow from "./booking (1).png";
 import logoImage from "../assets/logo";
@@ -37,13 +38,46 @@ export default function MoblieHeader({
   const handleDrawerClose = useCallback(() => setOpen(false), []);
   const [isHovered, setIsHovered] = useState(false);
   const handleButtonClick = () => {
-    // Replace the phone number with the desired one
     const phoneNumber = "7094460944";
     const whatsappLink = `https://wa.me/${phoneNumber}`;
 
     // Open WhatsApp link in a new window
     window.open(whatsappLink, "_blank");
   };
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogout = async (event: any) => {
+    event.preventDefault();
+    try {
+      UserLoginApi.logoutUser();
+      navigate(routes.ROOT);
+      localStorage.clear();
+      setOpen(false);
+    } catch {
+      console.log("Logout failed");
+    }
+  };
+
+  interface User {
+    name?: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    const parsedUserData = userData && JSON.parse(userData);
+
+    if (parsedUserData) {
+      setUser(parsedUserData);
+      setIsLoggedIn(true); // Set to true if there is user data
+    } else {
+      setUser(null);
+      setIsLoggedIn(false); // Set to false if there is no user data
+    }
+  }, []);
+
   return (
     <>
       <Box
@@ -114,8 +148,12 @@ export default function MoblieHeader({
                 />
               )}
             </IconButton>
+            <Box display={isLoggedIn ? "block" : "none"}>
+              <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp">
+                {user ? user.name?.charAt(0).toUpperCase() : "U"}
+              </Avatar>
+            </Box>
 
-            <Button>Login</Button>
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon
                 style={{ fontSize: 40, color: Colors.BUTTON_COLOR }}
@@ -126,10 +164,13 @@ export default function MoblieHeader({
       </Box>
 
       <AppDrawer
+        handleLogout={handleLogout}
+        user={user}
         open={open}
         onClose={handleDrawerClose}
         setActiveTab={setActiveTab}
         activeTab={activeTab}
+        isLoggedIn={isLoggedIn}
       />
     </>
   );

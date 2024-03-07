@@ -49,6 +49,7 @@ export default function Header() {
 
   const handleLogout = async (event: any) => {
     event.preventDefault();
+
     try {
       UserLoginApi.logoutUser();
       navigate(routes.ROOT);
