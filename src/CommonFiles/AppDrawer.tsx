@@ -153,7 +153,7 @@ export default function AppDrawer({
           {isMenuOpen && (
             <Stack padding={"0 20px"} direction="column" spacing={1}>
               {MenuList.map((item, index) => (
-                <HeaderLink key={index} href={""}>
+                <HeaderLink key={index} href={item.href}>
                   <Box>
                     <Typography color={Colors.WHITE} fontSize="16px">
                       {item.label}
@@ -170,11 +170,6 @@ export default function AppDrawer({
           </HeaderLink>
 
           <Box width={"90%"} border={"1px solid white"}></Box>
-          <HeaderLink href={routes.BOOKING_SERVICE}>
-            <Typography color={Colors.WHITE} fontSize="16px" fontWeight={700}>
-              Book now{" "}
-            </Typography>
-          </HeaderLink>
         </Stack>
 
         <Stack

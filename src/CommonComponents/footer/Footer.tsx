@@ -11,7 +11,7 @@ import assets from "../../assets";
 import routes from "../../routes/routes";
 import { styled } from "@mui/system";
 
-const { "Playzo (1).svg": logo, "Twitter.png": TwitterIcon } = assets;
+const { "Playzo (1).svg": logo } = assets;
 
 const StyledLink = styled(Link)({
   color: Colors.WHITE,
@@ -82,7 +82,12 @@ export default function Footer() {
                 <Typography
                   fontSize="15px"
                   fontWeight={"400"}
-                  ml={{xs: "0px", sm: "0px", md: "0px", lg: "10px !important"}}
+                  ml={{
+                    xs: "0px",
+                    sm: "0px",
+                    md: "0px",
+                    lg: "10px !important",
+                  }}
                 >
                   At Playzo33, we extend beyond being a turf booking platform
                   we're a community-driven destination designed for sports
@@ -284,54 +289,52 @@ export default function Footer() {
           />
 
           <Stack
-            marginTop={{xs: "0px", sm: "0px", md: "0px", lg: "48px"}}
+            marginTop={{ xs: "0px", sm: "0px", md: "0px", lg: "48px" }}
             display={{ xs: "flex", sm: "none" }}
             justifyContent={"center"}
             alignItems={"center"}
             direction="row"
             spacing={2}
           >
-           <Link to={"https://www.facebook.com/PlayZo33"}>
-                <FacebookIcon
-                  sx={{
-                    color: Colors.WHITE,
-                    width: "25px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
-                      color: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                />
-              </Link>
-              <Link to={"https://www.instagram.com/playzo_33/"}>
-                <InstagramIcon
-                  sx={{
-                    color: Colors.WHITE,
-                    width: "25px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
-                      color: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                />
-              </Link>
-              <Link
-                to={"https://www.youtube.com/results?search_query=PLAYZO+33"}
-              >
-                <YouTubeIcon
-                  sx={{
-                    color: Colors.WHITE,
-                    width: "25px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
-                      color: Colors.BUTTON_COLOR,
-                    },
-                  }}
-                />
-              </Link>
+            <Link to={"https://www.facebook.com/PlayZo33"}>
+              <FacebookIcon
+                sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR,
+                  },
+                }}
+              />
+            </Link>
+            <Link to={"https://www.instagram.com/playzo_33/"}>
+              <InstagramIcon
+                sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR,
+                  },
+                }}
+              />
+            </Link>
+            <Link to={"https://www.youtube.com/results?search_query=PLAYZO+33"}>
+              <YouTubeIcon
+                sx={{
+                  color: Colors.WHITE,
+                  width: "25px",
+                  height: "30px",
+                  transition: "color 0.3s ease",
+                  ":hover": {
+                    color: Colors.BUTTON_COLOR,
+                  },
+                }}
+              />
+            </Link>
           </Stack>
 
           <Divider

@@ -241,11 +241,20 @@ export default function CustomTimeline() {
                   display={index === activeIndex ? "flex" : "none"}
                   color={index === activeIndex ? "white" : "white"}
                   gap={{ xs: 0, sm: 0, md: 0, lg: "1rem" }}
-                  justifyContent={
-                    index && (activeIndex === 1 || activeIndex === 3)
-                      ? "flex-end"
-                      : ""
-                  }
+                  justifyContent={{
+                    xs:
+                      index && (activeIndex === 1 || activeIndex === 3)
+                        ? "flex-start"
+                        : "",
+                    sm:
+                      index && (activeIndex === 1 || activeIndex === 3)
+                        ? "flex-end"
+                        : "",
+                    md:
+                      index && (activeIndex === 1 || activeIndex === 3)
+                        ? "flex-end"
+                        : "",
+                  }}
                 >
                   <Typography
                     maxWidth={300}
@@ -255,40 +264,42 @@ export default function CustomTimeline() {
                     {/* {item.title} */}
                   </Typography>
                   <AnimatedTypographyWrapper>
-                    <Typography
+                    <Box
                       style={{
                         background: Colors.BUTTON_COLOR,
                         padding: "10px 20px",
                         borderRadius: "30px",
                       }}
                       maxWidth={300}
-                      lineHeight={1.4}
-                      // fontSize={{ xs: "9px", sm: "9px", md: "13px" }}
                     >
                       <Typography
-                        fontSize={{
-                          xs: "15px ",
-                          sm: "15px ",
-                          md: "22px ",
-                          lg: "22px",
-                        }}
-                        style={
-                          {
-                            fontFamily: `'ESL Legend', sans-serif`,
-                            fontWeight: 600,
-                          } as any
-                        }
+                        lineHeight={1.4}
+                        // fontSize={{ xs: "9px", sm: "9px", md: "13px" }}
                       >
-                        {" "}
-                        {item.title}
-                      </Typography>{" "}
-                      <br />
+                        <Typography
+                          fontSize={{
+                            xs: "15px ",
+                            sm: "15px ",
+                            md: "22px ",
+                            lg: "22px",
+                          }}
+                          style={
+                            {
+                              fontFamily: `'ESL Legend', sans-serif`,
+                              fontWeight: 600,
+                            } as any
+                          }
+                        >
+                          {" "}
+                          {item.title}
+                        </Typography>{" "}
+                      </Typography>
                       <Typography
                         display={{ xs: "none", sm: "block", md: "block" }}
                       >
                         {item.disciption}
                       </Typography>
-                    </Typography>
+                    </Box>
                   </AnimatedTypographyWrapper>
                 </Box>
               </TimelineContent>

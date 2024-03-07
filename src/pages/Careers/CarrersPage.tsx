@@ -20,18 +20,24 @@ export default function CareersPageNew() {
 
   return (
     <Box>
-      <Box position="relative">
+      <Box
+        position="relative"
+        sx={{
+          height: { xs: 200, sm: 380, md: 400 },
+        }}
+      >
         <img
           src={bg}
           alt="Low Opacitymage"
-          style={{
-            width: "100%",
-            height: "100%",
-            opacity: 0.6,
-            maxHeight: 800,
-            objectFit: "cover",
-            display: imageLoaded ? "block" : "none",
-          }}
+          style={
+            {
+              width: "100%",
+              height: "100%",
+              opacity: 0.6,
+              objectFit: "cover",
+              display: imageLoaded ? "block" : "none",
+            } as any
+          }
           onLoad={handleImageLoad}
         />
         {!imageLoaded && (
@@ -48,6 +54,7 @@ export default function CareersPageNew() {
             display={"flex"}
             flexDirection={"column"}
             alignItems={"center"}
+            // gap={"0.5rem"}
             style={{
               position: "absolute",
               top: "50%",
@@ -56,7 +63,7 @@ export default function CareersPageNew() {
             }}
           >
             <Typography
-              mb={{ xs: 0, sm: 0, md: 4 }}
+              mb={{ xs: 0, sm: 0, md: 1 }}
               color={"black"}
               fontStyle={"italic"}
               fontSize={"82px"}
@@ -64,7 +71,7 @@ export default function CareersPageNew() {
               whiteSpace={"nowrap"}
               gutterBottom
               sx={{
-                fontSize: { xs: "20px", sm: "48px", md: "70px", lg: "82px" },
+                fontSize: { xs: "20px", sm: "48px", md: "62px", lg: "82px" },
               }}
             >
               Welcome to Our Careers Page
