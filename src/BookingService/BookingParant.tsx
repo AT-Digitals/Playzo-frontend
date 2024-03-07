@@ -431,7 +431,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   // }, [tableData.length]);
 
   useEffect(() => {
-    if (blocker.state === "blocked") {
+    if (blocker.state === "blocked" && blocker.location.pathname !== "/") {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected service will be lost."
       );

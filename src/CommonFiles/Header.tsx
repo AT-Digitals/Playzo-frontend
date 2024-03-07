@@ -47,14 +47,33 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  // const handleLogout = async (event: any) => {
+  //   event.preventDefault();
+
+  //   try {
+  //     UserLoginApi.logoutUser();
+  //     navigate(routes.ROOT);
+  //     localStorage.clear();
+  //     setAnchorEl(null);
+  //   } catch {
+  //     console.log("Logout failed");
+  //   }
+  // };
+
   const handleLogout = async (event: any) => {
     event.preventDefault();
 
+    // Ask for confirmation before logging out
+    if (!window.confirm("Are you sure you want to logout?")) {
+      // User canceled logout
+      return;
+    }
+
     try {
       UserLoginApi.logoutUser();
-      navigate(routes.ROOT);
       localStorage.clear();
       setAnchorEl(null);
+      navigate(routes.ROOT);
     } catch {
       console.log("Logout failed");
     }

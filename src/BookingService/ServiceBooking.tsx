@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import badmintonImg from "./badminton-type.jpg";
 import routes from "../routes/routes";
 
 const {
-  "Image (7).png": badminton,
   "board games.png": boardgames,
   "Image (2).png": bowling,
   "Image (1).png": cricketnet,
@@ -33,7 +33,7 @@ const TurfDetails = [
 ];
 const BoardDetails = [
   {
-    image: badminton,
+    image: badmintonImg,
     name: "Badminton",
     link: routes.BADMINTON_BOOKING,
   },
@@ -64,7 +64,7 @@ export default function ServiceBooking() {
   };
   const breadcrumbs = [
     <Typography
-      fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
+      fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="1"
@@ -74,7 +74,7 @@ export default function ServiceBooking() {
       Service
     </Typography>,
     <Typography
-    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
+      fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="2"
@@ -84,7 +84,7 @@ export default function ServiceBooking() {
       Service Type
     </Typography>,
     <Typography
-    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
+      fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="3"
@@ -94,7 +94,7 @@ export default function ServiceBooking() {
       Date & Time
     </Typography>,
     <Typography
-    fontSize={{xs: "14px", sm: "16px", md: "16px", lg: "20px"}}
+      fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
       key="4"
@@ -111,15 +111,6 @@ export default function ServiceBooking() {
       behavior: "smooth",
     });
   }, []);
-
-  // const ZoomedBox = styled(Box)<{ zoomedIn: boolean }>`
-  //   transition: transform 1s ease-in-out;
-
-  //   &:hover {
-  //     background-color: ${Colors.BUTTON_COLOR};
-  //     transform: ${({ zoomedIn }) => (zoomedIn ? "scale(1.2)" : "scale(1)")};
-  //   }
-  // `;
 
   const zoomInAnimation = keyframes`
   from {
@@ -174,7 +165,7 @@ export default function ServiceBooking() {
             alignItems={"center"}
             sx={{
               opacity: "1",
-              marginLeft: {xs: "11px", sm: "11px", md: '11px', lg: "0px"}
+              marginLeft: { xs: "11px", sm: "11px", md: "11px", lg: "0px" },
             }}
           >
             <Breadcrumbs
@@ -193,10 +184,15 @@ export default function ServiceBooking() {
             }}
             width={"100%"}
             maxWidth={"310px"}
-            borderRight={{xs: "none", sm: "none", md: "none", lg: "1px solid gray"}}
+            borderRight={{
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "1px solid gray",
+            }}
           >
             <Typography
-             fontSize={{xs: "16px", sm: "16px", md: "16px", lg: "20px"}}
+              fontSize={{ xs: "16px", sm: "16px", md: "16px", lg: "20px" }}
               marginBottom={"10px"}
               fontWeight={"bold"}
               color={Colors.BLACK}
@@ -230,7 +226,12 @@ export default function ServiceBooking() {
                       border={"1px solid gray"}
                     >
                       <Box padding={"12px 12px"}>
-                        <img src={item.image} width={"100px"} alt="turf" />
+                        <img
+                          src={item.image}
+                          width={"100px"}
+                          alt="turf"
+                          style={{ borderRadius: "50%" }}
+                        />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}
@@ -275,6 +276,7 @@ export default function ServiceBooking() {
                           width={"100px"}
                           height={"90px"}
                           alt="board"
+                          style={{ borderRadius: "50%" }}
                         />
                         <Typography
                           fontSize={"12px"}
@@ -315,7 +317,12 @@ export default function ServiceBooking() {
                       border={"1px solid gray"}
                     >
                       <Box padding={"12px 12px"}>
-                        <img src={item.image} width={"100px"} alt="cricket" />
+                        <img
+                          src={item.image}
+                          width={"100px"}
+                          alt="cricket"
+                          style={{ borderRadius: "50%" }}
+                        />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}
