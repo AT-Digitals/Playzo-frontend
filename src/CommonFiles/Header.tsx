@@ -63,8 +63,17 @@ export default function Header() {
   const handleLogout = async (event: any) => {
     event.preventDefault();
 
-    // Ask for confirmation before logging out
-    if (!window.confirm("Are you sure you want to logout?")) {
+    // Check if local storage is empty
+    const isLocalStorageEmpty =
+      localStorage.getItem("bookings") == null ||
+      localStorage.getItem("bookings") === undefined ||
+      localStorage.getItem("bookings") === "[]";
+
+    // Ask for confirmation before logging out if local storage is not empty
+    if (
+      !isLocalStorageEmpty &&
+      !window.confirm("Are you sure you want to logout?")
+    ) {
       // User canceled logout
       return;
     }

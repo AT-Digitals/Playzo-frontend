@@ -430,8 +430,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   //   };
   // }, [tableData.length]);
 
+  const isLocalCleared =
+    localStorage.getItem("bookings") == null ||
+    localStorage.getItem("bookings") === undefined ||
+    localStorage.getItem("bookings") === "[]";
+
   useEffect(() => {
-    if (blocker.state === "blocked" && blocker.location.pathname !== "/") {
+    if (blocker.state === "blocked" && !isLocalCleared) {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected service will be lost."
       );
