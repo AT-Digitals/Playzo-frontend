@@ -280,36 +280,55 @@ export default function Header() {
                       overflow: "visible",
                       filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                       mt: 1.5,
+                      width: 200, // Adjust the width as needed
                       "& .MuiAvatar-root": {
                         width: 32,
                         height: 32,
                         ml: -0.5,
                         mr: 1,
                       },
-                      "&::before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
                     },
                   }}
                   transformOrigin={{ horizontal: "right", vertical: "top" }}
                   anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                  <MenuItem onClick={handleChange}>
-                    <Avatar /> My Profile
+                  <MenuItem
+                    onClick={handleChange}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: Colors.BUTTON_COLOR, // Change background color on hover
+                        color: Colors.WHITE,
+                      },
+                    }}
+                  >
+                    <Avatar
+                      style={{
+                        color: Colors.BUTTON_COLOR,
+                        background: "white",
+                      }}
+                    />{" "}
+                    My Profile
                   </MenuItem>
                   <Divider />
-                  <MenuItem onClick={handleLogout}>
+                  <MenuItem
+                    onClick={handleLogout}
+                    sx={{
+                      color: "#f44336",
+                      padding: "10px 20px",
+                      "&:hover": {
+                        backgroundColor: Colors.BUTTON_COLOR, // Change background color on hover
+                        color: Colors.WHITE,
+                      },
+                    }}
+                  >
                     <ListItemIcon>
-                      <Logout fontSize="small" />
+                      <Logout
+                        style={{
+                          color: Colors.BUTTON_COLOR,
+                          background: "white",
+                        }}
+                        fontSize="small"
+                      />
                     </ListItemIcon>
                     Logout
                   </MenuItem>
