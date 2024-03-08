@@ -75,9 +75,9 @@ const StyledImage = styled.img`
 `;
 
 const TurfImages = [
-  { image: turf, name: "Turf 1", value: 1 },
-  { image: turf, name: "Turf 2", value: 2 },
-  { image: turf, name: "Turf 1&2", value: 3 },
+  { image: turf, name: "Turf 2.O", value: 1 },
+  { image: turf, name: "Turf 3.O", value: 2 },
+  { image: turf, name: "Turf 2.O&3.O", value: 3 },
 ];
 
 const PlaystationImages = [
