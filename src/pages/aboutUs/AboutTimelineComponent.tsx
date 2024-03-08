@@ -16,65 +16,44 @@ export default function AboutTimelineComponent() {
     };
   }, []);
 
+  // Define your timeline data
+  const timelineData = [
+    {
+      title: "Turf",
+      year: '2024',
+      content: 'Turf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering',
+    },
+    {
+      title: "PlayStation",
+      year: '2023',
+      content: 'PlayStations are popular gaming consoles developed by Sony, providing immersive gaming experiences with advanced graphics and technology. These gaming. ',
+    },
+    {
+      title: "Cricket",
+      year: '2021',
+      content: 'Cricket is a popular bat-and-ball sport, known for its excitement, strategy, and global appeal. Played professionally and recreationally worldwide.',
+    },
+    {
+        title: "BoardGames",
+        year: '2017',
+        content: 'Board games bring joy, strategy, and social interaction. From classics like Monopoly to modern hits like Catan, endless entertainment awaits.',
+      },
+  ];
 
   return (
-    <>
-      <div className="timeline" >
-        <div className="outer">
-          <div className="card">
+    <div className="timeline">
+      <div className="outer">
+        {timelineData.map((item, index) => (
+          <div className="card" key={index}>
             <div className="info">
-              <h3 className="title">2021</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.{' '}
-              </p>
+            <h3 className="title" data-year={item.year}>
+                {item.title}
+              </h3>
+              <p>{item.content}</p>
             </div>
           </div>
-          <div className="card">
-            <div className="info">
-              <h3 className="title">2020</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.{' '}
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="info">
-              <h3 className="title">2019</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.{' '}
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="info">
-              <h3 className="title">2018</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.{' '}
-              </p>
-            </div>
-            
-          </div>
-          <div className="card">
-            <div className="info">
-              <h3 className="title">2017</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.{' '}
-              </p>
-            </div>
-            
-          </div>
-        </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

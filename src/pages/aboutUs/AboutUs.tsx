@@ -119,7 +119,7 @@ export default function AboutUs() {
             width: "100%",
             bottom: "0%",
             // top: "-10%",
-            right: "1%",
+            right: "-10.5%",
           }}
         >
           {showTimeline && window.innerWidth >= 600 && <AboutTimelineComponent />}

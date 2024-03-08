@@ -24,7 +24,7 @@ const data = [
   {
     title: "Play Hard",
     disciption:
-      " urf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering",
+      " Turf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering",
     year: "2023",
     game: "Turf",
   },
