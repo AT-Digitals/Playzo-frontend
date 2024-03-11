@@ -501,11 +501,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           <Stack
             justifyContent={"space-between"}
             maxWidth={800}
-            width={{ xs: "90%", sm: "72%", md: "73%", lg: "100%" }}
+            width={{ xs: "100%", sm: "72%", md: "73%", lg: "100%" }}
             ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
-            marginTop={"5rem"}
-            direction={"row"}
+            marginTop={{ xs: "1rem", sm: "1rem", md: "5rem", lg: "5rem" }}
+            direction={{ xs: "column", sm: "row", md: "row", lg: "row" }}
             alignItems={"flex-start"}
+            spacing={2}
           >
             <Box display={"flex"}>
               <Button

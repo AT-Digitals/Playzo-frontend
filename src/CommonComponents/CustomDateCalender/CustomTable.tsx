@@ -26,6 +26,7 @@ const StyledCell = styled(TableCell)({
     color: Colors.BLACK,
     textTransform: "capitalize",
     fontWeight: 600,
+    whiteSpace: "nowrap",
   },
 });
 
@@ -38,6 +39,7 @@ const StyledCellTitle = styled(TableCell)({
     textAlign: "center",
     borderRight: "none",
     borderLeft: "none",
+    whiteSpace: "nowrap",
   },
 });
 interface TableProps {
