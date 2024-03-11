@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Drawer,
   IconButton,
   Stack,
@@ -12,13 +13,14 @@ import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../CommonComponents/Colors";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowUpTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
-import assets from "../assets";
+import { Link } from "react-router-dom";
+import LoginForm from "../pages/login/LoginForm";
 import routes from "../routes/routes";
 
-const { "Image (6).png": Userprofile } = assets;
-
-const HeaderLink = styled("a")`
+const HeaderLink = styled(Link)`
   text-decoration: none;
   position: relative;
   color: graytext;
@@ -47,6 +49,9 @@ interface AppDrawerProps {
   onClose?: () => void;
   setActiveTab: (event: any) => void;
   activeTab: string;
+  isLoggedIn: any;
+  user: any;
+  handleLogout: any;
 }
 
 const MenuList = [
@@ -87,11 +92,23 @@ export default function AppDrawer({
   onClose,
   setActiveTab,
   activeTab,
+  isLoggedIn,
+  user,
+  handleLogout,
 }: AppDrawerProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const [Modalopen, setModalOpen] = useState(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
+
+  const [showoption, setShowOption] = useState(false);
+
+  const handleUserToggle = () => {
+    setShowOption(!showoption);
   };
 
   return (
@@ -100,8 +117,56 @@ export default function AppDrawer({
       anchor="right"
       open={open}
       onClose={onClose}
-      // onEscapeKeyDown={onClose}
     >
+      <Box display={"flex"} justifyContent={"end"}>
+        <IconButton onClick={onClose}>
+          <CloseIcon
+            style={{
+              color: "white",
+            }}
+          />
+        </IconButton>
+      </Box>
+      <Box display={isLoggedIn ? "flex" : "none"}>
+        <Box
+          display={"flex"}
+          gap={"1rem"}
+          alignItems={"center"}
+          padding={"0 20px"}
+        >
+          <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp">
+            {user ? user.name?.charAt(0).toUpperCase() : "U"}
+          </Avatar>
+          <Typography fontSize={"22px"} color={"white"}>
+            {" "}
+            {user ? user.name : null}
+          </Typography>
+        </Box>
+        <IconButton onClick={handleUserToggle}>
+          {showoption ? (
+            <KeyboardArrowUpIcon
+              style={{
+                color: "white",
+              }}
+            />
+          ) : (
+            <KeyboardArrowDownIcon style={{ color: "white" }} />
+          )}
+        </IconButton>
+      </Box>
+
+      {showoption && (
+        <Stack padding={" 20px 80px 0"} direction="column" spacing={1}>
+          <HeaderLink to={routes.USERPROFILE} onClick={onClose}>
+            <Box>
+              <Typography color={Colors.WHITE} fontSize="16px">
+                My Profile
+              </Typography>
+            </Box>
+          </HeaderLink>
+        </Stack>
+      )}
+
       <Stack
         direction={"column"}
         display={"flex"}
@@ -110,14 +175,7 @@ export default function AppDrawer({
         height="100%"
       >
         <Stack padding={"0 20px"} mt={6} spacing={3} alignItems="self-start">
-          <IconButton onClick={onClose}>
-            <CloseIcon
-              style={{
-                color: "white",
-              }}
-            />
-          </IconButton>
-          <HeaderLink href={routes.ABOUTUS}>
+          <HeaderLink to={routes.ABOUTUS} onClick={onClose}>
             <Typography color={Colors.WHITE} fontSize="16px">
               About Us
             </Typography>
@@ -153,7 +211,7 @@ export default function AppDrawer({
           {isMenuOpen && (
             <Stack padding={"0 20px"} direction="column" spacing={1}>
               {MenuList.map((item, index) => (
-                <HeaderLink key={index} href={item.href}>
+                <HeaderLink key={index} to={item.href} onClick={onClose}>
                   <Box>
                     <Typography color={Colors.WHITE} fontSize="16px">
                       {item.label}
@@ -163,7 +221,7 @@ export default function AppDrawer({
               ))}
             </Stack>
           )}
-          <HeaderLink href={routes.CONTACTUS}>
+          <HeaderLink to={routes.CONTACTUS} onClick={onClose}>
             <Typography color={Colors.WHITE} fontSize="16px">
               Contact Us
             </Typography>
@@ -171,28 +229,52 @@ export default function AppDrawer({
 
           <Box width={"90%"} border={"1px solid white"}></Box>
         </Stack>
-
-        <Stack
-          padding={"0 20px"}
-          textAlign={"center"}
-          direction={"row"}
-          spacing={1}
-          alignItems="center"
-        >
-          <Avatar
-            src={Userprofile}
-            style={{
-              height: "48px",
-              width: "100%",
-              maxWidth: "48px",
-            }}
-          />
-
-          <Typography fontSize={"16px"} color={"white"}>
-            John Doe
-          </Typography>
+        <Stack>
+          {isLoggedIn ? (
+            <Button
+              sx={{
+                whiteSpace: "nowrap",
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "150px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                width: "100%",
+              }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={handleOpen}
+              sx={{
+                whiteSpace: "nowrap",
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "150px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                width: "100%",
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Stack>
       </Stack>
+
+      <LoginForm handleClose={handleClose} open={Modalopen} />
     </StyledDrawer>
   );
 }

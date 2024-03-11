@@ -77,7 +77,7 @@ export default function CareersPageNew() {
               Welcome to Our Careers Page
             </Typography>
             <Typography
-              mb={{ xs: 0, sm: 0, md: 4 }}
+              mb={{ xs: 2, sm: 2, md: 4 }}
               color={"black"}
               fontSize={"32px"}
               textAlign={"center"}
@@ -115,7 +115,7 @@ export default function CareersPageNew() {
                   // Responsive styles for the button
                   "@media (max-width: 600px)": {
                     fontSize: "14px",
-                    minWidth: "120px",
+                    minWidth: "100px",
                   },
                 }}
                 startIcon={<MailOutlineIcon />}

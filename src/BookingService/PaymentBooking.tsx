@@ -87,8 +87,6 @@ export default function PaymentBooking() {
     localStorage.removeItem("selectedService");
   };
 
-
-
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
 
@@ -129,7 +127,6 @@ export default function PaymentBooking() {
         }
       } catch (err: any) {
         alert(err.message);
-
       }
     });
     sampleref.current = true;
@@ -156,14 +153,14 @@ export default function PaymentBooking() {
 
   const nextLocation = localStorage.getItem("nextLocation");
   const sampleref = useRef(false);
-  const isBlocked = useRef<any>(true)
+  const isBlocked = useRef<any>(true);
 
   let blocker = useBlocker(({ currentLocation, nextLocation }: any) => {
     if (
       currentLocation.pathname !== nextLocation.pathname &&
       !sampleref.current
     ) {
-      isBlocked.current = true
+      isBlocked.current = true;
       return true;
     }
     return false;
@@ -193,8 +190,8 @@ export default function PaymentBooking() {
       );
       localStorage.removeItem("nextLocation");
       if (val) {
-        localStorage.setItem("nextLocation", blocker.location.pathname)
-        isBlocked.current = false
+        localStorage.setItem("nextLocation", blocker.location.pathname);
+        isBlocked.current = false;
         sampleref.current = true;
         cleanupLocalStorage();
       }
@@ -329,8 +326,9 @@ export default function PaymentBooking() {
 
                     // Format start and end times without minutes
                     const formattedStartTime = `${startHours % 12 || 12}:00`;
-                    const formattedEndTime = `${endHours % 12 || 12}:00 ${endHours < 12 ? "AM" : "PM"
-                      }`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
+                      endHours < 12 ? "AM" : "PM"
+                    }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
@@ -715,6 +713,13 @@ export default function PaymentBooking() {
               >
                 Make payment through Gpay, Paytm etc
               </Typography>
+
+              <Box mt={"20px"}>
+                <Typography color={Colors.BUTTON_COLOR} fontSize={"16px"}>
+                  You have pay 30% in online remaining you have to pay in the
+                  court
+                </Typography>
+              </Box>
               <Box
                 sx={{
                   opacity: "1",
@@ -781,6 +786,7 @@ export default function PaymentBooking() {
         handleClose={handleClose}
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
+        paymentText="you have paid 30% in online remaining you have to pay in the court"
       />
     </>
   );

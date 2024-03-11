@@ -143,7 +143,6 @@ export default function CustomDateCalendar({
     { name: "1:00-2:00 AM", disabled: false },
   ]);
 
-
   const handleDateSelection = (newValue: any) => {
     let datedata = newValue.$d;
     const parsedDate = moment(datedata);
@@ -168,11 +167,11 @@ export default function CustomDateCalendar({
           endDate: dateValue,
           court:
             type === BookingType.BowlingMachine ||
-              type === BookingType.CricketNet
+            type === BookingType.CricketNet
               ? "1"
               : BookingSubTypes[
-                selectedService as keyof typeof BookingSubTypes
-              ].toString(),
+                  selectedService as keyof typeof BookingSubTypes
+                ].toString(),
         });
         setDisableData(response);
       } catch (error: any) {
@@ -238,32 +237,32 @@ for (let i = 0; diff > i; i++) {
           );
         });
         break;
-      case "Turf 1&2":
+      case "Turf 2.O&3.O":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "Turf 1" ||
-              booking.name === "Turf 2" ||
-              booking.name === "Turf 1&2")
+            (booking.name === "Turf 2.O" ||
+              booking.name === "Turf 3.O" ||
+              booking.name === "Turf 2.O&3.O")
           );
         });
         break;
-      case "Turf 1":
+      case "Turf 2.O":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "Turf 1" || booking.name === "Turf 1&2")
+            (booking.name === "Turf 2.O" || booking.name === "Turf 2.O&3.O")
           );
         });
         break;
-      case "Turf 2":
+      case "Turf 3.O":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "Turf 2" || booking.name === "Turf 1&2")
+            (booking.name === "Turf 3.O" || booking.name === "Turf 2.O&3.O")
           );
         });
         break;
@@ -338,7 +337,7 @@ for (let i = 0; diff > i; i++) {
         try {
           const courtValue =
             type === BookingType.BowlingMachine ||
-              type === BookingType.CricketNet
+            type === BookingType.CricketNet
               ? 1
               : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
@@ -360,11 +359,11 @@ for (let i = 0; diff > i; i++) {
           try {
             const newCourt =
               type === BookingType.BowlingMachine ||
-                type === BookingType.CricketNet
+              type === BookingType.CricketNet
                 ? 1
                 : BookingSubTypes[
-                bookings.name as keyof typeof BookingSubTypes
-                ];
+                    bookings.name as keyof typeof BookingSubTypes
+                  ];
 
             const startDateTime = DateUtils.startTimeAddtoDate(timeData);
             const endDateTime = DateUtils.endTimeAddtoDate(timeData);
@@ -429,10 +428,10 @@ for (let i = 0; diff > i; i++) {
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
       } else {
-        alert('Please choose date and time slots')
+        alert("Please choose date and time slots");
       }
     } else {
-      alert('Could not add your bookings!\nPlease Login to Your Account');
+      alert("Could not add your bookings!\nPlease Login to Your Account");
       navigate(routes.ROOT);
     }
   };
@@ -469,9 +468,7 @@ for (let i = 0; diff > i; i++) {
       flexDirection="column"
       spacing={2}
       maxWidth={1146}
-
-
-      alignItems={{ xs: "center", sm: "center", md: 'center', lg: "center" }}
+      alignItems={{ xs: "center", sm: "center", md: "center", lg: "center" }}
       width="100%"
       margin="0 auto"
     >
@@ -552,8 +549,8 @@ for (let i = 0; diff > i; i++) {
                 border: item.disabled
                   ? "1px solid #9C9C9C"
                   : selectedTimings.includes(item.name)
-                    ? "2px solid #15B5FC"
-                    : "1px solid black",
+                  ? "2px solid #15B5FC"
+                  : "1px solid black",
                 textAlign: "center",
                 padding: "4px 0px 5px 0px",
                 display: "flex",
@@ -562,8 +559,8 @@ for (let i = 0; diff > i; i++) {
                 background: item.disabled
                   ? ""
                   : selectedTimings.includes(item.name)
-                    ? "#15B5FC"
-                    : "none",
+                  ? "#15B5FC"
+                  : "none",
                 ":hover": {
                   border: "2px solid #15B5FC",
                   color: "#15B5FC",
@@ -578,8 +575,8 @@ for (let i = 0; diff > i; i++) {
                     item.disabled
                       ? "#9C9C9C"
                       : selectedTimings.includes(item.name)
-                        ? "white"
-                        : "black"
+                      ? "white"
+                      : "black"
                   }
                   sx={{
                     ":hover": {

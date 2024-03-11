@@ -3,6 +3,7 @@ import {
   Breadcrumbs,
   Button,
   Stack,
+  TextField,
   Typography,
   keyframes,
 } from "@mui/material";
@@ -13,6 +14,7 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
+import CustomTextField from "../CommonComponents/CustomTextField";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -75,9 +77,9 @@ const StyledImage = styled.img`
 `;
 
 const TurfImages = [
-  { image: turf, name: "Turf 1", value: 1 },
-  { image: turf, name: "Turf 2", value: 2 },
-  { image: turf, name: "Turf 1&2", value: 3 },
+  { image: turf, name: "Turf 2.O", value: 1 },
+  { image: turf, name: "Turf 3.O", value: 2 },
+  { image: turf, name: "Turf 2.O&3.O", value: 3 },
 ];
 
 const PlaystationImages = [
@@ -148,7 +150,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const isBlocked = useRef<any>(true);
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
     if (
@@ -239,6 +240,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
+  const [numberOfPersons, setNumberOfPersons] = useState("");
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
@@ -292,11 +294,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       []
     );
 
+    if (numberOfPersons === "") {
+      alert("Number of persons cannot be empty. Please enter a value.");
+      return;
+    }
+
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
 
     localStorage.setItem("selectedService", selectedService);
+  };
+
+  const handleNumber = (e: any) => {
+    setNumberOfPersons(e.target.value);
   };
 
   useEffect(() => {
@@ -403,8 +414,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   //   };
   // }, [tableData.length]);
 
+  const isLocalCleared =
+    localStorage.getItem("bookings") == null ||
+    localStorage.getItem("bookings") === undefined ||
+    localStorage.getItem("bookings") === "[]";
+
   useEffect(() => {
-    if (blocker.state === "blocked") {
+    if (blocker.state === "blocked" && !isLocalCleared) {
       const val = window.confirm(
         "Are you sure you want to leave? Your selected service will be lost."
       );
@@ -469,11 +485,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           <Stack
             justifyContent={"space-between"}
             maxWidth={800}
-            width={{ xs: "90%", sm: "72%", md: "73%", lg: "100%" }}
+            width={{ xs: "100%", sm: "72%", md: "73%", lg: "100%" }}
             ml={{ xs: 0, sm: "3rem", md: 0, lg: "9rem" }}
-            marginTop={"5rem"}
-            direction={"row"}
+            marginTop={{ xs: "1rem", sm: "1rem", md: "5rem", lg: "5rem" }}
+            direction={{ xs: "column", sm: "row", md: "row", lg: "row" }}
             alignItems={"flex-start"}
+            spacing={2}
           >
             <Box display={"flex"}>
               <Button
@@ -816,6 +833,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       </Typography>
                     </Box>
                   </Box>
+                  {type === BookingType.Badminton ? (
+                    <Box mt={2}>
+                      <CustomTextField
+                        placeholder="number of persons"
+                        value={numberOfPersons}
+                        onChange={(e) => handleNumber(e)}
+                      />
+                    </Box>
+                  ) : (
+                    ""
+                  )}
                 </AnimatedZoomIn>
               )}
             </Stack>

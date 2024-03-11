@@ -1,16 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 
 import { BookingNameTypes } from "../../BookingService/BookingSubTypes";
 import Colors from "../../CommonComponents/Colors";
-import CustomButton from "../../CommonComponents/CustomButton";
 import DateUtils from "../../Utils/DateUtils";
-import Rating from "@mui/material/Rating";
 import TimeUtlis from "../../Utils/TimeUtlis";
-import assets from "../../assets";
 
-const { "Vector.png": Vector, "Vector (1).png": Vector1, "Vector (2).png": Vector2 } = assets
 interface dataProps {
   userDetails: any[];
   userName: string;
@@ -19,7 +15,7 @@ interface dataProps {
 export default function ListCard({ userDetails, userName }: dataProps) {
   const CapitalizeFirstLetter = (str: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  };
   return (
     <>
       {userDetails.map((user, index) => (
@@ -36,6 +32,7 @@ export default function ListCard({ userDetails, userName }: dataProps) {
                 {user.id}
               </Typography>
             </Stack>
+
             {/* <Rating
               name="size-small"
               size="small"
@@ -51,12 +48,33 @@ export default function ListCard({ userDetails, userName }: dataProps) {
           <Typography variant="body2" fontWeight={600}>
             {DateUtils.formatDate(user.startDate, "DD-MMM-YYYY")}
           </Typography>
-          <Stack direction="row" spacing={5} alignItems="center">
-            <Typography variant="body2">{userName}</Typography>
-            <Typography variant="body2">{CapitalizeFirstLetter(user.type)}</Typography>
-            <Typography variant="body2">{CapitalizeFirstLetter(BookingNameTypes[user.type + user.court as keyof typeof BookingNameTypes])}</Typography>
+          <Stack
+            direction={{ xs: "column", sm: "row", md: "row", lg: "row" }}
+            spacing={{ xs: 2, sm: 5, md: 5, lg: 5 }}
+            alignItems="start"
+            // flexWrap={"wrap"}
+          >
+            <Box display={"flex"} justifyContent={"space-between"} gap={"2rem"}>
+              <Typography variant="body2">{userName}</Typography>
+              <Typography variant="body2">
+                {CapitalizeFirstLetter(user.type)}
+              </Typography>
+            </Box>
+            <Box display={"flex"} justifyContent={"space-between"} gap={"2rem"}>
+              <Typography variant="body2">
+                {CapitalizeFirstLetter(
+                  BookingNameTypes[
+                    (user.type + user.court) as keyof typeof BookingNameTypes
+                  ]
+                )}
+              </Typography>
 
-            <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(user.startTime)} - ${TimeUtlis.formatMillisecondsToTimeConvert(user.endTime)}`}</Typography>
+              <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(
+                user.startTime
+              )} - ${TimeUtlis.formatMillisecondsToTimeConvert(
+                user.endTime
+              )}`}</Typography>
+            </Box>
             {/* <Button
                 variant="outlined"
                 sx={{
@@ -85,11 +103,11 @@ export default function ListCard({ userDetails, userName }: dataProps) {
             spacing={1}
             alignItems="flex-end"
             justifyContent="flex-end"
-          // sx={{
-          //   display: "flex",
-          //   flexWrap: "wrap", // Add flexWrap property
-          //   justifyContent: "space-between",
-          // }}
+            // sx={{
+            //   display: "flex",
+            //   flexWrap: "wrap", // Add flexWrap property
+            //   justifyContent: "space-between",
+            // }}
           >
             {/* {!user.comments? (
               <Stack direction="row" spacing={1} alignItems="center">
@@ -157,7 +175,6 @@ export default function ListCard({ userDetails, userName }: dataProps) {
                 flexWrap: "wrap", // Add flexWrap property
               }}
             >
-
               <Stack direction="row" spacing={1} alignItems="center">
                 {/* <img src={Vector2} width={9} height={10} />
                   <Typography variant="body2">Refund initiated</Typography> */}
@@ -166,8 +183,13 @@ export default function ListCard({ userDetails, userName }: dataProps) {
                   sx={{
                     padding: "8px 20px",
                     textTransform: "none",
-                    fontSize: "16px",
-                    minWidth: "110px",
+                    fontSize: {
+                      xs: "12px",
+                      sm: "16px",
+                      md: "16px",
+                      lg: "16px",
+                    },
+                    maxWidth: "110px",
                     fontWeight: "400",
                     border: "2px solid #15B5FC",
                     borderRadius: "30px",
