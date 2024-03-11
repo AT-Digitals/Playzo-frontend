@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
@@ -79,89 +79,65 @@ const StyledImage5 = styled.img`
     transform: translate(1300%, -21px);
   }
 `;
-const StyledTypography = styled(Typography)`
-  /* Media queries for different screen sizes */
-  @media (min-width: 300px) {
-    top: 26%;
-    left: 12%;
-  }
-
-  @media (min-width: 414px) {
-    top: 20%;
-    left: 13%;
-  }
-  @media (min-width: 768px) {
-    top: 18%;
-    left: 14%;
-  }
-
-  @media (min-width: 820px) {
-    top: 16%;
-    left: 14%;
-  }
-  @media (min-width: 1024px) {
-    top: 33%;
-    left: 14%;
-  }
-  @media (min-width: 1200px) {
-    top: 20%;
-    left: 14%;
-  }
-`;
 
 export default function PrivacyPolicy() {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
+  const isHideBannerImage = useMediaQuery(
+    "(min-width: 280px) and (max-width: 900px)"
+  );
   return (
     <Box mb={"90px"}>
       <Container>
-        <BannerImage src={banner} alt="banner" />
+        {isHideBannerImage ? null : <BannerImage src={banner} alt="banner" />}
         <Box
           sx={{
             background: Colors.BUTTON_COLOR,
-            width: { xs: "800px", sm: "428px", md: "617px", lg: "800px" },
+            maxWidth: { xs: "100%", sm: "100%", md: "603px", lg: "800px" },
+            width: { xs: "100%", sm: "100%" },
             height: { xs: "250px", sm: "282px", md: "380px", lg: "379px" },
             position: "absolute",
           }}
         >
           {" "}
         </Box>
-        <StyledImage5 src={layer} alt="background" />
+        {isHideBannerImage ? null : (
+          <StyledImage5 src={layer} alt="background" />
+        )}
       </Container>
-      <Box pt={"30px"}>
-        <StyledTypography
+      <Box
+        position={"absolute"}
+        // top={{ xs: "22%", sm: "15%", md: "17%", lg: "25%" }}
+        left={"9%"}
+        pt={"30px"}
+      >
+        <Typography
           fontWeight={"900"}
           position={"absolute"}
-          // top={{ xs: "26%", sm: "16%", md: "33%", lg: "28%" }}
-          // left={{ xs: "14%", sm: "6%", md: "14%", lg: "11%" }}
+          top={{ xs: "235%", sm: "235%", md: "-841%",}}
           color={"white"}
-          fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}
+          fontSize={{ xs: "56px", sm: "80px", md: "90px", lg: "92px" }}
           fontStyle={"italic"}
           textTransform={"uppercase"}
+          lineHeight={1}
         >
           Privacy{" "}
-          <Typography
-            fontWeight={"900"}
-            position={"absolute"}
-            top={{ xs: "26%", sm: "16%", md: "14%", lg: "28%" }}
-            left={"1%"}
-            color={"white"}
-            textTransform={"uppercase"}
-            fontSize={{ xs: "60px", sm: "60px", md: "90px", lg: "92px" }}
-            fontStyle={"italic"}
-            lineHeight={"3"}
-          >
+          <br />
             Policy
-          </Typography>
-        </StyledTypography>
+        </Typography>
       </Box>
 
-      <AppContainer maxWidth={1180}>
+      <AppContainer
+        mt={{ xs: "18rem", sm: "20rem", md: "2rem" }}
+        padding={0}
+        maxWidth={1180}
+      >
         <Box
-          width={"100%"}
-          maxWidth={{ xs: "320px", sm: "700px", md: "850px", lg: "1200px" }}
-          paddingTop={{ xs: "3px", sm: "0px", md: "0px", lg: "0px" }}
+          padding={"0 20px"}
+          display={"flex"}
+          flexDirection={"column"}
+          gap={"3rem"}
         >
           <Typography fontSize={"16px"} fontWeight={"400"} color={Colors.BLACK}>
             <Typography
@@ -519,7 +495,7 @@ export default function PrivacyPolicy() {
             By post: 39/6 KCP Thottam, Kumalan Kuttai, Erode, Tamil Nadu -
             638011
           </Typography>
-        </Box>
+         </Box>
       </AppContainer>
     </Box>
   );
