@@ -214,18 +214,20 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid gray"}
                     >
-                      <Box padding={"12px 12px"}>
+                      <Box
+                        sx={{
+                          transition: "transform 0.3s", // adjust the duration as needed
+                          ":hover": {
+                            transform: "scale(1.1)",
+                          },
+                        }}
+                        padding={"12px 12px"}
+                      >
                         <img
                           src={item.image}
                           width={"100px"}
@@ -259,18 +261,20 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid gray"}
                     >
-                      <Box padding={"12px 12px"}>
+                      <Box
+                        sx={{
+                          transition: "transform 0.3s", // adjust the duration as needed
+                          ":hover": {
+                            transform: "scale(1.1)",
+                          },
+                        }}
+                        padding={"12px 12px"}
+                      >
                         <img
                           src={item.image}
                           width={"100px"}
@@ -305,18 +309,20 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid gray"}
                     >
-                      <Box padding={"12px 12px"}>
+                      <Box
+                        padding={"12px 12px"}
+                        sx={{
+                          transition: "transform 0.3s", // adjust the duration as needed
+                          ":hover": {
+                            transform: "scale(1.1)",
+                          },
+                        }}
+                      >
                         <img
                           src={item.image}
                           width={"100px"}

@@ -777,9 +777,7 @@ export default function PaymentBooking() {
         mt={{ xs: "50px", sm: "50px", md: "50px", lg: "0px" }}
         display={"flex"}
         justifyContent={"end"}
-      >
-        {/* <img src={ball} width={"150px"} alt="" /> */}
-      </Box>
+      ></Box>
       <img src={grass} alt="" />
       <ModalComponent
         open={open}

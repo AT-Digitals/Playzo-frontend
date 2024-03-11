@@ -14,16 +14,15 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
-import CustomTextField from "../CommonComponents/CustomTextField";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import badmintonImg from "./badminton-type.jpg";
 import styled from "@emotion/styled";
 
 const {
-  "Image (7).png": badminton,
   "Rectangle 685 (3).png": badminton1,
   "Rectangle 685 (4).png": badminton2,
   "Rectangle 685 (5).png": badminton3,
@@ -44,22 +43,22 @@ const {
 const StyledImage = styled.img`
   @media (min-width: 300px) {
     width: 100px;
-    height: 80px;
+    height: 100px;
   }
 
   @media (min-width: 768px) {
     width: 130px;
-    height: 80px;
+    height: 130px;
   }
 
   @media (min-width: 992px) {
     width: 130px;
-    height: 80px;
+    height: 130px;
   }
 
   @media (min-width: 1200px) {
     width: 145px;
-    height: 105px;
+    height: 145px;
   }
 
   &.animate-zoom-in {
@@ -241,6 +240,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const location = useLocation();
   const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
   const [numberOfPersons, setNumberOfPersons] = useState("");
+  const [validationError, setValidationError] = useState<string>("");
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
@@ -294,8 +294,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       []
     );
 
-    if (numberOfPersons === "") {
+    if (type === BookingType.Badminton && numberOfPersons === "") {
       alert("Number of persons cannot be empty. Please enter a value.");
+      setValidationError("Please enter a valid number of persons (1 to 10).");
+
       return;
     }
 
@@ -306,8 +308,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.setItem("selectedService", selectedService);
   };
 
-  const handleNumber = (e: any) => {
-    setNumberOfPersons(e.target.value);
+  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseInt(e.target.value, 10);
+    if (!isNaN(inputValue) && inputValue >= 1 && inputValue <= 10) {
+      setNumberOfPersons(inputValue.toString());
+      setValidationError("");
+    } else {
+      setNumberOfPersons("");
+      setValidationError("Please enter a valid number of persons (1 to 10).");
+    }
   };
 
   useEffect(() => {
@@ -433,6 +442,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       }
       blocker.reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocker, blocker.state]);
 
   useEffect(() => {
@@ -500,7 +510,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     xs: "0px 0px",
                     sm: "0px 0px",
                     md: "0px 5px",
-                    lg: "8px 20px",
+                    lg: "10px",
                   },
                   textTransform: "none",
                   fontSize: { xs: "14px", sm: "14px", md: "14px", lg: "16px" },
@@ -616,7 +626,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       : type === BookingType.Playstaion
                       ? playstation
                       : type === BookingType.Badminton
-                      ? badminton
+                      ? badmintonImg
                       : type === BookingType.BoardGame
                       ? boardgames
                       : type === BookingType.BowlingMachine
@@ -625,6 +635,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       ? cricketnet
                       : undefined // Handle other cases or set to undefined
                   }
+                  style={{
+                    borderRadius: "50%",
+                  }}
                   width={"100%"}
                   height={"100%"}
                   alt="booking"
@@ -709,12 +722,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <AnimatedZoomIn key={item.name}>
                   <Box
                     display={selectedService ? "none" : "block"}
-                    sx={{
-                      ":hover": {
-                        backgroundColor: Colors.BUTTON_COLOR,
-                      },
-                    }}
-                    border={"1px solid gray"}
                     width={"100%"}
                     maxWidth={{
                       xs: "215px",
@@ -734,6 +741,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   >
                     <Box
                       sx={{
+                        transition: "transform 0.3s", // adjust the duration as needed
+                        ":hover": {
+                          transform: "scale(1.1)",
+                        },
                         opacity: "1",
                       }}
                       display={"flex"}
@@ -743,8 +754,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     >
                       <img
                         src={item.image}
-                        width={"95px"}
-                        height={"75px"}
+                        width={"100px"}
+                        height={"100px"}
+                        style={{
+                          borderRadius: "50%",
+                        }}
                         alt={
                           type === BookingType.Turf
                             ? "Turf"
@@ -774,7 +788,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     sx={{
                       opacity: "1",
                     }}
-                    border={"1px solid gray"}
                     width={"100%"}
                     maxWidth={{
                       xs: "220px",
@@ -808,6 +821,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       padding={"14px 12px"}
                     >
                       <StyledImage
+                        style={{
+                          borderRadius: "50%",
+                        }}
                         src={
                           images.find((item) => item.name === selectedService)
                             ?.image
@@ -833,19 +849,24 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       </Typography>
                     </Box>
                   </Box>
-                  {type === BookingType.Badminton ? (
-                    <Box mt={2}>
-                      <CustomTextField
-                        placeholder="number of persons"
-                        value={numberOfPersons}
-                        onChange={(e) => handleNumber(e)}
-                      />
-                    </Box>
-                  ) : (
-                    ""
-                  )}
                 </AnimatedZoomIn>
               )}
+
+              {selectedService && type === BookingType.Badminton ? (
+                <Box mt={2}>
+                  <TextField
+                    label="Number of persons"
+                    required
+                    fullWidth
+                    type="number"
+                    value={numberOfPersons}
+                    onChange={handleNumber}
+                    inputProps={{ max: 10 }}
+                    error={!!validationError}
+                    helperText={validationError}
+                  />
+                </Box>
+              ) : undefined}
             </Stack>
             <Stack
               sx={{
