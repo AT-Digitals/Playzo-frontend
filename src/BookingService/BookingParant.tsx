@@ -150,16 +150,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const isBlocked = useRef<any>(true);
 
   const excutedBlocker = ["/payment-booking", "/service-booking"];
-  // const rootLocal = "/";
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    // const isLocalCleared =
-    //   localStorage.getItem("bookings") !== null ||
-    //   localStorage.getItem("bookings") !== undefined ||
-    //   localStorage.getItem("bookings") !== "[]";
-    // if (nextLocation.pathname === rootLocal && isLocalCleared) {
-    //   return false;
-    // }
     if (
       tableData.length !== 0 &&
       currentLocation.pathname !== nextLocation.pathname &&
@@ -171,26 +163,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     return false;
   });
   const nextLocation = localStorage.getItem("nextLocation");
-
-  //   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
-  //     const isLocalCleared =
-  //       localStorage.getItem("bookings") == null ||
-  //       localStorage.getItem("bookings") === undefined ||
-  //       localStorage.getItem("bookings") === "[]";
-  //     if (nextLocation.pathname === rootLocal && isLocalCleared) {
-  // return false
-  //     }{
-  //     // if (nextLocation.pathname === rootLocal && isLocalCleared) {
-  //     //   // Allow navigation if the pathname is the root and local storage is cleared
-  //     // } else {
-  //     //   // Block navigation and set isBlocked.current to true
-  //     //   isBlocked.current = true;
-  //     //   return true;
-  //     // }
-
-  //     // Allow navigation if none of the above conditions are met
-  //     return false;
-  //   });
 
   const images =
     type === BookingType.Turf
