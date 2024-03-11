@@ -138,7 +138,7 @@ export default function ServiceGrid(props: serviceGridProps) {
             >
               <Box>
                 <Typography
-                  fontSize={{ xs: "35px", sm: "70px", md: "82px" }}
+                  fontSize={{ xs: "35px", sm: "70px", md: "74px" }}
                   gutterBottom
                   variant="h5"
                   style={{
