@@ -3,6 +3,7 @@ import {
   Breadcrumbs,
   Button,
   Stack,
+  TextField,
   Typography,
   keyframes,
 } from "@mui/material";
@@ -13,6 +14,7 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
+import CustomTextField from "../CommonComponents/CustomTextField";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -266,6 +268,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
+  const [numberOfPersons, setNumberOfPersons] = useState("");
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
@@ -319,11 +322,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       []
     );
 
+    if (numberOfPersons === "") {
+      alert("Number of persons cannot be empty. Please enter a value.");
+      return;
+    }
+
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
 
     localStorage.setItem("selectedService", selectedService);
+  };
+
+  const handleNumber = (e: any) => {
+    setNumberOfPersons(e.target.value);
   };
 
   useEffect(() => {
@@ -849,6 +861,17 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       </Typography>
                     </Box>
                   </Box>
+                  {type === BookingType.Badminton ? (
+                    <Box mt={2}>
+                      <CustomTextField
+                        placeholder="number of persons"
+                        value={numberOfPersons}
+                        onChange={(e) => handleNumber(e)}
+                      />
+                    </Box>
+                  ) : (
+                    ""
+                  )}
                 </AnimatedZoomIn>
               )}
             </Stack>
