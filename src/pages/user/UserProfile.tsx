@@ -155,7 +155,8 @@ export default function UserProfile() {
                 <Typography variant="body1" fontWeight={600}>
                   Phone Number
                 </Typography>
-                <Typography variant="body1">{user && user["phone"]}</Typography>
+                {user &&<Typography variant="body1">{user["phone"]===0?"-":user["phone"]}</Typography>}
+
               </Stack>
             </Stack>
             <Stack direction="row" pt={5} pb={2}>
