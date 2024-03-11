@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import BasicTimeline from "./VerticalTimeline";
 import ImageClick from "./AboutImageSection";
 import assets from "../../assets";
+import AboutTimelineComponent from "./AboutTimelineComponent";
+
+
 
 const { "Rectangle 67.png": Image1, "Rectangle 669.png": Image2 } = assets;
 
@@ -116,10 +119,10 @@ export default function AboutUs() {
             width: "100%",
             bottom: "0%",
             // top: "-10%",
-            right: "1%",
+            right: "-10.5%",
           }}
         >
-          {showTimeline && window.innerWidth >= 600 && <BasicTimeline />}
+          {showTimeline && window.innerWidth >= 600 && <AboutTimelineComponent />}
         </Box>
         <Box
           display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
@@ -150,7 +153,7 @@ export default function AboutUs() {
           </Typography>
         </Box>
       </Box>
-
+{/* <AboutTimelineComponent /> */}
       <ImageClick />
     </>
   );
