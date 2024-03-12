@@ -328,12 +328,14 @@ export default function CustomDateCalendar({
     type: string,
     selectedService: string
   ) => {
+
     if (type === BookingType.Badminton && numberOfPersons === "") {
       alert("Number of persons cannot be empty. Please enter a value.");
       setValidationError("Please enter a valid number of persons (1 to 10).");
 
       return;
     }
+
 
     if (userData && userData.userType === "user") {
       if (selectedDate !== "" && selectedTimings.length > 0) {
@@ -346,6 +348,7 @@ export default function CustomDateCalendar({
           time: selectedTimings,
           amount: 0,
           duration: totalDuration,
+          numberOfPersons:0
           // ... other properties
         };
 
@@ -361,7 +364,14 @@ export default function CustomDateCalendar({
           );
           if (response) {
             ratePerHour = response.bookingAmount;
+            if(type === BookingType.Badminton && numberOfPersons !== ""){
+              const totalAmt = totalDuration * ratePerHour;
+             
+              bookings.amount = totalAmt*parseInt(numberOfPersons);
+              bookings.numberOfPersons=parseInt(numberOfPersons)
+            }else{
             bookings.amount = totalDuration * ratePerHour;
+            }
           } else {
             console.log("amount fetch Failed");
           }
