@@ -10,42 +10,24 @@ import {
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
+import ConfirmPasswordModal from "./ConfirmPasswordModal";
 import CustomLabel from "../../CommonComponents/CustomLabel";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import OTPModal from "./OTPModal";
 import { useState } from "react";
 
-interface loginProps {
-  handleClose?: () => void;
-  open: any;
+interface OTPModalProps {
+  open: boolean;
+  handleClose: () => void;
 }
 
-export default function ForgetPassword({ handleClose, open }: loginProps) {
-  const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [showOTPModal, setShowOTPModal] = useState(false);
+export default function OTPModal({ open, handleClose }: OTPModalProps) {
+  const [showPassModal, setShowPassModal] = useState(false);
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(false);
+  const handlePassModalClose = () => {
+    setShowPassModal(false);
   };
 
-  const validateEmail = (input: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(input);
-  };
-
-  const onSubmit = () => {
-    if (!validateEmail(email)) {
-      setIsValidEmail(true);
-      return;
-    }
-    setShowOTPModal(true);
-  };
-
-  const handleOTPModalClose = () => {
-    setShowOTPModal(false);
+  const onSubmitOtp = () => {
+    setShowPassModal(true);
   };
 
   return (
@@ -75,7 +57,7 @@ export default function ForgetPassword({ handleClose, open }: loginProps) {
           <Stack direction="column" spacing={3} padding={2}>
             <Box>
               <CustomLabel color={Colors.WHITE} mb={1}>
-                Email
+                Enter OTP
               </CustomLabel>
               <TextField
                 id="outlined-basic"
@@ -88,24 +70,9 @@ export default function ForgetPassword({ handleClose, open }: loginProps) {
                     borderRadius: "8px",
                   },
                 }}
-                placeholder="Enter your email"
-                type="email"
+                placeholder="Enter Otp"
                 required
-                value={email}
-                onChange={handleEmailChange}
-                error={!!isValidEmail}
-                InputProps={{
-                  endAdornment: isValidEmail && (
-                    <ErrorOutlineIcon
-                      color="error"
-                      style={{ marginRight: "8px" }}
-                    />
-                  ),
-                }}
               />
-              <span style={{ color: "#d32f2f", fontSize: "12px" }}>
-                {isValidEmail ? "Please enter a valid email address" : ""}
-              </span>
             </Box>
 
             <Button
@@ -127,9 +94,9 @@ export default function ForgetPassword({ handleClose, open }: loginProps) {
                   border: "2px solid #15B5FC",
                 },
               }}
-              onClick={onSubmit}
+              onClick={onSubmitOtp}
             >
-              Send Verification Link
+              Enter Otp
             </Button>
 
             <Button
@@ -159,8 +126,11 @@ export default function ForgetPassword({ handleClose, open }: loginProps) {
         </DialogContent>
       </Dialog>
       <>
-        {showOTPModal && (
-          <OTPModal open={showOTPModal} handleClose={handleOTPModalClose} />
+        {showPassModal && (
+          <ConfirmPasswordModal
+            open={showPassModal}
+            handleClose={handlePassModalClose}
+          />
         )}
       </>
     </>

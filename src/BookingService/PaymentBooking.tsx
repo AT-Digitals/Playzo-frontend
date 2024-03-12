@@ -732,8 +732,7 @@ export default function PaymentBooking() {
 
               <Box mt={"20px"}>
                 <Typography color={Colors.BUTTON_COLOR} fontSize={"16px"}>
-                  You have pay 30% in online remaining you have to pay in the
-                  court
+                  You are paying 30% in online, remaining in premises.
                 </Typography>
               </Box>
               <Box
@@ -800,7 +799,7 @@ export default function PaymentBooking() {
         handleClose={handleClose}
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
-        paymentText="you have paid 30% in online remaining you have to pay in the court"
+        paymentText="You have paid 30% in online remaining you have to pay in the court"
       />
     </>
   );

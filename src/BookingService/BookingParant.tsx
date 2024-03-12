@@ -849,17 +849,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
               {selectedService && type === BookingType.Badminton ? (
                 <Box mt={2}>
-                  <Typography mb={2} fontSize={"15px"}>
-                    <span
-                      style={{
-                        fontWeight: 700,
-                      }}
-                    >
-                      {" "}
-                      Note:
-                    </span>{" "}
-                    Will have add 30% amount for 6 people{" "}
-                  </Typography>
                   <TextField
                     placeholder="Number of persons"
                     required
@@ -870,6 +859,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     error={!!validationError}
                     helperText={validationError}
                   />
+                  <Typography mt={2} fontSize={"15px"}>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      Note:
+                    </span>{" "}
+                    No.of members going to play
+                  </Typography>
                 </Box>
               ) : undefined}
             </Stack>
@@ -888,26 +887,26 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 "@media (max-width: 1024px)": {
                   borderLeft: "none",
                 },
-                
               }}
             >
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
-                <Box sx={{
-                  "@media (max-width: 768px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 820px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 912px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 1024px)": {
-                    borderLeft: "none",
-                  },
-                }}
+                <Box
+                  sx={{
+                    "@media (max-width: 768px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 820px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 912px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 1024px)": {
+                      borderLeft: "none",
+                    },
+                  }}
                   borderLeft={
                     type === BookingType.BowlingMachine ||
                     type === BookingType.CricketNet

@@ -60,7 +60,7 @@ export default function ModalComponent({
           <Typography
             border={"1px solid white"}
             textAlign={"center"}
-            textTransform={"capitalize"}
+            textTransform={"none"}
             fontSize={"15px"}
             padding={"10px"}
             color={Colors.WHITE}
