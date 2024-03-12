@@ -43,22 +43,22 @@ const {
 const StyledImage = styled.img`
   @media (min-width: 300px) {
     width: 100px;
-    height: 100px;
+    height: 80px;
   }
 
   @media (min-width: 768px) {
     width: 130px;
-    height: 130px;
+    height: 80px;
   }
 
   @media (min-width: 992px) {
     width: 130px;
-    height: 130px;
+    height: 80px;
   }
 
   @media (min-width: 1200px) {
     width: 145px;
-    height: 145px;
+    height: 105px;
   }
 
   &.animate-zoom-in {
@@ -635,9 +635,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       ? cricketnet
                       : undefined // Handle other cases or set to undefined
                   }
-                  style={{
-                    borderRadius: "50%",
-                  }}
+                  // style={{
+                  //   borderRadius: "50%",
+                  // }}
                   width={"100%"}
                   height={"100%"}
                   alt="booking"
@@ -723,6 +723,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   <Box
                     display={selectedService ? "none" : "block"}
                     width={"100%"}
+                    border={"1px solid black"}
+                    sx={{
+                      ":hover": {
+                        background: Colors.BUTTON_COLOR,
+                      },
+                    }}
                     maxWidth={{
                       xs: "215px",
                       sm: "215px",
@@ -741,10 +747,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   >
                     <Box
                       sx={{
-                        transition: "transform 0.3s", // adjust the duration as needed
-                        ":hover": {
-                          transform: "scale(1.1)",
-                        },
+                        // transition: "transform 0.3s", // adjust the duration as needed
+                        // ":hover": {
+                        //   transform: "scale(1.1)",
+                        // },
                         opacity: "1",
                       }}
                       display={"flex"}
@@ -754,11 +760,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     >
                       <img
                         src={item.image}
-                        width={"100px"}
-                        height={"100px"}
-                        style={{
-                          borderRadius: "50%",
-                        }}
+                        width={"95px"}
+                        height={"75px"}
+                        // style={{
+                        //   borderRadius: "50%",
+                        // }}
                         alt={
                           type === BookingType.Turf
                             ? "Turf"
@@ -785,6 +791,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               {selectedService && (
                 <AnimatedZoomIn>
                   <Box
+                    // sx={{
+
+                    // }}
+                    border={"1px solid black"}
                     sx={{
                       opacity: "1",
                     }}
@@ -821,9 +831,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       padding={"14px 12px"}
                     >
                       <StyledImage
-                        style={{
-                          borderRadius: "50%",
-                        }}
+                        // style={{
+                        //   borderRadius: "50%",
+                        // }}
                         src={
                           images.find((item) => item.name === selectedService)
                             ?.image

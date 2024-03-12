@@ -218,22 +218,15 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
+                      border={"1px solid black"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
-                      <Box
-                        sx={{
-                          transition: "transform 0.3s", // adjust the duration as needed
-                          ":hover": {
-                            transform: "scale(1.1)",
-                          },
-                        }}
-                        padding={"12px 12px"}
-                      >
-                        <img
-                          src={item.image}
-                          width={"100px"}
-                          alt="turf"
-                          style={{ borderRadius: "50%" }}
-                        />
+                      <Box padding={"12px 12px"}>
+                        <img src={item.image} width={"100px"} alt="turf" />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}
@@ -265,22 +258,19 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
+                      border={"1px solid black"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
-                      <Box
-                        sx={{
-                          transition: "transform 0.3s", // adjust the duration as needed
-                          ":hover": {
-                            transform: "scale(1.1)",
-                          },
-                        }}
-                        padding={"12px 12px"}
-                      >
+                      <Box padding={"12px 12px"}>
                         <img
                           src={item.image}
                           width={"100px"}
                           height={"90px"}
                           alt="board"
-                          style={{ borderRadius: "50%" }}
                         />
                         <Typography
                           fontSize={"12px"}
@@ -313,22 +303,15 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
+                      border={"1px solid black"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
-                      <Box
-                        padding={"12px 12px"}
-                        sx={{
-                          transition: "transform 0.3s", // adjust the duration as needed
-                          ":hover": {
-                            transform: "scale(1.1)",
-                          },
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          width={"100px"}
-                          alt="cricket"
-                          style={{ borderRadius: "50%" }}
-                        />
+                      <Box padding={"12px 12px"}>
+                        <img src={item.image} width={"100px"} alt="cricket" />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}
