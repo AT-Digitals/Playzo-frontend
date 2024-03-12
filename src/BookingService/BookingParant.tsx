@@ -14,16 +14,15 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
-import CustomTextField from "../CommonComponents/CustomTextField";
 import DateUtils from "../Utils/DateUtils";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
+import badmintonImg from "./badminton-type.jpg";
 import styled from "@emotion/styled";
 
 const {
-  "Image (7).png": badminton,
   "Rectangle 685 (3).png": badminton1,
   "Rectangle 685 (4).png": badminton2,
   "Rectangle 685 (5).png": badminton3,
@@ -241,6 +240,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const location = useLocation();
   const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
   const [numberOfPersons, setNumberOfPersons] = useState("");
+  const [validationError, setValidationError] = useState<string>("");
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
@@ -294,11 +294,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       []
     );
 
-    if (numberOfPersons === "") {
-      alert("Number of persons cannot be empty. Please enter a value.");
-      return;
-    }
-
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
@@ -306,9 +301,24 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     localStorage.setItem("selectedService", selectedService);
   };
 
-  const handleNumber = (e: any) => {
-    setNumberOfPersons(e.target.value);
+  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseInt(e.target.value, 10);
+    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 10) {
+      setNumberOfPersons(inputValue.toString());
+      setValidationError("");
+      localStorage.setItem("numberOfPersons", inputValue.toString());
+    } else {
+      setNumberOfPersons("");
+      setValidationError("Please enter a valid number of persons (0 to 10).");
+    }
   };
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("numberOfPersons");
+    if (storedValue) {
+      setNumberOfPersons(storedValue);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
@@ -433,6 +443,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       }
       blocker.reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocker, blocker.state]);
 
   useEffect(() => {
@@ -500,12 +511,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     xs: "0px 0px",
                     sm: "0px 0px",
                     md: "0px 5px",
-                    lg: "8px 20px",
+                    lg: "10px",
                   },
                   margin: "0px",
                   textTransform: "none",
                   fontSize: { xs: "14px", sm: "14px", md: "14px", lg: "16px" },
                   width: "100%",
+
                   maxWidth: { xs: "75px", sm: "75px", md: "80px", lg: "115px" },
                   fontWeight: "400",
                   border: "2px solid #15B5FC",
@@ -524,8 +536,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <span
                   style={{
                     display: "flex",
-                    gap: "0.5rem",
-
+                    gap: "10px",
                     alignItems: "center",
                   }}
                 >
@@ -616,7 +627,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       : type === BookingType.Playstaion
                       ? playstation
                       : type === BookingType.Badminton
-                      ? badminton
+                      ? badmintonImg
                       : type === BookingType.BoardGame
                       ? boardgames
                       : type === BookingType.BowlingMachine
@@ -709,13 +720,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <AnimatedZoomIn key={item.name}>
                   <Box
                     display={selectedService ? "none" : "block"}
+                    width={"100%"}
+                    border={"1px solid gray"}
                     sx={{
                       ":hover": {
-                        backgroundColor: Colors.BUTTON_COLOR,
+                        background: Colors.BUTTON_COLOR,
                       },
                     }}
-                    border={"1px solid gray"}
-                    width={"100%"}
                     maxWidth={{
                       xs: "215px",
                       sm: "215px",
@@ -771,10 +782,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               {selectedService && (
                 <AnimatedZoomIn>
                   <Box
+                    border={"1px solid gray"}
                     sx={{
                       opacity: "1",
                     }}
-                    border={"1px solid gray"}
                     width={"100%"}
                     maxWidth={{
                       xs: "220px",
@@ -833,19 +844,34 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       </Typography>
                     </Box>
                   </Box>
-                  {type === BookingType.Badminton ? (
-                    <Box mt={2}>
-                      <CustomTextField
-                        placeholder="number of persons"
-                        value={numberOfPersons}
-                        onChange={(e) => handleNumber(e)}
-                      />
-                    </Box>
-                  ) : (
-                    ""
-                  )}
                 </AnimatedZoomIn>
               )}
+
+              {selectedService && type === BookingType.Badminton ? (
+                <Box mt={2}>
+                  <Typography mb={2} fontSize={"15px"}>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      {" "}
+                      Note:
+                    </span>{" "}
+                    Will have add 30% amount for 6 people{" "}
+                  </Typography>
+                  <TextField
+                    placeholder="Number of persons"
+                    required
+                    fullWidth
+                    value={numberOfPersons}
+                    onChange={handleNumber}
+                    inputProps={{ max: 10 }}
+                    error={!!validationError}
+                    helperText={validationError}
+                  />
+                </Box>
+              ) : undefined}
             </Stack>
             <Stack
               sx={{
@@ -895,6 +921,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     selectedService={selectedService}
                     type={type}
                     setIsBackButtonVisible={setIsBackButtonVisible}
+                    setValidationError={setValidationError}
+                    numberOfPersons={numberOfPersons}
                   />
                 </Box>
               )}

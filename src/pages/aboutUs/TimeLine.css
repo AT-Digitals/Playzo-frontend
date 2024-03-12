@@ -1,5 +1,4 @@
-
-  .timeline {
+.timeline {
     background: var(--primary-color);
     margin: 20px auto;
     padding: 20px;
@@ -11,32 +10,26 @@
     -ms-overflow-style: none;
     width: 100%;
   }
-  
   .timeline::-webkit-scrollbar {
     display: none;
   }
-  
   .card {
     position: relative;
     max-width: 400px;
     width: 100%;
   }
-  
   .card:nth-child(odd) {
     padding: 40px 0 40px 30px;
   }
   .card:nth-child(even) {
     padding: 40px 30px 40px 0;
   }
-  
   .card::before {
     content: "";
     position: absolute;
     width: 52%;
     border: solid #15B5FC;
   }
-  
- 
   .card:nth-child(odd)::before {
     left: -11px;
     top: -4.5px;
@@ -44,7 +37,6 @@
     border-width: 5px 0 5px 5px;
     border-radius: 50px 0 0 50px;
   }
-  
   .card:nth-child(even)::before {
     right: -11px;
     top: 0;
@@ -52,22 +44,18 @@
     border-width: 5px 5px 5px 0;
     border-radius: 0 50px 50px 0;
   }
-  
   .card:first-child::before {
     border-top: 0;
     border-top-left-radius: 0;
   }
-  
   .card:last-child:nth-child(odd)::before {
     border-bottom: 0;
     border-bottom-left-radius: 0;
   }
-  
   .card:last-child:nth-child(even)::before {
     border-bottom: 0;
     border-bottom-right-radius: 0;
   }
-  
   .info {
     display: flex;
     flex-direction: column;
@@ -76,14 +64,12 @@
     border-radius: 10px;
     padding: 10px 10px 10px;
   }
-  
   .title {
     color: #15B5FC;
     position: relative;
     font-family: sans-serif;
     margin-top: 5px;
   }
-  
   .title::before {
     content: "";
     position: absolute;
@@ -92,29 +78,25 @@
     background: white;
     border-radius: 999px;
     border: 3px solid #15B5FC;
-    content: attr(data-year); 
+    content: attr(data-year);
     font-size: 17px;
     font-weight: 500;
   }
-  
   .card:nth-child(even) > .info > .title {
     text-align: right;
   }
-  
   .card:nth-child(odd) > .info > .title::before {
     left: -75px;
     display: flex;
     align-items: center;
     padding-left: 7px;
   }
-  
   .card:nth-child(even) > .info > .title::before {
     right: -75px;
     display: flex;
     align-items: center;
     padding-left: 7px;
   }
-
   @media only screen and (min-width: 375px) {
 .timeline{
     background: var(--primary-color);
@@ -126,7 +108,7 @@
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    width: 100%; 
+    width: 100%;
     margin-left: -10px;
 }
 .card {
@@ -146,7 +128,7 @@
         overflow-y: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
-        width: 100%; 
+        width: 100%;
         margin-left: -10px;
     }
     .card {

@@ -214,24 +214,19 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
                       border={"1px solid gray"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
                       <Box padding={"12px 12px"}>
-                        <img
-                          src={item.image}
-                          width={"100px"}
-                          alt="turf"
-                          style={{ borderRadius: "50%" }}
-                        />
+                        <img src={item.image} width={"100px"} alt="turf" />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}
@@ -259,16 +254,16 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
                       border={"1px solid gray"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
                       <Box padding={"12px 12px"}>
                         <img
@@ -276,7 +271,6 @@ export default function ServiceBooking() {
                           width={"100px"}
                           height={"90px"}
                           alt="board"
-                          style={{ borderRadius: "50%" }}
                         />
                         <Typography
                           fontSize={"12px"}
@@ -305,24 +299,19 @@ export default function ServiceBooking() {
                 <Link style={{ textDecoration: "none" }} to={item.link}>
                   <AnimatedZoomIn>
                     <Box
-                      sx={{
-                        ":hover": {
-                          backgroundColor: Colors.BUTTON_COLOR,
-                        },
-                      }}
                       width={"100%"}
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
                       border={"1px solid gray"}
+                      sx={{
+                        ":hover": {
+                          background: Colors.BUTTON_COLOR,
+                        },
+                      }}
                     >
                       <Box padding={"12px 12px"}>
-                        <img
-                          src={item.image}
-                          width={"100px"}
-                          alt="cricket"
-                          style={{ borderRadius: "50%" }}
-                        />
+                        <img src={item.image} width={"100px"} alt="cricket" />
                         <Typography
                           fontSize={"12px"}
                           fontWeight={"600"}

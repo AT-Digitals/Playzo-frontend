@@ -47,19 +47,6 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  // const handleLogout = async (event: any) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     UserLoginApi.logoutUser();
-  //     navigate(routes.ROOT);
-  //     localStorage.clear();
-  //     setAnchorEl(null);
-  //   } catch {
-  //     console.log("Logout failed");
-  //   }
-  // };
-
   const handleLogout = async (event: any) => {
     event.preventDefault();
 
@@ -124,8 +111,6 @@ export default function Header() {
     // Replace the phone number with the desired one
     const phoneNumber = "7094460944";
     const whatsappLink = `https://wa.me/${phoneNumber}`;
-
-    // Open WhatsApp link in a new window
     window.open(whatsappLink, "_blank");
   };
   return (

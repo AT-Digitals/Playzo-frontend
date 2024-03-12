@@ -51,6 +51,8 @@ interface CustomDateCalendarProps {
   type?: any;
   selectedService?: any;
   setIsBackButtonVisible?: any;
+  setValidationError?: any;
+  numberOfPersons?: any;
 }
 
 interface datatype {
@@ -66,6 +68,8 @@ export default function CustomDateCalendar({
   type,
   selectedService,
   setIsBackButtonVisible,
+  setValidationError,
+  numberOfPersons,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const user = localStorage.getItem("user");
@@ -186,17 +190,21 @@ export default function CustomDateCalendar({
       const start = item.startTime;
       const end = item.endTime;
       let fromTime = moment(start);
-let toTime = moment(end);
-let duration = moment.duration(toTime.diff(fromTime));
-let diff = duration.hours();
-let array = [];
+      let toTime = moment(end);
+      let duration = moment.duration(toTime.diff(fromTime));
+      let diff = duration.hours();
+      let array = [];
 
-for (let i = 0; diff > i; i++) {
-  let result = moment(fromTime).add(i, 'hours').format('h:mm')
-  array.push(
-    result+"-"+moment(fromTime).add(i+1, 'hours').format('h:mm A')
-  )
-}
+      for (let i = 0; diff > i; i++) {
+        let result = moment(fromTime).add(i, "hours").format("h:mm");
+        array.push(
+          result +
+            "-" +
+            moment(fromTime)
+              .add(i + 1, "hours")
+              .format("h:mm A")
+        );
+      }
 
       combinedIntervals = combinedIntervals.concat(array);
     });
@@ -286,7 +294,7 @@ for (let i = 0; diff > i; i++) {
       },
       []
     );
-    if (uniqueArray.length > 0 && selectedDate!=="") {
+    if (uniqueArray.length > 0 && selectedDate !== "") {
       const updatedItems = items.map((item) =>
         uniqueArray.includes(item.name)
           ? { ...item, disabled: true }
@@ -299,7 +307,7 @@ for (let i = 0; diff > i; i++) {
   };
 
   React.useEffect(() => {
-    if (disableData || selectedDate!=="") {
+    if (disableData || selectedDate !== "") {
       MilisecondsToHours();
     }
   }, [disableData, selectedDate]);
@@ -433,6 +441,13 @@ for (let i = 0; diff > i; i++) {
     } else {
       alert("Could not add your bookings!\nPlease Login to Your Account");
       navigate(routes.ROOT);
+    }
+
+    if (type === BookingType.Badminton && numberOfPersons === "") {
+      alert("Number of persons cannot be empty. Please enter a value.");
+      setValidationError("Please enter a valid number of persons (1 to 10).");
+
+      return;
     }
   };
 

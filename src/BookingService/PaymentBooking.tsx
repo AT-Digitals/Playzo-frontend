@@ -8,6 +8,7 @@ import {
   RadioGroup,
   RadioProps,
   Stack,
+  TextField,
   Typography,
   styled,
 } from "@mui/material";
@@ -79,6 +80,8 @@ export default function PaymentBooking() {
     setSelectedPaymentMethod(event.target.value);
   };
   const [open, setOpen] = React.useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const handleClose = () => {
     setOpen(false);
@@ -102,6 +105,12 @@ export default function PaymentBooking() {
   };
 
   const handlePayClick = () => {
+    if (phoneNumber.trim() === "") {
+      // Set an error message or handle the case where the phone number is empty
+      setPhoneNumberError("Please enter your phone number.");
+      return; // Stop further execution
+    }
+
     allBookings.map(async (bookings: any) => {
       try {
         const response = await BookingApi.createBooking({
@@ -130,6 +139,7 @@ export default function PaymentBooking() {
       }
     });
     sampleref.current = true;
+    localStorage.removeItem("numberOfPersons");
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
@@ -206,6 +216,20 @@ export default function PaymentBooking() {
     }
   }, [nextLocation, navigate]);
 
+  const handlePhoneNumberChange = (e: any) => {
+    const enteredPhoneNumber = e.target.value;
+    setPhoneNumber(enteredPhoneNumber);
+
+    // Clear the error when the user starts typing in the phone number field
+    setPhoneNumberError("");
+
+    // Phone number validation using a regex pattern (example: 10-digit US phone number)
+    const phoneRegex = /^\d{10}$/;
+
+    if (!phoneRegex.test(enteredPhoneNumber)) {
+      setPhoneNumberError("Please enter a valid 10-digit phone number.");
+    }
+  };
   return (
     <>
       <Box
@@ -495,22 +519,14 @@ export default function PaymentBooking() {
               >
                 Phone Number
               </Typography>
-              <Box
-                mt={"5px"}
-                width={"100%"}
-                maxWidth={"140px"}
-                height={"35px"}
-                bgcolor={"#F9F9F9"}
-              >
-                <Typography
-                  pt={"7px"}
-                  textAlign={"center"}
-                  fontWeight={"500"}
-                  color={Colors.BLACK}
-                  fontSize={"15px"}
-                >
-                  9876543210
-                </Typography>
+              <Box mt={"5px"}>
+                <TextField
+                  fullWidth
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  error={phoneNumberError !== ""}
+                  helperText={phoneNumberError}
+                />
               </Box>
               <Typography
                 pt={"30px"}
@@ -777,9 +793,7 @@ export default function PaymentBooking() {
         mt={{ xs: "50px", sm: "50px", md: "50px", lg: "0px" }}
         display={"flex"}
         justifyContent={"end"}
-      >
-        {/* <img src={ball} width={"150px"} alt="" /> */}
-      </Box>
+      ></Box>
       <img src={grass} alt="" />
       <ModalComponent
         open={open}

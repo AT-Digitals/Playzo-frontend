@@ -18,6 +18,7 @@ import Colors from "../../CommonComponents/Colors";
 import CustomButton from "../../CommonComponents/CustomButton";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ForgetPassword from "./ForgetPasswordModal";
 import SignUpForm from "./SignUpForm";
 import UserLoginApi from "../../api/UserLoginApi";
 import assets from "../../assets";
@@ -39,9 +40,10 @@ export default function Form({ handleClose, open }: loginProps) {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openForgetModal, setOpenForgetModal] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -51,7 +53,6 @@ export default function Form({ handleClose, open }: loginProps) {
     setEmail(newEmail);
     setIsValidEmail(false);
   };
-
 
   const signUpOnClickChange = () => {
     setOpenModal(true);
@@ -142,6 +143,14 @@ export default function Form({ handleClose, open }: loginProps) {
     },
     flow: "auth-code",
   });
+
+  const ForgetpOnClickChange = () => {
+    setOpenForgetModal(true);
+  };
+
+  const handleCloseForgetModal = () => {
+    setOpenForgetModal(false);
+  };
 
   return (
     <Dialog
@@ -248,15 +257,17 @@ export default function Form({ handleClose, open }: loginProps) {
               {isPasswordValid ? "Please enter a valid password" : ""}
             </span>
           </Box>
-          <Link
+          <Typography
+            onClick={ForgetpOnClickChange}
             sx={{
               color: Colors.WHITE,
-              textDecoration: "none",
+              textDecoration: "underline",
               textAlign: "end",
+              cursor: "pointer",
             }}
           >
             Forgot Password?
-          </Link>
+          </Typography>
           <Button
             type="button"
             sx={{
@@ -273,7 +284,7 @@ export default function Form({ handleClose, open }: loginProps) {
               ":hover": {
                 background: Colors.WHITE,
                 color: Colors.BUTTON_COLOR,
-                border: "1px solid #15B5FC",
+                border: "2px solid #15B5FC",
               },
             }}
             onClick={onSubmit}
@@ -326,6 +337,10 @@ export default function Form({ handleClose, open }: loginProps) {
           </CustomButton>
         </Stack>
         <SignUpForm open={openModal} handleClose={handleCloseModal} />
+        <ForgetPassword
+          handleClose={handleCloseForgetModal}
+          open={openForgetModal}
+        />
       </DialogContent>
     </Dialog>
   );
