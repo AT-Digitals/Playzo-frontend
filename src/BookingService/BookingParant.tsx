@@ -515,7 +515,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   textTransform: "none",
                   fontSize: { xs: "14px", sm: "14px", md: "14px", lg: "16px" },
                   width: "100%",
-                  maxWidth: { xs: "70px", sm: "70px", md: "80px", lg: "115px" },
+                  maxWidth: {
+                    xs: "100px",
+                    sm: "100px",
+                    md: "80px",
+                    lg: "115px",
+                  },
                   fontWeight: "400",
                   border: "2px solid #15B5FC",
                   marginLeft: { xs: "0px", sm: "-45px", md: "0px", lg: "0px" },
@@ -534,7 +539,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <span
                   style={{
                     display: "flex",
-
+                    gap: "10px",
                     alignItems: "center",
                   }}
                 >
