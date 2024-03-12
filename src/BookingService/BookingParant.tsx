@@ -294,13 +294,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       []
     );
 
-    if (type === BookingType.Badminton && numberOfPersons === "") {
-      alert("Number of persons cannot be empty. Please enter a value.");
-      setValidationError("Please enter a valid number of persons (1 to 10).");
-
-      return;
-    }
-
     navigate("/payment-booking", {
       state: { selectedService, bookingsWithTime },
     });
@@ -310,12 +303,12 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseInt(e.target.value, 10);
-    if (!isNaN(inputValue) && inputValue >= 1 && inputValue <= 10) {
+    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 10) {
       setNumberOfPersons(inputValue.toString());
       setValidationError("");
     } else {
       setNumberOfPersons("");
-      setValidationError("Please enter a valid number of persons (1 to 10).");
+      setValidationError("Please enter a valid number of persons (0 to 10).");
     }
   };
 
@@ -852,11 +845,21 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
               {selectedService && type === BookingType.Badminton ? (
                 <Box mt={2}>
+                  <Typography mb={2} fontSize={"15px"}>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      {" "}
+                      Note:
+                    </span>{" "}
+                    Will have add 30% amount for 6 people{" "}
+                  </Typography>
                   <TextField
-                    label="Number of persons"
+                    placeholder="Number of persons"
                     required
                     fullWidth
-                    type="number"
                     value={numberOfPersons}
                     onChange={handleNumber}
                     inputProps={{ max: 10 }}
@@ -900,6 +903,8 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     selectedService={selectedService}
                     type={type}
                     setIsBackButtonVisible={setIsBackButtonVisible}
+                    setValidationError={setValidationError}
+                    numberOfPersons={numberOfPersons}
                   />
                 </Box>
               )}
