@@ -485,13 +485,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     md: "0px 5px",
                     lg: "8px 20px",
                   },
+                  margin: "0px",
                   textTransform: "none",
                   fontSize: { xs: "14px", sm: "14px", md: "14px", lg: "16px" },
                   width: "100%",
-                  maxWidth: { xs: "70px", sm: "70px", md: "80px", lg: "115px" },
+                  maxWidth: { xs: "75px", sm: "75px", md: "80px", lg: "115px" },
                   fontWeight: "400",
                   border: "2px solid #15B5FC",
-                  marginLeft: { xs: "0px", sm: "-45px", md: "0px", lg: "0px" },
                   letterSpacing: "1.6px",
                   background: Colors.BUTTON_COLOR,
                   color: Colors.WHITE,
@@ -579,9 +579,9 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 display={{ xs: "flex", sm: "flex", md: "flex", lg: "block" }}
                 alignItems={{
                   xs: "center",
-                  sm: "flex-start",
+                  sm: "center",
                   md: "center",
-                  lg: "",
+                  lg: "center",
                 }}
                 padding={{
                   xs: "10px 10px",
@@ -834,12 +834,26 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 "@media (max-width: 1024px)": {
                   borderLeft: "none",
                 },
+                
               }}
             >
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
-                <Box
+                <Box sx={{
+                  "@media (max-width: 768px)": {
+                    borderLeft: "none",
+                  },
+                  "@media (max-width: 820px)": {
+                    borderLeft: "none",
+                  },
+                  "@media (max-width: 912px)": {
+                    borderLeft: "none",
+                  },
+                  "@media (max-width: 1024px)": {
+                    borderLeft: "none",
+                  },
+                }}
                   borderLeft={
                     type === BookingType.BowlingMachine ||
                     type === BookingType.CricketNet
