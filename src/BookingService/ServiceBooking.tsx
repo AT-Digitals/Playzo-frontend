@@ -218,7 +218,7 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid black"}
+                      border={"1px solid gray"}
                       sx={{
                         ":hover": {
                           background: Colors.BUTTON_COLOR,
@@ -258,7 +258,7 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid black"}
+                      border={"1px solid gray"}
                       sx={{
                         ":hover": {
                           background: Colors.BUTTON_COLOR,
@@ -303,7 +303,7 @@ export default function ServiceBooking() {
                       borderRadius={"10px"}
                       maxWidth={"124px"}
                       height={"135px"}
-                      border={"1px solid black"}
+                      border={"1px solid gray"}
                       sx={{
                         ":hover": {
                           background: Colors.BUTTON_COLOR,

@@ -719,7 +719,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   <Box
                     display={selectedService ? "none" : "block"}
                     width={"100%"}
-                    border={"1px solid black"}
+                    border={"1px solid gray"}
                     sx={{
                       ":hover": {
                         background: Colors.BUTTON_COLOR,
@@ -780,7 +780,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               {selectedService && (
                 <AnimatedZoomIn>
                   <Box
-                    border={"1px solid black"}
+                    border={"1px solid gray"}
                     sx={{
                       opacity: "1",
                     }}
