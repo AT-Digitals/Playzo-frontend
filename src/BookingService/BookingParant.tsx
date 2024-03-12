@@ -306,11 +306,19 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
     if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 10) {
       setNumberOfPersons(inputValue.toString());
       setValidationError("");
+      localStorage.setItem("numberOfPersons", inputValue.toString());
     } else {
       setNumberOfPersons("");
       setValidationError("Please enter a valid number of persons (0 to 10).");
     }
   };
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("numberOfPersons");
+    if (storedValue) {
+      setNumberOfPersons(storedValue);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(tableData));
