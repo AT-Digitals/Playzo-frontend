@@ -1,22 +1,4 @@
-/* :root {
-    --primary-color: #212121;
-    --background-color: #111;
-    --font: sans-serif;
-  } */
-  
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background: var(--background-color);
-    font-family: var(--font);
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* Timeline Container */
+
   .timeline {
     background: var(--primary-color);
     margin: 20px auto;
@@ -24,29 +6,29 @@
     display: flex;
     justify-content: center;
     height: 630px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
   }
   
   .timeline::-webkit-scrollbar {
-    display: none; /* Hide scrollbar in Chrome, Safari, Opera */
+    display: none;
   }
   
-  /* Card container */
   .card {
     position: relative;
     max-width: 400px;
+    width: 100%;
   }
   
-  /* setting padding based on even or odd */
   .card:nth-child(odd) {
     padding: 40px 0 40px 30px;
   }
   .card:nth-child(even) {
     padding: 40px 30px 40px 0;
   }
-  /* Global ::before */
+  
   .card::before {
     content: "";
     position: absolute;
@@ -54,7 +36,7 @@
     border: solid #15B5FC;
   }
   
-  /* Setting the border of top, bottom, left */
+ 
   .card:nth-child(odd)::before {
     left: -11px;
     top: -4.5px;
@@ -63,7 +45,6 @@
     border-radius: 50px 0 0 50px;
   }
   
-  /* Setting the border of top, bottom, right */
   .card:nth-child(even)::before {
     right: -11px;
     top: 0;
@@ -72,49 +53,37 @@
     border-radius: 0 50px 50px 0;
   }
   
-  /* Removing the border if it is the first card */
   .card:first-child::before {
     border-top: 0;
     border-top-left-radius: 0;
   }
   
-  /* Removing the border if it is the last card  and it's odd */
   .card:last-child:nth-child(odd)::before {
     border-bottom: 0;
     border-bottom-left-radius: 0;
   }
   
-  /* Removing the border if it is the last card  and it's even */
   .card:last-child:nth-child(even)::before {
     border-bottom: 0;
     border-bottom-right-radius: 0;
   }
   
-  /* Information about the timeline */
   .info {
     display: flex;
     flex-direction: column;
     background: white;
     color: black;
     border-radius: 10px;
-    padding: 10px 10px 22px;
-  }
-
-  p {
-    font-family: sans-serif;
-    font-size: 14px;
-    padding-left: 5px;
+    padding: 10px 10px 10px;
   }
   
-  /* Title of the card */
   .title {
     color: #15B5FC;
     position: relative;
-    padding-bottom: 15px;
     font-family: sans-serif;
+    margin-top: 5px;
   }
   
-  /* Timeline dot  */
   .title::before {
     content: "";
     position: absolute;
@@ -128,12 +97,10 @@
     font-weight: 500;
   }
   
-  /* text right if the card is even  */
   .card:nth-child(even) > .info > .title {
     text-align: right;
   }
   
-  /* setting dot to the left if the card is odd */
   .card:nth-child(odd) > .info > .title::before {
     left: -75px;
     display: flex;
@@ -141,10 +108,145 @@
     padding-left: 7px;
   }
   
-  /* setting dot to the right if the card is odd */
   .card:nth-child(even) > .info > .title::before {
     right: -75px;
     display: flex;
     align-items: center;
     padding-left: 7px;
   }
+
+  @media only screen and (min-width: 375px) {
+.timeline{
+    background: var(--primary-color);
+    margin: 20px auto;
+    padding: 97px 0px;
+    display: flex;
+    justify-content: center;
+    height: 180px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%; 
+    margin-left: -10px;
+}
+.card {
+    position: relative;
+    max-width: 200px;
+    width: 100%;
+  }
+  }
+  @media only screen and (min-width: 430px) {
+    .timeline{
+        background: var(--primary-color);
+        margin: 20px auto;
+        padding: 97px 0px;
+        display: flex;
+        justify-content: center;
+        height: 228px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        width: 100%; 
+        margin-left: -10px;
+    }
+    .card {
+        position: relative;
+        max-width: 200px;
+        width: 100%;
+      }
+      }
+  @media only screen and (min-width: 768px) {
+    .timeline{
+        background: var(--primary-color);
+    margin: 20px auto;
+    padding: 30px 0px;
+    display: flex;
+    justify-content: center;
+    height: 495px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    }
+    .card {
+        position: relative;
+        max-width: 300px;
+        width: 100%;
+      }
+      }
+  @media only screen and (min-width: 820px) {
+    .timeline{
+        background: var(--primary-color);
+    margin: 20px auto;
+    padding: 30px 0px;
+    display: flex;
+    justify-content: center;
+    height: 495px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    }
+    .card {
+        position: relative;
+        max-width: 300px;
+        width: 100%;
+      }
+      }
+      @media only screen and (min-width: 912px) {
+        .timeline{
+            background: var(--primary-color);
+        margin: 20px auto;
+        padding: 30px 0px;
+        display: flex;
+        justify-content: center;
+        height: 575px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        width: 100%;
+        }
+        .card {
+            position: relative;
+            max-width: 340px;
+            width: 100%;
+          }
+          }
+      @media only screen and (min-width: 1024px) {
+        .timeline{
+            background: var(--primary-color);
+        margin: 20px auto;
+        padding: 30px 0px;
+        display: flex;
+        justify-content: center;
+        height: 635px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        width: 100%;
+        }
+        .card {
+            position: relative;
+            max-width: 360px;
+            width: 100%;
+          }
+          }
+  @media only screen and (min-width: 1200px) {
+    .timeline{
+        background: var(--primary-color);
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    height: 630px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    }
+    .card {
+        position: relative;
+        max-width: 400px;
+        width: 100%;
+      }
+      }

@@ -30,12 +30,12 @@ export default function AboutTimelineComponent() {
     },
     {
       title: "Cricket",
-      year: '2021',
+      year: '2022',
       content: 'Cricket is a popular bat-and-ball sport, known for its excitement, strategy, and global appeal. Played professionally and recreationally worldwide.',
     },
     {
         title: "BoardGames",
-        year: '2017',
+        year: '2021',
         content: 'Board games bring joy, strategy, and social interaction. From classics like Monopoly to modern hits like Catan, endless entertainment awaits.',
       },
   ];
@@ -49,7 +49,7 @@ export default function AboutTimelineComponent() {
             <h3 className="title" data-year={item.year}>
                 {item.title}
               </h3>
-              <p>{item.content}</p>
+              <p style={{fontSize: "14px", fontFamily: "sans-serif", paddingLeft: "5px", marginTop: "0px"}}>{item.content}</p>
             </div>
           </div>
         ))}
