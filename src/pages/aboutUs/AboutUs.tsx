@@ -122,7 +122,7 @@ export default function AboutUs() {
             right: "-10.5%",
           }}
         >
-          {showTimeline && window.innerWidth >= 600 && <AboutTimelineComponent />}
+          {showTimeline && window.innerWidth >= 300 && <AboutTimelineComponent />}
         </Box>
         <Box
           display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
