@@ -77,8 +77,7 @@ export default function AboutUs() {
         sx={{
           position: "relative",
           width: "100%",
-          height: "100%",
-          maxHeight: 650,
+          height: {xs: "360px", sm: "523px", md: "630px", lg: "650px"},
           overflow: "hidden",
         }}
         id="custom-timeline"
@@ -125,7 +124,7 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 300 && <AboutTimelineComponent />}
         </Box>
         <Box
-          display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
+          display={{ xs: "none", sm: "block", md: "block", lg: "block" }}
           position={"absolute"}
           top={"7%"}
           right={{ xs: "60%", sm: "67%", md: "68%", lg: "66%" }}
@@ -133,18 +132,18 @@ export default function AboutUs() {
           <Typography
             color={"white"}
             fontStyle={"italic"}
-            fontSize={{ xs: "30px", sm: "40px", md: "78px" }}
+            fontSize={{ xs: "30px", sm: "40px", md: "58px", lg: "78px" }}
             fontWeight={"bold"}
             lineHeight={1}
           >
             <span style={{ display: "inline-block" }}>Playzo</span> <br />
             <Typography
-              fontSize={{ xs: "30px", sm: "40px", md: "78px" }}
+              fontSize={{ xs: "30px", sm: "40px", md: "58px", lg: "78px" }}
               fontWeight={"bold"}
               sx={
                 {
                   // display: "inline-block",
-                  marginLeft: { xs: "2rem", sm: "5rem", md: "8rem" },
+                  marginLeft: { xs: "2rem", sm: "5rem", md: "3rem" },
                 } as any
               }
             >

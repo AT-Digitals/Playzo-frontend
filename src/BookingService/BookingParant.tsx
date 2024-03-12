@@ -375,6 +375,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       style={{ cursor: "pointer" }}
       key="4"
       color={Colors.BLACK}
+      margin={{xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px"}}
     >
       Payment
     </Typography>,
