@@ -328,6 +328,13 @@ export default function CustomDateCalendar({
     type: string,
     selectedService: string
   ) => {
+    if (type === BookingType.Badminton && numberOfPersons === "") {
+      alert("Number of persons cannot be empty. Please enter a value.");
+      setValidationError("Please enter a valid number of persons (1 to 10).");
+
+      return;
+    }
+
     if (userData && userData.userType === "user") {
       if (selectedDate !== "" && selectedTimings.length > 0) {
         const totalDuration = selectedTimings.length;
@@ -441,13 +448,6 @@ export default function CustomDateCalendar({
     } else {
       alert("Could not add your bookings!\nPlease Login to Your Account");
       navigate(routes.ROOT);
-    }
-
-    if (type === BookingType.Badminton && numberOfPersons === "") {
-      alert("Number of persons cannot be empty. Please enter a value.");
-      setValidationError("Please enter a valid number of persons (1 to 10).");
-
-      return;
     }
   };
 
