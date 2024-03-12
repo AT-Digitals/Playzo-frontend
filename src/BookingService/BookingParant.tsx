@@ -534,7 +534,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 <span
                   style={{
                     display: "flex",
-                    gap: "0.5rem",
 
                     alignItems: "center",
                   }}
@@ -635,9 +634,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       ? cricketnet
                       : undefined // Handle other cases or set to undefined
                   }
-                  // style={{
-                  //   borderRadius: "50%",
-                  // }}
                   width={"100%"}
                   height={"100%"}
                   alt="booking"
@@ -747,10 +743,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                   >
                     <Box
                       sx={{
-                        // transition: "transform 0.3s", // adjust the duration as needed
-                        // ":hover": {
-                        //   transform: "scale(1.1)",
-                        // },
                         opacity: "1",
                       }}
                       display={"flex"}
@@ -762,9 +754,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                         src={item.image}
                         width={"95px"}
                         height={"75px"}
-                        // style={{
-                        //   borderRadius: "50%",
-                        // }}
                         alt={
                           type === BookingType.Turf
                             ? "Turf"
@@ -791,9 +780,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
               {selectedService && (
                 <AnimatedZoomIn>
                   <Box
-                    // sx={{
-
-                    // }}
                     border={"1px solid black"}
                     sx={{
                       opacity: "1",
@@ -831,9 +817,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                       padding={"14px 12px"}
                     >
                       <StyledImage
-                        // style={{
-                        //   borderRadius: "50%",
-                        // }}
                         src={
                           images.find((item) => item.name === selectedService)
                             ?.image
