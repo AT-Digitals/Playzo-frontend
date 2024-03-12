@@ -139,6 +139,7 @@ export default function PaymentBooking() {
       }
     });
     sampleref.current = true;
+    localStorage.removeItem("numberOfPersons");
   };
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
