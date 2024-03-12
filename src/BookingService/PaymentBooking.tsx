@@ -27,6 +27,7 @@ import TodayIcon from "@mui/icons-material/Today";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
+import UserApi from "../api/UserApi";
 
 const {
   "Calendar.png": calendar,
@@ -79,8 +80,12 @@ export default function PaymentBooking() {
   const handlePaymentMethodChange = (event: any) => {
     setSelectedPaymentMethod(event.target.value);
   };
+
+  const user = localStorage.getItem("user");
+  const userData = user && JSON.parse(user);
+
   const [open, setOpen] = React.useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(userData.phone ?? '');
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const handleClose = () => {
@@ -93,8 +98,7 @@ export default function PaymentBooking() {
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
 
-  const user = localStorage.getItem("user");
-  const userData = user && JSON.parse(user);
+
 
   const navigate = useNavigate();
 
@@ -105,10 +109,19 @@ export default function PaymentBooking() {
   };
 
   const handlePayClick = () => {
-    if (phoneNumber.trim() === "") {
+    if (!phoneNumber) {
       // Set an error message or handle the case where the phone number is empty
       setPhoneNumberError("Please enter your phone number.");
       return; // Stop further execution
+    }
+    try {
+      const data = UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) });
+    } catch (error) {
+      console.log('phone number is not valid');
+    }
+
+    if (userData) {
+      localStorage.setItem('user', JSON.stringify({ ...userData, phone: phoneNumber }));
     }
 
     allBookings.map(async (bookings: any) => {
@@ -229,6 +242,8 @@ export default function PaymentBooking() {
     if (!phoneRegex.test(enteredPhoneNumber)) {
       setPhoneNumberError("Please enter a valid 10-digit phone number.");
     }
+
+
   };
   return (
     <>
@@ -350,9 +365,8 @@ export default function PaymentBooking() {
 
                     // Format start and end times without minutes
                     const formattedStartTime = `${startHours % 12 || 12}:00`;
-                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
-                      endHours < 12 ? "AM" : "PM"
-                    }`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${endHours < 12 ? "AM" : "PM"
+                      }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
@@ -522,10 +536,11 @@ export default function PaymentBooking() {
               <Box mt={"5px"}>
                 <TextField
                   fullWidth
-                  value={phoneNumber}
+                  value={phoneNumber ?? ''}
                   onChange={handlePhoneNumberChange}
                   error={phoneNumberError !== ""}
                   helperText={phoneNumberError}
+                  type="number"
                 />
               </Box>
               <Typography
