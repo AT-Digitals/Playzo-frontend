@@ -105,6 +105,7 @@ export default function PaymentBooking() {
   };
 
   const handlePayClick = () => {
+
     if (phoneNumber.trim() === "") {
       // Set an error message or handle the case where the phone number is empty
       setPhoneNumberError("Please enter your phone number.");
@@ -127,6 +128,7 @@ export default function PaymentBooking() {
             BookingSubTypes[
               bookings.name as keyof typeof BookingSubTypes
             ].toString(),
+            numberOfPerson:bookings.numberOfPersons
         });
 
         if (response) {

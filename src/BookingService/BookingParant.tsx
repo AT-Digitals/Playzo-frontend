@@ -135,6 +135,7 @@ interface TableDataItem {
   time: string;
   court: number;
   amount: any;
+  numberOfPersons: number;
 }
 
 const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
@@ -226,6 +227,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             time: selectedTime,
             court: selectedCourt,
             amount: selectedAmount,
+            numberOfPersons:0
           })
         );
       }
@@ -259,6 +261,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           endTime: number;
           court: number;
           amount: any;
+          numberOfPersons:number;
         }[],
         booking
       ) => {
@@ -286,6 +289,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             endTime: endMilliSec,
             court: booking.court,
             amount: splitamount,
+            numberOfPersons:booking.numberOfPersons
           });
         });
 
