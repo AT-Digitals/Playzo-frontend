@@ -13,19 +13,21 @@ import Colors from "../../CommonComponents/Colors";
 import ConfirmPasswordModal from "./ConfirmPasswordModal";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import { useState } from "react";
 import UserApi from "../../api/UserApi";
+import { useState } from "react";
 
 interface OTPModalProps {
   open: boolean;
   handleClose: () => void;
   setOpenForgetModal: any;
+  email:string;
 }
 
 export default function OTPModal({
   open,
   handleClose,
   setOpenForgetModal,
+  email
 }: OTPModalProps) {
   const [showPassModal, setShowPassModal] = useState(false);
   const [otp, setOtp] = useState("");
@@ -47,9 +49,11 @@ export default function OTPModal({
     }
 
     try {
-      const response = UserApi.otpVerification("thenmozhivij123@gmail.com", otp)
+      const response = UserApi.otpVerification(email, otp).then((dataVal)=>{
+        setShowPassModal(true);
+
+      })
       console.log(response);
-      setShowPassModal(true);
     } catch (error) {
       console.log(error);
     }
@@ -178,6 +182,7 @@ export default function OTPModal({
             handleClose={handlePassModalClose}
             setShowOTPModal={handleClose}
             setOpenForgetModal={setOpenForgetModal}
+            email={email}
           />
         )}
       </>

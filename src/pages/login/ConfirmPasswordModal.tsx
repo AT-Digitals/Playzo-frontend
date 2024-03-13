@@ -13,14 +13,15 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
-import { useState } from "react";
 import UserApi from "../../api/UserApi";
+import { useState } from "react";
 
 interface OTPModalProps {
   open: boolean;
   handleClose: () => void;
   setShowOTPModal: any;
   setOpenForgetModal: any;
+  email:string;
 }
 
 export default function ConfirmPasswordModal({
@@ -28,6 +29,7 @@ export default function ConfirmPasswordModal({
   handleClose,
   setShowOTPModal,
   setOpenForgetModal,
+  email
 }: OTPModalProps) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -49,12 +51,14 @@ export default function ConfirmPasswordModal({
     }
 
     try {
-      const data = UserApi.forgotPassword("thenmozhivij123@gmail.com", { password: password })
+      const data = UserApi.forgotPassword(email, { password: password }).then((dataVal)=>{
+        setPasswordError("");
+        setShowOTPModal(false); // Close the ShowOTPModal
+        setOpenForgetModal(false); // Close the OpenForgetModal
+        handleClose();
+      })
       console.log('data', data);
-      setPasswordError("");
-      setShowOTPModal(false); // Close the ShowOTPModal
-      setOpenForgetModal(false); // Close the OpenForgetModal
-      handleClose();
+    
     } catch (error) {
       console.log('error', error);
     }
