@@ -49,6 +49,9 @@ export default function OTPModal({
     }
 
     try {
+      if(!email){
+        alert("Please give your email in website")
+      }
       const response = UserApi.otpVerification(email, otp).then((dataVal)=>{
         setShowPassModal(true);
 
