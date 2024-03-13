@@ -13,8 +13,8 @@ import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import OTPModal from "./OTPModal";
-import { useState } from "react";
 import UserApi from "../../api/UserApi";
+import { useState } from "react";
 
 interface loginProps {
   handleClose?: () => void;
@@ -30,6 +30,7 @@ export default function ForgetPassword({
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [showOTPModal, setShowOTPModal] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
@@ -48,10 +49,14 @@ export default function ForgetPassword({
       return;
     }
     try {
-      const data = UserApi.sendOtp({ email: email });
+      const data = UserApi.sendOtp({ email: email }).then((dataVal)=>{
+        setEmailValue(dataVal.email)
+        setShowOTPModal(true);
+
+      });
       console.log('data', data);
-      setShowOTPModal(true);
     } catch (error) {
+      alert(error);
       console.log('error', error);
     }
 
@@ -179,6 +184,7 @@ export default function ForgetPassword({
             open={showOTPModal}
             handleClose={handleOTPModalClose}
             setOpenForgetModal={setOpenForgetModal}
+            email={emailValue}
           />
         )}
       </>
