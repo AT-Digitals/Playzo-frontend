@@ -1,50 +1,15 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  SelectChangeEvent,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DropDownComponent from "../../CommonComponents/DropdownComponent";
-import EnquiryApi from "../../api/EnquiryApi";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import banner from "./careers_banner.jpg";
 import image from "./Career-Development-Template-1024x777.jpg";
 import styled from "@emotion/styled";
 
-const DropDownData = [
-  {
-    value: "turf",
-    label: "Turf",
-  },
-  {
-    value: "playstation",
-    label: "PlayStation",
-  },
-  {
-    value: "Badminton",
-    label: "Badminton",
-  },
-  {
-    value: "cricketNet",
-    label: "CricketNet",
-  },
-  {
-    value: "boardGame",
-    label: "BoardGame",
-  },
-  {
-    value: "bowlingMachine",
-    label: "BowlingMachine",
-  },
-];
 const StyledImage = styled.img`
   @media (min-width: 300px) {
     width: 340px;
@@ -99,15 +64,12 @@ export default function CareersPageNew() {
   const userData = user && JSON.parse(user);
   const [name, setName] = useState(userData ? userData["name"] : "");
   const [email, setEmail] = useState(userData ? userData["email"] : "");
-  const [type, setType] = useState("");
-  const [message, setMessage] = useState("");
   const [phoneNumber, setPhoneNumber] = useState(
     userData ? userData["phone"] : ""
   );
   const [successMessage, setSuccessMessage] = useState(false);
 
   const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidType, setIsValidType] = useState<boolean>(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidPhone, setIsValidPhone] = useState(false);
   const [role, setRole] = useState(userData ? userData["name"] : "");
@@ -129,11 +91,6 @@ export default function CareersPageNew() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(input);
     return isValid;
-  };
-
-  const handleTypeChange = (event: SelectChangeEvent<string>) => {
-    setType(event?.target.value);
-    setIsValidType(false);
   };
 
   const handlePhoneChange = (event: any) => {
@@ -164,9 +121,6 @@ export default function CareersPageNew() {
       setIsValidPhone(true);
     }
 
-    if (!type) {
-      setIsValidType(true);
-    }
     if (!validateEmail(email)) {
       setIsValidEmail(true);
       return;
