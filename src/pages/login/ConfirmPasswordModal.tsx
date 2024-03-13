@@ -50,6 +50,11 @@ export default function ConfirmPasswordModal({
       return;
     }
 
+    if (password.length < 8 || confirmPassword.length < 8) {
+      setPasswordError("Passwords must be at least 8 characters long");
+      return;
+    }
+
     try {
       const data = UserApi.forgotPassword(email, { password: password })
         .then((dataVal) => {
@@ -81,7 +86,6 @@ export default function ConfirmPasswordModal({
   return (
     <Dialog
       open={open}
-      // onClose={ModlaCloseChange}
       maxWidth="xs"
       fullWidth
       sx={{
