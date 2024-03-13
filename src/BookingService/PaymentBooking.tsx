@@ -85,7 +85,7 @@ export default function PaymentBooking() {
   const userData = user && JSON.parse(user);
 
   const [open, setOpen] = React.useState(false);
-  const [phoneNumber, setPhoneNumber] = useState(userData.phone ?? '');
+  const [phoneNumber, setPhoneNumber] = useState(userData.phone === 0 ? '' : userData.phone ?? '');
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const handleClose = () => {
@@ -110,9 +110,8 @@ export default function PaymentBooking() {
 
   const handlePayClick = () => {
     if (!phoneNumber) {
-      // Set an error message or handle the case where the phone number is empty
       setPhoneNumberError("Please enter your phone number.");
-      return; // Stop further execution
+      return;
     }
     try {
       const data = UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) });
