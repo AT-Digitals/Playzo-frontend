@@ -12,22 +12,45 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import ConfirmPasswordModal from "./ConfirmPasswordModal";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useState } from "react";
 
 interface OTPModalProps {
   open: boolean;
   handleClose: () => void;
+  setOpenForgetModal: any;
 }
 
-export default function OTPModal({ open, handleClose }: OTPModalProps) {
+export default function OTPModal({
+  open,
+  handleClose,
+  setOpenForgetModal,
+}: OTPModalProps) {
   const [showPassModal, setShowPassModal] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isValidOTP, setIsValidOTP] = useState(false);
 
   const handlePassModalClose = () => {
     setShowPassModal(false);
   };
 
+  const validateOTP = (input: string) => {
+    const emailRegex = /^\d{8}$/;
+    return emailRegex.test(input);
+  };
+
   const onSubmitOtp = () => {
+    if (!validateOTP(otp)) {
+      setIsValidOTP(true);
+      return;
+    }
     setShowPassModal(true);
+  };
+
+  const handleOTPChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newOTP = event.target.value;
+    setOtp(newOTP);
+    setIsValidOTP(false);
   };
 
   return (
@@ -71,8 +94,22 @@ export default function OTPModal({ open, handleClose }: OTPModalProps) {
                   },
                 }}
                 placeholder="Enter Otp"
+                value={otp}
+                onChange={handleOTPChange}
                 required
+                error={!!isValidOTP}
+                InputProps={{
+                  endAdornment: isValidOTP && (
+                    <ErrorOutlineIcon
+                      color="error"
+                      style={{ marginRight: "8px" }}
+                    />
+                  ),
+                }}
               />
+              <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                {isValidOTP ? "Please enter a valid email otp" : ""}
+              </span>
             </Box>
 
             <Button
@@ -130,6 +167,8 @@ export default function OTPModal({ open, handleClose }: OTPModalProps) {
           <ConfirmPasswordModal
             open={showPassModal}
             handleClose={handlePassModalClose}
+            setShowOTPModal={handleClose}
+            setOpenForgetModal={setOpenForgetModal}
           />
         )}
       </>

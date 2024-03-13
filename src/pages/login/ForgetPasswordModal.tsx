@@ -18,9 +18,14 @@ import { useState } from "react";
 interface loginProps {
   handleClose?: () => void;
   open: any;
+  setOpenForgetModal: any;
 }
 
-export default function ForgetPassword({ handleClose, open }: loginProps) {
+export default function ForgetPassword({
+  handleClose,
+  open,
+  setOpenForgetModal,
+}: loginProps) {
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [showOTPModal, setShowOTPModal] = useState(false);
@@ -160,7 +165,11 @@ export default function ForgetPassword({ handleClose, open }: loginProps) {
       </Dialog>
       <>
         {showOTPModal && (
-          <OTPModal open={showOTPModal} handleClose={handleOTPModalClose} />
+          <OTPModal
+            open={showOTPModal}
+            handleClose={handleOTPModalClose}
+            setOpenForgetModal={setOpenForgetModal}
+          />
         )}
       </>
     </>

@@ -341,6 +341,7 @@ export default function Form({ handleClose, open }: loginProps) {
         <ForgetPassword
           handleClose={handleCloseForgetModal}
           open={openForgetModal}
+          setOpenForgetModal={handleCloseForgetModal}
         />
       </DialogContent>
     </Dialog>

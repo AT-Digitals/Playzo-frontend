@@ -4,23 +4,64 @@ import {
   Dialog,
   DialogContent,
   IconButton,
+  InputAdornment,
   Stack,
   TextField,
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import { useState } from "react";
 
 interface OTPModalProps {
   open: boolean;
   handleClose: () => void;
+  setShowOTPModal: any;
+  setOpenForgetModal: any;
 }
 
 export default function ConfirmPasswordModal({
   open,
   handleClose,
+  setShowOTPModal,
+  setOpenForgetModal,
 }: OTPModalProps) {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleConfirmClose = () => {
+    // Check if both password fields are not empty
+    if (!password || !confirmPassword) {
+      setPasswordError("Please fill in both password fields");
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords and Confirm password do not match");
+      return;
+    }
+
+    // If everything is valid, reset the error and close the modal
+    setPasswordError("");
+    setShowOTPModal(false); // Close the ShowOTPModal
+    setOpenForgetModal(false); // Close the OpenForgetModal
+    handleClose();
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <Dialog
       open={open}
@@ -62,6 +103,22 @@ export default function ConfirmPasswordModal({
               }}
               placeholder="Enter new Password"
               required
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
 
             <CustomLabel mt={2} color={Colors.WHITE} mb={1}>
@@ -80,7 +137,28 @@ export default function ConfirmPasswordModal({
               }}
               placeholder="Enter Confirm Password"
               required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              type={showConfirmPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowConfirmPassword}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+            {passwordError && (
+              <CustomLabel mt={1} color="red">
+                {passwordError}
+              </CustomLabel>
+            )}
           </Box>
 
           <Button
@@ -102,7 +180,7 @@ export default function ConfirmPasswordModal({
                 border: "2px solid #15B5FC",
               },
             }}
-            // onClick={onSubmit}
+            onClick={handleConfirmClose}
           >
             Confirm
           </Button>
