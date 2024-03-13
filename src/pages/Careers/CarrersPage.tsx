@@ -310,7 +310,7 @@ export default function CareersPageNew() {
         fontStyle={"italic"}
         textTransform={"uppercase"}
       >
-        Careers!!!
+        Welcome To Careers!!!
       </Typography>
       <Stack
         style={{
@@ -384,18 +384,7 @@ export default function CareersPageNew() {
                   isValidEmail ? "Please provide valid Email" : ""
                 }
               />
-              <DropDownComponent
-                label="Role you want to play"
-                options={DropDownData}
-                placeHolder="Select your game"
-                value={type}
-                onChange={handleTypeChange}
-                error={!!isValidType}
-                helperText={
-                  isValidType ? "Please provide valid Service" : ""
-                }
-              />
-              <CustomTextField
+               <CustomTextField
                 sx={{ maxWidth: 700, borderRadius: "8px" }}
                 label="Phone Number"
                 required={false}
@@ -408,7 +397,17 @@ export default function CareersPageNew() {
                   isValidPhone ? "Please provide valid phone number" : ""
                 }
               />
-
+              <DropDownComponent
+                label="Role you want to play"
+                options={DropDownData}
+                placeHolder="Select your game"
+                value={type}
+                onChange={handleTypeChange}
+                error={!!isValidType}
+                helperText={
+                  isValidType ? "Please provide valid Service" : ""
+                }
+              />
               <Button
                 sx={{
                   borderRadius: "30px",

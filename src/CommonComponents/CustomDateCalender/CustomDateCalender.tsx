@@ -562,7 +562,6 @@ export default function CustomDateCalendar({
           display="flex"
           gap="2rem"
           flexWrap="wrap"
-          padding={"0 20px  0 0"}
         >
           {items.map((item, index) => (
             <Button
