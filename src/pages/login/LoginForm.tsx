@@ -296,6 +296,7 @@ export default function Form({ handleClose, open }: loginProps) {
             alignItems="center"
             spacing={1}
             justifyContent="center"
+            whiteSpace={"nowrap"}
           >
             <Typography color={Colors.WHITE}>
               Dosen't have an account yet?
@@ -340,6 +341,7 @@ export default function Form({ handleClose, open }: loginProps) {
         <ForgetPassword
           handleClose={handleCloseForgetModal}
           open={openForgetModal}
+          setOpenForgetModal={handleCloseForgetModal}
         />
       </DialogContent>
     </Dialog>

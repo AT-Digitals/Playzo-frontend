@@ -57,16 +57,20 @@ export default function ModalComponent({
             {text}
             <br />
           </Typography>
-          <Typography
-            border={"1px solid white"}
-            textAlign={"center"}
-            textTransform={"capitalize"}
-            fontSize={"15px"}
-            padding={"10px"}
-            color={Colors.WHITE}
-          >
-            {paymentText}
-          </Typography>
+          {paymentText ? (
+            <Typography
+              border={"1px solid white"}
+              textAlign={"center"}
+              textTransform={"none"}
+              fontSize={"15px"}
+              padding={"10px"}
+              color={Colors.WHITE}
+            >
+              {paymentText}
+            </Typography>
+          ) : (
+            ""
+          )}
           <Button
             variant="outlined"
             sx={{

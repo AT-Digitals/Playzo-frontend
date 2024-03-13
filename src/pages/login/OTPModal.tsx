@@ -10,57 +10,56 @@ import {
 
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
+import ConfirmPasswordModal from "./ConfirmPasswordModal";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-import OTPModal from "./OTPModal";
 import { useState } from "react";
 import UserApi from "../../api/UserApi";
 
-interface loginProps {
-  handleClose?: () => void;
-  open: any;
+interface OTPModalProps {
+  open: boolean;
+  handleClose: () => void;
   setOpenForgetModal: any;
 }
 
-export default function ForgetPassword({
-  handleClose,
+export default function OTPModal({
   open,
+  handleClose,
   setOpenForgetModal,
-}: loginProps) {
-  const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [showOTPModal, setShowOTPModal] = useState(false);
+}: OTPModalProps) {
+  const [showPassModal, setShowPassModal] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isValidOTP, setIsValidOTP] = useState(false);
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(false);
+  const handlePassModalClose = () => {
+    setShowPassModal(false);
   };
 
-  const validateEmail = (input: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const validateOTP = (input: string) => {
+    const emailRegex = /^\d{8}$/;
     return emailRegex.test(input);
   };
 
-  const onSubmit = () => {
-    if (!validateEmail(email)) {
-      setIsValidEmail(true);
+  const onSubmitOtp = () => {
+    if (!validateOTP(otp)) {
+      setIsValidOTP(true);
       return;
     }
+
     try {
-      const data = UserApi.sendOtp({ email: email });
-      console.log('data', data);
-      setShowOTPModal(true);
+      const response = UserApi.otpVerification("thenmozhivij123@gmail.com", otp)
+      console.log(response);
+      setShowPassModal(true);
     } catch (error) {
-      console.log('error', error);
+      console.log(error);
     }
-
-
 
   };
 
-  const handleOTPModalClose = () => {
-    setShowOTPModal(false);
+  const handleOTPChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newOTP = event.target.value;
+    setOtp(newOTP);
+    setIsValidOTP(false);
   };
 
   return (
@@ -90,7 +89,7 @@ export default function ForgetPassword({
           <Stack direction="column" spacing={3} padding={2}>
             <Box>
               <CustomLabel color={Colors.WHITE} mb={1}>
-                Email
+                Enter OTP
               </CustomLabel>
               <TextField
                 id="outlined-basic"
@@ -103,14 +102,13 @@ export default function ForgetPassword({
                     borderRadius: "8px",
                   },
                 }}
-                placeholder="Enter your email"
-                type="email"
+                placeholder="Enter Otp"
+                value={otp}
+                onChange={handleOTPChange}
                 required
-                value={email}
-                onChange={handleEmailChange}
-                error={!!isValidEmail}
+                error={!!isValidOTP}
                 InputProps={{
-                  endAdornment: isValidEmail && (
+                  endAdornment: isValidOTP && (
                     <ErrorOutlineIcon
                       color="error"
                       style={{ marginRight: "8px" }}
@@ -119,7 +117,7 @@ export default function ForgetPassword({
                 }}
               />
               <span style={{ color: "#d32f2f", fontSize: "12px" }}>
-                {isValidEmail ? "Please enter a valid email address" : ""}
+                {isValidOTP ? "Please enter a valid email otp" : ""}
               </span>
             </Box>
 
@@ -142,9 +140,9 @@ export default function ForgetPassword({
                   border: "2px solid #15B5FC",
                 },
               }}
-              onClick={onSubmit}
+              onClick={onSubmitOtp}
             >
-              Send Verification Link
+              Enter Otp
             </Button>
 
             <Button
@@ -174,10 +172,11 @@ export default function ForgetPassword({
         </DialogContent>
       </Dialog>
       <>
-        {showOTPModal && (
-          <OTPModal
-            open={showOTPModal}
-            handleClose={handleOTPModalClose}
+        {showPassModal && (
+          <ConfirmPasswordModal
+            open={showPassModal}
+            handleClose={handlePassModalClose}
+            setShowOTPModal={handleClose}
             setOpenForgetModal={setOpenForgetModal}
           />
         )}

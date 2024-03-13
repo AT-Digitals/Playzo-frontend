@@ -78,34 +78,34 @@ const StyledImage = styled.img`
 const TurfImages = [
   { image: turf, name: "Turf 2.O", value: 1 },
   { image: turf, name: "Turf 3.O", value: 2 },
-  { image: turf, name: "Turf 2.O&3.O", value: 3 },
+  { image: turf, name: "Turf 2.O & 3.O", value: 3 },
 ];
 
 const PlaystationImages = [
   { image: playstation1, name: "PS 1", value: 1 },
   { image: playstation2, name: "PS 2", value: 2 },
-  { image: playstation3, name: "PS 1&2", value: 3 },
+  { image: playstation3, name: "PS 1 & 2", value: 3 },
 ];
 
 const BadmintonImages = [
   {
     image: badminton1,
-    name: "Court 1",
+    name: "Court 5.1",
     value: 1,
   },
   {
     image: badminton2,
-    name: "Court 2",
+    name: "Court 5.2",
     value: 2,
   },
   {
     image: badminton3,
-    name: "Court 3",
+    name: "Court 5.3",
     value: 3,
   },
   {
     image: badminton3,
-    name: "Court 4",
+    name: "Court 5.4",
     value: 4,
   },
 ];
@@ -854,17 +854,6 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
               {selectedService && type === BookingType.Badminton ? (
                 <Box mt={2}>
-                  <Typography mb={2} fontSize={"15px"}>
-                    <span
-                      style={{
-                        fontWeight: 700,
-                      }}
-                    >
-                      {" "}
-                      Note:
-                    </span>{" "}
-                    Will have add 30% amount for 6 people{" "}
-                  </Typography>
                   <TextField
                     placeholder="Number of persons"
                     required
@@ -875,6 +864,16 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     error={!!validationError}
                     helperText={validationError}
                   />
+                  <Typography mt={2} fontSize={"15px"}>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      Note:
+                    </span>{" "}
+                    No.of members going to play
+                  </Typography>
                 </Box>
               ) : undefined}
             </Stack>
@@ -893,26 +892,26 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 "@media (max-width: 1024px)": {
                   borderLeft: "none",
                 },
-                
               }}
             >
               {(type === BookingType.BowlingMachine ||
                 type === BookingType.CricketNet ||
                 selectedService) && (
-                <Box sx={{
-                  "@media (max-width: 768px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 820px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 912px)": {
-                    borderLeft: "none",
-                  },
-                  "@media (max-width: 1024px)": {
-                    borderLeft: "none",
-                  },
-                }}
+                <Box
+                  sx={{
+                    "@media (max-width: 768px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 820px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 912px)": {
+                      borderLeft: "none",
+                    },
+                    "@media (max-width: 1024px)": {
+                      borderLeft: "none",
+                    },
+                  }}
                   borderLeft={
                     type === BookingType.BowlingMachine ||
                     type === BookingType.CricketNet

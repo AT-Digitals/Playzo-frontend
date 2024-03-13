@@ -137,7 +137,11 @@ export default function AppDrawer({
           <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp">
             {user ? user.name?.charAt(0).toUpperCase() : "U"}
           </Avatar>
-          <Typography fontSize={"22px"} color={"white"}>
+          <Typography
+            fontSize={"16px"}
+            color={"white"}
+            textTransform={"capitalize"}
+          >
             {" "}
             {user ? user.name : null}
           </Typography>
