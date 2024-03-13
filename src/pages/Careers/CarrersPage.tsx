@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  IconButton,
   SelectChangeEvent,
   Stack,
   Typography,
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import AppContainer from "../../CommonComponents/AppContainer";
 import Colors from "../../CommonComponents/Colors";
 import CustomTextField from "../../CommonComponents/CustomTextField";
+import DeleteIcon from "@mui/icons-material/Delete";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
 import EnquiryApi from "../../api/EnquiryApi";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
@@ -89,7 +91,7 @@ const StyledImage = styled.img`
 
   @media (min-width: 1200px) {
     width: 700px;
-    height: 515px;
+    height: 600px;
   }
 `;
 export default function CareersPageNew() {
@@ -108,10 +110,15 @@ export default function CareersPageNew() {
   const [isValidType, setIsValidType] = useState<boolean>(false);
   const [isValidName, setIsValidName] = useState(false);
   const [isValidPhone, setIsValidPhone] = useState(false);
+  const [role, setRole] = useState(userData ? userData["name"] : "");
 
   const handleNameChange = (event: any) => {
     setName(event);
     setIsValidName(false);
+  };
+
+  const handleRoleChange = (event: any) => {
+    setRole(event);
   };
   const handleEmailChange = (event: any) => {
     setEmail(event);
@@ -168,34 +175,39 @@ export default function CareersPageNew() {
       setIsValidPhone(true);
       return;
     }
-    if (name && email && phoneNumber && type) {
-      const data = {
-        name: name,
-        email: email,
-        type: type,
-        phoneNumber: phoneNumber,
-        message: message,
-      };
-      try {
-        const response = await EnquiryApi.createEnquiry({
-          userName: data.name,
-          userEmail: data.email,
-          enquiryMessage: data.message,
-          phoneNumber: data.phoneNumber,
-          projectType: data.type,
-        });
-        if (response) {
-          setSuccessMessage(true);
-          setName("");
-          setEmail("");
-          setPhoneNumber("");
-          setType("");
-          setMessage("");
-        }
-      } catch (err: any) {
-        alert(err.message);
-      }
+    if (!resume) {
+      setIsValidResume(true);
+      return;
     }
+    // if (name && email && phoneNumber && type) {
+    const data = {
+      name: name,
+      email: email,
+      role: role,
+      phoneNumber: phoneNumber,
+      resume: resume,
+    };
+    console.log(data);
+    // try {
+    //   const response = await EnquiryApi.createEnquiry({
+    //     userName: data.name,
+    //     userEmail: data.email,
+    //     enquiryMessage: data.message,
+    //     phoneNumber: data.phoneNumber,
+    //     projectType: data.type,
+    //   });
+    //   if (response) {
+    //     setSuccessMessage(true);
+    //     setName("");
+    //     setEmail("");
+    //     setPhoneNumber("");
+    //     setType("");
+    //     setMessage("");
+    //   }
+    // } catch (err: any) {
+    //   alert(err.message);
+    // }
+    // }
   };
 
   const BannerImage = styled.img`
@@ -254,6 +266,18 @@ export default function CareersPageNew() {
       behavior: "smooth",
     });
   }, []);
+
+  const [resume, setResume] = useState(null);
+  const [isValidResume, setIsValidResume] = useState(false);
+
+  const handleResumeChange = (event: any) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      setResume(selectedFile);
+      setIsValidResume(false);
+    }
+  };
   return (
     <>
       <Box>
@@ -401,16 +425,14 @@ export default function CareersPageNew() {
                       isValidEmail ? "Please provide valid Email" : ""
                     }
                   />
-                  <DropDownComponent
-                    label="Role you want to play"
-                    options={DropDownData}
-                    placeHolder="Select your game"
-                    value={type}
-                    onChange={handleTypeChange}
-                    error={!!isValidType}
-                    helperText={
-                      isValidType ? "Please provide valid Service" : ""
-                    }
+
+                  <CustomTextField
+                    sx={{ maxWidth: 700, borderRadius: "8px" }}
+                    label="Role you want to apply"
+                    required={false}
+                    placeholder="Role you want to apply"
+                    value={role}
+                    onChange={handleRoleChange}
                   />
                   <CustomTextField
                     sx={{ maxWidth: 700, borderRadius: "8px" }}
@@ -425,6 +447,72 @@ export default function CareersPageNew() {
                       isValidPhone ? "Please provide valid phone number" : ""
                     }
                   />
+
+                  <Typography>Attachments</Typography>
+
+                  {resume ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <Typography color={Colors.BUTTON_COLOR}>
+                        {(resume as File)?.name}
+                      </Typography>
+                      <IconButton
+                        onClick={() => setResume(null)} // Assume setResume is your state updater
+                        style={{ marginLeft: "10px" }}
+                      >
+                        <DeleteIcon
+                          style={{
+                            color: "red",
+                          }}
+                        />
+                      </IconButton>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          marginTop: "10px",
+                        }}
+                      >
+                        <label
+                          htmlFor="resumeInput"
+                          style={{
+                            cursor: "pointer",
+                            padding: "10px",
+                            border: "1px solid #15B5FC",
+                            borderRadius: "5px",
+                            backgroundColor: "#15B5FC",
+                            color: "#fff",
+                            textAlign: "center",
+                            width: "200px",
+                          }}
+                        >
+                          Choose File
+                        </label>
+                        <input
+                          id="resumeInput"
+                          type="file"
+                          accept=".pdf, .doc, .docx"
+                          onChange={handleResumeChange}
+                          style={{
+                            display: "none",
+                          }}
+                        />
+                      </div>
+                      {isValidResume && (
+                        <p style={{ color: "red" }}>
+                          Please attach a valid resume file.
+                        </p>
+                      )}
+                    </>
+                  )}
 
                   <Button
                     sx={{
