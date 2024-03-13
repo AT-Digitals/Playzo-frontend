@@ -216,14 +216,14 @@ export default function CustomDateCalendar({
     }
     let isBookingExists: any = [];
     switch (selectedService) {
-      case "PS 1&2":
+      case "PS 1 & 2":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
             (booking.name === "PS 1" ||
               booking.name === "PS 2" ||
-              booking.name === "PS 1&2")
+              booking.name === "PS 1 & 2")
           );
         });
         break;
@@ -232,7 +232,7 @@ export default function CustomDateCalendar({
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "PS 1" || booking.name === "PS 1&2")
+            (booking.name === "PS 1" || booking.name === "PS 1 & 2")
           );
         });
         break;
@@ -241,18 +241,18 @@ export default function CustomDateCalendar({
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "PS 2" || booking.name === "PS 1&2")
+            (booking.name === "PS 2" || booking.name === "PS 1 & 2")
           );
         });
         break;
-      case "Turf 2.O&3.O":
+      case "Turf 2.O & 3.O":
         isBookingExists = tableData.filter((booking: any) => {
           return (
             booking.date === selectedDate &&
             booking.type === type &&
             (booking.name === "Turf 2.O" ||
               booking.name === "Turf 3.O" ||
-              booking.name === "Turf 2.O&3.O")
+              booking.name === "Turf 2.O & 3.O")
           );
         });
         break;
@@ -261,7 +261,7 @@ export default function CustomDateCalendar({
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "Turf 2.O" || booking.name === "Turf 2.O&3.O")
+            (booking.name === "Turf 2.O" || booking.name === "Turf 2.O & 3.O")
           );
         });
         break;
@@ -270,7 +270,7 @@ export default function CustomDateCalendar({
           return (
             booking.date === selectedDate &&
             booking.type === type &&
-            (booking.name === "Turf 3.O" || booking.name === "Turf 2.O&3.O")
+            (booking.name === "Turf 3.O" || booking.name === "Turf 2.O & 3.O")
           );
         });
         break;

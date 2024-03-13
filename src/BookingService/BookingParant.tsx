@@ -78,34 +78,34 @@ const StyledImage = styled.img`
 const TurfImages = [
   { image: turf, name: "Turf 2.O", value: 1 },
   { image: turf, name: "Turf 3.O", value: 2 },
-  { image: turf, name: "Turf 2.O&3.O", value: 3 },
+  { image: turf, name: "Turf 2.O & 3.O", value: 3 },
 ];
 
 const PlaystationImages = [
   { image: playstation1, name: "PS 1", value: 1 },
   { image: playstation2, name: "PS 2", value: 2 },
-  { image: playstation3, name: "PS 1&2", value: 3 },
+  { image: playstation3, name: "PS 1 & 2", value: 3 },
 ];
 
 const BadmintonImages = [
   {
     image: badminton1,
-    name: "Court 1",
+    name: "Court 5.1",
     value: 1,
   },
   {
     image: badminton2,
-    name: "Court 2",
+    name: "Court 5.2",
     value: 2,
   },
   {
     image: badminton3,
-    name: "Court 3",
+    name: "Court 5.3",
     value: 3,
   },
   {
     image: badminton3,
-    name: "Court 4",
+    name: "Court 5.4",
     value: 4,
   },
 ];
