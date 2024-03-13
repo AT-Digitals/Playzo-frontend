@@ -56,6 +56,7 @@ export default function ForgetPassword({
       });
       console.log('data', data);
     } catch (error) {
+      alert(error);
       console.log('error', error);
     }
 

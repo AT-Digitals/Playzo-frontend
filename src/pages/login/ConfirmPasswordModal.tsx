@@ -60,6 +60,7 @@ export default function ConfirmPasswordModal({
       console.log('data', data);
     
     } catch (error) {
+      alert(error);
       console.log('error', error);
     }
 

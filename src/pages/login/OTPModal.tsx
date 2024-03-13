@@ -55,6 +55,7 @@ export default function OTPModal({
       })
       console.log(response);
     } catch (error) {
+      alert(error);
       console.log(error);
     }
 
