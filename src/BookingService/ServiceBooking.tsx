@@ -97,6 +97,7 @@ export default function ServiceBooking() {
       fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
+      margin={{xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px"}}
       key="4"
       color={selectedBreadcrumb === "4" ? Colors.BUTTON : Colors.BLACK}
       onClick={() => handleBreadcrumbClick("4")}
