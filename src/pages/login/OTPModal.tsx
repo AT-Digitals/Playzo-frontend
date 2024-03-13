@@ -38,7 +38,7 @@ export default function OTPModal({
   };
 
   const validateOTP = (input: string) => {
-    const emailRegex = /^\d{8}$/;
+    const emailRegex =  /^[0-9A-Za-z]{8}$/;
     return emailRegex.test(input);
   };
 
