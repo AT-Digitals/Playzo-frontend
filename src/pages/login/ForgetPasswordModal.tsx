@@ -14,6 +14,7 @@ import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import OTPModal from "./OTPModal";
 import { useState } from "react";
+import UserApi from "../../api/UserApi";
 
 interface loginProps {
   handleClose?: () => void;
@@ -46,7 +47,16 @@ export default function ForgetPassword({
       setIsValidEmail(true);
       return;
     }
-    setShowOTPModal(true);
+    try {
+      const data = UserApi.sendOtp({ email: email });
+      console.log('data', data);
+      setShowOTPModal(true);
+    } catch (error) {
+      console.log('error', error);
+    }
+
+
+
   };
 
   const handleOTPModalClose = () => {

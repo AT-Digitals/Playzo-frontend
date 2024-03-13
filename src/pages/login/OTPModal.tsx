@@ -14,6 +14,7 @@ import ConfirmPasswordModal from "./ConfirmPasswordModal";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useState } from "react";
+import UserApi from "../../api/UserApi";
 
 interface OTPModalProps {
   open: boolean;
@@ -44,7 +45,15 @@ export default function OTPModal({
       setIsValidOTP(true);
       return;
     }
-    setShowPassModal(true);
+
+    try {
+      const response = UserApi.otpVerification("thenmozhivij123@gmail.com", otp)
+      console.log(response);
+      setShowPassModal(true);
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   const handleOTPChange = (event: React.ChangeEvent<HTMLInputElement>) => {

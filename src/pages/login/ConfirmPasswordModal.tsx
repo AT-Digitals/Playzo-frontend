@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import { useState } from "react";
+import UserApi from "../../api/UserApi";
 
 interface OTPModalProps {
   open: boolean;
@@ -47,11 +48,19 @@ export default function ConfirmPasswordModal({
       return;
     }
 
+    try {
+      const data = UserApi.forgotPassword("thenmozhivij123@gmail.com", { password: password })
+      console.log('data', data);
+      setPasswordError("");
+      setShowOTPModal(false); // Close the ShowOTPModal
+      setOpenForgetModal(false); // Close the OpenForgetModal
+      handleClose();
+    } catch (error) {
+      console.log('error', error);
+    }
+
     // If everything is valid, reset the error and close the modal
-    setPasswordError("");
-    setShowOTPModal(false); // Close the ShowOTPModal
-    setOpenForgetModal(false); // Close the OpenForgetModal
-    handleClose();
+
   };
 
   const handleClickShowPassword = () => {
