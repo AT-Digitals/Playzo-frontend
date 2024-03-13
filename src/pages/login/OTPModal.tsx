@@ -20,14 +20,14 @@ interface OTPModalProps {
   open: boolean;
   handleClose: () => void;
   setOpenForgetModal: any;
-  email:string;
+  email: string;
 }
 
 export default function OTPModal({
   open,
   handleClose,
   setOpenForgetModal,
-  email
+  email,
 }: OTPModalProps) {
   const [showPassModal, setShowPassModal] = useState(false);
   const [otp, setOtp] = useState("");
@@ -38,7 +38,7 @@ export default function OTPModal({
   };
 
   const validateOTP = (input: string) => {
-    const emailRegex =  /^[0-9A-Za-z]{8}$/;
+    const emailRegex = /^[0-9A-Za-z]{8}$/;
     return emailRegex.test(input);
   };
 
@@ -47,21 +47,22 @@ export default function OTPModal({
       setIsValidOTP(true);
       return;
     }
-
     try {
-      if(!email){
-        alert("Please give your email in website")
+      if (!email) {
+        alert("Please give your email in website");
       }
-      const response = UserApi.otpVerification(email, otp).then((dataVal)=>{
-        setShowPassModal(true);
-
-      })
+      const response = UserApi.otpVerification(email, otp)
+        .then((dataVal) => {
+          setShowPassModal(true);
+        })
+        .catch((error) => {
+          alert(error);
+        });
       console.log(response);
     } catch (error) {
       alert(error);
       console.log(error);
     }
-
   };
 
   const handleOTPChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,15 +1,21 @@
-import { Box, Button, SelectChangeEvent, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  SelectChangeEvent,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import Colors from "../../CommonComponents/Colors";
-import EnquiryApi from "../../api/EnquiryApi";
-import banner from "./careers_banner.jpg";
-import styled from "@emotion/styled";
+
 import AppContainer from "../../CommonComponents/AppContainer";
+import Colors from "../../CommonComponents/Colors";
 import CustomTextField from "../../CommonComponents/CustomTextField";
 import DropDownComponent from "../../CommonComponents/DropdownComponent";
+import EnquiryApi from "../../api/EnquiryApi";
 import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
-import image from './Career-Development-Template-1024x777.jpg';
-
+import banner from "./careers_banner.jpg";
+import image from "./Career-Development-Template-1024x777.jpg";
+import styled from "@emotion/styled";
 
 const DropDownData = [
   {
@@ -128,10 +134,6 @@ export default function CareersPageNew() {
     setIsValidPhone(false);
   };
 
-  const handleMessageChange = (event: any) => {
-    setMessage(event?.target.value);
-  };
-
   const successNotification = () => {
     setSuccessMessage(false);
   };
@@ -197,54 +199,54 @@ export default function CareersPageNew() {
   };
 
   const BannerImage = styled.img`
-  @media (min-width: 300px) {
-    width: 100%;
-    max-height: 100px;
-    object-fit: cover;
-  }
-  @media (min-width: 414px) {
-    width: 100%;
-    max-height: 100px;
-    object-fit: cover;
-  }
-  @media (min-width: 540px) {
-    width: 490px;
-    height: 340px;
-    margin: auto;
-  }
+    @media (min-width: 300px) {
+      width: 100%;
+      max-height: 100px;
+      object-fit: cover;
+    }
+    @media (min-width: 414px) {
+      width: 100%;
+      max-height: 100px;
+      object-fit: cover;
+    }
+    @media (min-width: 540px) {
+      width: 490px;
+      height: 340px;
+      margin: auto;
+    }
 
-  @media (min-width: 768px) {
-    width: 100%;
-    max-height: 160px;
-    object-fit: cover;
-  }
-  @media (min-width: 820px) {
-    width: 100%;
-    max-height: 160px;
-    object-fit: cover;
-  }
-  @media (min-width: 912px) {
-    width: 100%;
-    max-height: 170px;
-    object-fit: cover;
-  }
+    @media (min-width: 768px) {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+    }
+    @media (min-width: 820px) {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+    }
+    @media (min-width: 912px) {
+      width: 100%;
+      max-height: 170px;
+      object-fit: cover;
+    }
 
-  @media (min-width: 992px) {
-    width: 100%;
-    max-height: 170px;
-    object-fit: cover;
-  }
-  @media (min-width: 1000px) {
-    width: 100%;
-    max-height: 170px;
-    object-fit: cover;
-  }
+    @media (min-width: 992px) {
+      width: 100%;
+      max-height: 170px;
+      object-fit: cover;
+    }
+    @media (min-width: 1000px) {
+      width: 100%;
+      max-height: 170px;
+      object-fit: cover;
+    }
 
-  @media (min-width: 1200px) {
-    width: 100%;
-    max-height: 270px;
-    object-fit: cover;
-  }
+    @media (min-width: 1200px) {
+      width: 100%;
+      max-height: 270px;
+      object-fit: cover;
+    }
   `;
   useEffect(() => {
     window.scrollTo({
@@ -254,12 +256,12 @@ export default function CareersPageNew() {
   }, []);
   return (
     <>
-    <Box>
-    <BannerImage src={banner} alt="banner" />
-  </Box>
-  <Box
-    sx={{
-      background: `
+      <Box>
+        <BannerImage src={banner} alt="banner" />
+      </Box>
+      <Box
+        sx={{
+          background: `
         repeating-linear-gradient(
           -45deg,
           transparent,
@@ -292,157 +294,172 @@ export default function CareersPageNew() {
         ),
         whitesmoke
       `,
-      backgroundBlendMode: "multiply",
-    }}
-  >
-    <AppContainer
-      paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
-      paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
-      maxWidth={1200}
-    >
-      <Typography
-        pb={{ xs: "48px", sm: "48px", md: "48px", lg: "20px" }}
-        pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
-        pt={"20px"}
-        color={Colors.BLACK}
-        fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
-        fontWeight={"900"}
-        fontStyle={"italic"}
-        textTransform={"uppercase"}
-      >
-        Careers!!!
-      </Typography>
-      <Stack
-        style={{
-          marginBottom: "20px",
-          marginTop: "-28px",
+          backgroundBlendMode: "multiply",
         }}
-        spacing={10}
-        direction={{ xs: "column-reverse", sm: "column-reverse", md: "column-reverse", lg: "row" }}
-        paddingBottom={{ xs: "30px", sm: "60px", md: "60px", lg: "0px" }}
       >
-        <Box
-          flexDirection={"column"}
-          display={"flex"}
-          marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-          sx={{
-            paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" },
-          }}
+        <AppContainer
+          paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
+          paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
+          maxWidth={1200}
         >
-        <StyledImage src={image} alt="" />
-        </Box>
-
-        <Box style={{marginBottom: "40px"}} marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} width={"100%"}>
-          <form onSubmit={onSubmit}>
-            <Stack
-              margin={{
-                xs: "0 auto",
-                sm: "0 auto",
-                md: "0 auto",
-                lg: "0 auto",
-              }}
-              border={{
-                xs: "1px solid #d4ebf2",
-                sm: "1px solid #d4ebf2",
-                md: "1px solid #d4ebf2",
-                lg: "1px solid #d4ebf2",
-              }}
-              width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
-              borderRadius={{ xs: "20px", sm: "20px", md: "20px", lg: "20px" }}
-              padding={{
-                xs: "21px 16px",
-                sm: "21px 16px",
-                md: "21px 16px",
-                lg: "10px 21px",
-              }}
-              direction="column"
-              spacing={3}
-              style={{
-                backgroundColor: "#d4ebf2",
-               boxShadow: "1px 7px 11px 2px dimgrey",
+          <Typography
+            pb={{ xs: "48px", sm: "48px", md: "48px", lg: "20px" }}
+            pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
+            pt={"20px"}
+            color={Colors.BLACK}
+            fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
+            fontWeight={"900"}
+            fontStyle={"italic"}
+            textTransform={"uppercase"}
+          >
+            Careers!!!
+          </Typography>
+          <Stack
+            style={{
+              marginBottom: "20px",
+              marginTop: "-28px",
+            }}
+            spacing={10}
+            direction={{
+              xs: "column-reverse",
+              sm: "column-reverse",
+              md: "column-reverse",
+              lg: "row",
+            }}
+            paddingBottom={{ xs: "30px", sm: "60px", md: "60px", lg: "0px" }}
+          >
+            <Box
+              flexDirection={"column"}
+              display={"flex"}
+              marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+              sx={{
+                paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" },
               }}
             >
-              <CustomTextField
-                sx={{ maxWidth: 700, borderRadius: "8px" }}
-                label="Name"
-                required={false}
-                placeholder="Enter your name"
-                value={name}
-                onChange={handleNameChange}
-                error={!!isValidName}
-                helperText={isValidName ? "Please provide valid Name" : ""}
-              />
-              <CustomTextField
-                sx={{ maxWidth: 700, borderRadius: "8px" }}
-                label="Email"
-                required={false}
-                placeholder="Enter your email address"
-                value={email}
-                onChange={handleEmailChange}
-                error={!!isValidEmail}
-                helperText={
-                  isValidEmail ? "Please provide valid Email" : ""
-                }
-              />
-              <DropDownComponent
-                label="Role you want to play"
-                options={DropDownData}
-                placeHolder="Select your game"
-                value={type}
-                onChange={handleTypeChange}
-                error={!!isValidType}
-                helperText={
-                  isValidType ? "Please provide valid Service" : ""
-                }
-              />
-              <CustomTextField
-                sx={{ maxWidth: 700, borderRadius: "8px" }}
-                label="Phone Number"
-                required={false}
-                placeholder="Enter your phone number"
-                value={phoneNumber}
-                onChange={handlePhoneChange}
-                type="number"
-                error={!!isValidPhone}
-                helperText={
-                  isValidPhone ? "Please provide valid phone number" : ""
-                }
-              />
+              <StyledImage src={image} alt="" />
+            </Box>
 
-              <Button
-                sx={{
-                  borderRadius: "30px",
-                  textTransform: "none",
-                  fontSize: "16px",
-                  fontWeight: 400,
-                  padding: "10px",
-                  maxWidth: 700,
-                  border: "1px solid #15B5FC",
-                  background: Colors.BUTTON_COLOR,
-                  color: Colors.WHITE,
-                  ":hover": {
-                    background: Colors.WHITE,
-                    color: Colors.BUTTON_COLOR,
-                    border: "1px solid #15B5FC",
-                  },
-                }}
-                variant="outlined"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Stack>
-          </form>
-          <ModalComponent
-            open={successMessage}
-            handleClose={successNotification}
-            text="Your Enquiry is Successfully added"
-            headingText="Enquiry Confirmation"
-          />
-        </Box>
-      </Stack>
-    </AppContainer>
-  </Box>
-  </>
+            <Box
+              style={{ marginBottom: "40px" }}
+              marginLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "110px" }}
+              pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}
+              width={"100%"}
+            >
+              <form onSubmit={onSubmit}>
+                <Stack
+                  margin={{
+                    xs: "0 auto",
+                    sm: "0 auto",
+                    md: "0 auto",
+                    lg: "0 auto",
+                  }}
+                  border={{
+                    xs: "1px solid #d4ebf2",
+                    sm: "1px solid #d4ebf2",
+                    md: "1px solid #d4ebf2",
+                    lg: "1px solid #d4ebf2",
+                  }}
+                  width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
+                  borderRadius={{
+                    xs: "20px",
+                    sm: "20px",
+                    md: "20px",
+                    lg: "20px",
+                  }}
+                  padding={{
+                    xs: "21px 16px",
+                    sm: "21px 16px",
+                    md: "21px 16px",
+                    lg: "10px 21px",
+                  }}
+                  direction="column"
+                  spacing={3}
+                  style={{
+                    backgroundColor: "#d4ebf2",
+                    boxShadow: "1px 7px 11px 2px dimgrey",
+                  }}
+                >
+                  <CustomTextField
+                    sx={{ maxWidth: 700, borderRadius: "8px" }}
+                    label="Name"
+                    required={false}
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={handleNameChange}
+                    error={!!isValidName}
+                    helperText={isValidName ? "Please provide valid Name" : ""}
+                  />
+                  <CustomTextField
+                    sx={{ maxWidth: 700, borderRadius: "8px" }}
+                    label="Email"
+                    required={false}
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={handleEmailChange}
+                    error={!!isValidEmail}
+                    helperText={
+                      isValidEmail ? "Please provide valid Email" : ""
+                    }
+                  />
+                  <DropDownComponent
+                    label="Role you want to play"
+                    options={DropDownData}
+                    placeHolder="Select your game"
+                    value={type}
+                    onChange={handleTypeChange}
+                    error={!!isValidType}
+                    helperText={
+                      isValidType ? "Please provide valid Service" : ""
+                    }
+                  />
+                  <CustomTextField
+                    sx={{ maxWidth: 700, borderRadius: "8px" }}
+                    label="Phone Number"
+                    required={false}
+                    placeholder="Enter your phone number"
+                    value={phoneNumber}
+                    onChange={handlePhoneChange}
+                    type="number"
+                    error={!!isValidPhone}
+                    helperText={
+                      isValidPhone ? "Please provide valid phone number" : ""
+                    }
+                  />
+
+                  <Button
+                    sx={{
+                      borderRadius: "30px",
+                      textTransform: "none",
+                      fontSize: "16px",
+                      fontWeight: 400,
+                      padding: "10px",
+                      maxWidth: 700,
+                      border: "1px solid #15B5FC",
+                      background: Colors.BUTTON_COLOR,
+                      color: Colors.WHITE,
+                      ":hover": {
+                        background: Colors.WHITE,
+                        color: Colors.BUTTON_COLOR,
+                        border: "1px solid #15B5FC",
+                      },
+                    }}
+                    variant="outlined"
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </Stack>
+              </form>
+              <ModalComponent
+                open={successMessage}
+                handleClose={successNotification}
+                text="Your Enquiry is Successfully added"
+                headingText="Enquiry Confirmation"
+              />
+            </Box>
+          </Stack>
+        </AppContainer>
+      </Box>
+    </>
   );
 }

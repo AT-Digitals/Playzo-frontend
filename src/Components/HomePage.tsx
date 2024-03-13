@@ -1,11 +1,20 @@
-import { Backdrop, Box, Button, CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import CardComponent from "./CardComponent";
 import CarouselComponent from "./CarouselComponent";
 import Colors from "../CommonComponents/Colors";
 import EastIcon from "@mui/icons-material/East";
-import { Link } from "react-router-dom";
+import OTPModal from "../pages/login/OTPModal";
 import assets from "../assets";
 import routes from "../routes/routes";
 import styled from "styled-components";
@@ -166,253 +175,284 @@ export default function HomePage() {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
   }, []);
-  
+
+  const [openOtp, setOpenOtp] = useState(false);
+
+  const { id } = useParams<{ id: string }>();
+
+  const handleClose = () => {
+    setOpenOtp(false);
+  };
+
+  useEffect(() => {
+    // Check if the URL contains an email or string (assuming 'id' is the parameter)
+    if (id && (id.includes("@") || isNaN(Number(id)))) {
+      setOpenOtp(true);
+    }
+  }, [id]);
+
   return (
-    <Box width="100%">
-       <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <video width="100%" autoPlay loop muted controls={false}>
-        <source src={videoFile} type="video/mp4" />
-      </video>
-      <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
-        <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
+    <>
+      <Box width="100%">
+        <Backdrop
+          open={loading}
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: "#fff" }}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        <video width="100%" autoPlay loop muted controls={false}>
+          <source src={videoFile} type="video/mp4" />
+        </video>
+        <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
+          <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
+            <Box
+              width={"24%"}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
+              marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
+              marginBottom={"10px"}
+            ></Box>
+            <Typography
+              fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
+              marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
+              fontWeight={"600"}
+              color={Colors.BLACK}
+              fontStyle={"italic"}
+              textTransform={"uppercase"}
+            >
+              Our Services
+            </Typography>
+            <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
+              {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+              <Typography
+                variant="h2"
+                color={Colors.BLACK}
+                fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
+                fontWeight={400}
+                width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
+                marginLeft={{ xs: "27px", sm: "27px", md: "27px", lg: "57px" }}
+                sx={{ fontFamily: "Inter" }}
+              >
+                We offer a diverse range of{" "}
+                <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
+                  <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
+                </Link>{" "}
+                to cater to the varied interests of our community.
+              </Typography>
+            </Box>
+          </Stack>
+          <Grid
+            container
+            width="100%"
+            maxWidth={1460}
+            margin="0 auto"
+            spacing={3}
+            flexDirection={{
+              xs: "column",
+              sm: "row",
+              md: "row",
+              lg: "row",
+            }}
+          >
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Turf"}
+                description={
+                  "Kick off your sports adventure on our two top-notch turfs, perfect for football, and a cricket selection for your sports."
+                }
+                image={turf}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Play Station"}
+                description={
+                  "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection for your sports."
+                }
+                image={playstation}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Board Games"}
+                description={
+                  "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time for your sports."
+                }
+                image={boardGames}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Badminton"}
+                description={
+                  "Ace every shot on our professional Badminton courts, where passion meets a wide game and precision for your sports."
+                }
+                image={Badminton}
+              />
+            </Grid>
+          </Grid>
           <Box
-            width={"24%"}
-            border={`2px solid ${Colors.BUTTON_COLOR}`}
-            marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
-            marginBottom={"10px"}
-          ></Box>
+            width="100%"
+            margin="0 auto"
+            pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+            pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+          >
+            <Stack
+              marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+              direction="row"
+              justifyContent="end"
+              alignItems="center"
+              gap="20px"
+            >
+              <Button
+                sx={{
+                  color: Colors.BUTTON_COLOR,
+                  textTransform: "capitalize",
+                  border: "1px solid #15B5FC",
+                  padding: "10px 10px",
+                  borderRadius: "30px",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  ":hover": {
+                    background: Colors.BUTTON_COLOR,
+                    color: Colors.WHITE,
+                  },
+                }}
+                variant="outlined"
+              >
+                see more services
+              </Button>
+              <EastIcon
+                style={{
+                  color: Colors.BUTTON_COLOR,
+                  fontSize: "34px",
+                }}
+              />
+            </Stack>
+          </Box>
+        </Box>
+        <CarouselComponent />
+        <Box width="100%" paddingY={4}>
+          <Box display={"flex"} justifyContent={"center"}>
+            <StyledImage src={logo} alt="22" />
+          </Box>
           <Typography
-            fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
-            marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
+            fontSize={{ xs: "26px", sm: "26px", md: "26px", lg: "54px" }}
             fontWeight={"600"}
             color={Colors.BLACK}
+            textAlign={"center"}
             fontStyle={"italic"}
             textTransform={"uppercase"}
           >
-            Our Services
+            @INSTA FEEDS
           </Typography>
-          <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
-            {/* <StyledImage src={Layer2} alt="Layer2" /> */}
-            <Typography
-              variant="h2"
-              color={Colors.BLACK}
-              fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
-              fontWeight={400}
-              width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
-              marginLeft={{ xs: "27px", sm: "27px", md: "27px", lg: "57px" }}
-              sx={{ fontFamily: "Inter" }}
-            >
-              We offer a diverse range of{" "}
-              <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
-                <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
-              </Link>{" "}
-              to cater to the varied interests of our community.
-            </Typography>
-          </Box>
-        </Stack>
-        <Grid
-          container
-          width="100%"
-          maxWidth={1460}
-          margin="0 auto"
-          spacing={3}
-          flexDirection={{
-            xs: "column",
-            sm: "row",
-            md: "row",
-            lg: "row",
-          }}
-        >
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Turf"}
-              description={
-                "Kick off your sports adventure on our two top-notch turfs, perfect for football, and a cricket selection for your sports."
-              }
-              image={turf}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Play Station"}
-              description={
-                "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection for your sports."
-              }
-              image={playstation}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Board Games"}
-              description={
-                "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time for your sports."
-              }
-              image={boardGames}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <CardComponent
-              buttonLabel="Know more"
-              title={"Badminton"}
-              description={
-                "Ace every shot on our professional Badminton courts, where passion meets a wide game and precision for your sports."
-              }
-              image={Badminton}
-            />
-          </Grid>
-        </Grid>
-        <Box
-          width="100%"
-          margin="0 auto"
-          pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-          pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
-        >
-          <Stack
-            marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
-            direction="row"
-            justifyContent="end"
-            alignItems="center"
-            gap="20px"
+          <Box
+            width={"9%"}
+            border={`2px solid ${Colors.BUTTON_COLOR}`}
+            margin={"auto"}
+          ></Box>
+          <Typography
+            pt={"15px"}
+            textAlign={"center"}
+            fontSize={{ xs: "16px", sm: "16px", md: "16px", lg: "20px" }}
+            fontWeight={"400"}
+            color={Colors.BLACK}
           >
-            <Button
-              sx={{
-                color: Colors.BUTTON_COLOR,
-                textTransform: "capitalize",
-                border: "1px solid #15B5FC",
-                padding: "10px 10px",
-                borderRadius: "30px",
-                fontSize: "14px",
-                fontWeight: "400",
-                ":hover": {
-                  background: Colors.BUTTON_COLOR,
-                  color: Colors.WHITE,
-                },
-              }}
-              variant="outlined"
-            >
-              see more services
-            </Button>
-            <EastIcon
-              style={{
-                color: Colors.BUTTON_COLOR,
-                fontSize: "34px",
-              }}
-            />
-          </Stack>
+            Relentless is more than a brand
+          </Typography>
+          <Box mt={"20px"} display={"flex"} justifyContent={"center"}>
+            <Link to={"https://www.instagram.com/"}>
+              <StyledImage1 src={insta} alt="22" />
+            </Link>
+          </Box>
+          <Grid
+            container
+            width="100%"
+            margin="0 auto"
+            spacing={3}
+            maxWidth={{
+              xs: "365px",
+              sm: "740px",
+              md: "867px",
+              lg: "fit-content",
+            }}
+            paddingTop={"20px"}
+            flexDirection={{
+              xs: "column",
+              sm: "row",
+              md: "row",
+              lg: "row",
+            }}
+          >
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <Link
+                to={
+                  "https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"
+                }
+              >
+                <StyledImage2
+                  style={{ borderRadius: "10px" }}
+                  src={pic1}
+                  alt=""
+                />
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <Link
+                to={
+                  "https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"
+                }
+              >
+                <StyledImage2
+                  style={{ borderRadius: "10px" }}
+                  src={pic2}
+                  alt=""
+                />
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <Link
+                to={
+                  "https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"
+                }
+              >
+                <StyledImage2
+                  style={{ borderRadius: "10px" }}
+                  src={pic3}
+                  alt=""
+                />
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
+              <Link
+                to={
+                  "https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"
+                }
+              >
+                <StyledImage2
+                  style={{ borderRadius: "10px" }}
+                  src={pic4}
+                  alt=""
+                />
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
-      <CarouselComponent />
-      <Box width="100%" paddingY={4}>
-        <Box display={"flex"} justifyContent={"center"}>
-          <StyledImage src={logo} alt="22" />
-        </Box>
-        <Typography
-          fontSize={{ xs: "26px", sm: "26px", md: "26px", lg: "54px" }}
-          fontWeight={"600"}
-          color={Colors.BLACK}
-          textAlign={"center"}
-          fontStyle={"italic"}
-          textTransform={"uppercase"}
-        >
-          @INSTA FEEDS
-        </Typography>
-        <Box
-          width={"9%"}
-          border={`2px solid ${Colors.BUTTON_COLOR}`}
-          margin={"auto"}
-        ></Box>
-        <Typography
-          pt={"15px"}
-          textAlign={"center"}
-          fontSize={{ xs: "16px", sm: "16px", md: "16px", lg: "20px" }}
-          fontWeight={"400"}
-          color={Colors.BLACK}
-        >
-          Relentless is more than a brand
-        </Typography>
-        <Box mt={"20px"} display={"flex"} justifyContent={"center"}>
-          <Link to={"https://www.instagram.com/"}>
-            <StyledImage1 src={insta} alt="22" />
-          </Link>
-        </Box>
-        <Grid
-          container
-          width="100%"
-          margin="0 auto"
-          spacing={3}
-          maxWidth={{
-            xs: "365px",
-            sm: "740px",
-            md: "867px",
-            lg: "fit-content",
-          }}
-          paddingTop={"20px"}
-          flexDirection={{
-            xs: "column",
-            sm: "row",
-            md: "row",
-            lg: "row",
-          }}
-        >
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Link
-              to={
-                "https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"
-              }
-            >
-              <StyledImage2
-                style={{ borderRadius: "10px" }}
-                src={pic1}
-                alt=""
-              />
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Link
-              to={
-                "https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"
-              }
-            >
-              <StyledImage2
-                style={{ borderRadius: "10px" }}
-                src={pic2}
-                alt=""
-              />
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Link
-              to={
-                "https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"
-              }
-            >
-              <StyledImage2
-                style={{ borderRadius: "10px" }}
-                src={pic3}
-                alt=""
-              />
-            </Link>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6} lg={3}>
-            <Link
-              to={
-                "https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"
-              }
-            >
-              <StyledImage2
-                style={{ borderRadius: "10px" }}
-                src={pic4}
-                alt=""
-              />
-            </Link>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
+
+      {id && openOtp ? (
+        <OTPModal
+          open={true}
+          handleClose={handleClose}
+          email={id}
+          setOpenForgetModal={handleClose}
+        />
+      ) : (
+        ""
+      )}
+    </>
   );
 }

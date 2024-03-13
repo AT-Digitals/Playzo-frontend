@@ -49,19 +49,19 @@ export default function ForgetPassword({
       return;
     }
     try {
-      const data = UserApi.sendOtp({ email: email }).then((dataVal)=>{
-        setEmailValue(dataVal.email)
-        setShowOTPModal(true);
-
-      });
-      console.log('data', data);
+      const data = UserApi.sendOtp({ email: email })
+        .then((dataVal) => {
+          setEmailValue(dataVal.email);
+          setShowOTPModal(true);
+        })
+        .catch((error) => {
+          alert(error);
+        });
+      console.log("data", data);
     } catch (error) {
       alert(error);
-      console.log('error', error);
+      console.log("error", error);
     }
-
-
-
   };
 
   const handleOTPModalClose = () => {
