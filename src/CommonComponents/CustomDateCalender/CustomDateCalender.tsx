@@ -80,6 +80,10 @@ export default function CustomDateCalendar({
     Date.now().toString()
   );
 
+  const [isChooseModalOpen, setChooseIsModalOpen] = useState(false);
+  const [isChoose, setIsChoose] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
 
@@ -157,6 +161,10 @@ export default function CustomDateCalendar({
     ApiCall(formattedDate);
   };
 
+  const hanldeLoginWithoutClose = () => {
+    setIsLogin(false);
+    navigate(routes.ROOT);
+  };
   const ApiCall = async (dateValue: any) => {
     if (type === BookingType.BowlingMachine) {
       selectedService = "Bowling Machine";
@@ -421,7 +429,7 @@ export default function CustomDateCalendar({
           } catch (error: any) {
             flag = true;
             if (error.message === "Please choose another date and slot") {
-              alert("Please choose another date and slot");
+              setIsChoose(true);
             }
           }
         }
@@ -453,11 +461,11 @@ export default function CustomDateCalendar({
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
       } else {
-        alert("Please choose date and time slots");
+        setChooseIsModalOpen(true);
       }
     } else {
-      alert("Could not add your bookings!\nPlease Login to Your Account");
-      navigate(routes.ROOT);
+      setIsLogin(true);
+      // navigate(routes.ROOT);
     }
   };
 
@@ -646,6 +654,27 @@ export default function CustomDateCalendar({
         open={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
         text={"Number of persons cannot be empty. Please enter a value."}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isChooseModalOpen}
+        handleClose={() => setChooseIsModalOpen(false)}
+        text={"Please choose date and slots"}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isChoose}
+        handleClose={() => setIsChoose(false)}
+        text={"Please choose another date and slots"}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isLogin}
+        handleClose={hanldeLoginWithoutClose}
+        text={"Could not add your bookings!\nPlease Login to Your Account"}
         headingText={""}
       />
     </>
