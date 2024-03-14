@@ -24,10 +24,10 @@ import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
+import UserApi from "../api/UserApi";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
 import routes from "../routes/routes";
-import UserApi from "../api/UserApi";
 
 const {
   "Calendar.png": calendar,
@@ -85,7 +85,9 @@ export default function PaymentBooking() {
   const userData = user && JSON.parse(user);
 
   const [open, setOpen] = React.useState(false);
-  const [phoneNumber, setPhoneNumber] = useState(userData.phone === 0 ? '' : userData.phone ?? '');
+  const [phoneNumber, setPhoneNumber] = useState(
+    userData.phone === 0 ? "" : userData.phone ?? ""
+  );
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const handleClose = () => {
@@ -97,8 +99,6 @@ export default function PaymentBooking() {
 
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
-
-
 
   const navigate = useNavigate();
 
@@ -114,13 +114,18 @@ export default function PaymentBooking() {
       return;
     }
     try {
-      const data = UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) });
+      const data = UserApi.updateById(userData.id, {
+        phone: parseInt(phoneNumber),
+      });
     } catch (error) {
-      console.log('phone number is not valid');
+      console.log("phone number is not valid");
     }
 
     if (userData) {
-      localStorage.setItem('user', JSON.stringify({ ...userData, phone: phoneNumber }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...userData, phone: phoneNumber })
+      );
     }
 
     allBookings.map(async (bookings: any) => {
@@ -242,9 +247,8 @@ export default function PaymentBooking() {
     if (!phoneRegex.test(enteredPhoneNumber)) {
       setPhoneNumberError("Please enter a valid 10-digit phone number.");
     }
-
-
   };
+
   return (
     <>
       <Box
@@ -365,8 +369,9 @@ export default function PaymentBooking() {
 
                     // Format start and end times without minutes
                     const formattedStartTime = `${startHours % 12 || 12}:00`;
-                    const formattedEndTime = `${endHours % 12 || 12}:00 ${endHours < 12 ? "AM" : "PM"
-                      }`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
+                      endHours < 12 ? "AM" : "PM"
+                    }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
@@ -536,7 +541,7 @@ export default function PaymentBooking() {
               <Box mt={"5px"}>
                 <TextField
                   fullWidth
-                  value={phoneNumber ?? ''}
+                  value={phoneNumber ?? ""}
                   onChange={handlePhoneNumberChange}
                   error={phoneNumberError !== ""}
                   helperText={phoneNumberError}

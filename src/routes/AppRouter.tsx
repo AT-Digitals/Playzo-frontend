@@ -11,6 +11,7 @@ import Badminton from "../pages/services/Badminton";
 import BadmintonBookingCommon from "../BookingService/BadmintonCommon";
 import BoardBookingCommon from "../BookingService/BoardGamesCommon";
 import BoardGames from "../pages/services/BoardGames";
+import BookingPDF from "../BookingService/BookingPDF";
 import BowlingMachine from "../pages/services/BowlingMachine";
 import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon";
 import Cafeteria from "../pages/services/Cafeteria";
@@ -91,6 +92,7 @@ const router = createBrowserRouter(
         <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
 
         <Route path={`${routes.ROOT}/:id`} element={<HomePage />} />
+        <Route path={routes.BOOKING_PDF} element={<BookingPDF />} />
       </Route>
     </Route>
   )

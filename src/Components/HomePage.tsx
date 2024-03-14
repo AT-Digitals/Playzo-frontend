@@ -184,9 +184,19 @@ export default function HomePage() {
     setOpenOtp(false);
   };
 
+  // useEffect(() => {
+  //   // Check if the URL contains an email or string (assuming 'id' is the parameter)
+  //   if (id && (id.includes("@") || isNaN(Number(id)))) {
+  //     setOpenOtp(true);
+  //   }
+  // }, [id]);
+
   useEffect(() => {
-    // Check if the URL contains an email or string (assuming 'id' is the parameter)
-    if (id && (id.includes("@") || isNaN(Number(id)))) {
+    // Regular expression to check if id is an email address
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the URL contains an email address
+    if (id && emailRegex.test(id)) {
       setOpenOtp(true);
     }
   }, [id]);
