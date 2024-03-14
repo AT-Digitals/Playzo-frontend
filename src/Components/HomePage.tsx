@@ -98,8 +98,58 @@ const StyledImage2 = styled.img`
     width: 290px;
     height: 345px;
 }
-  
 `;
+const StyledVideo = styled.video`
+  @media (min-width: 300px) {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  @media (min-width: 414px) {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  @media (min-width: 540px) {
+    width: 490px;
+    height: 340px;
+    margin: auto;
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 820px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 912px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 992px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 1000px) {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1200px) {
+    width: 100%;
+    height: 854px;
+    object-fit: cover;
+  }
+`;
+
 
 const {
   "pexels-ben-muk-5488874 (1).jpg": Badminton,
@@ -172,9 +222,9 @@ export default function HomePage() {
        <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
         <CircularProgress color="inherit" />
       </Backdrop>
-      <video width="100%" autoPlay loop muted controls={false}>
+      <StyledVideo autoPlay loop muted controls={false}>
         <source src={videoFile} type="video/mp4" />
-      </video>
+      </StyledVideo>
       <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
         <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
           <Box
