@@ -68,9 +68,6 @@ const StyledStack = styled(Stack)`
   @media (min-width: 414px) {
     transform: translate(-61px, 10px);
   }
-  @media (min-width: 390px) {
-    transform: translate(-43px, 10px);
-  }
 
   @media (min-width: 430px) {
     transform: translate(-74px, 10px);
