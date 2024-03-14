@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useBlocker, useLocation, useNavigate } from "react-router-dom";
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -679,6 +679,10 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     : "Unknown Type"}
                 </Typography>
               </Box>
+            </Box>
+            <Box display={{xs: "flex", sm: "flex", md: "flex", lg: "none"}} justifyContent={{xs: "center", sm: "center", md: "center", lg: ""}}
+            marginTop={{xs: "-33px", sm: "-39px", md: "-39px", lg: "0px"}} marginBottom={{xs: "28px", sm: "28px", md: "28px", lg: "0px"}}>
+            <KeyboardArrowDownIcon style={{fontSize: "30px", color: "rgba(0, 0, 0, 0.6)"}} />
             </Box>
             <Stack
               display={
