@@ -19,6 +19,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
 import { BookingSubTypes } from "./BookingSubTypes";
+import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
@@ -353,6 +354,7 @@ export default function PaymentBooking() {
                       endDate: string;
                       amount: string;
                       endTime: number;
+                      numberOfPersons: string;
                     },
                     index: any
                   ) => {
@@ -389,11 +391,22 @@ export default function PaymentBooking() {
                         paddingBottom={"20px"}
                       >
                         <Typography
+                          display={"flex"}
+                          gap={"0.5rem"}
                           fontWeight={"500"}
                           fontSize={"15px"}
                           color={Colors.BLACK}
                         >
-                          {item.name}
+                          {item.name}{" "}
+                          <Typography
+                            display={
+                              item.type === BookingType.Badminton
+                                ? "flex"
+                                : "none"
+                            }
+                          >
+                            / {item.numberOfPersons}
+                          </Typography>
                         </Typography>
                         <Box
                           pt={"10px"}
