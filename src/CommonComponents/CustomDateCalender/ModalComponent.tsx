@@ -1,6 +1,8 @@
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 
 import Colors from "../Colors";
+import MyDocument from "../../BookingService/BookingPDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import assets from "../../assets";
 
 const { "Playzo (1).svg": logo } = assets;
@@ -22,6 +24,7 @@ interface modalProps {
   text: string;
   headingText: string;
   paymentText?: string;
+  pdf?: any;
 }
 
 export default function ModalComponent({
@@ -30,6 +33,7 @@ export default function ModalComponent({
   text,
   headingText,
   paymentText,
+  pdf,
 }: modalProps) {
   return (
     <Modal
@@ -92,8 +96,41 @@ export default function ModalComponent({
             }}
             onClick={handleClose}
           >
-            OK
+            <div>
+              <PDFDownloadLink
+                document={<MyDocument />}
+                fileName="booking.pdf"
+                download={pdf}
+              >
+                OK
+                {/* {({ loading }) =>
+                    loading ? "Loading document..." : "Download now!"
+                  } */}
+              </PDFDownloadLink>
+            </div>
           </Button>
+
+          <Button
+            variant="outlined"
+            sx={{
+              padding: "8px 20px",
+              textTransform: "none",
+              fontSize: "16px",
+              minWidth: "150px",
+              fontWeight: "400",
+              border: "2px solid #15B5FC",
+              borderRadius: "30px",
+              letterSpacing: "1.6px",
+              background: Colors.BUTTON_COLOR,
+              color: Colors.WHITE,
+              ":hover": {
+                background: Colors.WHITE,
+                color: Colors.BUTTON_COLOR,
+                border: "2px solid #15B5FC",
+              },
+            }}
+            // onClick={handleClose}
+          ></Button>
         </Stack>
       </Box>
     </Modal>

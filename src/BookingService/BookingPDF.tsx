@@ -6,6 +6,7 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
+import React, { useState } from "react";
 
 const styles = StyleSheet.create({
   page: {
@@ -20,25 +21,25 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function BookingPDF() {
-  const handlePdfGeneration = ({ blob }: any) => {
-    // Handle PDF generation here if needed
-    console.log("PDF generated");
-  };
+// export default function BookingPDF() {
+//   const handlePdfGeneration = ({ blob }: any) => {
+//     // Handle PDF generation here if needed
+//     console.log("PDF generated");
+//   };
 
-  return (
-    <div>
-      <PDFDownloadLink
-        document={<MyDocument />}
-        fileName="booking.pdf"
-        download={handlePdfGeneration}
-      >
-        {({ loading }) => (loading ? "Loading document..." : "Download now!")}
-      </PDFDownloadLink>
-    </div>
-  );
-}
-function MyDocument() {
+//   return (
+//     <div>
+//       <PDFDownloadLink
+//         document={<MyDocument />}
+//         fileName="booking.pdf"
+//         download={handlePdfGeneration}
+//       >
+//         {({ loading }) => (loading ? "Loading document..." : "Download now!")}
+//       </PDFDownloadLink>
+//     </div>
+//   );
+// }
+export default function MyDocument() {
   return (
     <Document>
       <Page size="A4" style={styles.page}>

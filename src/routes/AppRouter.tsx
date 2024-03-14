@@ -11,7 +11,6 @@ import Badminton from "../pages/services/Badminton";
 import BadmintonBookingCommon from "../BookingService/BadmintonCommon";
 import BoardBookingCommon from "../BookingService/BoardGamesCommon";
 import BoardGames from "../pages/services/BoardGames";
-import BookingPDF from "../BookingService/BookingPDF";
 import BowlingMachine from "../pages/services/BowlingMachine";
 import BowllingMachineBookingCommon from "../BookingService/BowlingMachineCommon";
 import Cafeteria from "../pages/services/Cafeteria";
@@ -37,6 +36,8 @@ import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
+
+// import BookingPDF from "../BookingService/BookingPDF";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -92,7 +93,6 @@ const router = createBrowserRouter(
         <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
 
         <Route path={`${routes.ROOT}/:id`} element={<HomePage />} />
-        <Route path={routes.BOOKING_PDF} element={<BookingPDF />} />
       </Route>
     </Route>
   )

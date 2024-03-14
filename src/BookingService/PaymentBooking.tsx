@@ -23,6 +23,9 @@ import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
+import MyDocument from "./BookingPDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
 import TodayIcon from "@mui/icons-material/Today";
 import UserApi from "../api/UserApi";
 import assets from "../assets";
@@ -95,6 +98,13 @@ export default function PaymentBooking() {
     navigate(routes.BOOKING_SERVICE);
     localStorage.removeItem("bookings");
     localStorage.removeItem("selectedService");
+    window.open("_blank");
+  };
+
+  const handlePdfGeneration = ({ blob }: any) => {
+    // Handle PDF generation here if needed
+    console.log("PDF generated");
+    window.open("_blank");
   };
 
   const location = useLocation();
@@ -817,10 +827,21 @@ export default function PaymentBooking() {
       <ModalComponent
         open={open}
         handleClose={handleClose}
+        pdf={handlePdfGeneration}
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
         paymentText="You have paid 30% in online remaining you have to pay in the court"
       />
+
+      {/* <div>
+        <PDFDownloadLink
+          document={<MyDocument />}
+          fileName="booking.pdf"
+          download={handlePdfGeneration}
+        >
+          {({ loading }) => (loading ? "Loading document..." : "Download now!")}
+        </PDFDownloadLink>
+      </div> */}
     </>
   );
 }
