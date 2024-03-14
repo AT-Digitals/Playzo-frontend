@@ -260,7 +260,7 @@ export default function MyDocument({ allBookings }: any) {
                   width: "20%",
                 }}
               >
-                {item.name}
+                {item.type}
               </Text>
               <Text
                 style={{
@@ -269,8 +269,9 @@ export default function MyDocument({ allBookings }: any) {
                   width: "20%",
                 }}
               >
-                {item.type}
+                {item.name}
               </Text>
+
               <Text
                 style={{
                   fontSize: "12px",
