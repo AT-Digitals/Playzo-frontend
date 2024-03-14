@@ -114,8 +114,9 @@ export default function PaymentBooking() {
       return;
     }
     try {
-      const data = UserApi.updateById(userData.id, {
-        phone: parseInt(phoneNumber),
+
+      UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) }).then().catch((error)=>{
+        alert(error);
       });
     } catch (error) {
       console.log("phone number is not valid");
@@ -144,6 +145,7 @@ export default function PaymentBooking() {
             BookingSubTypes[
               bookings.name as keyof typeof BookingSubTypes
             ].toString(),
+            numberOfPerson:bookings.numberOfPersons>0?bookings.numberOfPersons:0
         });
 
         if (response) {

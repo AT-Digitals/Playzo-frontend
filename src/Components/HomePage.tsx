@@ -107,8 +107,58 @@ const StyledImage2 = styled.img`
     width: 290px;
     height: 345px;
 }
-  
 `;
+const StyledVideo = styled.video`
+  @media (min-width: 300px) {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  @media (min-width: 414px) {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  @media (min-width: 540px) {
+    width: 490px;
+    height: 340px;
+    margin: auto;
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 820px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 912px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 992px) {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+  @media (min-width: 1000px) {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1200px) {
+    width: 100%;
+    height: 854px;
+    object-fit: cover;
+  }
+`;
+
 
 const {
   "pexels-ben-muk-5488874 (1).jpg": Badminton,
@@ -202,25 +252,34 @@ export default function HomePage() {
   }, [id]);
 
   return (
-    <>
-      <Box width="100%">
-        <Backdrop
-          open={loading}
-          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: "#fff" }}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        <video width="100%" autoPlay loop muted controls={false}>
-          <source src={videoFile} type="video/mp4" />
-        </video>
-        <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
-          <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
-            <Box
-              width={"24%"}
-              border={`2px solid ${Colors.BUTTON_COLOR}`}
-              marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
-              marginBottom={"10px"}
-            ></Box>
+
+    <Box width="100%">
+       <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <StyledVideo autoPlay loop muted controls={false}>
+        <source src={videoFile} type="video/mp4" />
+      </StyledVideo>
+      <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
+        <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
+          <Box
+            width={"24%"}
+            border={`2px solid ${Colors.BUTTON_COLOR}`}
+            marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
+            marginBottom={"10px"}
+          ></Box>
+          <Typography
+            fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
+            marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
+            fontWeight={"600"}
+            color={Colors.BLACK}
+            fontStyle={"italic"}
+            textTransform={"uppercase"}
+          >
+            Our Services
+          </Typography>
+          <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
+            {/* <StyledImage src={Layer2} alt="Layer2" /> */}
             <Typography
               fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
               marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
