@@ -159,7 +159,6 @@ const StyledVideo = styled.video`
   }
 `;
 
-
 const {
   "pexels-ben-muk-5488874 (1).jpg": Badminton,
   "pexels-guduru-ajay-bhargav-863988.jpg": Image3,
@@ -252,34 +251,25 @@ export default function HomePage() {
   }, [id]);
 
   return (
-
-    <Box width="100%">
-       <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: '#fff' }}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <StyledVideo autoPlay loop muted controls={false}>
-        <source src={videoFile} type="video/mp4" />
-      </StyledVideo>
-      <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
-        <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
-          <Box
-            width={"24%"}
-            border={`2px solid ${Colors.BUTTON_COLOR}`}
-            marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
-            marginBottom={"10px"}
-          ></Box>
-          <Typography
-            fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
-            marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
-            fontWeight={"600"}
-            color={Colors.BLACK}
-            fontStyle={"italic"}
-            textTransform={"uppercase"}
-          >
-            Our Services
-          </Typography>
-          <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
-            {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+    <>
+      <Box width="100%">
+        <Backdrop
+          open={loading}
+          sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, color: "#fff" }}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        <StyledVideo autoPlay loop muted controls={false}>
+          <source src={videoFile} type="video/mp4" />
+        </StyledVideo>
+        <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
+          <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "60px" }}>
+            <Box
+              width={"24%"}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
+              marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
+              marginBottom={"10px"}
+            ></Box>
             <Typography
               fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
               marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
@@ -293,20 +283,38 @@ export default function HomePage() {
             <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
               {/* <StyledImage src={Layer2} alt="Layer2" /> */}
               <Typography
-                variant="h2"
+                fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
+                marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
+                fontWeight={"600"}
                 color={Colors.BLACK}
-                fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
-                fontWeight={400}
-                width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
-                marginLeft={{ xs: "27px", sm: "27px", md: "27px", lg: "57px" }}
-                sx={{ fontFamily: "Inter" }}
+                fontStyle={"italic"}
+                textTransform={"uppercase"}
               >
-                We offer a diverse range of{" "}
-                <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
-                  <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
-                </Link>{" "}
-                to cater to the varied interests of our community.
+                Our Services
               </Typography>
+              <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
+                {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+                <Typography
+                  variant="h2"
+                  color={Colors.BLACK}
+                  fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
+                  fontWeight={400}
+                  width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
+                  marginLeft={{
+                    xs: "27px",
+                    sm: "27px",
+                    md: "27px",
+                    lg: "57px",
+                  }}
+                  sx={{ fontFamily: "Inter" }}
+                >
+                  We offer a diverse range of{" "}
+                  <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
+                    <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
+                  </Link>{" "}
+                  to cater to the varied interests of our community.
+                </Typography>
+              </Box>
             </Box>
           </Stack>
           <Grid

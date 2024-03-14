@@ -273,30 +273,7 @@ export default function CareersPageNew() {
         whitesmoke
       `,
 
-      backgroundBlendMode: "multiply",
-    }}
-  >
-    <AppContainer
-      paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
-      paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
-      maxWidth={1200}
-    >
-      <Typography
-        pb={{ xs: "48px", sm: "48px", md: "48px", lg: "20px" }}
-        pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
-        pt={"20px"}
-        color={Colors.BLACK}
-        fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
-        fontWeight={"900"}
-        fontStyle={"italic"}
-        textTransform={"uppercase"}
-      >
-        Welcome To Careers!!!
-      </Typography>
-      <Stack
-        style={{
-          marginBottom: "20px",
-          marginTop: "-28px",
+          backgroundBlendMode: "multiply",
         }}
       >
         <AppContainer
@@ -314,219 +291,252 @@ export default function CareersPageNew() {
             fontStyle={"italic"}
             textTransform={"uppercase"}
           >
-            Careers!!!
+            Welcome To Careers!!!
           </Typography>
           <Stack
             style={{
               marginBottom: "20px",
               marginTop: "-28px",
             }}
-            spacing={10}
-            direction={{
-              xs: "column-reverse",
-              sm: "column-reverse",
-              md: "column-reverse",
-              lg: "row",
-            }}
-            paddingBottom={{ xs: "30px", sm: "60px", md: "60px", lg: "0px" }}
           >
-            <Box
-              flexDirection={"column"}
-              display={"flex"}
-              marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
-              sx={{
-                paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" },
-              }}
+            <AppContainer
+              paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
+              paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
+              maxWidth={1200}
             >
-              <StyledImage src={image} alt="" />
-            </Box>
-
-            <Box
-              style={{ marginBottom: "40px" }}
-              marginLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "110px" }}
-              pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}
-              width={"100%"}
-            >
-              <form onSubmit={onSubmit}>
-                <Stack
-                  margin={{
-                    xs: "0 auto",
-                    sm: "0 auto",
-                    md: "0 auto",
-                    lg: "0 auto",
-                  }}
-                  border={{
-                    xs: "1px solid #d4ebf2",
-                    sm: "1px solid #d4ebf2",
-                    md: "1px solid #d4ebf2",
-                    lg: "1px solid #d4ebf2",
-                  }}
-                  width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
-                  borderRadius={{
-                    xs: "20px",
-                    sm: "20px",
-                    md: "20px",
-                    lg: "20px",
-                  }}
-                  padding={{
-                    xs: "21px 16px",
-                    sm: "21px 16px",
-                    md: "21px 16px",
-                    lg: "10px 21px",
-                  }}
-                  direction="column"
-                  spacing={3}
-                  style={{
-                    backgroundColor: "#d4ebf2",
-                    boxShadow: "1px 7px 11px 2px dimgrey",
+              <Typography
+                pb={{ xs: "48px", sm: "48px", md: "48px", lg: "20px" }}
+                pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
+                pt={"20px"}
+                color={Colors.BLACK}
+                fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
+                fontWeight={"900"}
+                fontStyle={"italic"}
+                textTransform={"uppercase"}
+              >
+                Careers!!!
+              </Typography>
+              <Stack
+                style={{
+                  marginBottom: "20px",
+                  marginTop: "-28px",
+                }}
+                spacing={10}
+                direction={{
+                  xs: "column-reverse",
+                  sm: "column-reverse",
+                  md: "column-reverse",
+                  lg: "row",
+                }}
+                paddingBottom={{
+                  xs: "30px",
+                  sm: "60px",
+                  md: "60px",
+                  lg: "0px",
+                }}
+              >
+                <Box
+                  flexDirection={"column"}
+                  display={"flex"}
+                  marginLeft={{ xs: "-14px", sm: "0px", md: "0px", lg: "0px" }}
+                  sx={{
+                    paddingTop: { xs: "0px", sm: "0px", md: "0px", lg: "0px" },
                   }}
                 >
-                  <CustomTextField
-                    sx={{ maxWidth: 700, borderRadius: "8px" }}
-                    label="Name"
-                    required={false}
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={handleNameChange}
-                    error={!!isValidName}
-                    helperText={isValidName ? "Please provide valid Name" : ""}
-                  />
-                  <CustomTextField
-                    sx={{ maxWidth: 700, borderRadius: "8px" }}
-                    label="Email"
-                    required={false}
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={handleEmailChange}
-                    error={!!isValidEmail}
-                    helperText={
-                      isValidEmail ? "Please provide valid Email" : ""
-                    }
-                  />
+                  <StyledImage src={image} alt="" />
+                </Box>
 
-                  <CustomTextField
-                    sx={{ maxWidth: 700, borderRadius: "8px" }}
-                    label="Role you want to apply"
-                    required={false}
-                    placeholder="Role you want to apply"
-                    value={role}
-                    onChange={handleRoleChange}
-                  />
-                  <CustomTextField
-                    sx={{ maxWidth: 700, borderRadius: "8px" }}
-                    label="Phone Number"
-                    required={false}
-                    placeholder="Enter your phone number"
-                    value={phoneNumber}
-                    onChange={handlePhoneChange}
-                    type="number"
-                    error={!!isValidPhone}
-                    helperText={
-                      isValidPhone ? "Please provide valid phone number" : ""
-                    }
-                  />
-
-                  <Typography>Attachments</Typography>
-
-                  {resume ? (
-                    <div
+                <Box
+                  style={{ marginBottom: "40px" }}
+                  marginLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "110px" }}
+                  pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }}
+                  width={"100%"}
+                >
+                  <form onSubmit={onSubmit}>
+                    <Stack
+                      margin={{
+                        xs: "0 auto",
+                        sm: "0 auto",
+                        md: "0 auto",
+                        lg: "0 auto",
+                      }}
+                      border={{
+                        xs: "1px solid #d4ebf2",
+                        sm: "1px solid #d4ebf2",
+                        md: "1px solid #d4ebf2",
+                        lg: "1px solid #d4ebf2",
+                      }}
+                      width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
+                      borderRadius={{
+                        xs: "20px",
+                        sm: "20px",
+                        md: "20px",
+                        lg: "20px",
+                      }}
+                      padding={{
+                        xs: "21px 16px",
+                        sm: "21px 16px",
+                        md: "21px 16px",
+                        lg: "10px 21px",
+                      }}
+                      direction="column"
+                      spacing={3}
                       style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginTop: "10px",
+                        backgroundColor: "#d4ebf2",
+                        boxShadow: "1px 7px 11px 2px dimgrey",
                       }}
                     >
-                      <Typography color={Colors.BUTTON_COLOR}>
-                        {(resume as File)?.name}
-                      </Typography>
-                      <IconButton
-                        onClick={() => setResume(null)} // Assume setResume is your state updater
-                        style={{ marginLeft: "10px" }}
-                      >
-                        <DeleteIcon
+                      <CustomTextField
+                        sx={{ maxWidth: 700, borderRadius: "8px" }}
+                        label="Name"
+                        required={false}
+                        placeholder="Enter your name"
+                        value={name}
+                        onChange={handleNameChange}
+                        error={!!isValidName}
+                        helperText={
+                          isValidName ? "Please provide valid Name" : ""
+                        }
+                      />
+                      <CustomTextField
+                        sx={{ maxWidth: 700, borderRadius: "8px" }}
+                        label="Email"
+                        required={false}
+                        placeholder="Enter your email address"
+                        value={email}
+                        onChange={handleEmailChange}
+                        error={!!isValidEmail}
+                        helperText={
+                          isValidEmail ? "Please provide valid Email" : ""
+                        }
+                      />
+
+                      <CustomTextField
+                        sx={{ maxWidth: 700, borderRadius: "8px" }}
+                        label="Role you want to apply"
+                        required={false}
+                        placeholder="Role you want to apply"
+                        value={role}
+                        onChange={handleRoleChange}
+                      />
+                      <CustomTextField
+                        sx={{ maxWidth: 700, borderRadius: "8px" }}
+                        label="Phone Number"
+                        required={false}
+                        placeholder="Enter your phone number"
+                        value={phoneNumber}
+                        onChange={handlePhoneChange}
+                        type="number"
+                        error={!!isValidPhone}
+                        helperText={
+                          isValidPhone
+                            ? "Please provide valid phone number"
+                            : ""
+                        }
+                      />
+
+                      <Typography>Attachments</Typography>
+
+                      {resume ? (
+                        <div
                           style={{
-                            color: "red",
-                          }}
-                        />
-                      </IconButton>
-                    </div>
-                  ) : (
-                    <>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          marginTop: "10px",
-                        }}
-                      >
-                        <label
-                          htmlFor="resumeInput"
-                          style={{
-                            cursor: "pointer",
-                            padding: "10px",
-                            border: "1px solid #15B5FC",
-                            borderRadius: "5px",
-                            backgroundColor: "#15B5FC",
-                            color: "#fff",
-                            textAlign: "center",
-                            width: "200px",
+                            display: "flex",
+                            alignItems: "center",
+                            marginTop: "10px",
                           }}
                         >
-                          Choose File
-                        </label>
-                        <input
-                          id="resumeInput"
-                          type="file"
-                          accept=".pdf, .doc, .docx"
-                          onChange={handleResumeChange}
-                          style={{
-                            display: "none",
-                          }}
-                        />
-                      </div>
-                      {isValidResume && (
-                        <p style={{ color: "red" }}>
-                          Please attach a valid resume file.
-                        </p>
+                          <Typography color={Colors.BUTTON_COLOR}>
+                            {(resume as File)?.name}
+                          </Typography>
+                          <IconButton
+                            onClick={() => setResume(null)} // Assume setResume is your state updater
+                            style={{ marginLeft: "10px" }}
+                          >
+                            <DeleteIcon
+                              style={{
+                                color: "red",
+                              }}
+                            />
+                          </IconButton>
+                        </div>
+                      ) : (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              marginTop: "10px",
+                            }}
+                          >
+                            <label
+                              htmlFor="resumeInput"
+                              style={{
+                                cursor: "pointer",
+                                padding: "10px",
+                                border: "1px solid #15B5FC",
+                                borderRadius: "5px",
+                                backgroundColor: "#15B5FC",
+                                color: "#fff",
+                                textAlign: "center",
+                                width: "200px",
+                              }}
+                            >
+                              Choose File
+                            </label>
+                            <input
+                              id="resumeInput"
+                              type="file"
+                              accept=".pdf, .doc, .docx"
+                              onChange={handleResumeChange}
+                              style={{
+                                display: "none",
+                              }}
+                            />
+                          </div>
+                          {isValidResume && (
+                            <p style={{ color: "red" }}>
+                              Please attach a valid resume file.
+                            </p>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
 
-                  <Button
-                    sx={{
-                      borderRadius: "30px",
-                      textTransform: "none",
-                      fontSize: "16px",
-                      fontWeight: 400,
-                      padding: "10px",
-                      maxWidth: 700,
-                      border: "1px solid #15B5FC",
-                      background: Colors.BUTTON_COLOR,
-                      color: Colors.WHITE,
-                      ":hover": {
-                        background: Colors.WHITE,
-                        color: Colors.BUTTON_COLOR,
-                        border: "1px solid #15B5FC",
-                      },
-                    }}
-                    variant="outlined"
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </Stack>
-              </form>
-              <ModalComponent
-                open={successMessage}
-                handleClose={successNotification}
-                text="Your Enquiry is Successfully added"
-                headingText="Enquiry Confirmation"
-              />
-            </Box>
+                      <Button
+                        sx={{
+                          borderRadius: "30px",
+                          textTransform: "none",
+                          fontSize: "16px",
+                          fontWeight: 400,
+                          padding: "10px",
+                          maxWidth: 700,
+                          border: "1px solid #15B5FC",
+                          background: Colors.BUTTON_COLOR,
+                          color: Colors.WHITE,
+                          ":hover": {
+                            background: Colors.WHITE,
+                            color: Colors.BUTTON_COLOR,
+                            border: "1px solid #15B5FC",
+                          },
+                        }}
+                        variant="outlined"
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+                    </Stack>
+                  </form>
+                  <ModalComponent
+                    open={successMessage}
+                    handleClose={successNotification}
+                    text="Your Enquiry is Successfully added"
+                    headingText="Enquiry Confirmation"
+                  />
+                </Box>
+              </Stack>
+            </AppContainer>
           </Stack>
         </AppContainer>
       </Box>
     </>
-
   );
 }
