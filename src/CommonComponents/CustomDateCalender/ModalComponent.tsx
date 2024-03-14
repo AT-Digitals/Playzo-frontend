@@ -25,6 +25,7 @@ interface modalProps {
   headingText: string;
   paymentText?: string;
   pdf?: any;
+  data?: any;
 }
 
 export default function ModalComponent({
@@ -34,6 +35,7 @@ export default function ModalComponent({
   headingText,
   paymentText,
   pdf,
+  data,
 }: modalProps) {
   return (
     <Modal
@@ -96,41 +98,45 @@ export default function ModalComponent({
             }}
             onClick={handleClose}
           >
-            <div>
-              <PDFDownloadLink
-                document={<MyDocument />}
-                fileName="booking.pdf"
-                download={pdf}
-              >
-                OK
-                {/* {({ loading }) =>
-                    loading ? "Loading document..." : "Download now!"
-                  } */}
-              </PDFDownloadLink>
-            </div>
+            OK
           </Button>
 
-          <Button
-            variant="outlined"
-            sx={{
-              padding: "8px 20px",
-              textTransform: "none",
-              fontSize: "16px",
-              minWidth: "150px",
-              fontWeight: "400",
-              border: "2px solid #15B5FC",
-              borderRadius: "30px",
-              letterSpacing: "1.6px",
-              background: Colors.BUTTON_COLOR,
-              color: Colors.WHITE,
-              ":hover": {
-                background: Colors.WHITE,
-                color: Colors.BUTTON_COLOR,
+          {pdf ? (
+            <Button
+              variant="outlined"
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "150px",
+                fontWeight: "400",
                 border: "2px solid #15B5FC",
-              },
-            }}
-            // onClick={handleClose}
-          ></Button>
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "2px solid #15B5FC",
+                },
+              }}
+            >
+              <div>
+                <PDFDownloadLink
+                  style={{
+                    color: "red",
+                  }}
+                  document={<MyDocument allBookings={data} />}
+                  fileName="booking.pdf"
+                >
+                  Download as PDF
+                </PDFDownloadLink>
+              </div>
+            </Button>
+          ) : (
+            ""
+          )}
         </Stack>
       </Box>
     </Modal>

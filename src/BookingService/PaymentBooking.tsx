@@ -98,13 +98,6 @@ export default function PaymentBooking() {
     navigate(routes.BOOKING_SERVICE);
     localStorage.removeItem("bookings");
     localStorage.removeItem("selectedService");
-    window.open("_blank");
-  };
-
-  const handlePdfGeneration = ({ blob }: any) => {
-    // Handle PDF generation here if needed
-    console.log("PDF generated");
-    window.open("_blank");
   };
 
   const location = useLocation();
@@ -124,10 +117,11 @@ export default function PaymentBooking() {
       return;
     }
     try {
-
-      UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) }).then().catch((error)=>{
-        alert(error);
-      });
+      UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) })
+        .then()
+        .catch((error) => {
+          alert(error);
+        });
     } catch (error) {
       console.log("phone number is not valid");
     }
@@ -155,7 +149,8 @@ export default function PaymentBooking() {
             BookingSubTypes[
               bookings.name as keyof typeof BookingSubTypes
             ].toString(),
-            numberOfPerson:bookings.numberOfPersons>0?bookings.numberOfPersons:0
+          numberOfPerson:
+            bookings.numberOfPersons > 0 ? bookings.numberOfPersons : 0,
         });
 
         if (response) {
@@ -829,21 +824,12 @@ export default function PaymentBooking() {
       <ModalComponent
         open={open}
         handleClose={handleClose}
-        pdf={handlePdfGeneration}
+        pdf={true}
+        data={allBookings}
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
         paymentText="You have paid 30% in online remaining you have to pay in the court"
       />
-
-      {/* <div>
-        <PDFDownloadLink
-          document={<MyDocument />}
-          fileName="booking.pdf"
-          download={handlePdfGeneration}
-        >
-          {({ loading }) => (loading ? "Loading document..." : "Download now!")}
-        </PDFDownloadLink>
-      </div> */}
     </>
   );
 }
