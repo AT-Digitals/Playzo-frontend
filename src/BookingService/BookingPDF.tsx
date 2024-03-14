@@ -6,10 +6,9 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
+import React, { useEffect, useState } from "react";
 
-import { Box } from "@mui/material";
 import Colors from "../CommonComponents/Colors";
-import React from "react";
 import assets from "../assets";
 
 const { "Playzo (1).svg": logo } = assets;
@@ -34,11 +33,18 @@ const styles = StyleSheet.create({
   itemName: {
     fontWeight: "bold",
   },
+  logo: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    width: 100,
+    height: 50,
+  },
 });
 
-export default function MyDocument({ allBookings }: any) {
-  const startDateTime = new Date(allBookings.startTime);
-  const endDateTime = new Date(allBookings.endTime);
+const formatTimeRange = (startTime: any, endTime: any) => {
+  const startDateTime = new Date(startTime);
+  const endDateTime = new Date(endTime);
 
   const startHours = startDateTime.getHours();
   const endHours = endDateTime.getHours();
@@ -47,12 +53,49 @@ export default function MyDocument({ allBookings }: any) {
     endHours < 12 ? "AM" : "PM"
   }`;
 
-  const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
+  return `${formattedStartTime} - ${formattedEndTime}`;
+};
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  return formattedDate;
+};
+
+interface User {
+  phone?: string;
+  name?: string;
+  email?: string;
+}
+export default function MyDocument({ allBookings }: any) {
+  const totalAmount = allBookings.reduce(
+    (accumulator: number, booking: { amount: string }) =>
+      accumulator + (parseFloat(booking.amount) || 0),
+    0
+  );
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    const parsedUserData = userData && JSON.parse(userData);
+
+    if (parsedUserData) {
+      setUser(parsedUserData);
+    } else {
+      setUser(null);
+    }
+  }, []);
+
   return (
     <Document
       style={{
         border: "1px solid red",
         padding: "20px",
+        backgroundColor: "#000333",
       }}
     >
       <Page
@@ -65,89 +108,232 @@ export default function MyDocument({ allBookings }: any) {
           padding: "60px",
         }}
       >
+        <Image style={styles.logo} src={logo} />
         <Text
           style={{
             textAlign: "center",
-            fontSize: "25px",
+            fontSize: "30px",
             paddingBottom: "5px",
-            color: Colors.BUTTON_COLOR,
+            color: Colors.WHITE,
+            fontStyle: "italic",
+            backgroundColor: Colors.BUTTON_COLOR,
           }}
         >
-          Playzo33
+          BOOKING CONFIRMATION
         </Text>
-        <Text
+        <View
           style={{
-            textAlign: "left",
-            fontSize: "15px",
-            paddingBottom: "5px",
-          }}
-        >
-          Booking Details
-        </Text>
-        <Text
-          style={{
-            textAlign: "left",
-            fontSize: "12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
             paddingBottom: "10px",
           }}
         >
-          Thank you for your <br /> Bookings
-        </Text>
-
-        <Text
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "12px",
+              color: Colors.BLACK,
+              fontWeight: "bold",
+              paddingTop: "10px",
+            }}
+          >
+            Customer Name : {user ? user.name : null}
+          </Text>
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "12px",
+              color: Colors.BLACK,
+              fontWeight: "bold",
+            }}
+          >
+            Phone Number : {user ? user.phone : null}
+          </Text>
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "12px",
+              color: Colors.BLACK,
+              fontWeight: "bold",
+              borderBottom: "1px solid black",
+              paddingBottom: "10px",
+            }}
+          >
+            E-mail : {user ? user.email : null}
+          </Text>
+        </View>
+        <View
           style={{
-            textAlign: "left",
-            fontSize: "12px",
-            borderBottom: "1px solid black",
-            color: "red",
-            paddingBottom: "30px",
+            paddingBottom: "15px",
+
+            backgroundColor: Colors.BUTTON_COLOR,
           }}
         >
-          Thank you for choosing us for your bookings! We appreciate your trust
-          in our services.
-        </Text>
-
-        {allBookings.map((item: any, index: any) => (
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "15px",
+              color: Colors.WHITE,
+              fontWeight: "bold",
+              paddingLeft: "10px",
+            }}
+          >
+            Bookings Summary
+          </Text>
+        </View>
+        <View style={{ paddingBottom: "10px", paddingTop: "15px" }}>
           <View
-            key={index}
             style={{
               display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-              justifyContent: "space-around",
-              borderBottom: "1px solid black", // Add bottom border
-              paddingBottom: "10px", // Add some padding to separate bookings visually
-              flexWrap: "wrap",
-              paddingTop: "10px",
+              flexDirection: "row",
+              gap: "2rem",
+              borderBottom: `1px solid ${Colors.BUTTON_COLOR}`,
+              paddingBottom: "5px",
+              alignItems: "center",
+              textAlign: "center",
             }}
           >
             <Text
               style={{
-                fontSize: "12px",
-                color: Colors.BUTTON_COLOR,
+                fontSize: "15px",
+                fontWeight: "bold",
+                width: "20%",
               }}
             >
-              {index + 1} Service: {item.name}
+              Service
             </Text>
             <Text
               style={{
-                fontSize: "12px",
-                color: Colors.BUTTON_COLOR,
+                fontSize: "15px",
+                fontWeight: "bold",
+                width: "20%",
               }}
             >
-              Type: {item.type}
+              Type
             </Text>
             <Text
               style={{
-                fontSize: "12px",
-                color: Colors.BUTTON_COLOR,
+                fontSize: "15px",
+                fontWeight: "bold",
+                width: "20%",
               }}
             >
-              Start Time: {formattedTimeRange}
+              Date
+            </Text>
+            <Text
+              style={{
+                fontSize: "15px",
+                fontWeight: "bold",
+                width: "20%",
+              }}
+            >
+              Time
+            </Text>
+
+            <Text
+              style={{
+                fontSize: "15px",
+                fontWeight: 700,
+                width: "20%",
+              }}
+            >
+              Amount
             </Text>
           </View>
-        ))}
-
+          {allBookings.map((item: any, index: any) => (
+            <View
+              key={index}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                borderBottom: `1px solid ${Colors.BUTTON_COLOR}`,
+                paddingBottom: "5px",
+                paddingTop: "5px",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "20%",
+                }}
+              >
+                {item.name}
+              </Text>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "20%",
+                }}
+              >
+                {item.type}
+              </Text>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "20%",
+                }}
+              >
+                {formatDate(item.startDate)}
+              </Text>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "20%",
+                }}
+              >
+                {formatTimeRange(item.startTime, item.endTime)}
+              </Text>
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "20%",
+                }}
+              >
+                {item.amount}
+              </Text>
+            </View>
+          ))}
+        </View>
+        ;
+        <Text
+          style={{
+            fontSize: "12px",
+            paddingTop: "15px",
+            paddingLeft: "10px",
+            fontWeight: 700,
+            display: "flex",
+            textAlign: "right",
+          }}
+        >
+          Total Amount:{" "}
+          <Text
+            style={{
+              fontSize: "12px",
+            }}
+          >
+            {totalAmount}
+          </Text>
+        </Text>
+        <View style={styles.section}>
+          <Text style={styles.title}>Thank You for Your Booking!</Text>
+          <Text
+            style={{
+              fontSize: "12px",
+            }}
+          >
+            We are delighted to confirm your booking. Please feel free to
+            contact us if you have any questions or special requests.
+          </Text>
+        </View>
         <Text
           style={{
             fontSize: "12px",
@@ -185,6 +371,9 @@ export default function MyDocument({ allBookings }: any) {
           }}
         >
           +91 91088 83555
+        </Text>
+        <Text>
+          ---------------------------------------------------------------------------------
         </Text>
       </Page>
     </Document>
