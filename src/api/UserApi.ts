@@ -12,7 +12,7 @@ export default class UserApi {
   }
   public static async updateById(userId: string, request: any) {
     try {
-      const user = await axiosInstance.put(`/${userId}`, request);
+      const user = await axiosInstance.put(`/updatePhone/${userId}`, request);
       return user.data;
     } catch (e) {
       throw handleApiError(e, "Failed to create details");

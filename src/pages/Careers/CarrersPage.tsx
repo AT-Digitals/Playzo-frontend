@@ -272,7 +272,31 @@ export default function CareersPageNew() {
         ),
         whitesmoke
       `,
-          backgroundBlendMode: "multiply",
+
+      backgroundBlendMode: "multiply",
+    }}
+  >
+    <AppContainer
+      paddingRight={{ xs: "0px", sm: "0px", md: "32px" }}
+      paddingLeft={{ xs: "0px", sm: "0px", md: "0px", lg: "32px" }}
+      maxWidth={1200}
+    >
+      <Typography
+        pb={{ xs: "48px", sm: "48px", md: "48px", lg: "20px" }}
+        pl={{ xs: "15px", sm: "28px", md: "28px", lg: "0px" }}
+        pt={"20px"}
+        color={Colors.BLACK}
+        fontSize={{ xs: "32px", sm: "32px", md: "32px", lg: "42px" }}
+        fontWeight={"900"}
+        fontStyle={"italic"}
+        textTransform={"uppercase"}
+      >
+        Welcome To Careers!!!
+      </Typography>
+      <Stack
+        style={{
+          marginBottom: "20px",
+          marginTop: "-28px",
         }}
       >
         <AppContainer
@@ -503,5 +527,6 @@ export default function CareersPageNew() {
         </AppContainer>
       </Box>
     </>
+
   );
 }
