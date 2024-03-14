@@ -112,37 +112,80 @@ export default function MyDocument({ allBookings }: any) {
             key={index}
             style={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               gap: "1rem",
               justifyContent: "space-around",
               borderBottom: "1px solid black", // Add bottom border
               paddingBottom: "10px", // Add some padding to separate bookings visually
               flexWrap: "wrap",
+              paddingTop: "10px",
             }}
           >
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
+                color: Colors.BUTTON_COLOR,
               }}
             >
-              Name: {item.name}
+              {index + 1} Service: {item.name}
             </Text>
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
+                color: Colors.BUTTON_COLOR,
               }}
             >
               Type: {item.type}
             </Text>
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
+                color: Colors.BUTTON_COLOR,
               }}
             >
               Start Time: {formattedTimeRange}
             </Text>
           </View>
         ))}
+
+        <Text
+          style={{
+            fontSize: "12px",
+            color: "black",
+            textAlign: "right",
+            paddingTop: "30px",
+            marginTop: "30px",
+          }}
+        >
+          39/6 KCP Thottam, Kumalan Kuttai, Erode,
+        </Text>
+        <Text
+          style={{
+            fontSize: "12px",
+            color: "black",
+            textAlign: "right",
+          }}
+        >
+          Tamil Nadu - 638011
+        </Text>
+        <Text
+          style={{
+            fontSize: "12px",
+            color: "black",
+            textAlign: "right",
+          }}
+        >
+          +91 70944 60944
+        </Text>
+        <Text
+          style={{
+            fontSize: "12px",
+            color: "black",
+            textAlign: "right",
+          }}
+        >
+          +91 91088 83555
+        </Text>
       </Page>
     </Document>
   );
