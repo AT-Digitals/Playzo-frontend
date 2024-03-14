@@ -165,8 +165,6 @@ export default function MyDocument({ allBookings }: any) {
         </View>
         <View
           style={{
-            paddingBottom: "15px",
-
             backgroundColor: Colors.BUTTON_COLOR,
           }}
         >
@@ -176,7 +174,7 @@ export default function MyDocument({ allBookings }: any) {
               fontSize: "15px",
               color: Colors.WHITE,
               fontWeight: "bold",
-              paddingLeft: "10px",
+              padding: "10px",
             }}
           >
             Bookings Summary
@@ -307,11 +305,12 @@ export default function MyDocument({ allBookings }: any) {
         <Text
           style={{
             fontSize: "12px",
-            paddingTop: "15px",
+            paddingTop: "10px",
             paddingLeft: "10px",
             fontWeight: 700,
             display: "flex",
             textAlign: "right",
+            borderBottom: "1px solid black",
           }}
         >
           Total Amount:{" "}
