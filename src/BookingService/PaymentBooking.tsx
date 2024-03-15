@@ -557,6 +557,11 @@ export default function PaymentBooking() {
               </Typography>
               <Box mt={"5px"}>
                 <TextField
+                  sx={{
+                    "& .MuiInputBase-input": {
+                      height: "15px",
+                    },
+                  }}
                   fullWidth
                   value={phoneNumber ?? ""}
                   onChange={handlePhoneNumberChange}

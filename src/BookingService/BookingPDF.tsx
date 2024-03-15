@@ -1,5 +1,6 @@
 import {
   Document,
+  Font,
   Image,
   Page,
   StyleSheet,
@@ -12,7 +13,23 @@ import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import logo from "./favicon.png";
 
+// import ProximaFont from '../assets/fonts/Proxima Nova/proximanova_black.otf'
+
 // const { "Playzo (1).svg": logo } = assets;
+
+Font.register({
+  family: "Proxima",
+  fonts: [
+    {
+      src: "../assets/fonts/Proxima Nova/proximanova_black.otf",
+      fontWeight: 400,
+    },
+    {
+      src: "../assets/fonts/Proxima Nova/proximanova_extrabold.otf", // Path to bold font file
+      fontWeight: "bold", // Specify font weight as 'bold'
+    },
+  ],
+});
 
 const styles = StyleSheet.create({
   page: {
@@ -20,6 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000333",
     padding: 10,
     border: "1px solid black",
+    fontFamily: "Proxima",
   },
   section: {
     margin: 10,
@@ -32,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   itemName: {
-    fontWeight: "bold",
+    fontWeight: 700,
   },
   logo: {
     // position: "absolute",
@@ -106,13 +124,10 @@ export default function MyDocument({ allBookings, numberofPersons }: any) {
           display: "flex",
           flexDirection: "column",
           border: "1px solid black",
-          borderColor: "red",
+          borderColor: Colors.BUTTON_COLOR,
           padding: "60px",
         }}
       >
-        {/* <Svg> */}
-        {/* </Svg> */}
-        {/* <img style={styles.logo} src={logo} alt="Logo" /> */}
         <View
           style={{
             display: "flex",
@@ -532,6 +547,7 @@ export default function MyDocument({ allBookings, numberofPersons }: any) {
             style={{
               fontSize: "12px",
               color: "gray",
+              fontWeight: 700,
             }}
           >
             I accept the terms and conditioins By accessing and using our
@@ -543,7 +559,7 @@ export default function MyDocument({ allBookings, numberofPersons }: any) {
             incurred due to misuse of our services. We reserve the right to
             terminate or suspend accounts violating these terms without prior
             notice. Your continued use of our services indicates your acceptance
-            of any updates or modifications to these terms."
+            of any updates or modifications to these terms.
           </Text>
         </View>
         <View
