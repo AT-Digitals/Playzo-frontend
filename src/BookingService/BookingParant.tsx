@@ -310,13 +310,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseInt(e.target.value, 10);
-    if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 10) {
+    if (!isNaN(inputValue) && inputValue >= 1 && inputValue <= 10) {
       setNumberOfPersons(inputValue.toString());
       setValidationError("");
       localStorage.setItem("numberOfPersons", inputValue.toString());
     } else {
       setNumberOfPersons("");
-      setValidationError("Please enter a valid number of persons (0 to 10).");
+      setValidationError("Please enter a valid number of persons (1 to 10).");
     }
   };
 
