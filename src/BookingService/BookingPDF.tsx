@@ -3,6 +3,7 @@ import {
   Image,
   Page,
   StyleSheet,
+  Svg,
   Text,
   View,
 } from "@react-pdf/renderer";
@@ -10,8 +11,9 @@ import React, { useEffect, useState } from "react";
 
 import Colors from "../CommonComponents/Colors";
 import assets from "../assets";
+import logo from "./favicon.png";
 
-const { "Playzo (1).svg": logo } = assets;
+// const { "Playzo (1).svg": logo } = assets;
 
 const styles = StyleSheet.create({
   page: {
@@ -34,11 +36,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   logo: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    width: 100,
-    height: 50,
+    // position: "absolute",
+    // top: 10,
+    // right: 10,
+    width: "120px",
+    height: "50px",
+    paddingBottom: "10px",
   },
 });
 
@@ -108,7 +111,9 @@ export default function MyDocument({ allBookings }: any) {
           padding: "60px",
         }}
       >
-        <Image style={styles.logo} src={logo} />
+        {/* <Svg> */}
+        {/* </Svg> */}
+        {/* <img style={styles.logo} src={logo} alt="Logo" /> */}
         <View
           style={{
             display: "flex",
@@ -123,17 +128,7 @@ export default function MyDocument({ allBookings }: any) {
               textAlign: "center",
             }}
           >
-            <Text
-              style={{
-                fontSize: "14px",
-                color: "black",
-                textAlign: "left",
-                textTransform: "uppercase",
-                fontWeight: 700,
-              }}
-            >
-              Plazo33
-            </Text>
+            <Image src={logo} style={styles.logo} />
           </View>
 
           <View
@@ -141,16 +136,6 @@ export default function MyDocument({ allBookings }: any) {
               textAlign: "center",
             }}
           >
-            <Text
-              style={{
-                fontSize: "12px",
-                color: "gray",
-                textAlign: "center",
-                textTransform: "uppercase",
-              }}
-            >
-              Plazo33
-            </Text>
             <Text
               style={{
                 fontSize: "10px",
@@ -466,6 +451,7 @@ export default function MyDocument({ allBookings }: any) {
                   fontWeight: 400,
                   width: "20%",
                   color: "gray",
+                  textTransform: "uppercase",
                 }}
               >
                 {item.type}
@@ -476,6 +462,7 @@ export default function MyDocument({ allBookings }: any) {
                   fontWeight: 400,
                   width: "20%",
                   color: "gray",
+                  textTransform: "uppercase",
                 }}
               >
                 {item.name}
