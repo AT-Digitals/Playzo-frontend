@@ -9,6 +9,7 @@ import {
 } from "@react-pdf/renderer";
 import React, { useEffect, useState } from "react";
 
+import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import assets from "../assets";
 import logo from "./favicon.png";
@@ -74,7 +75,7 @@ interface User {
   name?: string;
   email?: string;
 }
-export default function MyDocument({ allBookings }: any) {
+export default function MyDocument({ allBookings, numberofPersons }: any) {
   const totalAmount = allBookings.reduce(
     (accumulator: number, booking: { amount: string }) =>
       accumulator + (parseFloat(booking.amount) || 0),
@@ -465,7 +466,12 @@ export default function MyDocument({ allBookings }: any) {
                   textTransform: "uppercase",
                 }}
               >
-                {item.name}
+                {item.name}{" "}
+                {item.type === BookingType.Badminton ? (
+                  <Text>/ {item.numberOfPersons}</Text>
+                ) : (
+                  ""
+                )}
               </Text>
               <Text
                 style={{
