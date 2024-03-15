@@ -280,18 +280,7 @@ export default function HomePage() {
             >
               Our Services
             </Typography>
-            <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
-              {/* <StyledImage src={Layer2} alt="Layer2" /> */}
-              <Typography
-                fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
-                marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
-                fontWeight={"600"}
-                color={Colors.BLACK}
-                fontStyle={"italic"}
-                textTransform={"uppercase"}
-              >
-                Our Services
-              </Typography>
+           
               <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
                 {/* <StyledImage src={Layer2} alt="Layer2" /> */}
                 <Typography
@@ -315,7 +304,6 @@ export default function HomePage() {
                   to cater to the varied interests of our community.
                 </Typography>
               </Box>
-            </Box>
           </Stack>
           <Grid
             container
