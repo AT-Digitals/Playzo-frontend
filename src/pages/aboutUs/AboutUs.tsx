@@ -124,21 +124,21 @@ export default function AboutUs() {
           {showTimeline && window.innerWidth >= 300 && <AboutTimelineComponent />}
         </Box>
         <Box
-          display={{ xs: "none", sm: "block", md: "block", lg: "block" }}
+          display={{ xs: "block", sm: "block", md: "block", lg: "block" }}
           position={"absolute"}
-          top={"7%"}
-          right={{ xs: "60%", sm: "67%", md: "68%", lg: "66%" }}
+          top={{xs: "3%", sm: '7%', md: "7%", lg: "7%"}}
+          right={{ xs: "70%", sm: "67%", md: "68%", lg: "66%" }}
         >
           <Typography
             color={"white"}
             fontStyle={"italic"}
-            fontSize={{ xs: "30px", sm: "40px", md: "58px", lg: "78px" }}
+            fontSize={{ xs: "20px", sm: "40px", md: "58px", lg: "78px" }}
             fontWeight={"bold"}
             lineHeight={1}
           >
             <span style={{ display: "inline-block" }}>Playzo</span> <br />
             <Typography
-              fontSize={{ xs: "30px", sm: "40px", md: "58px", lg: "78px" }}
+              fontSize={{ xs: "20px", sm: "40px", md: "58px", lg: "78px" }}
               fontWeight={"bold"}
               sx={
                 {
