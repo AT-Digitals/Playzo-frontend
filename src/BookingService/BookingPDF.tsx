@@ -3,7 +3,6 @@ import {
   Image,
   Page,
   StyleSheet,
-  Svg,
   Text,
   View,
 } from "@react-pdf/renderer";
@@ -11,7 +10,6 @@ import React, { useEffect, useState } from "react";
 
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
-import assets from "../assets";
 import logo from "./favicon.png";
 
 // const { "Playzo (1).svg": logo } = assets;
