@@ -546,17 +546,9 @@ export default function MyDocument({ allBookings }: any) {
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
           }}
         >
-          <Text
-            style={{
-              fontSize: "12px",
-              color: "gray",
-            }}
-          >
-            SIGN
-          </Text>
           <Text
             style={{
               fontSize: "12px",
