@@ -21,7 +21,7 @@ interface OTPModalProps {
   handleClose: () => void;
   setShowOTPModal: any;
   setOpenForgetModal: any;
-  email:string;
+  email: string;
 }
 
 export default function ConfirmPasswordModal({
@@ -29,7 +29,7 @@ export default function ConfirmPasswordModal({
   handleClose,
   setShowOTPModal,
   setOpenForgetModal,
-  email
+  email,
 }: OTPModalProps) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -50,22 +50,29 @@ export default function ConfirmPasswordModal({
       return;
     }
 
+    if (password.length < 8 || confirmPassword.length < 8) {
+      setPasswordError("Passwords must be at least 8 characters long");
+      return;
+    }
+
     try {
-      const data = UserApi.forgotPassword(email, { password: password }).then((dataVal)=>{
-        setPasswordError("");
-        setShowOTPModal(false); // Close the ShowOTPModal
-        setOpenForgetModal(false); // Close the OpenForgetModal
-        handleClose();
-      })
-      console.log('data', data);
-    
+      const data = UserApi.forgotPassword(email, { password: password })
+        .then((dataVal) => {
+          setPasswordError("");
+          setShowOTPModal(false); // Close the ShowOTPModal
+          setOpenForgetModal(false); // Close the OpenForgetModal
+          handleClose();
+        })
+        .catch((error) => {
+          alert(error);
+        });
+      console.log("data", data);
     } catch (error) {
       alert(error);
-      console.log('error', error);
+      console.log("error", error);
     }
 
     // If everything is valid, reset the error and close the modal
-
   };
 
   const handleClickShowPassword = () => {
@@ -79,7 +86,6 @@ export default function ConfirmPasswordModal({
   return (
     <Dialog
       open={open}
-      // onClose={ModlaCloseChange}
       maxWidth="xs"
       fullWidth
       sx={{

@@ -1,6 +1,8 @@
 import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 
 import Colors from "../Colors";
+import MyDocument from "../../BookingService/BookingPDF";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import assets from "../../assets";
 
 const { "Playzo (1).svg": logo } = assets;
@@ -22,6 +24,8 @@ interface modalProps {
   text: string;
   headingText: string;
   paymentText?: string;
+  pdf?: any;
+  data?: any;
 }
 
 export default function ModalComponent({
@@ -30,6 +34,8 @@ export default function ModalComponent({
   text,
   headingText,
   paymentText,
+  pdf,
+  data,
 }: modalProps) {
   return (
     <Modal
@@ -71,29 +77,73 @@ export default function ModalComponent({
           ) : (
             ""
           )}
-          <Button
-            variant="outlined"
-            sx={{
-              padding: "8px 20px",
-              textTransform: "none",
-              fontSize: "16px",
-              minWidth: "150px",
-              fontWeight: "400",
-              border: "2px solid #15B5FC",
-              borderRadius: "30px",
-              letterSpacing: "1.6px",
-              background: Colors.BUTTON_COLOR,
-              color: Colors.WHITE,
-              ":hover": {
-                background: Colors.WHITE,
-                color: Colors.BUTTON_COLOR,
-                border: "2px solid #15B5FC",
-              },
-            }}
-            onClick={handleClose}
+          <Stack
+            direction={"row"}
+            gap={"1rem"}
+            justifyContent={"space-between"}
           >
-            OK
-          </Button>
+            <Button
+              variant="outlined"
+              sx={{
+                padding: "8px 20px",
+                textTransform: "none",
+                fontSize: "14px",
+                maxWidth: "150px",
+                fontWeight: "400",
+                border: "2px solid #15B5FC",
+                borderRadius: "30px",
+                letterSpacing: "1.6px",
+                background: Colors.BUTTON_COLOR,
+                color: Colors.WHITE,
+                ":hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "2px solid #15B5FC",
+                },
+              }}
+              onClick={handleClose}
+            >
+              OK
+            </Button>
+
+            {pdf ? (
+              <Button
+                variant="outlined"
+                sx={{
+                  padding: "8px 20px",
+                  textTransform: "none",
+                  fontSize: "14px",
+                  maxWidth: "180px",
+                  fontWeight: "400",
+                  border: "2px solid #15B5FC",
+                  borderRadius: "30px",
+                  letterSpacing: "1.6px",
+                  background: Colors.BUTTON_COLOR,
+                  color: Colors.WHITE,
+                  whiteSpace: "nowrap",
+                  ":hover": {
+                    background: Colors.WHITE,
+                    color: Colors.BUTTON_COLOR,
+                    border: "2px solid #15B5FC",
+                  },
+                }}
+              >
+                <div>
+                  <PDFDownloadLink
+                    style={{
+                      color: "red",
+                    }}
+                    document={<MyDocument allBookings={data} />}
+                    fileName="booking.pdf"
+                  >
+                    Download as PDF
+                  </PDFDownloadLink>
+                </div>
+              </Button>
+            ) : (
+              ""
+            )}
+          </Stack>
         </Stack>
       </Box>
     </Modal>

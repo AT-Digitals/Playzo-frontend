@@ -31,6 +31,8 @@ const CRICKETNET = SERVICE + "cricketnet";
 const BOWLINGMACHINE = SERVICE + "bowlingmachine";
 const TERMS_AND_CONDITIONS = "/terms-and-conditioins";
 const COOKIES_PAGE = "/cookies";
+
+const BOOKING_PDF = "/pdf-view";
 const routes = {
   ROOT,
   LOGIN,
@@ -64,6 +66,7 @@ const routes = {
   TERMS_AND_CONDITIONS,
   PRIVACY_POLICY,
   COOKIES_PAGE,
+  BOOKING_PDF,
 };
 
 export default routes;

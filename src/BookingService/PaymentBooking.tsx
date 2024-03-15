@@ -19,6 +19,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
 import { BookingSubTypes } from "./BookingSubTypes";
+import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
 import LockIcon from "@mui/icons-material/Lock";
@@ -85,7 +86,9 @@ export default function PaymentBooking() {
   const userData = user && JSON.parse(user);
 
   const [open, setOpen] = React.useState(false);
-  const [phoneNumber, setPhoneNumber] = useState(userData.phone === 0 ? '' : userData.phone ?? '');
+  const [phoneNumber, setPhoneNumber] = useState(
+    userData.phone === 0 ? "" : userData.phone ?? ""
+  );
   const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const handleClose = () => {
@@ -97,8 +100,6 @@ export default function PaymentBooking() {
 
   const location = useLocation();
   let allBookings = location.state?.bookingsWithTime || [];
-
-
 
   const navigate = useNavigate();
 
@@ -114,15 +115,20 @@ export default function PaymentBooking() {
       return;
     }
     try {
-      UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) }).then().catch((error)=>{
-        alert(error);
-      });
+      UserApi.updateById(userData.id, { phone: parseInt(phoneNumber) })
+        .then()
+        .catch((error) => {
+          alert(error);
+        });
     } catch (error) {
-      console.log('phone number is not valid');
+      console.log("phone number is not valid");
     }
 
     if (userData) {
-      localStorage.setItem('user', JSON.stringify({ ...userData, phone: phoneNumber }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ ...userData, phone: phoneNumber })
+      );
     }
 
     allBookings.map(async (bookings: any) => {
@@ -141,7 +147,8 @@ export default function PaymentBooking() {
             BookingSubTypes[
               bookings.name as keyof typeof BookingSubTypes
             ].toString(),
-            numberOfPerson:bookings.numberOfPersons>0?bookings.numberOfPersons:0
+          numberOfPerson:
+            bookings.numberOfPersons > 0 ? bookings.numberOfPersons : 0,
         });
 
         if (response) {
@@ -245,9 +252,8 @@ export default function PaymentBooking() {
     if (!phoneRegex.test(enteredPhoneNumber)) {
       setPhoneNumberError("Please enter a valid 10-digit phone number.");
     }
-
-
   };
+
   return (
     <>
       <Box
@@ -348,6 +354,7 @@ export default function PaymentBooking() {
                       endDate: string;
                       amount: string;
                       endTime: number;
+                      numberOfPersons: string;
                     },
                     index: any
                   ) => {
@@ -368,8 +375,9 @@ export default function PaymentBooking() {
 
                     // Format start and end times without minutes
                     const formattedStartTime = `${startHours % 12 || 12}:00`;
-                    const formattedEndTime = `${endHours % 12 || 12}:00 ${endHours < 12 ? "AM" : "PM"
-                      }`;
+                    const formattedEndTime = `${endHours % 12 || 12}:00 ${
+                      endHours < 12 ? "AM" : "PM"
+                    }`;
 
                     const formattedTimeRange = ` ${formattedStartTime} - ${formattedEndTime}`;
 
@@ -383,11 +391,22 @@ export default function PaymentBooking() {
                         paddingBottom={"20px"}
                       >
                         <Typography
+                          display={"flex"}
+                          gap={"0.5rem"}
                           fontWeight={"500"}
                           fontSize={"15px"}
                           color={Colors.BLACK}
                         >
-                          {item.name}
+                          {item.name}{" "}
+                          <Typography
+                            display={
+                              item.type === BookingType.Badminton
+                                ? "flex"
+                                : "none"
+                            }
+                          >
+                            / {item.numberOfPersons}
+                          </Typography>
                         </Typography>
                         <Box
                           pt={"10px"}
@@ -539,7 +558,7 @@ export default function PaymentBooking() {
               <Box mt={"5px"}>
                 <TextField
                   fullWidth
-                  value={phoneNumber ?? ''}
+                  value={phoneNumber ?? ""}
                   onChange={handlePhoneNumberChange}
                   error={phoneNumberError !== ""}
                   helperText={phoneNumberError}
@@ -815,6 +834,8 @@ export default function PaymentBooking() {
       <ModalComponent
         open={open}
         handleClose={handleClose}
+        pdf={true}
+        data={allBookings}
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
         paymentText="You have paid 30% in online remaining you have to pay in the court"

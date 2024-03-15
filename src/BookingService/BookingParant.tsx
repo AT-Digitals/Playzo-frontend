@@ -9,13 +9,15 @@ import {
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useBlocker, useLocation, useNavigate } from "react-router-dom";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
 import CustomTable from "../CommonComponents/CustomDateCalender/CustomTable";
 import DateUtils from "../Utils/DateUtils";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
@@ -227,7 +229,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             time: selectedTime,
             court: selectedCourt,
             amount: selectedAmount,
-            numberOfPersons:0
+            numberOfPersons: 0,
           })
         );
       }
@@ -243,10 +245,11 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   const [isBackButtonVisible, setIsBackButtonVisible] = useState(true);
   const [numberOfPersons, setNumberOfPersons] = useState("");
   const [validationError, setValidationError] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleProceedToPayment = async () => {
     if (allBookings.length === 0) {
-      alert("Please make at least one booking before proceeding to payment");
+      setIsModalOpen(true);
       return;
     }
 
@@ -261,7 +264,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
           endTime: number;
           court: number;
           amount: any;
-          numberOfPersons:number;
+          numberOfPersons: number;
         }[],
         booking
       ) => {
@@ -289,7 +292,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
             endTime: endMilliSec,
             court: booking.court,
             amount: splitamount,
-            numberOfPersons:booking.numberOfPersons
+            numberOfPersons: booking.numberOfPersons,
           });
         });
 
@@ -379,7 +382,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       style={{ cursor: "pointer" }}
       key="4"
       color={Colors.BLACK}
-      margin={{xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px"}}
+      margin={{ xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px" }}
     >
       Payment
     </Typography>,
@@ -680,9 +683,20 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                 </Typography>
               </Box>
             </Box>
-            <Box display={{xs: "flex", sm: "flex", md: "flex", lg: "none"}} justifyContent={{xs: "center", sm: "center", md: "center", lg: ""}}
-            marginTop={{xs: "-33px", sm: "-39px", md: "-39px", lg: "0px"}} marginBottom={{xs: "28px", sm: "28px", md: "28px", lg: "0px"}}>
-            <KeyboardArrowDownIcon style={{fontSize: "30px", color: "rgba(0, 0, 0, 0.6)"}} />
+            <Box
+              display={{ xs: "flex", sm: "flex", md: "flex", lg: "none" }}
+              justifyContent={{
+                xs: "center",
+                sm: "center",
+                md: "center",
+                lg: "",
+              }}
+              marginTop={{ xs: "-33px", sm: "-39px", md: "-39px", lg: "0px" }}
+              marginBottom={{ xs: "28px", sm: "28px", md: "28px", lg: "0px" }}
+            >
+              <KeyboardArrowDownIcon
+                style={{ fontSize: "30px", color: "rgba(0, 0, 0, 0.6)" }}
+              />
             </Box>
             <Stack
               display={
@@ -979,6 +993,13 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
       </Box>
 
       <img src={grass} alt="" />
+
+      <ModalComponent
+        open={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        text={"Please make at least one booking before proceeding to payment"}
+        headingText={""}
+      />
     </>
   );
 };

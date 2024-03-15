@@ -14,6 +14,7 @@ import Colors from "../Colors";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import DateUtils from "../../Utils/DateUtils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import ModalComponent from "./ModalComponent";
 import TimeUtlis from "../../Utils/TimeUtlis";
 import leftarrow from "./left-arrow.svg";
 import moment from "moment";
@@ -78,6 +79,10 @@ export default function CustomDateCalendar({
   const [calendarKey, setCalendarKey] = React.useState<string>(
     Date.now().toString()
   );
+
+  const [isChooseModalOpen, setChooseIsModalOpen] = useState(false);
+  const [isChoose, setIsChoose] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const CustomDateHeader = (props: any) => {
     const { currentMonth, onMonthChange } = props;
@@ -156,6 +161,10 @@ export default function CustomDateCalendar({
     ApiCall(formattedDate);
   };
 
+  const hanldeLoginWithoutClose = () => {
+    setIsLogin(false);
+    navigate(routes.ROOT);
+  };
   const ApiCall = async (dateValue: any) => {
     if (type === BookingType.BowlingMachine) {
       selectedService = "Bowling Machine";
@@ -323,19 +332,18 @@ export default function CustomDateCalendar({
       }
     });
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddButtonClick = async (
     type: string,
     selectedService: string
   ) => {
-
     if (type === BookingType.Badminton && numberOfPersons === "") {
-      alert("Number of persons cannot be empty. Please enter a value.");
+      setIsModalOpen(true);
       setValidationError("Please enter a valid number of persons (1 to 10).");
 
       return;
     }
-
 
     if (userData && userData.userType === "user") {
       if (selectedDate !== "" && selectedTimings.length > 0) {
@@ -348,7 +356,7 @@ export default function CustomDateCalendar({
           time: selectedTimings,
           amount: 0,
           duration: totalDuration,
-          numberOfPersons:0
+          numberOfPersons: 0,
           // ... other properties
         };
 
@@ -364,13 +372,13 @@ export default function CustomDateCalendar({
           );
           if (response) {
             ratePerHour = response.bookingAmount;
-            if(type === BookingType.Badminton && numberOfPersons !== ""){
+            if (type === BookingType.Badminton && numberOfPersons !== "") {
               const totalAmt = totalDuration * ratePerHour;
-             
-              bookings.amount = totalAmt*parseInt(numberOfPersons);
-              bookings.numberOfPersons=parseInt(numberOfPersons)
-            }else{
-            bookings.amount = totalDuration * ratePerHour;
+
+              bookings.amount = totalAmt * parseInt(numberOfPersons);
+              bookings.numberOfPersons = parseInt(numberOfPersons);
+            } else {
+              bookings.amount = totalDuration * ratePerHour;
             }
           } else {
             console.log("amount fetch Failed");
@@ -421,7 +429,7 @@ export default function CustomDateCalendar({
           } catch (error: any) {
             flag = true;
             if (error.message === "Please choose another date and slot") {
-              alert("Please choose another date and slot");
+              setIsChoose(true);
             }
           }
         }
@@ -453,11 +461,11 @@ export default function CustomDateCalendar({
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
       } else {
-        alert("Please choose date and time slots");
+        setChooseIsModalOpen(true);
       }
     } else {
-      alert("Could not add your bookings!\nPlease Login to Your Account");
-      navigate(routes.ROOT);
+      setIsLogin(true);
+      // navigate(routes.ROOT);
     }
   };
 
@@ -482,159 +490,193 @@ export default function CustomDateCalendar({
   }, [location]);
 
   return (
-    <Stack
-      padding={{
-        xs: "18px 0px",
-        sm: "18px 38px",
-        md: "18px 38px",
-        lg: "0px 20px",
-      }}
-      display="flex"
-      flexDirection="column"
-      spacing={2}
-      maxWidth={1146}
-      alignItems={{ xs: "center", sm: "center", md: "center", lg: "center" }}
-      width="100%"
-      margin="0 auto"
-    >
-      <Box>
-        <Typography
-          mb={2}
-          fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
-          fontWeight={"600"}
-        >
-          Pick Date
-        </Typography>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateCalendar
-            key={calendarKey}
-            components={{ CalendarHeader: CustomDateHeader }}
-            sx={{
-              border: "0.25px solid var(--black, #000)",
-              borderRadius: "12px",
-              width: "260px",
-              height: "280px",
-              margin: "0px",
-              padding: 2,
-              opacity: 1,
-              "& .MuiPickersDay-root.Mui-selected": {
-                color: "white !important",
-                background: "#15B5FC !important",
-                border: "1px solid #15B5FC  !important",
-                borderRadius: "12px",
-              },
-              "& .MuiPickersDay-today": {
-                border: "1px solid #15B5FC !important",
-
-                borderRadius: "12px",
-
-                background: "white !important",
-                color: "#15B5FC !important",
-              },
-            }}
-            onChange={(date) => handleDateSelection(date)}
-            disablePast
-          />
-        </LocalizationProvider>
-      </Box>
-      <Box
-        pl={{ xs: "26px", sm: "0px", md: "0px", lg: "0px" }}
+    <>
+      <Stack
+        padding={{
+          xs: "18px 0px",
+          sm: "18px 38px",
+          md: "18px 38px",
+          lg: "0px 20px",
+        }}
+        display="flex"
+        flexDirection="column"
+        spacing={2}
+        maxWidth={1146}
+        alignItems={{ xs: "center", sm: "center", md: "center", lg: "center" }}
         width="100%"
-        maxWidth={350}
+        margin="0 auto"
       >
-        <Typography
-          mb={2}
-          fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
-          fontWeight={"600"}
-        >
-          Pick Time
-        </Typography>
-        <Box
-          sx={{
-            maxWidth: 350,
-            width: "100%",
-            maxHeight: 400,
-            overflow: "scroll", // Set overflow to scroll
-            overflowX: "hidden",
-            // scrollbarWidth: "none",
-          }}
-          mb={2}
-          display="flex"
-          gap="2rem"
-          flexWrap="wrap"
-        >
-          {items.map((item, index) => (
-            <Button
-              disabled={item.disabled}
+        <Box>
+          <Typography
+            mb={2}
+            fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
+            fontWeight={"600"}
+          >
+            Pick Date
+          </Typography>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar
+              key={calendarKey}
+              components={{ CalendarHeader: CustomDateHeader }}
               sx={{
-                maxWidth: 147,
-                width: "100%",
-                height: "29px",
-                border: item.disabled
-                  ? "1px solid #9C9C9C"
-                  : selectedTimings.includes(item.name)
-                  ? "2px solid #15B5FC"
-                  : "1px solid black",
-                textAlign: "center",
-                padding: "4px 0px 5px 0px",
-                display: "flex",
-                justifyContent: "center",
-                borderRadius: "5px",
-                background: item.disabled
-                  ? ""
-                  : selectedTimings.includes(item.name)
-                  ? "#15B5FC"
-                  : "none",
-                ":hover": {
-                  border: "2px solid #15B5FC",
-                  color: "#15B5FC",
+                border: "0.25px solid var(--black, #000)",
+                borderRadius: "12px",
+                width: "260px",
+                height: "280px",
+                margin: "0px",
+                padding: 2,
+                opacity: 1,
+                "& .MuiPickersDay-root.Mui-selected": {
+                  color: "white !important",
+                  background: "#15B5FC !important",
+                  border: "1px solid #15B5FC  !important",
+                  borderRadius: "12px",
+                },
+                "& .MuiPickersDay-today": {
+                  border: "1px solid #15B5FC !important",
+
+                  borderRadius: "12px",
+
+                  background: "white !important",
+                  color: "#15B5FC !important",
                 },
               }}
-              key={index}
-              onClick={() => handleTimeSelection(item.name)}
-            >
-              <Box>
-                <Typography
-                  color={
-                    item.disabled
-                      ? "#9C9C9C"
-                      : selectedTimings.includes(item.name)
-                      ? "white"
-                      : "black"
-                  }
-                  sx={{
-                    ":hover": {
-                      color: "#15B5FC",
-                    },
-                  }}
-                  fontSize={{ xs: "14px", sm: "14px", md: "14px", lg: "18px" }}
-                >
-                  {item.name.replace("-", " - ")}
-                </Typography>
-              </Box>
-            </Button>
-          ))}
+              onChange={(date) => handleDateSelection(date)}
+              disablePast
+            />
+          </LocalizationProvider>
         </Box>
-        <Box display="flex" justifyContent="end">
-          <Button
-            onClick={() => handleAddButtonClick(type, selectedService)}
-            sx={{
-              background: " #15B5FC",
-              color: "white",
-              textTransform: "none",
-              border: "2px solid #15B5FC",
-
-              "&:hover": {
-                background: Colors.WHITE,
-                color: Colors.BUTTON_COLOR,
-                border: "2px solid #15B5FC",
-              },
-            }}
+        <Box
+          pl={{ xs: "26px", sm: "0px", md: "0px", lg: "0px" }}
+          width="100%"
+          maxWidth={350}
+        >
+          <Typography
+            mb={2}
+            fontSize={{ xs: "15px", sm: "15px", md: "15px", lg: "18px" }}
+            fontWeight={"600"}
           >
-            Add
-          </Button>
+            Pick Time
+          </Typography>
+          <Box
+            sx={{
+              maxWidth: 350,
+              width: "100%",
+              maxHeight: 400,
+              overflow: "scroll", // Set overflow to scroll
+              overflowX: "hidden",
+              // scrollbarWidth: "none",
+            }}
+            mb={2}
+            display="flex"
+            gap="2rem"
+            flexWrap="wrap"
+          >
+            {items.map((item, index) => (
+              <Button
+                disabled={item.disabled}
+                sx={{
+                  maxWidth: 147,
+                  width: "100%",
+                  height: "29px",
+                  border: item.disabled
+                    ? "1px solid #9C9C9C"
+                    : selectedTimings.includes(item.name)
+                    ? "2px solid #15B5FC"
+                    : "1px solid black",
+                  textAlign: "center",
+                  padding: "4px 0px 5px 0px",
+                  display: "flex",
+                  justifyContent: "center",
+                  borderRadius: "5px",
+                  background: item.disabled
+                    ? ""
+                    : selectedTimings.includes(item.name)
+                    ? "#15B5FC"
+                    : "none",
+                  ":hover": {
+                    border: "2px solid #15B5FC",
+                    color: "#15B5FC",
+                  },
+                }}
+                key={index}
+                onClick={() => handleTimeSelection(item.name)}
+              >
+                <Box>
+                  <Typography
+                    color={
+                      item.disabled
+                        ? "#9C9C9C"
+                        : selectedTimings.includes(item.name)
+                        ? "white"
+                        : "black"
+                    }
+                    sx={{
+                      ":hover": {
+                        color: "#15B5FC",
+                      },
+                    }}
+                    fontSize={{
+                      xs: "14px",
+                      sm: "14px",
+                      md: "14px",
+                      lg: "18px",
+                    }}
+                  >
+                    {item.name.replace("-", " - ")}
+                  </Typography>
+                </Box>
+              </Button>
+            ))}
+          </Box>
+          <Box display="flex" justifyContent="end">
+            <Button
+              onClick={() => handleAddButtonClick(type, selectedService)}
+              sx={{
+                background: " #15B5FC",
+                color: "white",
+                textTransform: "none",
+                border: "2px solid #15B5FC",
+
+                "&:hover": {
+                  background: Colors.WHITE,
+                  color: Colors.BUTTON_COLOR,
+                  border: "2px solid #15B5FC",
+                },
+              }}
+            >
+              Add
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Stack>
+      </Stack>
+      <ModalComponent
+        open={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        text={"Number of persons cannot be empty. Please enter a value."}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isChooseModalOpen}
+        handleClose={() => setChooseIsModalOpen(false)}
+        text={"Please choose date and slots"}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isChoose}
+        handleClose={() => setIsChoose(false)}
+        text={"Please choose another date and slots"}
+        headingText={""}
+      />
+
+      <ModalComponent
+        open={isLogin}
+        handleClose={hanldeLoginWithoutClose}
+        text={"Could not add your bookings!\nPlease Login to Your Account"}
+        headingText={""}
+      />
+    </>
   );
 }

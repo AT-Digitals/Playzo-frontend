@@ -1,4 +1,9 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 import AboutUs from "../pages/aboutUs/AboutUs";
 import AppLayout from "../CommonFiles/AppLayout";
@@ -32,65 +37,67 @@ import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
 import routes from "./routes";
 
+// import BookingPDF from "../BookingService/BookingPDF";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-        <Route path={routes.ROOT} element={<AppLayout />}>
-          <Route path={routes.ROOT} element={<HomePage />} />
-          <Route path={routes.SERVICE} element={<ServiceNewUI />} />
-          <Route path={routes.PLAYSTATION} element={<PlayStation />} />
-          <Route path={routes.CROSSFIT} element={<CrossFit />} />
-          <Route path={routes.BADMINTON} element={<Badminton />} />
-          <Route path={routes.TURF} element={<Turf />} />
-          <Route path={routes.BOARDGAMES} element={<BoardGames />} />
-          <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
-          <Route path={routes.CAFETERIA} element={<Cafeteria />} />
-          <Route path={routes.ABOUTUS} element={<AboutUs />} />
-          <Route path={routes.CONTACTUS} element={<ContactUs />} />
-          <Route path={routes.CAREERS_PAGE} element={<CareersPageNew />} />
+      <Route path={routes.ROOT} element={<AppLayout />}>
+        <Route path={routes.ROOT} element={<HomePage />} />
+        <Route path={routes.SERVICE} element={<ServiceNewUI />} />
+        <Route path={routes.PLAYSTATION} element={<PlayStation />} />
+        <Route path={routes.CROSSFIT} element={<CrossFit />} />
+        <Route path={routes.BADMINTON} element={<Badminton />} />
+        <Route path={routes.TURF} element={<Turf />} />
+        <Route path={routes.BOARDGAMES} element={<BoardGames />} />
+        <Route path={routes.PARTYCENTER} element={<PartyCenter />} />
+        <Route path={routes.CAFETERIA} element={<Cafeteria />} />
+        <Route path={routes.ABOUTUS} element={<AboutUs />} />
+        <Route path={routes.CONTACTUS} element={<ContactUs />} />
+        <Route path={routes.CAREERS_PAGE} element={<CareersPageNew />} />
 
-          <Route path={routes.USERPROFILE} element={<UserProfile />} />
-          <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
-          <Route path={routes.TURF_BOOKING} element={<TurfBookingCoomon />} />
-          <Route
-            path={routes.PLAYSTATION_BOOKING}
-            element={<PlaystationBookingCommon />}
-          />
-          <Route
-            path={routes.BADMINTON_BOOKING}
-            element={<BadmintonBookingCommon />}
-          />
-          <Route
-            path={routes.BOARDGAME_BOOKING}
-            element={<BoardBookingCommon />}
-          />
-          <Route
-            path={routes.CRICKETNET_BOOKING}
-            element={<CricketNetBookingCommon />}
-          />
-          <Route
-            path={routes.BOWLINGMACHINE_BOOKING}
-            element={<BowllingMachineBookingCommon />}
-          />
-          <Route path={routes.PAYMENT_BOOKING} element={<PaymentBooking />} />
-          <Route path={routes.DATE_CALENDER} element={<CustomDateCalendar />} />
-          <Route path={routes.IMAGE_GALLERY} element={<ImageSliderGallery />} />
-          <Route path={routes.CRICKETNET} element={<CricketNet />} />
-          <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
-          <Route path={routes.FAQ} element={<FaqPage />} />
-          <Route
-            path={routes.TERMS_AND_CONDITIONS}
-            element={<TermsandComditions />}
-          />
-          <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
-          <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
-        </Route>
+        <Route path={routes.USERPROFILE} element={<UserProfile />} />
+        <Route path={routes.BOOKING_SERVICE} element={<ServiceBooking />} />
+        <Route path={routes.TURF_BOOKING} element={<TurfBookingCoomon />} />
+        <Route
+          path={routes.PLAYSTATION_BOOKING}
+          element={<PlaystationBookingCommon />}
+        />
+        <Route
+          path={routes.BADMINTON_BOOKING}
+          element={<BadmintonBookingCommon />}
+        />
+        <Route
+          path={routes.BOARDGAME_BOOKING}
+          element={<BoardBookingCommon />}
+        />
+        <Route
+          path={routes.CRICKETNET_BOOKING}
+          element={<CricketNetBookingCommon />}
+        />
+        <Route
+          path={routes.BOWLINGMACHINE_BOOKING}
+          element={<BowllingMachineBookingCommon />}
+        />
+        <Route path={routes.PAYMENT_BOOKING} element={<PaymentBooking />} />
+        <Route path={routes.DATE_CALENDER} element={<CustomDateCalendar />} />
+        <Route path={routes.IMAGE_GALLERY} element={<ImageSliderGallery />} />
+        <Route path={routes.CRICKETNET} element={<CricketNet />} />
+        <Route path={routes.BOWLINGMACHINE} element={<BowlingMachine />} />
+        <Route path={routes.FAQ} element={<FaqPage />} />
+        <Route
+          path={routes.TERMS_AND_CONDITIONS}
+          element={<TermsandComditions />}
+        />
+        <Route path={routes.PRIVACY_POLICY} element={<PrivacyPolicy />} />
+        <Route path={routes.COOKIES_PAGE} element={<CookiesPage />} />
+
+        <Route path={`${routes.ROOT}/:id`} element={<HomePage />} />
       </Route>
+    </Route>
   )
 );
 
 export default function AppRouter() {
-  return (
-    <RouterProvider router={router}/>
-  );
+  return <RouterProvider router={router} />;
 }
