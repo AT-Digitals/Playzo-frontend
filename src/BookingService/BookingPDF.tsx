@@ -109,84 +109,265 @@ export default function MyDocument({ allBookings }: any) {
         }}
       >
         <Image style={styles.logo} src={logo} />
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: "30px",
-            paddingBottom: "5px",
-            color: Colors.WHITE,
-            fontStyle: "italic",
-            backgroundColor: Colors.BUTTON_COLOR,
-          }}
-        >
-          BOOKING CONFIRMATION
-        </Text>
         <View
           style={{
             display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-            paddingBottom: "10px",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            borderBottom: `1px solid gray`,
+            alignItems: "center",
           }}
         >
-          <Text
+          <View
             style={{
-              textAlign: "left",
-              fontSize: "12px",
-              color: Colors.BLACK,
-              fontWeight: "bold",
-              paddingTop: "10px",
+              textAlign: "center",
             }}
           >
-            Customer Name : {user ? user.name : null}
-          </Text>
-          <Text
+            <Text
+              style={{
+                fontSize: "14px",
+                color: "black",
+                textAlign: "left",
+                textTransform: "uppercase",
+                fontWeight: 700,
+              }}
+            >
+              Plazo33
+            </Text>
+          </View>
+
+          <View
             style={{
-              textAlign: "left",
-              fontSize: "12px",
-              color: Colors.BLACK,
-              fontWeight: "bold",
+              textAlign: "center",
             }}
           >
-            Phone Number : {user ? user.phone : null}
-          </Text>
-          <Text
+            <Text
+              style={{
+                fontSize: "12px",
+                color: "gray",
+                textAlign: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              Plazo33
+            </Text>
+            <Text
+              style={{
+                fontSize: "10px",
+                color: "gray",
+                textAlign: "center",
+              }}
+            >
+              playzo.erode@gmail.com
+            </Text>
+          </View>
+          <View
             style={{
-              textAlign: "left",
-              fontSize: "12px",
-              color: Colors.BLACK,
-              fontWeight: "bold",
-              borderBottom: "1px solid black",
+              textAlign: "right",
               paddingBottom: "10px",
             }}
           >
-            E-mail : {user ? user.email : null}
-          </Text>
+            <Text
+              style={{
+                fontSize: "10px",
+                color: "gray",
+                textAlign: "right",
+              }}
+            >
+              39/6 KCP Thottam, Kumalan Kuttai, Erode,
+            </Text>
+            <Text
+              style={{
+                fontSize: "10px",
+                color: "gray",
+                textAlign: "right",
+              }}
+            >
+              Tamil Nadu - 638011
+            </Text>
+            <Text
+              style={{
+                fontSize: "10px",
+                color: "gray",
+                textAlign: "right",
+              }}
+            >
+              +91 70944 60944
+            </Text>
+            <Text
+              style={{
+                fontSize: "10px",
+                color: "gray",
+                textAlign: "right",
+              }}
+            >
+              +91 91088 83555
+            </Text>
+          </View>
         </View>
         <View
           style={{
-            backgroundColor: Colors.BUTTON_COLOR,
+            backgroundColor: "gray",
+            marginTop: "20px",
           }}
         >
           <Text
             style={{
               textAlign: "left",
               fontSize: "15px",
-              color: Colors.WHITE,
+              color: Colors.BLACK,
               fontWeight: "bold",
-              padding: "10px",
+              padding: "3px",
             }}
           >
-            Bookings Summary
+            SHIPPING INFORMATION
           </Text>
         </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            // gap: "5px",
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "5px",
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: "gray",
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              Customer Name -
+            </Text>
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: Colors.BLACK,
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              {user ? user.name : null}
+            </Text>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "5px",
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: "gray",
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              Contact -
+            </Text>
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: Colors.BLACK,
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              {user ? user.phone : null}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "5px",
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: "gray",
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              Email -
+            </Text>
+
+            <Text
+              style={{
+                textAlign: "left",
+                fontSize: "12px",
+                color: Colors.BLACK,
+                fontWeight: "bold",
+                paddingTop: "10px",
+              }}
+            >
+              {user ? user.email : null}
+            </Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            backgroundColor: "gray",
+            marginTop: "10px",
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "15px",
+              color: Colors.BLACK,
+              fontWeight: "bold",
+              padding: "3px",
+            }}
+          >
+            BILLING INFORMATION
+          </Text>
+        </View>
+        <View
+          style={{
+            backgroundColor: "gray",
+            marginTop: "10px",
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: "15px",
+              color: Colors.BLACK,
+              fontWeight: "bold",
+              padding: "3px",
+            }}
+          >
+            BOOKING INFORMATION
+          </Text>
+        </View>
+
         <View style={{ paddingBottom: "10px", paddingTop: "15px" }}>
           <View
             style={{
               display: "flex",
               flexDirection: "row",
               gap: "2rem",
-              borderBottom: `1px solid ${Colors.BUTTON_COLOR}`,
+              borderBottom: `1px solid ${"gray"}`,
               paddingBottom: "5px",
               alignItems: "center",
               textAlign: "center",
@@ -194,36 +375,50 @@ export default function MyDocument({ allBookings }: any) {
           >
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
+                fontWeight: "bold",
+                width: "5%",
+                textTransform: "uppercase",
+              }}
+            >
+              #
+            </Text>
+            <Text
+              style={{
+                fontSize: "13px",
                 fontWeight: "bold",
                 width: "20%",
+                textTransform: "uppercase",
               }}
             >
               Service
             </Text>
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
                 fontWeight: "bold",
                 width: "20%",
+                textTransform: "uppercase",
               }}
             >
               Type
             </Text>
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
                 fontWeight: "bold",
                 width: "20%",
+                textTransform: "uppercase",
               }}
             >
               Date
             </Text>
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
                 fontWeight: "bold",
                 width: "20%",
+                textTransform: "uppercase",
               }}
             >
               Time
@@ -231,9 +426,10 @@ export default function MyDocument({ allBookings }: any) {
 
             <Text
               style={{
-                fontSize: "15px",
+                fontSize: "13px",
                 fontWeight: 700,
                 width: "20%",
+                textTransform: "uppercase",
               }}
             >
               Amount
@@ -246,18 +442,30 @@ export default function MyDocument({ allBookings }: any) {
                 display: "flex",
                 flexDirection: "row",
                 gap: "2rem",
-                borderBottom: `1px solid ${Colors.BUTTON_COLOR}`,
+                borderBottom: `1px solid ${"gray"}`,
                 paddingBottom: "5px",
                 paddingTop: "5px",
                 alignItems: "center",
                 textAlign: "center",
               }}
             >
+              {" "}
+              <Text
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  width: "5%",
+                  color: "gray",
+                }}
+              >
+                {index + 1}
+              </Text>
               <Text
                 style={{
                   fontSize: "12px",
                   fontWeight: 400,
                   width: "20%",
+                  color: "gray",
                 }}
               >
                 {item.type}
@@ -267,16 +475,17 @@ export default function MyDocument({ allBookings }: any) {
                   fontSize: "12px",
                   fontWeight: 400,
                   width: "20%",
+                  color: "gray",
                 }}
               >
                 {item.name}
               </Text>
-
               <Text
                 style={{
                   fontSize: "12px",
                   fontWeight: 400,
                   width: "20%",
+                  color: "gray",
                 }}
               >
                 {formatDate(item.startDate)}
@@ -286,6 +495,7 @@ export default function MyDocument({ allBookings }: any) {
                   fontSize: "12px",
                   fontWeight: 400,
                   width: "20%",
+                  color: "gray",
                 }}
               >
                 {formatTimeRange(item.startTime, item.endTime)}
@@ -295,6 +505,7 @@ export default function MyDocument({ allBookings }: any) {
                   fontSize: "12px",
                   fontWeight: 400,
                   width: "20%",
+                  color: "gray",
                 }}
               >
                 {item.amount}
@@ -302,7 +513,7 @@ export default function MyDocument({ allBookings }: any) {
             </View>
           ))}
         </View>
-        ;
+
         <Text
           style={{
             fontSize: "12px",
@@ -312,66 +523,62 @@ export default function MyDocument({ allBookings }: any) {
             display: "flex",
             textAlign: "right",
             borderBottom: "1px solid black",
+            paddingBottom: "10px",
           }}
         >
           Total Amount:{" "}
           <Text
             style={{
               fontSize: "12px",
+              color: "gray",
             }}
           >
             {totalAmount}
           </Text>
         </Text>
         <View style={styles.section}>
-          <Text style={styles.title}>Thank You for Your Booking!</Text>
           <Text
             style={{
               fontSize: "12px",
+              color: "gray",
             }}
           >
-            We are delighted to confirm your booking. Please feel free to
-            contact us if you have any questions or special requests.
+            I accept the terms and conditioins By accessing and using our
+            services, you agree to abide by the terms and conditions outlined
+            herein. This agreement constitutes a legally binding contract
+            between you and Playzo33, governing your use of our platform. You
+            acknowledge and accept our privacy policy, usage guidelines, and any
+            applicable licenses. Playzo33 bears no liability for any damages
+            incurred due to misuse of our services. We reserve the right to
+            terminate or suspend accounts violating these terms without prior
+            notice. Your continued use of our services indicates your acceptance
+            of any updates or modifications to these terms."
           </Text>
         </View>
-        <Text
+        <View
           style={{
-            fontSize: "12px",
-            color: "black",
-            textAlign: "right",
-            paddingTop: "30px",
-            marginTop: "30px",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          39/6 KCP Thottam, Kumalan Kuttai, Erode,
-        </Text>
-        <Text
-          style={{
-            fontSize: "12px",
-            color: "black",
-            textAlign: "right",
-          }}
-        >
-          Tamil Nadu - 638011
-        </Text>
-        <Text
-          style={{
-            fontSize: "12px",
-            color: "black",
-            textAlign: "right",
-          }}
-        >
-          +91 70944 60944
-        </Text>
-        <Text
-          style={{
-            fontSize: "12px",
-            color: "black",
-            textAlign: "right",
-          }}
-        >
-          +91 91088 83555
-        </Text>
+          <Text
+            style={{
+              fontSize: "12px",
+              color: "gray",
+            }}
+          >
+            SIGN
+          </Text>
+          <Text
+            style={{
+              fontSize: "12px",
+              color: "gray",
+            }}
+          >
+            DATE
+          </Text>
+        </View>
         <Text>
           ---------------------------------------------------------------------------------
         </Text>
