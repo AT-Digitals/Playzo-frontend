@@ -133,7 +133,6 @@ export default function CareersPageNew() {
       setIsValidResume(true);
       return;
     }
-    // if (name && email && phoneNumber && type) {
     const data = {
       name: name,
       email: email,
@@ -142,26 +141,6 @@ export default function CareersPageNew() {
       resume: resume,
     };
     console.log(data);
-    // try {
-    //   const response = await EnquiryApi.createEnquiry({
-    //     userName: data.name,
-    //     userEmail: data.email,
-    //     enquiryMessage: data.message,
-    //     phoneNumber: data.phoneNumber,
-    //     projectType: data.type,
-    //   });
-    //   if (response) {
-    //     setSuccessMessage(true);
-    //     setName("");
-    //     setEmail("");
-    //     setPhoneNumber("");
-    //     setType("");
-    //     setMessage("");
-    //   }
-    // } catch (err: any) {
-    //   alert(err.message);
-    // }
-    // }
   };
 
   const BannerImage = styled.img`

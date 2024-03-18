@@ -54,6 +54,7 @@ interface CustomDateCalendarProps {
   setIsBackButtonVisible?: any;
   setValidationError?: any;
   numberOfPersons?: any;
+  setNumberOfPersons?: any;
 }
 
 interface datatype {
@@ -71,6 +72,7 @@ export default function CustomDateCalendar({
   setIsBackButtonVisible,
   setValidationError,
   numberOfPersons,
+  setNumberOfPersons,
 }: CustomDateCalendarProps) {
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const user = localStorage.getItem("user");
@@ -460,6 +462,7 @@ export default function CustomDateCalendar({
         setSelectedDate("");
         setSelectedTimings([]);
         setCalendarKey(Date.now().toString());
+        setNumberOfPersons("");
       } else {
         setChooseIsModalOpen(true);
       }
@@ -494,7 +497,7 @@ export default function CustomDateCalendar({
       <Stack
         padding={{
           xs: "18px 0px",
-          sm: "18px 38px",
+          sm: "0px",
           md: "18px 38px",
           lg: "0px 20px",
         }}

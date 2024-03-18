@@ -945,6 +945,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
                     setIsBackButtonVisible={setIsBackButtonVisible}
                     setValidationError={setValidationError}
                     numberOfPersons={numberOfPersons}
+                    setNumberOfPersons={setNumberOfPersons}
                   />
                 </Box>
               )}

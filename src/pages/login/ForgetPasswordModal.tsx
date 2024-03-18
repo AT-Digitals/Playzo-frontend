@@ -68,6 +68,11 @@ export default function ForgetPassword({
     setShowOTPModal(false);
   };
 
+  const HandleCloseandClear = () => {
+    handleClose?.();
+    setEmail("");
+  };
+
   return (
     <>
       <Dialog
@@ -88,7 +93,7 @@ export default function ForgetPassword({
           }}
         >
           <Stack direction="row" justifyContent="end">
-            <IconButton onClick={handleClose}>
+            <IconButton onClick={HandleCloseandClear}>
               <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
             </IconButton>
           </Stack>
@@ -171,7 +176,7 @@ export default function ForgetPassword({
                   border: "2px solid #15B5FC",
                 },
               }}
-              onClick={handleClose}
+              onClick={HandleCloseandClear}
             >
               Back
             </Button>

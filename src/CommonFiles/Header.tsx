@@ -56,20 +56,22 @@ export default function Header() {
       localStorage.getItem("bookings") === undefined ||
       localStorage.getItem("bookings") === "[]";
 
-    // Ask for confirmation before logging out if local storage is not empty
     if (
       !isLocalStorageEmpty &&
       !window.confirm("Are you sure you want to logout?")
     ) {
-      // User canceled logout
       return;
     }
 
     try {
-      UserLoginApi.logoutUser();
+      // Logout user
+      await UserLoginApi.logoutUser();
+
       localStorage.clear();
+      setIsLoggedIn(false);
       setAnchorEl(null);
-      navigate(routes.ROOT);
+
+      window.location.href = routes.ROOT;
     } catch {
       console.log("Logout failed");
     }
