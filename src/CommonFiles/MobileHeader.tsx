@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import UserLoginApi from "../api/UserLoginApi";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import booknow from "./booking (1).png";
+import booknow from "./Sports.svg";
 import logoImage from "../assets/logo";
 import routes from "../routes/routes";
 
