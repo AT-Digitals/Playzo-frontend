@@ -494,7 +494,7 @@ export default function CustomDateCalendar({
       <Stack
         padding={{
           xs: "18px 0px",
-          sm: "18px 38px",
+          sm: "0px",
           md: "18px 38px",
           lg: "0px 20px",
         }}
