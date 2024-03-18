@@ -42,6 +42,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [sportsName, setSportsName] = useState<string[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [signupfailed, setSignUpFailed] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -155,7 +156,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
           console.log("Register Failed");
         }
       } catch (error: any) {
-        alert(error.message);
+        setSignUpFailed(true);
       }
     }
   };
@@ -328,6 +329,14 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             "Congratulations! Your account has been successfully registered."
           }
           headingText="Registration Confirmation"
+        />
+        <ModalComponent
+          open={signupfailed}
+          handleClose={() => setSignUpFailed(false)}
+          text={
+            "Failed to connect to server. Please check your internet connection"
+          }
+          headingText=""
         />
       </DialogContent>
     </Dialog>
