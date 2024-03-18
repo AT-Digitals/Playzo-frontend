@@ -167,97 +167,29 @@ export default function CustomTable({
       >
         <Card
           style={{
-            border: `1px solid ${Colors.BUTTON_COLOR}`,
-            borderRadius: "12px",
             width: "70%", // Adjust as needed
             margin: "0 auto",
             boxShadow: "0px 2px 20px 0px",
-            backgroundColor: Colors.BUTTON_COLOR,
+            backgroundColor: Colors.WHITE,
             marginBottom: "20px", // Adjust as needed
           }}
         >
-          <CardContent
+          <Box
+            mb={1}
+            bgcolor={Colors.BUTTON_COLOR}
             style={{
-              padding: "16px",
-              maxHeight: 550,
-              overflowY: "auto",
-              scrollbarWidth: "thin",
+              position: "sticky", // Fix the header
+              top: 0, // Position it at the top
+              zIndex: 1, // Ensure it's above the scrollable content
             }}
+            padding={"0 20px"}
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            {tableData.map((data: any, index: any) => (
-              <div
-                key={index}
-                style={{
-                  marginBottom: "10px",
-                  borderBottom: "1px solid white",
-                }}
-              >
-                <Box
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
-                  display={"flex"}
-                >
-                  <Typography fontWeight={700}>Item:{index + 1}</Typography>
-                  <IconButton
-                    style={{
-                      color: "black",
-                      padding: "8px",
-                      borderRadius: "50%",
-                    }}
-                    onClick={() => handleRemoveItem(index)}
-                  >
-                    <CloseIcon
-                      style={{
-                        color: "red",
-                      }}
-                    />
-                  </IconButton>
-                </Box>
-                <Box display={"flex"} gap={"1rem"}>
-                  <Typography fontWeight={700}> Service:</Typography>
-                  <Typography> {data.type}</Typography>
-                </Box>
-
-                <Box display={"flex"} gap={"1rem"}>
-                  <Typography fontWeight={700}> Service Type:</Typography>
-                  <Typography> {data.name}</Typography>
-                </Box>
-                <Box display={"flex"} gap={"1rem"}>
-                  <Typography fontWeight={700}> Date:</Typography>
-                  <Typography>
-                    {" "}
-                    {data.date && isValid(new Date(data.date))
-                      ? format(new Date(data.date), "dd MMM yyyy")
-                      : "Invalid Date"}
-                  </Typography>
-                </Box>
-                <Box display={"flex"} gap={"1rem"}>
-                  <Typography fontWeight={700}> Time:</Typography>
-                  <Typography>
-                    {" "}
-                    {Array.isArray(data.time)
-                      ? data.time.join(", ").replace("-", " - ")
-                      : data.time.replace("-", " - ")}
-                  </Typography>
-                </Box>
-
-                <Box display={"flex"} gap={"1rem"} pb={1}>
-                  <Typography fontWeight={700}> Qty:</Typography>
-                  <Typography> {data.duration}</Typography>
-                </Box>
-                <Box
-                  display={"flex"}
-                  gap={"1rem"}
-                  pb={2}
-                  justifyContent={"flex-end"}
-                  borderTop={"1px solid white"}
-                  pt={1}
-                >
-                  <Typography fontWeight={700}> Amount:</Typography>
-                  <Typography> {data.amount}</Typography>
-                </Box>
-              </div>
-            ))}
+            <Typography p={1} color={"black"} fontWeight={700}>
+              CHECKOUT
+            </Typography>
             <Link
               onClick={handleAddmore}
               to={routes.BOOKING_SERVICE}
@@ -265,13 +197,195 @@ export default function CustomTable({
                 textDecoration: "none",
                 textAlign: "center",
                 display: "block",
-                paddingTop: "10px",
               }}
             >
-              <p style={{ color: "black", whiteSpace: "nowrap" }}>
+              <p
+                style={{
+                  color: "black",
+                  whiteSpace: "nowrap",
+                  fontWeight: 600,
+                }}
+              >
                 + Add more items
               </p>
             </Link>
+          </Box>
+          <CardContent
+            style={{
+              overflowY: "auto",
+              scrollbarWidth: "thin",
+              position: "relative",
+              padding: 0,
+              maxHeight: 550,
+            }}
+          >
+            <div>
+              {tableData.map((data: any, index: any) => (
+                <div
+                  key={index}
+                  style={{
+                    marginBottom: "10px",
+                    borderBottom: "1px solid white",
+                    // padding: "0 20px",
+                  }}
+                >
+                  <Box
+                    justifyContent={"space-between"}
+                    alignItems={"center"}
+                    display={"flex"}
+                    borderBottom={`3px solid ${Colors.BUTTON_COLOR}`}
+                    padding={"0 20px"}
+                    mb={1}
+                  >
+                    <Typography fontWeight={700}>Item:{index + 1}</Typography>
+                    <IconButton
+                      style={{
+                        color: "black",
+                        padding: "8px",
+                        borderRadius: "50%",
+                      }}
+                      onClick={() => handleRemoveItem(index)}
+                    >
+                      <CloseIcon
+                        style={{
+                          color: "red",
+                        }}
+                      />
+                    </IconButton>
+                  </Box>
+                  <Box padding={"0 20px"}>
+                    <Box display={"flex"} gap={"1rem"}>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontWeight={900}
+                        fontSize={"16px"}
+                      >
+                        {" "}
+                        Service:
+                      </Typography>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={600}
+                      >
+                        {" "}
+                        {data.type}
+                      </Typography>
+                    </Box>
+
+                    <Box display={"flex"} gap={"1rem"}>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontWeight={900}
+                        fontSize={"16px"}
+                      >
+                        {" "}
+                        Service Type:
+                      </Typography>
+                      <Typography
+                        fontWeight={600}
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                      >
+                        {" "}
+                        {data.name}
+                      </Typography>
+                    </Box>
+                    <Box
+                      border={` 1px solid ${Colors.BUTTON_COLOR}`}
+                      width={"15%"}
+                      mt={1}
+                      mb={1}
+                    ></Box>
+                    <Box display={"flex"} gap={"1rem"}>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={900}
+                      >
+                        {" "}
+                        Date:
+                      </Typography>
+                      <Typography
+                        fontWeight={600}
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                      >
+                        {" "}
+                        {data.date && isValid(new Date(data.date))
+                          ? format(new Date(data.date), "dd MMM yyyy")
+                          : "Invalid Date"}
+                      </Typography>
+                    </Box>
+                    <Box display={"flex"} gap={"1rem"}>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={900}
+                      >
+                        {" "}
+                        Time:
+                      </Typography>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={600}
+                      >
+                        {" "}
+                        {Array.isArray(data.time)
+                          ? data.time.join(", ").replace("-", " - ")
+                          : data.time.replace("-", " - ")}
+                      </Typography>
+                    </Box>
+
+                    <Box display={"flex"} gap={"1rem"} pb={1}>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={900}
+                      >
+                        {" "}
+                        Qty:
+                      </Typography>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={600}
+                      >
+                        {" "}
+                        {data.duration}
+                      </Typography>
+                    </Box>
+                    <Box
+                      display={"flex"}
+                      gap={"1rem"}
+                      pb={2}
+                      justifyContent={"space-between"}
+                      borderTop={` 1px solid ${Colors.BUTTON_COLOR}`}
+                      borderBottom={` 1px solid ${Colors.BUTTON_COLOR}`}
+                      pt={1}
+                    >
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontWeight={900}
+                        fontSize={"16px"}
+                        color={Colors.BUTTON_COLOR}
+                      >
+                        Amount:
+                      </Typography>
+                      <Typography
+                        textTransform={"capitalize"}
+                        fontSize={"16px"}
+                        fontWeight={600}
+                      >
+                        {" "}
+                        {data.amount}
+                      </Typography>
+                    </Box>
+                  </Box>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
       </Box>
