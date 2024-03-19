@@ -48,35 +48,6 @@ export default function Header() {
     setAnchorEl(null);
   };
 
-  // const handleLogout = async (event: any) => {
-  //   event.preventDefault();
-
-  //   // Check if local storage is empty
-  //   const isLocalStorageEmpty =
-  //     localStorage.getItem("bookings") == null ||
-  //     localStorage.getItem("bookings") === undefined ||
-  //     localStorage.getItem("bookings") === "[]";
-
-  //   if (
-  //     !isLocalStorageEmpty &&
-  //     !window.confirm("Are you sure you want to logout?")
-  //   ) {
-  //     return;
-  //   }
-
-  //   try {
-  //     // Logout user
-  //     await UserLoginApi.logoutUser();
-
-  //     localStorage.clear();
-  //     setIsLoggedIn(false);
-  //     setAnchorEl(null);
-
-  //     window.location.href = routes.ROOT;
-  //   } catch {
-  //     console.log("Logout failed");
-  //   }
-  // };
   const [openModal, setOpenModal] = useState(false);
 
   const handleCloseModal = () => {

@@ -80,7 +80,6 @@ export default function ForgetPassword({
     <>
       <Dialog
         open={open}
-        // onClose={ModlaCloseChange}
         maxWidth="xs"
         fullWidth
         sx={{

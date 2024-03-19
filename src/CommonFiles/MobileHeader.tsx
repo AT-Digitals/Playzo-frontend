@@ -47,18 +47,6 @@ export default function MoblieHeader({
   };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const handleLogout = async (event: any) => {
-  //   event.preventDefault();
-  //   try {
-  //     UserLoginApi.logoutUser();
-  //     navigate(routes.ROOT);
-  //     localStorage.clear();
-  //     setOpen(false);
-  //   } catch {
-  //     console.log("Logout failed");
-  //   }
-  // };
-
   const [openModal, setOpenModal] = useState(false);
 
   const handleCloseModal = () => {

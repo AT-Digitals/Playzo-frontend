@@ -23,7 +23,6 @@ import styled from "styled-components";
 
 const StyledCell = styled(TableCell)({
   " &.MuiTableCell-root": {
-    // borderBottom: "none",
     fontSize: "16px",
     textAlign: "center",
     color: Colors.BLACK,
