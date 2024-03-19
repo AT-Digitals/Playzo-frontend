@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 
+import BookingParantmodal from "./BookingParantmodal";
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomDateCalendar from "../CommonComponents/CustomDateCalender/CustomDateCalender";
@@ -432,6 +433,7 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
   //   };
   // }, [tableData.length]);
 
+  const [selectedModal, setSelectedModal] = useState(false);
   const isLocalCleared =
     localStorage.getItem("bookings") == null ||
     localStorage.getItem("bookings") === undefined ||
@@ -439,20 +441,28 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
 
   useEffect(() => {
     if (blocker.state === "blocked" && !isLocalCleared) {
-      const val = window.confirm(
-        "Are you sure you want to leave? Your selected service will be lost."
-      );
-      localStorage.removeItem("nextLocation");
-      if (val) {
-        localStorage.setItem("nextLocation", blocker.location.pathname);
-        isBlocked.current = false;
-        setTableData([]);
-        cleanupLocalStorage();
-      }
-      blocker.reset();
+      setSelectedModal(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocker, blocker.state]);
+
+  const handleModalConfirm = () => {
+    localStorage.removeItem("nextLocation");
+    if (blocker.location) {
+      localStorage.setItem("nextLocation", blocker.location.pathname);
+    }
+    isBlocked.current = false;
+    setTableData([]);
+    cleanupLocalStorage();
+    if (blocker.state === "blocked") {
+      blocker.reset();
+    }
+    setSelectedModal(false); // Close the modal after confirmation
+  };
+
+  const handleModalCancel = () => {
+    setSelectedModal(false); // Close the modal
+  };
 
   useEffect(() => {
     if (nextLocation && !isBlocked.current) {
@@ -1000,6 +1010,15 @@ const BookingParent: React.FC<{ type: BookingType }> = ({ type }) => {
         handleClose={() => setIsModalOpen(false)}
         text={"Please make at least one booking before proceeding to payment"}
         headingText={""}
+      />
+
+      <BookingParantmodal
+        open={selectedModal}
+        handleClose={handleModalCancel}
+        text={
+          "Are you sure you want to leave? Your selected service will be lost."
+        }
+        handleConfirmReset={handleModalConfirm}
       />
     </>
   );

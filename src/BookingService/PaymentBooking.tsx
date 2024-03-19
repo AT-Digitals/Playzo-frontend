@@ -18,6 +18,7 @@ import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookingApi from "../api/BookingApi";
+import BookingParantmodal from "./BookingParantmodal";
 import { BookingSubTypes } from "./BookingSubTypes";
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
@@ -217,22 +218,6 @@ export default function PaymentBooking() {
   }, []);
 
   useEffect(() => {
-    if (blocker.state === "blocked") {
-      const val = window.confirm(
-        "Are you sure you want to leave? Your selected bookings will be lost."
-      );
-      localStorage.removeItem("nextLocation");
-      if (val) {
-        localStorage.setItem("nextLocation", blocker.location.pathname);
-        isBlocked.current = false;
-        sampleref.current = true;
-        cleanupLocalStorage();
-      }
-      blocker.reset();
-    }
-  }, [blocker, blocker.state]);
-
-  useEffect(() => {
     if (nextLocation && !isBlocked.current) {
       localStorage.removeItem("nextLocation");
       navigate(nextLocation);
@@ -252,6 +237,36 @@ export default function PaymentBooking() {
     if (!phoneRegex.test(enteredPhoneNumber)) {
       setPhoneNumberError("Please enter a valid 10-digit phone number.");
     }
+  };
+
+  const [selectedModal, setSelectedModal] = useState(false);
+
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      // Instead of window.alert, set showModal to true
+      setSelectedModal(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blocker, blocker.state]);
+
+  const handleConfirmation = () => {
+    // Perform actions when the user confirms
+    localStorage.removeItem("nextLocation");
+    if (blocker.location) {
+      localStorage.setItem("nextLocation", blocker.location.pathname);
+    }
+    isBlocked.current = false;
+    sampleref.current = true;
+    cleanupLocalStorage();
+    setSelectedModal(false); // Close the modal
+    if (blocker.state === "blocked") {
+      blocker.reset();
+    }
+  };
+
+  const handleModalCancel = () => {
+    // Handle user cancellation
+    setSelectedModal(false); // Close the modal
   };
 
   return (
@@ -844,6 +859,15 @@ export default function PaymentBooking() {
         text="Thank you, Your booking is confirmed"
         headingText="Booking Confirmation"
         paymentText="You have paid 30% in online remaining you have to pay in the court"
+      />
+
+      <BookingParantmodal
+        open={selectedModal}
+        handleClose={handleModalCancel}
+        text={
+          "Are you sure you want to leave? Your selected service will be lost."
+        }
+        handleConfirmReset={handleConfirmation}
       />
     </>
   );
