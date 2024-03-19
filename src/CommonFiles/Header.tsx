@@ -14,6 +14,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import AppContainer from "../CommonComponents/AppContainer";
+import BookingParantmodal from "../BookingService/BookingParantmodal";
 import Colors from "../CommonComponents/Colors";
 import DropDown from "../CommonComponents/DropDown";
 import LoginForm from "../pages/login/LoginForm";
@@ -47,6 +48,26 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleConfirmLogout = async () => {
+    try {
+      await UserLoginApi.logoutUser();
+
+      localStorage.clear();
+      setIsLoggedIn(false);
+      setAnchorEl(null);
+
+      window.location.href = routes.ROOT;
+    } catch {
+      console.log("Logout failed");
+    }
+  };
+
   const handleLogout = async (event: any) => {
     event.preventDefault();
 
@@ -56,10 +77,8 @@ export default function Header() {
       localStorage.getItem("bookings") === undefined ||
       localStorage.getItem("bookings") === "[]";
 
-    if (
-      !isLocalStorageEmpty &&
-      !window.confirm("Are you sure you want to logout?")
-    ) {
+    if (!isLocalStorageEmpty) {
+      setOpenModal(true); // Open the modal instead of using window.confirm
       return;
     }
 
@@ -351,6 +370,13 @@ export default function Header() {
         </Stack>
 
         <LoginForm handleClose={handleClose} open={open} />
+
+        <BookingParantmodal
+          open={openModal}
+          handleClose={handleCloseModal}
+          handleConfirmReset={handleConfirmLogout}
+          text="Are you sure to log out?"
+        />
       </AppContainer>
     </Box>
   );

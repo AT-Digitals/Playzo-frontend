@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 
 import AppDrawer from "./AppDrawer";
+import BookingParantmodal from "../BookingService/BookingParantmodal";
 import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
@@ -44,16 +45,49 @@ export default function MoblieHeader({
     // Open WhatsApp link in a new window
     window.open(whatsappLink, "_blank");
   };
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleConfirmLogout = async () => {
+    try {
+      await UserLoginApi.logoutUser();
+
+      localStorage.clear();
+      setIsLoggedIn(false);
+
+      window.location.href = routes.ROOT;
+    } catch {
+      console.log("Logout failed");
+    }
+  };
 
   const handleLogout = async (event: any) => {
     event.preventDefault();
+
+    // Check if local storage is empty
+    const isLocalStorageEmpty =
+      localStorage.getItem("bookings") == null ||
+      localStorage.getItem("bookings") === undefined ||
+      localStorage.getItem("bookings") === "[]";
+
+    if (!isLocalStorageEmpty) {
+      setOpenModal(true); // Open the modal instead of using window.confirm
+      return;
+    }
+
     try {
-      UserLoginApi.logoutUser();
-      navigate(routes.ROOT);
+      // Logout user
+      await UserLoginApi.logoutUser();
+
       localStorage.clear();
-      setOpen(false);
+      setIsLoggedIn(false);
+
+      window.location.href = routes.ROOT;
     } catch {
       console.log("Logout failed");
     }
@@ -171,6 +205,13 @@ export default function MoblieHeader({
         setActiveTab={setActiveTab}
         activeTab={activeTab}
         isLoggedIn={isLoggedIn}
+      />
+
+      <BookingParantmodal
+        open={openModal}
+        handleClose={handleCloseModal}
+        handleConfirmReset={handleConfirmLogout}
+        text="Are you sure to log out?"
       />
     </>
   );
