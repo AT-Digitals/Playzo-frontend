@@ -166,13 +166,15 @@ export default function CustomTable({
         width={"100%"}
       >
         <Card
-          style={{
-            width: "70%", // Adjust as needed
-            margin: "0 auto",
-            boxShadow: "0px 2px 20px 0px",
-            backgroundColor: Colors.WHITE,
-            marginBottom: "20px", // Adjust as needed
-          }}
+          style={
+            {
+              width: { xs: "100%", sm: "70%" }, // Adjust as needed
+              margin: "0 auto",
+              boxShadow: "0px 2px 20px 0px",
+              backgroundColor: Colors.WHITE,
+              marginBottom: "20px", // Adjust as needed
+            } as any
+          }
         >
           <Box
             mb={1}
