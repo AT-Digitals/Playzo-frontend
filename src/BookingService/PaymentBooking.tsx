@@ -23,6 +23,7 @@ import { BookingSubTypes } from "./BookingSubTypes";
 import { BookingType } from "../CommonFiles/BookingType";
 import Colors from "../CommonComponents/Colors";
 import CustomTextField from "../CommonComponents/CustomTextField";
+import DateUtils from "../Utils/DateUtils";
 import LockIcon from "@mui/icons-material/Lock";
 import ModalComponent from "../CommonComponents/CustomDateCalender/ModalComponent";
 import TodayIcon from "@mui/icons-material/Today";
@@ -150,6 +151,7 @@ export default function PaymentBooking() {
             ].toString(),
           numberOfPerson:
             bookings.numberOfPersons > 0 ? bookings.numberOfPersons : 0,
+            connectId: `${DateUtils.formatDate(new Date(), 'DD-MM-YYYY')}-${bookings.type}-${userData.email}`
         });
 
         if (response) {

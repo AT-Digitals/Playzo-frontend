@@ -370,7 +370,6 @@ export default function CustomDateCalendar({
               : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
-            courtValue
           );
           if (response) {
             ratePerHour = response.bookingAmount;

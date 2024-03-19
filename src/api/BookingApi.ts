@@ -97,9 +97,9 @@ export default class BookingApi {
     }
   }
 
-  public static async getBookingAmount(type: any, court:any) {
+  public static async getBookingAmount(type: any) {
     try {
-      const detail = await axiosInstance.get<any>(`/booking/amount/${type}/${court}`);
+      const detail = await axiosInstance.get<any>(`/booking/amount/${type}`);
       return detail.data;
     } catch (e) {
       throw handleApiError(e, "Failed to get amount");
