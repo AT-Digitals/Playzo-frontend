@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalComponent";
 import OTPModal from "./OTPModal";
 import UserApi from "../../api/UserApi";
 import { useState } from "react";
@@ -30,6 +31,8 @@ export default function ForgetPassword({
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [showOTPModal, setShowOTPModal] = useState(false);
+  const [usersNot, setUsersNot] = useState(false);
+
   const [emailValue, setEmailValue] = useState("");
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +58,7 @@ export default function ForgetPassword({
           setShowOTPModal(true);
         })
         .catch((error) => {
-          alert(error);
+          setUsersNot(true);
         });
       console.log("data", data);
     } catch (error) {
@@ -192,6 +195,13 @@ export default function ForgetPassword({
             email={emailValue}
           />
         )}
+
+        <ModalComponent
+          open={usersNot}
+          handleClose={() => setUsersNot(false)}
+          text={"User not exists with given email!"}
+          headingText={"User Not Exists"}
+        />
       </>
     </>
   );
