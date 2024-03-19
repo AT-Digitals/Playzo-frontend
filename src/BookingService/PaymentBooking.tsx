@@ -200,23 +200,6 @@ export default function PaymentBooking() {
     return false;
   });
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event: any) => {
-  //     event.preventDefault();
-  //     cleanupLocalStorage();
-  //     const message =
-  //       "Are you sure you want to leave? Your selected bookings will be lost.";
-  //     event.returnValue = message;
-  //     return message;
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (nextLocation && !isBlocked.current) {
       localStorage.removeItem("nextLocation");
