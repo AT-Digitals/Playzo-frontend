@@ -166,9 +166,9 @@ export default function CustomTable({
         width={"100%"}
       >
         <Card
-          style={
+          sx={
             {
-              width: { xs: "100%", sm: "70%" }, // Adjust as needed
+              width: { xs: "90%", sm: "70%", md: "70%" }, // Adjust as needed
               margin: "0 auto",
               boxShadow: "0px 2px 20px 0px",
               backgroundColor: Colors.WHITE,
