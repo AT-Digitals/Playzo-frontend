@@ -426,6 +426,7 @@ export default function CustomDateCalendar({
                 "YYYY-MM-DD"
               ),
               court: newCourt.toString(),
+              userBookingType: "online",
             });
           } catch (error: any) {
             flag = true;
