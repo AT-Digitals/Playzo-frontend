@@ -378,7 +378,9 @@ export default function CustomDateCalendar({
 
               bookings.amount = totalAmt * parseInt(numberOfPersons);
               bookings.numberOfPersons = parseInt(numberOfPersons);
-            } else {
+            }else  if ((type === BookingType.Playstaion || type === BookingType.Turf)  && courtValue===3) {
+              bookings.amount = totalDuration * ratePerHour * 2;
+             } else {
               bookings.amount = totalDuration * ratePerHour;
             }
           } else {
