@@ -5,7 +5,7 @@ import { handleApiError } from "../Utils/ApiUtils";
 export default class BookingApi {
   public static async createBooking(booking?: any) {
     try {
-      const details = await axiosInstance.post("/bookings", booking);
+      const details = await axiosInstance.post("/bookings/bulk", booking);
       return details.data;
     } catch (e) {
       throw handleApiError(e, "Failed to create booking");
