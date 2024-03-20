@@ -210,10 +210,7 @@ export default function ContactUs() {
     object-fit: cover;
   `;
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    document.documentElement.scrollTop = 0;
   }, []);
 
   return (
