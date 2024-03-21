@@ -8,14 +8,50 @@ interface cardProps {
   buttonLabel: string;
 }
 const StyledCard = styled(Card)`
-  width: 290px; /* Default width */
-
-  @media (max-width: 1280px) {
-    width: 280px; /* For 1280px width */
-  }
-
-  @media (max-width: 1200px) {
-    width: 340px; /* For 1200px width */
+@media (min-width: 360px) {
+  width: 100%;
+  max-width: 313px;
+}
+@media (min-width: 375px) {
+  width: 100%;
+  max-width: 330px;
+}
+@media (min-width: 390px) {
+  width: 100%;
+  max-width: 340px;
+}
+@media (min-width: 412px) {
+  width: 100%;
+  max-width: 360px;
+}
+@media (min-width: 414px) {
+  width: 100%;
+  max-width: 365px;
+}
+@media (min-width: 430px) {
+  width: 100%;
+  max-width: 380px;
+}
+@media (min-width: 768px) {
+  width: 100%;
+  max-width: 333px;
+}
+@media (min-width: 820px) {
+  width: 100%;
+  max-width: 354px;
+}
+@media (min-width: 912px) {
+  width: 100%;
+  max-width: 408px;
+}
+@media (min-width: 1024px) {
+  width: 100%;
+  max-width: 460px;
+}
+@media (max-width: 1280px) {
+  width: 100%;
+  max-width: 270px;
+}
   }
 `;
 
@@ -29,8 +65,7 @@ export default function CardComponent({
     <>
     <StyledCard
       sx={{
-        width: {xs: "328px", sm: "353px", md: "390px", lg: "340px"},
-        maxWidth: 400,
+        width: "100%",
         borderRadius: "10px",
         overflow: "hidden",
         position: "relative",

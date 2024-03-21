@@ -31,7 +31,7 @@ export default function Footer() {
       bgcolor={Colors.BLACK}
       top={0}
       zIndex={1000}
-      paddingX={3}
+     paddingRight={"24px"}
       paddingY={4}
       //height={"456px"}
     >

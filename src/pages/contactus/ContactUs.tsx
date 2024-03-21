@@ -322,7 +322,7 @@ export default function ContactUs() {
               </Box>
             </Box>
 
-            <Box marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} width={"100%"}>
+            <Box style={{marginBottom: "50px"}} marginLeft={{ xs: "0px", sm: "0px", md: '0px', lg: "110px" }} pt={{ xs: "0px", sm: "0px", md: "0px", lg: "40px" }} width={"100%"}>
               <form onSubmit={onSubmit}>
                 <Stack
                   sx={{
@@ -340,7 +340,7 @@ export default function ContactUs() {
                     md: "1px solid #d4ebf2",
                     lg: "1px solid #d4ebf2",
                   }}
-                  width={{ xs: "80%", sm: "90%", md: "90%", lg: "100%" }}
+                  width={{ xs: "80%", sm: "88%", md: "90%", lg: "100%" }}
                   borderRadius={{ xs: "20px", sm: "20px", md: "20px", lg: "20px" }}
                   padding={{
                     xs: "21px 16px",
