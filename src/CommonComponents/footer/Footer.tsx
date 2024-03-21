@@ -296,7 +296,7 @@ export default function Footer() {
             direction="row"
             spacing={2}
           >
-            <Link to={"https://www.facebook.com/PlayZo33"}>
+            <Link target="_blank" to={"https://www.facebook.com/PlayZo33"}>
               <FacebookIcon
                 sx={{
                   color: Colors.WHITE,
@@ -309,7 +309,7 @@ export default function Footer() {
                 }}
               />
             </Link>
-            <Link to={"https://www.instagram.com/playzo_33/"}>
+            <Link target="_blank" to={"https://www.instagram.com/playzo_33/"}>
               <InstagramIcon
                 sx={{
                   color: Colors.WHITE,
@@ -322,7 +322,7 @@ export default function Footer() {
                 }}
               />
             </Link>
-            <Link to={"https://www.youtube.com/results?search_query=PLAYZO+33"}>
+            <Link target="_blank" to={"https://www.youtube.com/results?search_query=PLAYZO+33"}>
               <YouTubeIcon
                 sx={{
                   color: Colors.WHITE,
@@ -360,7 +360,7 @@ export default function Footer() {
               direction="row"
               spacing={2}
             >
-              <Link to={"https://www.facebook.com/PlayZo33"}>
+              <Link target="_blank" to={"https://www.facebook.com/PlayZo33"}>
                 <FacebookIcon
                   sx={{
                     color: Colors.WHITE,
@@ -373,7 +373,7 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              <Link to={"https://www.instagram.com/playzo_33/"}>
+              <Link target="_blank" to={"https://www.instagram.com/playzo_33/"}>
                 <InstagramIcon
                   sx={{
                     color: Colors.WHITE,
@@ -386,7 +386,7 @@ export default function Footer() {
                   }}
                 />
               </Link>
-              <Link
+              <Link target="_blank"
                 to={"https://www.youtube.com/results?search_query=PLAYZO+33"}
               >
                 <YouTubeIcon
