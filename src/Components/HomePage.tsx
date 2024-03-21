@@ -429,7 +429,7 @@ export default function HomePage() {
             Relentless is more than a brand
           </Typography>
           <Box mt={"20px"} display={"flex"} justifyContent={"center"}>
-            <Link to={"https://www.instagram.com/"}>
+            <Link target="_blank" to={"https://www.instagram.com/"}>
               <StyledImage1 src={insta} alt="22" />
             </Link>
           </Box>
@@ -453,7 +453,7 @@ export default function HomePage() {
             }}
           >
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"
                 }
@@ -466,7 +466,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"
                 }
@@ -479,7 +479,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"
                 }
@@ -492,7 +492,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"
                 }
