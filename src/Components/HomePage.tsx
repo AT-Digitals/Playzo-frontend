@@ -318,7 +318,9 @@ export default function HomePage() {
               lg: "row",
             }}
           >
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Turf"}
@@ -328,7 +330,9 @@ export default function HomePage() {
                 image={turf}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Play Station"}
@@ -338,7 +342,9 @@ export default function HomePage() {
                 image={playstation}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Board Games"}
@@ -348,7 +354,9 @@ export default function HomePage() {
                 image={boardGames}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Badminton"}

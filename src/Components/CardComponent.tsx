@@ -77,7 +77,7 @@ export default function CardComponent({
       <CardMedia
         component="img"
         sx={{
-          height: { xs: "330px", sm: "350px", md: "390px", lg: "450px" },
+          height: { xs: "360px", sm: "360px", md: "390px", lg: "450px" },
           borderRadius: "10px",
           transition: "transform 0.5s ease",
           cursor: "pointer",
