@@ -370,7 +370,6 @@ export default function CustomDateCalendar({
               : BookingSubTypes[bookings.name as keyof typeof BookingSubTypes];
           const response = await BookingApi.getBookingAmount(
             bookings.type,
-            courtValue
           );
           if (response) {
             ratePerHour = response.bookingAmount;
@@ -379,7 +378,10 @@ export default function CustomDateCalendar({
 
               bookings.amount = totalAmt * parseInt(numberOfPersons);
               bookings.numberOfPersons = parseInt(numberOfPersons);
-            } else {
+            }else if ((type === BookingType.Playstaion || type === BookingType.Turf)  && courtValue===3) {
+              const totalAmt = totalDuration * ratePerHour;
+              bookings.amount = totalAmt * 2;
+             } else {
               bookings.amount = totalDuration * ratePerHour;
             }
           } else {
@@ -427,6 +429,7 @@ export default function CustomDateCalendar({
                 "YYYY-MM-DD"
               ),
               court: newCourt.toString(),
+              userBookingType: "online",
             });
           } catch (error: any) {
             flag = true;
