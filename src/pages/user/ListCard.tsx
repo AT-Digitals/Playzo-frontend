@@ -43,14 +43,16 @@ export default function ListCard({ userDetails, userName }: dataProps) {
           >
             <Box display={"flex"} justifyContent={"space-between"} gap={"2rem"}>
               <Typography variant="body2">{userName}</Typography>
-              <Typography variant="body2">
-                {CapitalizeFirstLetter(user.type)}
-              </Typography>
-              {user.type === "Badminton" ? (
-                <Typography>/{user.numberOfPersons}</Typography>
-              ) : (
-                ""
-              )}
+              <Box display={"flex"}>
+                <Typography variant="body2">
+                  {CapitalizeFirstLetter(user.type)}
+                </Typography>
+                {user.type === "Badminton" ? (
+                  <Typography>/{user.numberOfPersons}</Typography>
+                ) : (
+                  ""
+                )}
+              </Box>
             </Box>
             <Box display={"flex"} justifyContent={"space-between"} gap={"2rem"}>
               <Typography variant="body2">
