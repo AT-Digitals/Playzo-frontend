@@ -308,9 +308,9 @@ export default function HomePage() {
           <Grid
             container
             width="100%"
-            maxWidth={1460}
             margin="0 auto"
             spacing={3}
+            maxWidth={1460}
             flexDirection={{
               xs: "column",
               sm: "row",
