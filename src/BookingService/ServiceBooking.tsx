@@ -104,7 +104,16 @@ export default function ServiceBooking() {
     </Typography>,
   ];
   const isBlocked = useRef<any>(true);
-  const excutedBlocker = ["/payment-booking", "/service-booking"];
+  const excutedBlocker = [
+    "/payment-booking",
+    "/service-booking",
+    routes.BADMINTON_BOOKING,
+    routes.TURF_BOOKING,
+    routes.PLAYSTATION_BOOKING,
+    routes.BADMINTON_BOOKING,
+    routes.CRICKETNET_BOOKING,
+    routes.BOARDGAME_BOOKING,
+  ];
   // Block navigating elsewhere when data has been entered into the input
   let blocker = useBlocker(({ currentLocation, nextLocation }) => {
     const isLocalCleared =
