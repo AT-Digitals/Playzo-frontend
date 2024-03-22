@@ -6,6 +6,7 @@ import BookingParantmodal from "../BookingService/BookingParantmodal";
 import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+import LoginForm from "../pages/login/LoginForm";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import UserLoginApi from "../api/UserLoginApi";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -37,6 +38,7 @@ export default function MoblieHeader({
 
   const handleDrawerOpen = useCallback(() => setOpen(true), []);
   const handleDrawerClose = useCallback(() => setOpen(false), []);
+
   const [isHovered, setIsHovered] = useState(false);
   const handleButtonClick = () => {
     const phoneNumber = "7094460944";
@@ -111,6 +113,10 @@ export default function MoblieHeader({
       setIsLoggedIn(false); // Set to false if there is no user data
     }
   }, []);
+
+  const [Modalopen, setModalOpen] = useState(false);
+  // const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
   return (
     <>
@@ -205,6 +211,7 @@ export default function MoblieHeader({
         setActiveTab={setActiveTab}
         activeTab={activeTab}
         isLoggedIn={isLoggedIn}
+        setModalOpen={setModalOpen}
       />
 
       <BookingParantmodal
@@ -213,6 +220,8 @@ export default function MoblieHeader({
         handleConfirmReset={handleConfirmLogout}
         text="Are you sure to log out?"
       />
+
+      <LoginForm handleClose={handleClose} open={Modalopen} />
     </>
   );
 }
