@@ -75,7 +75,6 @@ export default function OTPModal({
     <>
       <Dialog
         open={open}
-        // onClose={ModlaCloseChange}
         maxWidth="xs"
         fullWidth
         sx={{

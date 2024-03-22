@@ -178,7 +178,6 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
   return (
     <Dialog
       open={open}
-      onClose={ModlaCloseChange}
       maxWidth="xs"
       fullWidth
       sx={{

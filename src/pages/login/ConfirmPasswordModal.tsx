@@ -71,8 +71,6 @@ export default function ConfirmPasswordModal({
       alert(error);
       console.log("error", error);
     }
-
-    // If everything is valid, reset the error and close the modal
   };
 
   const handleClickShowPassword = () => {

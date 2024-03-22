@@ -159,7 +159,6 @@ export default function Form({ handleClose, open }: loginProps) {
     <>
       <Dialog
         open={open}
-        onClose={ModlaCloseChange}
         maxWidth="xs"
         fullWidth
         sx={{
