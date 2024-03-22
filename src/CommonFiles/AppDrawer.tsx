@@ -117,6 +117,9 @@ export default function AppDrawer({
 
   return (
     <StyledDrawer
+      sx={{
+        display: { xs: "block", sm: "block", md: "block", lg: "none" },
+      }}
       variant="temporary"
       anchor="right"
       open={open}
