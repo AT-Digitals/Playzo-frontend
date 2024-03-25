@@ -29,12 +29,18 @@ export default function ModalComponent({
   text,
   handleConfirmReset,
 }: modalProps) {
+  const handleBackdropClick = (event: any) => {
+    // Prevent modal from closing when clicking on the backdrop
+    event.stopPropagation();
+  };
+
   return (
     <Modal
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      BackdropProps={{ onClick: handleBackdropClick }}
     >
       <Box sx={style}>
         <Stack direction="column" alignItems="center" spacing={2}>

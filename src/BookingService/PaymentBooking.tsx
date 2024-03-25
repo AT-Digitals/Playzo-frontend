@@ -287,8 +287,10 @@ let finalBookings:any = [];
         <Box
           sx={{
             position: "relative",
+            zIndex: 1, // Ensure content appears above background
+            padding: "20px 40px", // Adjust padding as needed
+            color: "black", // Set text color for content
             zIndex: 1,
-            padding: {xs: "0px", sm: '0px', md: "0px", lg: "20px"},
             color: "black",
           }}
         >
@@ -308,13 +310,13 @@ let finalBookings:any = [];
           >
             <Box
               margin={{
-                xs: "30px 30px",
+                xs: "0px",
                 sm: "30px 30px",
                 md: "30px 30px",
                 lg: "50px",
               }}
               width={"100%"}
-              maxWidth={{ xs: "313px", sm: "313px", md: "313px", lg: "330px" }}
+              maxWidth={{ xs: "100%", sm: "313px", md: "313px", lg: "330px" }}
               borderRadius={"10px"}
               border={"1px solid gray"}
               maxHeight="600px"
@@ -546,13 +548,13 @@ let finalBookings:any = [];
                 opacity: "1",
               }}
               padding={{
-                xs: "17px 35px",
+                xs: "0px ",
                 sm: "17px 35px",
                 md: "17px 35px",
-                lg: "70px 45px",
+                lg: "40px 45px",
               }}
               width={"100%"}
-              maxWidth={{ xs: "295px", sm: "295px", md: "295px", lg: "379px" }}
+              maxWidth={{ xs: "100%", sm: "295px", md: "295px", lg: "379px" }}
               display={"flex"}
               flexDirection={"column"}
             >
@@ -619,8 +621,8 @@ let finalBookings:any = [];
                 </Typography>
               </Box>
               <Box
-                mt={"-10px"}
-                gap={"42px"}
+                // mt={"-10px"}
+                gap={"32px"}
                 display={"flex"}
                 alignItems={"center"}
               >
@@ -635,7 +637,7 @@ let finalBookings:any = [];
                 <img src={cardicons} alt="" width={"80px"} />
               </Box>
               <Box
-                margin={"15px 35px"}
+                margin={"15px "}
                 width={"100%"}
                 maxWidth={"340px"}
                 height={"35px"}
@@ -647,7 +649,7 @@ let finalBookings:any = [];
                   }}
                   flexDirection={"row"}
                   justifyContent={"space-between"}
-                  padding={"5px 10px"}
+                  padding={"5px 25px"}
                 >
                   <Typography
                     fontWeight={"500"}
@@ -662,7 +664,7 @@ let finalBookings:any = [];
               <Box
                 width={"100%"}
                 display={"flex"}
-                margin={"15px 35px"}
+                margin={"15px "}
                 gap={"12px"}
               >
                 <Box
@@ -677,7 +679,7 @@ let finalBookings:any = [];
                     }}
                     flexDirection={"row"}
                     justifyContent={"space-between"}
-                    padding={"5px 10px"}
+                    padding={"5px 25px"}
                   >
                     <Typography
                       fontWeight={"500"}

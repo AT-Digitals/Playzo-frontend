@@ -17,7 +17,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowUpTwoToneIcon from "@mui/icons-material/KeyboardArrowUpTwoTone";
 import { Link } from "react-router-dom";
-import LoginForm from "../pages/login/LoginForm";
 import routes from "../routes/routes";
 
 const HeaderLink = styled(Link)`
@@ -52,6 +51,7 @@ interface AppDrawerProps {
   isLoggedIn: any;
   user: any;
   handleLogout: any;
+  setModalOpen?: any;
 }
 
 const MenuList = [
@@ -95,15 +95,13 @@ export default function AppDrawer({
   isLoggedIn,
   user,
   handleLogout,
+  setModalOpen,
 }: AppDrawerProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  const [Modalopen, setModalOpen] = useState(false);
-  const handleOpen = () => setModalOpen(true);
-  const handleClose = () => setModalOpen(false);
 
   const [showoption, setShowOption] = useState(false);
 
@@ -111,8 +109,16 @@ export default function AppDrawer({
     setShowOption(!showoption);
   };
 
+  const LoginClick = () => {
+    onClose?.();
+    setModalOpen(true);
+  };
+
   return (
     <StyledDrawer
+      sx={{
+        display: { xs: "block", sm: "block", md: "block", lg: "none" },
+      }}
       variant="temporary"
       anchor="right"
       open={open}
@@ -256,7 +262,7 @@ export default function AppDrawer({
             </Button>
           ) : (
             <Button
-              onClick={handleOpen}
+              onClick={LoginClick}
               sx={{
                 whiteSpace: "nowrap",
                 padding: "8px 20px",
@@ -277,8 +283,6 @@ export default function AppDrawer({
           )}
         </Stack>
       </Stack>
-
-      <LoginForm handleClose={handleClose} open={Modalopen} />
     </StyledDrawer>
   );
 }

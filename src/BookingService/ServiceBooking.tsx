@@ -1,9 +1,10 @@
 import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
+import { Link, useBlocker, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import BookingParantmodal from "./BookingParantmodal";
 import Colors from "../CommonComponents/Colors";
-import { Link } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import assets from "../assets";
 import backgroundimage from "./7692.jpg";
@@ -18,7 +19,6 @@ const {
   "playstation.png": playstation,
   "turf.png": turf,
 } = assets;
-
 const TurfDetails = [
   {
     image: turf,
@@ -55,10 +55,8 @@ const CricketDetails = [
     link: routes.BOWLINGMACHINE_BOOKING,
   },
 ];
-
 export default function ServiceBooking() {
   const [selectedBreadcrumb, setSelectedBreadcrumb] = useState("1");
-
   const handleBreadcrumbClick = (breadcrumbKey: any) => {
     setSelectedBreadcrumb(breadcrumbKey);
   };
@@ -97,7 +95,7 @@ export default function ServiceBooking() {
       fontSize={{ xs: "14px", sm: "16px", md: "16px", lg: "20px" }}
       fontWeight={"bold"}
       style={{ cursor: "pointer" }}
-      margin={{xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px"}}
+      margin={{ xs: "2px 3px", sm: "2px 3px", md: "2px 3px", lg: "0px" }}
       key="4"
       color={selectedBreadcrumb === "4" ? Colors.BUTTON : Colors.BLACK}
       onClick={() => handleBreadcrumbClick("4")}
@@ -105,14 +103,79 @@ export default function ServiceBooking() {
       Payment
     </Typography>,
   ];
+  const isBlocked = useRef<any>(true);
+  const excutedBlocker = [
+    "/payment-booking",
+    "/service-booking",
+    routes.BADMINTON_BOOKING,
+    routes.TURF_BOOKING,
+    routes.PLAYSTATION_BOOKING,
+    routes.BADMINTON_BOOKING,
+    routes.CRICKETNET_BOOKING,
+    routes.BOARDGAME_BOOKING,
+  ];
+  // Block navigating elsewhere when data has been entered into the input
+  let blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    const isLocalCleared =
+      localStorage.getItem("bookings") == null ||
+      localStorage.getItem("bookings") === undefined ||
+      localStorage.getItem("bookings") === "[]";
+    if (
+      !isLocalCleared &&
+      currentLocation.pathname !== nextLocation.pathname &&
+      !excutedBlocker.includes(nextLocation.pathname)
+    ) {
+      isBlocked.current = true;
+      return true;
+    }
+    return false;
+  });
 
+  const cleanupLocalStorage = () => {
+    localStorage.removeItem("bookings");
+    localStorage.removeItem("selectedService");
+  };
+  const nextLocation = localStorage.getItem("nextLocation");
+  const navigate = useNavigate();
+  const [selectedModal, setSelectedModal] = useState(false);
+  const isLocalCleared =
+    localStorage.getItem("bookings") == null ||
+    localStorage.getItem("bookings") === undefined ||
+    localStorage.getItem("bookings") === "[]";
+  useEffect(() => {
+    if (blocker.state === "blocked" && !isLocalCleared) {
+      setSelectedModal(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blocker, blocker.state]);
+  const handleModalConfirm = () => {
+    localStorage.removeItem("nextLocation");
+    if (blocker.location) {
+      localStorage.setItem("nextLocation", blocker.location.pathname);
+    }
+    isBlocked.current = false;
+    //setTableData([]);
+    cleanupLocalStorage();
+    if (blocker.state === "blocked") {
+      blocker.reset();
+    }
+    setSelectedModal(false); // Close the modal after confirmation
+  };
+  const handleModalCancel = () => {
+    setSelectedModal(false); // Close the modal
+  };
+  useEffect(() => {
+    if (nextLocation && !isBlocked.current) {
+      localStorage.removeItem("nextLocation");
+      navigate(nextLocation);
+    }
+  }, [nextLocation, navigate]);
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   }, []);
-
   const zoomInAnimation = keyframes`
   from {
     transform: scale(0);
@@ -121,11 +184,9 @@ export default function ServiceBooking() {
     transform: scale(1);
   }
 `;
-
   const AnimatedZoomIn = styled.div`
     animation: ${zoomInAnimation} 1s ease-in-out;
   `;
-
   return (
     <>
       <Box
@@ -329,7 +390,6 @@ export default function ServiceBooking() {
             </Stack>
           </Box>
         </Box>
-
         <img
           width={"100%"}
           style={{
@@ -339,6 +399,14 @@ export default function ServiceBooking() {
           alt=""
         />
       </Box>
+      <BookingParantmodal
+        open={selectedModal}
+        handleClose={handleModalCancel}
+        text={
+          "Are you sure you want to leave? Your selected service will be lost."
+        }
+        handleConfirmReset={handleModalConfirm}
+      />
     </>
   );
 }

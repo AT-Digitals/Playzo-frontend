@@ -74,6 +74,7 @@ export default function ForgetPassword({
   const HandleCloseandClear = () => {
     handleClose?.();
     setEmail("");
+    setIsValidEmail(false);
   };
 
   return (
