@@ -132,34 +132,38 @@ export default function PaymentBooking() {
         JSON.stringify({ ...userData, phone: phoneNumber })
       );
     }
-let finalBookings:any = [];
+    let finalBookings: any = [];
 
     allBookings.map(async (bookings: any) => {
-     finalBookings.push({
-      type: bookings.type,
-      bookingtype: "online",
-      startTime: parseInt(bookings.startTime),
-      endTime: parseInt(bookings.endTime),
-      user: userData.id,
-      startDate: bookings.startDate,
-      endDate: bookings.endDate,
-      userBookingType: "online",
-      court:
-        BookingSubTypes[
-          bookings.name as keyof typeof BookingSubTypes
-        ].toString(),
-      numberOfPerson:
-        bookings.numberOfPersons > 0 ? bookings.numberOfPersons : 0,
-        connectId: `${DateUtils.formatDate(new Date(), 'DD/MM/YYYY')}-${bookings.type}-${userData.email}`,
-        bookingAmount:{
-          online:bookings.amount,
-          total:bookings.amount
-        }
-    })
+      finalBookings.push({
+        type: bookings.type,
+        bookingtype: "online",
+        startTime: parseInt(bookings.startTime),
+        endTime: parseInt(bookings.endTime),
+        user: userData.id,
+        startDate: bookings.startDate,
+        endDate: bookings.endDate,
+        userBookingType: "online",
+        court:
+          BookingSubTypes[
+            bookings.name as keyof typeof BookingSubTypes
+          ].toString(),
+        numberOfPerson:
+          bookings.numberOfPersons > 0 ? bookings.numberOfPersons : 0,
+        connectId: `${DateUtils.formatDate(new Date(), "DD/MM/YYYY")}-${
+          bookings.type
+        }-${userData.email}`,
+        bookingAmount: {
+          online: bookings.amount,
+          total: bookings.amount,
+        },
+      });
     });
-    console.log("finalBookings", finalBookings)
+    console.log("finalBookings", finalBookings);
     try {
-      const response = await BookingApi.createBooking({ bookings: finalBookings });
+      const response = await BookingApi.createBooking({
+        bookings: finalBookings,
+      });
 
       if (response) {
         setOpen(true);
@@ -290,8 +294,6 @@ let finalBookings:any = [];
             zIndex: 1, // Ensure content appears above background
             padding: "20px 40px", // Adjust padding as needed
             color: "black", // Set text color for content
-            zIndex: 1,
-            color: "black",
           }}
         >
           <Stack
@@ -299,8 +301,18 @@ let finalBookings:any = [];
               opacity: "1",
             }}
             margin={{ xs: "0px", sm: "0px", md: "0px", lg: "50px 190px" }}
-            alignItems={{xs: "center", sm: "center", md: "center", lg: "normal"}}
-            justifyContent={{xs: "center", sm: "center", md: "center", lg: "center"}}
+            alignItems={{
+              xs: "center",
+              sm: "center",
+              md: "center",
+              lg: "normal",
+            }}
+            justifyContent={{
+              xs: "center",
+              sm: "center",
+              md: "center",
+              lg: "center",
+            }}
             flexDirection={{
               xs: "column",
               sm: "column",
