@@ -62,36 +62,36 @@ const CarouselContainer = styled(Stack)`
 const StyledStack = styled(Stack)`
   /* Media queries for different screen sizes */
   @media (min-width: 300px) {
-    transform: translate(-24px, 10px);
+    transform: translate(-24px, -10px);
   }
 
   @media (min-width: 414px) {
-    transform: translate(-61px, 10px);
+    transform: translate(-61px, -10px);
   }
 
   @media (min-width: 430px) {
-    transform: translate(-74px, 10px);
+    transform: translate(-74px, -10px);
   }
   @media (min-width: 375px) {
-    transform: translate(-23px, 10px);
+    transform: translate(-23px, -10px);
   }
   @media (min-width: 360px) {
-    transform: translate(-13px, -6px);
+    transform: translate(-23px, -9px);
   }
   @media (min-width: 412px) {
-    transform: translate(-59px, 10px);
+    transform: translate(-59px, -10px);
   }
   @media (min-width: 768px) {
-    transform: translate(-149px, 10px);
+    transform: translate(-149px, -10px);
   }
   @media (min-width: 820px) {
-    transform: translate(-177px, 10px);
+    transform: translate(-177px, -10px);
   }
   @media (min-width: 1024px) {
-    transform: translate(-190px, 10px);
+    transform: translate(-190px, -10px);
   }
   @media (min-width: 1200px) {
-    transform: translate(2px, 10px);
+    transform: translate(11px, 10px);
   }
 `;
 const StyledStack1 = styled(Stack)`

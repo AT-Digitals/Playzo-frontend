@@ -194,10 +194,7 @@ export default function CareersPageNew() {
     }
   `;
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    document.documentElement.scrollTop = 0;
   }, []);
 
   const [resume, setResume] = useState(null);

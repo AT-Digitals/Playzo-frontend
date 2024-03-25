@@ -279,9 +279,9 @@ export default function PaymentBooking() {
         <Box
           sx={{
             position: "relative",
-            zIndex: 1, // Ensure content appears above background
-            padding: "20px", // Adjust padding as needed
-            color: "black", // Set text color for content
+            zIndex: 1,
+            padding: {xs: "0px", sm: '0px', md: "0px", lg: "20px"},
+            color: "black",
           }}
         >
           <Stack
@@ -289,6 +289,8 @@ export default function PaymentBooking() {
               opacity: "1",
             }}
             margin={{ xs: "0px", sm: "0px", md: "0px", lg: "50px 190px" }}
+            alignItems={{xs: "center", sm: "center", md: "center", lg: "normal"}}
+            justifyContent={{xs: "center", sm: "center", md: "center", lg: "center"}}
             flexDirection={{
               xs: "column",
               sm: "column",
