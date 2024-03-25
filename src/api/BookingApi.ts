@@ -5,7 +5,7 @@ import { handleApiError } from "../Utils/ApiUtils";
 export default class BookingApi {
   public static async createBooking(booking?: any) {
     try {
-      const details = await axiosInstance.post("/bookings", booking);
+      const details = await axiosInstance.post("/bookings/bulk", booking);
       return details.data;
     } catch (e) {
       throw handleApiError(e, "Failed to create booking");
@@ -97,9 +97,9 @@ export default class BookingApi {
     }
   }
 
-  public static async getBookingAmount(type: any, court:any) {
+  public static async getBookingAmount(type: any) {
     try {
-      const detail = await axiosInstance.get<any>(`/booking/amount/${type}/${court}`);
+      const detail = await axiosInstance.get<any>(`/booking/amount/${type}`);
       return detail.data;
     } catch (e) {
       throw handleApiError(e, "Failed to get amount");

@@ -308,9 +308,9 @@ export default function HomePage() {
           <Grid
             container
             width="100%"
-            maxWidth={1460}
             margin="0 auto"
             spacing={3}
+            maxWidth={1460}
             flexDirection={{
               xs: "column",
               sm: "row",
@@ -318,7 +318,9 @@ export default function HomePage() {
               lg: "row",
             }}
           >
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Turf"}
@@ -328,7 +330,9 @@ export default function HomePage() {
                 image={turf}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Play Station"}
@@ -338,7 +342,9 @@ export default function HomePage() {
                 image={playstation}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Board Games"}
@@ -348,7 +354,9 @@ export default function HomePage() {
                 image={boardGames}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6} lg={3}>
+            <Grid sx={{
+              margin: {xs: "10px", sm: "0px", md: "0px" }
+            }} item xs={12} sm={6} md={6} lg={3}>
               <CardComponent
                 buttonLabel="Know more"
                 title={"Badminton"}
@@ -429,7 +437,7 @@ export default function HomePage() {
             Relentless is more than a brand
           </Typography>
           <Box mt={"20px"} display={"flex"} justifyContent={"center"}>
-            <Link to={"https://www.instagram.com/"}>
+            <Link target="_blank" to={"https://www.instagram.com/"}>
               <StyledImage1 src={insta} alt="22" />
             </Link>
           </Box>
@@ -453,7 +461,7 @@ export default function HomePage() {
             }}
           >
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"
                 }
@@ -466,7 +474,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"
                 }
@@ -479,7 +487,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"
                 }
@@ -492,7 +500,7 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link
+              <Link target="_blank"
                 to={
                   "https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"
                 }
