@@ -9,33 +9,38 @@ import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalCompo
 import banner from "./careers_banner.jpg";
 import image from "./Career-Development-Template-1024x777.jpg";
 import styled from "@emotion/styled";
-
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 const StyledImage = styled.img`
   @media (min-width: 300px) {
     width: 340px;
     height: 340px;
     margin: auto;
+    display: none;
   }
   @media (min-width: 414px) {
     width: 370px;
     height: 340px;
     margin: auto;
+    display: none;
   }
   @media (min-width: 540px) {
     width: 490px;
     height: 340px;
     margin: auto;
+    display: none;
   }
 
   @media (min-width: 768px) {
     width: 700px;
     height: 440px;
     margin: auto;
+    display: flex;
   }
   @media (min-width: 820px) {
     width: 730px;
     height: 440px;
     margin: auto;
+    display: flex;
   }
   @media (min-width: 912px) {
     width: 830px;
@@ -47,16 +52,19 @@ const StyledImage = styled.img`
     width: 840px;
     height: 440px;
     margin: auto;
+    display: flex;
   }
   @media (min-width: 1000px) {
     width: 940px;
     height: 440px;
     margin: auto;
+    display: flex;
   }
 
   @media (min-width: 1200px) {
     width: 700px;
     height: 600px;
+    display: flex;
   }
 `;
 export default function CareersPageNew() {
@@ -289,7 +297,7 @@ export default function CareersPageNew() {
                   lg: "row",
                 }}
                 paddingBottom={{
-                  xs: "30px",
+                  xs: "0px",
                   sm: "60px",
                   md: "60px",
                   lg: "0px",
@@ -394,15 +402,15 @@ export default function CareersPageNew() {
                             : ""
                         }
                       />
-
-                      <Typography>Attachments</Typography>
+                    <Box display={"flex"} alignItems={"center"} gap={"8px"}>
+                      <Typography>Attachments:</Typography>
 
                       {resume ? (
                         <div
                           style={{
                             display: "flex",
                             alignItems: "center",
-                            marginTop: "10px",
+                            marginTop: "3px",
                           }}
                         >
                           <Typography color={Colors.BUTTON_COLOR}>
@@ -419,30 +427,27 @@ export default function CareersPageNew() {
                             />
                           </IconButton>
                         </div>
+                        
                       ) : (
                         <>
-                          <div
+                          <IconButton
                             style={{
                               display: "flex",
                               flexDirection: "column",
                               marginTop: "10px",
                             }}
                           >
-                            <label
-                              htmlFor="resumeInput"
+                            <label htmlFor="resumeInput">
+                           
+                            <AttachFileIcon 
                               style={{
                                 cursor: "pointer",
-                                padding: "10px",
-                                border: "1px solid #15B5FC",
-                                borderRadius: "5px",
-                                backgroundColor: "#15B5FC",
-                                color: "#fff",
                                 textAlign: "center",
-                                width: "200px",
+                                color: Colors.BUTTON_COLOR
                               }}
-                            >
-                              Choose File
-                            </label>
+                            />
+                          
+                             </label>
                             <input
                               id="resumeInput"
                               type="file"
@@ -452,15 +457,17 @@ export default function CareersPageNew() {
                                 display: "none",
                               }}
                             />
-                          </div>
+                          </IconButton>
                           {isValidResume && (
                             <p style={{ color: "red" }}>
                               Please attach a valid resume file.
                             </p>
                           )}
+                        
                         </>
+                          
                       )}
-
+</Box>
                       <Button
                         sx={{
                           borderRadius: "30px",
