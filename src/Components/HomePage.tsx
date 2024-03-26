@@ -300,7 +300,10 @@ export default function HomePage() {
                 sx={{ fontFamily: "Inter" }}
               >
                 We offer a diverse range of{" "}
-                <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
+                <Link
+                  to={routes.PLAY33_SERVIVICES}
+                  style={{ textDecoration: "none" }}
+                >
                   <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
                 </Link>{" "}
                 to cater to the varied interests of our community.
@@ -477,7 +480,10 @@ export default function HomePage() {
                 sx={{ fontFamily: "Inter" }}
               >
                 We offer a diverse range of{" "}
-                <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
+                <Link
+                  to={routes.ZO_CAFE_SERVIVICES}
+                  style={{ textDecoration: "none" }}
+                >
                   <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
                 </Link>{" "}
                 to cater to the varied interests of our community.
