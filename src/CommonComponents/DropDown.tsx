@@ -8,13 +8,8 @@ import routes from "../routes/routes";
 import styled from "styled-components";
 
 const menuList = [
-  { label: "Badminton" },
-  { label: "CrossFit" },
-  { label: "Turf" },
-  { label: "Play Station" },
-  { label: "Board Games" },
-  { label: "Party Center" },
-  { label: "Cafeteria" },
+  { label: "Playzo 33", href: routes.PLAY33_SERVIVICES },
+  { label: "Zo’s Cafe", href: routes.ZO_CAFE_SERVIVICES },
 ];
 
 const HeaderLink = styled(Link)`
@@ -53,30 +48,30 @@ export default function BasicMenu() {
         onMouseLeave={handleMouseLeave}
         style={{ position: "relative" }}
       >
-        <HeaderLink to={routes.SERVICE}>
-          <Typography
-            sx={{
-              color: Colors.WHITE,
-              transition: "color 0.5s ease",
-              textTransform: "uppercase",
-              ":hover": {
-                color: Colors.BUTTON_COLOR,
-              },
+        {/* <HeaderLink to={routes.SERVICE}> */}
+        <Typography
+          sx={{
+            color: Colors.WHITE,
+            transition: "color 0.5s ease",
+            textTransform: "uppercase",
+            ":hover": {
+              color: Colors.BUTTON_COLOR,
+            },
+          }}
+          fontWeight={"400"}
+          fontSize="14px"
+          letterSpacing={"1.6px"}
+        >
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
             }}
-            fontWeight={"400"}
-            fontSize="14px"
-            letterSpacing={"1.6px"}
           >
-            <span
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              Services <KeyboardArrowDownIcon />
-            </span>
-          </Typography>
-        </HeaderLink>
+            Services <KeyboardArrowDownIcon />
+          </span>
+        </Typography>
+        {/* </HeaderLink> */}
 
         {isHovered && (
           <div
@@ -88,24 +83,26 @@ export default function BasicMenu() {
               boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)", // You can customize the box shadow
               zIndex: 1000,
               borderRadius: "4px",
-              width: 120,
+              width: 100,
             }}
           >
             {menuList.map((menu, index) => (
-              <Typography
-                key={index}
-                sx={{
-                  padding: "8px 16px",
-                  cursor: "pointer",
-                  color: "black",
-                  whiteSpace: "nowrap",
-                  "&:hover": {
-                    color: Colors.BUTTON_COLOR,
-                  },
-                }}
-              >
-                {menu.label}
-              </Typography>
+              <HeaderLink to={menu.href}>
+                <Typography
+                  key={index}
+                  sx={{
+                    padding: "8px 16px",
+                    cursor: "pointer",
+                    color: "black",
+                    whiteSpace: "nowrap",
+                    "&:hover": {
+                      color: Colors.BUTTON_COLOR,
+                    },
+                  }}
+                >
+                  {menu.label}
+                </Typography>
+              </HeaderLink>
             ))}
           </div>
         )}

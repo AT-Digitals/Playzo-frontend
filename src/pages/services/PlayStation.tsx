@@ -43,7 +43,7 @@ export default function PlayStation() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row-reverse",
+          lg: "row",
         }}
         icon={Play_logo}
         carouselItems={carouselItems}

@@ -28,6 +28,7 @@ import PartyCenter from "../pages/services/PartyCenter";
 import PaymentBooking from "../BookingService/PaymentBooking";
 import PlayStation from "../pages/services/PlayStation";
 import PlaystationBookingCommon from "../BookingService/PlaystatinCommon";
+import Playzo33 from "../pages/services/Playzo33Services";
 import PrivacyPolicy from "../pages/FAQ/PrivacyPolicy";
 import ServiceBooking from "../BookingService/ServiceBooking";
 import ServiceNewUI from "../pages/services/ServiceNew";
@@ -35,6 +36,7 @@ import TermsandComditions from "../pages/Terms&conditions/TermsandConditions";
 import Turf from "../pages/services/Turf";
 import TurfBookingCoomon from "../BookingService/TurfBookingCommon";
 import UserProfile from "../pages/user/UserProfile";
+import ZocafeServices from "../pages/services/Zo'scafeServices";
 import routes from "./routes";
 
 // import BookingPDF from "../BookingService/BookingPDF";
@@ -45,6 +47,10 @@ const router = createBrowserRouter(
       <Route path={routes.ROOT} element={<AppLayout />}>
         <Route path={routes.ROOT} element={<HomePage />} />
         <Route path={routes.SERVICE} element={<ServiceNewUI />} />
+
+        <Route path={routes.ZO_CAFE_SERVIVICES} element={<ZocafeServices />} />
+        <Route path={routes.PLAY33_SERVIVICES} element={<Playzo33 />} />
+
         <Route path={routes.PLAYSTATION} element={<PlayStation />} />
         <Route path={routes.CROSSFIT} element={<CrossFit />} />
         <Route path={routes.BADMINTON} element={<Badminton />} />

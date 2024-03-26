@@ -32,9 +32,14 @@ const BOWLINGMACHINE = SERVICE + "bowlingmachine";
 const TERMS_AND_CONDITIONS = "/terms-and-conditioins";
 const COOKIES_PAGE = "/cookies";
 
+const PLAY33_SERVIVICES = "/services/playzo33";
+const ZO_CAFE_SERVIVICES = "/services/zo's-cafe";
+
 const BOOKING_PDF = "/pdf-view";
 const routes = {
   ROOT,
+  ZO_CAFE_SERVIVICES,
+  PLAY33_SERVIVICES,
   LOGIN,
   LOGOUT,
   HOME,

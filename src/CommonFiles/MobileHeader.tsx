@@ -1,12 +1,22 @@
-import { Avatar, Box, Stack, styled } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Divider,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Stack,
+  styled,
+} from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 
 import AppDrawer from "./AppDrawer";
 import BookingParantmodal from "../BookingService/BookingParantmodal";
 import Colors from "../CommonComponents/Colors";
 import IconButton from "@mui/material/IconButton";
-import { Link } from "react-router-dom";
 import LoginForm from "../pages/login/LoginForm";
+import { Logout } from "@mui/icons-material";
 import MenuTwoToneIcon from "@mui/icons-material/MenuTwoTone";
 import UserLoginApi from "../api/UserLoginApi";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -118,6 +128,21 @@ export default function MoblieHeader({
   // const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openvalue = Boolean(anchorEl);
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const navigate = useNavigate();
+
+  const handleChange = () => {
+    navigate(routes.USERPROFILE);
+    setAnchorEl(null);
+  };
   return (
     <>
       <Box
@@ -138,20 +163,20 @@ export default function MoblieHeader({
             <img
               width={"100%"}
               style={{
-                maxWidth: 110,
+                maxWidth: 150,
               }}
               src={logo}
               alt="alterknit"
-              height={25}
+              height={60}
             />
           </HeaderLink>
           <Box display={"flex"} alignItems={"center"}>
             <HeaderLink to={routes.BOOKING_SERVICE}>
               <IconButton
                 style={{
-                  maxWidth: "100px",
+                  maxWidth: "115px",
                   position: "fixed",
-                  bottom: "10%",
+                  bottom: "9%",
                   right: "3%",
                 }}
               >
@@ -188,11 +213,95 @@ export default function MoblieHeader({
                 />
               )}
             </IconButton>
-            <Box display={isLoggedIn ? "block" : "none"}>
-              <Avatar sx={{ width: 40, height: 40 }} alt="Remy Sharp">
-                {user ? user.name?.charAt(0).toUpperCase() : "U"}
-              </Avatar>
-            </Box>
+            {isLoggedIn ? (
+              <Box display={isLoggedIn ? "block" : "none"}>
+                <Box>
+                  <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={openvalue ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={openvalue ? "true" : undefined}
+                  >
+                    <Avatar
+                      sx={{ width: 40, height: 40 }}
+                      alt="Remy Sharp"
+                      // src={headerProfileLogo}
+                    >
+                      {user ? user.name?.charAt(0).toUpperCase() : "U"}
+                    </Avatar>
+                  </IconButton>
+
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={openvalue}
+                    onClose={handleMenuClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        width: 200, // Adjust the width as needed
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    <MenuItem
+                      onClick={handleChange}
+                      sx={{
+                        "&:hover": {
+                          backgroundColor: Colors.BUTTON_COLOR, // Change background color on hover
+                          color: Colors.WHITE,
+                        },
+                      }}
+                    >
+                      <Avatar
+                        style={{
+                          color: Colors.BUTTON_COLOR,
+                          background: "white",
+                        }}
+                      />{" "}
+                      My Profile
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem
+                      onClick={handleLogout}
+                      sx={{
+                        color: "#f44336",
+                        padding: "10px 20px",
+                        "&:hover": {
+                          backgroundColor: Colors.BUTTON_COLOR, // Change background color on hover
+                          color: Colors.WHITE,
+                        },
+                      }}
+                    >
+                      <ListItemIcon>
+                        <Logout
+                          style={{
+                            color: Colors.BUTTON_COLOR,
+                            background: "white",
+                          }}
+                          fontSize="small"
+                        />
+                      </ListItemIcon>
+                      Logout
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              </Box>
+            ) : (
+              ""
+            )}
 
             <IconButton size="large" onClick={handleDrawerOpen}>
               <MenuTwoToneIcon

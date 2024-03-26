@@ -3,6 +3,7 @@
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 
 import { BookingNameTypes } from "../../BookingService/BookingSubTypes";
+import { BookingType } from "../../CommonFiles/BookingType";
 import Colors from "../../CommonComponents/Colors";
 import DateUtils from "../../Utils/DateUtils";
 import TimeUtlis from "../../Utils/TimeUtlis";
@@ -47,21 +48,25 @@ export default function ListCard({ userDetails, userName }: dataProps) {
                 <Typography variant="body2">
                   {CapitalizeFirstLetter(user.type)}
                 </Typography>
-                {user.type === "Badminton" ? (
-                  <Typography>/{user.numberOfPersons}</Typography>
-                ) : (
-                  ""
-                )}
               </Box>
             </Box>
             <Box display={"flex"} justifyContent={"space-between"} gap={"2rem"}>
-              <Typography variant="body2">
-                {CapitalizeFirstLetter(
-                  BookingNameTypes[
-                    (user.type + user.court) as keyof typeof BookingNameTypes
-                  ]
-                )}
-              </Typography>
+              <Box display={"flex"} flexDirection={"row"} alignItems={"center"}>
+                <Typography variant="body2">
+                  {CapitalizeFirstLetter(
+                    BookingNameTypes[
+                      (user.type + user.court) as keyof typeof BookingNameTypes
+                    ]
+                  )}
+                </Typography>
+                <Typography paddingLeft={"5px"}>
+                  {user.type === BookingType.Badminton ? (
+                    <Typography>/ {user.numberOfPerson}</Typography>
+                  ) : (
+                    ""
+                  )}
+                </Typography>
+              </Box>
 
               <Typography variant="body2">{`${TimeUtlis.formatMillisecondsToTimeConvert(
                 user.startTime

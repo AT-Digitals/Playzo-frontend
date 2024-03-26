@@ -134,6 +134,7 @@ export default function Header() {
     const whatsappLink = `https://wa.me/${phoneNumber}`;
     window.open(whatsappLink, "_blank");
   };
+
   return (
     <Box width="100%" bgcolor={Colors.BLACK}>
       <AppContainer
@@ -172,6 +173,7 @@ export default function Header() {
               </Typography>
             </Link>
             <DropDown />
+
             <Link className="react-router-link" to={routes.CONTACTUS}>
               <Typography
                 sx={{
