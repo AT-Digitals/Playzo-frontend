@@ -21,6 +21,7 @@ const firstBullet1 =
 const secBullet1 =
   "Professional-grade netting ensures a secure environment for players. Adjust the tension settings for specific skill refinement, catering to both batting and bowling practice needs.";
 const buttonLabel = "Book Now";
+const content = "This is cricketnet"
 export default function CricketNet() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={CricketNetSlide1} alt={"title"} />,
@@ -48,6 +49,7 @@ export default function CricketNet() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

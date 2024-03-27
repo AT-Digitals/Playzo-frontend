@@ -22,6 +22,7 @@ const secBullet1 =
   "Forge social bonds with laughter-filled moments. Diverse game selection suits various moods, creating memorable experiences during board game sessions for lasting enjoyment.";
 
 const buttonLabel = "Book Now";
+const content = "This is boardgames"
 export default function BoardGames() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={BoardGameSlide1} alt={"title"} />,
@@ -42,12 +43,7 @@ export default function BoardGames() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{
-          xs: "column",
-          sm: "column",
-          md: "column",
-          lg: "row-reverse",
-        }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Board_logo}
         carouselItems={carouselItems}
         heading1={heading1}
@@ -57,6 +53,7 @@ export default function BoardGames() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

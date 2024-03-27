@@ -21,6 +21,7 @@ const firstBullet1 =
 const secBullet1 =
   "Engage in varied workouts challenging all fitness levels with expert guidance from certified professionals. Join a positive fitness community that promotes health and wellness for everyone.";
 const buttonLabel = "Enquire Now";
+const content = "This is crossfit"
 export default function CrossFit() {
   const carouselItems = [
     <img
@@ -64,7 +65,7 @@ export default function CrossFit() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row",
+          lg: "row-reverse",
         }}
         icon={Cross_logo}
         carouselItems={carouselItems}
@@ -75,6 +76,7 @@ export default function CrossFit() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

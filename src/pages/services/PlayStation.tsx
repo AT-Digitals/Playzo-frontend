@@ -20,6 +20,7 @@ const firstBullet1 =
 const secBullet1 =
   "Access the latest games and consoles, ideal for solo or group play, catering to diverse gaming preferences. Engage with a vibrant gaming community in an energetic atmosphere.";
 const buttonLabel = "Book Now";
+const content = "This is playstation"
 export default function PlayStation() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={plyaStationSlide4} alt={"title"} />,
@@ -43,7 +44,7 @@ export default function PlayStation() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row",
+          lg: "row-reverse",
         }}
         icon={Play_logo}
         carouselItems={carouselItems}
@@ -54,6 +55,7 @@ export default function PlayStation() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

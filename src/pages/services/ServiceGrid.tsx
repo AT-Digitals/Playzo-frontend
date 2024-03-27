@@ -1,7 +1,5 @@
 import * as React from "react";
-
-import { IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
-
+import { Button, IconButton, Stack, Typography, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import Colors from "../../CommonComponents/Colors";
 import CustomSlider from "./CustomSliderService";
@@ -18,10 +16,8 @@ interface serviceGridProps {
   desc1: string;
   heading2: string;
   firstBullet1: string;
-
   heading3: string;
   secBullet1: string;
-
   buttonLabel: string;
   icon: string;
   direction?: any;
@@ -30,15 +26,13 @@ interface serviceGridProps {
   radiusbottompright?: any;
   radiusTopleft?: any;
   radiusbottompleft?: any;
+  content1?: any;
 }
-
-// const SkeletonContainer = styled.div<{ showSkeleton: boolean }>`
-//   opacity: ${({ showSkeleton }) => (showSkeleton ? 1 : 0)};
-//   transition: opacity 0.5s ease-in-out;
-// `;
 
 export default function ServiceGrid(props: serviceGridProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isContentVisible, setContentVisibility] = useState(true); // State to manage content visibility
+  const [showDummyText, setShowDummyText] = useState(false); // State to manage dummy text visibility
 
   const nextSlide = () => {
     const nextIndex = (currentSlide + 1) % props.carouselItems.length;
@@ -65,9 +59,13 @@ export default function ServiceGrid(props: serviceGridProps) {
   const handleMouseLeave = () => {
     setIsMouseOver(false);
   };
-  const isMediumScreen = useMediaQuery(
-    "(min-width: 900px) and (max-width: 1280px)"
-  );
+
+  const isMediumScreen = useMediaQuery("(min-width: 900px) and (max-width: 1280px)");
+
+  const toggleContentVisibility = () => {
+    setContentVisibility(!isContentVisible);
+    setShowDummyText(!showDummyText); // Hide dummy text when content is toggled
+  };
 
   return (
     <Box
@@ -103,6 +101,7 @@ export default function ServiceGrid(props: serviceGridProps) {
           direction={props.direction}
           alignItems={"flex-start"}
         >
+          {isContentVisible && ( 
           <Box width={"100%"} height={"100%"}>
             <CustomSlider
               currentSlide={currentSlide}
@@ -112,7 +111,7 @@ export default function ServiceGrid(props: serviceGridProps) {
               autoplayInterval={4000}
             />
           </Box>
-
+          )}
           <Box
             height={"100%"}
             display={"flex"}
@@ -129,119 +128,81 @@ export default function ServiceGrid(props: serviceGridProps) {
               borderBottomRightRadius: props.radiusbottompright,
             }}
             justifyContent="space-between"
-            // spacing={2}
           >
-            <Stack
-              padding={{ xs: "20px 22px", sm: "0 22px" }}
-              direction={"column"}
-              spacing={2}
-            >
-              <Box>
-                <Typography
-                  fontSize={{ xs: "35px", sm: "70px", md: "74px" }}
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    whiteSpace: "nowrap",
-                    fontStyle: "italic",
-                    fontWeight: 700,
-                    color: isMouseOver ? Colors.BUTTON_COLOR : "black",
-                    marginBottom: 0,
-                  }}
-                >
-                  {props.heading1}
-                </Typography>
-                <Typography
-                  style={{
-                    fontSize: "16px",
-                  }}
-                  variant="body1"
-                >
-                  {props.desc1}
-                </Typography>
-              </Box>
-
-              <Box
-                display={"flex"}
-                gap={"10px"}
-                flexDirection={{ xs: "column", sm: "column", md: "row" }}
-              >
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    fontStyle: "normal",
-                    fontWeight: 700,
+            {isContentVisible && ( // Conditionally render content based on visibility state
+              <Stack padding={{ xs: "20px 22px", sm: "0 22px" }} direction={"column"} spacing={2}>
+                <Box>
+                  <Typography
+                    fontSize={{ xs: "35px", sm: "70px", md: "74px" }}
+                    gutterBottom
+                    variant="h5"
+                    style={{
+                      whiteSpace: "nowrap",
+                      fontStyle: "italic",
+                      fontWeight: 700,
+                      color: isMouseOver ? Colors.BUTTON_COLOR : "black",
+                      marginBottom: 0,
+                    }}
+                  >
+                    {props.heading1}
+                  </Typography>
+                  <Typography style={{ fontSize: "16px" }} variant="body1">
+                    {props.desc1}
+                  </Typography>
+                </Box>
+                <Box display={"flex"} gap={"10px"} flexDirection={{ xs: "column", sm: "column", md: "row" }}>
+                  <Typography gutterBottom variant="h5" style={{ fontStyle: "normal", fontWeight: 700, fontSize: "18px", margin: 0 }}>
+                    {props.heading2}:
+                  </Typography>
+                  <Typography style={{ fontStyle: "normal", fontSize: "16px" }} variant="body1">
+                    {props.firstBullet1}
+                  </Typography>
+                </Box>
+                <Box display={"flex"} gap={"10px"} flexDirection={{ xs: "column", sm: "column", md: "row" }}>
+                  <Typography gutterBottom variant="h5" style={{ fontSize: "18px", margin: 0, fontStyle: "normal", fontWeight: 700 }}>
+                    {props.heading3}:
+                  </Typography>
+                  <Typography style={{ fontStyle: "normal", fontSize: "16px" }} variant="body1">
+                    {props.secBullet1}
+                  </Typography>
+                </Box>
+                <Button
+                  onClick={toggleContentVisibility} // Toggle content visibility on button click
+                  sx={{
+                    width: "100%",
+                    maxWidth: "150px",
                     fontSize: "18px",
-                    margin: 0,
-                  }}
-                >
-                  {props.heading2}:
-                </Typography>
-                <Typography
-                  style={{
-                    fontStyle: "normal",
-                    fontSize: "16px",
-                  }}
-                  variant="body1"
-                >
-                  {props.firstBullet1}
-                </Typography>
-              </Box>
-
-              <Box
-                display={"flex"}
-                gap={"10px"}
-                flexDirection={{ xs: "column", sm: "column", md: "row" }}
-              >
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  style={{
-                    fontSize: "18px",
-                    margin: 0,
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                  }}
-                >
-                  {props.heading3}:
-                </Typography>
-                <Typography
-                  style={{
-                    fontStyle: "normal",
-                    fontSize: "16px",
-                  }}
-                  variant="body1"
-                >
-                  {props.secBullet1}
-                </Typography>
-              </Box>
-            </Stack>
-            <Box
-              // mb={2}
-              // sx={{
-              //   marginTop: "2px !important",
-              // }}
-              justifyContent={props.position}
-              display={"flex"}
-              alignItems={"center"}
-            >
-              <IconButton onClick={prevSlide}>
-                <NavigateBeforeIcon
-                  style={{
                     color: Colors.BUTTON_COLOR,
+                    background: "white",
+                    border: "1px solid #15B5FC",
+                    textTransform: "capitalize",
+                    borderRadius: "30px",
+                    ":hover": {
+                      color: "white",
+                      background: Colors.BUTTON_COLOR,
+                    },
                   }}
-                />
+                >
+                  See More
+                </Button>
+              </Stack>
+            )}
+            {showDummyText && ( // Render dummy text based on visibility state
+              <Box padding={2}>
+                <Typography color={"black"} fontSize={"18px"}>{props.content1}</Typography>
+              </Box>
+            )}
+              {isContentVisible && ( 
+            <Box justifyContent={props.position} display={"flex"} alignItems={"center"}>
+              <IconButton onClick={prevSlide}>
+                <NavigateBeforeIcon style={{ color: Colors.BUTTON_COLOR }} />
               </IconButton>
               0{currentSlide + 1} /0{props.carouselItems.length}{" "}
               <IconButton onClick={nextSlide}>
-                <NavigateNextIcon
-                  style={{
-                    color: Colors.BUTTON_COLOR,
-                  }}
-                />
+                <NavigateNextIcon style={{ color: Colors.BUTTON_COLOR }} />
               </IconButton>
             </Box>
+              )}
           </Box>
         </Stack>
       </Box>
