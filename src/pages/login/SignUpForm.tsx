@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Dialog,
@@ -14,6 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import DeleteIcon from "@mui/icons-material/Delete";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
@@ -95,6 +97,8 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     setIsPasswordValid(false);
   };
 
+  const [profile, setProfile] = useState("");
+
   const onSubmit = async (event: any) => {
     event?.preventDefault();
     if (!name) {
@@ -159,6 +163,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         setSignUpFailed(true);
       }
     }
+    console.log(profile, "profile-image");
   };
 
   const ModlaCloseChange = () => {
@@ -173,6 +178,14 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     setIsValidName(false);
     setIsValidPhone(false);
     setShowPassword(false);
+  };
+
+  const handleProfileChange = (e: any) => {
+    setProfile(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const handleRemoveProfile = () => {
+    setProfile(""); // or setProfile('')
   };
 
   return (
@@ -297,6 +310,32 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             <span style={{ color: "#d32f2f", fontSize: "12px" }}>
               {isPasswordValid ? "Please enter a valid password" : ""}
             </span>
+          </Box>
+
+          <Box>
+            <CustomLabel color={Colors.WHITE} mb={1}>
+              Profile image
+            </CustomLabel>
+            {profile ? (
+              <Box display={"flex"} gap={"5px"}>
+                <Avatar
+                  sx={{ width: 40, height: 40 }}
+                  src={profile}
+                  alt="profile"
+                />
+                <IconButton onClick={handleRemoveProfile}>
+                  <DeleteIcon
+                    style={{
+                      color: "red",
+                    }}
+                  />
+                </IconButton>
+              </Box>
+            ) : (
+              <>
+                <input type="file" onChange={handleProfileChange} />
+              </>
+            )}
           </Box>
           <Button
             sx={{
