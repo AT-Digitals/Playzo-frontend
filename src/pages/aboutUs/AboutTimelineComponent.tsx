@@ -21,7 +21,7 @@ export default function AboutTimelineComponent() {
     {
       title: "Turf",
       year: '2024',
-      content: 'Turf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering',
+      content: 'Turf refers to artificial or natural grass surfaces, commonly used in sports, landscaping, or recreational areas, providing a lush, durable ground covering.',
     },
     {
       title: "PlayStation",
@@ -46,10 +46,10 @@ export default function AboutTimelineComponent() {
         {timelineData.map((item, index) => (
           <div className="card" key={index}>
             <div className="info">
-            <h3 className="title" data-year={item.year}>
+            <h3 className="title" style={{position: "relative", color: "#15B5FC", marginTop: "5px", fontWeight: "600", fontFamily: "'Proxima Nova', sans-serif", }} data-year={item.year}>
                 {item.title}
               </h3>
-              <p style={{fontSize: "14px", fontFamily: "sans-serif", paddingLeft: "5px", marginTop: "0px"}}>{item.content}</p>
+              <p style={{fontSize: "15px", fontFamily: "'Proxima Nova', sans-serif", fontWeight: "500", paddingLeft: "5px", marginTop: "0px"}}>{item.content}</p>
             </div>
           </div>
         ))}

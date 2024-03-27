@@ -332,6 +332,7 @@ export default function PaymentBooking() {
               borderRadius={"10px"}
               border={"1px solid gray"}
               maxHeight="600px"
+              paddingBottom={"12px"}
             >
               <Box
                 padding={"27px 20px"}
@@ -560,9 +561,9 @@ export default function PaymentBooking() {
                 opacity: "1",
               }}
               padding={{
-                xs: "0px ",
-                sm: "17px 35px",
-                md: "17px 35px",
+                xs: "10px 0px",
+                sm: "3px 35px",
+                md: "3px 35px",
                 lg: "40px 45px",
               }}
               width={"100%"}

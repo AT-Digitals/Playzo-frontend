@@ -26,21 +26,21 @@ import styled from "styled-components";
 
 const StyledImage = styled.img`
   @media (min-width: 300px) {
-    width: 200px;
+    width: 225px;
     height: 80px;
   }
 
   @media (min-width: 768px) {
-    width: 200px;
+    width: 225px;
     height: 80px;
   }
   @media (min-width: 820px) {
-    width: 200px;
+    width: 225px;
     height: 80px;
   }
 
   @media (min-width: 900px) {
-    width: 200px;
+    width: 225px;
     height: 80px;
   }
 
