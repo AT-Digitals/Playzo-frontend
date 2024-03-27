@@ -61,9 +61,6 @@ export default function ConfirmPasswordModal({
       const data = UserApi.forgotPassword(email, { password: password })
         .then((dataVal) => {
           setPasswordError("");
-          setShowOTPModal(false); // Close the ShowOTPModal
-          setOpenForgetModal(false); // Close the OpenForgetModal
-          handleClose();
           setSucess(true);
         })
         .catch((error) => {
@@ -82,6 +79,13 @@ export default function ConfirmPasswordModal({
 
   const handleClickShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const SucessModalClose = () => {
+    handleClose();
+    setSucess(false);
+    setShowOTPModal(false); // Close the ShowOTPModal
+    setOpenForgetModal(false); // Close the OpenForgetModal
   };
 
   return (
@@ -237,7 +241,7 @@ export default function ConfirmPasswordModal({
           </Stack>
         </DialogContent>
       </Dialog>
-      <SucessfullyModal open={sucess} handleClose={() => setSucess(false)} />
+      <SucessfullyModal open={sucess} handleClose={SucessModalClose} />
     </>
   );
 }

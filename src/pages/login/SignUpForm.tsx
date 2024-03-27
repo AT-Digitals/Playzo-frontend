@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Dialog,
@@ -9,11 +10,15 @@ import {
   TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useRef, useState } from "react";
 
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
@@ -21,7 +26,7 @@ import ModalComponent from "../../CommonComponents/CustomDateCalender/ModalCompo
 import Select from "@mui/material/Select";
 import TextFieldComponent from "./TextFieldComponent";
 import UserApi from "../../api/UserApi";
-import { useState } from "react";
+import sample from "./user-image.png";
 
 interface signUpProps {
   handleClose?: () => void;
@@ -95,6 +100,8 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     setIsPasswordValid(false);
   };
 
+  const [profile, setProfile] = useState("");
+
   const onSubmit = async (event: any) => {
     event?.preventDefault();
     if (!name) {
@@ -159,6 +166,7 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         setSignUpFailed(true);
       }
     }
+    console.log(profile, "profile-image");
   };
 
   const ModlaCloseChange = () => {
@@ -175,6 +183,19 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     setShowPassword(false);
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setProfile(URL.createObjectURL(file));
+    }
+  };
+
   return (
     <Dialog
       open={open}
@@ -187,17 +208,97 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         },
       }}
     >
+      <Box
+        style={{
+          backdropFilter: "blur(15px)",
+          backgroundImage: `url(${profile})`,
+          backgroundSize: "cover",
+        }}
+        display={"flex"}
+        justifyContent={"center"}
+      >
+        <img
+          src={profile ? profile : sample}
+          alt="profile"
+          width={"100%"}
+          onClick={handleAvatarClick}
+          style={{
+            maxHeight: profile ? 250 : 250,
+            maxWidth: profile ? 250 : 250,
+            cursor: "pointer",
+            width: "100%",
+            height: "100%",
+            margin: "0 auto",
+            objectFit: "cover",
+          }}
+        />
+        <Stack
+          sx={{
+            width: "100%",
+            position: "absolute",
+          }}
+          direction="row"
+          justifyContent="space-between"
+        >
+          {profile ? (
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "5%",
+                left: 0,
+              }}
+              onClick={handleAvatarClick}
+            >
+              <EditIcon
+                sx={{
+                  color: profile ? "white" : Colors.BACKGROUND_COLOR,
+                  fontSize: "30px",
+                }}
+              />
+            </IconButton>
+          ) : (
+            ""
+          )}
+          <IconButton
+            sx={{
+              top: "5%",
+              left: "86%",
+            }}
+            onClick={ModlaCloseChange}
+          >
+            <CloseIcon
+              sx={{
+                color: profile ? "white" : Colors.BACKGROUND_COLOR,
+                fontSize: "30px",
+              }}
+            />
+          </IconButton>
+        </Stack>
+      </Box>
       <DialogContent
         style={{
           background: Colors.BACKGROUND_COLOR,
+          scrollbarWidth: "none",
         }}
       >
-        <Stack direction="row" justifyContent="end">
-          <IconButton onClick={ModlaCloseChange}>
-            <CloseIcon sx={{ color: Colors.WHITE, fontSize: "30px" }} />
-          </IconButton>
-        </Stack>
         <Stack direction="column" spacing={3} padding={2}>
+          <Box
+            margin={"0 auto"}
+            display={"flex"}
+            justifyContent={"center"}
+            onClick={handleAvatarClick} // Attach click handler to Avatar
+          >
+            <Avatar sx={{ width: 80, height: 80 }} src={profile} />{" "}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef} // Attach ref to input element
+              style={{ display: "none" }} // Hide the input element
+              onChange={handleFileChange} // Attach file change handler
+            />
+            {/* Render Avatar with profile image */}
+          </Box>
+
           <TextFieldComponent
             label="Name"
             value={name}
@@ -298,6 +399,32 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
               {isPasswordValid ? "Please enter a valid password" : ""}
             </span>
           </Box>
+
+          {/* <Box>
+            <CustomLabel color={Colors.WHITE} mb={1}>
+              Profile image
+            </CustomLabel>
+            {profile ? (
+              <Box display={"flex"} gap={"5px"}>
+                <Avatar
+                  sx={{ width: 40, height: 40 }}
+                  src={profile}
+                  alt="profile"
+                />
+                <IconButton onClick={handleRemoveProfile}>
+                  <DeleteIcon
+                    style={{
+                      color: "red",
+                    }}
+                  />
+                </IconButton>
+              </Box>
+            ) : (
+              <>
+                <Avatar onClick={handleProfileChange} />
+              </>
+            )}
+          </Box> */}
           <Button
             sx={{
               padding: "12px 20px",

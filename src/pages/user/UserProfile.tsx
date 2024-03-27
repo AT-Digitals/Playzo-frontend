@@ -14,8 +14,11 @@ import Colors from "../../CommonComponents/Colors";
 import ListCard from "./ListCard";
 import assets from "../../assets";
 
-const { "Image (6).png": Image6, "Rectangle 679.png": RectangleImage, "ball 1.png": ball, "ball 2.png": ball2, "Layer_1.png": layer } = assets
-
+const {
+  "Image (6).png": Image6,
+  "Rectangle 679.png": RectangleImage,
+  "ball 1.png": ball,
+} = assets;
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -28,10 +31,10 @@ export default function UserProfile() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem("user");
     const userData = user && JSON.parse(user);
     setUser(userData);
-    setUserSports(userData["interestedSports"])
+    setUserSports(userData["interestedSports"]);
   }, []);
 
   const fetchInfo = useCallback(async () => {
@@ -46,12 +49,12 @@ export default function UserProfile() {
         await BookingApi.filterPage({
           user: user["id"],
           page: page,
-          limit: 4
+          limit: 4,
         }).then((data) => {
           setFilteredData(data);
         });
       } catch {
-        console.log('Error fetching data');
+        console.log("Error fetching data");
       }
     }
   }, [page, user]);
@@ -121,7 +124,11 @@ export default function UserProfile() {
                 >
                   {user && CapitalizeFirstLetter(user["name"])}
                 </Typography>
-                {userSports && userSports.length > 0 && <Typography variant="body1">{userSports.join(" & ")}</Typography>}
+                {userSports && userSports.length > 0 && (
+                  <Typography variant="body1">
+                    {userSports.join(" & ")}
+                  </Typography>
+                )}
               </Stack>
             </Card>
           </Grid>
@@ -136,12 +143,13 @@ export default function UserProfile() {
             sm={12}
             md={6}
             px={{ xs: 0, sm: 5, md: 0 }}
-          ><Typography
-            variant="h6"
-            color={Colors.BUTTON_COLOR}
-            fontWeight={600}
-            mb={3}
           >
+            <Typography
+              variant="h6"
+              color={Colors.BUTTON_COLOR}
+              fontWeight={600}
+              mb={3}
+            >
               Basic Information
             </Typography>
             <Stack direction="column" spacing={1}>
@@ -155,8 +163,11 @@ export default function UserProfile() {
                 <Typography variant="body1" fontWeight={600}>
                   Phone Number
                 </Typography>
-                {user &&<Typography variant="body1">{user["phone"]===0?"-":user["phone"]}</Typography>}
-
+                {user && (
+                  <Typography variant="body1">
+                    {user["phone"] === 0 ? "-" : user["phone"]}
+                  </Typography>
+                )}
               </Stack>
             </Stack>
             <Stack direction="row" pt={5} pb={2}>
@@ -179,8 +190,18 @@ export default function UserProfile() {
                 }}
               />
             </Stack>
-            <ListCard userDetails={filteredData} userName={user ? CapitalizeFirstLetter(user["name"]) : ""} />
-            {filteredData.length > 0 && <Pagination count={count} page={page} onChange={(event, val) => setPage(val)} sx={{ mt: "15px" }} />}
+            <ListCard
+              userDetails={filteredData}
+              userName={user ? CapitalizeFirstLetter(user["name"]) : ""}
+            />
+            {filteredData.length > 0 && (
+              <Pagination
+                count={count}
+                page={page}
+                onChange={(event, val) => setPage(val)}
+                sx={{ mt: "15px" }}
+              />
+            )}
           </Grid>
         </Grid>
       </AppContainer>

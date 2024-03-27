@@ -36,7 +36,12 @@ export default function BowlingMachine() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+        direction={{
+          xs: "column",
+          sm: "column",
+          md: "column",
+          lg: "row-reverse",
+        }}
         icon={Bowling_logo}
         carouselItems={carouselItems}
         heading1={heading1}

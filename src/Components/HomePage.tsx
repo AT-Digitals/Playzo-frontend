@@ -16,6 +16,11 @@ import Colors from "../CommonComponents/Colors";
 import EastIcon from "@mui/icons-material/East";
 import OTPModal from "../pages/login/OTPModal";
 import assets from "../assets";
+import booknow from "../CommonFiles/Sports.svg";
+import bowlingImage from "../assets/Bowling";
+import cafeteriaImage from "../assets/Cafeteriya";
+import cricketNetImage from "../assets/CricketNet";
+import partycenterImage from "../assets/Partycenter";
 import routes from "../routes/routes";
 import styled from "styled-components";
 
@@ -176,6 +181,12 @@ const {
   "307209848_504498594836255_6289868240102465405_n.jpg": pic4,
 } = assets;
 
+const { "cafe3.jpg": CafeteriaSlide3 } = cafeteriaImage;
+const { "party1.webp": PartyCenterSlide1 } = partycenterImage;
+const { "bowling2.jpg": BowlingSlide2 } = bowlingImage;
+
+const { "crick2.jpg": CricketNetSlide2 } = cricketNetImage;
+
 const images = [Image3, Image4, Image5]; // List of images to loop through
 const intervalTime = 5000; // Interval time in milliseconds
 
@@ -233,13 +244,6 @@ export default function HomePage() {
     setOpenOtp(false);
   };
 
-  // useEffect(() => {
-  //   // Check if the URL contains an email or string (assuming 'id' is the parameter)
-  //   if (id && (id.includes("@") || isNaN(Number(id)))) {
-  //     setOpenOtp(true);
-  //   }
-  // }, [id]);
-
   useEffect(() => {
     // Regular expression to check if id is an email address
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -278,32 +282,34 @@ export default function HomePage() {
               fontStyle={"italic"}
               textTransform={"uppercase"}
             >
-              Our Services
+              Playzo 33
             </Typography>
-           
-              <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
-                {/* <StyledImage src={Layer2} alt="Layer2" /> */}
-                <Typography
-                  variant="h2"
-                  color={Colors.BLACK}
-                  fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
-                  fontWeight={400}
-                  width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
-                  marginLeft={{
-                    xs: "27px",
-                    sm: "27px",
-                    md: "27px",
-                    lg: "57px",
-                  }}
-                  sx={{ fontFamily: "Inter" }}
+
+            <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
+              <Typography
+                variant="h2"
+                color={Colors.BLACK}
+                fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
+                fontWeight={400}
+                width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
+                marginLeft={{
+                  xs: "27px",
+                  sm: "27px",
+                  md: "27px",
+                  lg: "57px",
+                }}
+                sx={{ fontFamily: "Inter" }}
+              >
+                We offer a diverse range of{" "}
+                <Link
+                  to={routes.BOOKING_SERVICE}
+                  style={{ textDecoration: "none" }}
                 >
-                  We offer a diverse range of{" "}
-                  <Link to={routes.SERVICE} style={{ textDecoration: "none" }}>
-                    <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
-                  </Link>{" "}
-                  to cater to the varied interests of our community.
-                </Typography>
-              </Box>
+                  <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
+                </Link>{" "}
+                to cater to the varied interests of our community.
+              </Typography>
+            </Box>
           </Stack>
           <Grid
             container
@@ -318,9 +324,16 @@ export default function HomePage() {
               lg: "row",
             }}
           >
-            <Grid sx={{
-              margin: {xs: "10px", sm: "0px", md: "0px" }
-            }} item xs={12} sm={6} md={6} lg={3}>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
               <CardComponent
                 buttonLabel="Know more"
                 title={"Turf"}
@@ -330,40 +343,61 @@ export default function HomePage() {
                 image={turf}
               />
             </Grid>
-            <Grid sx={{
-              margin: {xs: "10px", sm: "0px", md: "0px" }
-            }} item xs={12} sm={6} md={6} lg={3}>
-              <CardComponent
-                buttonLabel="Know more"
-                title={"Play Station"}
-                description={
-                  "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection for your sports."
-                }
-                image={playstation}
-              />
-            </Grid>
-            <Grid sx={{
-              margin: {xs: "10px", sm: "0px", md: "0px" }
-            }} item xs={12} sm={6} md={6} lg={3}>
-              <CardComponent
-                buttonLabel="Know more"
-                title={"Board Games"}
-                description={
-                  "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time for your sports."
-                }
-                image={boardGames}
-              />
-            </Grid>
-            <Grid sx={{
-              margin: {xs: "10px", sm: "0px", md: "0px" }
-            }} item xs={12} sm={6} md={6} lg={3}>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
               <CardComponent
                 buttonLabel="Know more"
                 title={"Badminton"}
                 description={
-                  "Ace every shot on our professional Badminton courts, where passion meets a wide game and precision for your sports."
+                  "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection for your sports."
                 }
                 image={Badminton}
+              />
+            </Grid>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Cricket net"}
+                description={
+                  "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time for your sports."
+                }
+                image={CricketNetSlide2}
+              />
+            </Grid>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Bowling machine"}
+                description={
+                  "Ace every shot on our professional Badminton courts, where passion meets a wide game and precision for your sports."
+                }
+                image={BowlingSlide2}
               />
             </Grid>
           </Grid>
@@ -378,26 +412,211 @@ export default function HomePage() {
               direction="row"
               justifyContent="end"
               alignItems="center"
-              gap="20px"
             >
-              <Button
-                sx={{
-                  color: Colors.BUTTON_COLOR,
-                  textTransform: "capitalize",
-                  border: "1px solid #15B5FC",
-                  padding: "10px 10px",
-                  borderRadius: "30px",
-                  fontSize: "14px",
-                  fontWeight: "400",
-                  ":hover": {
-                    background: Colors.BUTTON_COLOR,
-                    color: Colors.WHITE,
-                  },
+              <Link to={routes.BOOKING_SERVICE}>
+                <Button
+                  sx={{
+                    color: Colors.BUTTON_COLOR,
+                    textTransform: "capitalize",
+                    padding: "10px 10px",
+                    borderRadius: "30px",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    ":hover": {
+                      background: Colors.BUTTON_COLOR,
+                      color: Colors.WHITE,
+                      border: "1px solid #15B5FC",
+                    },
+                    minWidth: 140,
+                    width: "100%",
+                  }}
+                  variant="outlined"
+                >
+                  Book now
+                </Button>
+              </Link>
+              <img
+                width={"100%"}
+                style={{
+                  maxWidth: 100,
                 }}
-                variant="outlined"
+                src={booknow}
+                alt="book"
+              />
+            </Stack>
+          </Box>
+        </Box>
+
+        <Box width={"100%"} margin={"auto"} sx={{ backgroundColor: "#f0f0f0" }}>
+          <Stack pt={{ xs: "30px", sm: "30px", md: "30px", lg: "20px" }}>
+            <Box
+              width={"24%"}
+              border={`2px solid ${Colors.BUTTON_COLOR}`}
+              marginLeft={{ xs: "29px", sm: "29px", md: "29px", lg: "59px" }}
+              marginBottom={"10px"}
+            ></Box>
+            <Typography
+              fontSize={{ xs: "22px", sm: "32px", md: "22px", lg: "42px" }}
+              marginLeft={{ xs: "20px", sm: "20px", md: "20px", lg: "50px" }}
+              fontWeight={"600"}
+              color={Colors.BLACK}
+              fontStyle={"italic"}
+              textTransform={"uppercase"}
+            >
+              Zo’s Cafe
+            </Typography>
+
+            <Box width="100%" maxWidth={1200} paddingTop={"20px"} pb={"20px"}>
+              {/* <StyledImage src={Layer2} alt="Layer2" /> */}
+              <Typography
+                variant="h2"
+                color={Colors.BLACK}
+                fontSize={{ xs: "16px", sm: "18px", md: "18px", lg: "20px" }}
+                fontWeight={400}
+                width={{ xs: "300px", sm: "662px", md: "770px", lg: "850px" }}
+                marginLeft={{
+                  xs: "27px",
+                  sm: "27px",
+                  md: "27px",
+                  lg: "57px",
+                }}
+                sx={{ fontFamily: "Inter" }}
               >
-                see more services
-              </Button>
+                We offer a diverse range of{" "}
+                <Link
+                  to={routes.ZO_CAFE_SERVIVICES}
+                  style={{ textDecoration: "none" }}
+                >
+                  <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
+                </Link>{" "}
+                to cater to the varied interests of our community.
+              </Typography>
+            </Box>
+          </Stack>
+          <Grid
+            container
+            width="100%"
+            margin="0 auto"
+            spacing={3}
+            maxWidth={1460}
+            flexDirection={{
+              xs: "column",
+              sm: "row",
+              md: "row",
+              lg: "row",
+            }}
+          >
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Play Station"}
+                description={
+                  "Immerse yourself in the ultimate gaming experience with the latest consoles and a wide game selection for your sports."
+                }
+                image={playstation}
+              />
+            </Grid>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Board Games"}
+                description={
+                  "Explore timeless and modern board games, fostering laughter and friendly competition for a delightful time for your sports."
+                }
+                image={boardGames}
+              />
+            </Grid>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Cafeteria"}
+                description={
+                  "Ace every shot on our professional Badminton courts, where passion meets a wide game and precision for your sports."
+                }
+                image={CafeteriaSlide3}
+              />
+            </Grid>
+            <Grid
+              sx={{
+                margin: { xs: "10px", sm: "0px", md: "0px" },
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+            >
+              <CardComponent
+                buttonLabel="Know more"
+                title={"Party center"}
+                description={
+                  "Kick off your sports adventure on our two top-notch turfs, perfect for football, and a cricket selection for your sports."
+                }
+                image={PartyCenterSlide1}
+              />
+            </Grid>
+          </Grid>
+          <Box
+            width="100%"
+            margin="0 auto"
+            pb={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+            pt={{ xs: "32px", sm: "32px", md: "32px", lg: "50px" }}
+          >
+            <Stack
+              marginRight={{ xs: "25px", sm: "25px", md: "25px", lg: "0px" }}
+              direction="row"
+              justifyContent="end"
+              alignItems="center"
+              // gap="20px"
+              spacing={2}
+            >
+              <Link to={routes.ZO_CAFE_SERVIVICES}>
+                <Button
+                  sx={{
+                    color: Colors.BUTTON_COLOR,
+                    textTransform: "capitalize",
+                    padding: "10px 10px",
+                    borderRadius: "30px",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    ":hover": {
+                      background: Colors.BUTTON_COLOR,
+                      color: Colors.WHITE,
+                      border: "1px solid #15B5FC",
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  see more details
+                </Button>
+              </Link>
               <EastIcon
                 style={{
                   color: Colors.BUTTON_COLOR,
@@ -407,6 +626,7 @@ export default function HomePage() {
             </Stack>
           </Box>
         </Box>
+
         <CarouselComponent />
         <Box width="100%" paddingY={4}>
           <Box display={"flex"} justifyContent={"center"}>
@@ -461,7 +681,8 @@ export default function HomePage() {
             }}
           >
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link target="_blank"
+              <Link
+                target="_blank"
                 to={
                   "https://www.instagram.com/p/CcZ6CBzJoOD/?igsh=MWFjOGltaWJ5NXBraA%3D%3D"
                 }
@@ -474,7 +695,8 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link target="_blank"
+              <Link
+                target="_blank"
                 to={
                   "https://www.instagram.com/p/CfwI533r_-c/?igsh=MTFjbnIxcjY0bmZ1dw%3D%3D"
                 }
@@ -487,7 +709,8 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link target="_blank"
+              <Link
+                target="_blank"
                 to={
                   "https://www.instagram.com/p/Cgln7h6JH7Y/?igsh=MWZrMDg2cncxYXV2dg%3D%3D"
                 }
@@ -500,7 +723,8 @@ export default function HomePage() {
               </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={6} lg={3}>
-              <Link target="_blank"
+              <Link
+                target="_blank"
                 to={
                   "https://www.instagram.com/p/CimdLmRJBfn/?igsh=MXBtem1iNm15cmhxZg%3D%3D"
                 }

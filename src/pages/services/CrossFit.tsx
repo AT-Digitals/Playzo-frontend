@@ -64,7 +64,7 @@ export default function CrossFit() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row-reverse",
+          lg: "row",
         }}
         icon={Cross_logo}
         carouselItems={carouselItems}

@@ -54,37 +54,9 @@ interface AppDrawerProps {
   setModalOpen?: any;
 }
 
-const MenuList = [
-  {
-    href: routes.SERVICE,
-    label: "Badminton",
-  },
-  {
-    href: routes.SERVICE,
-    label: "CrossFit",
-  },
-
-  {
-    href: routes.SERVICE,
-    label: "Turf",
-  },
-  {
-    href: routes.SERVICE,
-    label: "Play Station",
-  },
-
-  {
-    href: routes.SERVICE,
-    label: "Board Games",
-  },
-  {
-    href: routes.SERVICE,
-    label: "Party Center",
-  },
-  {
-    href: routes.SERVICE,
-    label: "Cafeteria",
-  },
+const menuList = [
+  { label: "Playzo 33", href: routes.PLAY33_SERVIVICES },
+  { label: "Zo’s Cafe", href: routes.ZO_CAFE_SERVIVICES },
 ];
 
 export default function AppDrawer({
@@ -220,7 +192,7 @@ export default function AppDrawer({
 
           {isMenuOpen && (
             <Stack padding={"0 20px"} direction="column" spacing={1}>
-              {MenuList.map((item, index) => (
+              {menuList.map((item, index) => (
                 <HeaderLink key={index} to={item.href} onClick={onClose}>
                   <Box>
                     <Typography color={Colors.WHITE} fontSize="16px">

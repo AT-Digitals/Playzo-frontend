@@ -43,7 +43,7 @@ export default function Cafeteria() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row-reverse",
+          lg: "row",
         }}
         icon={Cafe_logo}
         carouselItems={carouselItems}
