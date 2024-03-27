@@ -12,12 +12,10 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useRef, useState } from "react";
 
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Checkbox from "@mui/material/Checkbox";
 import CloseIcon from "@mui/icons-material/Close";
 import Colors from "../../CommonComponents/Colors";
 import CustomLabel from "../../CommonComponents/CustomLabel";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import ListItemText from "@mui/material/ListItemText";
@@ -196,6 +194,10 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
     }
   };
 
+  const handleremove = () => {
+    setProfile("");
+  };
+
   return (
     <Dialog
       open={open}
@@ -208,87 +210,94 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
         },
       }}
     >
-      <Box
-        style={{
-          backdropFilter: "blur(15px)",
-          backgroundImage: `url(${profile})`,
-          backgroundSize: "cover",
-        }}
-        display={"flex"}
-        justifyContent={"center"}
-      >
-        <img
-          src={profile ? profile : sample}
-          alt="profile"
-          width={"100%"}
-          onClick={handleAvatarClick}
-          style={{
-            maxHeight: profile ? 250 : 250,
-            maxWidth: profile ? 250 : 250,
-            cursor: "pointer",
-            width: "100%",
-            height: "100%",
-            margin: "0 auto",
-            objectFit: "cover",
-          }}
-        />
-        <Stack
-          sx={{
-            width: "100%",
-            position: "absolute",
-          }}
-          direction="row"
-          justifyContent="space-between"
-        >
-          {profile ? (
-            <IconButton
-              sx={{
-                position: "absolute",
-                top: "5%",
-                left: 0,
-              }}
-              onClick={handleAvatarClick}
-            >
-              <EditIcon
-                sx={{
-                  color: profile ? "white" : Colors.BACKGROUND_COLOR,
-                  fontSize: "30px",
-                }}
-              />
-            </IconButton>
-          ) : (
-            ""
-          )}
-          <IconButton
-            sx={{
-              top: "5%",
-              left: "86%",
-            }}
-            onClick={ModlaCloseChange}
-          >
-            <CloseIcon
-              sx={{
-                color: profile ? "white" : Colors.BACKGROUND_COLOR,
-                fontSize: "30px",
-              }}
-            />
-          </IconButton>
-        </Stack>
-      </Box>
       <DialogContent
         style={{
           background: Colors.BACKGROUND_COLOR,
           scrollbarWidth: "none",
         }}
       >
-        <Stack direction="column" spacing={3} padding={2}>
-          <Box
-            margin={"0 auto"}
-            display={"flex"}
-            justifyContent={"center"}
-            onClick={handleAvatarClick} // Attach click handler to Avatar
+        <Stack
+          sx={{
+            width: "100%",
+          }}
+          direction="row"
+          justifyContent="space-between"
+        >
+          <IconButton
+            sx={{
+              top: "5%",
+              left: "85%",
+            }}
+            onClick={ModlaCloseChange}
           >
-            <Avatar sx={{ width: 80, height: 80 }} src={profile} />{" "}
+            <CloseIcon
+              sx={{
+                color: "white",
+                fontSize: "30px",
+              }}
+            />
+          </IconButton>
+        </Stack>
+        <Stack direction="column" spacing={3} padding={2}>
+          <Box margin={"0 auto"} display={"flex"} justifyContent={"center"}>
+            <Box
+              style={{
+                backdropFilter: "blur(15px)",
+                backgroundSize: "cover",
+              }}
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              <Avatar
+                src={profile ? profile : sample}
+                alt="profile"
+                style={{
+                  cursor: "pointer",
+                  width: 300,
+                  height: 300,
+                  margin: "0 auto",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
+              />
+
+              <Button
+                sx={{
+                  border: "1px solid white",
+                  background: "transparent",
+                  color: "white",
+                  textTransform: "none",
+                  minWidth: 150,
+                  borderRadius: "30px",
+                  position: "absolute",
+                  transform: "translate(-5px, 200px)",
+                }}
+                onClick={handleAvatarClick}
+              >
+                Upload
+              </Button>
+              {profile ? (
+                <Button
+                  sx={{
+                    border: "1px solid white",
+                    background: "transparent",
+                    color: "red",
+                    textTransform: "none",
+                    minWidth: 150,
+                    borderRadius: "30px",
+                    position: "absolute",
+                    transform: "translate(-5px, 244px)",
+                  }}
+                  onClick={handleremove}
+                >
+                  Delete
+                </Button>
+              ) : (
+                ""
+              )}
+            </Box>
+
+            {/* <Avatar sx={{ width: 80, height: 80 }} src={profile} />{" "} */}
             <input
               type="file"
               accept="image/*"
@@ -296,7 +305,6 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
               style={{ display: "none" }} // Hide the input element
               onChange={handleFileChange} // Attach file change handler
             />
-            {/* Render Avatar with profile image */}
           </Box>
 
           <TextFieldComponent
@@ -400,31 +408,6 @@ export default function SignUpForm({ handleClose, open }: signUpProps) {
             </span>
           </Box>
 
-          {/* <Box>
-            <CustomLabel color={Colors.WHITE} mb={1}>
-              Profile image
-            </CustomLabel>
-            {profile ? (
-              <Box display={"flex"} gap={"5px"}>
-                <Avatar
-                  sx={{ width: 40, height: 40 }}
-                  src={profile}
-                  alt="profile"
-                />
-                <IconButton onClick={handleRemoveProfile}>
-                  <DeleteIcon
-                    style={{
-                      color: "red",
-                    }}
-                  />
-                </IconButton>
-              </Box>
-            ) : (
-              <>
-                <Avatar onClick={handleProfileChange} />
-              </>
-            )}
-          </Box> */}
           <Button
             sx={{
               padding: "12px 20px",
