@@ -23,6 +23,7 @@ const secBullet1 =
   "Providing a multi-sport experience catering to soccer, Cricket, and flag football, with flexible playing hours for day or night activities and safety assurance through consistent maintenance.";
 
 const buttonLabel = "Book Now";
+const content = "This is turf"
 
 export default function Turf() {
   const carouselItems = [
@@ -52,6 +53,7 @@ export default function Turf() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

@@ -20,6 +20,7 @@ const firstBullet1 =
 const secBullet1 =
   "Enhance batting skills with consistent, controlled deliveries suitable for all skill levels. Tailored for individual training, promoting continuous improvement for both beginners and seasoned cricketers.";
 const buttonLabel = "Book Now";
+const content = "This is bowlingmachine"
 export default function BowlingMachine() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={BowlingSlide1} alt={"title"} />,
@@ -36,12 +37,7 @@ export default function BowlingMachine() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{
-          xs: "column",
-          sm: "column",
-          md: "column",
-          lg: "row-reverse",
-        }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Bowling_logo}
         carouselItems={carouselItems}
         heading1={heading1}
@@ -51,6 +47,7 @@ export default function BowlingMachine() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

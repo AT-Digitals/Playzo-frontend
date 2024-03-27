@@ -22,6 +22,7 @@ const secBullet1 =
   "Enjoy versatile play accommodating all levels, with convenient playing hours, including evening sessions. Experience a competitive atmosphere for both friendly and challenging matches.";
 
 const buttonLabel = "Enquire Now";
+const content = "This is badminton"
 export default function Badminton() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={Badmintonslide2} alt={"title"} />,
@@ -53,6 +54,7 @@ export default function Badminton() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

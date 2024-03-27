@@ -21,6 +21,7 @@ const firstBullet1 =
 const secBullet1 =
   "Enjoy stress-free event planning with assistance in all details. Create lasting memories in a vibrant setting with all-inclusive packages catering to various budgets and preferences.";
 const buttonLabel = "Enquire Now";
+const content = "This is partycenter"
 export default function PartyCenter() {
   const carouselItems = [
     <img
@@ -55,12 +56,7 @@ export default function PartyCenter() {
         radiusTopright={"20px"}
         radiusbottompleft={"0px"}
         radiusbottompright={"20px"}
-        direction={{
-          xs: "column",
-          sm: "column",
-          md: "column",
-          lg: "row-reverse",
-        }}
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
         icon={Party_logo}
         carouselItems={carouselItems}
         heading1={heading1}
@@ -70,6 +66,7 @@ export default function PartyCenter() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );

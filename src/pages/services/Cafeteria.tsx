@@ -21,6 +21,7 @@ const firstBullet1 =
 const secBullet1 =
   "Enjoy onsite dining without leaving, a social hub for friends, with a variety catering to quick bites or hearty meals.";
 const buttonLabel = "Enquire Now";
+const content = "This is cafeteria"
 export default function Cafeteria() {
   const carouselItems = [
     <img style={{ width: "100%" }} src={CafeteriaSlide1} alt={"title"} />,
@@ -43,7 +44,7 @@ export default function Cafeteria() {
           xs: "column",
           sm: "column",
           md: "column",
-          lg: "row",
+          lg: "row-reverse",
         }}
         icon={Cafe_logo}
         carouselItems={carouselItems}
@@ -54,6 +55,7 @@ export default function Cafeteria() {
         heading3={heading3}
         secBullet1={secBullet1}
         buttonLabel={buttonLabel}
+        content1={content}
       />
     </>
   );
