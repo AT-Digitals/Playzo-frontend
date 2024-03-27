@@ -428,7 +428,7 @@ export default function PaymentBooking() {
                                 : "none"
                             }
                           >
-                            / {item.numberOfPersons}
+                            / No.of.Persons : {item.numberOfPersons}
                           </Typography>
                         </Typography>
                         <Box
