@@ -1,7 +1,6 @@
 import BoardGames from "./BoardGames";
 import { Box } from "@mui/material";
 import Cafeteria from "./Cafeteria";
-import CrossFit from "./CrossFit";
 import PartyCenter from "./PartyCenter";
 import PlayStation from "./PlayStation";
 import ServiceHeaders from "./ServiceHeader";
