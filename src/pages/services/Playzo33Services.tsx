@@ -2,6 +2,7 @@ import Badminton from "./Badminton";
 import BowlingMachine from "./BowlingMachine";
 import { Box } from "@mui/material";
 import CricketNet from "./CricketNet";
+import CrossFit from "./CrossFit";
 import ServiceHeaders from "./ServiceHeader";
 import Turf from "./Turf";
 import { useEffect } from "react";
@@ -59,6 +60,7 @@ export default function Playzo33() {
           <Badminton />
           <CricketNet />
           <BowlingMachine />
+          <CrossFit />
         </Box>
       </Box>
     </>

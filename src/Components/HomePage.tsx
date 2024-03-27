@@ -4,6 +4,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -16,6 +17,7 @@ import Colors from "../CommonComponents/Colors";
 import EastIcon from "@mui/icons-material/East";
 import OTPModal from "../pages/login/OTPModal";
 import assets from "../assets";
+import booknow from "../CommonFiles/Sports.svg";
 import bowlingImage from "../assets/Bowling";
 import cafeteriaImage from "../assets/Cafeteriya";
 import cricketNetImage from "../assets/CricketNet";
@@ -301,7 +303,7 @@ export default function HomePage() {
               >
                 We offer a diverse range of{" "}
                 <Link
-                  to={routes.PLAY33_SERVIVICES}
+                  to={routes.BOOKING_SERVICE}
                   style={{ textDecoration: "none" }}
                 >
                   <span style={{ color: Colors.BUTTON_COLOR }}>services</span>
@@ -411,9 +413,8 @@ export default function HomePage() {
               direction="row"
               justifyContent="end"
               alignItems="center"
-              gap="20px"
             >
-              <Link to={routes.PLAY33_SERVIVICES}>
+              <Link to={routes.BOOKING_SERVICE}>
                 <Button
                   sx={{
                     color: Colors.BUTTON_COLOR,
@@ -427,18 +428,21 @@ export default function HomePage() {
                       color: Colors.WHITE,
                       border: "1px solid #15B5FC",
                     },
+                    minWidth: 140,
+                    width: "100%",
                   }}
                   variant="outlined"
                 >
-                  see more services
+                  Book now
                 </Button>
               </Link>
-
-              <EastIcon
+              <img
+                width={"100%"}
                 style={{
-                  color: Colors.BUTTON_COLOR,
-                  fontSize: "34px",
+                  maxWidth: 100,
                 }}
+                src={booknow}
+                alt="book"
               />
             </Stack>
           </Box>
@@ -591,7 +595,8 @@ export default function HomePage() {
               direction="row"
               justifyContent="end"
               alignItems="center"
-              gap="20px"
+              // gap="20px"
+              spacing={2}
             >
               <Link to={routes.ZO_CAFE_SERVIVICES}>
                 <Button
@@ -610,7 +615,7 @@ export default function HomePage() {
                   }}
                   variant="outlined"
                 >
-                  see more services
+                  see more details
                 </Button>
               </Link>
               <EastIcon

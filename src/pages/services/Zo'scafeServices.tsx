@@ -60,7 +60,6 @@ export default function ZocafeServices() {
           <BoardGames />
           <Cafeteria />
           <PartyCenter />
-          <CrossFit />
         </Box>
       </Box>
     </>
